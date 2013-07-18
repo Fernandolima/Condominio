@@ -1,0 +1,108 @@
+body#loginView {
+	background: url("../img/predio.jpg") -92px 65px no-repeat #fff;
+}
+
+#institucional {
+	width: 100%;
+	height: 90px;
+	background: #7DBEB8;
+}
+
+#loginView h1 {
+	color: #181619;
+	font-size: 45px;
+	float: left;
+	margin-top: 17px;
+}
+
+#loginView .description {
+	font-size: 15px;
+	float: left;
+	margin: 36px 0 0 30px;
+}
+
+#login {
+	background: #ABCCBD;
+	width: 400px;
+	min-height: 300px;
+	margin: 100px auto 0;
+	border-radius: 0px 10px 10px 10px;
+	-moz-border-radius: 0px 10px 10px 10px;
+	-webkit-border-radius: 0px 10px 10px 10px;
+	
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+}
+
+#frmLogin {
+	float: left;
+}
+
+#titleLogin {
+	font-size: 20px;
+	float: left;
+	margin: 10px 0 20px 20px;
+}
+
+label {
+	font-size: 16px;
+	width: 52px;
+	float: left;
+	text-align: right;
+	margin: 10px 0 0 20px;
+}
+
+input {
+	width: 292px;
+	margin: 0 0 15px 8px;
+	height: 26px;
+	padding: 5px;
+	border: 1px solid #ABCCBD;
+}
+
+input:focus {
+	border: 1px solid #181619;
+}
+
+input#txtPassword {
+	margin: 0 0 5px 8px;
+}
+
+#forgotPassword {
+	float: right;
+	margin-right: 24px;
+	color: #181619;
+	text-decoration: underline;
+}
+
+#forgotPassword:hover {
+	text-decoration: none;
+}
+
+#btSubmitLogin {
+	width: 90px;
+	height: 30px;
+	background: #E32F21;
+	cursor: pointer;
+	color: #fff;
+	border: 0;
+	font-size: 17px;
+	float: right;
+	clear: both;
+	margin: 10px 24px 0 0;
+	border-radius: 8px
+}
+
+#noRegister {
+	width: auto;
+	text-align: right;
+	margin: 40px 22px 0 0;
+	float: right;
+	font-size: 16px;
+}
+
+#btRegister {
+	font-size: 18px;
+	color: #181619;
+}
