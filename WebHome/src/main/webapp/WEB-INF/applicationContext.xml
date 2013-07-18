@@ -21,9 +21,9 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver"/>
-		<property name="url" value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
-		<property name="username" value="fernandoolimaa" />
-		<property name="password" value="lima102030" />
+		<property name="url" value="jdbc:jtds:sqlserver://127.0.0.1:1433/webhomedb" />
+		<property name="username" value="diego" />
+		<property name="password" value="diegolindo" />
 	</bean>
 	<!-- Configuracao do Hibernate -->
 	<bean id="entityManagerFactory"
@@ -32,7 +32,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+				<property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect" />
 				<property name="showSql" value="true" /> 
 			</bean>
 		</property>
