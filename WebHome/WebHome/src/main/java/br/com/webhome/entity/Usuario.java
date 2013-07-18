@@ -1,5 +1,7 @@
 package br.com.webhome.entity;
 
-public class Usuario {
+import javax.persistence.Table;
 
+public class Usuario {
+			String nome;
 }
