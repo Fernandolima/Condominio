@@ -2,8 +2,8 @@
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" type="text/css" href="/webstatic/css/style.css">
-		<link rel="stylesheet" type="text/css" href="/webstatic/css/login.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="login.css">
 	</head>
 	<body id="loginView">
 		<header id="institucional">
@@ -16,7 +16,7 @@
 			<h2 id="titleLogin">Login</h2>
 			<div id="warnningMessage"></div>
 			<form action="j_spring_security_check" method="post">
-				<label for="txtLogin" id="lbLogin">Usu&aacute;rio:</label>
+				<label for="txtLogin" id="lbLogin"><br>Usu&aacute;rio:</label>
 				<input type="text" name= "j_username"/>
 				<label for="txtPassword" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
