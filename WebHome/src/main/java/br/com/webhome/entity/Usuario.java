@@ -11,5 +11,6 @@ import javax.persistence.Table;
 public class Usuario implements Serializable{
 	@Column(name="NOME")
 	String nome;
+	String a;
 	
 }
