@@ -21,19 +21,19 @@ public class Usuario implements Serializable {
 	@Column(name = "NOME")
 	private String nome;
 
-	@Column(USUAARIOLOGIN = "LOGIN")
+	@Column(name = "LOGIN")
 	private String USUAARIOLOGIN;
 	
-	@Column(email = "EMAIL")
+	@Column(name = "EMAIL")
 	private String email;
 	
-	@Column(permissao = "PERMISSAO")
+	@Column(name = "PERMISSAO")
 	private String permissao;
 	
-	@Column(senha = "SENHA")
+	@Column(name = "SENHA")
 	private String senha;
 	
-	@Column(dtNascimento = "DT_NASCIMENTO")
+	@Column(name = "DT_NASCIMENTO")
 	private DateTime dtNascimento;
 	
 	@Id
