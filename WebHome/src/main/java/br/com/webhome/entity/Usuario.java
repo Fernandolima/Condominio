@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
-@Entity
+	@Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
-@Table(name = "dbo.USER")
+	@Table(name = "dbo.USER")
 // que define qual o nome da tabela no banco de dados ao qual a classe será
 // mapeada
 public class Usuario implements Serializable {
@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 	
-	@Column(name = "DT_NASCIMENTO")
+	//@Column(name = "DT_NASCIMENTO")
 	private DateTime dtNascimento;
 	
 	@Id
