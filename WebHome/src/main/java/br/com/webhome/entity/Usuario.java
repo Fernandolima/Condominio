@@ -33,11 +33,11 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 	//@OneToMany(fetch=FetchType.LAZY, mappedBy="USER")
+	@GeneratedValue(strategy=GenerateType.IDENTITY)// É uma boa prática definir uma propriedade id com um valor gerado automaticamente
 	@Id //define a propriedade que será o identificador único da classe e da tabela.
 	@Table(Usuario="dbo.USER")//que define qual o nome da tabela no banco de dados ao qual a classe será mapeada 
 	@Column(id="ID")
 	@Column(nome="NOME")
-	@GeneratedValue(strategy=GenerateType.IDENTITY)// É uma boa prática definir uma propriedade id com um valor gerado automaticamente
 	@Enumerated(EnumType.ORDINAL) // Ele indica que o valor a ser gravado no banco de dados é um valor numérico correspondente à posição do valor na Enum;
 	
 
