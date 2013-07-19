@@ -1,16 +1,16 @@
 package br.com.webhome.entity;
 
-import java.io.Serializable;
+import org.hibernate.annotations.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="dbo.USER")
-public class Usuario implements Serializable{
-	@Column(name="NOME")
-	String nome;
-	String a;
+public class Usuario {
 	
+	
+	
+	
+	
+	
+	
+	//@Table(dbo.USER)
+	
+
 }
