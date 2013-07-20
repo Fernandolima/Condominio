@@ -4,6 +4,8 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="login.css">
+		
+		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
 	</head>
 	<body id="loginView">
 		<header id="institucional">
@@ -25,5 +27,6 @@
 			</form>
 			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="#" id="btRegister">Clique aqui</a></p>
 		</section>
+		<script src="login-validate.js" type="text/javascript"></script>
 	</body>
 </html>
