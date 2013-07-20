@@ -1,108 +1,109 @@
-body#loginView {
-	background: url("../img/predio.jpg") -92px 65px no-repeat #fff;
-}
-
-#institucional {
-	width: 100%;
-	height: 90px;
-	background: #7DBEB8;
-}
-
-#loginView h1 {
-	color: #181619;
-	font-size: 45px;
-	float: left;
-	margin-top: 17px;
-}
-
-#loginView .description {
-	font-size: 15px;
-	float: left;
-	margin: 36px 0 0 30px;
+body#login-view {
+	background: #0F3242;
 }
 
 #login {
-	background: #ABCCBD;
-	width: 400px;
-	min-height: 300px;
-	margin: 100px auto 0;
-	border-radius: 0px 10px 10px 10px;
-	-moz-border-radius: 0px 10px 10px 10px;
-	-webkit-border-radius: 0px 10px 10px 10px;
+	background: #fff;
+	width: 300px;
+	height: 300px;
+	float: left;
+	position: relative;
+	left: 50%;
+	margin-left: -150px;
+	top: 50%;
+	margin-top: 150px;
+	padding: 10px;
+	border-radius: 200px 200px 0px 200px;
+	border: 0px solid #0F3242;	
+	-moz-border-radius: 200px 200px 0px 200px;
+	-webkit-border-radius: 200px 200px 0px 200px;	
 	
-	-moz-box-shadow: 10px 10px 5px #888;
-	-webkit-box-shadow: 10px 10px 5px #888;
-	box-shadow: 10px 10px 5px #888;
+	/* -webkit-box-shadow: 10px 10px 300px -2px rgba(189,226,240,1);
+	-moz-box-shadow: 10px 10px 300px -2px rgba(189,226,240,1);
+	box-shadow: 10px 10px 300px -2px rgba(189,226,240,1); */
 }
 
-#frmLogin {
+#login h1 {
+	width: 100%;
+	text-align: center;
+	font-size: 25px;
+	color: #DE2844;
+	text-transform: uppercase;
+	font-family: 'Chela One', Arial, Verdana;
 	float: left;
+	margin-top: 40px;
 }
 
-#titleLogin {
-	font-size: 20px;
+#warnningMessage {
+	width: 100%;
+	height: 15px;
 	float: left;
-	margin: 10px 0 20px 20px;
+	text-align: center;
+	font-size: 14px;
+	color: #DE2844;
+	font-weight: bold;
+	margin-top: 15px;
+	visibility: hidden;
+}
+
+#frm-login {
+	float: left;
+	margin-top: 15px;
 }
 
 label {
+	color: #153C63;
 	font-size: 16px;
-	width: 52px;
-	float: left;
+	width: 60px;
 	text-align: right;
-	margin: 10px 0 0 20px;
+	float: left;
+	margin: 10px 5px 0 0;
 }
 
 input {
-	width: 292px;
-	margin: 0 0 15px 8px;
-	height: 26px;
-	padding: 5px;
-	border: 1px solid #ABCCBD;
+	width: 210px;
+	float: left;
+	margin-top: 10px;
 }
 
-input:focus {
-	border: 1px solid #181619;
-}
-
-input#txtPassword {
-	margin: 0 0 5px 8px;
-}
-
-#forgotPassword {
+a#forgotPassword {
+	color: #153C63;
+	font-size: 12px;
 	float: right;
-	margin-right: 24px;
-	color: #181619;
-	text-decoration: underline;
-}
-
-#forgotPassword:hover {
-	text-decoration: none;
+	margin: 5px 20px 0 0;
 }
 
 #btSubmitLogin {
-	width: 90px;
-	height: 30px;
-	background: #E32F21;
-	cursor: pointer;
-	color: #fff;
-	border: 0;
-	font-size: 17px;
+	width: 60px;
+	height: 40px;
+	background: #BDE2F0;
 	float: right;
+	margin: 20px 20px 0 0;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
 	clear: both;
-	margin: 10px 24px 0 0;
-	border-radius: 8px
+	font-weight: bold;	
+}
+
+#btSubmitLogin:hover {
+	transform: scale(1.1,1.1);
+	-webkit-transform: scale(1.1,1.1);
+	-moz-transform: scale(1.1,1.1);
+	-o-transform: scale(1.1,1.1);
+	-ms-transform: scale(1.1,1.1);
 }
 
 #noRegister {
-	width: auto;
-	text-align: right;
-	margin: 40px 22px 0 0;
 	float: right;
-	font-size: 16px;
+	margin: 20px 20px 0 0;
 }
 
-#btRegister {
-	font-size: 18px;
-	color: #181619;
+#noRegister a {
+	color: #DE2844;
+}
+
+#noRegister a:hover {
+	text-decoration: none;
 }
