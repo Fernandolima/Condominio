@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
@@ -12,41 +10,49 @@
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-3.0.xsd">
-     
+
 	<!-- Seta anotaçoes para serem usadas pelo Spring -->
 	<context:annotation-config />
 	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
 	<context:component-scan base-package="br.com.webhome.service,br.com.webhome.dao" />
-	
+
+
 	<!-- define que as transaçoes irao ser anotadas -->
 	<tx:annotation-driven />
 	<!-- Configuracao do Banco de Dados -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver"/>
-		<property name="url" value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
 		<property name="username" value="fernandoolimaa" />
 		<property name="password" value="lima102030" />
 	</bean>
-	
+
 	<!-- Spring Security -->
+
+	
 	<sec:http auto-config="true">
-		<sec:form-login login-page="/webstatic/index.html"
-			authentication-failure-url="/webstatic/Loginerror.html" />
-		<sec:intercept-url pattern="/webstatic/funcionario/**" access="ROLE_FUNC,ROLE_GER" />
-		<sec:intercept-url pattern="/webstatic/gerente/**"
-			access="ROLE_ADMIN" />
+		<sec:form-login login-page="/index.jsp"
+			authentication-failure-url="/index.jsp?erro=true" />
+		<sec:intercept-url pattern="/funcionario/**" access="ROLE_FUNC,ROLE_GER" />
+		<sec:intercept-url pattern="/gerente/**" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/**"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	</sec:http>
+	
+	<bean id="MyAuthenticationSuccessHandler"
+	class="br.com.webhome.controller.MyAuthenticationSuccessHandler">
+	</bean>
+	
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT USUAARIOLOGIN, SENHA, 'True' as STATUS FROM dbo.USER WHERE NOME=?"
-				authorities-by-username-query="SELECT USUAARIOLOGIN, PERMISSAO FROM dbo.USER WHERE NOME=?" />
+				users-by-username-query="SELECT NOME, SENHA, 'True' as STATUS FROM [dbo].[USER] WHERE NOME=?"
+				authorities-by-username-query="SELECT NOME, PERMISSAO FROM [dbo].[USER] WHERE NOME=?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
-	
+
 	<!-- Configuracao do Hibernate -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -55,7 +61,7 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect" />
-				<property name="showSql" value="true" /> 
+				<property name="showSql" value="true" />
 			</bean>
 		</property>
 	</bean>
