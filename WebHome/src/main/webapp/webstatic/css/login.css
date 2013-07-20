@@ -46,6 +46,10 @@ body#login-view {
 	visibility: hidden;
 }
 
+.error #warnningMessage {
+	visibility: visible;
+}
+
 #frm-login {
 	float: left;
 	margin-top: 15px;
@@ -64,6 +68,10 @@ input {
 	width: 210px;
 	float: left;
 	margin-top: 10px;
+}
+
+.error input {
+	border: 1px solid #DE2844;
 }
 
 a#forgotPassword {
