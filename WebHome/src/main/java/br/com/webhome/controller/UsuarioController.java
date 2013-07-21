@@ -25,7 +25,6 @@ public class UsuarioController implements Serializable {
 			Authentication authentication = context.getAuthentication();
 			if(authentication instanceof Authentication){
 				usuario.setNome(((Usuario)authentication.getPrincipal()).getNome()); //pega o nome do usuario
-				System.out.println("Nome:" + usuario.getNome());
 			}
 		}
 	}
