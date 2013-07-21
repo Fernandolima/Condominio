@@ -7,14 +7,9 @@
 		
 		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
 	</head>
-	<body id="loginView">
-		<header id="institucional">
-			<div class="content">
-				<h1>TCC</h1>
-				<p class="description">Colocamos alguma mensagem marketeira aqui. Exemplo: A rede do seu condomínio</p>
-			</div>
-		</header>
+	<body id="login-view">
 		<section id="login">
+			<h1>Web Home</h1>
 			<h2 id="titleLogin">Login</h2>
 			<div id="warnningMessage"></div>
 			<form action="j_spring_security_check" method="post">
