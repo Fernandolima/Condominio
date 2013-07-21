@@ -10,7 +10,6 @@
 	<body id="login-view">
 		<section id="login">
 			<h1>Web Home</h1>
-			<h2 id="titleLogin">Login</h2>
 			<div id="warnningMessage"></div>
 			<form action="j_spring_security_check" method="post">
 				<label for="txtLogin" id="lbLogin">Usu&aacute;rio:</label>
