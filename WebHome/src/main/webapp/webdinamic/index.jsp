@@ -2,6 +2,8 @@
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
+		<link href='http://fonts.googleapis.com/css?family=Chela+One' rel='stylesheet' type='text/css'>
+		
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="login.css">
 		
