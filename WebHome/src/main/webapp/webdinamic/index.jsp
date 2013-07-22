@@ -14,9 +14,9 @@
 			<h1>Web Home</h1>
 			<div id="warnningMessage"></div>
 			<form action="j_spring_security_check" method="post">
-				<label for="txtLogin" id="lbLogin">Usu&aacute;rio:</label>
+				<label for="j_username" id="lbLogin">Usu&aacute;rio:</label>
 				<input type="text" name= "j_username"/>
-				<label for="txtPassword" id="lbPassword">Senha:</label>
+				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
 				<a href="#" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" id="btSubmitLogin">

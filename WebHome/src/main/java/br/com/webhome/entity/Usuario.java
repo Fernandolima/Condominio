@@ -2,19 +2,21 @@ package br.com.webhome.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
 	@Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
-	@Table(name = "dbo.USER")
+	@Table(name = "dbo.User")
 // que define qual o nome da tabela no banco de dados ao qual a classe será
 // mapeada
 public class Usuario implements Serializable {
@@ -23,21 +25,23 @@ public class Usuario implements Serializable {
 	private String nome;
 
 	@Column(name = "LOGIN")
-	private String USUAARIOLOGIN;
+	private String login;
 	
 	@Column(name = "EMAIL")
 	private String email;
 	
 	@Column(name = "PERMISSAO")
-	private String permissao;
 	
+	private String permissao;
+
 	@Column(name = "SENHA")
 	private String senha;
 	
 	@Column(name = "STATUS", columnDefinition="BOOLEAN" )
 	private boolean status;
 	
-	private Date DT_NASCIMENTO;
+	@Column(name = "DT_NASCIMENTO")
+	private Date dt_nascimento;
 
 	
 	@Id
@@ -49,101 +53,90 @@ public class Usuario implements Serializable {
 	// automaticamente
 	private Integer id;
 
-	/**
-	 * @return the nome
-	 */
+
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
 
-	/**
-	 * @param nome
-	 *            the nome to set
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
+
+	public String getLogin() {
+		return login;
 	}
 
-	/**
-	 * @return the uSUAARIOLOGIN
-	 */
-	public String getUSUAARIOLOGIN() {
-		return USUAARIOLOGIN;
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	/**
-	 * @return the email
-	 */
+
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @return the permissao
-	 */
-	public String getPermissao() {
-		return permissao;
-	}
 
-	/**
-	 * @return the senha
-	 */
-	public String getSenha() {
-		return senha;
-	}
-
-	/**
-	 * @return the dtNascimento
-	 */
-	
-	/**
-	 * @param uSUAARIOLOGIN the uSUAARIOLOGIN to set
-	 */
-	public void setUSUAARIOLOGIN(String uSUAARIOLOGIN) {
-		USUAARIOLOGIN = uSUAARIOLOGIN;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @param permissao the permissao to set
-	 */
+
+	public String getPermissao() {
+		return permissao;
+	}
+
+
 	public void setPermissao(String permissao) {
 		this.permissao = permissao;
 	}
 
-	/**
-	 * @param senha the senha to set
-	 */
+
+	public String getSenha() {
+		return senha;
+	}
+
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
-	/**
-	 * @param dtNascimento the dtNascimento to set
-	 */
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
+	public Date getDt_nascimento() {
+		return dt_nascimento;
+	}
+
+
+	public void setDt_nascimento(Date dt_nascimento) {
+		this.dt_nascimento = dt_nascimento;
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	
+
 
 	
 }
-// @OneToMany(fetch=FetchType.LAZY, mappedBy="USER")
+
 

@@ -14,7 +14,7 @@
 	<!-- Seta anotaçoes para serem usadas pelo Spring -->
 	<context:annotation-config />
 	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
-	<context:component-scan base-package="br.com.webhome.service,br.com.webhome.dao" />
+	<context:component-scan base-package="br.com.webhome.service,br.com.webhome.dao,br.com.webhome.controller" />
 
 
 	<!-- define que as transaçoes irao ser anotadas -->
@@ -24,32 +24,31 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:jtds:sqlserver://localhost:1433/webhomedb" />
-		<property name="username" value="diego" />
-		<property name="password" value="diegolindo" />
+			value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
+		<property name="username" value="fernandolimaa" />
+		<property name="password" value="lima102030" />
 	</bean>
 
 	<!-- Spring Security -->
 
-	
+
 	<sec:http auto-config="true">
 		<sec:form-login login-page="/index.jsp"
-			authentication-failure-url="/index.jsp?erro=true" />
-		<sec:intercept-url pattern="/funcionario/**" access="ROLE_FUNC,ROLE_GER" />
-		<sec:intercept-url pattern="/gerente/**" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/**"
+			authentication-failure-url="/index.jsp?error"
+			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
+		<sec:intercept-url pattern="/**" 
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	</sec:http>
-	
-	<bean id="MyAuthenticationSuccessHandler"
-	class="br.com.webhome.controller.MyAuthenticationSuccessHandler">
+
+	<bean id="myAuthenticationSuccessHandler"
+		class="br.com.webhome.controller.MyAuthenticationSuccessHandler">
 	</bean>
-	
+
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT NOME, SENHA, 'True' as STATUS FROM [dbo].[USER] WHERE NOME=?"
-				authorities-by-username-query="SELECT NOME, PERMISSAO FROM [dbo].[USER] WHERE NOME=?" />
+				users-by-username-query="SELECT NOME, SENHA, 'True' as STATUS FROM [dbo].[User] WHERE NOME=?"
+				authorities-by-username-query="SELECT NOME, PERMISSAO FROM [dbo].[User] WHERE NOME=?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 

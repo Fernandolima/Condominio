@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import br.com.webhome.entity.Usuario;
 
@@ -24,7 +25,7 @@ public class UsuarioController implements Serializable {
 		if(context instanceof SecurityContext){
 			Authentication authentication = context.getAuthentication();
 			if(authentication instanceof Authentication){
-				usuario.setNome(((Usuario)authentication.getPrincipal()).getNome()); //pega o nome do usuario
+				usuario.setNome(((User)authentication.getPrincipal()).getUsername()); //pega o nome do usuario
 			}
 		}
 	}

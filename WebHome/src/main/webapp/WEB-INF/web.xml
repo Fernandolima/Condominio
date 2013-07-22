@@ -12,6 +12,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 	<!-- Configuracao DO JSF -->	
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
