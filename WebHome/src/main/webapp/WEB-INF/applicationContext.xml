@@ -25,7 +25,7 @@
 		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
-		<property name="username" value="fernandolimaa" />
+		<property name="username" value="fernandoolimaa" />
 		<property name="password" value="lima102030" />
 	</bean>
 
