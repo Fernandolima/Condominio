@@ -31,7 +31,6 @@ public class Usuario implements Serializable {
 	private String email;
 	
 	@Column(name = "PERMISSAO")
-	
 	private String permissao;
 
 	@Column(name = "SENHA")
