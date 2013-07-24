@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 	@Id
 	// define a propriedade que será o identificador único da classe e da
 	// tabela.
-	@Column(name = "ID")
+	@Column(name = "ID_USER")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// É uma boa prática definir uma propriedade id com um valor gerado
 	// automaticamente
