@@ -32,6 +32,7 @@ public class MoradorBean extends BaseBean {
 			addInfoMessage("Morador criado com sucesso");
 		}
 		else{
+			service.update(morador);
 		}
 	}
 }

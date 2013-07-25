@@ -21,4 +21,8 @@ public class MoradorService {
 	public Morador getMorador(int id){
 		return dao.getMorador(id);
 	}
+	
+	public void update(Morador morador){
+		dao.update(morador);
+	}
 }

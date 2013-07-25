@@ -1,4 +1,4 @@
-package br.com.webhome.dao;
+package br.com.webhome.dao.imp;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.webhome.dao.MoradorDAO;
 import br.com.webhome.entity.Morador;
 
 //@Repository: as excecoes do JPA serão traduzidas em excecoes do tipo DataAccessException do Spring, 
@@ -43,7 +44,7 @@ public class moradorDAOImp implements MoradorDAO {
 
 	@Override
 	public void update(Morador morador) {
-
+		entityManager.merge(morador);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "dbo.PUBLICACAO")
 //que define qual o nome da tabela no banco de dados ao qual a classe será
 //mapeada
-public class Publicacao extends Usuario{
+public class Publicacao {
 	
 
 	@Column(name = "PUBLICACAO")
