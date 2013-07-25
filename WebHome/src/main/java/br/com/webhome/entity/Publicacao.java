@@ -15,6 +15,7 @@ import javax.persistence.Table;
 //mapeada
 public class Publicacao {
 	
+	
 
 	@Column(name = "PUBLICACAO")
 	private String publicacao;

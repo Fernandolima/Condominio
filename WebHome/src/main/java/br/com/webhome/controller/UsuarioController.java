@@ -11,22 +11,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import br.com.webhome.entity.Usuario;
+import br.com.webhome.entity.to.UsuarioTO;
 
 @ManagedBean
 @SessionScoped // Isto mantem o contexto do usuario logado até o fim de sua sessão
 public class UsuarioController implements Serializable {
 	
-	private Usuario usuario;
-	
+	private UsuarioTO usuario;
 	
 	public UsuarioController(){
-		usuario = new Usuario(); //Cria novo usuário
-		SecurityContext context = SecurityContextHolder.getContext();//Recebe o contexto do usuario que logou
-		if(context instanceof SecurityContext){
-			Authentication authentication = context.getAuthentication();
-			if(authentication instanceof Authentication){
-				usuario.setNome(((User)authentication.getPrincipal()).getUsername()); //pega o nome do usuario
-			}
-		}
+		
 	}
 }
+//Pega o user que logou

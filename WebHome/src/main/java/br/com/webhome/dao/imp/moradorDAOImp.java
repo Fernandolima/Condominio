@@ -26,6 +26,14 @@ public class moradorDAOImp implements MoradorDAO {
 		entityManager.persist(morador);
 		return morador;
 	}
+	//Pega o morador pelo login
+	public Morador getMorador(String login){
+		String sql = "SELECT * FROM [dbo].[USER] WHERE LOGIN = :login";
+		Query query = entityManager.createQuery(sql);
+		query.setParameter("login",login);
+		Morador morador = (Morador) query.getSingleResult();
+		return morador;
+	}
 
 	@Transactional(readOnly = true)
 	public Morador getMorador(int id) {

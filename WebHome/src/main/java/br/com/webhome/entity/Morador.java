@@ -56,6 +56,4 @@ public class Morador extends Usuario {
 		// TODO Auto-generated method stub
 		super.setStatus(status);
 	}
-
-
 }

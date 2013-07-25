@@ -17,7 +17,10 @@ public class MoradorService {
 		
 		return morador;
 	}
-	
+	//O bean chama o service que chama o dao.
+	public Morador getMorador(String login){
+		return dao.getMorador(login);
+	}
 	public Morador getMorador(int id){
 		return dao.getMorador(id);
 	}

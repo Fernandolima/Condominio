@@ -47,8 +47,8 @@
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT NOME, SENHA, 'True' as STATUS FROM [dbo].[User] WHERE NOME=?"
-				authorities-by-username-query="SELECT NOME, PERMISSAO FROM [dbo].[User] WHERE NOME=?" />
+				users-by-username-query="SELECT LOGIN, SENHA, 'True' as STATUS FROM [dbo].[User] WHERE LOGIN=?"
+				authorities-by-username-query="SELECT LOGIN, PERMISSAO FROM [dbo].[User] WHERE LOGIN=?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
