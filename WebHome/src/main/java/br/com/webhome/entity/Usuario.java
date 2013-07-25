@@ -42,7 +42,6 @@ public class Usuario implements Serializable {
 	private boolean status;
 	
 	@Column(name = "DT_NASCIMENTO")
-	@Temporal(TemporalType.DATE) //beleza alterei essa clase toda vez q vc alterar e tiver bala vc faz assim
 	private Date dt_nascimento;
 
 	
