@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
@@ -36,10 +38,11 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 	
-	@Column(name = "STATUS", columnDefinition="BOOLEAN" )
+	@Column(name = "STATUS", columnDefinition="BOOLEAN")
 	private boolean status;
 	
 	@Column(name = "DT_NASCIMENTO")
+	@Temporal(TemporalType.DATE) //beleza alterei essa clase toda vez q vc alterar e tiver bala vc faz assim
 	private Date dt_nascimento;
 
 	
