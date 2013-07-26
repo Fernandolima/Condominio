@@ -1,5 +1,5 @@
 package br.com.webhome.to;
 
-public class MoradorTO {
+public class MoradorTO extends UsuarioTO {
 
 }
