@@ -13,6 +13,7 @@ public interface MoradorDAO {
     public List<MoradorTO> getMoradores();
     public void remove(Morador morador);
     public void update(Morador morador);
+   
     
     
 }
