@@ -2,14 +2,14 @@ var LOGIN = {
 	hash: null,
 	
 	init: function() {
-		console.log('init');
-		hash = location.href.split('?');
+		hash = location.href.split('#');
 		hash = hash[1];
 		
 		if(hash !== '') {
 			switch (hash) {
 				case 'error':
 					$('body').addClass('error');
+					$('#warnningMessage').html('Usu&aacute;rio ou senha inv&aacute;lido')
 				break;
 			}
 		}
