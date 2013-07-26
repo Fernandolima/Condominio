@@ -17,7 +17,7 @@ import br.com.webhome.to.MoradorTO;
 //@Repository: as excecoes do JPA serão traduzidas em excecoes do tipo DataAccessException do Spring, 
 //o que significa que não precisaremos tratar mensagens de erro do banco de dados
 @Repository("moradorDao")
-public class moradorDAOImp implements MoradorDAO {
+public class MoradorDAOImp implements MoradorDAO {
 	//@PersistenceContext: Realiza a injeção do entityManager que é responsável pelo CRUD
 	@PersistenceContext
 	protected EntityManager entityManager;
