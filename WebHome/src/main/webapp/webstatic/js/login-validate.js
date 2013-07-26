@@ -9,7 +9,7 @@ var LOGIN = {
 			switch (hash) {
 				case 'error':
 					$('body').addClass('error');
-					$('#warnningMessage').html('Usu&aacute;rio ou senha inv&aacute;lido')
+					$('#warnningMessage').html('<p>Usu&aacute;rio ou senha inv&aacute;lido</p>');
 				break;
 			}
 		}

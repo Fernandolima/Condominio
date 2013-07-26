@@ -21,7 +21,7 @@
 				<a href="#" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" value="Enviar" id="btSubmitLogin">
 			</form>
-			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="#" id="btRegister">Clique aqui</a></p>
+			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="cadastro.jsp" id="btRegister">Clique aqui</a></p>
 		</section>
 		<script src="login-validate.js" type="text/javascript"></script>
 	</body>

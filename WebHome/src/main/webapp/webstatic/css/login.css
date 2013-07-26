@@ -1,13 +1,14 @@
 body#login-view {
 	/*background: #0F3242;*/
-	background: #0f3242; /* Old browsers */
-	background: -moz-linear-gradient(45deg,  #0f3242 0%, #de2844 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#0f3242), color-stop(100%,#de2844)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(45deg,  #0f3242 0%,#de2844 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(45deg,  #0f3242 0%,#de2844 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(45deg,  #0f3242 0%,#de2844 100%); /* IE10+ */
-	background: linear-gradient(45deg,  #0f3242 0%,#de2844 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f3242', endColorstr='#de2844',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: #bde2f0; /* Old browsers */
+background: -moz-linear-gradient(45deg,  #bde2f0 1%, #153c63 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,#bde2f0), color-stop(100%,#153c63)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* IE10+ */
+background: linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bde2f0', endColorstr='#153c63',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 
 #login {
@@ -26,9 +27,9 @@ body#login-view {
 	-moz-border-radius: 200px 200px 0px 200px;
 	-webkit-border-radius: 200px 200px 0px 200px;	
 	
-	/* -webkit-box-shadow: 10px 10px 300px -2px rgba(189,226,240,1);
-	-moz-box-shadow: 10px 10px 300px -2px rgba(189,226,240,1);
-	box-shadow: 10px 10px 300px -2px rgba(189,226,240,1); */
+	-webkit-box-shadow: 4px 4px 18px 0 #0F3242;
+	-moz-box-shadow: 4px 4px 18px 0 #0F3242;
+	box-shadow: 4px 4px 18px 0 #0F3242;
 }
 
 #login h1 {
@@ -54,6 +55,10 @@ body#login-view {
 	visibility: hidden;
 }
 
+#warnningMessage p {
+	margin-top: 0;
+}
+
 .error #warnningMessage {
 	visibility: visible;
 }
@@ -76,6 +81,9 @@ input {
 	width: 210px;
 	float: left;
 	margin-top: 10px;
+	-webkit-border-radius: 4px;
+	border: 1px solid #0F3242;
+	height: 21px;
 }
 
 .error input {
