@@ -10,9 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import br.com.webhome.entity.Morador;
-import br.com.webhome.entity.to.MoradorTO;
-import br.com.webhome.entity.to.UsuarioTO;
 import br.com.webhome.service.MoradorService;
+import br.com.webhome.to.MoradorTO;
+import br.com.webhome.to.UsuarioTO;
 
 @ManagedBean(name = "moradorBean")
 @ViewScoped
@@ -48,7 +48,7 @@ public class MoradorBean extends BaseBean {
 		
 	}
 	public void save(){
-		if(morador.getId() == null || morador.getId().intValue() == 0){
+		if(morador.getLogin() == null || morador.getLogin() == ""){
 			morador = service.save(morador);
 			addInfoMessage("Morador criado com sucesso");
 		}

@@ -15,13 +15,7 @@ public class Morador extends Usuario {
 		// TODO Auto-generated method stub
 		super.setDt_nascimento(dt_nascimento);
 	}
-	
-	@Override
-	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		super.setId(id);
-	}
-	
+
 	@Override
 	public void setEmail(String email) {
 		// TODO Auto-generated method stub

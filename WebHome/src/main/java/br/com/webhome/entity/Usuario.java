@@ -26,6 +26,8 @@ public class Usuario implements Serializable {
 	@Column(name = "NOME")
 	private String nome;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "LOGIN")
 	private String login;
 	
@@ -43,16 +45,6 @@ public class Usuario implements Serializable {
 	
 	@Column(name = "DT_NASCIMENTO")
 	private Date dt_nascimento;
-
-	
-	@Id
-	// define a propriedade que será o identificador único da classe e da
-	// tabela.
-	@Column(name = "ID_USER")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// É uma boa prática definir uma propriedade id com um valor gerado
-	// automaticamente
-	private Integer id;
 
 
 	public String getNome() {
@@ -123,19 +115,6 @@ public class Usuario implements Serializable {
 	public void setDt_nascimento(Date dt_nascimento) {
 		this.dt_nascimento = dt_nascimento;
 	}
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	
-
 
 	
 }

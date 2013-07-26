@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import br.com.webhome.entity.Usuario;
-import br.com.webhome.entity.to.UsuarioTO;
+import br.com.webhome.to.UsuarioTO;
 
 @ManagedBean
 @SessionScoped // Isto mantem o contexto do usuario logado até o fim de sua sessão
