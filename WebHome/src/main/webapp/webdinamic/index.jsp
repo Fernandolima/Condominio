@@ -19,7 +19,7 @@
 				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
 				<a href="#" id="forgotPassword">Esqueci minha senha</a>
-				<input type="submit" id="btSubmitLogin">
+				<input type="submit" value="Enviar" id="btSubmitLogin">
 			</form>
 			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="#" id="btRegister">Clique aqui</a></p>
 		</section>
