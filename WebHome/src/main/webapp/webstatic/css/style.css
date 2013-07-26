@@ -29,6 +29,10 @@ time, mark, audio, video {
 
 /*Defaul site*/
 
+html, body {
+	height: 100%;
+}
+
 body {
 	background: #fff;
 	color: #0F3242;
