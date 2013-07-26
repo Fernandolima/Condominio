@@ -2,7 +2,7 @@ var LOGIN = {
 	hash: null,
 	
 	init: function() {
-		hash = location.href.split('#');
+		hash = location.href.split('?');
 		hash = hash[1];
 		
 		if(hash !== '') {

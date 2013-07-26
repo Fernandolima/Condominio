@@ -36,7 +36,7 @@ html { height: 100%;
 body {
 	background: #fff;
 	color: #0F3242;
-	font: Arial, Verdana, Sans-Serif;
+	font-family: Arial, Verdana, Sans-Serif;
 	font-size: 12px;
 }
 
