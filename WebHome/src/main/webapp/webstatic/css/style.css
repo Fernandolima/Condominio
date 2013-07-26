@@ -29,8 +29,8 @@ time, mark, audio, video {
 
 /*Defaul site*/
 
-html, body {
-	height: 100%;
+html { height: 100%;
+
 }
 
 body {

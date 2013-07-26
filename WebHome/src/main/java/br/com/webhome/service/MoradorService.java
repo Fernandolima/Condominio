@@ -21,10 +21,7 @@ public class MoradorService {
 	public Morador getMorador(String login){
 		return dao.getMorador(login);
 	}
-	public Morador getMorador(int id){
-		return dao.getMorador(id);
-	}
-	
+		
 	public void update(Morador morador){
 		dao.update(morador);
 	}
