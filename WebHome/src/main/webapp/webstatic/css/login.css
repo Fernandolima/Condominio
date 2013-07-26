@@ -137,8 +137,9 @@ a#forgotPassword {
 
 #load-login {
 	float: right;
-	margin-right: 30px;
+	margin:20px 30px 0 0;
 	display: none;
+	clear: both;
 }
 
 #noRegister {

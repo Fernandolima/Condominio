@@ -26,6 +26,7 @@ $(function() {
 	}
 	
 	$('#frmLogin').on('submit', function(){
-		$('#frmLogin').display('block');
+		$('#btSubmitLogin').css('display', 'none');
+		$('#load-login').css('display', 'block');
 	});
 });
