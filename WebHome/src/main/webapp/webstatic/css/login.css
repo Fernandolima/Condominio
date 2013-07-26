@@ -114,6 +114,7 @@ a#forgotPassword {
 #noRegister {
 	float: right;
 	margin: 20px 20px 0 0;
+	clear: both;
 }
 
 #noRegister a {
