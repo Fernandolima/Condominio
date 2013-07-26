@@ -1,5 +1,6 @@
 package br.com.webhome.dao.imp;
 
+import java.beans.Transient;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,28 +34,8 @@ public class UsuarioDAOImp  implements  UsuarioDAO {
 			BeanUtils.copyProperties(usuario, moradorTO);
 			return moradorTO;
 		}
-		//Pega o morador pelo login
-		public UsuarioTO getMorador(String login){
-			String sql = "SELECT * FROM [dbo].[USER] WHERE LOGIN = :login";
-			Query query = entityManager.createQuery(sql);
-			query.setParameter("login",login);
-			Morador morador = (Morador) query.getSingleResult();
-			MoradorTO moradorTO = new MoradorTO();
-			BeanUtils.copyProperties(morador, moradorTO);
-			return moradorTO;
-		}
 
-		@Transactional(readOnly = true)
-		public UsuarioTO getMorador(int id) {
-			String sql = "SELECT * FROM [dbo].[USER] WHERE ID = :id";
-			Query query = entityManager.createQuery(sql);
-			query.setParameter("id",id);
-			Morador morador = (Morador) query.getSingleResult();
-			MoradorTO moradorTO = new MoradorTO();
-			BeanUtils.copyProperties(morador, moradorTO);
-			return moradorTO;
-		}
-		@Override
+		@Transactional
 		public List<UsuarioTO> getUsuario() {
 			// TODO Auto-generated method stub
 			return null;
