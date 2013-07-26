@@ -104,7 +104,7 @@ public class Usuario implements Serializable {
 
 	public void setStatus(boolean status) {
 		this.status = status;
-	}
+	} 
 
 
 	public Date getDt_nascimento() {
