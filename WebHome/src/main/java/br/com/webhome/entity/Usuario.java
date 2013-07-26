@@ -45,9 +45,17 @@ public class Usuario implements Serializable {
 	
 	@Column(name = "DT_NASCIMENTO")
 	private Date dt_nascimento;
-
-
-	public String getNome() {
+	
+	@Column(name = "CPF")
+	private int cpf;
+	
+	@Column(name = "BLOCO")
+	private int bloco;
+	
+	@Column(name = "AP")
+	private int apartamento;
+	
+		public String getNome() {
 		return nome;
 	}
 

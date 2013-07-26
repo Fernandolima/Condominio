@@ -22,7 +22,6 @@ public class MoradorBean extends BaseBean {
 	private Morador morador;
 	private MoradorTO moradorTO;
 	private boolean editMode;
-
 	
 	public MoradorBean(){
 		moradorTO = new MoradorTO(); //Cria novo usuário
@@ -37,6 +36,7 @@ public class MoradorBean extends BaseBean {
 			}
 		}
 	}
+	
 	public MoradorTO getMorador(){
 		return moradorTO;
 	}
