@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.webhome.dao.MoradorDAO;
 import br.com.webhome.entity.Morador;
+import br.com.webhome.to.MoradorTO;
 
 @Service("moradorService")
 public class MoradorService {
@@ -18,7 +19,7 @@ public class MoradorService {
 		return morador;
 	}
 	//O bean chama o service que chama o dao.
-	public Morador getMorador(String login){
+	public MoradorTO getMorador(String login){
 		return dao.getMorador(login);
 	}
 		

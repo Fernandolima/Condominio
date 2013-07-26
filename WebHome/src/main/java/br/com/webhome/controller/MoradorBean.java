@@ -32,7 +32,8 @@ public class MoradorBean extends BaseBean {
 			if(authentication instanceof Authentication){
 				
 				String login = ((User)authentication.getPrincipal()).getUsername();
-				//moradorTO = service.getMorador(login); // pega os dados do morador pego login DELE
+				moradorTO = service.getMorador(login); // pega os dados do morador pego login DELE
+				
 			}
 		}
 	}
