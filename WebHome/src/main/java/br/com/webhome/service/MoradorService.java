@@ -1,5 +1,6 @@
 package br.com.webhome.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,11 @@ public class MoradorService {
 	@Autowired
 	private MoradorDAO dao;
 	
-	public Morador save(Morador morador){
+	public MoradorTO save(Morador morador){
 		dao.save(morador);
-		
-		return morador;
+		MoradorTO moradorTO = new MoradorTO();
+		BeanUtils.copyProperties(morador, moradorTO);
+		return moradorTO;
 	}
 	//O bean chama o service que chama o dao.
 	public MoradorTO getMorador(String login){
