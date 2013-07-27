@@ -37,8 +37,13 @@ public class UsuarioDAOImp  implements  UsuarioDAO {
 
 		@Transactional
 		public List<UsuarioTO> getUsuario() {
-			// TODO Auto-generated method stub
-			return null;
+			String sql = "SELECT LOGIN FROM [dbo].[User]";
+			Query query = entityManager.createQuery(sql);
+			List<Usuario> usuario = query.getResultList();
+			List<UsuarioTO> usuarioTO = null;
+			BeanUtils.copyProperties(usuario, usuarioTO);
+			
+			return usuarioTO;
 		}
 
 		
