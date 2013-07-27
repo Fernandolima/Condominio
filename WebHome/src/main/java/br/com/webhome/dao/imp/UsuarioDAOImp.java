@@ -34,7 +34,6 @@ public class UsuarioDAOImp  implements  UsuarioDAO {
 			BeanUtils.copyProperties(usuario, moradorTO);
 			return moradorTO;
 		}
-
 		@Transactional
 		public List<UsuarioTO> getUsuario() {
 			String sql = "SELECT LOGIN FROM [dbo].[User]";
