@@ -15,10 +15,10 @@
 			<div id="warnningMessage"></div>
 			<form action="j_spring_security_check" id="frmLogin" method="post">
 				<label for="j_username" id="lbLogin">Usu&aacute;rio:</label>
-				<input type="text" name= "j_username"/>
+				<input type="text" autocomplete="off" name= "j_username"/>
 				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
-				<a href="#" id="forgotPassword">Esqueci minha senha</a>
+				<a href="esqueciMinhaSenha.jsp" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" value="Enviar" id="btSubmitLogin">
 				<img src="load-login.gif" id="load-login" alt="carregando" />
 			</form>
