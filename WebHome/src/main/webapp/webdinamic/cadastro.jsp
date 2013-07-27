@@ -2,7 +2,7 @@
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
-		
+		<title>Web Home - Cadastro</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>

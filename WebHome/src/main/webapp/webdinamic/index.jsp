@@ -2,8 +2,9 @@
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
+		<title>Web Home - Login</title>
 		<link href='http://fonts.googleapis.com/css?family=Chela+One' rel='stylesheet' type='text/css'>
-		
+		<link rel="shortcut icon" href="favicon.jpg" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="login.css">
 		
