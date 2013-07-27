@@ -50,11 +50,7 @@ public class MoradorBean extends BaseBean {
 	}
 	public void save(){
 		if(morador.getLogin() == null || morador.getLogin() == ""){
-			morador = service.save(morador);
-			addInfoMessage("Morador criado com sucesso");
-		}
-		else{
-			service.update(morador);
+		
 		}
 	}
 }
