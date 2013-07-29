@@ -2,6 +2,10 @@ package br.com.webhomebeta.controller;
 
 
 
+import java.util.Map;
+
+import javassist.expr.NewArray;
+
 import javax.naming.Binding;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.UsuarioService;
@@ -20,16 +25,24 @@ import br.com.webhomebeta.to.UsuarioTO;
 
 
 @Controller
-@RequestMapping("/teste")
+@RequestMapping("/cadastro")
 public class UsuarioController{
 	
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String print(ModelMap model){
-		model.addAttribute("message","funciona issso bosta");
-		return "hello";
+	//mapeia a URL
+	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
+	public ModelAndView cadastro(){
+		//Retorna a pagina cadastro.jsp com um usuario criado
+		return new ModelAndView("cadastro", "usuario", new Usuario());
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
+		
+		usuarioService.save(usuario);
+		return "usuario";
 	}
 	
 //	@RequestMapping(value = "/", method = RequestMethod.GET)

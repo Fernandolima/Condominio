@@ -26,7 +26,7 @@
 				<input type="submit" value="Enviar" id="btSubmitLogin">
 				<img src="/WEB-INF/webstatic/img/load-login.gif" id="load-login" alt="carregando" />
 			</form>
-			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="/pages/hello.jsp" id="btRegister">Clique aqui</a></p>
+			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="cadastro" id="btRegister">Clique aqui</a></p>
 		</section>
 		<script src="/webstatic/js/login-validate.js" type="text/javascript"></script>
 	</body>

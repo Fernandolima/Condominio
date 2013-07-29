@@ -13,8 +13,9 @@
 	<head>
 	<body id="register-view">
 		
-			<form:form modelAttribute="usuario" action="save" method="post">
+			<form:form modelAttribute="usuario" action="" method="post">
 				<form:label path="nome">Nome</form:label><form:input path="nome"/>
+				<form:label path="login">Login</form:label><form:input path="login"/>
 				<form:label path="email">E-mail</form:label><form:input path="email"/>
 				<form:label path="senha">Senha</form:label><form:input path="senha"/>
 				<form:label path="dt_nascimento">Data de nascimento</form:label><form:input path="dt_nascimento"/>
