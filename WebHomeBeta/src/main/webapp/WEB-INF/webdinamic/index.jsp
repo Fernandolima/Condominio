@@ -7,7 +7,7 @@
 		<meta charset="UTF-8" />
 		<title>Web Home - Login</title>
 		<link href="<c:url value = 'http://fonts.googleapis.com/css?family=Chela+One'/>" rel='stylesheet' type='text/css'>
-		<link rel="shortcut icon" href="<c:url value = "/img/favicon.jpg"/>" type="image/x-icon" />
+		<link rel="shortcut icon" href="<c:url value = "\img/favicon.jpg"/>" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/login.css"/>">
 		
