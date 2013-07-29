@@ -1,12 +1,15 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
 		<title>Web Home - Login</title>
-		<link href='http://fonts.googleapis.com/css?family=Chela+One' rel='stylesheet' type='text/css'>
-		<link rel="shortcut icon" href="favicon.jpg" type="image/x-icon" />
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="login.css">
+		<link href="<c:url value = 'http://fonts.googleapis.com/css?family=Chela+One'/>" rel='stylesheet' type='text/css'>
+		<link rel="shortcut icon" href="<c:url value = "/img/favicon.jpg"/>" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/login.css"/>">
 		
 		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
 	</head>

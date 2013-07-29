@@ -20,7 +20,7 @@ import br.com.webhomebeta.to.UsuarioTO;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/teste")
 public class UsuarioController{
 	
 	@Autowired
