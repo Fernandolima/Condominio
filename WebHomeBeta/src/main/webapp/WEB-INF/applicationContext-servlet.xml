@@ -21,7 +21,7 @@
 	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
 	<context:component-scan base-package="br.com.webhomebeta"/>
 	 <mvc:view-controller path="/" view-name="index"/>
-	
+	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
 	<mvc:annotation-driven />
 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/webdinamic/" />
