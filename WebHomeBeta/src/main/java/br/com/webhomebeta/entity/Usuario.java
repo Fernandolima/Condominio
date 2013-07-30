@@ -52,6 +52,8 @@ public class Usuario implements Serializable {
 	@Column(name = "BLOCO")
 	private int bloco;
 	
+	
+	
 	@Column(name = "AP")
 	private int apartamento;
 	

@@ -38,12 +38,14 @@ public class UsuarioController{
 		return new ModelAndView("cadastro", "usuario", new Usuario());
 	}
 	
+	//Pega o Objeto usuario  e sava na tabela USER no banco.
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
 		
 		usuarioService.save(usuario);
 		return "usuario";
 	}
+	
 	
 //	@RequestMapping(value = "/", method = RequestMethod.GET)
 //    public String showUserForm(Model model) {
