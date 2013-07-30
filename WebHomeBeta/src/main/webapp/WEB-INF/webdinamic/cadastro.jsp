@@ -13,7 +13,7 @@
 	<head>
 	<body id="register-view">
 		
-			<form:form modelAttribute="usuario" action="" method="post">
+			<form:form modelAttribute="usuario" action="cadastro/add" method="post">
 				<form:label path="nome">Nome</form:label><form:input path="nome"/>
 				<form:label path="login">Login</form:label><form:input path="login"/>
 				<form:label path="email">E-mail</form:label><form:input path="email"/>

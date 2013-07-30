@@ -32,18 +32,18 @@ public class UsuarioController{
 	private UsuarioService usuarioService;
 	
 	//mapeia a URL
-	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView cadastro(){
 		//Retorna a pagina cadastro.jsp com um usuario criado
 		return new ModelAndView("cadastro", "usuario", new Usuario());
 	}
 	
 	//Pega o Objeto usuario  e sava na tabela USER no banco.
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
 		
 		usuarioService.save(usuario);
-		return "usuario";
+		return "index";
 	}
 	
 	

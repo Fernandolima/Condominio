@@ -30,9 +30,9 @@ public class UsuarioDAOImp  implements  UsuarioDAO {
 		@Transactional
 		public UsuarioTO save(Usuario usuario) {
 			entityManager.persist(usuario);
-			MoradorTO moradorTO = new MoradorTO();
-			BeanUtils.copyProperties(usuario, moradorTO);
-			return moradorTO;
+			UsuarioTO usuarioTO = new UsuarioTO();
+			BeanUtils.copyProperties(usuario, usuarioTO);
+			return usuarioTO;
 		}
 		@Transactional
 		public List<UsuarioTO> getUsuario() {
