@@ -198,7 +198,6 @@
 	</dependencies>
 	<build>
 		<finalName>WebHome</finalName>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
