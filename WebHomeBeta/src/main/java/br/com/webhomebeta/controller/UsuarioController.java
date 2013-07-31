@@ -41,7 +41,7 @@ public class UsuarioController{
 	//Pega o Objeto usuario  e sava na tabela USER no banco.
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
-		
+		usuario.setStatus(false);
 		usuarioService.save(usuario);
 		return "index";
 	}
