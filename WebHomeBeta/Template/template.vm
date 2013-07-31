@@ -1,0 +1,10 @@
+<html>
+	  <body>
+	    <h3>Seja bem vindo ${nome}</h3>
+
+		  Veja as novidades na revista Java Magazine deste mês:
+
+		  <p><img src="cid:imagem"/></p>
+	  </body>
+
+</html>
