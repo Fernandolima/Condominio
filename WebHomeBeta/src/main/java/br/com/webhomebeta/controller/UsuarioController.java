@@ -43,6 +43,8 @@ public class UsuarioController{
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
 		usuario.setStatus(false);
 		usuarioService.save(usuario);
+		EnviaEmailHtmlVelocity enviaEmail = new EnviaEmailHtmlVelocity();
+		enviaEmail.enviar();
 		return "index";
 	}
 	
