@@ -50,7 +50,7 @@
 
 
 
-	<!-- Determina a classe que será injetada -->
+	<!-- Determina a classe que será injetada 
 
 	<bean id="simpleMail" class="EnviarEmailHtmlVelocity">
 
@@ -59,7 +59,7 @@
 		<property name="defaultMessage" ref="defaultMessage" />
 
 	</bean> 
-
+-->
 
 
 	<!-- Determina a classe que será injetada 
