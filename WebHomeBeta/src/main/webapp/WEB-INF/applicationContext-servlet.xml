@@ -21,70 +21,12 @@
 	<mvc:view-controller path="/" view-name="index" />
 
 	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
+	<mvc:resources mapping="/template/**" location="/template/" />
 	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/webdinamic/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
-	<!-- Configura o servidor SMTP de E-mail -->
-
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-
-		<property name="host" value="smtp.gmail.com" />
-
-		<property name="username" value="webhomecondominios@gmail.com" />
-
-		<property name="password" value="lima102030" />
-
-	</bean>
-	<!-- Cria uma parte da mensagem que será padrão -->
-
-	<bean id="defaultMessage" class="org.springframework.mail.SimpleMailMessage">
-
-		<property name="to" value="fernandolima66@gmail.com" />
-
-		<property name="subject" value="Aprovação de Novos Moradores" />
-
-	</bean>
-
-
-
-	<!-- Determina a classe que será injetada 
-
-	<bean id="simpleMail" class="EnviarEmailHtmlVelocity">
-
-		<property name="mailSender" ref="mailSender" />
-
-		<property name="defaultMessage" ref="defaultMessage" />
-
-	</bean> 
--->
-
-
-	<!-- Determina a classe que será injetada 
-
-	<bean id="htmlMail" class="EnviarEmailHtmlVelocity">
-
-		<property name="mailSender" ref="mailSender" />
-
-	</bean>-->
-
-
-	<bean id="velocityEngine"
-		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-
-		<property name="velocityProperties">
-
-			<value>
-
-				resource.loader=class
-				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-
-			</value>
-
-		</property>
-
 	</bean>
 
 	<!-- define que as transaçoes irao ser anotadas -->
@@ -97,6 +39,34 @@
 			value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
 		<property name="username" value="fernandoolimaa" />
 		<property name="password" value="lima102030" />
+	</bean>
+
+
+
+	<!-- Configurações do VelocityEngine -->
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value>
+				resource.loader=file
+				file.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
+	<!-- Propriedades do JavaMailSender com SMTP do Gmail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="465" />
+		<property name="protocol" value="smtps" />
+		<property name="username" value="webhomecondominios@gmail.com" />
+		<property name="password" value="lima102030" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtps.auth">true</prop>
+				<prop key="mail.smtps.starttls.enable">true</prop>
+				<prop key="mail.smtps.debug">true</prop>
+			</props>
+		</property>
 	</bean>
 
 	<!-- Spring Security -->

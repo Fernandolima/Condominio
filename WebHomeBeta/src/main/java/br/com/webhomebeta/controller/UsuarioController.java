@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.to.UsuarioTO;
 
@@ -30,6 +31,8 @@ public class UsuarioController{
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private EmailServico emailServico;
 	
 	//mapeia a URL
 	@RequestMapping(method = RequestMethod.GET)
@@ -43,8 +46,7 @@ public class UsuarioController{
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
 		usuario.setStatus(false);
 		usuarioService.save(usuario);
-		EnviaEmailHtmlVelocity enviaEmail = new EnviaEmailHtmlVelocity();
-		enviaEmail.enviar();
+		emailServico.enviarEmail();
 		return "index";
 	}
 	
