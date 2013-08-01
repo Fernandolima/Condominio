@@ -39,6 +39,8 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 	
+	private String confSenha;
+
 	@Column(name = "STATUS", columnDefinition="BOOLEAN")
 	private boolean status;
 	
@@ -154,7 +156,14 @@ public class Usuario implements Serializable {
 		this.apartamento = apartamento;
 	}
 
+	public String getConfSenha() {
+		return confSenha;
+	}
 
+
+	public void setConfSenha(String confSenha) {
+		this.confSenha = confSenha;
+	}
 	
 }
 
