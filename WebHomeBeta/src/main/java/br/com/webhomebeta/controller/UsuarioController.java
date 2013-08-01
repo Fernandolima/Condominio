@@ -45,6 +45,9 @@ public class UsuarioController{
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String print(@ModelAttribute("usuario")Usuario usuario, BindingResult result){
 		usuario.setStatus(false);
+		usuario.setPermissao("ROLE_MORADOR");
+		String email = usuario.getEmail();
+		usuario.setLogin(email);
 		usuarioService.save(usuario);
 		emailServico.enviarEmail();
 		return "index";
