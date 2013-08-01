@@ -22,7 +22,7 @@
 				<input type="text" autocomplete="off" name= "j_username"/>
 				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
-				<a href="esqueciMinhaSenha.jsp" id="forgotPassword">Esqueci minha senha</a>
+				<a href="esqueciMinhaSenha" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" value="Enviar" id="btSubmitLogin" class="btSubmit">
 				<img src="img/load-login.gif" id="load-login" alt="carregando" />
 			</form>

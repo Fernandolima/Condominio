@@ -69,7 +69,7 @@ body {
     margin: 0 auto;
 }
 
-#header-site a {
+#header-site h1 {
     width: 150px;
     float: left;
     font-size: 30px;
@@ -80,6 +80,7 @@ body {
 }
 
 #header-site a {
+	color: #DE2844;
     text-decoration: none;
 }
 

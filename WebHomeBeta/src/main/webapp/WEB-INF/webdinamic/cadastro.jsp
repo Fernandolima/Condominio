@@ -33,7 +33,7 @@
 		
 					<form:form modelAttribute="usuario" action="cadastro/add" method="post" id="frm-register">
 						<form:label for="nome" path="nome">Nome: *</form:label>
-						<form:input type="text" path="nome"/>
+						<form:input type="text" <c:if test="${nomeOK}">class="error</c:if> path="nome"/>
 					
 						<form:label for="email" path="email">E-mail: *</form:label>
 						<form:input path="email"/>
