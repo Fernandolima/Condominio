@@ -18,11 +18,15 @@
 	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
 	<context:component-scan base-package="br.com.webhomebeta" />
 
+	<!-- Define a pagina inical -->
 	<mvc:view-controller path="/" view-name="index" />
-
+	
+	<!-- Define o local dos arquivos de imagem, javascript, e css -->
 	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
-	<mvc:resources mapping="/template/**" location="/template/" />
+
 	<mvc:annotation-driven />
+	
+	<!-- Diz ao Spring onde as paginas JSP estao -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/webdinamic/" />
@@ -53,6 +57,7 @@
 			</value>
 		</property>
 	</bean>
+	
 	<!-- Propriedades do JavaMailSender com SMTP do Gmail -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
@@ -70,8 +75,6 @@
 	</bean>
 
 	<!-- Spring Security -->
-
-
 	<sec:http auto-config="true">
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
