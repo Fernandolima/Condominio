@@ -1,13 +1,12 @@
 body#login-view {
-	/*background: #0F3242;*/
 	background: #bde2f0; /* Old browsers */
-background: -moz-linear-gradient(45deg,  #bde2f0 1%, #153c63 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,#bde2f0), color-stop(100%,#153c63)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* IE10+ */
-background: linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bde2f0', endColorstr='#153c63',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: -moz-linear-gradient(45deg,  #bde2f0 1%, #153c63 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,#bde2f0), color-stop(100%,#153c63)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* IE10+ */
+	background: linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bde2f0', endColorstr='#153c63',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
 
@@ -68,44 +67,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bde2f0', end
 	margin-top: 15px;
 }
 
-label {
-	color: #153C63;
-	font-size: 14px;
-	width: 60px;
-	text-align: right;
-	float: left;
-	margin: 12px 5px 0 0;
-}
-
-input {
-	width: 200px;
-	float: left;
-	margin-top: 10px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #0F3242;
-	height: 23px;
-	padding: 0 5px;
-	line-height: 12px;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-	background: #deefff; /* Old browsers */
-	background: -moz-linear-gradient(45deg,  #deefff 0%, #e3e7ed 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#deefff), color-stop(100%,#e3e7ed)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(45deg,  #deefff 0%,#e3e7ed 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(45deg,  #deefff 0%,#e3e7ed 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(45deg,  #deefff 0%,#e3e7ed 100%); /* IE10+ */
-	background: linear-gradient(45deg,  #deefff 0%,#e3e7ed 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#e3e7ed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */	
-	border-color: #153C63;
-}
-
-.error input {
-	border: 1px solid #DE2844;
-}
-
 a#forgotPassword {
 	color: #153C63;
 	font-size: 12px;
@@ -116,23 +77,6 @@ a#forgotPassword {
 #btSubmitLogin {
 	width: 60px;
 	height: 40px;
-	background: #BDE2F0;
-	float: right;
-	margin: 20px 20px 0 0;
-	border-radius: 10px 10px 10px 10px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	-webkit-border-radius: 10px 10px 10px 10px;
-	border: 0px solid #000000;
-	clear: both;
-	font-weight: bold;	
-}
-
-#btSubmitLogin:hover {
-	transform: scale(1.1,1.1);
-	-webkit-transform: scale(1.1,1.1);
-	-moz-transform: scale(1.1,1.1);
-	-o-transform: scale(1.1,1.1);
-	-ms-transform: scale(1.1,1.1);
 }
 
 #load-login {
@@ -156,5 +100,37 @@ a#forgotPassword {
 	text-decoration: none;
 }
 
-
 /* LAYOUT MOBILE*/
+
+@media screen and (max-width: 340px){
+	#login {
+		width: 100%;
+		border-radius: 0;
+		left: 0;
+		margin-left: 0;
+		padding: 0;
+		height: auto;
+		padding-bottom: 20px;
+	}
+
+	label {
+		width: 100%;
+		text-align: center;
+	}
+
+	input {
+		width: 95%;
+		padding-left: 2%;
+		padding-right: 2%;
+		margin-top: 5px;
+	}
+
+	a#forgotPassword {
+		margin: 5px 0 0 0;
+	}
+
+	#btSubmitLogin,
+	#noRegister {
+		margin-right: 0;
+	}
+}

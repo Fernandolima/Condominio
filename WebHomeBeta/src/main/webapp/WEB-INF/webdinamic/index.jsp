@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/login.css"/>"/>
 		
-		<script src="/webstatic/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+		<script src="<c:url value = "/webstatic/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 	</head>
 	<body id="login-view">
 		<section id="login">
@@ -23,12 +23,13 @@
 				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
 				<a href="esqueciMinhaSenha.jsp" id="forgotPassword">Esqueci minha senha</a>
-				<input type="submit" value="Enviar" id="btSubmitLogin">
-				<img src="/WEB-INF/webstatic/img/load-login.gif" id="load-login" alt="carregando" />
+				<input type="submit" value="Enviar" id="btSubmitLogin" class="btSubmit">
+				<img src="img/load-login.gif" id="load-login" alt="carregando" />
 			</form>
 			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="cadastro" id="btRegister">Clique aqui</a></p>
 		</section>
-		<script src="/webstatic/js/login-validate.js" type="text/javascript"></script>
+		
+		<script src="<c:url value = "/webstatic/js/login-validate.js"/>" type="text/javascript"></script>
 	</body>
 </html>
 

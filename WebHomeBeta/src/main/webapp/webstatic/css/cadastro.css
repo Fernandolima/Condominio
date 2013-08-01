@@ -1,0 +1,162 @@
+.info-register {
+	width: 400px;
+	float: left;
+	margin-top: 30px;
+}
+
+.info-register h2 {
+	font-size: 25px;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.info-register p {
+	clear: both;
+	float: left;
+	font-size: 16px;
+	margin-top: 15px;
+}
+
+.form-register {
+	width: 500px;
+	float: left;
+	margin: 30px 0 0 60px;
+}
+
+.form-register h2 {
+	font-size: 15px;
+	float: left;
+	width: 100%;
+}
+
+.form-register p {
+	float: left;
+	margin: 15px 0 15px 0;
+	text-align: right;
+	width: 100%;
+}
+
+#frm-register label {
+	width: auto;
+	margin: 22px 5px 0 0;
+}
+
+#frm-register input {
+	margin-top: 20px;
+}
+
+input[name="nome"] {
+	width: 430px;
+}
+
+input[name="email"] {
+	width: 427px;
+}
+
+#frm-register label.lblRight {
+	margin-left: 15px;
+}
+
+input[name="senha"],
+input[name="confSenha"] {
+	width: 137px;
+}
+
+input[name="dt_nascimento"],
+input[name="cpf"] {
+	width: 136px;
+}
+
+input[name="bloco"],
+input[name="apartamento"] {
+	width: 151px;
+}
+
+#btSubmitRegister {
+	width: 60px;
+	height: 40px;
+	margin-right: 9px;
+}
+
+/* LAYOUT MOBILE*/
+
+@media screen and (max-width: 980px){
+	#main-register {
+		height: auto !important;
+	}
+
+	.info-register h2 {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+	}
+
+	.info-register {
+		margin: 0 auto;
+		float: none;
+		text-align: center;
+	}
+
+	.form-register {
+		float: none;
+		margin: 0 auto;
+	}
+
+	.form-register h2 {
+		width: 100%;
+		margin-top: 28px;
+		text-align: center;
+	}
+
+	footer {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 515px) { 
+	.form-register {
+		width: 100%;
+	}
+
+	#frm-register label {
+		width: 100%;
+		text-align: left;
+		margin: 7px 0 0 0;
+	}
+
+	#frm-register input {
+		width: 95%;
+		margin-top: 5px;
+		padding-left: 2%;
+		padding-right: 2%;
+	}
+
+	#frm-register label.lblRight {
+		margin-left: 0;
+	}
+
+	.btSubmit {
+		width: 100%;
+		padding: 0;
+		margin-right: 0;
+	}
+
+	#frm-register input[type="submit"] {
+		width: 100%;
+	}
+
+	#btSubmitRegister {
+		margin-right: 0;;
+	}
+
+	.btSubmit:hover {
+		background: red;
+		transform: none;
+	}
+}
+
+@media screen and (max-width: 515px) {  
+	.info-register {
+		width: 100%;
+	}
+}
