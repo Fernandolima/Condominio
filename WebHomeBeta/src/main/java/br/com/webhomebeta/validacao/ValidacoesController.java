@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class ValidacoesController {
 
-	private static final int[] pesoCPF = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+	private final int[] pesoCPF = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
-	private static int calcularDigito(String str, int[] peso) {
+	private  int calcularDigito(String str, int[] peso) {
 		int soma = 0;
 		for (int indice = str.length() - 1, digito; indice >= 0; indice--) {
 			digito = Integer.parseInt(str.substring(indice, indice + 1));
@@ -17,7 +17,7 @@ public class ValidacoesController {
 		return soma > 9 ? 0 : soma;
 	}
 
-	public static boolean isValidCPF(String cpf) {
+	public  boolean isValidCPF(String cpf) {
 		if ((cpf == null) || (cpf.length() != 11))
 			return false;
 

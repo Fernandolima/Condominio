@@ -36,33 +36,33 @@
 					<h2>Formulário de Pré-Cadastro</h2>
 					<p>* Campos obrigatórios</p>
 		
-					<form:form modelAttribute="usuario" cssClass="${(list[7]) ? '' : 'error'}" action="cadastro/add" method="post" id="frm-register">
+					<form:form modelAttribute="bean" action="cadastro/add" method="post" id="frm-register">
 						<div id="warnningMessage">
 							<p>Verifique os campos destacados</p>
 						</div>
-						<form:label for="nome" path="nome">Nome: *</form:label>
-						<form:input type="text" value="${usuario.nome}" path="nome" cssClass="${(list[0]) ? '' : 'error'}" />
+						<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
+						<form:input type="text" value="${bean.usuarioTO.nome}" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
 						
 						<form:label for="email" path="email">E-mail: *</form:label>
-						<form:input path="email"  cssClass="${(list[1]) ? '' : 'error'}" />
+						<form:input path="bean.usuarioTO.email" />
 						
 						<form:label for="senha" path="senha">Senha: *</form:label>
-						<form:password path="senha"  cssClass="${(list[2]) ? '' : 'error'}" />
+						<form:password path="bean.usuarioTO.senha" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-						<form:password path="confSenha"  cssClass="${(list[3]) ? '' : 'error'}" />
+						<form:password path="bean.usuarioTO.confSenha" />
 						
 						<form:label for="dt_nascimento" path="dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="dt_nascimento"  cssClass="${(list[4]) ? '' : 'error'}" />
+						<form:input path="bean.usuarioTO.dt_nascimento"/>
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						<form:label class="lblRight" for="cpf" path="cpf">CPF: *</form:label>
-						<form:input path="cpf" cssClass="${(list[5]) ? '' : 'error'}" />i
+						<form:input path="bean.usuarioTO.cpf" />
 						
 						<form:label for="bloco" path="bloco">Bloco: *</form:label>
-						<form:input path="bloco"  cssClass="${(list[6]) ? '' : 'error'}" />
+						<form:input path="bean.usuarioTO.bloco" />
 						
 						<form:label for="apartamento" class="lblRight" path="apartamento">Apartamento: *</form:label>
-						<form:input path="apartamento"/>
+						<form:input path="bean.usuarioTO.apartamento"/>
 						
 						<input type="submit" id="btSubmitRegister" class="btSubmit" value="Enviar" />
 					</form:form></div>
