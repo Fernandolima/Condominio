@@ -1,16 +1,10 @@
 package br.com.webhomebeta.controller;
 
-import java.io.ObjectInputStream.GetField;
-import java.util.Map;
-
-import javassist.expr.NewArray;
-
-import javax.naming.Binding;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.UsuarioService;
-import br.com.webhomebeta.to.UsuarioTO;
 
 @Controller
 @RequestMapping("/cadastro")
@@ -49,7 +42,7 @@ public class UsuarioController {
 		isValidCPF(usuario.getCpf());
 		usuarioService.save(usuario);
 		emailServico.enviarEmail();
-		return "index";
+		return "redirect:/cadastro";
 	}
 	private static final int[] pesoCPF = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
@@ -73,6 +66,19 @@ public class UsuarioController {
 				+ digito2.toString());
 		
 }
+	 public static boolean validarEmail(String email)
+	    {
+	        boolean isEmailIdValid = false;
+	        if (email != null && email.length() > 0) {
+	            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+	            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	            Matcher matcher = pattern.matcher(email);
+	            if (matcher.matches()) {
+	                isEmailIdValid = true;
+	            }
+	        }
+	        return isEmailIdValid;
+	    }
 	
 
 	// @RequestMapping(value = "/", method = RequestMethod.GET)
