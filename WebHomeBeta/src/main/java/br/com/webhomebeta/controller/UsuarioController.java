@@ -70,6 +70,8 @@ public class UsuarioController {
 				|| usuarioTO.getNome().length() > 50) {
 			throw new NomeException();
 		}
+		
+		
 
 		if (validacoesController.isValidCPF(usuarioTO.getCpf())) {
 			throw new CPFException();
