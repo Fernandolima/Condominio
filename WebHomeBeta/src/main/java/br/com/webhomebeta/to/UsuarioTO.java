@@ -25,6 +25,30 @@ public class UsuarioTO {
 	
 	
 	private Date dt_nascimento;
+	
+	private String bloco;
+	
+	private String apartamento;
+
+
+	public String getBloco() {
+		return bloco;
+	}
+
+
+	public void setBloco(String bloco) {
+		this.bloco = bloco;
+	}
+
+
+	public String getApartamento() {
+		return apartamento;
+	}
+
+
+	public void setApartamento(String apartamento) {
+		this.apartamento = apartamento;
+	}
 
 
 	public String getNome() {

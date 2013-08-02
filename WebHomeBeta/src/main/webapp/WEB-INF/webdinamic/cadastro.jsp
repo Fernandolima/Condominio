@@ -40,29 +40,31 @@
 						<div id="warnningMessage">
 							<p>Verifique os campos destacados</p>
 						</div>
+						
 						<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
-						<form:input type="text" value="${bean.usuarioTO.nome}" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
+						<form:input type="text" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
 						
-						<form:label for="email" path="email">E-mail: *</form:label>
-						<form:input path="bean.usuarioTO.email" />
+						<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
+						<form:input path="usuarioTO.email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
 						
-						<form:label for="senha" path="senha">Senha: *</form:label>
-						<form:password path="bean.usuarioTO.senha" />
+						<form:label for="senha" path="usuarioTO.senha">Senha: *</form:label>
+						<form:password path="usuarioTO.senha" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-						<form:password path="bean.usuarioTO.confSenha" />
+						<form:password path="confSenha" />
 						
-						<form:label for="dt_nascimento" path="dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="bean.usuarioTO.dt_nascimento"/>
+						<form:label for="dt_nascimento" path="usuarioTO.dt_nascimento">Data de nascimento:</form:label>
+						<form:input path="usuarioTO.dt_nascimento"/>
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
-						<form:label class="lblRight" for="cpf" path="cpf">CPF: *</form:label>
-						<form:input path="bean.usuarioTO.cpf" />
 						
-						<form:label for="bloco" path="bloco">Bloco: *</form:label>
-						<form:input path="bean.usuarioTO.bloco" />
+						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
+						<form:input path="usuarioTO.cpf" />
 						
-						<form:label for="apartamento" class="lblRight" path="apartamento">Apartamento: *</form:label>
-						<form:input path="bean.usuarioTO.apartamento"/>
+						<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
+						<form:input path="usuarioTO.bloco" />
+						
+						<form:label for="apartamento" class="lblRight" path="usuarioTO.apartamento">Apartamento: *</form:label>
+						<form:input path="usuarioTO.apartamento"/>
 						
 						<input type="submit" id="btSubmitRegister" class="btSubmit" value="Enviar" />
 					</form:form></div>
