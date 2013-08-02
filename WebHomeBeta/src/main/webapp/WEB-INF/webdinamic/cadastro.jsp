@@ -35,31 +35,30 @@
 					<h2>Formulário de Pré-Cadastro</h2>
 					<p>* Campos obrigatórios</p>
 		
-					<form:form modelAttribute="usuario" cssClass="${(!formNok) ? 'error' : ''}" action="cadastro/add" method="post" id="frm-register">
+					<form:form modelAttribute="usuario" cssClass="${(list[0]) ? '' : 'error'}" action="cadastro/add" method="post" id="frm-register">
 						<div id="warnningMessage">
 							<p>Verifique os campos destacados</p>
 						</div>
 						<form:label for="nome" path="nome">Nome: *</form:label>
-						<form:input type="text" value="${nomeCadastro}" path="nome" cssClass="${(!nomeOK) ? 'error' : ''}" />
-											
+						<form:input type="text" value="${usuario.nome}" path="nome" cssClass="${(list[1]) ? '' : 'error'}" />
+						
 						<form:label for="email" path="email">E-mail: *</form:label>
-						<form:input path="email"/>
+						<form:input path="email"  cssClass="${(list[2]) ? '' : 'error'}" />
 						
 						<form:label for="senha" path="senha">Senha: *</form:label>
-						<form:password path="senha" />
+						<form:password path="senha"  cssClass="${(list[3]) ? '' : 'error'}" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-						<form:password path="confSenha"/>
+						<form:password path="confSenha"  cssClass="${(list[4]) ? '' : 'error'}" />
 						
 						<form:label for="dt_nascimento" path="dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="dt_nascimento"/>
+						<form:input path="dt_nascimento"  cssClass="${(list[5]) ? '' : 'error'}" />
 						
 						<form:label class="lblRight" for="cpf" path="cpf">CPF: *</form:label>
-						<!-- form:input path="cpf" value=""/-->
-						<input type="text" name="cpf" id="cpf" />
+						<form:input path="cpf" cssClass="${(list[6]) ? '' : 'error'}" />
 						
 						<form:label for="bloco" path="bloco">Bloco: *</form:label>
-						<form:input path="bloco"/>
+						<form:input path="bloco"  cssClass="${(list[7]) ? '' : 'error'}" />
 						
 						<form:label for="apartamento" class="lblRight" path="apartamento">Apartamento: *</form:label>
 						<form:input path="apartamento"/>
