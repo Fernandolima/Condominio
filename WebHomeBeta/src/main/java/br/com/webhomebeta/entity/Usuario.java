@@ -2,19 +2,12 @@ package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import net.sourceforge.jtds.jdbc.DateTime;
+import javax.persistence.Transient;
 
 	@Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
@@ -39,6 +32,8 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 	
+	//Atributo que não persiste no banco de dados.
+	@Transient
 	private String confSenha;
 
 	@Column(name = "STATUS", columnDefinition="BOOLEAN")
@@ -48,11 +43,10 @@ public class Usuario implements Serializable {
 	private Date dt_nascimento;
 	
 	@Column(name = "CPF")
-	private int cpf;
+	private String cpf;
 	
 	@Column(name = "BLOCO")
 	private int bloco;
-	
 	
 	
 	@Column(name = "AP")
@@ -127,12 +121,12 @@ public class Usuario implements Serializable {
 		this.dt_nascimento = dt_nascimento;
 	}
 	
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

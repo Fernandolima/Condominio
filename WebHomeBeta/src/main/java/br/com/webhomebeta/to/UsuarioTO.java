@@ -5,6 +5,8 @@ import java.sql.Date;
 public class UsuarioTO {
 	
 	private String nome;
+	
+	private String cpf;
 
 	
 	private String login;
@@ -92,6 +94,22 @@ public class UsuarioTO {
 
 	public void setDt_nascimento(Date dt_nascimento) {
 		this.dt_nascimento = dt_nascimento;
+	}
+
+
+	/**
+	 * @return the cpf
+	 */
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	/**
+	 * @param cpf the cpf to set
+	 */
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }
