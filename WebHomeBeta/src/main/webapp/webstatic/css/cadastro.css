@@ -67,11 +67,11 @@ input.error {
 	border: 1px solid #DE2844;
 }
 
-input[name="usuarioTO.nome"] {
+input#nome {
 	width: 430px;
 }
 
-input[name="usuarioTO.email"] {
+input#email {
 	width: 427px;
 }
 
@@ -79,18 +79,18 @@ input[name="usuarioTO.email"] {
 	margin-left: 15px;
 }
 
-input[name="usuarioTO.senha"],
-input[name="confSenha"] {
+input#senha,
+input#confSenha {
 	width: 137px;
 }
 
-input[name="usuarioTO.dt_nascimento"],
-input[name="usuarioTO.cpf"] {
+input#dt_nascimento,
+input#cpf {
 	width: 136px;
 }
 
-input[name="usuarioTO.bloco"],
-input[name="usuarioTO.apartamento"] {
+input#bloco,
+input#apartamento {
 	width: 151px;
 }
 

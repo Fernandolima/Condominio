@@ -42,29 +42,29 @@
 						</div>
 						
 						<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
-						<form:input type="text" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
+						<form:input type="text" id="nome" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
 						
 						<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
-						<form:input path="usuarioTO.email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
+						<form:input path="usuarioTO.email" id="email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
 						
 						<form:label for="senha" path="usuarioTO.senha">Senha: *</form:label>
-						<form:password path="usuarioTO.senha" />
+						<form:password id="senha" path="usuarioTO.senha" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-						<form:password path="confSenha" />
+						<form:password id="confSenha" path="confSenha" />
 						
 						<form:label for="dt_nascimento" path="usuarioTO.dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="usuarioTO.dt_nascimento" cssClass="dt_nascimento "/>
+						<form:input path="usuarioTO.dt_nascimento" id="dt_nascimento" />
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						
 						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
-						<form:input path="usuarioTO.cpf" cssClass="cpf" />
+						<form:input path="usuarioTO.cpf" id="cpf" />
 						
 						<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
-						<form:input path="usuarioTO.bloco" />
+						<form:input path="usuarioTO.bloco" id="bloco" />
 						
 						<form:label for="apartamento" class="lblRight" path="usuarioTO.apartamento">Apartamento: *</form:label>
-						<form:input path="usuarioTO.apartamento"/>
+						<form:input path="usuarioTO.apartamento" id="apartamento" />
 						
 						<input type="submit" id="btSubmitRegister" class="btSubmit" value="Enviar" />
 					</form:form></div>
