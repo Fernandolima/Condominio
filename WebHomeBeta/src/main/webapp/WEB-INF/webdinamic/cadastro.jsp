@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt_BR">
 
@@ -53,7 +54,7 @@
 						
 						<form:label for="dt_nascimento" path="dt_nascimento">Data de nascimento:</form:label>
 						<form:input path="dt_nascimento"  cssClass="${(list[4]) ? '' : 'error'}" />
-						
+						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						<form:label class="lblRight" for="cpf" path="cpf">CPF: *</form:label>
 						<form:input path="cpf" cssClass="${(list[5]) ? '' : 'error'}" />
 						
