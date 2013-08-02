@@ -1,16 +1,7 @@
 package br.com.webhomebeta.controller;
 
-import java.io.ObjectInputStream.GetField;
-import java.util.Map;
-
-import javassist.expr.NewArray;
-
-import javax.naming.Binding;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.UsuarioService;
-import br.com.webhomebeta.to.UsuarioTO;
+import br.com.webhomebeta.validacao.ValidacoesController;
 
 @Controller
 @RequestMapping("/cadastro")

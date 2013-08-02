@@ -1,4 +1,4 @@
-package br.com.webhomebeta.controller;
+package br.com.webhomebeta.validacao;
 
 public class ValidacoesController {
 		
