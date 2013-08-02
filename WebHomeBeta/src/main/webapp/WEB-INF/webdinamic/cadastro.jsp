@@ -56,11 +56,11 @@
 						<form:password path="confSenha" />
 						
 						<form:label for="dt_nascimento" path="usuarioTO.dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="usuarioTO.dt_nascimento"/>
+						<form:input path="usuarioTO.dt_nascimento" cssClass="dt_nascimento "/>
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						
 						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
-						<form:input path="usuarioTO.cpf" />
+						<form:input path="usuarioTO.cpf" cssClass="cpf" />
 						
 						<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
 						<form:input path="usuarioTO.bloco" />

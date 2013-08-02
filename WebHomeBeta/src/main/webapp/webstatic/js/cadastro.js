@@ -9,11 +9,11 @@ var CADASTRO = {
 		}
 
 		//inicializa plugin alphanumeric nos inputs do formulário
-		$('#dt_nascimento').numeric();
-		$("#dt_nascimento").mask("99/99/9999",{placeholder:" "});
+		$('.dt_nascimento').numeric();
+		$(".dt_nascimento").mask("99/99/9999",{placeholder:" "});
 
-		$('#cpf').numeric();
-		$("#cpf").mask("999.999.999-99",{placeholder:" "});
+		$('.cpf').numeric();
+		$(".cpf").mask("999.999.999-99",{placeholder:" "});
 	}	
 }
 
