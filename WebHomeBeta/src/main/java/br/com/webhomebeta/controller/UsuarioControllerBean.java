@@ -7,13 +7,13 @@ public class UsuarioControllerBean {
 	UsuarioTO usuarioTO;
 	
 	private String confSenha;
-	private boolean validName;
-	private boolean validEmail;
-	private boolean validSenha;
-	private boolean validDataNascimento;
-	private boolean validCpf;
-	private boolean validBloco;
-	private boolean validApartamento;
+	private boolean validName = true;
+	private boolean validEmail = true;
+	private boolean validSenha = true;
+	private boolean validDataNascimento = true;
+	private boolean validCpf = true;
+	private boolean validBloco = true;
+	private boolean validApartamento = true;
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
