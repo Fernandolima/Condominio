@@ -56,7 +56,7 @@
 						<form:input path="dt_nascimento"  cssClass="${(list[4]) ? '' : 'error'}" />
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						<form:label class="lblRight" for="cpf" path="cpf">CPF: *</form:label>
-						<form:input path="cpf" cssClass="${(list[5]) ? '' : 'error'}" />
+						<form:input path="cpf" cssClass="${(list[5]) ? '' : 'error'}" />i
 						
 						<form:label for="bloco" path="bloco">Bloco: *</form:label>
 						<form:input path="bloco"  cssClass="${(list[6]) ? '' : 'error'}" />
