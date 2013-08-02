@@ -44,6 +44,8 @@
 						<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
 						<form:input type="text" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
 						
+						<h3><c:out value="${bean.validName}" /></h3>
+						
 						<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
 						<form:input path="usuarioTO.email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
 						
