@@ -23,6 +23,11 @@ $(function() {
 		CADASTRO.init();
 	}
 	
+	//verifica se há erro no formulário
+	if($('#frm-register').hasClass('error')) {
+		$('#warnningMessage').css('display', 'block');
+	}
+	
 	//quando o form for submetido exibe o load e esconde o botão
 	$('#frmLogin').on('submit', function(){
 		$('#btSubmitLogin').css('display', 'none');

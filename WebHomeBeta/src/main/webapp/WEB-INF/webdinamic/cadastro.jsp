@@ -3,6 +3,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt_BR">
+
+      <c:set var="nomeOK" value="false"/> <!-- se o campo estiver preenchido errado uma variável deve vir setada como true -->
+      <c:set var="nomeCadastro" value="Tatiane Jayme Dias"/> <!-- quando retorna com erro, todos os valores inseridos nos inputs devem ser retornados em uma variável -->
+      <c:set var="formNok" value="true"/> <!-- se algum campo do formulário estiver com erro, uma variável deve vir setada como true -->      
       
 	<head>
 	<meta charset="UTF-8" />
@@ -31,15 +35,18 @@
 					<h2>Formulário de Pré-Cadastro</h2>
 					<p>* Campos obrigatórios</p>
 		
-					<form:form modelAttribute="usuario" action="cadastro/add" method="post" id="frm-register">
+					<form:form modelAttribute="usuario" cssClass="${(!formNok) ? 'error' : ''}" action="cadastro/add" method="post" id="frm-register">
+						<div id="warnningMessage">
+							<p>Verifique os campos destacados</p>
+						</div>
 						<form:label for="nome" path="nome">Nome: *</form:label>
-						<form:input type="text" <c:if test="${nomeOK}">class="error</c:if> path="nome"/>
-					
+						<form:input type="text" value="${nomeCadastro}" path="nome" cssClass="${(!nomeOK) ? 'error' : ''}" />
+											
 						<form:label for="email" path="email">E-mail: *</form:label>
 						<form:input path="email"/>
 						
 						<form:label for="senha" path="senha">Senha: *</form:label>
-						<form:password path="senha"/>
+						<form:password path="senha" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
 						<form:password path="confSenha"/>
