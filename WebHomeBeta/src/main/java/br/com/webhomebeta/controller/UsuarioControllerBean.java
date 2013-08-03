@@ -14,6 +14,7 @@ public class UsuarioControllerBean {
 	private String confSenha;
 	private boolean validName = true;
 	private boolean validEmail = true;
+	private boolean validEmailExistente = true;
 	private boolean validSenha = true;
 	private boolean validDataNascimento = true;
 	private boolean validCpf = true;
@@ -89,6 +90,18 @@ public class UsuarioControllerBean {
 	}
 	public void setValidApartamento(boolean validApartamento) {
 		this.validApartamento = validApartamento;
+	}
+	/**
+	 * @return the validEmailExistente
+	 */
+	public boolean isValidEmailExistente() {
+		return validEmailExistente;
+	}
+	/**
+	 * @param validEmailExistente the validEmailExistente to set
+	 */
+	public void setValidEmailExistente(boolean validEmailExistente) {
+		this.validEmailExistente = validEmailExistente;
 	}
 	
 	
