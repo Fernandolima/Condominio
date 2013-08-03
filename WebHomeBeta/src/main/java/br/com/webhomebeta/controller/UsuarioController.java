@@ -5,6 +5,8 @@ import javax.security.auth.login.LoginException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,11 +28,19 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EmailServico emailServico;
+	@Autowired
+	private UsuarioValidator validator;
 	
 	private ValidacoesController validacoesController = new ValidacoesController();
 
+	
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+	}
+	
 	// mapeia a URL principal (cadastro) e retorna um novo UsuarioControllerBean()
-
 	@RequestMapping(value = "cadastro", method = RequestMethod.GET)
 	public ModelAndView cadastro() {
 		// Retorna a pagina cadastro.jsp com um usuario criado
