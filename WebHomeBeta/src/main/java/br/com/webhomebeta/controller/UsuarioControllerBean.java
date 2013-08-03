@@ -1,5 +1,10 @@
 package br.com.webhomebeta.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import br.com.webhomebeta.to.UsuarioTO;
 
 public class UsuarioControllerBean {
@@ -15,6 +20,22 @@ public class UsuarioControllerBean {
 	private boolean validBloco = true;
 	private boolean validApartamento = true;
 	
+	private DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+	private String data;
+	
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+		try {
+			Date date = (Date) format.parse(data);
+			usuarioTO.setDt_nascimento(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
 	}
