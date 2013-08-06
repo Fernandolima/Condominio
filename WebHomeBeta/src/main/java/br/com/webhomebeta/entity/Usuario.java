@@ -32,10 +32,6 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 	
-	//Atributo que não persiste no banco de dados.
-	@Transient
-	private String confSenha;
-
 	@Column(name = "STATUS", columnDefinition="BOOLEAN")
 	private boolean status;
 	
@@ -46,11 +42,12 @@ public class Usuario implements Serializable {
 	private String cpf;
 	
 	@Column(name = "BLOCO")
-	private int bloco;
+	private String bloco;
 	
 	
 	@Column(name = "AP")
-	private int apartamento;
+	private String apartamento;
+	
 	
 		public String getNome() {
 		return nome;
@@ -131,34 +128,26 @@ public class Usuario implements Serializable {
 	}
 
 
-	public int getBloco() {
+	public String getBloco() {
 		return bloco;
 	}
 
 
-	public void setBloco(int bloco) {
+	public void setBloco(String bloco) {
 		this.bloco = bloco;
 	}
 
 
-	public int getApartamento() {
+	public String getApartamento() {
 		return apartamento;
 	}
 
 
-	public void setApartamento(int apartamento) {
+	public void setApartamento(String apartamento) {
 		this.apartamento = apartamento;
 	}
 
-	public String getConfSenha() {
-		return confSenha;
-	}
 
-
-	public void setConfSenha(String confSenha) {
-		this.confSenha = confSenha;
-	}
-	
 }
 
 

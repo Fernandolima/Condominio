@@ -36,7 +36,7 @@
 					<h2>Formulário de Pré-Cadastro</h2>
 					<p>* Campos obrigatórios</p>
 		
-					<form:form modelAttribute="bean" action="cadastro/add" method="post" id="frm-register">
+					<form:form modelAttribute="bean" action="add" method="post" id="frm-register">
 						<div id="warnningMessage">
 							<p>Verifique os campos destacados</p>
 						</div>
@@ -48,7 +48,7 @@
 						<form:input path="usuarioTO.email" id="email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
 						
 						<form:label for="senha" path="usuarioTO.senha">Senha: *</form:label>
-						<form:password id="senha" path="usuarioTO.senha" />
+						<form:password id="senha" path="usuarioTO.senha" cssClass="${(bean.validSenha) ? '' : 'error'}" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
 						<form:password id="confSenha" path="confSenha" />
@@ -58,13 +58,13 @@
 						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
 						
 						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
-						<form:input path="usuarioTO.cpf" id="cpf" />
+						<form:input path="usuarioTO.cpf" id="cpf" cssClass="${(bean.validCpf) ? '' : 'error'}" />
 						
 						<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
-						<form:input path="usuarioTO.bloco" id="bloco" />
+						<form:input path="usuarioTO.bloco" id="bloco" cssClass="${(bean.validBloco) ? '' : 'error'}" />
 						
 						<form:label for="apartamento" class="lblRight" path="usuarioTO.apartamento">Apartamento: *</form:label>
-						<form:input path="usuarioTO.apartamento" id="apartamento" />
+						<form:input path="usuarioTO.apartamento" id="apartamento" cssClass="${(bean.validApartamento) ? '' : 'error'}"/>
 						
 						<input type="submit" id="btSubmitRegister" class="btSubmit" value="Enviar" />
 					</form:form></div>
