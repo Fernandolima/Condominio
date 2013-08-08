@@ -1,25 +1,17 @@
 package br.com.webhomebeta.controller;
 
-import javax.security.auth.login.LoginException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.exceptions.CPFException;
-import br.com.webhomebeta.exceptions.EmailException;
-import br.com.webhomebeta.exceptions.NomeException;
-import br.com.webhomebeta.exceptions.SenhaException;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.to.UsuarioTO;
@@ -48,9 +40,9 @@ public class UsuarioController {
 	public ModelAndView cadastro(
 			@ModelAttribute("bean") final UsuarioControllerBean bean,
 			BindingResult result, HttpServletRequest request) {
-		
+
 		validarCadastro(bean);
-		
+
 		if (bean.hasErrors()) {
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
@@ -87,6 +79,14 @@ public class UsuarioController {
 		else
 			bean.setValidEmail(true);
 
-	}
+		java.util.List<UsuarioTO> lista = usuarioService.getUsuario();
+			for (UsuarioTO CompEmail : lista) {
+			if (bean.getUsuarioTO().getEmail() == CompEmail.getEmail()) {
+				bean.setValidEmailExistente(false);
 
+			}
+
+		}
+
+	}
 }
