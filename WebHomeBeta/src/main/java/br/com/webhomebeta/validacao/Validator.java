@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 
-public class ValidacoesController {
+public class Validator {
 
 	private String removeChar(String Cpf) {
 
@@ -149,7 +149,20 @@ public class ValidacoesController {
 	}
 
 	public boolean isValidNome(String nome) {
-		return nome.matches("[0-9]");
+		if (nome.length() < 3
+				|| nome.length() > 50 || nome.matches("[0-9]"))
+			return false;
+		else
+			return true;
+
+	}
+	
+	public boolean isValidSenha(String senha, String confSenha){
+		if(senha.length() < 6 || !senha.equals(confSenha)){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 }

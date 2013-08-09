@@ -18,7 +18,7 @@ import br.com.webhomebeta.entity.Usuario;
 
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.UsuarioService;
-import br.com.webhomebeta.validacao.ValidacoesController;
+import br.com.webhomebeta.validacao.Validator;
 
 @Controller
 public class UsuarioController {
@@ -28,7 +28,7 @@ public class UsuarioController {
 	@Autowired
 	private EmailServico emailServico;
 
-	private ValidacoesController validacoesController = new ValidacoesController();
+	private Validator validator = new Validator();
 
 	// mapeia a URL principal (cadastro) e retorna um novo
 	// UsuarioControllerBean()
@@ -77,8 +77,7 @@ public class UsuarioController {
 
 	private void validarCadastro(UsuarioControllerBean bean) {
 
-		if (bean.getUsuarioTO().getSenha().length() < 6
-				|| !bean.getUsuarioTO().getSenha().equals(bean.getConfSenha())) {
+		if (!validator.isValidSenha(bean.getUsuarioTO().getSenha(),bean.getConfSenha())) {
 			bean.setValidSenha(false);
 			bean.setValidConfSenha(false);
 		} else {
@@ -86,23 +85,22 @@ public class UsuarioController {
 			bean.setValidConfSenha(true);
 		}
 
-		if (bean.getUsuarioTO().getNome().length() < 3
-				|| bean.getUsuarioTO().getNome().length() > 50)
+		if (!validator.isValidNome(bean.getUsuarioTO().getNome()))
 			bean.setValidName(false);
 		else
 			bean.setValidName(true);
 
-		if (!validacoesController.validaData(bean.getData()))
+		if (!validator.validaData(bean.getData()))
 			bean.setValidDataNascimento(false);
 		else
 			bean.setValidDataNascimento(true);
 
-		if (!validacoesController.isCPF(bean.getUsuarioTO().getCpf()))
+		if (!validator.isCPF(bean.getUsuarioTO().getCpf()))
 			bean.setValidCpf(false);
 		else
 			bean.setValidCpf(true);
 
-		if (!validacoesController.isValidEmail(bean.getUsuarioTO().getEmail()))
+		if (!validator.isValidEmail(bean.getUsuarioTO().getEmail()))
 			bean.setValidEmail(false);
 		else
 			bean.setValidEmail(true);
