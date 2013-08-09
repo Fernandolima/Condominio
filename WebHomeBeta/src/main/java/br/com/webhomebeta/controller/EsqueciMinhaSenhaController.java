@@ -1,20 +1,51 @@
 package br.com.webhomebeta.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.EmailServico;
+import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.to.UsuarioTO;
 
 @Controller
-@RequestMapping("/esqueciMinhaSenha")
 public class EsqueciMinhaSenhaController {
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	@Autowired
+	private EmailServico emailServico;
 	//mapeia a URL
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView esqueciMinhaSenha(){
 		
 		//Retorna a pagina esqueciMinhaSenha.jsp com um usuario criado
-		return new ModelAndView("esqueciMinhaSenha", "usuario", new Usuario());
+		return new ModelAndView("esqueciMinhaSenha", "usuario", new UsuarioTO());
+	}
+	@RequestMapping(value = "enviarEmail", method = RequestMethod.POST)
+	public ModelAndView enviarEmail(@ModelAttribute("usuario")UsuarioTO usuarioTO){
+		//Cria a variavel booleana validEmail
+		boolean validEmail = false;
+		//Recebe a lista de usuarios do banco
+		List<Usuario> usuarios = usuarioService.getUsuario();
+		//Compara cada usuario da lista e verifica se o email existe
+		for(Usuario user : usuarios){
+			//se existir envia email de perda de senha
+			if(user.getEmail() == usuarioTO.getEmail()){
+				emailServico.enviarEmail();
+			}else{
+				validEmail = false;
+			}
+		}
+		ModelAndView mv = new ModelAndView("esqueciMinhaSenha");
+		//adiciona ao model a variavel validEmail
+		mv.addObject("validEmail", validEmail);
+		return mv;
 	}
 }
