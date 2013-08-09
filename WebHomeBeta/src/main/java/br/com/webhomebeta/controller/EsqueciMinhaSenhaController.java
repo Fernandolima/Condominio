@@ -22,7 +22,7 @@ public class EsqueciMinhaSenhaController {
 	@Autowired
 	private EmailServico emailServico;
 	//mapeia a URL
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "esqueciMinhaSenha", method = RequestMethod.GET)
 	public ModelAndView esqueciMinhaSenha(){
 		
 		//Retorna a pagina esqueciMinhaSenha.jsp com um usuario criado
