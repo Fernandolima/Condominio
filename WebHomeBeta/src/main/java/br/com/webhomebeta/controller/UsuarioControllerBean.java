@@ -4,19 +4,47 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import br.com.webhomebeta.to.UsuarioTO;
-
+//Bean usada na view
 public class UsuarioControllerBean {
 
 	private UsuarioTO usuarioTO;
 	private String confSenha;
+	private String data;
 	private boolean validName = true;
 	private boolean validEmail = true;
 	private boolean validEmailExistente = true;
 	private boolean validSenha = true;
+	private boolean validConfSenha = true;
 	private boolean validDataNascimento = true;
 	private boolean validCpf = true;
 	private boolean validBloco = true;
 	private boolean validApartamento = true;
+	private boolean hasErrorForm = false;
+	
+	
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public boolean isValidConfSenha() {
+		return validConfSenha;
+	}
+
+	public void setValidConfSenha(boolean validConfSenha) {
+		this.validConfSenha = validConfSenha;
+	}
+
+	public boolean isHasErrorForm() {
+		return hasErrorForm;
+	}
+
+	public void setHasErrorForm(boolean hasErrorForm) {
+		this.hasErrorForm = hasErrorForm;
+	}
 
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
@@ -97,14 +125,18 @@ public class UsuarioControllerBean {
 	public void setValidEmailExistente(boolean validEmailExistente) {
 		this.validEmailExistente = validEmailExistente;
 	}
-
+	
+	
+	
 	public boolean hasErrors() {
 		if (validApartamento == false || validBloco == false
 				|| validCpf == false || validDataNascimento == false
 				|| validEmail == false || validEmailExistente == false
-				|| validName == false || validSenha == false)
+				|| validName == false || validSenha == false){
+			hasErrorForm = true;
 			return false;
-		
+		}
+		hasErrorForm = false;
 		return true;
 	}
 
