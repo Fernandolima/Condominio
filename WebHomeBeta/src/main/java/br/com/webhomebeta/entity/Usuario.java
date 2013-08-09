@@ -1,23 +1,19 @@
 package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+	@Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
-	
+	@Table(name = "[dbo].[User]")
 // que define qual o nome da tabela no banco de dados ao qual a classe será
-	
 // mapeada
-
-@Entity
-@Table(name = "[dbo].[USER]")
 public class Usuario implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 
 	@Column(name = "NOME")
 	private String nome;

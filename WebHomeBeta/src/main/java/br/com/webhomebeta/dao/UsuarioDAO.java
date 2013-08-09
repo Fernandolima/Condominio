@@ -8,10 +8,10 @@ import br.com.webhomebeta.to.UsuarioTO;
 public interface UsuarioDAO {
 	
 
-		  public UsuarioTO save(Usuario usuario);
+		  public Usuario save(Usuario usuario);
 		   // public Morador getMorador(int id);
 		   // public UsuarioTO getUsurio(String login);
-		    public List<UsuarioTO> getUsuario();
+		    public List<Usuario> getUsuario();
 		  
 	}
 

@@ -8,7 +8,7 @@
 		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
 	</head>
 	<body id="forgotPassword-view">
-		<form action="" method="POST" id="frmForgotPassword">
+		<form action="enviarEmail" method="POST" id="frmForgotPassword">
 			<label>Digite seu e-mail</label>
 			<input type="text" name="email" />
 			<br>

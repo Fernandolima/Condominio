@@ -7,10 +7,10 @@ import br.com.webhomebeta.to.MoradorTO;
 
 public interface MoradorDAO {
 	
-    public MoradorTO save(Morador morador);
+    public Morador save(Morador morador);
    // public Morador getMorador(int id);
-    public MoradorTO getMorador(String login);
-    public List<MoradorTO> getMoradores();
+    public Morador getMorador(String login);
+    public List<Morador> getMoradores();
     public void remove(Morador morador);
     public void update(Morador morador);
    

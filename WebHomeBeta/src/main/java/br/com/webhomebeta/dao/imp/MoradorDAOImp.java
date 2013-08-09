@@ -24,46 +24,41 @@ public class MoradorDAOImp implements MoradorDAO {
 	
 	//@Transactional: O spring se encarrega de criar uma nova transação
 	@Transactional
-	public MoradorTO save(Morador morador) {
+	public Morador save(Morador morador) {
 		entityManager.persist(morador);
-		MoradorTO moradorTO = new MoradorTO();
-		BeanUtils.copyProperties(morador, moradorTO);
-		return moradorTO;
+		
+		return morador;
 	}
 	//Pega o morador pelo login
-	public MoradorTO getMorador(String login){
+	public Morador getMorador(String login){
 		String sql = "SELECT * FROM [dbo].[USER] WHERE LOGIN = :login";
 		Query query = entityManager.createQuery(sql);
 		query.setParameter("login",login);
 		Morador morador = (Morador) query.getSingleResult();
-		MoradorTO moradorTO = new MoradorTO();
-		BeanUtils.copyProperties(morador, moradorTO);
-		return moradorTO;
+		return morador;
 	}
 
 	@Transactional(readOnly = true)
-	public MoradorTO getMorador(int id) {
+	public Morador getMorador(int id) {
 		String sql = "SELECT * FROM [dbo].[USER] WHERE ID = :id";
 		Query query = entityManager.createQuery(sql);
 		query.setParameter("id",id);
 		Morador morador = (Morador) query.getSingleResult();
-		MoradorTO moradorTO = new MoradorTO();
-		BeanUtils.copyProperties(morador, moradorTO);
-		return moradorTO;
+		return morador;
 	}
 
 	@Override
-	public void remove(Morador moradorTO) {
+	public void remove(Morador morador) {
 
 	}
 
 	@Override
-	public void update(Morador moradorTO) {
-		entityManager.merge(moradorTO);
+	public void update(Morador morador) {
+		entityManager.merge(morador);
 	}
 
 	@Override
-	public List<MoradorTO> getMoradores() {
+	public List<Morador> getMoradores() {
 		// TODO Auto-generated method stub
 		return null;
 	}

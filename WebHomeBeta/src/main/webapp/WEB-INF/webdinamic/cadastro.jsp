@@ -37,7 +37,7 @@
 					<p>* Campos obrigatórios</p>
 		
 					<form:form modelAttribute="bean" action="add" method="post" id="frm-register">
-						<div id="warnningMessage">
+						<div id="warnningMessage" class="${(bean.hasErrorForm) ? 'error' : ''}">
 							<p>Verifique os campos destacados</p>
 						</div>
 						
@@ -45,17 +45,16 @@
 						<form:input type="text" id="nome" path="usuarioTO.nome" cssClass="${(bean.validName) ? '' : 'error'}" />
 						
 						<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
-						<form:input path="usuarioTO.email" id="email" cssClass="${(bean.validEmail) ? '' : 'error'}" />
+						<form:input path="usuarioTO.email" id="email" cssClass="${(bean.validEmail) || (bean.validEmailExistente) ? '' : 'error'}" />
 						
 						<form:label for="senha" path="usuarioTO.senha">Senha: *</form:label>
 						<form:password id="senha" path="usuarioTO.senha" cssClass="${(bean.validSenha) ? '' : 'error'}" />
 						
 						<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-						<form:password id="confSenha" path="confSenha" />
+						<form:password id="confSenha" path="confSenha" cssClass="${(bean.validConfSenha) ? '' : 'error'}" />
 						
-						<form:label for="dt_nascimento" path="usuarioTO.dt_nascimento">Data de nascimento:</form:label>
-						<form:input path="usuarioTO.dt_nascimento" id="dt_nascimento" />
-						<!--<fmt:formatDate value="${dt_nascimento.time}" pattern="DD/MM/YYYY"/>-->
+						<form:label for="dt_nascimento" path="data">Data de nascimento:</form:label>
+						<form:input path="data" id="dt_nascimento"  cssClass="${(bean.validDataNascimento) ? '' : 'error'}" />
 						
 						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
 						<form:input path="usuarioTO.cpf" id="cpf" cssClass="${(bean.validCpf) ? '' : 'error'}" />
