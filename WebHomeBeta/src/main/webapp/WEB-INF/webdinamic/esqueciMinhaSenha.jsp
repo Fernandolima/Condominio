@@ -1,22 +1,49 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Web Home - Esqueci minha senha</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>Web Home - Cadastro</title>
+		<link href='http://fonts.googleapis.com/css?family=Chela+One' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/esqueciMinhaSenha.css"/>"/>
 		
-		<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+		<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 	</head>
 	<body id="forgotPassword-view">
-		<form action="enviarEmail" method="POST" id="frmForgotPassword">
-			<label>Digite seu e-mail</label>
-			<input type="text" name="email" />
-			<br>
-			<input type="submit" value="Enviar" />			
-		</form>
+		<header id="header-site">
+			<div class="content">
+				<a href="index" title="Web Home"><h1>Web Home</h1></a>
+			</div>
+		</header>
+		<section id="main-forgotPassword">
+			<div class="content">
+				<h2>Esqueci minha senha</h2>
+				<div id="content-form">
+					<form action="enviarEmail" method="POST" id="frmForgotPassword">
+						<p>Para solicitar uma nova senha, informe o e-mail cadastrado no sistema para solicitar uma nova senha.</p>
+						<div id="warnningMessage">
+							<p>Mensagem de erro</p>
+						</div>
+						<label>Digite seu e-mail</label>
+						<input type="text" name="email" />
+						<br>
+						<input type="submit" value="Enviar" />			
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer id="footer-site">
+		</footer>
 		
+		<script src="<c:url value = "/webstatic/js/esqueciMinhaSenha.js"/>" type="text/javascript"></script>
 	</body>
 </html>
+
 
 <!-- 
 	- Validar se usuário tem cadastro - setar em uma variável em caso de erro e em caso de sucesso (ex: sendEmailForgot: true ou false), ai o front
