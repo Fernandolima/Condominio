@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,36 +17,46 @@ import br.com.webhomebeta.to.UsuarioTO;
 
 @Controller
 public class EsqueciMinhaSenhaController {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private EmailServico emailServico;
-	//mapeia a URL
+
+	// mapeia a URL
 	@RequestMapping(value = "esqueciMinhaSenha", method = RequestMethod.GET)
-	public ModelAndView esqueciMinhaSenha(){
-		
-		//Retorna a pagina esqueciMinhaSenha.jsp com um usuario criado
+	public ModelAndView esqueciMinhaSenha() {
+
+		// Retorna a pagina esqueciMinhaSenha.jsp com um usuario criado
 		return new ModelAndView("esqueciMinhaSenha", "usuario", new UsuarioTO());
 	}
+
 	@RequestMapping(value = "enviarEmail", method = RequestMethod.POST)
-	public ModelAndView enviarEmail(@ModelAttribute("usuario")UsuarioTO usuarioTO){
-		//Cria a variavel booleana validEmail
+	public ModelAndView enviarEmail(
+			@ModelAttribute("usuario") UsuarioTO usuarioTO) {
+		// Cria a variavel booleana validEmail
 		boolean validEmail = false;
-		//Recebe a lista de usuarios do banco
+		// Recebe a lista de usuarios do banco
 		List<Usuario> usuarios = usuarioService.getUsuario();
-		//Compara cada usuario da lista e verifica se o email existe
-		for(Usuario user : usuarios){
-			//se existir envia email de perda de senha
-			if(user.getEmail() == usuarioTO.getEmail()){
-				emailServico.enviarEmail();
-			}else{
+		// Compara cada usuario da lista e verifica se o email existe
+		for (Usuario user : usuarios) {
+			// se existir envia email de perda de senha
+			if (user.getEmail().equals(usuarioTO.getEmail())) {
+				emailServico.enviarEmail(user);
+			} else {
 				validEmail = false;
 			}
 		}
 		ModelAndView mv = new ModelAndView("esqueciMinhaSenha");
-		//adiciona ao model a variavel validEmail
+		// adiciona ao model a variavel validEmail
 		mv.addObject("validEmail", validEmail);
+		UUID uuid = UUID.randomUUID();
+		String myRandom = uuid.toString();
+		String senhaGerada = myRandom.substring(0, 6);
 		return mv;
+
+		
+
 	}
+
 }
