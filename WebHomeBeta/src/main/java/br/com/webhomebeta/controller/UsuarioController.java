@@ -51,6 +51,7 @@ public class UsuarioController {
 			//Seta a role
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
+			bean.getUsuarioTO().setStatus(false);
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
 			Usuario usuario = new Usuario();
@@ -114,7 +115,8 @@ public class UsuarioController {
 			bean.setValidBloco(false);
 		else
 			bean.setValidBloco(true);
-
+		
+		//recebe uma lista do banco com todos os usuarios e verifica se o email digitado ja existe no  banco
 		for (Usuario user : usuarioService.getUsuario()) {
 			if (user.getEmail().equals(bean.getUsuarioTO().getEmail())) {
 				bean.setValidEmailExistente(false);
