@@ -2,6 +2,7 @@ package br.com.webhomebeta.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,15 +28,17 @@ public class AdministradorController {
 	@RequestMapping(value = "validarMoradores", method = RequestMethod.GET)
 	public ModelAndView validarMoradores(){
 		List<Usuario> usuarios = usuarioService.getUsuario();
-		
+		//Lista com permissao para copia e escrita
+		List<Usuario> usuariosNaoAceitos = new CopyOnWriteArrayList<Usuario>();
 		Iterator<Usuario> it = usuarios.iterator();
 		while(it.hasNext()){
 			Usuario usuario = it.next();
-			if(usuario.isStatus()){
-				usuarios.remove(usuario);
+			//se usuario tiver Status False
+			if(!usuario.isStatus()){
+				usuariosNaoAceitos.add(usuario);
 			}
 		}
-		return new ModelAndView("validarMoradores","listaUsuarios",usuarios);
+		return new ModelAndView("validarMoradores","listaUsuarios",usuariosNaoAceitos);
 	}
 	
 	@RequestMapping(value = "editarCadastro", method = RequestMethod.POST)
@@ -64,7 +67,6 @@ public class AdministradorController {
 		return excluirmv;
 	}
 	
-	// mapeia a URL principal (excluirCadastro) e retorna um Lista de Usuario.
 	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
 	public ModelAndView listUsuario(@PathVariable String loginUsuario){
 		ModelAndView listmv = new ModelAndView("excluirCadastro");
