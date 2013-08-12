@@ -1,5 +1,6 @@
 package br.com.webhomebeta.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,21 @@ public class AdministradorController {
 	public ModelAndView show(){
 		return new ModelAndView("admin");
 	}
+	
 	@RequestMapping(value = "validarMoradores", method = RequestMethod.GET)
 	public ModelAndView validarMoradores(){
 		List<Usuario> usuarios = usuarioService.getUsuario();
-		for(Usuario usuario : usuarios){
+		
+		Iterator<Usuario> it = usuarios.iterator();
+		while(it.hasNext()){
+			Usuario usuario = it.next();
 			if(usuario.isStatus()){
 				usuarios.remove(usuario);
 			}
 		}
 		return new ModelAndView("validarMoradores","listaUsuarios",usuarios);
 	}
+	
 	@RequestMapping(value = "editarCadastro", method = RequestMethod.POST)
 	public ModelAndView editarUsuario(@PathVariable String loginUsuario){
 		ModelAndView mv = new ModelAndView("editarCadastro");
