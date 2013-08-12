@@ -61,6 +61,7 @@ public class AdministradorController {
 	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
 	public ModelAndView listUsuario(@PathVariable String loginUsuario){
 		ModelAndView listmv = new ModelAndView("excluirCadastro");
+		List<Usuario> usuarios = usuarioService.getUsuario();
 			
 			return listmv;
 	}
