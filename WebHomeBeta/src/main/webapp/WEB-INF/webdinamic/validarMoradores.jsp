@@ -47,8 +47,8 @@
 						<p>Cadastros pendentes de aprovação</p>
 						<table id="tableEntries">
 							<tr>
-								<td>Nome</td>
-								<td>Link</td>
+								<td class="name">Nome</td>
+								<td class="link">Link</td>
 							</tr>
 						</table>
 					</div>
