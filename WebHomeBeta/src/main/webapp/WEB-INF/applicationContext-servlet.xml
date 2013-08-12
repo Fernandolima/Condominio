@@ -79,8 +79,8 @@
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-		<sec:intercept-url pattern="/**"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			<sec:intercept-url pattern="/validarMoradores" access="ROLE_ADMIN"/>
+			
 	</sec:http>
 
 	<bean id="myAuthenticationSuccessHandler"
