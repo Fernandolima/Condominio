@@ -46,16 +46,16 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping(value = "inserirCadastro", method = RequestMethod.POST)
-	public ModelAndView inserirUsuario(@PathVariable String loginUsuario){
-		ModelAndView inserirmv = new ModelAndView("editarCadastro");
+	public ModelAndView excluirUsuario(@PathVariable String loginUsuario){
+		ModelAndView excluirmv = new ModelAndView("editarCadastro");
 		List<Usuario> usuarios = usuarioService.getUsuario();
 		for(Usuario usuario : usuarios){
 			if(usuario.getLogin().equals(loginUsuario)){
-				inserirmv.addObject("usuario",usuario);
+				excluirmv.addObject("usuario",usuario);
 			}
 		}
 			
-		return inserirmv;
+		return excluirmv;
 	}
 	
 	
