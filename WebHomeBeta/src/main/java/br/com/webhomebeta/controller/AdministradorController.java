@@ -58,5 +58,12 @@ public class AdministradorController {
 		return excluirmv;
 	}
 	
+	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
+	public ModelAndView listUsuario(@PathVariable String loginUsuario){
+		ModelAndView listmv = new ModelAndView("excluirCadastro");
+			
+			return listmv;
+	}
+	
 	
 }
