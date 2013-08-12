@@ -37,7 +37,21 @@
 					</ul> -->
 				</nav>
 				<section id="content-admin">
-					<h2>Validar Cadastro</h2>
+					<!-- Se não tiver cadastros para serem validados -->
+					<!-- <div id="noRegistration">
+						<p>Nenhum cadastro pendente.</p>
+					</div> -->
+					
+					<!-- Se tiver cadastros pendentes -->
+					<div id="entries">
+						<p>Cadastros pendentes de aprovação</p>
+						<table id="tableEntries">
+							<tr>
+								<td>Nome</td>
+								<td>Link</td>
+							</tr>
+						</table>
+					</div>
 				</section>
 			</div>
 		</section>

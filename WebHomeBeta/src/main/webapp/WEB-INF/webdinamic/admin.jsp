@@ -31,7 +31,7 @@
 				<nav id="nav-admin">
 					<h2>Administrador</h2>
 					<span class="item-menu">Painel</span>
-					<a href="validarCadastro" class="item-menu"><b>></b> Morador</a>
+					<a href="validarMoradores" class="item-menu"><b>></b> Morador</a>
 					<!-- <ul id="btn-morador" class="item-menu">
 						<li></li>
 					</ul> -->
