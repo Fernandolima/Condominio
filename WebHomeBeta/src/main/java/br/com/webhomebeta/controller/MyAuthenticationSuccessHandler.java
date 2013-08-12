@@ -59,9 +59,9 @@ public class MyAuthenticationSuccessHandler implements
 		}
 
 		if (isMorador) {
-			return "/index.html";
+			return "/index";
 		} else if (isAdmin) {
-			return "/admin.jsp";
+			return "/admin";
 		} else {
 			throw new IllegalStateException();
 		}
