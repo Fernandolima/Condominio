@@ -15,4 +15,10 @@ $(function() {
 	if($('#forgotPassword-view')[0]){
 		ESQUECI_SENHA.init();
 	}
+	
+	$('#list-user-register .link').on('click', function(e) {
+		e.preventDefault();
+		var login = $(this).find('a').attr('data-link');
+		$.post("editarCadastro", {login: login});
+	});
 });

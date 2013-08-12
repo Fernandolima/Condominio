@@ -13,7 +13,7 @@
 		
 		<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 	<head>
-	<body id="register-view">
+	<body id="list-user-register">
 		<header id="header-site">
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
@@ -64,6 +64,6 @@
 		<!-- <footer id="footer-site">
 		</footer> -->
 		
-		<script src="<c:url value = "/webstatic/js/admin-home.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/webstatic/js/admin.js"/>" type="text/javascript"></script>
 	</body>
 </html>
