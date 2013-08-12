@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
@@ -42,10 +43,10 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping(value = "editarCadastro", method = RequestMethod.POST)
-	public ModelAndView editarUsuario(@PathVariable String loginUsuario){
+	public ModelAndView editarUsuario(@RequestParam("login") String loginUsuario){
 		ModelAndView mv = new ModelAndView("editarCadastro");
 		List<Usuario> usuarios = usuarioService.getUsuario();
-		for(Usuario usuario : usuarios){
+		for(Usuario usuario : usuarios){ 
 			if(usuario.getLogin().equals(loginUsuario)){
 				mv.addObject("usuario",usuario);
 			}
