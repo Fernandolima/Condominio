@@ -52,7 +52,7 @@ body {
 	background: #fff;
 	border: 1px solid #153C63;
 	width: 700px;
-	height: 500px;
+	min-height: 500px;
 	float: left;
 	margin-left: 40px;
 }

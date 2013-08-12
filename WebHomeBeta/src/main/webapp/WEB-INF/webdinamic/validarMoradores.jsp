@@ -50,6 +50,12 @@
 								<td class="name">Nome</td>
 								<td class="link">Link</td>
 							</tr>
+							<c:forEach items="${listaUsuarios}" var="item">
+								<tr>
+									<td class="name"><c:out value="${item.nome}"/></td>
+									<td class="link"><a href="#" data-link="${item.login}">Link</a></td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</section>
