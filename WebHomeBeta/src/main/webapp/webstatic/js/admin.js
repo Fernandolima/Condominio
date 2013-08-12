@@ -18,7 +18,8 @@ $(function() {
 	
 	$('#list-user-register .link').on('click', function(e) {
 		e.preventDefault();
-		var login = $(this).find('a').attr('data-link');
-		$.post("editarCadastro", {login: login});
+		var user = $(this).find('a').attr('data-link');
+		
+		$.post('editarCadastro', {login: user});
 	});
 });
