@@ -45,9 +45,9 @@ public class AdministradorController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "editarCadastro", method = RequestMethod.POST)
+	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
 	public ModelAndView excluirUsuario(@PathVariable String loginUsuario){
-		ModelAndView excluirmv = new ModelAndView("editarCadastro");
+		ModelAndView excluirmv = new ModelAndView("excluirCadastro");
 		List<Usuario> usuarios = usuarioService.getUsuario();
 		for(Usuario usuario : usuarios){
 			if(usuario.getLogin().equals(loginUsuario)){
