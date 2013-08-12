@@ -6,7 +6,7 @@
 <html lang="pt_BR">
 	<head>
 	<meta charset="UTF-8" />
-		<title>Web Home - &Aacute;rea Administrativa</title>
+		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
 		<link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/admin-home.css"/>"/>
@@ -31,12 +31,13 @@
 				<nav id="nav-admin">
 					<h2>Administrador</h2>
 					<span class="item-menu">Painel</span>
-					<a href="validarCadastro" class="item-menu"><b>></b> Morador</a>
+					<a href="validarMoradores" class="item-menu"><b>></b> Morador</a>
 					<!-- <ul id="btn-morador" class="item-menu">
 						<li></li>
 					</ul> -->
 				</nav>
 				<section id="content-admin">
+					<h2>Validar Cadastro</h2>
 				</section>
 			</div>
 		</section>
