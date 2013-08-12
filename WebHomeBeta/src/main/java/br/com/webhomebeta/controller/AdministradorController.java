@@ -6,6 +6,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,15 +46,15 @@ public class AdministradorController {
 	
 	@RequestMapping(value = "editarCadastro", method = RequestMethod.POST)
 	public ModelAndView editarUsuario(@RequestParam("login") String loginUsuario){
-		ModelAndView mv = new ModelAndView("editarCadastro");
+		ModelMap model = new ModelMap();
 		List<Usuario> usuarios = usuarioService.getUsuario();
 		for(Usuario usuario : usuarios){ 
 			if(usuario.getLogin().equals(loginUsuario)){
-				mv.addObject("usuario",usuario);
+				model.addObject("usuario", usuario);
 			}
 		}
 		
-		return mv;
+		return new ModelAndView("editarCadastro", model);
 	}
 	
 	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
