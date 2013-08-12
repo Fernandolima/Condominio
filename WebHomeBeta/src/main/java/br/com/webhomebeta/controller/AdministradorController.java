@@ -64,6 +64,7 @@ public class AdministradorController {
 		return excluirmv;
 	}
 	
+	// mapeia a URL principal (excluirCadastro) e retorna um Lista de Usuario.
 	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
 	public ModelAndView listUsuario(@PathVariable String loginUsuario){
 		ModelAndView listmv = new ModelAndView("excluirCadastro");
