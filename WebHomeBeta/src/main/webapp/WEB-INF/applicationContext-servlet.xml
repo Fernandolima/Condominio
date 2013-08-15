@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -35,17 +36,6 @@
 
 	<!-- define que as transaçoes irao ser anotadas -->
 	<tx:annotation-driven />
-	<!-- Configuracao do Banco de Dados -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:jtds:sqlserver://FERNANDO-PC:1433/Condominio" />
-		<property name="username" value="fernandoolimaa" />
-		<property name="password" value="lima102030" />
-	</bean>
-
-
 
 	<!-- Configurações do VelocityEngine -->
 	<bean id="velocityEngine"
@@ -79,7 +69,6 @@
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-			<sec:intercept-url pattern="/validarMoradores" access="ROLE_ADMIN"/>
 			
 	</sec:http>
 
@@ -88,27 +77,45 @@
 	</bean>
 
 	<sec:authentication-manager>
-		<sec:authentication-provider>
-			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT LOGIN, SENHA, 'True' as STATUS FROM [dbo].[User] WHERE LOGIN=?"
-				authorities-by-username-query="SELECT LOGIN, PERMISSAO FROM [dbo].[User] WHERE LOGIN=?" />
+		<sec:authentication-provider
+		user-service-ref="customLogin">
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
 	<!-- Configuracao do Hibernate -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitName" value="webHomeBetaPu" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect" />
-				<property name="showSql" value="true" />
-			</bean>
-		</property>
-	</bean>
-	<!-- Configuracao do gerente de transacoes do Spring -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-</beans>
+	<bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:location="/WEB-INF/jdbc.properties"></bean>
+ 
+    <bean id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+        p:password="${jdbc.password}"></bean>
+ 
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <property name="configurationClass">
+            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+ 
+    <bean id="dao" class="br.com.webhomebeta.dao.imp.UsuarioDAOImp"></bean>
+    <bean id="usuarioService" class="br.com.webhomebeta.service.UsuarioService"></bean>
+ 
+    <tx:annotation-driven />
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    </beans>

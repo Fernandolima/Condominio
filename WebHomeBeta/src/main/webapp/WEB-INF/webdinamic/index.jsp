@@ -24,7 +24,7 @@
 				<input type="password" name="j_password"/>
 				<a href="esqueciMinhaSenha" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" value="Enviar" id="btSubmitLogin" class="btSubmit">
-				<img src="img/load-login.gif" id="load-login" alt="carregando" />
+				<img src="<c:url value = "/webstatic/img/load-login.gif"/>" id="load-login" alt="carregando" />
 			</form>
 			<p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="cadastro" id="btRegister">Clique aqui</a></p>
 		</section>

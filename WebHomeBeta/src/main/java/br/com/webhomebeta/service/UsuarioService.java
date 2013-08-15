@@ -27,4 +27,14 @@ public class UsuarioService {
 		return dao.getUsuario();
 	}
 
+	public List<Usuario> getUsuarioNaoAtivo() {
+
+		return dao.getUsuarioNaoAtivo();
+	}
+
+	public Usuario getUsuarioByLogin(String login) {
+		
+		return dao.getUsuarioByLogin(login);
+	}
+	
 }

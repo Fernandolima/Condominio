@@ -58,6 +58,9 @@
 							</c:forEach>
 						</table>
 					</div>
+					<form method="POST" action="editarCadastro" id="frmEditarCadastro">
+						<input value="" type="hidden" name="login" id="loginEdit" />
+					</form>
 				</section>
 			</div>
 		</section>

@@ -20,6 +20,8 @@ $(function() {
 		e.preventDefault();
 		var user = $(this).find('a').attr('data-link');
 		
-		$.post('editarCadastro', {login: user});
+		$("#loginEdit").attr("value", user);
+		
+		$("#frmEditarCadastro").submit();
 	});
 });

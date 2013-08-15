@@ -5,7 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp/WEB-INF/webdinamic"/>
-        <wb-resource deploy-path="/" source-path="/Template"/>
         <property name="context-root" value="WebHomeBeta"/>
         <property name="java-output-path" value="/WebHomeBeta/target/classes"/>
     </wb-module>
