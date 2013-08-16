@@ -15,13 +15,26 @@ import br.com.webhomebeta.entity.Usuario;
 //o que significa que não precisaremos tratar mensagens de erro do banco de dados
 @Repository("usuarioDao")
 public class UsuarioDAOImp implements UsuarioDAO {
-	
+
 	@Autowired
 	private SessionFactory factory;
 
 	@Transactional
 	public Usuario save(Usuario usuario) {
-		factory.getCurrentSession().persist(usuario);
+		String sql = "exec [dbo].[USUARIO_CRIPTOGRAFADO_I] ?,?,?,?,?,?,?,?,?,?";
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(Usuario.class);
+		q.setParameter(0, usuario.getBlocoEAp());
+		q.setParameter(1, usuario.getCargo());
+		q.setParameter(2, usuario.getDt_nascimento());
+		q.setParameter(3, usuario.getPermissao());
+		q.setParameter(4, usuario.getEmail());
+		q.setParameter(5, usuario.getNome());
+		q.setParameter(6, usuario.getCpf());
+		q.setParameter(7, usuario.getLogin());
+		q.setParameter(8, usuario.getSenha());
+		q.setParameter(9, usuario.isStatus());
+
 		return usuario;
 	}
 
@@ -43,11 +56,10 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 	@Transactional
 	public Usuario getUsuarioByLogin(String login) {
-		String sql = "exec [dbo].[Usuarios] :login";
+		String sql = "exec [dbo].[USUARIOS_DESCRIPTOGRAFADO_LOGIN] :login";
 
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(Usuario.class)
-				.setParameter("login", login);
+				.addEntity(Usuario.class).setParameter("login", login);
 		Usuario usuario = (Usuario) q.uniqueResult();
 
 		return usuario;

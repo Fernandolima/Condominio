@@ -48,21 +48,21 @@ public class UsuarioController {
 		validarCadastro(bean);
 
 		if (bean.hasErrors()) {
-			//Seta a role
+			// Seta a role
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
 			bean.getUsuarioTO().setStatus(false);
-			
-			//Insere a data
+
+			// Insere a data
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
-			
+
 			Usuario usuario = new Usuario();
-			//Passa as propriedades do usuarioTO para a entidade usuario
+			// Passa as propriedades do usuarioTO para a entidade usuario
 			BeanUtils.copyProperties(bean.getUsuarioTO(), usuario);
-			//Salva no banco
+			// Salva no banco
 			usuarioService.save(usuario);
-			
+
 			bean.getUsuarioTO().setCpf(null);
 			bean.getUsuarioTO().setDt_nascimento(null);
 			bean.setData("");
@@ -80,7 +80,8 @@ public class UsuarioController {
 
 	private void validarCadastro(UsuarioControllerBean bean) {
 
-		if (!validator.isValidSenha(bean.getUsuarioTO().getSenha(),bean.getConfSenha())) {
+		if (!validator.isValidSenha(bean.getUsuarioTO().getSenha(),
+				bean.getConfSenha())) {
 			bean.setValidSenha(false);
 			bean.setValidConfSenha(false);
 		} else {
@@ -107,15 +108,16 @@ public class UsuarioController {
 			bean.setValidEmail(false);
 		else
 			bean.setValidEmail(true);
-		
-		
-		for(Usuario user : usuarioService.getUsuario()){
-		if(bean.getUsuarioTO().getBlocoEAp().equals(user.getBlocoEAp())){
-			
-		bean.setValidBloco(false);
+
+		for (Usuario user : usuarioService.getUsuario()) {
+			if (bean.getUsuarioTO().getBlocoEAp().equals(user.getBlocoEAp())) {
+				bean.setValidBloco(false);
+			}else{
+				bean.setValidBloco(true);
+			}
 		}
-		}
-		//recebe uma lista do banco com todos os usuarios e verifica se o email digitado ja existe no  banco
+		// recebe uma lista do banco com todos os usuarios e verifica se o email
+		// digitado ja existe no banco
 		for (Usuario user : usuarioService.getUsuario()) {
 			if (user.getEmail().equals(bean.getUsuarioTO().getEmail())) {
 				bean.setValidEmailExistente(false);
