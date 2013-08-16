@@ -52,15 +52,17 @@ public class UsuarioController {
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
 			bean.getUsuarioTO().setStatus(false);
+			
+			//Insere a data
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
+			
 			Usuario usuario = new Usuario();
 			//Passa as propriedades do usuarioTO para a entidade usuario
 			BeanUtils.copyProperties(bean.getUsuarioTO(), usuario);
 			//Salva no banco
 			usuarioService.save(usuario);
-			bean.getUsuarioTO().setApartamento(null);
-			bean.getUsuarioTO().setBloco(null);
+			
 			bean.getUsuarioTO().setCpf(null);
 			bean.getUsuarioTO().setDt_nascimento(null);
 			bean.setData("");
@@ -105,23 +107,20 @@ public class UsuarioController {
 			bean.setValidEmail(false);
 		else
 			bean.setValidEmail(true);
-
-		if (bean.getUsuarioTO().getApartamento().length() == 0)
-			bean.setValidApartamento(false);
-		else
-			bean.setValidApartamento(true);
-
-		if (bean.getUsuarioTO().getBloco().length() == 0)
-			bean.setValidBloco(false);
-		else
-			bean.setValidBloco(true);
 		
+		
+		for(Usuario user : usuarioService.getUsuario()){
+		if(bean.getUsuarioTO().getBlocoEAp().equals(user.getBlocoEAp())){
+			
+		bean.setValidBloco(false);
+		}
+		}
 		//recebe uma lista do banco com todos os usuarios e verifica se o email digitado ja existe no  banco
 		for (Usuario user : usuarioService.getUsuario()) {
 			if (user.getEmail().equals(bean.getUsuarioTO().getEmail())) {
 				bean.setValidEmailExistente(false);
 			} else {
-				bean.setValidApartamento(true);
+				bean.setValidEmailExistente(true);
 			}
 
 		}

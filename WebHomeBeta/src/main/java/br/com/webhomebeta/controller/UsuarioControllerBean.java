@@ -18,7 +18,6 @@ public class UsuarioControllerBean {
 	private boolean validDataNascimento = true;
 	private boolean validCpf = true;
 	private boolean validBloco = true;
-	private boolean validApartamento = true;
 	private boolean hasErrorForm = false;
 	
 	
@@ -110,14 +109,7 @@ public class UsuarioControllerBean {
 		this.validBloco = validBloco;
 	}
 
-	public boolean isValidApartamento() {
-		return validApartamento;
-	}
-
-	public void setValidApartamento(boolean validApartamento) {
-		this.validApartamento = validApartamento;
-	}
-
+	
 	public boolean isValidEmailExistente() {
 		return validEmailExistente;
 	}
@@ -129,7 +121,7 @@ public class UsuarioControllerBean {
 	
 	
 	public boolean hasErrors() {
-		if (validApartamento == false || validBloco == false
+		if ( validBloco == false
 				|| validCpf == false || validDataNascimento == false
 				|| validEmail == false || validEmailExistente == false
 				|| validName == false || validSenha == false){

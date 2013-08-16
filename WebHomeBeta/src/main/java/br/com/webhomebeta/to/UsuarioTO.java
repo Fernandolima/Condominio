@@ -2,56 +2,61 @@ package br.com.webhomebeta.to;
 
 import java.util.Date;
 
-
 public class UsuarioTO {
 	
-	private String nome;
 	
-	private String cpf;
-
+	private int idUser;
+		
+	private String nome;
 	
 	private String login;
 	
-	
 	private String email;
 	
+	private String cargo;
 	
 	private String permissao;
 
-	
 	private String senha;
-	
 	
 	private boolean status;
 	
-	
 	private Date dt_nascimento;
 	
-	private String bloco;
+	private String cpf;
 	
-	private String apartamento;
+	private String blocoEAp;
+	
 
-
-	public String getBloco() {
-		return bloco;
+	public int getIdUser() {
+		return idUser;
 	}
 
 
-	public void setBloco(String bloco) {
-		this.bloco = bloco;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 
-	public String getApartamento() {
-		return apartamento;
+	public String getCargo() {
+		return cargo;
 	}
 
 
-	public void setApartamento(String apartamento) {
-		this.apartamento = apartamento;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 
+	public String getBlocoEAp() {
+		return blocoEAp;
+	}
+
+
+	public void setBlocoEAp(String blocoEAp) {
+		this.blocoEAp = blocoEAp;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -120,19 +125,12 @@ public class UsuarioTO {
 	public void setDt_nascimento(Date dt_nascimento) {
 		this.dt_nascimento = dt_nascimento;
 	}
-
-
-	/**
-	 * @return the cpf
-	 */
+	
 	public String getCpf() {
 		return cpf;
 	}
 
 
-	/**
-	 * @param cpf the cpf to set
-	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}

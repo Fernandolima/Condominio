@@ -14,16 +14,27 @@ import javax.persistence.Table;
 // que define qual o nome da tabela no banco de dados ao qual a classe será
 // mapeada
 public class Usuario implements Serializable {
+		
+	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 499205724766612628L;
 
+	@Id	
+	@Column(name = "ID_USER")	
+	private int idUser;
+		
 	@Column(name = "NOME")
 	private String nome;
 
-	@Id
 	@Column(name = "LOGIN")
 	private String login;
 	
 	@Column(name = "EMAIL")
 	private String email;
+	
+	@Column(name = "CARGO")
+	private String cargo;
 	
 	@Column(name = "PERMISSAO")
 	private String permissao;
@@ -40,15 +51,40 @@ public class Usuario implements Serializable {
 	@Column(name = "CPF")
 	private String cpf;
 	
-	@Column(name = "BLOCO")
-	private String bloco;
+	@Column(name = "BLOCO_AP")
+	private String blocoEAp;
 	
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+
+	public String getCargo() {
+		return cargo;
+	}
+
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+
+	public String getBlocoEAp() {
+		return blocoEAp;
+	}
+
+
+	public void setBlocoEAp(String blocoEAp) {
+		this.blocoEAp = blocoEAp;
+	}
 	
-	@Column(name = "AP")
-	private String apartamento;
-	
-	
-		public String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
@@ -125,27 +161,6 @@ public class Usuario implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-
-	public String getBloco() {
-		return bloco;
-	}
-
-
-	public void setBloco(String bloco) {
-		this.bloco = bloco;
-	}
-
-
-	public String getApartamento() {
-		return apartamento;
-	}
-
-
-	public void setApartamento(String apartamento) {
-		this.apartamento = apartamento;
-	}
-
 
 }
 
