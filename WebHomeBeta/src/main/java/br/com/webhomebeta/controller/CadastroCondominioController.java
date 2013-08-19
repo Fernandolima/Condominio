@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.DescricaoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
@@ -44,9 +45,12 @@ public class CadastroCondominioController {
 
 		if (bloco.hasErrors()) {
 			
+			
 			 DescricaoCondominio descricao = new DescricaoCondominio();
 			 BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),descricao);
 			 //Salva no banco
+			 
+			// for(DescricaoCondominio des: DescricaoCondominio()
 			 cadastroCondominioService.save(descricao);
 
 			return new ModelAndView("cadastrarBlocos", "bloco", bloco);

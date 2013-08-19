@@ -6,6 +6,9 @@ public class DescricaoCondominioTO {
 	private int idcondomnio;
 	private String ap;
 	private String nome_condominio;
+	private String QuatApAndares;
+	private String NumeroInicia;
+	private String QuantAp;
 	/**
 	 * @return the bloco
 	 */
@@ -53,6 +56,42 @@ public class DescricaoCondominioTO {
 	 */
 	public void setNome_condominio(String nome_condominio) {
 		this.nome_condominio = nome_condominio;
+	}
+	/**
+	 * @return the quatApAndares
+	 */
+	public String getQuatApAndares() {
+		return QuatApAndares;
+	}
+	/**
+	 * @return the numeroInicia
+	 */
+	public String getNumeroInicia() {
+		return NumeroInicia;
+	}
+	/**
+	 * @return the quantAp
+	 */
+	public String getQuantAp() {
+		return QuantAp;
+	}
+	/**
+	 * @param quatApAndares the quatApAndares to set
+	 */
+	public void setQuatApAndares(String quatApAndares) {
+		QuatApAndares = quatApAndares;
+	}
+	/**
+	 * @param numeroInicia the numeroInicia to set
+	 */
+	public void setNumeroInicia(String numeroInicia) {
+		NumeroInicia = numeroInicia;
+	}
+	/**
+	 * @param quantAp the quantAp to set
+	 */
+	public void setQuantAp(String quantAp) {
+		QuantAp = quantAp;
 	}
 
 }

@@ -12,11 +12,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "[dbo].[DESCRICAO_CONDOMINIO]")
 public class DescricaoCondominio implements Serializable {
-	
+
 	private static final long serialVersionUID = 499205724766612628L;
 
 	@Column(name = "BLOCO")
 	private String bloco;
+
+	@Column(name = "QUATAPANDARES")
+	private String QuatApAndares;
+
+	@Column(name = "NUMEROINICIA")
+	private String NumeroInicia;
+
+	@Column(name = "QUANTAP")
+	private String QuantAp;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,6 +96,55 @@ public class DescricaoCondominio implements Serializable {
 	 */
 	public void setNome_condominio(String nome_condominio) {
 		this.nome_condominio = nome_condominio;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * @return the quatApAndares
+	 */
+	public String getQuatApAndares() {
+		return QuatApAndares;
+	}
+
+	/**
+	 * @return the numeroInicia
+	 */
+	public String getNumeroInicia() {
+		return NumeroInicia;
+	}
+
+	/**
+	 * @return the quantAp
+	 */
+	public String getQuantAp() {
+		return QuantAp;
+	}
+
+	/**
+	 * @param quatApAndares the quatApAndares to set
+	 */
+	public void setQuatApAndares(String quatApAndares) {
+		QuatApAndares = quatApAndares;
+	}
+
+	/**
+	 * @param numeroInicia the numeroInicia to set
+	 */
+	public void setNumeroInicia(String numeroInicia) {
+		NumeroInicia = numeroInicia;
+	}
+
+	/**
+	 * @param quantAp the quantAp to set
+	 */
+	public void setQuantAp(String quantAp) {
+		QuantAp = quantAp;
 	}
 
 }
