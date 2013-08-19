@@ -1,5 +1,8 @@
 package br.com.webhomebeta.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
@@ -22,7 +25,7 @@ import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 public class CadastroCondominioController {
 	@Autowired
 	private CadastroCondominioService cadastroCondominioService;
-	
+
 	private DescricaoCondominio descricaoCondominio;
 
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio;
@@ -33,31 +36,38 @@ public class CadastroCondominioController {
 	public ModelAndView CadastraBlocos() {
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", "bloco",
-				new CadastroCondominioControllerBean()); 
+				new CadastroCondominioControllerBean());
 	}
 
 	// Pega o Objeto blco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "addBloco", method = RequestMethod.POST) // valor da action
+	@RequestMapping(value = "addBloco", method = RequestMethod.POST)
+	// valor da action
 	public ModelAndView CadastroBlocos(
-			@ModelAttribute("bloco") final CadastroCondominioControllerBean bloco, //se passo o bean
+			@ModelAttribute("bloco") final CadastroCondominioControllerBean bloco, // se
+																					// passo
+																					// o
+																					// bean
 			BindingResult result, HttpServletRequest request) {
 
 		if (bloco.hasErrors()) {
+
+			DescricaoCondominio descricao = new DescricaoCondominio();
+			BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
+					descricao);
+			// Salva no banco
+
+			ArrayList<DescricaoCondominio> LisDescricao = new ArrayList<DescricaoCondominio>();
+			for (DescricaoCondominio DescricaoList : LisDescricao);
 			
-			
-			 DescricaoCondominio descricao = new DescricaoCondominio();
-			 BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),descricao);
-			 //Salva no banco
-			 
-			// for(DescricaoCondominio des: DescricaoCondominio()
-			 cadastroCondominioService.save(descricao);
+
+			cadastroCondominioService.save(descricao);
 
 			return new ModelAndView("cadastrarBlocos", "bloco", bloco);
 		}
 
 		return new ModelAndView("cadastrarBlocos", "bloco", bloco);
-	
+
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {

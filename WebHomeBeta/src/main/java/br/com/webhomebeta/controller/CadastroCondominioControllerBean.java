@@ -13,6 +13,9 @@ public class CadastroCondominioControllerBean {
 	private boolean NumeroInicia = true;
 	private boolean QuantAp = true;
 	private boolean hasErrorCond = false;
+	private String Apartamento [];
+	private String Bloco [];
+	
 
 	/**
 	 * @return the descricaoCondominioTO
@@ -170,6 +173,41 @@ public class CadastroCondominioControllerBean {
 		}
 		hasErrorCond = false;
 		return true;
+	}
+
+	/**
+	 * @return the ap
+	 */
+	public boolean isAp() {
+		return ap;
+	}
+
+	/**
+	 * @return the apartamento
+	 */
+	public String[] getApartamento() {
+		return Apartamento;
+	}
+
+	/**
+	 * @return the bloco
+	 */
+	public String[] getBloco() {
+		return Bloco;
+	}
+
+	/**
+	 * @param apartamento the apartamento to set
+	 */
+	public void setApartamento(String[] apartamento) {
+		Apartamento = apartamento;
+	}
+
+	/**
+	 * @param bloco the bloco to set
+	 */
+	public void setBloco(String[] bloco) {
+		Bloco = bloco;
 	}
 
 
