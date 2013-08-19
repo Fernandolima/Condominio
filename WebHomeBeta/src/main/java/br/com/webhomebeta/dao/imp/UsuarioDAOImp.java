@@ -37,7 +37,6 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 		return usuario;
 	}
-
 	@Transactional
 	public List<Usuario> getUsuario() {
 

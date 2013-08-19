@@ -112,7 +112,8 @@
  
     <bean id="dao" class="br.com.webhomebeta.dao.imp.UsuarioDAOImp"></bean>
     <bean id="usuarioService" class="br.com.webhomebeta.service.UsuarioService"></bean>
- 
+ 	<bean id="daoCond" class="br.com.webhomebeta.dao.imp.DescricaoCondominioImp"></bean>
+ 	<bean id="cadastroCondominioService" class="br.com.webhomebeta.service.CadastroCondominioService"></bean>
     <tx:annotation-driven />
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">

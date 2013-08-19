@@ -18,7 +18,7 @@
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
-					<p>Entrou como Administrador<p>
+					<p>Ol&aacute;, <c:out value="${usuarioNaSessao.nome}"/><p>
 					<span>|</span>
 					<a href="#" title="Ver site">Ver site</a>
 					<span>|</span>

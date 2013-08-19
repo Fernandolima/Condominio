@@ -3,7 +3,6 @@ package br.com.webhomebeta.dao;
 import java.util.List;
 
 import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.to.UsuarioTO;
 
 public interface UsuarioDAO {
 	

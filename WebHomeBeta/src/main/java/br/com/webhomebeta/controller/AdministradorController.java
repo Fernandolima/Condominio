@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 @SessionAttributes("usuarioNaSessao")
@@ -28,23 +29,21 @@ public class AdministradorController {
 
 	private Usuario usuarioNaSessao;
 
-	public AdministradorController() {
-
+	//Passa um usuario para a sessao do mesmo
+	@RequestMapping(value = "admin", method = RequestMethod.GET)
+	public ModelAndView show() {
+		
 		usuarioNaSessao = new Usuario();
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				usuarioNaSessao = usuarioService
-						.getUsuarioByLogin(((User) authentication
+						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername());
 
 			}
 		}
-	}
-	//Passa um usuario para a sessao do mesmo
-	@RequestMapping(value = "admin", method = RequestMethod.GET)
-	public ModelAndView show() {
 		return new ModelAndView("admin", "usuarioNaSessao", usuarioNaSessao);
 	}
 
