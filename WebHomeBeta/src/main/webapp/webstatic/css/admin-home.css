@@ -168,11 +168,16 @@ body {
 	width: auto;
 }
 
-#lbNumAp {
+.marginLabel {
 	margin-left: 15px;
 }
 
-#frmBlocos input {
+#frmBlocos input[type="text"] {
+	width: 35px;
+}
+
+
+#frmBlocos input[type="submit"] {
 	width: 80px;
 }
 

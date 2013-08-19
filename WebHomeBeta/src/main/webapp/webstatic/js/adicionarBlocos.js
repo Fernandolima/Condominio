@@ -9,10 +9,10 @@ var ADICIONAR_BLOCOS = {
 
 		html += '<div class="blocos">';
 			html += '<label>Bloco:</label>';
-			html += '<input type="text" name="bloco" id="bloco" />';
+			html += '<input type="text" name="descricaoCondominioTO.bloco" id="bloco" />';
 			
 			html += '<label id="lbNumAp">Quantidade de Apartamentos:</label>';
-			html += '<input type="text" name="numAp" id="numAp" />';
+			html += '<input type="text" name="descricaoCondominioTO.apartamento" id="numAp" />';
 		html += '</div>';
 
 		$('#contentFrm').append(html);

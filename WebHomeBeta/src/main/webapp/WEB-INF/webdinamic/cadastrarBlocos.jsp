@@ -49,14 +49,20 @@
 					<div id="contentFrm">
 						<div class="blocos">
 							<label>Bloco:</label>
-							<input type="text" name="bloco" id="bloco" />
+							<input type="text" name="descricaoCondominioTO.bloco" id="bloco" />
 
-							<label id="lbNumAp">Quantidade de Apartamentos:</label>
-							<input type="text" name="numAp" id="numAp" />
+							<label class="marginLabel">Nº de Apartamentos:</label>
+							<input type="text" name="descricaoCondominioTO.ap" />
+							
+							<label class="marginLabel">Ap por andar:</label>
+							<input type="text" name="descricaoCondominioTO.quatAndares" />
+							
+							<label class="marginLabel">Inicio da numeração:</label>
+							<input type="text" name="descricaoCondominioTO.numeroInicial" />
 						</div>
 					</div>
 
-					<a href="#" class="adicionar-bloco">+ Adicionar mais bloco</a> 
+					<%--<a href="#" class="adicionar-bloco">+ Adicionar mais bloco</a>--%>
 					<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
 				</form>
 			</section>
@@ -64,7 +70,6 @@
 	</section>
 	<!-- <footer id="footer-site">
 		</footer> -->
-	<script src="<c:url value = "/webstatic/js/adicionarBlocos.js"/>"
-		type="text/javascript"></script>
+	<%--<script src="<c:url value = "/webstatic/js/adicionarBlocos.js"/>" type="text/javascript"></script>--%>
 </body>
 </html>
