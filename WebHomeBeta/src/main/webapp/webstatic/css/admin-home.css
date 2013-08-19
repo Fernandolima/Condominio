@@ -57,7 +57,7 @@ body {
 	margin-left: 40px;
 }
 
-#nav-admin h2 {
+#main-admin-home h2 {
 	color: #656565;
 	font-size: 18px;
 	float: left;
@@ -154,4 +154,42 @@ body {
 	width: 85px;
 	float: left;
 	border-left: 1px solid #000;
+}
+
+/*Cadastro de Blocos e Apartamentos*/
+
+#frmBlocos {
+	width: 650px;
+	float: left;
+	margin: 20px 0 0 25px;
+}
+
+#frmBlocos label {
+	width: auto;
+}
+
+#lbNumAp {
+	margin-left: 15px;
+}
+
+#frmBlocos input {
+	width: 80px;
+}
+
+.blocos {
+	width: 100%;
+	float: left;
+}
+
+.adicionar-bloco {
+	clear: both;
+    color: #DE2844;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#btSubmitBlocos {
+	float: left;
 }
