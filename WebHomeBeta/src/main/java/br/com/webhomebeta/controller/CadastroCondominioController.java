@@ -1,13 +1,11 @@
 package br.com.webhomebeta.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.DescricaoCondominio;
-import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
@@ -57,9 +54,8 @@ public class CadastroCondominioController {
 					descricao);
 			// Salva no banco
 
-			ArrayList<DescricaoCondominio> LisDescricao = new ArrayList<DescricaoCondominio>();
-			for (DescricaoCondominio DescricaoList : LisDescricao);
-			
+			// ArrayList<DescricaoCondominio> LisDescricao = new
+			// ArrayList<DescricaoCondominio>();
 
 			cadastroCondominioService.save(descricao);
 
@@ -67,6 +63,15 @@ public class CadastroCondominioController {
 		}
 
 		return new ModelAndView("cadastrarBlocos", "bloco", bloco);
+
+	}
+
+	//Lista toda Descrição do Condominio
+	@RequestMapping(value = "addListDescr", method = RequestMethod.POST)
+	public ModelMap Mandalist() {
+		ModelMap mop = new ModelMap();
+		mop.put("getListDescricao", cadastroCondominioService.getDescricao());
+		return mop;
 
 	}
 

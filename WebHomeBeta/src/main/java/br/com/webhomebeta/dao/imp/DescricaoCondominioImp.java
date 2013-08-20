@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 
 public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 
@@ -35,5 +36,16 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Transactional
+	public List<DescricaoCondominio> getDescricaoCondominio() {
+		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I]";
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(DescricaoCondominio.class);
+		@SuppressWarnings("unchecked")
+		List<DescricaoCondominio> descricaoCondominios = q.list();
+		return descricaoCondominios;
+	}
+
 	
 }

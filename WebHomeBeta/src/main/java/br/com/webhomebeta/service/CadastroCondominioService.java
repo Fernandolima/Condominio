@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 
 @Service("cadastroCondominioService")
 public class CadastroCondominioService {
@@ -20,9 +21,10 @@ public class CadastroCondominioService {
 		return daoCond.save(descricaoCondominio);
 	}
 	
-	//public List<DescricaoCondominio> getdeDescricaoCondominios{
+	public List<DescricaoCondominio> getDescricao() {
 
-		//return dao.getDescricaoCondominios();
+		return daoCond.getDescricaoCondominios();
+	}
 	}
 
 

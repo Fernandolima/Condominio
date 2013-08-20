@@ -13,9 +13,6 @@ public class CadastroCondominioControllerBean {
 	private boolean NumeroInicia = true;
 	private boolean QuantAp = true;
 	private boolean hasErrorCond = false;
-	private String Apartamento [];
-	private String Bloco [];
-	
 
 	/**
 	 * @return the descricaoCondominioTO
@@ -108,7 +105,6 @@ public class CadastroCondominioControllerBean {
 		this.hasErrorCond = hasErrorCond;
 	}
 
-	
 	/**
 	 * @return the bloco
 	 */
@@ -145,25 +141,29 @@ public class CadastroCondominioControllerBean {
 	}
 
 	/**
-	 * @param quatApAndares the quatApAndares to set
+	 * @param quatApAndares
+	 *            the quatApAndares to set
 	 */
 	public void setQuatApAndares(boolean quatApAndares) {
 		QuatApAndares = quatApAndares;
 	}
 
 	/**
-	 * @param numeroInicia the numeroInicia to set
+	 * @param numeroInicia
+	 *            the numeroInicia to set
 	 */
 	public void setNumeroInicia(boolean numeroInicia) {
 		NumeroInicia = numeroInicia;
 	}
 
 	/**
-	 * @param quantAp the quantAp to set
+	 * @param quantAp
+	 *            the quantAp to set
 	 */
 	public void setQuantAp(boolean quantAp) {
 		QuantAp = quantAp;
 	}
+
 	public boolean hasErrors() {
 		if (bloco == false || idcondomnio == false || ap == false
 				|| nome_condiminio == false || QuatApAndares == false
@@ -181,35 +181,5 @@ public class CadastroCondominioControllerBean {
 	public boolean isAp() {
 		return ap;
 	}
-
-	/**
-	 * @return the apartamento
-	 */
-	public String[] getApartamento() {
-		return Apartamento;
-	}
-
-	/**
-	 * @return the bloco
-	 */
-	public String[] getBloco() {
-		return Bloco;
-	}
-
-	/**
-	 * @param apartamento the apartamento to set
-	 */
-	public void setApartamento(String[] apartamento) {
-		Apartamento = apartamento;
-	}
-
-	/**
-	 * @param bloco the bloco to set
-	 */
-	public void setBloco(String[] bloco) {
-		Bloco = bloco;
-	}
-
-
 
 }
