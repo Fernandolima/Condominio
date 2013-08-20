@@ -2,17 +2,21 @@ package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 	@Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
-	@Table(name = "[dbo].[User]")
+	@Table(name = "[dbo].[USER]")
 // que define qual o nome da tabela no banco de dados ao qual a classe será
 // mapeada
 public class Usuario implements Serializable {
@@ -57,6 +61,35 @@ public class Usuario implements Serializable {
 	@Column(name = "BLOCO_AP")
 	private String blocoEAp;
 	
+	//Um usuario pode fazer varias publicacoes
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioPublicacao")
+	private Set<Publicacao> publicacoes = new HashSet<>(0);
+	//Um usuario pode fazer varios comentarios em uma publicacao
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioComentario")
+	private Set<Comentario> comentarios = new HashSet<>(0);
+	
+
+	
+	
+	public Set<Publicacao> getPublicacoes() {
+		return publicacoes;
+	}
+
+
+	public void setPublicacoes(Set<Publicacao> publicacoes) {
+		this.publicacoes = publicacoes;
+	}
+
+
+	public Set<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+
+	public void setComentarios(Set<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 
 	public int getIdUser() {
 		return idUser;

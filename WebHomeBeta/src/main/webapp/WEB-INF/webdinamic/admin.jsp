@@ -32,6 +32,7 @@
 					<h2>Administrador</h2>
 					<span class="item-menu">Painel</span>
 					<a href="validarMoradores" class="item-menu"><b>></b> Morador</a>
+					<a href="publicar" class="item-menu"><b>></b> Publicar</a>
 					<!-- <ul id="btn-morador" class="item-menu">
 						<li></li>
 					</ul> -->

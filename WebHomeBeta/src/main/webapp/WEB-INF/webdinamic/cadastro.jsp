@@ -59,12 +59,6 @@
 						<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
 						<form:input path="usuarioTO.cpf" id="cpf" cssClass="${(bean.validCpf) ? '' : 'error'}" />
 						
-						<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
-						<form:input path="usuarioTO.bloco" id="bloco" cssClass="${(bean.validBloco) ? '' : 'error'}" />
-						
-						<form:label for="apartamento" class="lblRight" path="usuarioTO.apartamento">Apartamento: *</form:label>
-						<form:input path="usuarioTO.apartamento" id="apartamento" cssClass="${(bean.validApartamento) ? '' : 'error'}"/>
-						
 						<input type="submit" id="btSubmitRegister" class="btSubmit" value="Enviar" />
 					</form:form></div>
 			</div>

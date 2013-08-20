@@ -1,25 +1,35 @@
 package br.com.webhomebeta.entity;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-//Ela declara a classe como persistente e gerenciada pelo Hibernate
-@Table(name = "dbo.PUBLICACAO")
-//que define qual o nome da tabela no banco de dados ao qual a classe será
-//mapeada
-public class Publicacao {
-	
-	
+// Ela declara a classe como persistente e gerenciada pelo Hibernate
+@Table(name = "[dbo].[PUBLICACAO]")
+// que define qual o nome da tabela no banco de dados ao qual a classe será
+// mapeada
+public class Publicacao implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7669238417461113597L;
 
 	@Column(name = "PUBLICACAO")
 	private String publicacao;
-	
+
 	@Id
 	// define a propriedade que será o identificador único da classe e da
 	// tabela.
@@ -27,37 +37,55 @@ public class Publicacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// É uma boa prática definir uma propriedade id com um valor gerado
 	// automaticamente
-	private Integer id_PUBLICACAO;
-	
+	private Integer idPublicacao;
 
-	/**
-	 * @return the publicacao
-	 */
+	// Mapeamento N - 1
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_USER")
+	private Usuario usuarioPublicacao;
+
+	// Mapeamento 1 - N
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "publicacao")
+	private Set<Comentario> comentarios = new HashSet<>(0);
+
+	public Usuario getUsuarioPublicacao() {
+		return usuarioPublicacao;
+	}
+
+	public void setUsuarioPublicacao(Usuario usuarioPublicacao) {
+		this.usuarioPublicacao = usuarioPublicacao;
+	}
+
+	public Integer getIdPublicacao() {
+		return idPublicacao;
+	}
+
+	public void setIdPublicacao(Integer idPublicacao) {
+		this.idPublicacao = idPublicacao;
+	}
+
+	public Set<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(Set<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 	public String getPublicacao() {
 		return publicacao;
 	}
 
-	/**
-	 * @return the id_PUBLICACAO
-	 */
 	public Integer getId_PUBLICACAO() {
-		return id_PUBLICACAO;
+		return idPublicacao;
 	}
 
-	/**
-	 * @param publicacao the publicacao to set
-	 */
 	public void setPublicacao(String publicacao) {
 		this.publicacao = publicacao;
 	}
 
-	/**
-	 * @param id_PUBLICACAO the id_PUBLICACAO to set
-	 */
-	public void setId_PUBLICACAO(Integer id_PUBLICACAO) {
-		this.id_PUBLICACAO = id_PUBLICACAO;
+	void setId_PUBLICACAO(Integer idPublicacao) {
+		this.idPublicacao = idPublicacao;
 	}
-	
-	
 
 }
