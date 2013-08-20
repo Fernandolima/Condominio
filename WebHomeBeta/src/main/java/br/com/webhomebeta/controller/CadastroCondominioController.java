@@ -66,7 +66,7 @@ public class CadastroCondominioController {
 
 	}
 
-	//Lista toda Descrição do Condominio
+	//Tati Lista toda Descrição do Condominio voce receberar o addListDescr. acessar pelo nome da Clas. o objeto.
 	@RequestMapping(value = "addListDescr", method = RequestMethod.POST)
 	public ModelMap Mandalist() {
 		ModelMap mop = new ModelMap();
