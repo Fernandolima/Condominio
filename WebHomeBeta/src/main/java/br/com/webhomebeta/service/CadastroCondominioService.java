@@ -1,3 +1,4 @@
+
 package br.com.webhomebeta.service;
 
 import java.util.List;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
-import br.com.webhomebeta.entity.Usuario;
 
 @Service("cadastroCondominioService")
 public class CadastroCondominioService {
@@ -20,11 +20,23 @@ public class CadastroCondominioService {
 
 		return daoCond.save(descricaoCondominio);
 	}
-	
+
 	public List<DescricaoCondominio> getDescricao() {
 
 		return daoCond.getDescricaoCondominios();
 	}
+
+	public DescricaoCondominio editar(int id) {
+
+		return (DescricaoCondominio) daoCond.editar(id);
 	}
 
+	public void update(DescricaoCondominio descricaoCondominio) {
 
+		daoCond.update(descricaoCondominio);
+	}
+
+	public void delete(DescricaoCondominio descricaoCondominio) {
+		daoCond.delete(descricaoCondominio);
+	}
+}
