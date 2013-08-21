@@ -28,7 +28,7 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 	public List<Publicacao> getPublicacoes() {
 		
 		String sql = "exec [dbo].[SELECT_PUBLICACOES]";
-		Query q = factory.getCurrentSession().createSQLQuery(sql);
+		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class);
 		
 		return q.list();
 		

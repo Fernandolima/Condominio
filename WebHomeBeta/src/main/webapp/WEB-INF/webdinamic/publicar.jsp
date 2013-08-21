@@ -12,11 +12,20 @@
 </head>
 <body>
 
-	<c:forEach items="${listaPublicacao}" var="item">
-		<tr>
-			<td class="Publicacao: ">Publicacao: <c:out value="${item.publicacao}" /></td>
-		</tr>
-	</c:forEach>
+					<div id="entries">
+						<p>Cadastros pendentes de aprovação</p>
+						<table id="tableEntries">
+							<tr>
+								<td class="name">Nome</td>
+								<td class="link">Link</td>
+							</tr>
+							<c:forEach items="${listaPublicacoes}" var="item">
+								<tr>
+									<td class="name"><c:out value="${item.publicacao}"/></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
 
 	<form:form modelAttribute="publicacaoTO" action="salvarPublicacao">
 		<form:label for="nome" path="publicacao">Publicacao:</form:label>

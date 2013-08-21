@@ -37,7 +37,7 @@ public class Publicacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// É uma boa prática definir uma propriedade id com um valor gerado
 	// automaticamente
-	private Integer idPublicacao;
+	private int idPublicacao;
 
 	// Mapeamento N - 1
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -56,14 +56,6 @@ public class Publicacao implements Serializable {
 		this.usuarioPublicacao = usuarioPublicacao;
 	}
 
-	public Integer getIdPublicacao() {
-		return idPublicacao;
-	}
-
-	public void setIdPublicacao(Integer idPublicacao) {
-		this.idPublicacao = idPublicacao;
-	}
-
 	public Set<Comentario> getComentarios() {
 		return comentarios;
 	}
@@ -76,7 +68,7 @@ public class Publicacao implements Serializable {
 		return publicacao;
 	}
 
-	public Integer getId_PUBLICACAO() {
+	public int getId_PUBLICACAO() {
 		return idPublicacao;
 	}
 
@@ -84,7 +76,7 @@ public class Publicacao implements Serializable {
 		this.publicacao = publicacao;
 	}
 
-	void setId_PUBLICACAO(Integer idPublicacao) {
+	void setId_PUBLICACAO(int idPublicacao) {
 		this.idPublicacao = idPublicacao;
 	}
 

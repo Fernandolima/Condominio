@@ -1,9 +1,11 @@
 package br.com.webhomebeta.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.naming.Binding;
 
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -41,8 +43,9 @@ public class MoradorController {
 	@RequestMapping(value = "publicar", method = RequestMethod.GET)
 	public ModelAndView show(ModelMap model){
 		List<Publicacao> publicacoes = publicacaoService.getPublicacoes();
+		Collections.reverse(publicacoes);
 		model.put("listaPublicacoes", publicacoes);
-		model.put("publicar", new PublicacaoTO());
+		model.put("publicacaoTO", new PublicacaoTO());
 //		usuarioNaSessao = new Usuario();
 //		SecurityContext context = SecurityContextHolder.getContext();
 //		if (context instanceof SecurityContext) {
@@ -59,14 +62,16 @@ public class MoradorController {
 	
 	@RequestMapping(value = "salvarPublicacao", method = RequestMethod.POST)
 	public String salvarPublicacao(@ModelAttribute("publicacaoTO") PublicacaoTO publicacaoTO, BindingResult bindingResult){
-		publicacaoTO.setUsuarioPublicacao(usuarioNaSessao);
+		Usuario u = new Usuario();
+		u.setIdUser(1);
+		publicacaoTO.setUsuarioPublicacao(u);
 		Publicacao p = new Publicacao();
 		BeanUtils.copyProperties(publicacaoTO, p);
 		publicacaoService.salvar(p);
 		return "redirect:/publicar";
 		
 	}
-	
+
 	
 	
 }
