@@ -1,3 +1,5 @@
+
+
 package br.com.webhomebeta.validacao;
 
 public class ValidatorDescricaoCondominio {
