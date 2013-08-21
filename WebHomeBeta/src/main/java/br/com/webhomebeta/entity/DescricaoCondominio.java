@@ -1,3 +1,4 @@
+
 package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
