@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
-import br.com.webhomebeta.entity.Usuario;
 
 public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 
@@ -46,6 +45,41 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		List<DescricaoCondominio> descricaoCondominios = q.list();
 		return descricaoCondominios;
 	}
+	
+	@Transactional
+	public DescricaoCondominio getDescricaoById( int idcondomnio){
+		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
+		Query q= factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(DescricaoCondominio.class).setParameter("0", idcondomnio);
+		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q.uniqueResult();
+				return descricaoCondominio;
+	}
+
+	@Override
+	public DescricaoCondominio editar(int id) {
+		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
+		Query q= factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(DescricaoCondominio.class).setParameter("0", id);
+		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q.uniqueResult();
+				return descricaoCondominio;
+	}
+	
+	@Override
+	public void update(DescricaoCondominio descricaoCondominio) {
+			factory.getCurrentSession().update(descricaoCondominio);
+			
+	}
+	
+	public void  Delete(DescricaoCondominio descricaoCondominio) {
+		factory.getCurrentSession().delete(descricaoCondominio);
+	}
+
+	@Override
+	public void delete(DescricaoCondominio descricacoCondominio) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 }
