@@ -1,3 +1,4 @@
+
 package br.com.webhomebeta.dao;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface DescricaoCondominioDAO {
 	public DescricaoCondominio save(DescricaoCondominio descricaoCondominio);
 
 	public List<DescricaoCondominio> getDescricaoCondominios();
+	
+	public DescricaoCondominio editar(int id);
+	
+	public void update(DescricaoCondominio descricaoCondominio);
+	
+	public  void delete(DescricaoCondominio descricacoCondominio);
 }
