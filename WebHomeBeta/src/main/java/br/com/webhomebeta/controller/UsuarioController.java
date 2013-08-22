@@ -110,7 +110,7 @@ public class UsuarioController {
 			bean.setValidEmail(true);
 
 		for (Usuario user : usuarioService.getUsuario()) {
-			if (bean.getUsuarioTO().getBlocoEAp().equals(user.getBlocoEAp())) {
+			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
 				bean.setValidBloco(false);
 			}else{
 				bean.setValidBloco(true);

@@ -116,6 +116,8 @@
     <bean id ="publicacaoService" class = "br.com.webhomebeta.service.PublicacaoService"></bean>
     <bean id="daoCond" class="br.com.webhomebeta.dao.imp.DescricaoCondominioImp"></bean>
  	<bean id="cadastroCondominioService" class="br.com.webhomebeta.service.CadastroCondominioService"></bean>
+ 	<bean id="atasDao" class="br.com.webhomebeta.dao.imp.AtasImp"></bean>
+ 	<bean id="atasService" class="br.com.webhomebeta.service.AtasService"></bean>
  	
     <tx:annotation-driven />
     <bean id="transactionManager"

@@ -21,10 +21,11 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 	@Transactional
 	public Usuario save(Usuario usuario) {
-		String sql = "exec [dbo].[USUARIO_CRIPTOGRAFADO_I] ?,?,?,?,?,?,?,?,?,?";
+		String sql = "exec [dbo].[USUARIO_CRIPTOGRAFADO_I] ?,?,?,?,?,?,?,?,?,?,?";
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(Usuario.class);
-		q.setParameter(0, usuario.getBlocoEAp());
+		q.setParameter(0, usuario.getBloco());
+		q.setParameter(0, usuario.getAp());
 		q.setParameter(1, usuario.getCargo());
 		q.setParameter(2, usuario.getDt_nascimento());
 		q.setParameter(3, usuario.getPermissao());

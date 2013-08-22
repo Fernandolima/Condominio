@@ -25,7 +25,9 @@ public class UsuarioTO {
 	
 	private String cpf;
 	
-	private String blocoEAp;
+	private String bloco;
+	
+	private String ap;
 	
 
 	public int getIdUser() {
@@ -46,16 +48,8 @@ public class UsuarioTO {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-
-
-	public String getBlocoEAp() {
-		return blocoEAp;
-	}
-
-
-	public void setBlocoEAp(String blocoEAp) {
-		this.blocoEAp = blocoEAp;
-	}
+	
+	
 	
 	public String getNome() {
 		return nome;
@@ -133,6 +127,38 @@ public class UsuarioTO {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+
+	/**
+	 * @return the bloco
+	 */
+	public String getBloco() {
+		return bloco;
+	}
+
+
+	/**
+	 * @return the ap
+	 */
+	public String getAp() {
+		return ap;
+	}
+
+
+	/**
+	 * @param bloco the bloco to set
+	 */
+	public void setBloco(String bloco) {
+		this.bloco = bloco;
+	}
+
+
+	/**
+	 * @param ap the ap to set
+	 */
+	public void setAp(String ap) {
+		this.ap = ap;
 	}
 
 }

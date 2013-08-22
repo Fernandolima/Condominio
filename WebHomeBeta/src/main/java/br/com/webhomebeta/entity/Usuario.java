@@ -58,8 +58,11 @@ public class Usuario implements Serializable {
 	@Column(name = "CPF")
 	private String cpf;
 	
-	@Column(name = "BLOCO_AP")
-	private String blocoEAp;
+	@Column(name = "BLOCO")
+	private String bloco;
+	
+	@Column(name = "AP")
+	private String ap;
 	
 	//Um usuario pode fazer varias publicacoes
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioPublicacao")
@@ -67,6 +70,9 @@ public class Usuario implements Serializable {
 	//Um usuario pode fazer varios comentarios em uma publicacao
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioComentario")
 	private Set<Comentario> comentarios = new HashSet<>(0);
+	//Um usuario criar faz varias atas
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAtas")
+	private Set<AtasEntity> atas = new HashSet<>(0);
 	
 
 	
@@ -111,14 +117,7 @@ public class Usuario implements Serializable {
 	}
 
 
-	public String getBlocoEAp() {
-		return blocoEAp;
-	}
-
-
-	public void setBlocoEAp(String blocoEAp) {
-		this.blocoEAp = blocoEAp;
-	}
+	
 	
 	public String getNome() {
 		return nome;
@@ -196,6 +195,62 @@ public class Usuario implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	/**
+	 * @return the atas
+	 */
+	public Set<AtasEntity> getAtas() {
+		return atas;
+	}
+
+
+	/**
+	 * @param atas the atas to set
+	 */
+	public void setAtas(Set<AtasEntity> atas) {
+		this.atas = atas;
+	}
+
+
+	/**
+	 * @return the bloco
+	 */
+	public String getBloco() {
+		return bloco;
+	}
+
+
+	/**
+	 * @return the ap
+	 */
+	public String getAp() {
+		return ap;
+	}
+
+
+	/**
+	 * @param bloco the bloco to set
+	 */
+	public void setBloco(String bloco) {
+		this.bloco = bloco;
+	}
+
+
+	/**
+	 * @param ap the ap to set
+	 */
+	public void setAp(String ap) {
+		this.ap = ap;
 	}
 
 }
