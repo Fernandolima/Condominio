@@ -23,8 +23,8 @@ public class AtasService {
 		return atasDao.getAtas();
 	}
 	
-	public void editar(int id){
-		 atasDao.editar(id);
+	public AtasEntity editar(int id){
+		 return atasDao.editar(id);
 	}
 	
 	public void delete(AtasEntity atasEntity){

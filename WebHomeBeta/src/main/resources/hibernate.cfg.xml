@@ -10,6 +10,7 @@
         <mapping class="br.com.webhomebeta.entity.Publicacao"></mapping>
         <mapping class="br.com.webhomebeta.entity.AtasEntity"></mapping>
          <mapping class="br.com.webhomebeta.entity.DescricaoCondominio"></mapping>
+         <mapping class="br.com.webhomebeta.entity.Assembleia"></mapping>
         
     </session-factory>
 </hibernate-configuration>

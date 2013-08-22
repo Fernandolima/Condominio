@@ -35,7 +35,7 @@ public class AtasImp implements AtasDao {
 	
 	@Override
 	public AtasEntity editar(int id) {
-		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
+		String sql = "exe[dbo].[ATAS] ?";
 		Query q= factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(AtasEntity.class).setParameter(0, id);
 		AtasEntity atasEntity = (AtasEntity) q.uniqueResult();
@@ -47,14 +47,15 @@ public class AtasImp implements AtasDao {
 		
 	}
 	
-	public void delete(AtasEntity atasEntity){
-		factory.getCurrentSession().delete(atasEntity);
-	}
-
 	@Override
 	public List<AtasEntity> getAtas() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void delete(AtasEntity atasEntity) {
+		factory.getCurrentSession().delete(atasEntity);
+		
 	}
 
 	

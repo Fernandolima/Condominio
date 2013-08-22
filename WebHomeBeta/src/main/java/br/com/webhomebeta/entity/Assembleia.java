@@ -1,6 +1,5 @@
 package br.com.webhomebeta.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -14,26 +13,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "[dbo.].[ATAS]")
-public class AtasEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8688347079158220711L;
+@Table(name = "[dbo.].[ASSEMBLEIA]")
+public class Assembleia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ATAS")
 	private int idAtas;
 
-	@Column(name = "ATAS")
-	private String atas;
+	@Column(name = "ASSEMBLEIA")
+	private String assembleia;
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USER", nullable = false)
-	private Usuario usuarioAtas;
+	private Usuario usuarioAssebleia;
 
 	@Column(name = "DATA_ATAS")
 	private Date dataAtas;
@@ -46,12 +40,18 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
-	 * @return the atas
+	 * @return the assembleia
 	 */
-	public String getAtas() {
-		return atas;
+	public String getAssembleia() {
+		return assembleia;
 	}
 
+	/**
+	 * @return the usuarioAssebleia
+	 */
+	public Usuario getUsuarioAssebleia() {
+		return usuarioAssebleia;
+	}
 
 	/**
 	 * @return the dataAtas
@@ -61,30 +61,31 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
-	 * @param idAtas
-	 *            the idAtas to set
+	 * @param idAtas the idAtas to set
 	 */
 	public void setIdAtas(int idAtas) {
 		this.idAtas = idAtas;
 	}
 
 	/**
-	 * @param atas
-	 *            the atas to set
+	 * @param assembleia the assembleia to set
 	 */
-	public void setAtas(String atas) {
-		this.atas = atas;
+	public void setAssembleia(String assembleia) {
+		this.assembleia = assembleia;
 	}
 
+	/**
+	 * @param usuarioAssebleia the usuarioAssebleia to set
+	 */
+	public void setUsuarioAssebleia(Usuario usuarioAssebleia) {
+		this.usuarioAssebleia = usuarioAssebleia;
+	}
 
 	/**
-	 * @param dataAtas
-	 *            the dataAtas to set
+	 * @param dataAtas the dataAtas to set
 	 */
 	public void setDataAtas(Date dataAtas) {
 		this.dataAtas = dataAtas;
 	}
-
-
 
 }

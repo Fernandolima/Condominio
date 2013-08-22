@@ -1,25 +1,16 @@
 package br.com.webhomebeta.controller;
 
 import br.com.webhomebeta.service.AtasService;
+import br.com.webhomebeta.to.AtasTo;
 
 public class AtasControllerBean {
-	private AtasService atasService;
-	private boolean Atas;
+	private AtasTo atasTo;
+	private boolean atas;
 	private String data;
 	private boolean hasErrorForm = false;
 
-	/**
-	 * @return the atasService
-	 */
-	public AtasService getAtasService() {
-		return atasService;
-	}
-
-	/**
-	 * @return the atas
-	 */
-	public boolean isAtas() {
-		return Atas;
+	public boolean isAtas(boolean b) {
+		return atas;
 	}
 
 	/**
@@ -30,19 +21,11 @@ public class AtasControllerBean {
 	}
 
 	/**
-	 * @param atasService
-	 *            the atasService to set
-	 */
-	public void setAtasService(AtasService atasService) {
-		this.atasService = atasService;
-	}
-
-	/**
 	 * @param atas
 	 *            the atas to set
 	 */
 	public void setAtas(boolean atas) {
-		Atas = atas;
+		atas = atas;
 	}
 
 	/**
@@ -64,16 +47,33 @@ public class AtasControllerBean {
 	 * @param hasErrorForm
 	 *            the hasErrorForm to set
 	 */
+
+	/**
+	 * @return the atasTo
+	 */
+	public AtasTo getAtasTo() {
+		return atasTo;
+	}
+
+	/**
+	 * @param atasTo
+	 *            the atasTo to set
+	 */
+	public void setAtasTo(AtasTo atasTo) {
+		this.atasTo = atasTo;
+	}
+
 	public void setHasErrorForm(boolean hasErrorForm) {
 		this.hasErrorForm = hasErrorForm;
 	}
 
 	public boolean hasErrors() {
-		if (Atas == false) {
+		if (atas == false) {
 			hasErrorForm = true;
 			return false;
 		}
 		hasErrorForm = false;
 		return true;
 	}
+
 }
