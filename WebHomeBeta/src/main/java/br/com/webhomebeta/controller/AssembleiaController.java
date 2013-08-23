@@ -79,16 +79,16 @@ public class AssembleiaController {
 		assembleiaControllerBean.isAssembleia(true);
 	}
 
-	@RequestMapping(value = "editar", method = RequestMethod.POST)
+	@RequestMapping(value = "assembelia/editar", method = RequestMethod.POST)
 	public ModelAndView editar(@RequestParam("idAssembleia") int id,
 			BindingResult result, HttpServletRequest request) {
 		Assembleia descricaoAssembleia = assembleiaService.editar(id);
-		return new ModelAndView("inserirAtas/editar", "atas",
+		return new ModelAndView("inserirAtas/editar", "assembleia",
 				descricaoAssembleia);
 
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@RequestMapping(value = "assembelia/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("assembleia") Assembleia assembleia,
 			BindingResult result) {
 
@@ -98,12 +98,12 @@ public class AssembleiaController {
 
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "assembelia/delete", method = RequestMethod.POST)
 	public String delete(@ModelAttribute("assembleia") Assembleia assembleia,
 			BindingResult result) {
 		assembleiaService.delete(assembleia);
 
-		return "redirect:/inserirAssembleia/editar";
+		return "redirect:/inserirAssembleia/delete";
 	}
 
 }

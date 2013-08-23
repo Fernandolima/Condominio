@@ -73,7 +73,7 @@ public class CadastroCondominioController {
 		return new ModelAndView("cadastrarBlocos", "bloco", bloco);
 	}
 
-	@RequestMapping(value = "editar", method = RequestMethod.POST)
+	@RequestMapping(value = "cadastro/editar", method = RequestMethod.POST)
 	public ModelAndView editar(@RequestParam("idcondomnio") int id,
 			BindingResult result, HttpServletRequest request) {
 		DescricaoCondominio descricaoCondominio = cadastroCondominioService
@@ -83,7 +83,7 @@ public class CadastroCondominioController {
 
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@RequestMapping(value = "cadastro/update", method = RequestMethod.POST)
 	public String update(
 			@ModelAttribute("bloco") DescricaoCondominio descricaoCondominio,
 			BindingResult result) {
@@ -94,7 +94,7 @@ public class CadastroCondominioController {
 
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "cadastro/delete", method = RequestMethod.POST)
 	public String delete(
 			@ModelAttribute("bloco") DescricaoCondominio descricaoCondominio,
 			BindingResult result) {

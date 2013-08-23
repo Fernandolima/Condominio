@@ -7,10 +7,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.webhomebeta.dao.AssembleiaDao;
 import br.com.webhomebeta.entity.Assembleia;
 import br.com.webhomebeta.entity.AtasEntity;
 
-public class AssembleiaImp {
+public class AssembleiaImp implements  AssembleiaDao {
 
 	@Autowired
 	private SessionFactory factory;
@@ -47,6 +48,12 @@ public class AssembleiaImp {
 	public void delete(Assembleia assembleia) {
 		factory.getCurrentSession().delete(assembleia);
 
+	}
+
+	@Override
+	public List<Assembleia> getAssembleias() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

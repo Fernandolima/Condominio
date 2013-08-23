@@ -79,7 +79,7 @@ public class AtasController {
 		atasBean.isAtas(true);
 	}
 
-	@RequestMapping(value = "editar", method = RequestMethod.POST)
+	@RequestMapping(value = "atas/editar", method = RequestMethod.POST)
 	public ModelAndView editar(@RequestParam("idAta") int id,
 			BindingResult result, HttpServletRequest request) {
 		AtasEntity descricaoAtas = atasService.editar(id);
@@ -87,7 +87,7 @@ public class AtasController {
 
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@RequestMapping(value = "atas/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("atas") AtasEntity atasEntity,
 			BindingResult result) {
 
@@ -97,11 +97,11 @@ public class AtasController {
 
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "atas/delete", method = RequestMethod.POST)
 	public String delete(@ModelAttribute("atas") AtasEntity atasEntity,
 			BindingResult result) {
 		atasService.delete(atasEntity);
 
-		return "redirect:/inserirAtas/editar";
+		return "redirect:/inserirAtas/delete";
 	}
 }
