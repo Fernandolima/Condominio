@@ -52,7 +52,7 @@ public class UsuarioController {
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
 			bean.getUsuarioTO().setStatus(false);
-
+			bean.getUsuarioTO().setCargo("Morador");
 			// Insere a data
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
@@ -70,6 +70,9 @@ public class UsuarioController {
 			bean.getUsuarioTO().setNome(null);
 			bean.getUsuarioTO().setPermissao(null);
 			bean.getUsuarioTO().setSenha(null);
+			bean.getUsuarioTO().setBloco(null);
+			bean.getUsuarioTO().setAp(null);
+			bean.getUsuarioTO().setCargo(null);
 
 			return new ModelAndView("cadastro", "bean", bean);
 		}
