@@ -25,23 +25,30 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(Usuario.class);
 		q.setParameter(0, usuario.getBloco());
-		q.setParameter(0, usuario.getAp());
-		q.setParameter(1, usuario.getCargo());
-		q.setParameter(2, usuario.getDt_nascimento());
-		q.setParameter(3, usuario.getPermissao());
-		q.setParameter(4, usuario.getEmail());
-		q.setParameter(5, usuario.getNome());
-		q.setParameter(6, usuario.getCpf());
-		q.setParameter(7, usuario.getLogin());
-		q.setParameter(8, usuario.getSenha());
-		q.setParameter(9, usuario.isStatus());
+		q.setParameter(1, usuario.getAp());
+		q.setParameter(2, usuario.getCargo());
+		q.setParameter(3, usuario.getDt_nascimento());
+		q.setParameter(4, usuario.getPermissao());
+		q.setParameter(5, usuario.getEmail());
+		q.setParameter(6, usuario.getNome());
+		q.setParameter(7, usuario.getCpf());
+		q.setParameter(8, usuario.getLogin());
+		q.setParameter(9, usuario.getSenha());
+		q.setParameter(10, usuario.isStatus());
+		
+		q.executeUpdate();
 
 		return usuario;
 	}
+
 	@Transactional
 	public List<Usuario> getUsuario() {
-
-		return null;
+		String sql = "exec [dbo].[USUARIOS_DESCRIPTOGRAFADO_ALL]";
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(Usuario.class);
+		@SuppressWarnings("unchecked")
+		List<Usuario> usuarios = q.list();
+		return usuarios;
 	}
 
 	@Transactional
