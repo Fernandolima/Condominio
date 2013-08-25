@@ -108,14 +108,19 @@ public class UsuarioController {
 			bean.setValidEmail(false);
 		else
 			bean.setValidEmail(true);
-
-		for (Usuario user : usuarioService.getUsuario()) {
-			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
-				bean.setValidBloco(false);
-			}else{
-				bean.setValidBloco(true);
-			}
-		}
+		
+		if(!validator.isValidApartamento(bean.getUsuarioTO().getAp()))
+			bean.setValidApartamento(false);
+		else
+			bean.setValidApartamento(true);
+		
+//		for (Usuario user : usuarioService.getUsuario()) {
+//			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
+//				bean.setValidBloco(false);
+//			}else{
+//				bean.setValidBloco(true);
+//			}
+//		}
 		// recebe uma lista do banco com todos os usuarios e verifica se o email
 		// digitado ja existe no banco
 		for (Usuario user : usuarioService.getUsuario()) {
