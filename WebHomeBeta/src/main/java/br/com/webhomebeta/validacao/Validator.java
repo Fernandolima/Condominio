@@ -157,6 +157,17 @@ public class Validator {
 
 	}
 	
+	public boolean isValidApartamento(String apartamento) {
+		if (apartamento.length() < 1
+				|| apartamento.length() > 30)
+			return false;
+		else
+			return true;
+
+	}
+	
+	
+	
 	public boolean isValidSenha(String senha, String confSenha){
 		if(senha.length() < 6 || !senha.equals(confSenha)){
 			return false;
