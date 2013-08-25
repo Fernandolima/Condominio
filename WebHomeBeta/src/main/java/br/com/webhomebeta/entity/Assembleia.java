@@ -18,32 +18,32 @@ public class Assembleia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_ATAS")
-	private int idAtas;
+	@Column(name = "ID_ASSEMBLEIA")
+	private int idAssembleia;
 
-	@Column(name = "ASSEMBLEIA")
-	private String assembleia;
+	@Column(name = "COMENTARIO")
+	private String comentario;
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAssebleia;
 
-	@Column(name = "DATA_ATAS")
-	private Date dataAtas;
+	@Column(name = "DATA_CRIACAO")
+	private Date dataCriacao;
 
 	/**
-	 * @return the idAtas
+	 * @return the idAssembleia
 	 */
-	public int getIdAtas() {
-		return idAtas;
+	public int getIdAssembleia() {
+		return idAssembleia;
 	}
 
 	/**
-	 * @return the assembleia
+	 * @return the comentario
 	 */
-	public String getAssembleia() {
-		return assembleia;
+	public String getComentario() {
+		return comentario;
 	}
 
 	/**
@@ -54,24 +54,24 @@ public class Assembleia {
 	}
 
 	/**
-	 * @return the dataAtas
+	 * @return the dataCriacao
 	 */
-	public Date getDataAtas() {
-		return dataAtas;
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
 	/**
-	 * @param idAtas the idAtas to set
+	 * @param idAssembleia the idAssembleia to set
 	 */
-	public void setIdAtas(int idAtas) {
-		this.idAtas = idAtas;
+	public void setIdAssembleia(int idAssembleia) {
+		this.idAssembleia = idAssembleia;
 	}
 
 	/**
-	 * @param assembleia the assembleia to set
+	 * @param comentario the comentario to set
 	 */
-	public void setAssembleia(String assembleia) {
-		this.assembleia = assembleia;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	/**
@@ -82,10 +82,12 @@ public class Assembleia {
 	}
 
 	/**
-	 * @param dataAtas the dataAtas to set
+	 * @param dataCriacao the dataCriacao to set
 	 */
-	public void setDataAtas(Date dataAtas) {
-		this.dataAtas = dataAtas;
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
+
+
 
 }

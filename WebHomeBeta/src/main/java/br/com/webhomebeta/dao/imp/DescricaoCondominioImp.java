@@ -25,6 +25,7 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		q.setParameter(2, condominio.getAp());
 		q.setParameter(3, condominio.getNome_condominio());
 
+		q.executeUpdate();
 		return condominio;
 		
 		

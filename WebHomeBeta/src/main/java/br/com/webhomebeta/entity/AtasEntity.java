@@ -27,16 +27,23 @@ public class AtasEntity implements Serializable {
 	@Column(name = "ID_ATAS")
 	private int idAtas;
 
-	@Column(name = "ATAS")
-	private String atas;
+	@Column(name = "COMENTARIO")
+	private String comentario;
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAtas;
 
-	@Column(name = "DATA_ATAS")
-	private Date dataAtas;
+	@Column(name = "DATA_CRIACAO")
+	private Date dataCriacao;
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	/**
 	 * @return the idAtas
@@ -46,44 +53,54 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
-	 * @return the atas
+	 * @return the comentario
 	 */
-	public String getAtas() {
-		return atas;
-	}
-
-
-	/**
-	 * @return the dataAtas
-	 */
-	public Date getDataAtas() {
-		return dataAtas;
+	public String getComentario() {
+		return comentario;
 	}
 
 	/**
-	 * @param idAtas
-	 *            the idAtas to set
+	 * @return the usuarioAtas
+	 */
+	public Usuario getUsuarioAtas() {
+		return usuarioAtas;
+	}
+
+	/**
+	 * @return the dataCriacao
+	 */
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	/**
+	 * @param idAtas the idAtas to set
 	 */
 	public void setIdAtas(int idAtas) {
 		this.idAtas = idAtas;
 	}
 
 	/**
-	 * @param atas
-	 *            the atas to set
+	 * @param comentario the comentario to set
 	 */
-	public void setAtas(String atas) {
-		this.atas = atas;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
-
 
 	/**
-	 * @param dataAtas
-	 *            the dataAtas to set
+	 * @param usuarioAtas the usuarioAtas to set
 	 */
-	public void setDataAtas(Date dataAtas) {
-		this.dataAtas = dataAtas;
+	public void setUsuarioAtas(Usuario usuarioAtas) {
+		this.usuarioAtas = usuarioAtas;
 	}
+
+	/**
+	 * @param dataCriacao the dataCriacao to set
+	 */
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
 
 
 

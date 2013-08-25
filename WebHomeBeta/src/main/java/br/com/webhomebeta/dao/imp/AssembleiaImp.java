@@ -15,6 +15,22 @@ public class AssembleiaImp implements  AssembleiaDao {
 
 	@Autowired
 	private SessionFactory factory;
+	
+	@Transactional
+	public Assembleia Inseri(Assembleia assembleia) {
+		String sql = "exec [dbo].[ASSEMBLEIA_CONDOMINIO_I] ?,?,?,?";
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(Assembleia.class);
+		q.setParameter(0, assembleia.getIdAssembleia());
+		q.setParameter(1, assembleia.getUsuarioAssebleia());
+		q.setParameter(2, assembleia.getComentario());
+		q.setParameter(3, assembleia.getDataCriacao()); 
+
+		q.executeUpdate();
+		return assembleia;
+		
+		
+	}
 
 	@Transactional
 	public List<Assembleia> getAssembleia() {
