@@ -61,6 +61,8 @@ public class AssembleiaControllerBean {
 	public void setData(String data) {
 		this.data = data;
 	}
+	
+	
 
 	/**
 	 * @param hasErrorForm

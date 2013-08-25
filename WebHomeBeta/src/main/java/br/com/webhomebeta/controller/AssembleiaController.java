@@ -48,8 +48,7 @@ public class AssembleiaController {
 		ValidadorAssembleia(AssembleiaBean);
 		if (AssembleiaBean.hasErrors()) {
 
-			// cria um objeto de Assembleia, compara com o dados to TO e salva
-			// no
+			// cria um objeto de Assembleia, compara com o dados to TO e salva no
 			// banco.
 			Assembleia descricaoAssembleia = new Assembleia();
 			BeanUtils.copyProperties(AssembleiaBean.getAssembleiaTO(),
