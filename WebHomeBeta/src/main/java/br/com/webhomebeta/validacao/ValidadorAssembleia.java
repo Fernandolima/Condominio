@@ -57,7 +57,7 @@ public class ValidadorAssembleia {
 	}
 
 	public boolean isValidAssembleia(String atas) {
-		if (atas.length() < 3 || atas.length() > 2500 || atas.matches("[0-9]"))
+		if (atas.length() < 3 || atas.length() > 2500)
 			return false;
 		else
 			return true;

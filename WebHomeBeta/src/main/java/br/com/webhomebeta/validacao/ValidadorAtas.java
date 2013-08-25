@@ -58,7 +58,7 @@ public class ValidadorAtas {
 	
 	public boolean isValidAtas( String atas) {
 		if (atas.length() < 3
-				|| atas.length() > 2500 || atas.matches("[0-9]"))
+				|| atas.length() > 2500)
 			return false;
 		else
 			return true;

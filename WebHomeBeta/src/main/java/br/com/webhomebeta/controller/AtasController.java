@@ -27,12 +27,11 @@ import br.com.webhomebeta.validacao.ValidadorAtas;
 public class AtasController {
 	@Autowired
 	private AtasService atasService;
-
+	@Autowired
 	private AtasEntity atasEntity;
-
+	@Autowired
 	private ValidadorAtas validadorAtas;
-
-	private AtasTo atasTo;
+	
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
 	@RequestMapping(value = "inserirAtas", method = RequestMethod.GET)
