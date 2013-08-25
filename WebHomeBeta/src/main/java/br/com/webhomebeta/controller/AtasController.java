@@ -27,9 +27,7 @@ import br.com.webhomebeta.validacao.ValidadorAtas;
 public class AtasController {
 	@Autowired
 	private AtasService atasService;
-	@Autowired
 	private AtasEntity atasEntity;
-	@Autowired
 	private ValidadorAtas validadorAtas;
 	
 

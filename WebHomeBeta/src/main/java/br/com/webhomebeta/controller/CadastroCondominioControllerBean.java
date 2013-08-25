@@ -167,7 +167,7 @@ public class CadastroCondominioControllerBean {
 	public boolean hasErrors() {
 		if (bloco == false || idcondomnio == false || ap == false
 				|| nome_condiminio == false || QuatApAndares == false
-				|| NumeroInicia == false || QuantAp == false) {
+				|| NumeroInicia == false || QuantAp == false || NumeroInicia == false) {
 			hasErrorCond = true;
 			return false;
 		}

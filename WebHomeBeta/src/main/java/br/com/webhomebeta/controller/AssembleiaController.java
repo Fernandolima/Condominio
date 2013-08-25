@@ -25,8 +25,9 @@ import br.com.webhomebeta.validacao.ValidadorAssembleia;
 public class AssembleiaController {
 	@Autowired
 	private AssembleiaService assembleiaService;
-	@Autowired
+	
 	private Assembleia assembleia;
+
 	private ValidadorAssembleia validadorAssembleia;
 
 	// mapeia a URL principal (Assembleia) e retorna um novo objeto assembleia

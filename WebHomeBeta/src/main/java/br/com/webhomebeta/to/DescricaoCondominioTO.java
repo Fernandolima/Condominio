@@ -93,5 +93,17 @@ public class DescricaoCondominioTO {
 	public void setQuantAp(String quantAp) {
 		QuantAp = quantAp;
 	}
+	/**
+	 * @return the numeroInicial
+	 */
+	public String getNumeroInicial() {
+		return numeroInicial;
+	}
+	/**
+	 * @param numeroInicial the numeroInicial to set
+	 */
+	public void setNumeroInicial(String numeroInicial) {
+		this.numeroInicial = numeroInicial;
+	}
 
 }
