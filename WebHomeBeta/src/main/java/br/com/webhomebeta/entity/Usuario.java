@@ -75,11 +75,21 @@ public class Usuario implements Serializable {
 	private Set<AtasEntity> atas = new HashSet<>(0);
 	//Um usuario cria  varias Assembleia
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAssebleia")
-		private Set<AtasEntity> assembleia = new HashSet<>(0);
+		private Set<Assembleia> assembleia = new HashSet<>(0);
 	
 
 	
 	
+	public Set<Assembleia> getAssembleia() {
+			return assembleia;
+		}
+
+
+		public void setAssembleia(Set<Assembleia> assembleia) {
+			this.assembleia = assembleia;
+		}
+
+
 	public Set<Publicacao> getPublicacoes() {
 		return publicacoes;
 	}
