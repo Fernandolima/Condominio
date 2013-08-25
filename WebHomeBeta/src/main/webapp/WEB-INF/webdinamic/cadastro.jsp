@@ -48,8 +48,7 @@
 				<h2>Formulário de Pré-Cadastro</h2>
 				<p>* Campos obrigatórios</p>
 
-				<form:form modelAttribute="bean" action="add" method="post"
-					id="frm-register">
+				<form:form modelAttribute="bean" action="add" method="post" id="frm-register">
 					<div id="warnningMessage"
 						class="${(bean.hasErrorForm) ? 'error' : ''}">
 						<p>Verifique os campos destacados</p>

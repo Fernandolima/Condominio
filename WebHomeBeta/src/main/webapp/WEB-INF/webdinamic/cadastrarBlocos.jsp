@@ -1,7 +1,8 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
@@ -45,26 +46,28 @@
 			
 			<section id="content-admin">
 				<h2>Cadastro de Blocos e Apartamentos</h2>
-				<form action="addBloco" method="POST" id="frmBlocos">
+				
+				<form:form modelAttribute="bean" action="addBloco" method="post" id="frmBlocos">
 					<div id="contentFrm">
 						<div class="blocos">
-							<label>Bloco:</label>
-							<input type="text" name="descricaoCondominioTO.bloco" id="bloco" />
-
-							<label class="marginLabel">Nº de Apartamentos:</label>
-							<input type="text" name="descricaoCondominioTO.ap" />
+							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
+							<form:input type="text" id="bloco" path="descricaoCondominioTO.bloco" />
 							
-							<label class="marginLabel">Ap por andar:</label>
-							<input type="text" name="descricaoCondominioTO.quatAndares" />
+							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.ap">Nº de Apartamentos:</form:label>
+							<form:input type="text" id="numAp" path="descricaoCondominioTO.ap" />
 							
-							<label class="marginLabel">Inicio da numeração:</label>
-							<input type="text" name="descricaoCondominioTO.numeroInicial" />
+							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatAndares">Ap. por Andar:</form:label>
+							<form:input type="text" id="numAp" path="descricaoCondominioTO.quatAndares" />
+							
+							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.numeroInicial">Inicio da numeração:</form:label>
+							<form:input type="text" id="numAp" path="descricaoCondominioTO.numeroInicial" />
+							
 						</div>
 					</div>
 
 					<%--<a href="#" class="adicionar-bloco">+ Adicionar mais bloco</a>--%>
 					<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
-				</form>
+				</form:form>
 			</section>
 		</div>
 	</section>
