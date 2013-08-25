@@ -47,7 +47,7 @@
 			<section id="content-admin">
 				<h2>Cadastro de Blocos e Apartamentos</h2>
 				
-				<form:form modelAttribute="bean" action="addBloco" method="post" id="frmBlocos">
+				<form:form modelAttribute="bloco" action="addBloco" method="post" id="frmBlocos">
 					<div id="contentFrm">
 						<div class="blocos">
 							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
@@ -56,8 +56,8 @@
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.ap">Nº de Apartamentos:</form:label>
 							<form:input type="text" id="numAp" path="descricaoCondominioTO.ap" />
 							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatAndares">Ap. por Andar:</form:label>
-							<form:input type="text" id="numAp" path="descricaoCondominioTO.quatAndares" />
+							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatApAndares">Ap. por Andar:</form:label>
+							<form:input type="text" id="numAp" path="descricaoCondominioTO.quatApAndares" />
 							
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.numeroInicial">Inicio da numeração:</form:label>
 							<form:input type="text" id="numAp" path="descricaoCondominioTO.numeroInicial" />
