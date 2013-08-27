@@ -30,12 +30,14 @@
 			<div class="content">
 				<nav id="nav-admin">
 					<h2>Administrador</h2>
-					<span class="item-menu">Painel</span>
-					<a href="validarMoradores" class="item-menu"><b>></b> Morador</a>
-					<a href="publicar" class="item-menu"><b>></b> Publicar</a>
-					<!-- <ul id="btn-morador" class="item-menu">
-						<li></li>
-					</ul> -->
+					
+						<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
+						<ul class="sub-menu">
+							<li class="item-menu"><a href="cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
+						</ul>
+						
+						<a href="validarMoradores" class="item-menu">Morador</a>
+						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
 				</section>
@@ -44,6 +46,6 @@
 		<!-- <footer id="footer-site">
 		</footer> -->
 		
-		<script src="<c:url value = "/webstatic/js/admin-home.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/webstatic/js/admin.js"/>" type="text/javascript"></script>
 	</body>
 </html>
