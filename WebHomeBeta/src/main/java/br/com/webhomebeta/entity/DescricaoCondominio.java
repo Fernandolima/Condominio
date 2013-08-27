@@ -20,7 +20,7 @@ public class DescricaoCondominio implements Serializable {
 	private String bloco;
 
 	@Column(name = "QUATAPANDARES")
-	private int QuatApAndares;
+	private Integer QuatApAndares;
 
 	@Column(name = "NUMEROINICIAL")
 	private String NumeroInicia;
@@ -71,7 +71,7 @@ public class DescricaoCondominio implements Serializable {
 	/**
 	 * @return the quatApAndares
 	 */
-	public int getQuatApAndares() {
+	public Integer getQuatApAndares() {
 		return QuatApAndares;
 	}
 
@@ -92,7 +92,7 @@ public class DescricaoCondominio implements Serializable {
 	/**
 	 * @param quatApAndares the quatApAndares to set
 	 */
-	public void setQuatApAndares(int quatApAndares) {
+	public void setQuatApAndares(Integer quatApAndares) {
 		QuatApAndares = quatApAndares;
 	}
 
@@ -100,7 +100,7 @@ public class DescricaoCondominio implements Serializable {
 	 * @param numeroInicia the numeroInicia to set
 	 */
 	public void setNumeroInicia(String numeroInicia) {
-		NumeroInicia = numeroInicia;
+		this.NumeroInicia = numeroInicia;
 	}
 
 	/**
