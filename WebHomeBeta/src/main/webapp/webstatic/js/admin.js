@@ -1,19 +1,25 @@
-var ESQUECI_SENHA = {
+var ADMIN = {
 	
-	init: function() {
+	esqueciMinhaSenha: function() {
 		//ajusta footer na parte inferior do site
 		var heightPage = $(window).height();
 		
 		if(heightPage > 550) {
 			$('#main-forgotPassword').css('height', heightPage - 40);
 		}
-	}	
+	},
+	
+	onClickItemMenu: function(e) {
+		e.preventDefault();
+		$(this).next('.sub-menu').fadeToggle();
+	
+	}
 }
 
 $(function() {
 	//valida se está na página de cadastro
 	if($('#forgotPassword-view')[0]){
-		ESQUECI_SENHA.init();
+		ADMIN.esqueciMinhaSenha();
 	}
 	
 	$('#list-user-register .link').on('click', function(e) {
@@ -24,4 +30,6 @@ $(function() {
 		
 		$("#frmEditarCadastro").submit();
 	});
+	
+	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 });
