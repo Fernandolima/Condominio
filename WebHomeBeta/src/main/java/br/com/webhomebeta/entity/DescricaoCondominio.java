@@ -33,13 +33,6 @@ public class DescricaoCondominio implements Serializable {
 	@Column(name = "ID_CONDOMINIO")
 	private int idcondomnio;
 
-
-	@Column(name = "NOME_CONDOMINIO")
-	private String nome_condominio;
-
-	/**
-	 * @return the bloco
-	 */
 	public String getBloco() {
 		return bloco;
 	}
@@ -51,13 +44,6 @@ public class DescricaoCondominio implements Serializable {
 		return idcondomnio;
 	}
 
-	
-	/**
-	 * @return the nome_condominio
-	 */
-	public String getNome_condominio() {
-		return nome_condominio;
-	}
 
 	/**
 	 * @param bloco
@@ -73,14 +59,6 @@ public class DescricaoCondominio implements Serializable {
 	 */
 	public void setIdcondomnio(int idcondomnio) {
 		this.idcondomnio = idcondomnio;
-	}
-
-	/**
-	 * @param nome_condominio
-	 *            the nome_condominio to set
-	 */
-	public void setNome_condominio(String nome_condominio) {
-		this.nome_condominio = nome_condominio;
 	}
 
 	/**

@@ -65,9 +65,7 @@ public class CadastroCondominioController {
 					descricao);
 			// Salva no banco
 			
-			bloco.getDescricaoCondominioTO().setAp(null);
 			bloco.getDescricaoCondominioTO().setBloco(null);
-			bloco.getDescricaoCondominioTO().setNome_condominio(null);
 			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			bloco.getDescricaoCondominioTO().setQuantAp(null);
 			bloco.getDescricaoCondominioTO().setQuatApAndares(null);
@@ -111,24 +109,18 @@ public class CadastroCondominioController {
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
 		
-//		if (!validatorDescricaoCondominio.isValidAp(bean
-//				.getDescricaoCondominioTO().getQuantAp())) { 
-//			bean.isAp(false);
-//		} else {
-//			bean.isAp(true);
-//		}
+		if (!validatorDescricaoCondominio.isValidAp(bean
+				.getDescricaoCondominioTO().getQuantAp())) { 
+			bean.isAp(false);
+		} else {
+			bean.isAp(true);
+		}
 	
 		if (!validatorDescricaoCondominio.isValidBloco(bean
 				.getDescricaoCondominioTO().getBloco())) {
 			bean.isBloco(false);
 		} else {
 			bean.isBloco(true);
-		}
-		if (!validatorDescricaoCondominio.isValidNomeCondominio(bean
-				.getDescricaoCondominioTO().getNome_condominio())) {
-			bean.isNome_condiminio(false);
-		} else {
-			bean.isNome_condiminio(true);
 		}
 	}
 }
