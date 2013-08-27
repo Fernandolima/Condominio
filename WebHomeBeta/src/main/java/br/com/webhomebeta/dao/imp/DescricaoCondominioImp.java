@@ -17,15 +17,18 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 
 	@Transactional
 	public DescricaoCondominio save(DescricaoCondominio condominio) {
-		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I] ?,?,?,?";
-		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(DescricaoCondominio.class);
-		q.setParameter(0, condominio.getIdcondomnio());
-		q.setParameter(1, condominio.getBloco());
-		q.setParameter(2, condominio.getAp());
-		q.setParameter(3, condominio.getNome_condominio());
-
-		q.executeUpdate();
+//		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I] ?,?,?,?";
+//		Query q = factory.getCurrentSession().createSQLQuery(sql)
+//				.addEntity(DescricaoCondominio.class);
+//		q.setParameter(0, condominio.getIdcondomnio());
+//		q.setParameter(1, condominio.getBloco());
+//		q.setParameter(2, condominio.getNome_condominio());
+//		q.setParameter(3, condominio.getQuantAp());
+//		q.setParameter(4, condominio.getNumeroInicia());
+//
+//		q.executeUpdate();
+		
+		factory.getCurrentSession().save(condominio);
 		return condominio;
 		
 		

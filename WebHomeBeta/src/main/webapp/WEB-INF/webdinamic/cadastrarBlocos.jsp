@@ -50,11 +50,15 @@
 				<form:form modelAttribute="bloco" action="addBloco" method="post" id="frmBlocos">
 					<div id="contentFrm">
 						<div class="blocos">
+						
+							<form:label for="bloco" path="descricaoCondominioTO.nome_condominio">Nome Apartamento:</form:label>
+							<form:input type="text" id="nome_Ap" path="descricaoCondominioTO.nome_condominio" />
+							
 							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
 							<form:input type="text" id="bloco" path="descricaoCondominioTO.bloco" />
-							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.ap">Nº de Apartamentos:</form:label>
-							<form:input type="text" id="numAp" path="descricaoCondominioTO.ap" />
+							 
+							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quantAp">Nº de Apartamentos:</form:label>
+							<form:input type="text" id="numAp" path="descricaoCondominioTO.quantAp" />
 							
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatApAndares">Ap. por Andar:</form:label>
 							<form:input type="text" id="numAp" path="descricaoCondominioTO.quatApAndares" />

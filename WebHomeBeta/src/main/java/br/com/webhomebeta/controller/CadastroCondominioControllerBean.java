@@ -9,10 +9,10 @@ public class CadastroCondominioControllerBean {
 	private boolean idcondomnio = true;
 	private boolean nome_condiminio = true;
 	private boolean ap = true;
-	private boolean QuatApAndares = true;
+	private boolean QuatApAndares = true; 
 	private boolean NumeroInicia = true;
 	private boolean QuantAp = true;
-	private boolean hasErrorCond = false;
+	private boolean hasErrorCond = false; 
 
 	/**
 	 * @return the descricaoCondominioTO

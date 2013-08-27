@@ -20,9 +20,9 @@ public class DescricaoCondominio implements Serializable {
 	private String bloco;
 
 	@Column(name = "QUATAPANDARES")
-	private String QuatApAndares;
+	private int QuatApAndares;
 
-	@Column(name = "NUMEROINICIA")
+	@Column(name = "NUMEROINICIAL")
 	private String NumeroInicia;
 
 	@Column(name = "QUANTAP")
@@ -33,8 +33,6 @@ public class DescricaoCondominio implements Serializable {
 	@Column(name = "ID_CONDOMINIO")
 	private int idcondomnio;
 
-	@Column(name = "AP")
-	private String ap;
 
 	@Column(name = "NOME_CONDOMINIO")
 	private String nome_condominio;
@@ -53,13 +51,7 @@ public class DescricaoCondominio implements Serializable {
 		return idcondomnio;
 	}
 
-	/**
-	 * @return the ap
-	 */
-	public String getAp() {
-		return ap;
-	}
-
+	
 	/**
 	 * @return the nome_condominio
 	 */
@@ -84,14 +76,6 @@ public class DescricaoCondominio implements Serializable {
 	}
 
 	/**
-	 * @param ap
-	 *            the ap to set
-	 */
-	public void setAp(String ap) {
-		this.ap = ap;
-	}
-
-	/**
 	 * @param nome_condominio
 	 *            the nome_condominio to set
 	 */
@@ -109,7 +93,7 @@ public class DescricaoCondominio implements Serializable {
 	/**
 	 * @return the quatApAndares
 	 */
-	public String getQuatApAndares() {
+	public int getQuatApAndares() {
 		return QuatApAndares;
 	}
 
@@ -130,7 +114,7 @@ public class DescricaoCondominio implements Serializable {
 	/**
 	 * @param quatApAndares the quatApAndares to set
 	 */
-	public void setQuatApAndares(String quatApAndares) {
+	public void setQuatApAndares(int quatApAndares) {
 		QuatApAndares = quatApAndares;
 	}
 

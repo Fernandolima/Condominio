@@ -30,7 +30,7 @@ public class CadastroCondominioController {
 
 	private DescricaoCondominio descricaoCondominio;
 
-	private ValidatorDescricaoCondominio validatorDescricaoCondominio;
+	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio(); 
 
 	private DescricaoCondominio getDescricaoById;
 
@@ -104,14 +104,14 @@ public class CadastroCondominioController {
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
-
-		if (!validatorDescricaoCondominio.isValidAp(bean
-				.getDescricaoCondominioTO().getAp())) {
-			bean.isAp(false);
-		} else {
-			bean.isAp(true);
-		}
-
+		
+//		if (!validatorDescricaoCondominio.isValidAp(bean
+//				.getDescricaoCondominioTO().getQuantAp())) { 
+//			bean.isAp(false);
+//		} else {
+//			bean.isAp(true);
+//		}
+	
 		if (!validatorDescricaoCondominio.isValidBloco(bean
 				.getDescricaoCondominioTO().getBloco())) {
 			bean.isBloco(false);

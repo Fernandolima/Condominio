@@ -4,13 +4,13 @@ public class DescricaoCondominioTO {
 	
 	private String bloco;
 	private int idcondomnio;
-	private String ap;
+	private String ap; //
 	private String nome_condominio;
-	private String quatApAndares;
-	private String numeroInicial;	
-	private String QuantAp	;
+	private int quatApAndares; //Quat de apartamento no andar
+	private String numeroInicial;
+	private String quantAp;
 	/**
-	 * @return the bloco
+	 * @return the blocoper
 	 */
 	public String getBloco() {
 		return bloco;
@@ -60,7 +60,7 @@ public class DescricaoCondominioTO {
 	/**
 	 * @return the quatApAndares
 	 */
-	public String getQuatApAndares() {
+	public int getQuatApAndares() {
 		return quatApAndares;
 	}
 	/**
@@ -73,7 +73,7 @@ public class DescricaoCondominioTO {
 	 * @return the quantAp
 	 */
 	public String getQuantAp() {
-		return QuantAp;
+		return quantAp;
 	}
 	/**
 	 * @param quatApAndares the quatApAndares to set
@@ -84,14 +84,14 @@ public class DescricaoCondominioTO {
 	/**
 	 * @param numeroInicia the numeroInicia to set
 	 */
-	public void setNumeroInicia(String numeroInicia) {
-		numeroInicia = numeroInicia;
+	public void setNumeroInicia(String numeroInicial) {
+		this.numeroInicial = numeroInicial;
 	}
 	/**
 	 * @param quantAp the quantAp to set
 	 */
 	public void setQuantAp(String quantAp) {
-		QuantAp = quantAp;
+		this.quantAp = quantAp; 
 	}
 	/**
 	 * @return the numeroInicial
