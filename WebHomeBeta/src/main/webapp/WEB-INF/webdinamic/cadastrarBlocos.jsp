@@ -6,17 +6,13 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
-<meta charset="UTF-8" />
-<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
-<link href="http://fonts.googleapis.com/css?family=Chela+One"
-	rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value = "/webstatic/css/style.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value = "/webstatic/css/admin-home.css"/>" />
-
-<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>"
-	type="text/javascript"></script>
+	<meta charset="UTF-8" />
+	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/admin-home.css"/>" />
+	
+	<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 <head>
 <body id="list-user-register">
 	<header id="header-site">
@@ -36,13 +32,15 @@
 		<div class="content">
 			<nav id="nav-admin">
 				<h2>Administrador</h2>
-				<span class="item-menu">Painel</span> <a href="validarMoradores"
-					class="item-menu"><b>></b> Morador</a>
-				<!-- <ul id="btn-morador" class="item-menu">
-						<li></li>
-					</ul> -->
-			</nav>
-			
+				
+					<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
+					<ul class="sub-menu">
+						<li class="item-menu"><a href="cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
+					</ul>
+					
+					<a href="validarMoradores" class="item-menu">Morador</a>
+					<a href="publicar" class="item-menu">Publicar</a>
+			</nav>			
 			
 			<section id="content-admin">
 				<h2>Cadastro de Blocos e Apartamentos</h2>
@@ -50,7 +48,6 @@
 				<form:form modelAttribute="bloco" action="addBloco" method="post" id="frmBlocos">
 					<div id="contentFrm">
 						<div class="blocos">
-						
 							<form:label for="bloco" path="descricaoCondominioTO.nome_condominio">Nome Apartamento:</form:label>
 							<form:input type="text" id="nome_Ap" path="descricaoCondominioTO.nome_condominio" />
 							
@@ -68,15 +65,30 @@
 							
 						</div>
 					</div>
-
-					<%--<a href="#" class="adicionar-bloco">+ Adicionar mais bloco</a>--%>
 					<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
 				</form:form>
+				
+				<div id="blocosCadastrados">
+					<h2>Blocos Cadastrados</h2>
+					
+					<c:choose>
+					    <c:when test="${blocos}">
+					    	<c:forEach items="${blocos}" var="item">
+						    	<tr>
+									<td class="name"><c:out value="${item.bloco}"/></td>
+								</tr>
+							</c:forEach>
+					    </c:when>
+					    <c:otherwise>
+					        <p class="nenhumResultado">Nenhum bloco cadastrado</p>
+					    </c:otherwise>
+					</c:choose>					
+				</div>
 			</section>
 		</div>
 	</section>
 	<!-- <footer id="footer-site">
 		</footer> -->
-	<%--<script src="<c:url value = "/webstatic/js/adicionarBlocos.js"/>" type="text/javascript"></script>--%>
+	<script src="<c:url value = "/webstatic/js/admin.js"/>" type="text/javascript"></script>
 </body>
 </html>
