@@ -17,17 +17,9 @@ public class AtasImp implements AtasDao {
 
 	@Transactional
 	public AtasEntity inseri(AtasEntity atasEntity) {
-		String sql = "exec [dbo].[ATAS_CONDOMINIO_I] ?,?,?,?";
-		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(AtasEntity.class);
-		q.setParameter(0, atasEntity.getIdAtas());
-		q.setParameter(1, atasEntity.getUsuarioAtas());
-		q.setParameter(2, atasEntity.getComentario());
-		q.setParameter(3, atasEntity.getDataCriacao());
-
-		q.executeUpdate();
-
+		factory.getCurrentSession().save(atasEntity);
 		return atasEntity;
+
 	}
 
 	@Transactional

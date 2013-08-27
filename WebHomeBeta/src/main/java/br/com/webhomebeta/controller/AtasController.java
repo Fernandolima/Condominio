@@ -28,7 +28,7 @@ public class AtasController {
 	@Autowired
 	private AtasService atasService;
 	private AtasEntity atasEntity;
-	private ValidadorAtas validadorAtas;
+	private ValidadorAtas validadorAtas = new ValidadorAtas();
 	
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas

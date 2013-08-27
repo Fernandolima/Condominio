@@ -25,7 +25,7 @@ public class AtasControllerBean {
 	 *            the atas to set
 	 */
 	public void setAtas(boolean atas) {
-		atas = atas;
+		this.atas = atas;
 	}
 
 	/**

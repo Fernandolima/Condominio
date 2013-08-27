@@ -28,7 +28,7 @@ public class AssembleiaController {
 	
 	private Assembleia assembleia;
 
-	private ValidadorAssembleia validadorAssembleia;
+	private ValidadorAssembleia validadorAssembleia = new ValidadorAssembleia();
 
 	// mapeia a URL principal (Assembleia) e retorna um novo objeto assembleia
 	@RequestMapping(value = "inserirAssembleia", method = RequestMethod.GET)
