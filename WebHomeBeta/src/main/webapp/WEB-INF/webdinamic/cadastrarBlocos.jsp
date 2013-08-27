@@ -68,10 +68,8 @@
 				<div id="blocosCadastrados">
 					<h2>Blocos Cadastrados</h2>
 					<c:forEach items="${blocos}" var="item">
-						    	<tr>
-									<td class="name"><c:out value="${item.bloco}"/></td>
-								</tr>
-							</c:forEach>
+				    	<p><c:out value="${item.bloco}"/></p>
+					</c:forEach>
 					
 					<%-- <c:choose>
 					    <c:when test="${blocos}">

@@ -41,7 +41,7 @@ public class CadastroCondominioController {
 	public ModelAndView CadastraBlocos(ModelMap model) {
 		List<DescricaoCondominio> blocos = cadastroCondominioService
 				.getDescricao();
-		model.put("listaBlocos", blocos);
+		model.put("cadastrarBlocos", blocos);
 		model.put("bloco", new CadastroCondominioControllerBean());
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
