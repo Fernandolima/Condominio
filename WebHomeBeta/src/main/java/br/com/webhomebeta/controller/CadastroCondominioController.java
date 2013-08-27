@@ -41,7 +41,7 @@ public class CadastroCondominioController {
 	public ModelAndView CadastraBlocos(ModelMap model) {
 		List<DescricaoCondominio> blocos = cadastroCondominioService
 				.getDescricao();
-		model.put("cadastrarBlocos", blocos);
+		model.put("listaBlocos", blocos);
 		model.put("bloco", new CadastroCondominioControllerBean());
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
@@ -64,11 +64,11 @@ public class CadastroCondominioController {
 			BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
 					descricao);
 			// Salva no banco
-			
 			bloco.getDescricaoCondominioTO().setBloco(null);
-			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
+			//bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			bloco.getDescricaoCondominioTO().setQuantAp(null);
 			bloco.getDescricaoCondominioTO().setQuatApAndares(null);
+			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			cadastroCondominioService.save(descricao);
 
 			return new ModelAndView("cadastrarBlocos");
