@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -66,24 +67,30 @@
 				</form:form>
 				
 				<div id="blocosCadastrados">
-					<h2>Blocos Cadastrados</h2>
-					<c:forEach items="${blocos}" var="item">
-				    	<p><c:out value="${item.bloco}"/></p>
-					</c:forEach>
-					
-					<%-- <c:choose>
-					    <c:when test="${blocos}">
-					    	<c:forEach items="${blocos}" var="item">
-						    	<tr>
-									<td class="name"><c:out value="${item.bloco}"/></td>
-								</tr>
-							</c:forEach>
-					    </c:when>
-					    <c:otherwise>
-					        <p class="nenhumResultado">Nenhum bloco cadastrado</p>
-					    </c:otherwise>
-					</c:choose>	 --%>				
-				</div>
+					<h2>Blocos Cadastrados</h2>					
+					<c:choose>
+						<c:when test="${fn:length(listaBlocos) gt 0}">
+							<div id="tabelaBlocos">
+								<div class="lineTabelaBlocos">
+									<p class="itemBlocos title">Bloco</p>
+									<p class="itemBlocos title">Nº de Apartamentos</p>
+									<p class="itemBlocos title">Ap. por Andar</p>
+									<p class="itemBlocos title">Inicio da numeração</p>
+								</div>
+								<c:forEach items="${listaBlocos}" var="item" varStatus="num">
+							    	<div class="lineTabelaBlocos">
+										<p class="itemBlocos"><c:out value="${item.bloco}"/></p>
+										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
+										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
+										
+									</div>							    	
+							    </c:forEach>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<p class="nenhumResultado">Nenhum bloco cadastrado</p>
+						</c:otherwise>
+					</c:choose>
 			</section>
 		</div>
 	</section>
