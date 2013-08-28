@@ -30,18 +30,18 @@ public class DescricaoCondominio implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_CONDOMINIO")
-	private int idcondomnio;
+	@Column(name = "ID_BLOCO")
+	private int idbloco;
 
 	public String getBloco() {
 		return bloco;
 	}
 
 	/**
-	 * @return the idcondomnio
+	 * @return the idbloco
 	 */
-	public int getIdcondomnio() {
-		return idcondomnio;
+	public int getIdbloco() {
+		return idbloco;
 	}
 
 
@@ -54,11 +54,11 @@ public class DescricaoCondominio implements Serializable {
 	}
 
 	/**
-	 * @param idcondomnio
-	 *            the idcondomnio to set
+	 * @param idbloco
+	 *            the idbloco to set
 	 */
-	public void setIdcondomnio(int idcondomnio) {
-		this.idcondomnio = idcondomnio;
+	public void setIdcondomnio(int idbloco) {
+		this.idbloco = idbloco;
 	}
 
 	/**
