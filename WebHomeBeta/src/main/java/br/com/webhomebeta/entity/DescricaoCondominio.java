@@ -110,4 +110,18 @@ public class DescricaoCondominio implements Serializable {
 		this.quantAp = quantAp;
 	}
 
+	/**
+	 * @return the numeroInicial
+	 */
+	public String getNumeroInicial() {
+		return numeroInicial;
+	}
+
+	/**
+	 * @param numeroInicial the numeroInicial to set
+	 */
+	public void setNumeroInicial(String numeroInicial) {
+		this.numeroInicial = numeroInicial;
+	}
+
 }
