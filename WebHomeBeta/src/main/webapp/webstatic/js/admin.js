@@ -12,7 +12,20 @@ var ADMIN = {
 	onClickItemMenu: function(e) {
 		e.preventDefault();
 		$(this).next('.sub-menu').fadeToggle();
+	},
 	
+	onDeleteBloco: function(e) {
+		e.preventDefault();
+		var idBloco = $(this).attr('data-id');
+
+		$.ajax({
+			url: 'cadastro/delete',
+			type: 'POST',
+			data: {id-bloco: idBloco},
+			success: function(data) {
+				console.log('JSON = ', data);
+			}
+		});
 	}
 }
 
@@ -32,4 +45,6 @@ $(function() {
 	});
 	
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
+	
+	$('.btn-delete-bloco').on('click', ADMIN.onDeleteBloco);
 });

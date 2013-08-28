@@ -72,17 +72,18 @@
 						<c:when test="${fn:length(listaBlocos) gt 0}">
 							<div id="tabelaBlocos">
 								<div class="lineTabelaBlocos">
-									<p class="itemBlocos title">Bloco</p>
+									<p class="itemBlocos pBloco title">Bloco</p>
 									<p class="itemBlocos title">Nº de Apartamentos</p>
 									<p class="itemBlocos title">Ap. por Andar</p>
 									<p class="itemBlocos title">Inicio da numeração</p>
 								</div>
 								<c:forEach items="${listaBlocos}" var="item" varStatus="num">
 							    	<div class="lineTabelaBlocos">
-										<p class="itemBlocos"><c:out value="${item.bloco}"/></p>
+										<p class="itemBlocos pBloco"><c:out value="${item.bloco}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
 										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
+										<a href="#" class="btn-delete-bloco" data-id="<c:out value="${item.idbloco}"/>">Delete</a>
 									</div>							    	
 							    </c:forEach>
 							</div>

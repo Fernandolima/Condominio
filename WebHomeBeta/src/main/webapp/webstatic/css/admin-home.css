@@ -261,6 +261,10 @@ body {
 	text-align: center;
 }
 
+.itemBlocos.pBloco {
+	width: 80px;
+}
+
 .itemBlocos.title {
 	font-weight: bold;
 }
