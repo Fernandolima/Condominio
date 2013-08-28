@@ -11,9 +11,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +48,8 @@ public class CadastroCondominioController {
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
 	}
-
+	
+	
 	// Pega o Objeto blco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "addBloco", method = RequestMethod.POST)
@@ -99,7 +102,7 @@ public class CadastroCondominioController {
 	}
 
 	@RequestMapping(value = "cadastro/delete", method = RequestMethod.POST)
-	public String delete(
+	public @ResponseBody String delete(
 			@ModelAttribute("bloco") DescricaoCondominio descricaoCondominio,
 			BindingResult result) {
 		cadastroCondominioService.delete(descricaoCondominio);
