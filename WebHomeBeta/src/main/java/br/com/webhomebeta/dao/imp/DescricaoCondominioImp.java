@@ -34,9 +34,9 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		
 	}
 
-	@Override
+	@Transactional
 	public List<DescricaoCondominio> getDescricaoCondominios() {
-		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO]";
+		String sql = "exec [dbo].[SELECT_DESCRICAO_CONDOMINIO]";
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(DescricaoCondominio.class);
 		@SuppressWarnings("unchecked")
@@ -54,6 +54,15 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		return descricaoCondominios;
 	}
 	
+	@Transactional
+	public DescricaoCondominio getDescricaoById( int idcondomnio){
+		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
+		Query q= factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(DescricaoCondominio.class).setParameter("0", idcondomnio);
+		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q.uniqueResult();
+				return descricaoCondominio;
+	}
+
 	@Override
 	public DescricaoCondominio editar(int id) {
 		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
