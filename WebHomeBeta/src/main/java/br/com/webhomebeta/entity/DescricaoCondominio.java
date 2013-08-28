@@ -20,13 +20,13 @@ public class DescricaoCondominio implements Serializable {
 	private String bloco;
 
 	@Column(name = "QUATAPANDARES")
-	private Integer QuatApAndares;
+	private Integer quatApAndares;
 
 	@Column(name = "NUMEROINICIAL")
-	private String NumeroInicia;
+	private String numeroInicial;
 
 	@Column(name = "QUANTAP")
-	private String QuantAp;
+	private String quantAp;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,42 +72,42 @@ public class DescricaoCondominio implements Serializable {
 	 * @return the quatApAndares
 	 */
 	public Integer getQuatApAndares() {
-		return QuatApAndares;
+		return quatApAndares;
 	}
 
 	/**
 	 * @return the numeroInicia
 	 */
 	public String getNumeroInicia() {
-		return NumeroInicia;
+		return numeroInicial;
 	}
 
 	/**
 	 * @return the quantAp
 	 */
 	public String getQuantAp() {
-		return QuantAp;
+		return quantAp;
 	}
 
 	/**
 	 * @param quatApAndares the quatApAndares to set
 	 */
 	public void setQuatApAndares(Integer quatApAndares) {
-		QuatApAndares = quatApAndares;
+		this.quatApAndares = quatApAndares;
 	}
 
 	/**
 	 * @param numeroInicia the numeroInicia to set
 	 */
 	public void setNumeroInicia(String numeroInicia) {
-		this.NumeroInicia = numeroInicia;
+		this.numeroInicial = numeroInicia;
 	}
 
 	/**
 	 * @param quantAp the quantAp to set
 	 */
 	public void setQuantAp(String quantAp) {
-		QuantAp = quantAp;
+		this.quantAp = quantAp;
 	}
 
 }
