@@ -82,7 +82,7 @@
 										<p class="itemBlocos"><c:out value="${item.bloco}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
-										
+										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
 									</div>							    	
 							    </c:forEach>
 							</div>
