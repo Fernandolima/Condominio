@@ -64,11 +64,11 @@ public class CadastroCondominioController {
 			BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
 					descricao);
 			// Salva no banco
+			
 			bloco.getDescricaoCondominioTO().setBloco(null);
-			//bloco.getDescricaoCondominioTO().setNumeroInicia(null);
+			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			bloco.getDescricaoCondominioTO().setQuantAp(null);
 			bloco.getDescricaoCondominioTO().setQuatApAndares(null);
-			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			cadastroCondominioService.save(descricao);
 
 			return new ModelAndView("cadastrarBlocos");
