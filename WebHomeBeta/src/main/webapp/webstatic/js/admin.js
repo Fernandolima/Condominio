@@ -21,7 +21,7 @@ var ADMIN = {
 		$.ajax({
 			url: 'cadastro/delete',
 			type: 'POST',
-			data: {id-bloco: idBloco},
+			data: {idbloco: idBloco},
 			success: function(data) {
 				console.log('JSON = ', data);
 			}
