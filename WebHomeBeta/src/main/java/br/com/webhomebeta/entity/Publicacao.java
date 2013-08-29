@@ -22,6 +22,22 @@ import javax.persistence.Table;
 // mapeada
 public class Publicacao implements Serializable {
 
+	
+	public Publicacao() {
+
+	}
+	public Publicacao(Integer id){
+		this.idPublicacao = id;
+	}
+	public Publicacao(Usuario usuario) {
+		this.usuarioPublicacao = usuario;
+	}
+	
+	public Publicacao(String publicacao, Usuario usuarioPublicacao) {
+		this.publicacao = publicacao;
+		this.usuarioPublicacao = usuarioPublicacao;
+	}
+
 	/**
 	 * 
 	 */

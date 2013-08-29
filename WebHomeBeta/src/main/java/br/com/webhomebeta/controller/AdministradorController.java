@@ -61,25 +61,5 @@ public class AdministradorController {
 				usuarioService.getUsuarioByLogin(loginUsuario));
 	}
 
-	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
-	public ModelAndView excluirUsuario(@PathVariable String loginUsuario) {
-		ModelAndView excluirmv = new ModelAndView("excluirCadastro");
-		List<Usuario> usuarios = usuarioService.getUsuario();
-		for (Usuario usuario : usuarios) {
-			if (usuario.getLogin().equals(loginUsuario)) {
-				excluirmv.addObject("usuario", usuario);
-			}
-		}
-
-		return excluirmv;
-	}
-
-	@RequestMapping(value = "excluirCadastro", method = RequestMethod.POST)
-	public ModelAndView listUsuario(@PathVariable String loginUsuario) {
-		ModelAndView listmv = new ModelAndView("excluirCadastro");
-		List<Usuario> usuarios = usuarioService.getUsuario();
-
-		return listmv;
-	}
 
 }

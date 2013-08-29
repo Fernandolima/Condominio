@@ -1,6 +1,7 @@
 package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,33 +14,67 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
-public class Comentario implements Serializable{
+@Table(name = "[dbo].[COMENTARIO_PUBLICACAO]")
+public class Comentario implements Serializable {
 
+	
+	
+	public Comentario(Usuario usuarioComentario, Publicacao publicacao,
+			String comentario, Date data) {
+		super();
+		this.usuarioComentario = usuarioComentario;
+		this.publicacao = publicacao;
+		this.comentario = comentario;
+		this.data = data;
+	}
+
+	public Comentario() {
+		
+	}
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_COMENTARIO")
 	private int idComentario;
-	
-	//Mapeamento N - 1
-	@ManyToOne(fetch = FetchType.LAZY) 
+
+	// Mapeamento N - 1
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioComentario;
-	
-	//Mapeamento 1 - N
+
+	// Mapeamento 1 - N
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PUBLICACAO", nullable = false)
 	private Publicacao publicacao;
-	
+
 	@Column(name = "COMENTARIO")
 	private String comentario;
+	
+	@Column(name = "D_DATE", nullable = false)
+	private Date data;
 
 	
 	
+	public Usuario getUsuarioComentario() {
+		return usuarioComentario;
+	}
+
+	public void setUsuarioComentario(Usuario usuarioComentario) {
+		this.usuarioComentario = usuarioComentario;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 	public Publicacao getPublicacao() {
 		return publicacao;
 	}

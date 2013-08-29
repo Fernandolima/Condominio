@@ -24,7 +24,8 @@
 	
 	<!-- Define o local dos arquivos de imagem, javascript, e css -->
 	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
-
+	
+	<tx:annotation-driven />
 	<mvc:annotation-driven />
 	
 	<!-- Diz ao Spring onde as paginas JSP estao -->
@@ -120,7 +121,7 @@
  	<bean id="atasService" class="br.com.webhomebeta.service.AtasService"></bean>
  	<bean id="assebleiaDao" class="br.com.webhomebeta.dao.imp.AssembleiaImp"></bean>
  	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
-    <tx:annotation-driven />
+ 
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>

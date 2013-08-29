@@ -6,7 +6,16 @@ import br.com.webhomebeta.entity.Comentario;
 import br.com.webhomebeta.entity.Usuario;
 
 public class PublicacaoTO {
-	
+
+	public PublicacaoTO() {
+		
+	}
+
+	public PublicacaoTO(Usuario usuarioPublicacao) {
+
+		this.usuarioPublicacao = usuarioPublicacao;
+	}
+
 	private String publicacao;
 
 	private Integer idPublicacao;

@@ -27,7 +27,15 @@
 						</table>
 					</div>
 
-	<form:form modelAttribute="publicacaoTO" action="salvarPublicacao">
+	<form:form modelAttribute="publicacaoTO" action="home/publicar">
+		<form:label for="nome" path="publicacao">Publicacao:</form:label>
+		<form:textarea type="text" id="nome" path="publicacao" rows="20"
+			cols="50" />
+		<input type="submit" id="btSubmitRegister" class="btSubmit"
+			value="Enviar" />
+	</form:form>
+	
+	<form:form modelAttribute="publicacaoTO" action="home/comentar">
 		<form:label for="nome" path="publicacao">Publicacao:</form:label>
 		<form:textarea type="text" id="nome" path="publicacao" rows="20"
 			cols="50" />

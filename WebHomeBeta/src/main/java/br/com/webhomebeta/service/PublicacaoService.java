@@ -20,4 +20,8 @@ public class PublicacaoService {
 	public List<Publicacao> getPublicacoes(){
 		return publicacaoDAO.getPublicacoes();
 	}
+	
+	public List<Publicacao> getPublicacao(int idUser){
+		return publicacaoDAO.getPublicacao(idUser);
+	}
 }
