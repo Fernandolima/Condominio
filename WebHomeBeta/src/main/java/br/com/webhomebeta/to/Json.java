@@ -1,19 +1,25 @@
 package br.com.webhomebeta.to;
 
 public class Json {
-	String json;
+	String response;
+
+	
+	public Json(String response) {
+		super();
+		this.response = response;
+	}
 
 	/**
 	 * @return the json
 	 */
 	public String getJson() {
-		return json;
+		return response;
 	}
 
 	/**
 	 * @param json the json to set
 	 */
 	public void setJson(String json) {
-		this.json = json;
+		this.response = json;
 	}
 }

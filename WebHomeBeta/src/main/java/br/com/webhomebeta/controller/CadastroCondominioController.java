@@ -106,9 +106,9 @@ public class CadastroCondominioController {
 			@RequestParam int idbloco
 			) {
 	
-		Json json = new Json();
-		json.setJson("true");
-		return json;
+		// ----------------------------------------s
+		
+		return new Json("true");
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
