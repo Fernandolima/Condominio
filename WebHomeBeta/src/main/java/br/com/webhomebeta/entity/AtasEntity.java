@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "[dbo.].[ATAS]")
+@Table(name = "[dbo].[ATAS]")
 public class AtasEntity implements Serializable {
 
 	/**
@@ -31,7 +31,7 @@ public class AtasEntity implements Serializable {
 	private String comentario;
 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAtas;
 

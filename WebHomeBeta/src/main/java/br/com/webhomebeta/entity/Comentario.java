@@ -42,12 +42,12 @@ public class Comentario implements Serializable {
 	private int idComentario;
 
 	// Mapeamento N - 1
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioComentario;
 
 	// Mapeamento 1 - N
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PUBLICACAO", nullable = false)
 	private Publicacao publicacao;
 

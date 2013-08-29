@@ -8,25 +8,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/admin-home.css"/>" />
 <title>Insert title here</title>
 </head>
 <body>
 
-					<div id="entries">
-						<p>Cadastros pendentes de aprovação</p>
-						<table id="tableEntries">
-							<tr>
-								<td class="name">Nome</td>
-								<td class="link">Link</td>
-							</tr>
-							<c:forEach items="${listaPublicacoes}" var="item">
-								<tr>
-									<td class="name"><c:out value="${item.publicacao}"/></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
+				
+							<div id="tabelaBlocos">
+								<div class="lineTabelaBlocos">
+									<p class="itemBlocos pBloco title">Publicacao:</p>
+								</div>
+								<c:forEach items="${listPublicacoes}" var="item" varStatus="num">
+							    	<div class="lineTabelaBlocos">
+										<p class="itemBlocos pBloco"><c:out value="${item.publicacao}"/></p>
+											<c:forEach items="${item.comentarios}" var="comments">
+											<div>
+											     <p class="itemBlocos pBloco"><c:out value="${comments.comentario}"/></p>
+											</div>											
+										</c:forEach>
+									</div>	
+							    	
+							    </c:forEach>
+							</div>
+						
 
+
+	<script src="<c:url value = "/webstatic/js/admin.js"/>" type="text/javascript"></script>
+	
 	<form:form modelAttribute="publicacaoTO" action="home/publicar">
 		<form:label for="nome" path="publicacao">Publicacao:</form:label>
 		<form:textarea type="text" id="nome" path="publicacao" rows="20"

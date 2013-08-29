@@ -65,16 +65,16 @@ public class Usuario implements Serializable {
 	private String ap;
 
 	// Um usuario pode fazer varias publicacoes
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioPublicacao")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioPublicacao")
 	private Set<Publicacao> publicacoes = new HashSet<>(0);
 	// Um usuario pode fazer varios comentarios em uma publicacao
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioComentario")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioComentario")
 	private Set<Comentario> comentarios = new HashSet<>(0);
 	// Um usuario cria varias atas
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAtas")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioAtas")
 	private Set<AtasEntity> atas = new HashSet<>(0);
 	// Um usuario cria varias Assembleia
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAssebleia")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioAssebleia")
 	private Set<Assembleia> assembleia = new HashSet<>(0);
 
 	public Set<Assembleia> getAssembleia() {

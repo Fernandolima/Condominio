@@ -24,8 +24,6 @@
 	
 	<!-- Define o local dos arquivos de imagem, javascript, e css -->
 	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
-	
-	<tx:annotation-driven />
 	<mvc:annotation-driven />
 	
 	<!-- Diz ao Spring onde as paginas JSP estao -->

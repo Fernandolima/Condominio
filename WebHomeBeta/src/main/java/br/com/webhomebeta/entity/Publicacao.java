@@ -56,12 +56,12 @@ public class Publicacao implements Serializable {
 	private int idPublicacao;
 
 	// Mapeamento N - 1
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER")
 	private Usuario usuarioPublicacao;
 
 	// Mapeamento 1 - N
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "publicacao")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Comentario> comentarios = new HashSet<>(0);
 
 	public Usuario getUsuarioPublicacao() {

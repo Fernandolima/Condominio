@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "[dbo.].[ASSEMBLEIA]")
+@Table(name = "[dbo].[ASSEMBLEIA]")
 public class Assembleia {
 
 	@Id
@@ -25,7 +25,7 @@ public class Assembleia {
 	private String comentario;
 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAssebleia;
 
