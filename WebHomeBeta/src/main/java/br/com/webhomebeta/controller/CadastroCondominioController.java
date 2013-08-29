@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.service.CadastroCondominioService;
+import br.com.webhomebeta.to.Json;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller
@@ -102,12 +100,15 @@ public class CadastroCondominioController {
 	}
 
 	@RequestMapping(value = "cadastro/delete", method = RequestMethod.POST)
-	public @ResponseBody String delete(
-			@ModelAttribute("bloco") DescricaoCondominio descricaoCondominio,
-			BindingResult result) {
-		cadastroCondominioService.delete(descricaoCondominio);
-
-		return "redirect:/cadastrarBlocos";
+	 // ResponseBody retorna um JSON.
+	public @ResponseBody Json delete(
+			//recebe o id do bloco a ser excluido
+			@RequestParam int idbloco
+			) {
+	
+		Json json = new Json();
+		json.setJson("true");
+		return json;
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
