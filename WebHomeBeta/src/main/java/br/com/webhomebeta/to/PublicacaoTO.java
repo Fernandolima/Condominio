@@ -1,5 +1,6 @@
 package br.com.webhomebeta.to;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import br.com.webhomebeta.entity.Comentario;
@@ -16,6 +17,8 @@ public class PublicacaoTO {
 		this.usuarioPublicacao = usuarioPublicacao;
 	}
 
+	private Date data;
+	
 	private String publicacao;
 
 	private Integer idPublicacao;
@@ -63,4 +66,13 @@ public class PublicacaoTO {
 	void setId_PUBLICACAO(Integer idPublicacao) {
 		this.idPublicacao = idPublicacao;
 	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
 }

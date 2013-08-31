@@ -1,6 +1,7 @@
 package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.stereotype.Component;
 
 @Entity
 // Ela declara a classe como persistente e gerenciada pelo Hibernate
@@ -59,8 +64,11 @@ public class Publicacao implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER")
 	private Usuario usuarioPublicacao;
-
+	
+	@Column(name = "DATA_PUBLICACAO")
+	private Date data;
 	// Mapeamento 1 - N
+	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Comentario> comentarios = new HashSet<>(0);
 
@@ -84,7 +92,7 @@ public class Publicacao implements Serializable {
 		return publicacao;
 	}
 
-	public int getId_PUBLICACAO() {
+	public int getIdPublicacao() {
 		return idPublicacao;
 	}
 
@@ -92,8 +100,14 @@ public class Publicacao implements Serializable {
 		this.publicacao = publicacao;
 	}
 
-	void setId_PUBLICACAO(int idPublicacao) {
+	public void setId_PUBLICACAO(int idPublicacao) {
 		this.idPublicacao = idPublicacao;
 	}
-
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
 }

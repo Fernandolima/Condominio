@@ -12,6 +12,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.ehcache.annotations.Cacheable;
+
 import br.com.webhomebeta.dao.PublicacaoDAO;
 import br.com.webhomebeta.entity.Publicacao;
 
@@ -32,7 +34,7 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 	public List<Publicacao> getPublicacoes() {
 		
 		String sql = "exec [dbo].[SELECT_PUBLICACOES]";
-		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class);
+		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class).setCacheable(true);
 		
 		return q.list();
 		

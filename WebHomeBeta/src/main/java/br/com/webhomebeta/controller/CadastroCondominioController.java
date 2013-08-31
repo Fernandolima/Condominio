@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.service.CadastroCondominioService;
-import br.com.webhomebeta.to.Json;
+import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller

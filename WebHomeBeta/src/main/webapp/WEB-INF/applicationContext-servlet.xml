@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
@@ -13,19 +13,27 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+        http://www.springframework.org/schema/security/spring-security-3.0.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
+ 	    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
 
+	<!-- Configura o EHCache -->
+	<ehcache:annotation-driven cache-manager="cacheManager" />
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="/WEB-INF/ehcache.xml" />
+	</bean>
 	<!-- Seta anotaçoes para serem usadas pelo Spring -->
 	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
 	<context:component-scan base-package="br.com.webhomebeta" />
 
 	<!-- Define a pagina inical -->
 	<mvc:view-controller path="/" view-name="index" />
-	
+
 	<!-- Define o local dos arquivos de imagem, javascript, e css -->
 	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
 	<mvc:annotation-driven />
-	
+
 	<!-- Diz ao Spring onde as paginas JSP estao -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -46,7 +54,7 @@
 			</value>
 		</property>
 	</bean>
-	
+
 	<!-- Propriedades do JavaMailSender com SMTP do Gmail -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
@@ -62,13 +70,37 @@
 			</props>
 		</property>
 	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="repository"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributeSource" ref="transactionAttributeSource" />
+		<property name="target" ref="publicacaoDAO" />
+	</bean>
+
+	<bean id="transactionAttributeSource"
+		class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+		<property name="properties">
+			<value>
+				get*=PROPAGATION_REQUIRED,readOnly
+				find*=PROPAGATION_REQUIRED,readOnly
+				create*=PROPAGATION_REQUIRED,readOnly
+				delete*=PROPAGATION_REQUIRED
+			</value>
+		</property>
+	</bean>
 
 	<!-- Spring Security -->
 	<sec:http auto-config="true">
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-			
+
 	</sec:http>
 
 	<bean id="myAuthenticationSuccessHandler"
@@ -77,51 +109,46 @@
 
 	<sec:authentication-manager>
 		<sec:authentication-provider
-		user-service-ref="customLogin">
+			user-service-ref="customLogin">
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
 	<!-- Configuracao do Hibernate -->
 	<bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:location="/WEB-INF/jdbc.properties"></bean>
- 
-    <bean id="dataSource"
-        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-        p:driverClassName="${jdbc.driverClassName}"
-        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
-        p:password="${jdbc.password}"></bean>
- 
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="configLocation">
-            <value>classpath:hibernate.cfg.xml</value>
-        </property>
-        <property name="configurationClass">
-            <value>org.hibernate.cfg.AnnotationConfiguration</value>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
-                <prop key="hibernate.show_sql">true</prop>
-            </props>
-        </property>
-    </bean>
- 
-    <bean id ="comentarioDAO" class = "br.com.webhomebeta.dao.imp.ComentarioDAOImp"></bean>
-    <bean id ="comentarioService" class="br.com.webhomebeta.service.ComentarioService"></bean>
-    <bean id ="publicacaoDAO" class = "br.com.webhomebeta.dao.imp.PublicacaoDAOImp"></bean>
-    <bean id ="publicacaoService" class = "br.com.webhomebeta.service.PublicacaoService"></bean>
-    <bean id="daoCond" class="br.com.webhomebeta.dao.imp.DescricaoCondominioImp"></bean>
- 	<bean id="cadastroCondominioService" class="br.com.webhomebeta.service.CadastroCondominioService"></bean>
- 	<bean id="atasDao" class="br.com.webhomebeta.dao.imp.AtasImp"></bean>
- 	<bean id="atasService" class="br.com.webhomebeta.service.AtasService"></bean>
- 	<bean id="assebleiaDao" class="br.com.webhomebeta.dao.imp.AssembleiaImp"></bean>
- 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
- 
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-    </beans>
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="/WEB-INF/jdbc.properties"></bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}"></bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean id="comentarioDAO" class="br.com.webhomebeta.dao.imp.ComentarioDAOImp"></bean>
+	<bean id="comentarioService" class="br.com.webhomebeta.service.ComentarioService"></bean>
+	<bean id="publicacaoDAO" class="br.com.webhomebeta.dao.imp.PublicacaoDAOImp"></bean>
+	<bean id="publicacaoService" class="br.com.webhomebeta.service.PublicacaoService"></bean>
+	<bean id="daoCond" class="br.com.webhomebeta.dao.imp.DescricaoCondominioImp"></bean>
+	<bean id="cadastroCondominioService" class="br.com.webhomebeta.service.CadastroCondominioService"></bean>
+	<bean id="atasDao" class="br.com.webhomebeta.dao.imp.AtasImp"></bean>
+	<bean id="atasService" class="br.com.webhomebeta.service.AtasService"></bean>
+	<bean id="assebleiaDao" class="br.com.webhomebeta.dao.imp.AssembleiaImp"></bean>
+	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
+
+</beans>

@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>WebHome</display-name>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -12,21 +12,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
 	</context-param>
-	<filter>
-		<filter-name>hibernateFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-		<init-param>
-            <param-name>sessionFactoryBeanName</param-name>
-            <param-value>sessionFactory</param-value>
-        </init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>hibernateFilter</filter-name>
-		<url-pattern>/</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
 
 	<servlet>
 		<servlet-name>Spring-Servlet</servlet-name>
@@ -41,6 +26,7 @@
 		<servlet-name>Spring-Servlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 
 	<!-- Spring Security -->
 	<filter>
