@@ -7,6 +7,7 @@ public class AtasControllerBean {
 	private AtasTo atasTo;
 	private boolean atas;
 	private String data;
+	private boolean validDate = true;
 	private boolean hasErrorForm = false;
 
 	public boolean isAtas(boolean b) {
@@ -32,6 +33,8 @@ public class AtasControllerBean {
 	 * @param data
 	 *            the data to set
 	 */
+	
+
 	public void setData(String data) {
 		this.data = data;
 	}
@@ -74,6 +77,28 @@ public class AtasControllerBean {
 		}
 		hasErrorForm = false;
 		return true;
+	}
+
+	/**
+	 * @return the atas
+	 */
+	public boolean isAtas() {
+		return atas;
+	}
+
+	/**
+	 * @param b 
+	 * @return the validDate
+	 */
+	public boolean isValidDate(boolean b) {
+		return validDate;
+	}
+
+	/**
+	 * @param validDate the validDate to set
+	 */
+	public void setValidDate(boolean validDate) {
+		this.validDate = validDate;
 	}
 
 }
