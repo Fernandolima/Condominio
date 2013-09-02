@@ -19,7 +19,7 @@ var ADMIN = {
 		var idBloco = $(this).attr('data-id');
 
 		$.ajax({
-			url: 'cadastro/delete',
+			url: 'home/getPublicacao',
 			type: 'POST',
 			data: {idbloco: idBloco},
 			success: function(data) {

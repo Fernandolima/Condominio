@@ -67,7 +67,9 @@ public class Publicacao implements Serializable {
 	
 	@Column(name = "DATA_PUBLICACAO")
 	private Date data;
+	
 	// Mapeamento 1 - N
+	// Utiliza Second level cache, para melhorar o desempenho do servidor
 	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Comentario> comentarios = new HashSet<>(0);
