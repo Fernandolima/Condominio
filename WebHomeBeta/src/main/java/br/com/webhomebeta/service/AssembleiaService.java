@@ -16,8 +16,8 @@ public class AssembleiaService {
 	@Autowired
 	private AssembleiaDao assembleiaDao;
 
-	public Assembleia save(Assembleia assembleia) {
-		return assembleiaDao.save(assembleia);
+	public void save(Assembleia assembleia) {
+		assembleiaDao.save(assembleia);
 	}
 
 	public List<Assembleia> getList() {
