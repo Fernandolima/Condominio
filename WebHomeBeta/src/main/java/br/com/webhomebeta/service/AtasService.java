@@ -15,8 +15,8 @@ public class AtasService {
 	@Autowired
 	private AtasDao atasDao;
 
-	public AtasEntity save(AtasEntity atasEntity) {
-		return atasDao.save(atasEntity);
+	public void save(AtasEntity atasEntity) {
+		 atasDao.save(atasEntity);
 	}
 
 	public List<AtasEntity> getList() {
