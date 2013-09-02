@@ -70,6 +70,7 @@ public class MoradorController extends AuthenticatedController {
 	@RequestMapping(value = "home/getPublicacao", method = RequestMethod.POST)
 	public @ResponseBody
 	ArrayList<JsonPublicacao> sendJsonPublicacao() {
+		usuarioNaSessao = obterUsuarioLogado();
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes();
 		// Varre cada publicacao

@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.DescricaoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller
 @SessionAttributes("usuarioNaSessao")
-public class CadastroCondominioController {
+public class CadastroCondominioController extends AuthenticatedController {
 	@Autowired
 	private CadastroCondominioService cadastroCondominioService;
 
@@ -33,12 +34,15 @@ public class CadastroCondominioController {
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio(); 
 
 	private DescricaoCondominio getDescricaoById;
+	
+	private Usuario usuarioNaSessao;
 
 	// mapeia a URL principal (cadastro) e retorna um novo
 	// UsuarioControllerBean() e uma lista de blocos
 
 	@RequestMapping(value = "cadastrarBlocos", method = RequestMethod.GET)
 	public ModelAndView CadastraBlocos(ModelMap model) {
+		usuarioNaSessao = obterUsuarioLogado();
 		List<DescricaoCondominio> blocos = cadastroCondominioService
 				.getDescricao();
 		model.put("listaBlocos", blocos);
