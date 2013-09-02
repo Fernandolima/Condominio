@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.AtasEntity;
-import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.service.AtasService;
-import br.com.webhomebeta.to.AtasTo;
 import br.com.webhomebeta.validacao.ValidadorAtas;
 
 @Controller
@@ -74,6 +72,11 @@ public class AtasController {
 
 		}
 		atasBean.isAtas(true);
+		if (!validadorAtas.validaData(atasBean.getData()))
+		{
+			atasBean.isValidDate(false);
+		}else
+			atasBean.isValidDate(true);
 	}
 
 	@RequestMapping(value = "atas/editar", method = RequestMethod.POST)
