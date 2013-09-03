@@ -19,7 +19,7 @@ var POST_COMMENT  = {
 					if(val.proprietario){
 						htmlHome += '<a href="#" class="deletePost hidden">Excluir</a>';
 					}
-					htmlHome += '<img src="http://localhost:8080/WebHomeBeta/webstatic/img/thumb-post.jpg" class="thumb-post" />';
+					htmlHome += '<img src="/WebHomeBeta/img/thumb-post.jpg" class="thumb-post" />';
 					htmlHome += '<div class="comments-post">';
 						htmlHome += '<a href="#" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
 						htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';
@@ -30,7 +30,7 @@ var POST_COMMENT  = {
 						htmlHome += '<div class="comments-holder">';
 						$.each(val.comentarios, function(l, comment){							
 								htmlHome += '<div class="comments">';
-									htmlHome += '<img src="http://localhost:8080/WebHomeBeta/webstatic/img/thumb-post.jpg" class="thumb-post" />';
+									htmlHome += '<img src="/WebHomeBeta/img/thumb-post.jpg" class="thumb-post" />';
 									htmlHome += '<a href="#" class="name-user-comment">'+comment.nome+'</a>';
 									htmlHome += '<p class="time-comments">30/08/2013 - 18:21</p>';
 									htmlHome += '<p>'+comment.comentario+'</p>';

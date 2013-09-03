@@ -31,7 +31,9 @@
 	<mvc:view-controller path="/" view-name="index" />
 
 	<!-- Define o local dos arquivos de imagem, javascript, e css -->
-	<mvc:resources mapping="/webstatic/**" location="/webstatic/" />
+	<mvc:resources mapping="/img/**" location="/resources/img/" />
+	<mvc:resources mapping="/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/js/**" location="/resources/js/" />
 	<mvc:annotation-driven />
 
 	<!-- Diz ao Spring onde as paginas JSP estao -->

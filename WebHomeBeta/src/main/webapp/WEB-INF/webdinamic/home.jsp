@@ -10,10 +10,10 @@
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
 		<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>"/>
-		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/admin-home.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
-		<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 	<head>
 	<body id="home" class="rede-social">
 		<header id="header-site" class="connected">
@@ -31,7 +31,7 @@
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
-							<img id="thumb-photo" src="<c:url value = "/webstatic/img/foto-user.jpg"/>" />
+							<img id="thumb-photo" src="<c:url value = "/img/foto-user.jpg"/>" />
 						</div>
 						<div id="nav-user">
 							<h3>Categoria</h3>
@@ -107,12 +107,12 @@
 		</section>
 		<!-- <footer id="footer-site">
 		</footer> -->
-		<script src="<c:url value = "/webstatic/js/jquery.autosize.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.autosize.min.js"/>" type="text/javascript"></script>
 		<script>
 			$(document).ready(function(){
 			    $('textarea').autosize();   
 			});
 		</script>
-		<script src="<c:url value = "/webstatic/js/comment.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
 	</body>
 </html>

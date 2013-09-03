@@ -57,7 +57,7 @@ public class Comentario implements Serializable {
 	@Column(name = "COMENTARIO")
 	private String comentario;
 	
-	@Column(name = "D_DATE", nullable = false)
+	@Column(name = "D_DATE")
 	private Date data;
 
 	
