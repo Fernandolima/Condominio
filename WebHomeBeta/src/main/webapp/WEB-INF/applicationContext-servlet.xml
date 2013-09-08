@@ -176,7 +176,7 @@
 	<bean id="assebleiaDao" class="br.com.webhomebeta.dao.imp.AssembleiaImp"></bean>
 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
 	<bean id="funcionarioService" class="br.com.webhomebeta.service.FuncionarioService"></bean>
-	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioImp"></bean>
+	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioDaoImp"></bean>
 	
 
 </beans>
