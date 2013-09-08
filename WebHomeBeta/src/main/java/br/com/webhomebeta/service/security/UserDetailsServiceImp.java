@@ -25,21 +25,26 @@ public class UserDetailsServiceImp implements UserDetailsService {
 			"ROLE_ADMIN");
 	private GrantedAuthority authorityMorador = new GrantedAuthorityImp(
 			"ROLE_MORADOR");
-	private Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+	private Set<GrantedAuthority> authoritiesAdmin = new HashSet<GrantedAuthority>();
+	private Set<GrantedAuthority> authoritiesMorador = new HashSet<GrantedAuthority>();
 	private Usuario usuario;
     private UserDetails user;
 
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
-		
+		authoritiesAdmin.add(authorityAdmin);
+		authoritiesAdmin.add(authorityMorador);
+		authoritiesMorador.add(authorityMorador);
 		usuario = usuarioService.getUsuarioByLogin(username);
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuario nao encontrado");
 		} else if (usuario.getPermissao().equals("ROLE_ADMIN")) {
-			authorities.add(authorityAdmin);
+			
 			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),
-					authorities);
+					authoritiesAdmin);
+		} else if (usuario.getPermissao().equals("ROLE_MORADOR")){
+			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),authoritiesMorador);
 		}
 		return user;
 	}

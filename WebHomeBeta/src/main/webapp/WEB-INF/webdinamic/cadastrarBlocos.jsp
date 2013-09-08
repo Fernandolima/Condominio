@@ -10,10 +10,10 @@
 	<meta charset="UTF-8" />
 	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
 	<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/admin-home.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>" />
 	
-	<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 <head>
 <body id="list-user-register">
 	<header id="header-site">
@@ -97,6 +97,6 @@
 	</section>
 	<!-- <footer id="footer-site">
 		</footer> -->
-	<script src="<c:url value = "/webstatic/js/admin.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@
 					<span>|</span>
 					<a href="#" title="Ver site">Ver site</a>
 					<span>|</span>
-					<a href="#" title="Sair">Sair</a>
+					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
 				</div>
 			</div>
 		</header>

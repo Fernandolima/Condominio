@@ -59,7 +59,7 @@ public class MyAuthenticationSuccessHandler implements
 		}
 
 		if (isMorador) {
-			return "/index";
+			return "/home";
 		} else if (isAdmin) {
 			return "/admin";
 		} else {

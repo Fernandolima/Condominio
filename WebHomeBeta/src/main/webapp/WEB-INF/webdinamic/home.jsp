@@ -20,7 +20,7 @@
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
-					<p class="name-user-connected">Tatiane Jayme Dias<p>
+					<p class="name-user-connected"><c:out value="${usuarioNaSessao.nome}"></c:out><p>
 					<span>|</span>
 					<a href="#" title="Sair" class="logout-site">Sair</a>
 				</div>
@@ -31,7 +31,7 @@
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
-							<img id="thumb-photo" src="<c:url value = "/img/foto-user.jpg"/>" />
+							<img id="thumb-photo" src="<c:url value = "/img/anonimos.jpg"/>" />
 						</div>
 						<div id="nav-user">
 							<h3>Categoria</h3>
@@ -40,6 +40,7 @@
 								<li><a href="#">Enquetes</a></li>
 								<li><a href="#">Gastos</a></li>
 								<li><a href="#">Reserva de espa&ccedil;os</a></li>
+								<li><a href="uploadImage">Configuracoes</a></li>
 								<li class="last-link"><a href="#">Usu&aacute;rios</a></li>
 							</ul>
 						</div>

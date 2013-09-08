@@ -72,12 +72,12 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+
 	<bean id="repository"
 		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager" />
@@ -102,7 +102,16 @@
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-
+		<sec:remember-me key="myAppKey"
+			token-validity-seconds="60" />
+		<sec:intercept-url pattern="/index.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/cadastro.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/morador/**" access="ROLE_MORADOR,ROLE_ADMIN" />
 	</sec:http>
 
 	<bean id="myAuthenticationSuccessHandler"
@@ -114,6 +123,20 @@
 			user-service-ref="customLogin">
 		</sec:authentication-provider>
 	</sec:authentication-manager>
+
+	<!-- Configura o multipart resolver -->
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000" />
+		<property name="uploadTempDir" ref="uploadDirResource" />
+	</bean>
+
+	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg>
+			<value>C:/imgs</value>
+		</constructor-arg>
+	</bean>
 
 	<!-- Configuracao do Hibernate -->
 	<bean id="propertyConfigurer"

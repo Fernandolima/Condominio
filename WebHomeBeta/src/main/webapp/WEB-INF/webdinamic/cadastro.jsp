@@ -19,11 +19,11 @@
 	href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>"
 	rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value = "/webstatic/css/style.css"/>" />
+	href="<c:url value = "/css/style.css"/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value = "/webstatic/css/cadastro.css"/>" />
+	href="<c:url value = "/css/cadastro.css"/>" />
 
-<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>"
+<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>"
 	type="text/javascript"></script>
 <head>
 <body id="register-view">
@@ -94,12 +94,12 @@
 	</section>
 	<footer id="footer-site"> </footer>
 
-	<script src="<c:url value = "/webstatic/js/jquery.alphanumeric.js"/>"
+	<script src="<c:url value = "/js/jquery.alphanumeric.js"/>"
 		type="text/javascript"></script>
 	<script
-		src="<c:url value = "/webstatic/js/jquery.maskedinput-1.3.min.js"/>"
+		src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>"
 		type="text/javascript"></script>
-	<script src="<c:url value = "/webstatic/js/cadastro.js"/>"
+	<script src="<c:url value = "/js/cadastro.js"/>"
 		type="text/javascript"></script>
 </body>
 </html>

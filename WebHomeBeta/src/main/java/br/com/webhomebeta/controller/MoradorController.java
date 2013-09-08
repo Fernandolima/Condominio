@@ -114,6 +114,7 @@ public class MoradorController extends AuthenticatedController {
 	ComentarioTO comentar(
 			@ModelAttribute("comentarioTO") ComentarioTO comentarioTO,
 			@RequestParam Integer id, BindingResult bindingResult) {
+		//Poderia setar o ID no comentarioTO pelo js? 
 		comentarioTO.setPublicacao(new Publicacao(id));
 		comentarioTO.setUsuarioComentario(usuarioNaSessao);
 		Comentario comentario = new Comentario();

@@ -21,10 +21,8 @@
 		overflowToDisk="false" />
 
 	<cache name="br.com.webhomebeta.Comentario" maxElementsInMemory="5000"
-		eternal="false" overflowToDisk="false" timeToIdleSeconds="300"
-		timeToLiveSeconds="600" />
+		eternal="true" overflowToDisk="false"/>
 
 	<cache name="br.com.webhomebeta.entity.Publicacao.comentarios"
-		maxElementsInMemory="4000" eternal="false" overflowToDisk="false"
-		timeToIdleSeconds="300" timeToLiveSeconds="1200"></cache>
+		maxElementsInMemory="4000" eternal="true" overflowToDisk="false"/>
 </ehcache>

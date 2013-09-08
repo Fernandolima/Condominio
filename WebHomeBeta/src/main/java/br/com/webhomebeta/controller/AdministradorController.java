@@ -47,17 +47,17 @@ public class AdministradorController {
 		return new ModelAndView("admin", "usuarioNaSessao", usuarioNaSessao);
 	}
 
-	@RequestMapping(value = "validarMoradores")
+	@RequestMapping(value = "admin/validarMoradores")
 	public ModelAndView validarMoradores() {
 
-		return new ModelAndView("validarMoradores", "listaUsuarios",
+		return new ModelAndView("admin/validarMoradores", "listaUsuarios",
 				usuarioService.getUsuarioNaoAtivo());
 	}
 	//Recebe como parametro o login do usuario e devolve o usuario com todas as informacoes
-	@RequestMapping(value = "editarCadastro")
+	@RequestMapping(value = "admin/editarCadastro")
 	public ModelAndView editarUsuario(@RequestParam("login") String loginUsuario) {
 
-		return new ModelAndView("editarCadastro", "usuario",
+		return new ModelAndView("admin/editarCadastro", "usuario",
 				usuarioService.getUsuarioByLogin(loginUsuario));
 	}
 

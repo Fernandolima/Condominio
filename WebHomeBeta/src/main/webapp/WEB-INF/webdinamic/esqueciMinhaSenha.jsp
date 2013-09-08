@@ -9,10 +9,10 @@
 		<meta charset="UTF-8" />
 		<title>Web Home - Cadastro</title>
 		<link href='http://fonts.googleapis.com/css?family=Chela+One' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/style.css"/>"/>
-		<link rel="stylesheet" type="text/css" href="<c:url value = "/webstatic/css/esqueciMinhaSenha.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/esqueciMinhaSenha.css"/>"/>
 		
-		<script src="<c:url value = "/webstatic/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 	</head>
 	<body id="forgotPassword-view">
 		<header id="header-site">
@@ -40,7 +40,7 @@
 		<footer id="footer-site">
 		</footer>
 		
-		<script src="<c:url value = "/webstatic/js/esqueciMinhaSenha.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/esqueciMinhaSenha.js"/>" type="text/javascript"></script>
 	</body>
 </html>
 
