@@ -4,16 +4,6 @@
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <!-- Mapeia as entidades.. -->
 <hibernate-configuration>
-    <session-factory>
-        <mapping class="br.com.webhomebeta.entity.Usuario"></mapping>
-        <mapping class="br.com.webhomebeta.entity.Comentario"></mapping>
-        <mapping class="br.com.webhomebeta.entity.Publicacao"></mapping>
-        <mapping class="br.com.webhomebeta.entity.AtasEntity"></mapping>
-         <mapping class="br.com.webhomebeta.entity.DescricaoCondominio"></mapping>
-         <mapping class="br.com.webhomebeta.entity.Assembleia"></mapping>
-         <mapping class="br.com.webhomebeta.entity.Funcionario"></mapping>
-        
-    </session-factory>
 	<session-factory>
 		
 		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
@@ -28,6 +18,7 @@
 		<mapping class="br.com.webhomebeta.entity.AtasEntity"></mapping>
 		<mapping class="br.com.webhomebeta.entity.DescricaoCondominio"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Assembleia"></mapping>
+		<mapping class="br.com.webhomebeta.entity.Funcionario"></mapping>
 		
 		
 		
