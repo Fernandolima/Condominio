@@ -23,7 +23,7 @@ public class AtasImp implements AtasDao {
 	}
 
 	@Transactional
-	public List<AtasEntity> getAtasEntities() {
+	public List<AtasEntity> getAtas() {
 		String sql = "exe[dbo].[ATAS]";
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(AtasEntity.class);
@@ -53,13 +53,7 @@ public class AtasImp implements AtasDao {
 
 	}
 
-	@Override
-	public List<AtasEntity> getAtas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void delete(AtasEntity atasEntity) {
+		public void delete(AtasEntity atasEntity) {
 		factory.getCurrentSession().delete(atasEntity);
 
 	}

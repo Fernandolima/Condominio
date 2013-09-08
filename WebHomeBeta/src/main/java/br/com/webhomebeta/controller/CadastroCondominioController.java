@@ -33,6 +33,7 @@ public class CadastroCondominioController extends AuthenticatedController {
 
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio(); 
 
+
 	private DescricaoCondominio getDescricaoById;
 	
 	private Usuario usuarioNaSessao;
