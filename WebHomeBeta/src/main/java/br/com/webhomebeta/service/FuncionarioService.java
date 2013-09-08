@@ -10,7 +10,8 @@ import br.com.webhomebeta.dao.FuncionarioDao;
 import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Funcionario;
 
-@Service
+
+@Service("funcionarioService")
 public class FuncionarioService {
 	// @Autowired injeta na propriedade anotada um Bean do Spring que seja od
 	// mesmo tipo da propriedade
