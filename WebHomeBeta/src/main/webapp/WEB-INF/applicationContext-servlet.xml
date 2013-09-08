@@ -103,15 +103,15 @@
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
 		<sec:remember-me key="myAppKey"
-			token-validity-seconds="60" />
+			token-validity-seconds="186000" />
 		<sec:intercept-url pattern="/index.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/cadastro.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/morador/**" access="ROLE_MORADOR,ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/home" access="ROLE_MORADOR,ROLE_ADMIN" />
 	</sec:http>
 
 	<bean id="myAuthenticationSuccessHandler"
