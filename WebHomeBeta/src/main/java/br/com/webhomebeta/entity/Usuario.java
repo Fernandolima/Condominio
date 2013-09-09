@@ -66,6 +66,9 @@ public class Usuario implements Serializable {
 
 	@Column(name = "AP")
 	private String ap;
+	
+	@Column(name = "IMAGEM")
+	private String imagem;
 
 	// Um usuario pode fazer varias publicacoes
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioPublicacao")
@@ -162,6 +165,14 @@ public class Usuario implements Serializable {
 
 	public boolean isStatus() {
 		return status;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public void setStatus(boolean status) {

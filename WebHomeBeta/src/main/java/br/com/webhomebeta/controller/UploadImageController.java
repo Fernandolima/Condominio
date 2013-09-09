@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,11 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.UploadImage;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.UsuarioService;
 
 @Controller
 @SessionAttributes("usuarioNaSessao")
 public class UploadImageController extends AuthenticatedController{
 
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	private Usuario usuarioNaSessao;
 	
 	@RequestMapping(value = "uploadImage", method = RequestMethod.GET)
@@ -58,6 +63,7 @@ public class UploadImageController extends AuthenticatedController{
 				}
 				outputStream.close();
 				inputStream.close();
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

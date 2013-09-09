@@ -50,7 +50,7 @@
 					<div id="rigth-content">
 						<form id="frmComment" method="POST" action="">
 							<textarea type="text" name="postUser" id="txtComment" placeholder="Comentário"></textarea>
-							<input type="button" id="submitComment" value="comentar" />
+							<input type="button" id="submitComment" value="Publicar" />
 						</form>
 						<div id="main-comments">
 							
