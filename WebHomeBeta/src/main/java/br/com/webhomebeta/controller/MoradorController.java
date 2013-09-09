@@ -111,13 +111,15 @@ public class MoradorController extends AuthenticatedController {
 	@RequestMapping(value = "home/publicar", method = RequestMethod.POST)
 	public @ResponseBody
 	NovaPublicacaoJSON publicar(
+			//Pega toda a publicacao
 			@ModelAttribute("publicacaoTO") PublicacaoTO publicacaoTO,
 			BindingResult bindingResult) {
 		publicacaoTO.setUsuarioPublicacao(usuarioNaSessao);
 		Publicacao publicacao = new Publicacao();
+		//salva no banco
 		BeanUtils.copyProperties(publicacaoTO, publicacao);
 		publicacaoService.salvar(publicacao);
-
+		// monta o JSON de Publicacao.
 		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
 				publicacaoTO.getIdPublicacao(), publicacaoTO.getPublicacao(),
 				publicacaoTO.getData().toString(), usuarioNaSessao.getIdUser(),
