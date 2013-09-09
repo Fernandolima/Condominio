@@ -29,7 +29,6 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		factory.getCurrentSession().save(publicacao);
 	}
 	@SuppressWarnings("unchecked")
-	@Override
 	@Transactional
 	public List<Publicacao> getPublicacoes() {
 		

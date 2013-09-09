@@ -1,23 +1,10 @@
 package br.com.webhomebeta.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import javax.naming.Binding;
-import javax.print.attribute.standard.DateTimeAtCreation;
-
-import org.hibernate.Hibernate;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,13 +20,11 @@ import br.com.webhomebeta.entity.Comentario;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
-import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.json.JsonPublicacao;
+import br.com.webhomebeta.json.NovaPublicacaoJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
 import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PublicacaoService;
-import br.com.webhomebeta.service.UsuarioService;
-import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.ComentarioTO;
 import br.com.webhomebeta.to.PublicacaoTO;
 
@@ -75,7 +60,7 @@ public class MoradorController extends AuthenticatedController {
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes();
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
-			// Cria uma lista para os comentarios da publicacao
+			// Cria uma lista para os comentarios desta publicacao
 			ArrayList<ComentarioJSON> comentariosJSON = new ArrayList<>();
 			// Adiciona os dados da publicacao, e o usuario que a fez
 			JsonPublicacao jsonPublicacao = new JsonPublicacao(
@@ -102,6 +87,7 @@ public class MoradorController extends AuthenticatedController {
 				jsonPublicacao.setProprietario(true);
 			else
 				jsonPublicacao.setProprietario(false);
+
 			// Seta as publicacoes filtradas e as retorna para a VIEW
 			jsonPublicacaos.add(jsonPublicacao);
 		}
@@ -114,7 +100,7 @@ public class MoradorController extends AuthenticatedController {
 	ComentarioTO comentar(
 			@ModelAttribute("comentarioTO") ComentarioTO comentarioTO,
 			@RequestParam Integer id, BindingResult bindingResult) {
-		//Poderia setar o ID no comentarioTO pelo js? 
+		// Poderia setar o ID no comentarioTO pelo js?
 		comentarioTO.setPublicacao(new Publicacao(id));
 		comentarioTO.setUsuarioComentario(usuarioNaSessao);
 		Comentario comentario = new Comentario();
@@ -124,14 +110,20 @@ public class MoradorController extends AuthenticatedController {
 
 	@RequestMapping(value = "home/publicar", method = RequestMethod.POST)
 	public @ResponseBody
-	Json publicar(@ModelAttribute("publicacaoTO") PublicacaoTO publicacaoTO,
+	NovaPublicacaoJSON publicar(
+			@ModelAttribute("publicacaoTO") PublicacaoTO publicacaoTO,
 			BindingResult bindingResult) {
 		publicacaoTO.setUsuarioPublicacao(usuarioNaSessao);
 		Publicacao publicacao = new Publicacao();
 		BeanUtils.copyProperties(publicacaoTO, publicacao);
 		publicacaoService.salvar(publicacao);
 
-		return new Json("true");
+		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
+				publicacaoTO.getIdPublicacao(), publicacaoTO.getPublicacao(),
+				publicacaoTO.getData().toString(), usuarioNaSessao.getIdUser(),
+				usuarioNaSessao.getNome());
+
+		return novaPublicacaoJSON;
 
 	}
 

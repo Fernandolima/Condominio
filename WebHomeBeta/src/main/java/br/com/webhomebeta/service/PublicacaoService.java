@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.webhomebeta.dao.PublicacaoDAO;
 import br.com.webhomebeta.entity.Publicacao;
 
-@Service("publicacaoService")
+@Service
 public class PublicacaoService {
 	@Autowired
 	private PublicacaoDAO publicacaoDAO;

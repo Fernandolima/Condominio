@@ -17,10 +17,13 @@ public class AuthenticatedController {
 	private UsuarioService usuarioService;
 	
 	public Usuario obterUsuarioLogado() {
+		//Pega o contexto do spring security
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
+			//Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
+				//Pega o usuario que logou
 				usuarioNaSessao = usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername());

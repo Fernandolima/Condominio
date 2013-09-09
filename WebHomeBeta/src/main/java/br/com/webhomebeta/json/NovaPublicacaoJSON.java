@@ -6,13 +6,13 @@ public class NovaPublicacaoJSON {
 	
 	private int idPublicacao;
 	private String publicacao;
-	private Date dataPublicacao;
+	private String dataPublicacao;
 	private int idUsuario;
 	private String nome;
 	private String caminhoImg;
 
 	public NovaPublicacaoJSON(int idPublicacao, String publicacao,
-			Date dataPublicacao, int idUsuario, String nome) {
+			String dataPublicacao, int idUsuario, String nome) {
 		this.idPublicacao = idPublicacao;
 		this.publicacao = publicacao;
 		this.dataPublicacao = dataPublicacao;
@@ -23,7 +23,7 @@ public class NovaPublicacaoJSON {
 	
 
 	public NovaPublicacaoJSON(int idPublicacao, String publicacao,
-			Date dataPublicacao, int idUsuario, String nome, String caminhoImg) {
+			String dataPublicacao, int idUsuario, String nome, String caminhoImg) {
 		this.idPublicacao = idPublicacao;
 		this.publicacao = publicacao;
 		this.dataPublicacao = dataPublicacao;
@@ -61,14 +61,26 @@ public class NovaPublicacaoJSON {
 	public void setPublicacao(String publicacao) {
 		this.publicacao = publicacao;
 	}
+	
+	
 
-	public Date getDataPublicacao() {
+	/**
+	 * @return the dataPublicacao
+	 */
+	public String getDataPublicacao() {
 		return dataPublicacao;
 	}
 
-	public void setDataPublicacao(Date dataPublicacao) {
+
+
+	/**
+	 * @param dataPublicacao the dataPublicacao to set
+	 */
+	public void setDataPublicacao(String dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
 	}
+
+
 
 	public int getIdUsuario() {
 		return idUsuario;
