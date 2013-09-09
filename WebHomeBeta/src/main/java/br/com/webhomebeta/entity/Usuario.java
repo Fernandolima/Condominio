@@ -67,7 +67,7 @@ public class Usuario implements Serializable {
 	@Column(name = "AP")
 	private String ap;
 	
-	@Column(name = "IMAGEM")
+	@Column(name ="IMAGEM")
 	private String imagem;
 
 	// Um usuario pode fazer varias publicacoes
@@ -167,14 +167,6 @@ public class Usuario implements Serializable {
 		return status;
 	}
 
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
@@ -229,6 +221,20 @@ public class Usuario implements Serializable {
 	 */
 	public String getAp() {
 		return ap;
+	}
+
+	/**
+	 * @return the imagem
+	 */
+	public String getImagem() {
+		return imagem;
+	}
+
+	/**
+	 * @param imagem the imagem to set
+	 */
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	/**
