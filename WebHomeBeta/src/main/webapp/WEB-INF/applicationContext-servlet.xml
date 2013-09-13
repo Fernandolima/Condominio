@@ -180,13 +180,13 @@
 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
 	<bean id="funcionarioService" class="br.com.webhomebeta.service.FuncionarioService"></bean>
 	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioDaoImp"></bean>
-	<bean id="uploadControllerBean" class="br.com.webhomebeta.controller.UploadControllerBean" scope="session">
+	<bean id="beanUsuario" class="br.com.webhomebeta.bean.UploadControllerBean" scope="session">
 		<aop:scoped-proxy/>
 	</bean>
-	<bean id="dadosUsuarioBean" class="br.com.webhomebeta.controller.DadosUsuarioBean" scope="session">
+	<bean id="dadosUsuarioBean" class="br.com.webhomebeta.bean.DadosUsuarioBean" scope="session">
 		<aop:scoped-proxy/>
 	</bean>
-	<bean id="moradorControllerBean" class="br.com.webhomebeta.controller.MoradorControllerBean" scope="session">
+	<bean id="moradorControllerBean" class="br.com.webhomebeta.bean.MoradorControllerBean" scope="session">
 		<aop:scoped-proxy/>
 	</bean>
 	

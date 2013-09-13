@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.FuncionarioControllerBean;
 import br.com.webhomebeta.entity.Funcionario;
 import br.com.webhomebeta.service.FuncionarioService;
 import br.com.webhomebeta.validacao.ValidadorFuncionario;

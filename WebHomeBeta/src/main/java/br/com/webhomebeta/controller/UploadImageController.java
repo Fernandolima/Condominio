@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -35,7 +37,9 @@ public class UploadImageController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private ServletContext context;
-
+	@Autowired
+	private UploadControllerBean beanUsuario;
+	
 	private void salvar(MultipartFile file, Usuario usuario) throws Exception {
 		String result = this.context.getRealPath("") + "/uploadedImgs/"
 				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
@@ -69,30 +73,29 @@ public class UploadImageController {
 
 	@RequestMapping(value = "uploadImage", method = RequestMethod.GET)
 	public ModelAndView showForm() {
-		UploadControllerBean bean = new UploadControllerBean();
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			//Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				//Pega o usuario que logou
-				bean.setUsuario(usuarioService.getUsuarioByLogin(((UserDetailsImp) authentication.getPrincipal()).getUsername()));
+				beanUsuario.setUsuario(usuarioService.getUsuarioByLogin(((UserDetailsImp) authentication.getPrincipal()).getUsername()));
 
 			}
 		}
 		return new ModelAndView("uploadImage", "uploadControllerBean",
-				bean);
+				beanUsuario);
 	}
 
 	@Async
 	@RequestMapping(value = "uploadImage/upload", method = RequestMethod.POST)
 	public String upload(
-			@ModelAttribute("uploadImage") UploadControllerBean uploadControllerBean,
+			@ModelAttribute("uploadControllerBean") UploadControllerBean uploadControllerBean,
 			BindingResult result) {
 
 		MultipartFile file = uploadControllerBean.getFileData();
 		try {
-			salvar(file, uploadControllerBean.getUsuario());
+			salvar(file, beanUsuario.getUsuario());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.CadastroCondominioControllerBean;
 import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.CadastroCondominioService;

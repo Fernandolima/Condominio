@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.AtasControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.validacao.ValidadorAtas;

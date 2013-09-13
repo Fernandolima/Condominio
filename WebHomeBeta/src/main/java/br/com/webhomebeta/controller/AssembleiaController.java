@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.AssembleiaControllerBean;
 import br.com.webhomebeta.entity.Assembleia;
 import br.com.webhomebeta.service.AssembleiaService;
 import br.com.webhomebeta.validacao.ValidadorAssembleia;

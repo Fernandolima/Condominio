@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.UsuarioControllerBean;
 import br.com.webhomebeta.entity.Usuario;
 
 import br.com.webhomebeta.service.EmailServico;
