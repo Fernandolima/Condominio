@@ -24,26 +24,21 @@ import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller
-@SessionAttributes("usuarioNaSessao")
-public class CadastroCondominioController extends AuthenticatedController {
+public class CadastroCondominioController {
 	@Autowired
 	private CadastroCondominioService cadastroCondominioService;
 
 	private DescricaoCondominio descricaoCondominio;
 
-	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio(); 
-
+	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio();
 
 	private DescricaoCondominio getDescricaoById;
-	
-	private Usuario usuarioNaSessao;
 
 	// mapeia a URL principal (cadastro) e retorna um novo
 	// UsuarioControllerBean() e uma lista de blocos
 
 	@RequestMapping(value = "cadastrarBlocos", method = RequestMethod.GET)
 	public ModelAndView CadastraBlocos(ModelMap model) {
-		usuarioNaSessao = obterUsuarioLogado();
 		List<DescricaoCondominio> blocos = cadastroCondominioService
 				.getDescricao();
 		model.put("listaBlocos", blocos);
@@ -51,8 +46,7 @@ public class CadastroCondominioController extends AuthenticatedController {
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
 	}
-	
-	
+
 	// Pega o Objeto blco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "addBloco", method = RequestMethod.POST)
@@ -70,7 +64,7 @@ public class CadastroCondominioController extends AuthenticatedController {
 			BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
 					descricao);
 			// Salva no banco
-			
+
 			bloco.getDescricaoCondominioTO().setBloco(null);
 			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			bloco.getDescricaoCondominioTO().setQuantAp(null);
@@ -105,26 +99,26 @@ public class CadastroCondominioController extends AuthenticatedController {
 	}
 
 	@RequestMapping(value = "cadastro/delete", method = RequestMethod.POST)
-	 // ResponseBody retorna um JSON.
-	public @ResponseBody Json delete(
-			//recebe o id do bloco a ser excluido
-			@RequestParam int idbloco
-			) {
-	
+	// ResponseBody retorna um JSON.
+	public @ResponseBody
+	Json delete(
+	// recebe o id do bloco a ser excluido
+			@RequestParam int idbloco) {
+
 		// ----------------------------------------s
-		
+
 		return new Json("true");
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
-		
+
 		if (!validatorDescricaoCondominio.isValidAp(bean
-				.getDescricaoCondominioTO().getQuantAp())) { 
+				.getDescricaoCondominioTO().getQuantAp())) {
 			bean.isAp(false);
 		} else {
 			bean.isAp(true);
 		}
-	
+
 		if (!validatorDescricaoCondominio.isValidBloco(bean
 				.getDescricaoCondominioTO().getBloco())) {
 			bean.isBloco(false);

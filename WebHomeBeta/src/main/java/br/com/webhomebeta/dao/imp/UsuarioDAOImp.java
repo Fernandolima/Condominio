@@ -72,4 +72,15 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		return usuario;
 	}
 
+	@Override
+	@Transactional
+	public void update(Usuario usuario) {
+		
+		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[USER] SET IMAGEM = ?, IMAGEM_VIEW = ? WHERE ID_USER = ?");
+		q.setParameter(0, usuario.getImagem());
+		q.setParameter(1, usuario.getImagemView());
+		q.setParameter(2,usuario.getIdUser());
+		q.executeUpdate();
+	}
+
 }

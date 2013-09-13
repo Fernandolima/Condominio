@@ -37,4 +37,9 @@ public class UsuarioService {
 		return dao.getUsuarioByLogin(login);
 	}
 	
+	public void update(Usuario usuario){
+		
+		dao.update(usuario);
+	}
+	
 }

@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-	<form:form modelAttribute="uploadImage" action="uploadImage/upload" name="frm" method="post"
+	<form:form modelAttribute="uploadControllerBean" action="uploadImage/upload" name="frm" method="post"
 		enctype="multipart/form-data" onSubmit="return Validate();">
 		<fieldset>
 			<legend>Upload File</legend>

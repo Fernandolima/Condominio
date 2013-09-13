@@ -21,7 +21,6 @@ import br.com.webhomebeta.service.AssembleiaService;
 import br.com.webhomebeta.validacao.ValidadorAssembleia;
 
 @Controller
-@SessionAttributes("usuarioNaSessao")
 public class AssembleiaController {
 	@Autowired
 	private AssembleiaService assembleiaService;

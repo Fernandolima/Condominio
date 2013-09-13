@@ -13,6 +13,7 @@ public interface UsuarioDAO {
 		  public List<Usuario> getUsuario();
 		  public List<Usuario> getUsuarioNaoAtivo();
 		  public Usuario getUsuarioByLogin(String login);
+		  public void update(Usuario usuario);
 		  
 	}
 

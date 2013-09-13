@@ -67,8 +67,11 @@ public class Usuario implements Serializable {
 	@Column(name = "AP")
 	private String ap;
 	
-	@Column(name ="IMAGEM")
+	@Column(name = "IMAGEM")
 	private String imagem;
+	
+	@Column(name = "IMAGEM_VIEW")
+	private String imagemView;
 
 	// Um usuario pode fazer varias publicacoes
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioPublicacao")
@@ -119,6 +122,14 @@ public class Usuario implements Serializable {
 		return cargo;
 	}
 
+	public String getImagemView() {
+		return imagemView;
+	}
+
+	public void setImagemView(String imagemView) {
+		this.imagemView = imagemView;
+	}
+
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
@@ -165,6 +176,14 @@ public class Usuario implements Serializable {
 
 	public boolean isStatus() {
 		return status;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public void setStatus(boolean status) {
@@ -221,20 +240,6 @@ public class Usuario implements Serializable {
 	 */
 	public String getAp() {
 		return ap;
-	}
-
-	/**
-	 * @return the imagem
-	 */
-	public String getImagem() {
-		return imagem;
-	}
-
-	/**
-	 * @param imagem the imagem to set
-	 */
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
 	}
 
 	/**

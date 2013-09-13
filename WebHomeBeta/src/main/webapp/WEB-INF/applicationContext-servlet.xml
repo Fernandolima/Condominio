@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -15,7 +16,8 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-3.0.xsd
         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
- 	    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+ 	    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+ 	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<!-- Configura o EHCache -->
 	<ehcache:annotation-driven cache-manager="cacheManager" />
@@ -34,6 +36,7 @@
 	<mvc:resources mapping="/img/**" location="/resources/img/" />
 	<mvc:resources mapping="/css/**" location="/resources/css/" />
 	<mvc:resources mapping="/js/**" location="/resources/js/" />
+	<mvc:resources mapping="/uploadedImgs/**" location="/uploadedImgs/"/>
 	<mvc:annotation-driven />
 
 	<!-- Diz ao Spring onde as paginas JSP estao -->
@@ -128,7 +131,7 @@
 	
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="100000" />
+		<property name="maxUploadSize" value="10000000" />
 		<property name="uploadTempDir" ref="uploadDirResource" />
 	</bean>
 
@@ -177,6 +180,14 @@
 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
 	<bean id="funcionarioService" class="br.com.webhomebeta.service.FuncionarioService"></bean>
 	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioDaoImp"></bean>
+	<bean id="uploadControllerBean" class="br.com.webhomebeta.controller.UploadControllerBean" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
+	<bean id="dadosUsuarioBean" class="br.com.webhomebeta.controller.DadosUsuarioBean" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
+	<bean id="moradorControllerBean" class="br.com.webhomebeta.controller.MoradorControllerBean" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
 	
-
 </beans>

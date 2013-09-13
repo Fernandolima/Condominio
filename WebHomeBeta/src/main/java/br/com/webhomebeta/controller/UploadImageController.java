@@ -1,74 +1,103 @@
 package br.com.webhomebeta.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.webhomebeta.entity.UploadImage;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
-@SessionAttributes("usuarioNaSessao")
-public class UploadImageController extends AuthenticatedController{
+public class UploadImageController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	private Usuario usuarioNaSessao;
-	
-	@RequestMapping(value = "uploadImage", method = RequestMethod.GET)
-	public ModelAndView showForm(ModelMap model) {
-		
-		usuarioNaSessao = obterUsuarioLogado();
-		model.put("usuarioNaSessao", usuarioNaSessao);
-		model.put("uploadImage", new UploadImage());
-		
-		return new ModelAndView("uploadImage");
-	}
+	@Autowired
+	private ServletContext context;
 
-	@RequestMapping(value = "uploadImage/upload", method = RequestMethod.POST)
-	public String upload(@ModelAttribute("uploadImage") UploadImage image,
-			BindingResult result) {
-		
+	private void salvar(MultipartFile file, Usuario usuario) throws Exception {
+		String result = this.context.getRealPath("") + "/uploadedImgs/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
 		try {
-
-			MultipartFile file = image.getFileData();
-			
 			InputStream inputStream = null;
 			OutputStream outputStream = null;
 			if (file.getSize() > 0) {
 				inputStream = file.getInputStream();
-				outputStream = new FileOutputStream("C:\\imgs\\"
-						+ file.getOriginalFilename());
+				outputStream = new FileOutputStream(result);
 				System.out.println(file.getOriginalFilename());
 				System.out.println("Arquivo salvo no disco rigido.");
 				int readBytes = 0;
 				byte[] buffer = new byte[8192];
 				while ((readBytes = inputStream.read(buffer, 0, 8192)) != -1) {
-					System.out.println("....");
 					outputStream.write(buffer, 0, readBytes);
 				}
 				outputStream.close();
 				inputStream.close();
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+		usuario.setImagem(result);
+		usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename());
+		usuarioService.update(usuario);
+
+	}
+
+	@RequestMapping(value = "uploadImage", method = RequestMethod.GET)
+	public ModelAndView showForm() {
+		UploadControllerBean bean = new UploadControllerBean();
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			//Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				//Pega o usuario que logou
+				bean.setUsuario(usuarioService.getUsuarioByLogin(((UserDetailsImp) authentication.getPrincipal()).getUsername()));
+
+			}
+		}
+		return new ModelAndView("uploadImage", "uploadControllerBean",
+				bean);
+	}
+
+	@Async
+	@RequestMapping(value = "uploadImage/upload", method = RequestMethod.POST)
+	public String upload(
+			@ModelAttribute("uploadImage") UploadControllerBean uploadControllerBean,
+			BindingResult result) {
+
+		MultipartFile file = uploadControllerBean.getFileData();
+		try {
+			salvar(file, uploadControllerBean.getUsuario());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return "redirect:/uploadImage";
 	}
 }

@@ -21,30 +21,25 @@ import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
-@SessionAttributes("usuarioNaSessao")
 public class AdministradorController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
-	private Usuario usuarioNaSessao;
-
-	//Passa um usuario para a sessao do mesmo
+	
 	@RequestMapping(value = "admin", method = RequestMethod.GET)
 	public ModelAndView show() {
-		
-		usuarioNaSessao = new Usuario();
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				usuarioNaSessao = usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername());
+			DadosUsuarioBean bean = new DadosUsuarioBean();
+			SecurityContext context = SecurityContextHolder.getContext();
+			if (context instanceof SecurityContext) {
+				//Pega as informacoes da autenticacao
+				Authentication authentication = context.getAuthentication();
+				if (authentication instanceof Authentication) {
+					//Pega o usuario que logou
+					bean.setUsuario(usuarioService.getUsuarioByLogin(((UserDetailsImp) authentication.getPrincipal()).getUsername()));
 
+				}
 			}
-		}
-		return new ModelAndView("admin", "usuarioNaSessao", usuarioNaSessao);
+		return new ModelAndView("admin","dadosUsuarioBean",bean);
 	}
 
 	@RequestMapping(value = "admin/validarMoradores")

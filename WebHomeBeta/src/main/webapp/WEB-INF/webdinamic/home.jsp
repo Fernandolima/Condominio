@@ -20,18 +20,19 @@
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
-					<p class="name-user-connected"><c:out value="${usuarioNaSessao.nome}"></c:out><p>
+					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>
 					<span>|</span>
 					<a href="#" title="Sair" class="logout-site">Sair</a>
 				</div>
 			</div>
 		</header>
-		<section id="contentSite">
+		<section id="contentSite">	
 			<div id="main-site">			
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
-							<img id="thumb-photo" src="<c:url value = "/img/anonimos.jpg"/>" />
+							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagemView}"></c:out>"/>
+							
 						</div>
 						<div id="nav-user">
 							<h3>Categoria</h3>
@@ -43,6 +44,7 @@
 								<li><a href="uploadImage">Configuracoes</a></li>
 								<li class="last-link"><a href="#">Usu&aacute;rios</a></li>
 							</ul>
+
 						</div>
 					</div>
 				</div>

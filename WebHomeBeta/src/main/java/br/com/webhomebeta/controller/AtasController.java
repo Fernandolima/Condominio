@@ -21,7 +21,6 @@ import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.validacao.ValidadorAtas;
 
 @Controller
-@SessionAttributes("usuarioNaSessao")
 public class AtasController {
 	@Autowired
 	private AtasService atasService;
