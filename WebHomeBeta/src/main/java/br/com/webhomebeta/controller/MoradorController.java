@@ -77,7 +77,7 @@ public class MoradorController {
 			// Adiciona os dados da publicacao, e o usuario que a fez
 			JsonPublicacao jsonPublicacao = new JsonPublicacao(
 					p.getPublicacao(), p.getIdPublicacao(), p.getData(),
-					"imagem", new UsuarioPublicacaoJSON(p
+					p.getImagem(), new UsuarioPublicacaoJSON(p
 							.getUsuarioPublicacao().getIdUser(), p
 							.getUsuarioPublicacao().getNome()));
 			// Varre os comentarios dentro da publicacao

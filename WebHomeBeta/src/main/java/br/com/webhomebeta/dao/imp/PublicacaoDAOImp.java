@@ -47,4 +47,12 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		return (List<Publicacao>) q.list();
 				
 	}
+	@Override
+	@Transactional
+	public void update(int id, String imagem) {
+		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[PUBLICACAO] SET IMAGEM = ? WHERE ID_USER = ?");
+		q.setParameter(0, imagem);
+		q.setParameter(1, id);
+		q.executeUpdate();
+	}
 }

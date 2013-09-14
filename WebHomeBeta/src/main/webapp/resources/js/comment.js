@@ -19,7 +19,7 @@ var POST_COMMENT  = {
 					if(val.proprietario){
 						htmlHome += '<a href="#" class="deletePost hidden">Excluir</a>';
 					}
-					htmlHome += '<img src="/WebHomeBeta/img/thumb-post.jpg" class="thumb-post" />';
+					htmlHome += '<img src="'+val.imagemPublicacao+'" class="thumb-post" />';
 					htmlHome += '<div class="comments-post">';
 						htmlHome += '<a href="#" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
 						htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';

@@ -9,6 +9,7 @@ public interface PublicacaoDAO {
 	public void salvarPublicacao(Publicacao publicacao);
 	public List<Publicacao> getPublicacoes();
 	public List<Publicacao> getPublicacao(int idUser);
+	public void update(int id, String imagem);
 }
 		
 	

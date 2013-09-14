@@ -24,4 +24,8 @@ public class PublicacaoService {
 	public List<Publicacao> getPublicacao(int idUser){
 		return publicacaoDAO.getPublicacao(idUser);
 	}
+	
+	public void update(int id, String imagem){
+		publicacaoDAO.update(id, imagem);
+	}
 }
