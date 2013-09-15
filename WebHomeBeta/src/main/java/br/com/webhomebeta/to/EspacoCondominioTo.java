@@ -6,6 +6,20 @@ public class EspacoCondominioTo {
 	
 	ArrayList<String> espaco = new ArrayList<>();
 	
+	/**
+	 * @return the espaco
+	 */
+	public ArrayList<String> getEspaco() {
+		return espaco;
+	}
+
+	/**
+	 * @param espaco the espaco to set
+	 */
+	public void setEspaco(ArrayList<String> espaco) {
+		this.espaco = espaco;
+	}
+
 	public EspacoCondominioTo() {
 		espaco.add("Piscina");
 		espaco.add("Salão de festa");
