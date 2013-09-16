@@ -84,7 +84,7 @@
 										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
 										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
-										<p class="itemBlocos delete" data-id="<c:out value="${item.idbloco}"/>"><a href="#" class="btn-delete-bloco hidden">Delete</a></p>
+										<p class="itemBlocos delete"><a href="#" data-id="<c:out value="${item.idbloco}"/>" class="btn-delete-bloco hidden">Delete</a></p>
 									</div>							    	
 							    </c:forEach>
 							</div>
@@ -93,11 +93,13 @@
 							<p class="nenhumResultado">Nenhum bloco cadastrado</p>
 						</c:otherwise>
 					</c:choose>
+				</div>
 			</section>
 		</div>
 	</section>
 	<!-- <footer id="footer-site">
 		</footer> -->
 	<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
 </body>
 </html>

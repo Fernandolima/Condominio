@@ -1,4 +1,4 @@
-var ADICIONAR_BLOCOS = {
+var BLOCOS = {
 	init: function() {
 		//inserir validações
 	},
@@ -16,13 +16,30 @@ var ADICIONAR_BLOCOS = {
 		html += '</div>';
 
 		$('#contentFrm').append(html);
+	},
+	
+	excluirBlocos: function(e) {
+		e.preventDefault();
+		
+		var idBloco = $(this).attr('data-id'),
+			el = $(this);
+		$.ajax({
+			url: 'cadastro/delete',
+			type: 'POST',
+			data: { idbloco: idBloco },
+			success: function(data) {
+				if(data.json) {
+					el.closest('div').remove();
+				}
+			}
+		});
 	}
 }
 
 $(function() {	
 	if($('#frmBlocos')[0]) {
-		ADICIONAR_BLOCOS.init();
-
-		$('.adicionar-bloco').on('click', ADICIONAR_BLOCOS.inserirBlocos);
+		BLOCOS.init();
+		//$('.adicionar-bloco').on('click', BLOCOS.inserirBlocos);
+		$('.btn-delete-bloco').on('click', BLOCOS.excluirBlocos);
 	}	
 });
