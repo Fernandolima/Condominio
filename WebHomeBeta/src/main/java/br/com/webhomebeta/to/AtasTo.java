@@ -4,31 +4,32 @@ import java.util.Date;
 
 public class AtasTo {
 	
-	private String Atas;
-	private Date DataAtas;
+	private String atas;
+	private Date dataAtas;
+	private String arquivo;
 	/**
 	 * @return the atas
 	 */
 	public String getAtas() {
-		return Atas;
+		return atas;
 	}
 	/**
 	 * @return the dataAtas
 	 */
 	public Date getDataAtas() {
-		return DataAtas;
+		return dataAtas;
 	}
 	/**
 	 * @param atas the atas to set
 	 */
 	public void setAtas(String atas) {
-		Atas = atas;
+		atas = atas;
 	}
 	/**
 	 * @param dataAtas the dataAtas to set
 	 */
 	public void setDataAtas(Date dataAtas) {
-		DataAtas = dataAtas;
+		dataAtas = dataAtas;
 	}
 	
 

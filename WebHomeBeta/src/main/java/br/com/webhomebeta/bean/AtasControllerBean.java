@@ -8,6 +8,7 @@ public class AtasControllerBean {
 	private boolean atas;
 	private String data;
 	private boolean validDate = true;
+	private boolean arquivo;
 	private boolean hasErrorForm = false;
 
 	public boolean isAtas(boolean b) {
@@ -50,6 +51,27 @@ public class AtasControllerBean {
 	 * @param hasErrorForm
 	 *            the hasErrorForm to set
 	 */
+
+	/**
+	 * @return the validDate
+	 */
+	public boolean isValidDate() {
+		return validDate;
+	}
+
+	/**
+	 * @return the arquivo
+	 */
+	public boolean isArquivo() {
+		return arquivo;
+	}
+
+	/**
+	 * @param arquivo the arquivo to set
+	 */
+	public void setArquivo(boolean arquivo) {
+		this.arquivo = arquivo;
+	}
 
 	/**
 	 * @return the atasTo

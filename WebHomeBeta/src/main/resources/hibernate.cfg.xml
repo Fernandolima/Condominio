@@ -19,6 +19,7 @@
 		<mapping class="br.com.webhomebeta.entity.DescricaoCondominio"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Assembleia"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Funcionario"></mapping>
+		<mapping class="br.com.webhomebeta.entity.EspacoCondominio"></mapping>
 		
 		
 		

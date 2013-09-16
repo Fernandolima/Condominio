@@ -36,7 +36,7 @@
 	<mvc:resources mapping="/img/**" location="/resources/img/" />
 	<mvc:resources mapping="/css/**" location="/resources/css/" />
 	<mvc:resources mapping="/js/**" location="/resources/js/" />
-	<mvc:resources mapping="/uploadedImgs/**" location="/uploadedImgs/"/>
+	<mvc:resources mapping="/uploadedImgs/**" location="/uploadedImgs/" />
 	<mvc:annotation-driven />
 
 	<!-- Diz ao Spring onde as paginas JSP estao -->
@@ -128,7 +128,7 @@
 	</sec:authentication-manager>
 
 	<!-- Configura o multipart resolver -->
-	
+
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10000000" />
@@ -180,14 +180,20 @@
 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
 	<bean id="funcionarioService" class="br.com.webhomebeta.service.FuncionarioService"></bean>
 	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioDaoImp"></bean>
-	<bean id="beanUsuario" class="br.com.webhomebeta.bean.UploadControllerBean" scope="session">
-		<aop:scoped-proxy/>
+	<bean id="beanUsuario" class="br.com.webhomebeta.bean.UploadControllerBean"
+		scope="session">
+		<aop:scoped-proxy />
 	</bean>
-	<bean id="dadosUsuarioBean" class="br.com.webhomebeta.bean.DadosUsuarioBean" scope="session">
-		<aop:scoped-proxy/>
+	<bean id="dadosUsuarioBean" class="br.com.webhomebeta.bean.DadosUsuarioBean"
+		scope="session">
+		<aop:scoped-proxy />
 	</bean>
-	<bean id="moradorControllerBean" class="br.com.webhomebeta.bean.MoradorControllerBean" scope="session">
-		<aop:scoped-proxy/>
+	<bean id="moradorControllerBean" class="br.com.webhomebeta.bean.MoradorControllerBean"
+		scope="session">
+		<aop:scoped-proxy />
 	</bean>
-	
+
+	<bean id="espacoCondominioDao" class="br.com.webhomebeta.dao.imp.EspacoCondominioDaoImp"></bean>
+		<bean id="espacoCondominioService" class="br.com.webhomebeta.service.EspacoCondominioServe"></bean>
+
 </beans>

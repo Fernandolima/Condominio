@@ -1,9 +1,26 @@
 package br.com.webhomebeta.to;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EspacoCondominioTo {
 	
+	private String data;
+	
+	/**
+	 * @return the data
+	 */
+	public String getData() {
+		return data;
+	}
+
+	/**
+	 * @param data the data to set
+	 */
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	ArrayList<String> espaco = new ArrayList<>();
 	
 	/**

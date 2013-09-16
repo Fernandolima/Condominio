@@ -29,6 +29,9 @@ public class AtasEntity implements Serializable {
 
 	@Column(name = "COMENTARIO")
 	private String comentario;
+	
+	@Column(name = "ARQUIVO")
+	private String arquivo;
 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -99,6 +102,20 @@ public class AtasEntity implements Serializable {
 	 */
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	/**
+	 * @return the arquivo
+	 */
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	/**
+	 * @param arquivo the arquivo to set
+	 */
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
 	}
 
 
