@@ -46,7 +46,7 @@
 			<section id="content-admin">
 				<h2>Cadastro de Blocos e Apartamentos</h2>
 				
-				<form:form modelAttribute="bloco" action="addBloco" method="post" id="frmBlocos">
+				<form:form modelAttribute="bloco" action="#" method="post" id="frmBlocos">
 					<div id="contentFrm">
 						<div class="blocos">
 							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
@@ -63,7 +63,7 @@
 							
 						</div>
 					</div>
-					<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
+					<input type="button" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
 				</form:form>
 				
 				<div id="blocosCadastrados">

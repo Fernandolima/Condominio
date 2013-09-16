@@ -55,6 +55,8 @@ body {
 	min-height: 500px;
 	float: left;
 	margin-left: 40px;
+	padding-bottom: 8px;
+	margin-bottom: 30px;
 }
 
 #main-admin-home h2 {

@@ -2,17 +2,17 @@ package br.com.webhomebeta.json;
 
 public class JsonBlocos {
 	private String bloco;
-	private int idcondomnio;
+	private int idBloco;
 	private int quatApAndares; //Quat de apartamento no andar
 	private String numeroInicial;
 	private String quantAp;
 	
 	
-	public JsonBlocos(String bloco, int idcondomnio, int quatApAndares,
+	public JsonBlocos(String bloco, int idBloco, int quatApAndares,
 			String numeroInicial, String quantAp) {
 		super();
 		this.bloco = bloco;
-		this.idcondomnio = idcondomnio;
+		this.idBloco = idBloco;
 		this.quatApAndares = quatApAndares;
 		this.numeroInicial = numeroInicial;
 		this.quantAp = quantAp;
@@ -28,10 +28,10 @@ public class JsonBlocos {
 
 
 	/**
-	 * @return the idcondomnio
+	 * @return the idBloco
 	 */
-	public int getIdcondomnio() {
-		return idcondomnio;
+	public int getIdBloco() {
+		return idBloco;
 	}
 
 
@@ -68,10 +68,10 @@ public class JsonBlocos {
 
 
 	/**
-	 * @param idcondomnio the idcondomnio to set
+	 * @param idBloco the idBloco to set
 	 */
-	public void setIdcondomnio(int idcondomnio) {
-		this.idcondomnio = idcondomnio;
+	public void setIdBloco(int idBloco) {
+		this.idBloco = idBloco;
 	}
 
 

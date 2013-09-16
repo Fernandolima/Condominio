@@ -109,6 +109,7 @@ public class CadastroCondominioController {
 	}
 
 	// ResponseBody retorna um JSON.
+	@RequestMapping(value = "cadastro/salvarBloco", method = RequestMethod.POST)
 	public @ResponseBody
 	//Nome da Class do Json Criado JsonBlocos e depois o metodo.
 	JsonBlocos save(
@@ -117,7 +118,7 @@ public class CadastroCondominioController {
 			BindingResult bindingResult) {
 		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
 		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
-				.getBloco(), bloco.getDescricaoCondominioTO().getIdcondomnio(),
+				.getBloco(), bloco.getDescricaoCondominioTO().getIdBloco(),
 				bloco.getDescricaoCondominioTO().getQuatApAndares(), bloco
 						.getDescricaoCondominioTO().getNumeroInicia(), bloco
 						.getDescricaoCondominioTO().getQuantAp());

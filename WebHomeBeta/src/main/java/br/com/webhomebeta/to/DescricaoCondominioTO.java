@@ -3,7 +3,7 @@ package br.com.webhomebeta.to;
 public class DescricaoCondominioTO {
 	
 	private String bloco;
-	private int idcondomnio;
+	private int idBloco;
 	private int quatApAndares; //Quat de apartamento no andar
 	private String numeroInicial;
 	private String quantAp;
@@ -13,22 +13,27 @@ public class DescricaoCondominioTO {
 	public String getBloco() {
 		return bloco;
 	}
-	/**
-	 * @return the idcondomnio
-	 */
-	public int getIdcondomnio() {
-		return idcondomnio;
-	}
+	
 	
 	public void setBloco(String bloco) {
 		this.bloco = bloco;
 	}
-	/**
-	 * @param idcondomnio the idcondomnio to set
-	 */
-	public void setIdcondomnio(int idcondomnio) {
-		this.idcondomnio = idcondomnio;
+	
+	public int getIdBloco() {
+		return idBloco;
 	}
+
+
+	public void setIdBloco(int idBloco) {
+		this.idBloco = idBloco;
+	}
+
+
+	public void setQuatApAndares(int quatApAndares) {
+		this.quatApAndares = quatApAndares;
+	}
+
+
 	/**
 	 * @return the quatApAndares
 	 */

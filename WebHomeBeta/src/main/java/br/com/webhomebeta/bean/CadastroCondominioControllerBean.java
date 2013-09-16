@@ -6,7 +6,7 @@ public class CadastroCondominioControllerBean {
 
 	private DescricaoCondominioTO descricaoCondominioTO;
 	private boolean bloco = true;
-	private boolean idcondomnio = true;
+	private boolean idBloco = true;
 	private boolean nome_condiminio = true;
 	private boolean ap = true;
 	private boolean QuatApAndares = true;
@@ -32,7 +32,7 @@ public class CadastroCondominioControllerBean {
 	 * @return the idcondomnio
 	 */
 	public boolean isIdcondomnio() {
-		return idcondomnio;
+		return idBloco;
 	}
 
 	/**
@@ -74,11 +74,11 @@ public class CadastroCondominioControllerBean {
 	}
 
 	/**
-	 * @param idcondomnio
-	 *            the idcondomnio to set
+	 * @param idBloco
+	 *            the idBloco to set
 	 */
-	public void setIdcondomnio(boolean idcondomnio) {
-		this.idcondomnio = idcondomnio;
+	public void setIdcondomnio(boolean idBloco) {
+		this.idBloco = idBloco;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class CadastroCondominioControllerBean {
 	}
 
 	public boolean hasErrors() {
-		if (bloco == false || idcondomnio == false || ap == false
+		if (bloco == false || idBloco == false || ap == false
 				|| nome_condiminio == false || QuatApAndares == false
 				|| NumeroInicia == false || QuantAp == false
 				|| NumeroInicia == false) {
