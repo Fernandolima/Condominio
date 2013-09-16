@@ -76,6 +76,7 @@
 									<p class="itemBlocos title">Nº de Apartamentos</p>
 									<p class="itemBlocos title">Ap. por Andar</p>
 									<p class="itemBlocos title">Inicio da numeração</p>
+									<p class="itemBlocos title deleteBloco">Excluir</p>
 								</div>
 								<c:forEach items="${listaBlocos}" var="item" varStatus="num">
 							    	<div class="lineTabelaBlocos">
@@ -83,7 +84,7 @@
 										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
 										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
 										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
-										<a href="#" class="btn-delete-bloco" data-id="<c:out value="${item.idbloco}"/>">Delete</a>
+										<p class="itemBlocos delete" data-id="<c:out value="${item.idbloco}"/>"><a href="#" class="btn-delete-bloco hidden">Delete</a></p>
 									</div>							    	
 							    </c:forEach>
 							</div>

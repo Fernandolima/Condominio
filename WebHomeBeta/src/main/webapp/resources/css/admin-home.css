@@ -268,3 +268,16 @@ body {
 .itemBlocos.title {
 	font-weight: bold;
 }
+
+.itemBlocos.deleteBloco,
+.itemBlocos.delete {
+	width: 83px;
+}
+
+.btn-delete-bloco {
+	background: url(../img/btn-delete.png) no-repeat transparent;
+	width: 21px;
+	height: 21px;
+	float: left;
+	margin: 8px 0 0 33px;
+}
