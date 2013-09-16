@@ -22,8 +22,12 @@
 				<input type="text" autocomplete="off" name= "j_username"/>
 				<label for="j_password" id="lbPassword">Senha:</label>
 				<input type="password" name="j_password"/>
-				<label for = "j_remember">Continuar conectado</label>
-				<input id = "j_remember" name ="_spring_security_remember_me" type="checkBox"/>
+				
+				<div id="contentRemember">
+					<label for = "j_remember" class="lblRemember">Continuar conectado</label>
+					<input id = "j_remember" class="inpRemember" name ="_spring_security_remember_me" type="checkBox"/>
+				</div>
+				
 				<a href="esqueciMinhaSenha" id="forgotPassword">Esqueci minha senha</a>
 				<input type="submit" value="Enviar" id="btSubmitLogin" class="btSubmit">
 				<img src="<c:url value = "/img/load-login.gif"/>" id="load-login" alt="carregando" />
