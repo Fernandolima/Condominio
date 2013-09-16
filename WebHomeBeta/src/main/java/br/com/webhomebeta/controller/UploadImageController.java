@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -45,6 +46,8 @@ public class UploadImageController {
 	@Autowired
 	private PublicacaoService publicacaoService;
 	@Autowired
+	private ComentarioService comentarioService;
+	@Autowired
 	private ServletContext context;
 	@Autowired
 	private UploadControllerBean beanUsuario;
@@ -52,6 +55,10 @@ public class UploadImageController {
 	private void salvar(MultipartFile file, Usuario usuario) throws Exception {
 		File fileToDisk = null;
 		File fileToDiskRedimensionada = null;
+		File caminho = null;
+
+		String caminhoPasta = this.context.getRealPath("") + "/uploadedImgs/"
+				+ usuario.getIdUser();
 
 		String result = this.context.getRealPath("") + "/uploadedImgs/"
 				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
@@ -69,40 +76,53 @@ public class UploadImageController {
 					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 240, 240,
 					Scalr.OP_ANTIALIAS);
 			if (file.getOriginalFilename().endsWith("jpg")) {
+				caminho = new File(caminhoPasta);
+
 				fileToDisk = new File(result);
+
+				if (!caminho.isDirectory()) {
+					caminho.mkdir();
+				}
 				ImageIO.write(imagemRedimensionada, "JPEG", fileToDisk);
 			}
-			
+
 			if (file.getOriginalFilename().endsWith("png")) {
+				caminho = new File(caminhoPasta);
+
 				fileToDisk = new File(result);
+
+				if (!caminho.isDirectory()) {
+					caminho.mkdir();
+				}
 				ImageIO.write(imagemRedimensionada, "png", fileToDisk);
 			}
-			
 
 			usuario.setImagem(result);
 			usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			usuarioService.update(usuario);
 
-
 			// redimensiona imagem para o tamanho para 43x43
 			InputStream stream2 = new ByteArrayInputStream(file.getBytes());
 			BufferedImage bufferImage2 = ImageIO.read(stream2);
 			BufferedImage imagemRedimensionada43x43 = Scalr.resize(
-					bufferImage2, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT,
-					43, 43, Scalr.OP_ANTIALIAS);
+					bufferImage2, Scalr.Method.ULTRA_QUALITY,
+					Scalr.Mode.FIT_EXACT, 43, 43, Scalr.OP_ANTIALIAS);
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
 				ImageIO.write(imagemRedimensionada43x43, "JPEG",
 						fileToDiskRedimensionada);
 			}
-			if (file.getOriginalFilename().endsWith("png")){
+			if (file.getOriginalFilename().endsWith("png")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
-			ImageIO.write(imagemRedimensionada43x43, "PNG",
-					fileToDiskRedimensionada);
+				ImageIO.write(imagemRedimensionada43x43, "PNG",
+						fileToDiskRedimensionada);
 			}
 
 			publicacaoService.update(usuario.getIdUser(),
+					"/WebHomeBeta/uploadedImgs/" + usuario.getIdUser()
+							+ "/Redimensionada " + file.getOriginalFilename());
+			comentarioService.update(usuario.getIdUser(),
 					"/WebHomeBeta/uploadedImgs/" + usuario.getIdUser()
 							+ "/Redimensionada " + file.getOriginalFilename());
 

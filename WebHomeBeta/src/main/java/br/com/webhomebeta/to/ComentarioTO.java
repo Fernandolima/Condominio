@@ -17,6 +17,9 @@ public class ComentarioTO {
 
 	private Date data;
 
+	private String imagem;
+	
+	
 	public ComentarioTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -28,6 +31,17 @@ public class ComentarioTO {
 		this.publicacao = publicacao;
 		this.comentario = comentario;
 		this.data = data;
+	}
+	
+	
+	
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public Usuario getUsuarioComentario() {

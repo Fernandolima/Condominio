@@ -1,5 +1,6 @@
 package br.com.webhomebeta.dao.imp;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,15 @@ public class ComentarioDAOImp implements ComentarioDAO{
 	public Comentario getComentarios() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	@Transactional
+	public void update(int id, String imagem) {
+		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[COMENTARIO_PUBLICACAO] SET IMAGEM = ? WHERE ID_USER = ?");
+		q.setParameter(0, imagem);
+		q.setParameter(1,id);
+		q.executeUpdate();
 	}
 
 }

@@ -7,23 +7,31 @@ public class JsonPublicacao {
 
 	private String publicacao;
 	private int idPublicacao;
-	private Date dataPublicacao;
+	private String dataPublicacao;
 	private String imagemPublicacao;
 	private UsuarioPublicacaoJSON usuarioPublicacao;
 	private List<ComentarioJSON> comentarios;
 	private boolean isProprietario;
 
 	
+	
+	
 	public JsonPublicacao(String publicacao, int idPublicacao,
-			Date dataPublicacao, String imagemPublicacao,
+			String dataPublicacao, String imagemPublicacao,
 			UsuarioPublicacaoJSON usuarioPublicacao) {
-		super();
 		this.publicacao = publicacao;
 		this.idPublicacao = idPublicacao;
 		this.dataPublicacao = dataPublicacao;
 		this.imagemPublicacao = imagemPublicacao;
 		this.usuarioPublicacao = usuarioPublicacao;
-		
+	}
+
+	public String getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public void setDataPublicacao(String dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
 	}
 
 	public boolean isProprietario() {
@@ -64,14 +72,6 @@ public class JsonPublicacao {
 
 	public void setIdPublicacao(int idPublicacao) {
 		this.idPublicacao = idPublicacao;
-	}
-
-	public Date getDataPublicacao() {
-		return dataPublicacao;
-	}
-
-	public void setDataPublicacao(Date dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
 	}
 
 	public String getImagemPublicacao() {

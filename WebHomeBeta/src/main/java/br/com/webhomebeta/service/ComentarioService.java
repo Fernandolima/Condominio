@@ -14,4 +14,8 @@ public class ComentarioService {
 	public void save(Comentario comentario) {
 		comentarioDAO.salvarComentario(comentario);
 	}
+	
+	public void update(int id, String imagem){
+		comentarioDAO.update(id, imagem);
+	}
 }

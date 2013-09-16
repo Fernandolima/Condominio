@@ -8,7 +8,25 @@ public class MoradorControllerBean {
 	private PublicacaoTO publicacaoTO;
 	private ComentarioTO comentarioTO;
 	private Usuario usuario;
-	
+	private int idComentario;
+	private int idPublicacao;
+
+	public int getIdComentario() {
+		return idComentario;
+	}
+
+	public void setIdComentario(int idComentario) {
+		this.idComentario = idComentario;
+	}
+
+	public int getIdPublicacao() {
+		return idPublicacao;
+	}
+
+	public void setIdPublicacao(int idPublicacao) {
+		this.idPublicacao = idPublicacao;
+	}
+
 	public PublicacaoTO getPublicacaoTO() {
 		return publicacaoTO;
 	}
@@ -32,6 +50,5 @@ public class MoradorControllerBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
+
 }
