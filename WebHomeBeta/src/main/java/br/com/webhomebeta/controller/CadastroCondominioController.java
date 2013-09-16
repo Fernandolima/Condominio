@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.CadastroCondominioControllerBean;
 import br.com.webhomebeta.entity.DescricaoCondominio;
-import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.json.Json;
+import br.com.webhomebeta.json.JsonBlocos;
+import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller
 public class CadastroCondominioController {
 	@Autowired
 	private CadastroCondominioService cadastroCondominioService;
-
-	private DescricaoCondominio descricaoCondominio;
 
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio();
 
@@ -109,6 +106,30 @@ public class CadastroCondominioController {
 		// ----------------------------------------s
 
 		return new Json("true");
+	}
+
+	// ResponseBody retorna um JSON.
+	public @ResponseBody
+	//Nome da Class do Json Criado JsonBlocos e depois o metodo.
+	JsonBlocos save(
+			// recebe o id do bloco a ser excluido
+			@ModelAttribute("addbloco") CadastroCondominioControllerBean bloco,
+			BindingResult bindingResult) {
+		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
+		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
+				.getBloco(), bloco.getDescricaoCondominioTO().getIdcondomnio(),
+				bloco.getDescricaoCondominioTO().getQuatApAndares(), bloco
+						.getDescricaoCondominioTO().getNumeroInicia(), bloco
+						.getDescricaoCondominioTO().getQuantAp());
+		
+		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
+		BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
+				descricaoCondominio);
+		cadastroCondominioService.save(descricaoCondominio);
+
+		// ----------------------------------------s
+
+		return jsonbloco;
 	}
 
 	public void ValidaCadastroBlocos(CadastroCondominioControllerBean bean) {
