@@ -102,9 +102,10 @@ public class CadastroCondominioController {
 	Json delete(
 	// recebe o id do bloco a ser excluido
 			@RequestParam int idbloco) {
-
-		// ----------------------------------------s
-
+		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
+				// ----------------------------------------s
+		descricaoCondominio.setIdcondomnio(idbloco);
+		cadastroCondominioService.delete(descricaoCondominio);
 		return new Json("true");
 	}
 
