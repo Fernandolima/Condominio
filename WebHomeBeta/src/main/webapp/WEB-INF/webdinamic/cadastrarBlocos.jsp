@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
-	<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
+	<!-- <link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>-->
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>" />
 	

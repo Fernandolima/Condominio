@@ -46,7 +46,7 @@ public class AdministradorController {
 	@RequestMapping(value = "admin/validarMoradores")
 	public ModelAndView validarMoradores() {
 
-		return new ModelAndView("admin/validarMoradores", "listaUsuarios",
+		return new ModelAndView("validarMoradores", "listaUsuarios",
 				usuarioService.getUsuarioNaoAtivo());
 	}
 	//Recebe como parametro o login do usuario e devolve o usuario com todas as informacoes

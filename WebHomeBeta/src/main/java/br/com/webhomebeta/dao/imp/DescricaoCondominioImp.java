@@ -63,7 +63,7 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 				return descricaoCondominio;
 	}
 
-	@Override
+	@Transactional
 	public DescricaoCondominio editar(int id) {
 		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
 		Query q= factory.getCurrentSession().createSQLQuery(sql)
@@ -72,22 +72,15 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 				return descricaoCondominio;
 	}
 	
-	@Override
+	@Transactional
 	public void update(DescricaoCondominio descricaoCondominio) {
 			factory.getCurrentSession().update(descricaoCondominio);
 			
 	}
-	
-	public void  Delete(DescricaoCondominio descricaoCondominio) {
+	@Transactional
+	public void  delete(DescricaoCondominio descricaoCondominio) {
 		factory.getCurrentSession().delete(descricaoCondominio);
 	}
 
-	@Override
-	public void delete(DescricaoCondominio descricacoCondominio) {
-		// TODO Auto-generated method stub
 		
-	}
-
-
-	
 }
