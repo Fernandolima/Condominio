@@ -117,17 +117,18 @@ public class CadastroCondominioController {
 			// recebe o id do bloco a ser excluido
 			@ModelAttribute("addbloco") CadastroCondominioControllerBean bloco,
 			BindingResult bindingResult) {
+		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
+		BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
+				descricaoCondominio);
+		cadastroCondominioService.save(descricaoCondominio);
+		cadastroCondominioService.
+		
 		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
 		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
 				.getBloco(), bloco.getDescricaoCondominioTO().getIdBloco(),
 				bloco.getDescricaoCondominioTO().getQuatApAndares(), bloco
 						.getDescricaoCondominioTO().getNumeroInicia(), bloco
 						.getDescricaoCondominioTO().getQuantAp());
-		
-		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
-		BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
-				descricaoCondominio);
-		cadastroCondominioService.save(descricaoCondominio);
 
 		// ----------------------------------------s
 

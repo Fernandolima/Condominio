@@ -1,4 +1,5 @@
 var BLOCOS = {
+	
 	init: function() {
 		//inserir validações
 	},
@@ -8,12 +9,30 @@ var BLOCOS = {
 		
 		var htmlBloco = "";
 		
+		if($('#tabelaBlocos')[0]) {
+			
+		} else {
+			htmlBloco += '<div id="tabelaBlocos">';
+				htmlBloco += '<div class="lineTabelaBlocos">';
+					htmlBloco += '<p class="itemBlocos pBloco title">Bloco</p>';
+					htmlBloco += '<p class="itemBlocos title">Nº de Apartamentos</p>';
+					htmlBloco += '<p class="itemBlocos title">Ap. por Andar</p>';
+					htmlBloco += '<p class="itemBlocos title">Inicio da numeração</p>';
+					htmlBloco += '<p class="itemBlocos title deleteBloco">Excluir</p>';
+				htmlBloco += '</div>';
+			htmlBloco += '</div>';
+			
+			$('.nenhumResultado').hide();
+			$('#blocosCadastrados').append(htmlBloco);
+		}
+		
+		htmlBloco = "";			
+		
 		$.ajax({
 			url: 'cadastro/salvarBloco',
 			type: 'POST',
 			data : $('#frmBlocos').serialize(),
 			success: function(data) {
-				console.log(data);
 				htmlBloco += '<div class="lineTabelaBlocos">';
 					htmlBloco += '<p class="itemBlocos pBloco">'+data.bloco+'</p>';
 					htmlBloco += '<p class="itemBlocos">'+data.quantAp+'</p>';
@@ -23,9 +42,9 @@ var BLOCOS = {
 				htmlBloco += '</div>';
 				
 				$('#tabelaBlocos').append(htmlBloco);
-				$('#frmBlocos input').val('');
+				$('.inputBloco').val('');
 			}
-		});
+		});		
 	},
 	
 	excluirBlocos: function(e) {
@@ -43,6 +62,12 @@ var BLOCOS = {
 				}
 			}
 		});
+		
+		if($('.lineTabelaBlocos').length === 2) {
+			console.log('entra');
+			$('.nenhumResultado').show();
+			$('#tabelaBlocos').remove();			
+		}
 	}
 }
 

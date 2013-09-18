@@ -225,7 +225,10 @@ body {
 }
 
 #btSubmitBlocos {
-	float: left;
+	float: right;
+    height: 30px;
+    margin-right: 0;
+    width: 100px;
 }
 
 #blocosCadastrados {

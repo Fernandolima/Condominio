@@ -50,16 +50,16 @@
 					<div id="contentFrm">
 						<div class="blocos">
 							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
-							<form:input type="text" id="bloco" path="descricaoCondominioTO.bloco" autocomplete="off" />
+							<form:input type="text" id="bloco" class="inputBloco" path="descricaoCondominioTO.bloco" autocomplete="off" />
 							 
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quantAp">Nº de Apartamentos:</form:label>
-							<form:input type="text" id="numAp" path="descricaoCondominioTO.quantAp" autocomplete="off" />
+							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quantAp" autocomplete="off" />
 							
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatApAndares">Ap. por Andar:</form:label>
-							<form:input type="text" id="numAp" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
+							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
 							
 							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.numeroInicial">Inicio da numeração:</form:label>
-							<form:input type="text" id="numAp" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
+							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
 							
 						</div>
 					</div>
