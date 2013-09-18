@@ -1,5 +1,8 @@
 package br.com.webhomebeta.bean;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.to.AtasTo;
 
@@ -10,6 +13,38 @@ public class AtasControllerBean {
 	private boolean validDate = true;
 	private boolean arquivo;
 	private boolean hasErrorForm = false;
+	private Usuario usuario;
+	private CommonsMultipartFile fileData;
+
+	/**
+	 * @return the usuario
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @return the fileData
+	 */
+	public CommonsMultipartFile getFileData() {
+		return fileData;
+	}
+
+	/**
+	 * @param usuario
+	 *            the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	/**
+	 * @param fileData
+	 *            the fileData to set
+	 */
+	public void setFileData(CommonsMultipartFile fileData) {
+		this.fileData = fileData;
+	}
 
 	public boolean isAtas(boolean b) {
 		return atas;
@@ -34,7 +69,6 @@ public class AtasControllerBean {
 	 * @param data
 	 *            the data to set
 	 */
-	
 
 	public void setData(String data) {
 		this.data = data;
@@ -67,7 +101,8 @@ public class AtasControllerBean {
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param arquivo
+	 *            the arquivo to set
 	 */
 	public void setArquivo(boolean arquivo) {
 		this.arquivo = arquivo;
@@ -92,15 +127,6 @@ public class AtasControllerBean {
 		this.hasErrorForm = hasErrorForm;
 	}
 
-	public boolean hasErrors() {
-		if (atas == false) {
-			hasErrorForm = true;
-			return false;
-		}
-		hasErrorForm = false;
-		return true;
-	}
-
 	/**
 	 * @return the atas
 	 */
@@ -109,7 +135,7 @@ public class AtasControllerBean {
 	}
 
 	/**
-	 * @param b 
+	 * @param b
 	 * @return the validDate
 	 */
 	public boolean isValidDate(boolean b) {
@@ -117,10 +143,21 @@ public class AtasControllerBean {
 	}
 
 	/**
-	 * @param validDate the validDate to set
+	 * @param validDate
+	 *            the validDate to set
 	 */
 	public void setValidDate(boolean validDate) {
 		this.validDate = validDate;
+	}
+
+	public boolean hasErrors() {
+		if (atasTo == null || atas == false || data == null
+				|| validDate == false || arquivo == false || fileData == null) {
+			hasErrorForm = true;
+			return false;
+		}
+		hasErrorForm = false;
+		return true;
 	}
 
 }
