@@ -10,28 +10,27 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.webhomebeta.dao.DescricaoCondominioDAO;
 import br.com.webhomebeta.entity.DescricaoCondominio;
 
-public class DescricaoCondominioImp implements DescricaoCondominioDAO{
+public class DescricaoCondominioImp implements DescricaoCondominioDAO {
 
 	@Autowired
 	private SessionFactory factory;
 
 	@Transactional
 	public DescricaoCondominio save(DescricaoCondominio condominio) {
-//		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I] ?,?,?,?";
-//		Query q = factory.getCurrentSession().createSQLQuery(sql)
-//				.addEntity(DescricaoCondominio.class);
-//		q.setParameter(0, condominio.getIdcondomnio());
-//		q.setParameter(1, condominio.getBloco());
-//		q.setParameter(2, condominio.getNome_condominio());
-//		q.setParameter(3, condominio.getQuantAp());
-//		q.setParameter(4, condominio.getNumeroInicia());
-//
-//		q.executeUpdate();
-		
+		// String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I] ?,?,?,?";
+		// Query q = factory.getCurrentSession().createSQLQuery(sql)
+		// .addEntity(DescricaoCondominio.class);
+		// q.setParameter(0, condominio.getIdcondomnio());
+		// q.setParameter(1, condominio.getBloco());
+		// q.setParameter(2, condominio.getNome_condominio());
+		// q.setParameter(3, condominio.getQuantAp());
+		// q.setParameter(4, condominio.getNumeroInicia());
+		//
+		// q.executeUpdate();
+
 		factory.getCurrentSession().save(condominio);
 		return condominio;
-		
-		
+
 	}
 
 	@Transactional
@@ -43,7 +42,7 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		List<DescricaoCondominio> descricaoCondominios = q.list();
 		return descricaoCondominios;
 	}
-	
+
 	@Transactional
 	public List<DescricaoCondominio> getDescricaoCondominio() {
 		String sql = "exec [dbo].[DESCRICAO_CONDOMINIO_I]";
@@ -53,34 +52,46 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO{
 		List<DescricaoCondominio> descricaoCondominios = q.list();
 		return descricaoCondominios;
 	}
-	
+
 	@Transactional
-	public DescricaoCondominio getDescricaoById( int idcondomnio){
+	public DescricaoCondominio getDescricaoById(int idcondomnio) {
 		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
-		Query q= factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(DescricaoCondominio.class).setParameter("0", idcondomnio);
-		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q.uniqueResult();
-				return descricaoCondominio;
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(DescricaoCondominio.class)
+				.setParameter("0", idcondomnio);
+		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q
+				.uniqueResult();
+		return descricaoCondominio;
 	}
 
 	@Transactional
 	public DescricaoCondominio editar(int id) {
 		String sql = "exe[dbo].[DESCRICAO_CONDOMINIO_ID] ?";
-		Query q= factory.getCurrentSession().createSQLQuery(sql)
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(DescricaoCondominio.class).setParameter("0", id);
-		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q.uniqueResult();
-				return descricaoCondominio;
+		DescricaoCondominio descricaoCondominio = (DescricaoCondominio) q
+				.uniqueResult();
+		return descricaoCondominio;
 	}
-	
+
 	@Transactional
 	public void update(DescricaoCondominio descricaoCondominio) {
-			factory.getCurrentSession().update(descricaoCondominio);
-			
+		factory.getCurrentSession().update(descricaoCondominio);
+
 	}
+
 	@Transactional
-	public void  delete(DescricaoCondominio descricaoCondominio) {
+	public void delete(DescricaoCondominio descricaoCondominio) {
 		factory.getCurrentSession().delete(descricaoCondominio);
 	}
 
-		
+	@Override
+	@Transactional
+	public int get(DescricaoCondominio condominio) {
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT ID_BLOCO FROM [dbo].[DESCRICAO_CONDOMINIO] WHERE BLOCO = ?");
+		q.setParameter(0,condominio.getBloco());
+		int id = (int) q.uniqueResult();
+		return id;
+	}
+
 }
