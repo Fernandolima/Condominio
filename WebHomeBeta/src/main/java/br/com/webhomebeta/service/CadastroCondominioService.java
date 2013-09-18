@@ -39,4 +39,8 @@ public class CadastroCondominioService {
 	public void delete(DescricaoCondominio descricaoCondominio) {
 		daoCond.delete(descricaoCondominio);
 	}
+	
+	public int get(DescricaoCondominio condominio){
+		return daoCond.get(condominio);
+	}
 }
