@@ -164,6 +164,14 @@ public class CadastroCondominioControllerBean {
 		QuantAp = quantAp;
 	}
 
+	/**
+	 * @return the ap
+	 */
+	public boolean isAp() {
+		return ap;
+	}
+
+
 	public boolean hasErrors() {
 		if (bloco == false || idBloco == false || ap == false
 				|| nome_condiminio == false || QuatApAndares == false
@@ -174,13 +182,6 @@ public class CadastroCondominioControllerBean {
 		}
 		hasErrorCond = false;
 		return true;
-	}
-
-	/**
-	 * @return the ap
-	 */
-	public boolean isAp() {
-		return ap;
 	}
 
 }
