@@ -14,5 +14,6 @@ public interface EspacoCondominioDao {
 	public void update(EspacoCondominio condominio);
 
 	public void delete(EspacoCondominio espacoCondominio);
+	
 
 }

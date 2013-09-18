@@ -121,11 +121,10 @@ public class CadastroCondominioController {
 		BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
 				descricaoCondominio);
 		cadastroCondominioService.save(descricaoCondominio);
-		cadastroCondominioService.
 		
 		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
 		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
-				.getBloco(), bloco.getDescricaoCondominioTO().getIdBloco(),
+				.getBloco(), cadastroCondominioService.get(descricaoCondominio),
 				bloco.getDescricaoCondominioTO().getQuatApAndares(), bloco
 						.getDescricaoCondominioTO().getNumeroInicia(), bloco
 						.getDescricaoCondominioTO().getQuantAp());

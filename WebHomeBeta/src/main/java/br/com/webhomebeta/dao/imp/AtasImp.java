@@ -14,32 +14,15 @@ public class AtasImp implements AtasDao {
 
 	@Autowired
 	private SessionFactory factory;
+	
 
 	@Transactional
-	public AtasEntity inseri(AtasEntity atasEntity) {
-		factory.getCurrentSession().save(atasEntity);
-		return atasEntity;
-
-	}
-
-	@Transactional
-	public List<AtasEntity> getAtas() {
-		String sql = "exe[dbo].[ATAS]";
-		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(AtasEntity.class);
-		@SuppressWarnings("unchecked")
-		List<AtasEntity> atasEntities = q.list();
-		return atasEntities;
-
-	}
-
-	@Override
 	public AtasEntity save(AtasEntity atasEntity) {
 		factory.getCurrentSession().save(atasEntity);
 		return atasEntity;
 	}
 
-	@Override
+	@Transactional
 	public AtasEntity editar(int id) {
 		String sql = "exe[dbo].[ATAS] ?";
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
@@ -47,15 +30,24 @@ public class AtasImp implements AtasDao {
 		AtasEntity atasEntity = (AtasEntity) q.uniqueResult();
 		return atasEntity;
 	}
-
+	@Transactional
 	public void update(AtasEntity atasEntity) {
 		factory.getCurrentSession().update(atasEntity);
 
 	}
-
+		@Transactional
 		public void delete(AtasEntity atasEntity) {
 		factory.getCurrentSession().delete(atasEntity);
 
 	}
+
+		@Transactional
+		public List<AtasEntity> getAtas() {		
+			String sql = "exe[dbo].[ATAS]";
+			Query q = factory.getCurrentSession().createSQLQuery("SELECT  * FROM [dbo].[ATAS]");
+			return q.list();
+		
+		}
+		
 
 }
