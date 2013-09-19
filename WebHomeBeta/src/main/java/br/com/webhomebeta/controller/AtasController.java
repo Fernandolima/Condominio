@@ -40,7 +40,6 @@ public class AtasController {
 	private AtasEntity atasEntity;
 	@Autowired
 	private UsuarioService usuarioService;
-	@Autowired
 	private UploadControllerBean beanUsuarios;
 	private ValidadorAtas validadorAtas = new ValidadorAtas();
 
@@ -70,7 +69,7 @@ public class AtasController {
 
 	}
 
-	@RequestMapping(value = "addArquivos", method = RequestMethod.POST)
+	@RequestMapping(value = "Atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public ModelAndView AtasArquivos(
 			@ModelAttribute("atas") final UploadArquivosAtasControllerBean bean,
