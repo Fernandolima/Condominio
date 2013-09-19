@@ -3,7 +3,6 @@ package br.com.webhomebeta.bean;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.to.AtasTo;
 
 public class UploadArquivosAtasControllerBean {
