@@ -27,7 +27,23 @@ public class Assembleia {
 	@Column(name = "COMENTARIO")
 	private String comentario;
 
+	@Column(name = "ARQUIVO")
+	private String arquivo;
 	
+	/**
+	 * @return the arquivo
+	 */
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	/**
+	 * @param arquivo the arquivo to set
+	 */
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAssebleia;
