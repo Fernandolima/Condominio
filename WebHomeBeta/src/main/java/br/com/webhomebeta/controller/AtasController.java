@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.webhomebeta.bean.AtasControllerBean;
+import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
 import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
@@ -65,7 +65,7 @@ public class AtasController {
 		}
 		model.put("listaAtas", atas);
 		model.put("Arquivo", beanUsuarios);
-		model.put("atas", new AtasControllerBean());
+		model.put("atas", new UploadArquivosAtasControllerBean());
 		return new ModelAndView("uploadArquivo", model);
 
 	}
@@ -73,7 +73,7 @@ public class AtasController {
 	@RequestMapping(value = "addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public ModelAndView AtasArquivos(
-			@ModelAttribute("atas") final AtasControllerBean bean,
+			@ModelAttribute("atas") final UploadArquivosAtasControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
 	salvar(bean.getFileData(), atasEntity, beanUsuarios.getUsuario());
@@ -99,7 +99,7 @@ public class AtasController {
 		return new ModelAndView("uploadArquivo", "atas", bean);
 	}
 
-	public void ValidadorAtas(AtasControllerBean atasBean,
+	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean,
 			UploadControllerBean bean){
 
 		if (!validadorAtas.isValidAtas(atasBean.getAtasTo().getAtas()))
