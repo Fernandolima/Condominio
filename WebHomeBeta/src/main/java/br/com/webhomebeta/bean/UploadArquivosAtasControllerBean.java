@@ -4,7 +4,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import br.com.webhomebeta.entity.Usuario;
 
-public class UploadArquivosControllerBean {
+public class UploadArquivosAtasControllerBean {
 	
 private Usuario usuario;
 	

@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.AtasControllerBean;
-import br.com.webhomebeta.bean.UploadArquivosControllerBean;
+import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Usuario;
@@ -76,7 +76,7 @@ public class AtasController {
 			@ModelAttribute("atas") final AtasControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
-		salvar(bean.getFileData(), atasEntity, beanUsuarios.getUsuario());
+	salvar(bean.getFileData(), atasEntity, beanUsuarios.getUsuario());
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
@@ -160,7 +160,7 @@ public class AtasController {
 				fileToDisk = new File(result);
 
 				if (!caminho.isDirectory()) {
-					caminho.mkdir();
+					caminho.mkdirs();
 				}
 
 				file.transferTo(fileToDisk);
