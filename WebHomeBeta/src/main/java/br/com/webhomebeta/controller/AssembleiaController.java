@@ -36,11 +36,10 @@ public class AssembleiaController {
 	@Autowired
 	private AssembleiaService assembleiaService;
 	private Assembleia assembleia;
-	@Autowired
 	private UploadArquivosAssembleiaControllerBean beanUsuarios;
 	@Autowired
 	private UsuarioService usuarioService;
-	@Autowired
+
 	private ValidadorAssembleia validadorAssembleia = new ValidadorAssembleia();
 
 	// mapeia a URL principal (Assembleia) e retorna um novo objeto assembleia
@@ -67,7 +66,7 @@ public class AssembleiaController {
 		return new ModelAndView("assembleia", model);
 	}
 
-	@RequestMapping(value = "addArquivos", method = RequestMethod.POST)
+	@RequestMapping(value = "Assembleia/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public ModelAndView AssembleiaArquivos(
 			@ModelAttribute("assembleia") final UploadArquivosAssembleiaControllerBean bean,
