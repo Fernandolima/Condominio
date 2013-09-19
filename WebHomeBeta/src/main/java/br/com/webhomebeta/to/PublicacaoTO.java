@@ -16,16 +16,29 @@ public class PublicacaoTO {
 
 		this.usuarioPublicacao = usuarioPublicacao;
 	}
+	
 
 	private Date data;
 	
 	private String publicacao;
 
-	private Integer idPublicacao;
+	private int idPublicacao;
 
 	private Usuario usuarioPublicacao;
 
+	private String imagem;
+	
 	private Set<Comentario> comentarios = new HashSet<>(0);
+
+	
+	
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 
 	public Usuario getUsuarioPublicacao() {
 		return usuarioPublicacao;

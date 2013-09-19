@@ -31,7 +31,7 @@
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
-							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagemView}"></c:out>"/>
+							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
 							
 						</div>
 						<div id="nav-user">
@@ -50,10 +50,10 @@
 				</div>
 				<div id="rightCol">
 					<div id="rigth-content">
-						<form id="frmComment" method="POST" action="">
-							<textarea type="text" name="postUser" id="txtComment" placeholder="Comentário"></textarea>
+						<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean">
+							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Publicar"></form:textarea>
 							<input type="button" id="submitComment" value="Publicar" />
-						</form>
+						</form:form>
 						<div id="main-comments">
 							
 							<!-- <div class="post" data-id-user="1234">

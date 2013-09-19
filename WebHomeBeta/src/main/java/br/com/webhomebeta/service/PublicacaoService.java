@@ -13,8 +13,8 @@ public class PublicacaoService {
 	@Autowired
 	private PublicacaoDAO publicacaoDAO;
 	
-	public void salvar(Publicacao publicacao){
-		publicacaoDAO.salvarPublicacao(publicacao);
+	public Publicacao salvar(Publicacao publicacao){
+		return publicacaoDAO.salvarPublicacao(publicacao);
 	}
 	
 	public List<Publicacao> getPublicacoes(){

@@ -6,8 +6,7 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />
 
 	<cache name="br.com.webhomebeta.Usuario" maxElementsInMemory="300"
-		eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
-		overflowToDisk="false" />
+		eternal="true" overflowToDisk="false" />
 
 	<cache name="br.com.webhomebeta.Publicacao" maxElementsInMemory="400"
 		eternal="true" overflowToDisk="false" />
@@ -21,8 +20,10 @@
 		overflowToDisk="false" />
 
 	<cache name="br.com.webhomebeta.Comentario" maxElementsInMemory="5000"
-		eternal="true" overflowToDisk="false"/>
+		eternal="false" overflowToDisk="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" />
 
 	<cache name="br.com.webhomebeta.entity.Publicacao.comentarios"
-		maxElementsInMemory="4000" eternal="true" overflowToDisk="false"/>
+		maxElementsInMemory="4000" eternal="false" overflowToDisk="false"
+		timeToIdleSeconds="5000" timeToLiveSeconds="10000"></cache>
 </ehcache>

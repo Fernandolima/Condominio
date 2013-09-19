@@ -194,6 +194,9 @@
 	</bean>
 
 	<bean id="espacoCondominioDao" class="br.com.webhomebeta.dao.imp.EspacoCondominioDaoImp"></bean>
-		<bean id="espacoCondominioService" class="br.com.webhomebeta.service.EspacoCondominioServe"></bean>
+	<bean id="espacoCondominioService" class="br.com.webhomebeta.service.EspacoCondominioServe"></bean>
+	<bean id="notificacaoDAO" class="br.com.webhomebeta.dao.imp.NotificacaoDAOImp"></bean>
+	<bean id="notificacaoSerivce" class="br.com.webhomebeta.service.NotificacaoService"></bean>
+	
 
 </beans>

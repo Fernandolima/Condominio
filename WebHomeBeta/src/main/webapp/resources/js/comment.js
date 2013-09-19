@@ -79,25 +79,25 @@ var POST_COMMENT  = {
 			$.ajax({
 				data: $('#frmComment').serialize(),
 		    	type: 'post',
-		      	url:'home/getPublicacao',
+		      	url:'home/publicar',
 		      	dataType: 'json',	
 		      	success: POST_COMMENT.successPost
 		    });
 		},
 
 		successPost: function(e) {
-			var htmlInserPost = '',
+			var htmlInserPost = "",
 				data = e.content;
 				console.log('success');
 				
 			$.each(data, function(i, val){
-				htmlInserPost += '<div class="post" data-id-user="1234">';
+				htmlInserPost += '<div class="post" data-id-user="'+val.idUsuario+'">';
 				htmlInserPost += '<a href="#" class="deletePost hidden">Excluir</a>';
 				htmlInserPost += '<img src="img/thumb-post.jpg" class="thumb-post" />';
 				htmlInserPost += '<div class="comments-post">';
-					htmlInserPost += '<a href="#" class="name-user-comment">'+val.nameUser+'</a>';
-					htmlInserPost += '<p class="time-comments">'+val.timePost+'</p>';
-					htmlInserPost += '<p class="comment-user">'+val.message+'</p>';
+					htmlInserPost += '<a href="#" class="name-user-comment">'+val.nome+'</a>';
+					htmlInserPost += '<p class="time-comments">'+val.dataPublicacao+'</p>';
+					htmlInserPost += '<p class="comment-user">'+val.publicacao+'</p>';
 				htmlInserPost += '</div>';
 				htmlInserPost += '<a href="#" class="add-comments">>> Comentar</a>';
 			htmlInserPost += '</div>';
@@ -105,7 +105,7 @@ var POST_COMMENT  = {
 			
 			$('#txtComment').val('');
 			$('#main-comments').prepend(htmlInserPost);				
-			
+			htmlInserPost += "";
 		}
 }
 

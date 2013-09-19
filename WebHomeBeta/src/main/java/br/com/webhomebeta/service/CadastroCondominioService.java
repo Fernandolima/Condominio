@@ -41,6 +41,6 @@ public class CadastroCondominioService {
 	}
 	
 	public int get(DescricaoCondominio condominio){
-		return daoCond.get(condominio);
+		return 1;
 	}
 }

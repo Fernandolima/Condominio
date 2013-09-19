@@ -24,9 +24,10 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 
 	@Override
 	@Transactional
-	public void salvarPublicacao(Publicacao publicacao) {
+	public Publicacao salvarPublicacao(Publicacao publicacao) {
 		
 		factory.getCurrentSession().save(publicacao);
+		return publicacao;
 	}
 	@SuppressWarnings("unchecked")
 	@Transactional

@@ -3,10 +3,15 @@ package br.com.webhomebeta.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.imgscalr.Scalr.Method;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,18 +21,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
+import br.com.webhomebeta.entity.Notificacao;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.json.ComentarioJSON;
+import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.json.JsonPublicacao;
+import br.com.webhomebeta.json.NotificacoesJSON;
 import br.com.webhomebeta.json.NovaPublicacaoJSON;
 import br.com.webhomebeta.json.NovoComentarioJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
 import br.com.webhomebeta.service.ComentarioService;
+import br.com.webhomebeta.service.NotificacaoService;
 import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -43,6 +54,11 @@ public class MoradorController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private MoradorControllerBean moradorControllerBean;
+	@Autowired
+	private NotificacaoService notificacaoService;
+
+	private Queue<DeferredResult<NotificacoesJSON>> queueNotificacaoJSON = new ConcurrentLinkedQueue<DeferredResult<NotificacoesJSON>>();
+	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
@@ -141,21 +157,69 @@ public class MoradorController {
 			@ModelAttribute("moradorControllerBean") MoradorControllerBean bean,
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		System.out.println(bean.getPublicacaoTO().getPublicacao());
+		//Seta o usuario que publicou
 		bean.getPublicacaoTO().setUsuarioPublicacao(
 				moradorControllerBean.getUsuario());
+		//Seta a data de postagem
+		bean.getPublicacaoTO().setData(new Date());
+		//Seta a imagem de quem publicou
+		bean.getPublicacaoTO().setImagem(
+				moradorControllerBean.getUsuario().getImagemView());
 		Publicacao publicacao = new Publicacao();
 		// salva no banco
 		BeanUtils.copyProperties(bean.getPublicacaoTO(), publicacao);
-		publicacaoService.salvar(publicacao);
+		Publicacao p = publicacaoService.salvar(publicacao);
 		// monta o JSON de Publicacao.
-		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(bean
-				.getPublicacaoTO().getIdPublicacao(), bean.getPublicacaoTO()
-				.getPublicacao(), df.format(bean.getPublicacaoTO().getData()),
+		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
+				p.getIdPublicacao(), bean.getPublicacaoTO().getPublicacao(),
+				df.format(bean.getPublicacaoTO().getData()),
 				moradorControllerBean.getUsuario().getIdUser(),
-				moradorControllerBean.getUsuario().getNome());
-
+				moradorControllerBean.getUsuario().getNome(),
+				moradorControllerBean.getUsuario().getImagemView());
 		return novaPublicacaoJSON;
 
+	}
+
+	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
+	// o ID da publicacao
+	// e o tipo de notificacao
+
+	// Testando
+	@RequestMapping(value = "home/notificacao", method = RequestMethod.GET)
+	public @ResponseBody
+	DeferredResult<NotificacoesJSON> receberNotificacao(
+			@RequestParam("id") int idPublicacao, @RequestParam("tipo") String tipo) {
+		
+		//adiociona a notificacaoJSON para a DeferredResult
+		DeferredResult<NotificacoesJSON> deferredResult = new DeferredResult<>();
+		this.queueNotificacaoJSON.add(deferredResult);
+		
+		Notificacao notificacao = new Notificacao(tipo, idPublicacao,
+				moradorControllerBean.getUsuario().getIdUser());
+		
+		//Adiociona a notificao salva na queue
+		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+	
+
+		return deferredResult;
+	}
+
+	@Scheduled(fixedRate = 3000)
+	public void externalThread() throws InterruptedException {
+		Thread.sleep(6000);
+		for (DeferredResult<NotificacoesJSON> result : this.queueNotificacaoJSON) {
+			
+			Notificacao n = queueNotificacao.poll();
+			
+			NotificacoesJSON json = new NotificacoesJSON();
+			json.setIdPublicacao(n.getIdNotificacado());
+			json.SetTipo(n.getTipoNotificacao(), moradorControllerBean.getUsuario().getNome());
+			
+			result.setResult(json);
+			
+			this.queueNotificacaoJSON.remove(result);
+		}
 	}
 
 }

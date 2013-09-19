@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -66,6 +68,7 @@ public class Publicacao implements Serializable {
 	private Usuario usuarioPublicacao;
 	
 	@Column(name = "DATA_PUBLICACAO")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	@Column(name = "IMAGEM")

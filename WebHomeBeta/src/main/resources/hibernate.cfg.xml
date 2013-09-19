@@ -20,7 +20,7 @@
 		<mapping class="br.com.webhomebeta.entity.Assembleia"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Funcionario"></mapping>
 		<mapping class="br.com.webhomebeta.entity.EspacoCondominio"></mapping>
-		
+		<mapping class="br.com.webhomebeta.entity.Notificacao"></mapping>
 		
 		
 	</session-factory>

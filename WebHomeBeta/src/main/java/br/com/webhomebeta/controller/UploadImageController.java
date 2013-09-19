@@ -1,13 +1,9 @@
 package br.com.webhomebeta.controller;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -31,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UploadControllerBean;
-import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PublicacaoService;
@@ -81,7 +76,7 @@ public class UploadImageController {
 				fileToDisk = new File(result);
 
 				if (!caminho.isDirectory()) {
-					caminho.mkdir();
+					caminho.mkdirs();
 				}
 				ImageIO.write(imagemRedimensionada, "JPEG", fileToDisk);
 			}
@@ -92,14 +87,15 @@ public class UploadImageController {
 				fileToDisk = new File(result);
 
 				if (!caminho.isDirectory()) {
-					caminho.mkdir();
+					caminho.mkdirs();
 				}
 				ImageIO.write(imagemRedimensionada, "png", fileToDisk);
 			}
 
-			usuario.setImagem(result);
-			usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
+			usuario.setImagem("/WebHomeBeta/uploadedImgs/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
+			usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
+					+ usuario.getIdUser() + "/Redimensionada " + file.getOriginalFilename());
 			usuarioService.update(usuario);
 
 			// redimensiona imagem para o tamanho para 43x43
