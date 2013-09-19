@@ -2,38 +2,59 @@ package br.com.webhomebeta.to;
 
 import java.util.Date;
 
+import br.com.webhomebeta.entity.Usuario;
+
 public class AssembleiaTO {
-
-	private String Assembleia;
-	private Date DataAtas;
-
+	private int idAssembleia;
+	private String comentario;
+	private Usuario usuarioAssebleia;
+	private Date dataCriacao;
 	/**
-	 * @return the assembleia
+	 * @return the idAssembleia
 	 */
-	public String getAssembleia() {
-		return Assembleia;
+	public int getIdAssembleia() {
+		return idAssembleia;
 	}
-
 	/**
-	 * @return the dataAtas
+	 * @return the comentario
 	 */
-	public Date getDataAtas() {
-		return DataAtas;
+	public String getComentario() {
+		return comentario;
 	}
-
 	/**
-	 * @param assembleia
-	 *            the assembleia to set
+	 * @return the usuarioAssebleia
 	 */
-	public void setAssembleia(String assembleia) {
-		Assembleia = assembleia;
+	public Usuario getUsuarioAssebleia() {
+		return usuarioAssebleia;
 	}
-
 	/**
-	 * @param dataAtas
-	 *            the dataAtas to set
+	 * @return the dataCriacao
 	 */
-	public void setDataAtas(Date dataAtas) {
-		DataAtas = dataAtas;
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+	/**
+	 * @param idAssembleia the idAssembleia to set
+	 */
+	public void setIdAssembleia(int idAssembleia) {
+		this.idAssembleia = idAssembleia;
+	}
+	/**
+	 * @param comentario the comentario to set
+	 */
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	/**
+	 * @param usuarioAssebleia the usuarioAssebleia to set
+	 */
+	public void setUsuarioAssebleia(Usuario usuarioAssebleia) {
+		this.usuarioAssebleia = usuarioAssebleia;
+	}
+	/**
+	 * @param dataCriacao the dataCriacao to set
+	 */
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 }

@@ -68,7 +68,7 @@ public class AssembleiaController {
 			UploadArquivosAssembleiaControllerBean assembleiaControllerBean) {
 
 		if (!validadorAssembleia.isValidAssembleia(assembleiaControllerBean
-				.getAssembleiaTO().getAssembleia()))
+				.getAssembleiaTO().getComentario()))
 			;
 		{
 			assembleiaControllerBean.isAssembleia(false);
