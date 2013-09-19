@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.webhomebeta.bean.AssembleiaControllerBean;
+import br.com.webhomebeta.bean.UploadArquivosAssembleiaControllerBean;
 import br.com.webhomebeta.entity.Assembleia;
 import br.com.webhomebeta.service.AssembleiaService;
 import br.com.webhomebeta.validacao.ValidadorAssembleia;
@@ -44,7 +43,7 @@ public class AssembleiaController {
 	@RequestMapping(value = "addAssembleia", method = RequestMethod.POST)
 	// valor da action
 	public ModelAndView Atas(
-			@ModelAttribute("assembleia") final AssembleiaControllerBean AssembleiaBean,
+			@ModelAttribute("assembleia") final UploadArquivosAssembleiaControllerBean AssembleiaBean,
 			BindingResult result, HttpServletRequest request) {
 		ValidadorAssembleia(AssembleiaBean);
 		if (AssembleiaBean.hasErrors()) {
@@ -66,7 +65,7 @@ public class AssembleiaController {
 	}
 
 	public void ValidadorAssembleia(
-			AssembleiaControllerBean assembleiaControllerBean) {
+			UploadArquivosAssembleiaControllerBean assembleiaControllerBean) {
 
 		if (!validadorAssembleia.isValidAssembleia(assembleiaControllerBean
 				.getAssembleiaTO().getAssembleia()))
