@@ -25,6 +25,10 @@ public class PublicacaoService {
 		return publicacaoDAO.getPublicacao(idUser);
 	}
 	
+	public void deletarPublicacao(int idUsuario, int idPublicacao){
+		publicacaoDAO.deletarPublicacao(idUsuario, idPublicacao);
+	}
+	
 	public void update(int id, String imagem){
 		publicacaoDAO.update(id, imagem);
 	}

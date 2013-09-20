@@ -7,16 +7,29 @@ public class NovoComentarioJSON {
 	private int idUser;
 	private String caminhoImagem;
 	private String dataComentario;
+	private String nomeUsuario;
 
 	public NovoComentarioJSON(String comentario, int idComentario, int idUser,
-			String caminhoImagem, String dataComentario) {
+			String caminhoImagem, String dataComentario, String nomeUsuario) {
 
 		this.comentario = comentario;
 		this.idComentario = idComentario;
 		this.idUser = idUser;
 		this.caminhoImagem = caminhoImagem;
 		this.dataComentario = dataComentario;
+		this.nomeUsuario = nomeUsuario;
 	}
+	
+	
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
 
 	public String getDataComentario() {
 		return dataComentario;

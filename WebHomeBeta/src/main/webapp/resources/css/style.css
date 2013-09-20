@@ -197,6 +197,7 @@ input[type="password"]:focus {
     background: #BDE2F0;
     height: 250px;
     float: left;
+    border-radius: 7px;
 }
 
 #photo-user {
@@ -254,6 +255,7 @@ input[type="password"]:focus {
 #thumb-photo {
     float: left;
     margin-left: 9px;
+    border-radius: 7px;
 }
 
 #rightCol {
@@ -313,6 +315,7 @@ input[type="password"]:focus {
     margin: 10px 0 0 15px;
     padding-bottom: 20px;
     width: 447px;
+    overflow: hidden;
 }
 
 .name-user-comment {
@@ -341,10 +344,11 @@ input[type="password"]:focus {
     margin-bottom: 20px;
     margin-left: 60px;
     width: 450px;
+    border-radius: 15px;
 }
 
 .comments-holder .comments {
-    border-bottom: 1px solid #0F3242;
+    border-bottom: 1px solid #FFF;
     float: left;
     margin: 10px 0 0 0;
     padding-bottom: 10px;
@@ -370,6 +374,7 @@ input[type="password"]:focus {
 .comments p {
     width: 375px;
     float: left;
+    overflow: hidden;
 }
 
 .frmCommentPost {
@@ -394,6 +399,20 @@ input[type="password"]:focus {
 .rede-social #data-user {
     height: 35px;
     width: 755px;
+}
+
+.rede-social #data-user a,
+.rede-social #data-user span,
+.rede-social #data-user p.name-user-connected {
+	float: right;
+	text-decoration: none;
+}
+
+.rede-social #data-user p.name-user-connected {
+	max-width: 200px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 textarea {

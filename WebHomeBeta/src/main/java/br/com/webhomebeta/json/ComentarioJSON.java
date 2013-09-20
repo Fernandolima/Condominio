@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class ComentarioJSON {
 	
-	int idUsuarioComentario;
-	String nome;
-	String imagemUsuario;
-	int idComentario;
-	Date dataComentario;
-	String comentario;
+	private int idUsuarioComentario;
+	private String nome;
+	private String imagemUsuario;
+	private int idComentario;
+	private String dataComentario;
+	private String comentario;
 	
 	public ComentarioJSON(int idUsuarioComentario, String nome,
-			String imagemUsuario, int idComentario, Date dataComentario,
+			String imagemUsuario, int idComentario, String dataComentario,
 			String comentario) {
 		super();
 		this.idUsuarioComentario = idUsuarioComentario;
@@ -46,10 +46,10 @@ public class ComentarioJSON {
 	public void setIdComentario(int idComentario) {
 		this.idComentario = idComentario;
 	}
-	public Date getDataComentario() {
+	public String getDataComentario() {
 		return dataComentario;
 	}
-	public void setDataComentario(Date dataComentario) {
+	public void setDataComentario(String dataComentario) {
 		this.dataComentario = dataComentario;
 	}
 	public String getComentario() {

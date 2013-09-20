@@ -14,8 +14,8 @@ var POST_COMMENT  = {
 			var htmlHome = '';
 			$.each(data, function(e, val){
 				htmlHome = '';
-				console.log(e);
-				htmlHome += '<div class="post" data-id-user="1234">';
+				
+				htmlHome += '<div class="post" data-id-post="'+val.idPublicacao+'">';
 					if(val.proprietario){
 						htmlHome += '<a href="#" class="deletePost hidden">Excluir</a>';
 					}
@@ -28,16 +28,19 @@ var POST_COMMENT  = {
 					
 					if(val.comentarios.length > 0) {
 						htmlHome += '<div class="comments-holder">';
+							htmlHome += '<div class="main-comment">';
 						$.each(val.comentarios, function(l, comment){							
 								htmlHome += '<div class="comments">';
 									htmlHome += '<img src="'+comment.imagemUsuario+'" class="thumb-post" />';
 									htmlHome += '<a href="#" class="name-user-comment">'+comment.nome+'</a>';
-									htmlHome += '<p class="time-comments">30/08/2013 - 18:21</p>';
+									htmlHome += '<p class="time-comments">'+comment.dataComentario+'</p>';
 									htmlHome += '<p>'+comment.comentario+'</p>';
 								htmlHome += '</div>';
 						});
-							htmlHome += '<form class="frmCommentPost">';
-								htmlHome += '<input type="text" class="inputComment" placeholder="Comentar" name="comment-post" />';
+							htmlHome += '</div>';
+							htmlHome += '<form class="frmCommentPost" method="POST">';
+								htmlHome += '<input type="text" class="inputComment" placeholder="Comentar" name="comentarioTO.comentario" />';
+								htmlHome += '<input type="hidden" class="idPub" name="idPublicacao" />';
 							htmlHome += '</form>';
 								
 						htmlHome += '</div>';
@@ -60,8 +63,10 @@ var POST_COMMENT  = {
 			e.preventDefault();
 			
 			htmlComment += '<div class="comments-holder" style="display:none;">';
-				htmlComment += '<form class="frmCommentPost">';
-					htmlComment += '<input type="text" class="inputComment" placeholder="Comentar" name="comment-post" />';
+				htmlComment += '<div class="main-comment"></div>';
+				htmlComment += '<form class="frmCommentPost" method="POST">';
+					htmlComment += '<input type="text" class="inputComment" placeholder="Comentar" name="comentarioTO.comentario" />';
+					htmlComment += '<input type="hidden" class="idPub" name="idPublicacao" />';
 				htmlComment += '</form>';
 			htmlComment += '</div>';
 
@@ -75,7 +80,11 @@ var POST_COMMENT  = {
 
 		onSubmitPost: function(e) {
 			e.preventDefault();
-
+			
+			if($('#txtComment').val().length === 0) {
+				return false;
+			}
+			
 			$.ajax({
 				data: $('#frmComment').serialize(),
 		    	type: 'post',
@@ -86,26 +95,74 @@ var POST_COMMENT  = {
 		},
 
 		successPost: function(e) {
-			var htmlInserPost = "",
-				data = e.content;
-				console.log('success');
-				
-			$.each(data, function(i, val){
-				htmlInserPost += '<div class="post" data-id-user="'+val.idUsuario+'">';
-				htmlInserPost += '<a href="#" class="deletePost hidden">Excluir</a>';
-				htmlInserPost += '<img src="img/thumb-post.jpg" class="thumb-post" />';
-				htmlInserPost += '<div class="comments-post">';
-					htmlInserPost += '<a href="#" class="name-user-comment">'+val.nome+'</a>';
-					htmlInserPost += '<p class="time-comments">'+val.dataPublicacao+'</p>';
-					htmlInserPost += '<p class="comment-user">'+val.publicacao+'</p>';
-				htmlInserPost += '</div>';
-				htmlInserPost += '<a href="#" class="add-comments">>> Comentar</a>';
+			var htmlInserPost = "";
+			
+			htmlInserPost += '<div class="post" data-id-post="'+e.idPublicacao+'">';
+			htmlInserPost += '<a href="#" class="deletePost hidden">Excluir</a>';
+			htmlInserPost += '<img src="'+e.caminhoImg+'" class="thumb-post" />';
+			htmlInserPost += '<div class="comments-post">';
+				htmlInserPost += '<a href="#" class="name-user-comment">'+e.nome+'</a>';
+				htmlInserPost += '<p class="time-comments">'+e.dataPublicacao+'</p>';
+				htmlInserPost += '<p class="comment-user">'+e.publicacao+'</p>';
 			htmlInserPost += '</div>';
-			});
+			htmlInserPost += '<a href="#" class="add-comments">>> Comentar</a>';
+			htmlInserPost += '</div>';
+			
 			
 			$('#txtComment').val('');
 			$('#main-comments').prepend(htmlInserPost);				
 			htmlInserPost += "";
+		},
+		
+		submitComment: function() {
+			var el = $(this),
+				idPub = $(this).closest('.post').attr('data-id-post'),
+				dataForm = '',
+				htmlComment = '';
+			
+			$(this).closest('.post').find('.idPub').val(idPub);
+			
+			dataForm = $(this).serialize();
+			
+			$.ajax({
+				data: dataForm,
+		    	type: 'post',
+		      	url:'home/comentar',
+		      	dataType: 'json',	
+		      	success: function(e) {
+		      		htmlComment += '<div class="comments">';
+		      			htmlComment += '<img class="thumb-post" src="'+e.caminhoImagem+'">';
+		      			htmlComment += '<a class="name-user-comment" href="#">'+e.nomeUsuario+'</a>';
+		      			htmlComment += '<p class="time-comments">'+e.dataComentario+'</p>';
+		      			htmlComment += '<p>'+e.comentario+'</p>';
+		      		htmlComment += '</div>';
+		      		
+		      		el.closest('.post').find('.main-comment').append(htmlComment);
+		      		el.closest('.post').find('.inputComment').val('');
+		      	}
+		    });
+			 
+			return false;			
+		},
+		
+		onDeletePost: function(e) {
+			e.preventDefault();
+			
+			var idPostDelete = $(this).closest('.post').attr('data-id-post'),
+				el = $(this),
+				dataPost = "idPost="+idPostDelete;
+			
+			$.ajax({
+				data: dataPost,
+		    	type: 'get',
+		      	url:'home/delete',
+		      	dataType: 'json',	
+		      	success: function(e) {
+		      		if(e) {
+		      			el.closest('.post').remove();
+		      		}
+		      	}
+		    });
 		}
 }
 
@@ -115,7 +172,9 @@ $(function() {
 	
 	$('#txtComment').on('focus', POST_COMMENT.postFocus);	
 
-	$('.add-comments').on('click', POST_COMMENT.addComment);
-
+	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
+	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
+	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
+	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
 });

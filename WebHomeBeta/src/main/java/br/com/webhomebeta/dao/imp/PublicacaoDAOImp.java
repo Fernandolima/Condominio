@@ -48,6 +48,8 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		return (List<Publicacao>) q.list();
 				
 	}
+	
+	
 	@Override
 	@Transactional
 	public void update(int id, String imagem) {
@@ -56,4 +58,13 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		q.setParameter(1, id);
 		q.executeUpdate();
 	}
+
+	@Transactional
+	public void deletarPublicacao(int idUsuario, int idPublicacao) {
+		Query q = factory.getCurrentSession().createSQLQuery("DELETE FROM [dbo].[PUBLICACAO]  WHERE ID_USER = ? AND ID_PUBLICACAO = ?");
+		q.setParameter(0, idUsuario);
+		q.setParameter(1, idPublicacao);
+		q.executeUpdate();
+	}
+	
 }

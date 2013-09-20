@@ -16,9 +16,11 @@ public class ComentarioDAOImp implements ComentarioDAO{
 	private SessionFactory factory;
 	@Override
 	@Transactional
-	public void salvarComentario(Comentario comentario) {
+	public Comentario salvarComentario(Comentario comentario) {
 		
 		factory.getCurrentSession().save(comentario);
+		
+		return comentario;
 		
 	}
 
