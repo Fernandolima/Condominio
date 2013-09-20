@@ -5,7 +5,7 @@ import br.com.webhomebeta.entity.Publicacao;
 
 public interface ComentarioDAO {
 	
-	public void salvarComentario(Comentario comentario);
+	public Comentario salvarComentario(Comentario comentario);
 	public Comentario getComentarios(Publicacao publicacao);
 	public Comentario getComentarios();
 	public void update(int id, String imagem);
