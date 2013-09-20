@@ -105,7 +105,8 @@ public class HomeController {
 				ComentarioJSON cJSON = new ComentarioJSON(c
 						.getUsuarioComentario().getIdUser(), c
 						.getUsuarioComentario().getNome(), c.getImagem(),
-						c.getIdComentario(), c.getData(), c.getComentario());
+						c.getIdComentario(), df.format(c.getData()),
+						c.getComentario());
 				// Adiciona a lista cada comentario
 				comentariosJSON.add(cJSON);
 			}
@@ -131,22 +132,28 @@ public class HomeController {
 	NovoComentarioJSON comentar(
 			@ModelAttribute("moradorControllerBean") MoradorControllerBean moradorControllerBean,
 			BindingResult bindingResult) {
-		// Poderia setar o ID no comentarioTO pelo js?
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		moradorControllerBean.getComentarioTO().setPublicacao(
 				new Publicacao(moradorControllerBean.getIdPublicacao()));
 		moradorControllerBean.getComentarioTO().setUsuarioComentario(
 				this.moradorControllerBean.getUsuario());
+		moradorControllerBean.getComentarioTO().setData(new Date());
+		moradorControllerBean.getComentarioTO().setImagem(
+				this.moradorControllerBean.getUsuario().getImagemView());
+
 		Comentario comentario = new Comentario();
 		BeanUtils.copyProperties(moradorControllerBean.getComentarioTO(),
 				comentario);
 
+		Comentario c = comentarioService.save(comentario);
+
 		NovoComentarioJSON comentarioJSON = new NovoComentarioJSON(
 				moradorControllerBean.getComentarioTO().getComentario(),
-				moradorControllerBean.getComentarioTO().getIdComentario(),
-				this.moradorControllerBean.getUsuario().getIdUser(),
-				moradorControllerBean.getComentarioTO().getImagem(),
-				df.format(moradorControllerBean.getComentarioTO().getData()));
+				c.getIdComentario(), this.moradorControllerBean.getUsuario()
+						.getIdUser(), this.moradorControllerBean.getUsuario()
+						.getImagemView(), df.format(moradorControllerBean
+						.getComentarioTO().getData())
+						, this.moradorControllerBean.getUsuario().getNome());
 		return comentarioJSON;
 	}
 
@@ -158,12 +165,12 @@ public class HomeController {
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		System.out.println(bean.getPublicacaoTO().getPublicacao());
-		//Seta o usuario que publicou
+		// Seta o usuario que publicou
 		bean.getPublicacaoTO().setUsuarioPublicacao(
 				moradorControllerBean.getUsuario());
-		//Seta a data de postagem
+		// Seta a data de postagem
 		bean.getPublicacaoTO().setData(new Date());
-		//Seta a imagem de quem publicou
+		// Seta a imagem de quem publicou
 		bean.getPublicacaoTO().setImagem(
 				moradorControllerBean.getUsuario().getImagemView());
 		Publicacao publicacao = new Publicacao();
@@ -181,6 +188,18 @@ public class HomeController {
 
 	}
 
+	//deleta uma publicação
+	@RequestMapping(value = "home/delete", method = RequestMethod.GET)
+	public @ResponseBody
+	String deletePost(@RequestParam("idPost") int id) {
+		
+			publicacaoService.deletarPublicacao(id,moradorControllerBean.getUsuario().getIdUser());
+		
+		
+		
+		return "true";
+	}
+	
 	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
 	// o ID da publicacao
 	// e o tipo de notificacao
@@ -189,18 +208,18 @@ public class HomeController {
 	@RequestMapping(value = "home/notificacao", method = RequestMethod.GET)
 	public @ResponseBody
 	DeferredResult<NotificacoesJSON> receberNotificacao(
-			@RequestParam("id") int idPublicacao, @RequestParam("tipo") String tipo) {
-		
-		//adiociona a notificacaoJSON para a DeferredResult
+			@RequestParam("id") int idPublicacao,
+			@RequestParam("tipo") String tipo) {
+
+		// adiociona a notificacaoJSON para a DeferredResult
 		DeferredResult<NotificacoesJSON> deferredResult = new DeferredResult<>();
 		this.queueNotificacaoJSON.add(deferredResult);
-		
+
 		Notificacao notificacao = new Notificacao(tipo, idPublicacao,
 				moradorControllerBean.getUsuario().getIdUser());
-		
-		//Adiociona a notificao salva na queue
+
+		// Adiociona a notificao salva na queue
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
-	
 
 		return deferredResult;
 	}
@@ -209,15 +228,16 @@ public class HomeController {
 	public void externalThread() throws InterruptedException {
 		Thread.sleep(6000);
 		for (DeferredResult<NotificacoesJSON> result : this.queueNotificacaoJSON) {
-			
+
 			Notificacao n = queueNotificacao.poll();
-			
+
 			NotificacoesJSON json = new NotificacoesJSON();
 			json.setIdPublicacao(n.getIdNotificacado());
-			json.SetTipo(n.getTipoNotificacao(), moradorControllerBean.getUsuario().getNome());
-			
+			json.SetTipo(n.getTipoNotificacao(), moradorControllerBean
+					.getUsuario().getNome());
+
 			result.setResult(json);
-			
+
 			this.queueNotificacaoJSON.remove(result);
 		}
 	}
