@@ -3,14 +3,19 @@ package br.com.webhomebeta.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.imgscalr.Scalr.Method;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -57,8 +62,6 @@ public class HomeController {
 	@Autowired
 	private NotificacaoService notificacaoService;
 
-	private Queue<DeferredResult<NotificacoesJSON>> queueNotificacaoJSON = new ConcurrentLinkedQueue<DeferredResult<NotificacoesJSON>>();
-	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
@@ -109,9 +112,13 @@ public class HomeController {
 						c.getComentario());
 				// Adiciona a lista cada comentario
 				comentariosJSON.add(cJSON);
+				
 			}
 			// Seta os comentarios
+			//ordena pela data
+			Collections.sort(comentariosJSON, new CustomComparator());
 			jsonPublicacao.setComentarios(comentariosJSON);
+			jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
 
 			// Verifica se a publicacao eh do usuario que esta logado
 			if (moradorControllerBean.getUsuario().getIdUser() == p
@@ -165,6 +172,10 @@ public class HomeController {
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		System.out.println(bean.getPublicacaoTO().getPublicacao());
+		//Filtra javascript
+		String publicacaoEscape = StringEscapeUtils.escapeHtml(bean.getPublicacaoTO().getPublicacao());
+		
+		bean.getPublicacaoTO().setPublicacao(publicacaoEscape);
 		// Seta o usuario que publicou
 		bean.getPublicacaoTO().setUsuarioPublicacao(
 				moradorControllerBean.getUsuario());
@@ -179,7 +190,7 @@ public class HomeController {
 		Publicacao p = publicacaoService.salvar(publicacao);
 		// monta o JSON de Publicacao.
 		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
-				p.getIdPublicacao(), bean.getPublicacaoTO().getPublicacao(),
+				p.getIdPublicacao(), publicacaoEscape,
 				df.format(bean.getPublicacaoTO().getData()),
 				moradorControllerBean.getUsuario().getIdUser(),
 				moradorControllerBean.getUsuario().getNome(),
@@ -199,47 +210,13 @@ public class HomeController {
 		
 		return "true";
 	}
-	
-	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
-	// o ID da publicacao
-	// e o tipo de notificacao
+		
+	private class CustomComparator implements Comparator<ComentarioJSON>{
 
-	// Testando
-	@RequestMapping(value = "home/notificacao", method = RequestMethod.GET)
-	public @ResponseBody
-	DeferredResult<NotificacoesJSON> receberNotificacao(
-			@RequestParam("id") int idPublicacao,
-			@RequestParam("tipo") String tipo) {
-
-		// adiociona a notificacaoJSON para a DeferredResult
-		DeferredResult<NotificacoesJSON> deferredResult = new DeferredResult<>();
-		this.queueNotificacaoJSON.add(deferredResult);
-
-		Notificacao notificacao = new Notificacao(tipo, idPublicacao,
-				moradorControllerBean.getUsuario().getIdUser());
-
-		// Adiociona a notificao salva na queue
-		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
-
-		return deferredResult;
-	}
-
-	@Scheduled(fixedRate = 3000)
-	public void externalThread() throws InterruptedException {
-		Thread.sleep(6000);
-		for (DeferredResult<NotificacoesJSON> result : this.queueNotificacaoJSON) {
-
-			Notificacao n = queueNotificacao.poll();
-
-			NotificacoesJSON json = new NotificacoesJSON();
-			json.setIdPublicacao(n.getIdNotificacado());
-			json.SetTipo(n.getTipoNotificacao(), moradorControllerBean
-					.getUsuario().getNome());
-
-			result.setResult(json);
-
-			this.queueNotificacaoJSON.remove(result);
+		@Override
+		public int compare(ComentarioJSON o1, ComentarioJSON o2) {
+			return o1.getDataComentario().compareTo(o2.getDataComentario());
 		}
+		
 	}
-
 }

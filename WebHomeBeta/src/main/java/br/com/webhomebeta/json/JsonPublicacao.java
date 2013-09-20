@@ -11,6 +11,7 @@ public class JsonPublicacao {
 	private String imagemPublicacao;
 	private UsuarioPublicacaoJSON usuarioPublicacao;
 	private List<ComentarioJSON> comentarios;
+	private int quantidadeComentarios;
 	private boolean isProprietario;
 
 	
@@ -26,9 +27,26 @@ public class JsonPublicacao {
 		this.usuarioPublicacao = usuarioPublicacao;
 	}
 
+	
+	
+	
 	public String getDataPublicacao() {
 		return dataPublicacao;
 	}
+
+	public int getQuantidadeComentarios() {
+		return quantidadeComentarios;
+	}
+
+
+
+
+	public void setQuantidadeComentarios(int quantidadeComentarios) {
+		this.quantidadeComentarios = quantidadeComentarios;
+	}
+
+
+
 
 	public void setDataPublicacao(String dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
