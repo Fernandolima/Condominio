@@ -20,16 +20,40 @@ public class AtasEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8688347079158220711L;
+	private static long serialVersionUID = 8688347079158220711L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ATAS")
 	private int idAtas;
 
-	@Column(name = "COMENTARIO")
+	@Column(name = "TITULO")
 	private String comentario;
 	
+	@Column(name = "DATA_CRIACAO")
+	private Date dataATA;
+	
+	/**
+	 * @return the dateATA
+	 */
+	public Date getDateATA() {
+		return dataATA;
+	}
+
+	/**
+	 * @param serialversionuid the serialversionuid to set
+	 */
+	public static void setSerialversionuid(long serialversionuid) {
+		serialVersionUID = serialversionuid;
+	}
+
+	/**
+	 * @param dateATA the dateATA to set
+	 */
+	public void setDateATA(Date dateATA) {
+		this.dataATA = dateATA;
+	}
+
 	@Column(name = "ARQUIVO")
 	private String arquivo;
 

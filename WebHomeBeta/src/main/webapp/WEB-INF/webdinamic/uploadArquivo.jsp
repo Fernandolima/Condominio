@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-	<form:form modelAttribute="atas" action="addArquivos" name="frm" method="post"
+	<form:form modelAttribute="atas" action="atas/addArquivos" name="frm" method="post"
 		enctype="multipart/form-data" onSubmit="return Validate();">
 		<fieldset>
 			<legend>Upload File</legend>

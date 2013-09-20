@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
-import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Usuario;
@@ -40,66 +39,67 @@ public class AtasController {
 	private AtasEntity atasEntity;
 	@Autowired
 	private UsuarioService usuarioService;
-	private UploadControllerBean beanUsuarios;
+	@Autowired
+	private UploadArquivosAtasControllerBean uploadArquivobeanUsuarios;
 	private ValidadorAtas validadorAtas = new ValidadorAtas();
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
 	@RequestMapping(value = "atas", method = RequestMethod.GET)
-	public ModelAndView Atas(ModelMap model) {
+	public ModelAndView Atas(ModelMap model){
 		List<AtasEntity> atas = atasService.getList();
-
-		// Retorna a pagina inserirAtas.jsp com uma ata criado
-
+		// beanUsuarios.getFileData();
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				beanUsuarios.setUsuario(usuarioService
+				uploadArquivobeanUsuarios.setUsuario(usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername()));
 
 			}
 		}
 		model.put("listaAtas", atas);
-		model.put("Arquivo", beanUsuarios);
-		model.put("atas", new UploadArquivosAtasControllerBean());
-		return new ModelAndView("uploadArquivo", model);
+		model.put("Arquivo", uploadArquivobeanUsuarios);
+		model.put("atasBean", new UploadArquivosAtasControllerBean());
+		return new ModelAndView("atas", model);
 
 	}
 
-	@RequestMapping(value = "Atas/addArquivos", method = RequestMethod.POST)
+	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public ModelAndView AtasArquivos(
 			@ModelAttribute("atas") final UploadArquivosAtasControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
-	salvar(bean.getFileData(), atasEntity, beanUsuarios.getUsuario());
+		salvar(bean.getFileData(), atasEntity, uploadArquivobeanUsuarios.getUsuario());
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				beanUsuarios.setUsuario(usuarioService
+				uploadArquivobeanUsuarios.setUsuario(usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername()));
 
 			}
 		}
-		
-		// cria um objeto de AtasEntity, compara com o dados to TO e salva  no banco.
-//		AtasEntity descricao = new AtasEntity();
-//		//BeanUtils.copyProperties(bean.getAtasTo(), descricao);
-//		// Salva no banco
-//
-//		atasService.save(descricao);
 
-		return new ModelAndView("uploadArquivo", "atas", bean);
+		// cria um objeto de AtasEntity, compara com o dados to TO e salva no
+		// banco.
+		AtasEntity descricao = new AtasEntity();
+
+		BeanUtils.copyProperties(bean.getAtasTo(), descricao);
+		// Salva no banco
+
+		atasService.save(descricao);
+
+		return new ModelAndView("atas", "atasBean", bean);
 	}
 
 	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean,
-			UploadControllerBean bean){
+			UploadControllerBean bean) {
 
 		if (!validadorAtas.isValidAtas(atasBean.getAtasTo().getAtas()))
 			;
@@ -112,7 +112,7 @@ public class AtasController {
 			atasBean.isValidDate(false);
 		} else
 			atasBean.isValidDate(true);
-	
+
 	}
 
 	@RequestMapping(value = "atas/editar", method = RequestMethod.POST)
@@ -127,7 +127,7 @@ public class AtasController {
 	public String update(@ModelAttribute("atas") AtasEntity atasEntity,
 			BindingResult result) {
 
-		atasService.update(atasEntity);
+		//atasService.update(result);
 
 		return "redirect:/inserirAtas/editar";
 
@@ -165,15 +165,16 @@ public class AtasController {
 				file.transferTo(fileToDisk);
 
 			}
-
-			usuario.setNome(result);
+			atasEntity = new  AtasEntity();
 			atasEntity.setArquivo("/WebHomeBeta/uploadedArquivos/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
-			atasService.update(atasEntity);
+			atasService.update("/WebHomeBeta/uploadedArquivos/"
+					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }

@@ -31,9 +31,10 @@ public class AtasImp implements AtasDao {
 		return atasEntity;
 	}
 	@Transactional
-	public void update(AtasEntity atasEntity) {
-		factory.getCurrentSession().update(atasEntity);
-
+	public void update(String arquivo) {
+		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[ATAS] SET ARQUIVO = ?");
+		q.setParameter(0, arquivo);
+		q.executeUpdate();
 	}
 		@Transactional
 		public void delete(AtasEntity atasEntity) {

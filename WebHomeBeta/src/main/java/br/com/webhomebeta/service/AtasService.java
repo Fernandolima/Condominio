@@ -32,8 +32,8 @@ public class AtasService {
 	 
 	}
 	
-	public void update(AtasEntity atasEntity){
-		atasDao.update(atasEntity);
+	public  void update(String arquivo){
+		atasDao.update(arquivo);
 	}
 
 }
