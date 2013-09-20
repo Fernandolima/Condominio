@@ -34,41 +34,9 @@ public class AtasEntity implements Serializable {
 	private Date dataATA;
 	
 	/**
-	 * @return the dateATA
+	 * @return the serialVersionUID
 	 */
-	public Date getDateATA() {
-		return dataATA;
-	}
-
-	/**
-	 * @param serialversionuid the serialversionuid to set
-	 */
-	public static void setSerialversionuid(long serialversionuid) {
-		serialVersionUID = serialversionuid;
-	}
-
-	/**
-	 * @param dateATA the dateATA to set
-	 */
-	public void setDateATA(Date dateATA) {
-		this.dataATA = dateATA;
-	}
-
-	@Column(name = "ARQUIVO")
-	private String arquivo;
-
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_USER", nullable = false)
-	private Usuario usuarioAtas;
-
-	@Column(name = "DATA_CRIACAO")
-	private Date dataCriacao;
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
+	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
@@ -87,6 +55,20 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
+	 * @return the dataATA
+	 */
+	public Date getDataATA() {
+		return dataATA;
+	}
+
+	/**
+	 * @return the arquivo
+	 */
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	/**
 	 * @return the usuarioAtas
 	 */
 	public Usuario getUsuarioAtas() {
@@ -98,6 +80,13 @@ public class AtasEntity implements Serializable {
 	 */
 	public Date getDataCriacao() {
 		return dataCriacao;
+	}
+
+	/**
+	 * @param serialVersionUID the serialVersionUID to set
+	 */
+	public static void setSerialVersionUID(long serialVersionUID) {
+		AtasEntity.serialVersionUID = serialVersionUID;
 	}
 
 	/**
@@ -115,6 +104,20 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
+	 * @param dataATA the dataATA to set
+	 */
+	public void setDataATA(Date dataATA) {
+		this.dataATA = dataATA;
+	}
+
+	/**
+	 * @param arquivo the arquivo to set
+	 */
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	/**
 	 * @param usuarioAtas the usuarioAtas to set
 	 */
 	public void setUsuarioAtas(Usuario usuarioAtas) {
@@ -128,21 +131,16 @@ public class AtasEntity implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
-	/**
-	 * @return the arquivo
-	 */
-	public String getArquivo() {
-		return arquivo;
-	}
+	@Column(name = "ARQUIVO")
+	private String arquivo;
 
-	/**
-	 * @param arquivo the arquivo to set
-	 */
-	public void setArquivo(String arquivo) {
-		this.arquivo = arquivo;
-	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_USER", nullable = false)
+	private Usuario usuarioAtas;
 
-
-
-
+	@Column(name = "DATA_ATA")
+	private Date dataCriacao;
+	
+	
 }
