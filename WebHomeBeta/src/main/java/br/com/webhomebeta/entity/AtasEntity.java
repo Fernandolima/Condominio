@@ -1,7 +1,7 @@
 package br.com.webhomebeta.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -105,10 +105,10 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
-	 * @param dataATA the dataATA to set
+	 * @param date the dataATA to set
 	 */
-	public void setDataATA(Date dataATA) {
-		this.dataATA = dataATA;
+	public void setDataATA(Date date) {
+		this.dataATA = date;
 	}
 
 	/**
@@ -142,6 +142,23 @@ public class AtasEntity implements Serializable {
 
 	@Column(name = "DATA_ATA")
 	private Date dataCriacao;
+	
+	@Column(name = "ATAS")
+	private String atas;
+
+	/**
+	 * @return the atas
+	 */
+	public String getAtas() {
+		return atas;
+	}
+
+	/**
+	 * @param atas the atas to set
+	 */
+	public void setAtas(String atas) {
+		this.atas = atas;
+	}
 	
 	
 }
