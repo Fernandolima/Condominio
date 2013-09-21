@@ -9,5 +9,5 @@ public interface NotificacaoDAO {
 	
 	public Notificacao salvar(Notificacao notificacao);
 	public void remove (Notificacao notificacao);
-	public List<Notificacao> getPublicacoes();
+	public List<Notificacao> getNotificacoes(int id, boolean b);
 }

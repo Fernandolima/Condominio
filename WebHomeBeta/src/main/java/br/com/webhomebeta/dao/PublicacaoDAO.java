@@ -10,6 +10,7 @@ public interface PublicacaoDAO {
 	public void deletarPublicacao(int idUsuario, int idPublicacao);
 	public List<Publicacao> getPublicacoes();
 	public List<Publicacao> getPublicacao(int idUser);
+	public Publicacao getUnicaPublicacao(int idPublicacao);
 	public void update(int id, String imagem);
 }
 		

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,7 +63,6 @@ public class HomeController {
 	@Autowired
 	private NotificacaoService notificacaoService;
 
-
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
@@ -81,6 +81,46 @@ public class HomeController {
 		model.put("moradorControllerBean", moradorControllerBean);
 
 		return new ModelAndView("home", model);
+	}
+
+	@RequestMapping(value = "home/{idPublicacao}", method = RequestMethod.POST)
+	public @ResponseBody
+	JsonPublicacao visualizaNotificacao(@PathVariable("idPublicacao") int id) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Publicacao publicacao = publicacaoService.getUnicaPublicacao(id);
+		JsonPublicacao jsonPublicacao = new JsonPublicacao(
+				publicacao.getPublicacao(), id,
+				df.format(publicacao.getData()), publicacao.getImagem(),
+				new UsuarioPublicacaoJSON(publicacao.getUsuarioPublicacao()
+						.getIdUser(), publicacao.getUsuarioPublicacao()
+						.getNome()));
+		 
+		ArrayList<ComentarioJSON> comentariosJSON = new ArrayList<>();
+		
+		for (Comentario c : publicacao.getComentarios()) {
+			// Adiciona os dados do comentario
+			ComentarioJSON cJSON = new ComentarioJSON(c
+					.getUsuarioComentario().getIdUser(), c
+					.getUsuarioComentario().getNome(), c.getImagem(),
+					c.getIdComentario(), df.format(c.getData()),
+					c.getComentario());
+			// Adiciona a lista cada comentario
+			comentariosJSON.add(cJSON);
+		}
+		
+		Collections.sort(comentariosJSON, new CustomComparator());
+		jsonPublicacao.setComentarios(comentariosJSON);
+		jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
+
+		// Verifica se a publicacao eh do usuario que esta logado
+		if (moradorControllerBean.getUsuario().getIdUser() == publicacao
+				.getUsuarioPublicacao().getIdUser())
+			jsonPublicacao.setProprietario(true);
+		else
+			jsonPublicacao.setProprietario(false);
+
+		// Seta as publicacoes filtradas e as retorna para a VIEW
+		return jsonPublicacao;
 	}
 
 	/*
@@ -112,10 +152,10 @@ public class HomeController {
 						c.getComentario());
 				// Adiciona a lista cada comentario
 				comentariosJSON.add(cJSON);
-				
+
 			}
 			// Seta os comentarios
-			//ordena pela data
+			// ordena pela data
 			Collections.sort(comentariosJSON, new CustomComparator());
 			jsonPublicacao.setComentarios(comentariosJSON);
 			jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
@@ -159,8 +199,8 @@ public class HomeController {
 				c.getIdComentario(), this.moradorControllerBean.getUsuario()
 						.getIdUser(), this.moradorControllerBean.getUsuario()
 						.getImagemView(), df.format(moradorControllerBean
-						.getComentarioTO().getData())
-						, this.moradorControllerBean.getUsuario().getNome());
+						.getComentarioTO().getData()),
+				this.moradorControllerBean.getUsuario().getNome());
 		return comentarioJSON;
 	}
 
@@ -172,9 +212,10 @@ public class HomeController {
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		System.out.println(bean.getPublicacaoTO().getPublicacao());
-		//Filtra javascript
-		String publicacaoEscape = StringEscapeUtils.escapeHtml(bean.getPublicacaoTO().getPublicacao());
-		
+		// Filtra javascript
+		String publicacaoEscape = StringEscapeUtils.escapeHtml(bean
+				.getPublicacaoTO().getPublicacao());
+
 		bean.getPublicacaoTO().setPublicacao(publicacaoEscape);
 		// Seta o usuario que publicou
 		bean.getPublicacaoTO().setUsuarioPublicacao(
@@ -190,33 +231,32 @@ public class HomeController {
 		Publicacao p = publicacaoService.salvar(publicacao);
 		// monta o JSON de Publicacao.
 		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
-				p.getIdPublicacao(), publicacaoEscape,
-				df.format(bean.getPublicacaoTO().getData()),
-				moradorControllerBean.getUsuario().getIdUser(),
-				moradorControllerBean.getUsuario().getNome(),
-				moradorControllerBean.getUsuario().getImagemView());
+				p.getIdPublicacao(), publicacaoEscape, df.format(bean
+						.getPublicacaoTO().getData()), moradorControllerBean
+						.getUsuario().getIdUser(), moradorControllerBean
+						.getUsuario().getNome(), moradorControllerBean
+						.getUsuario().getImagemView());
 		return novaPublicacaoJSON;
 
 	}
 
-	//deleta uma publicação
+	// deleta uma publicação
 	@RequestMapping(value = "home/delete", method = RequestMethod.GET)
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {
-		
-			publicacaoService.deletarPublicacao(id,moradorControllerBean.getUsuario().getIdUser());
-		
-		
-		
+
+		publicacaoService.deletarPublicacao(id, moradorControllerBean
+				.getUsuario().getIdUser());
+
 		return "true";
 	}
-		
-	private class CustomComparator implements Comparator<ComentarioJSON>{
+
+	private class CustomComparator implements Comparator<ComentarioJSON> {
 
 		@Override
 		public int compare(ComentarioJSON o1, ComentarioJSON o2) {
 			return o1.getDataComentario().compareTo(o2.getDataComentario());
 		}
-		
+
 	}
 }

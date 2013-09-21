@@ -2,6 +2,8 @@ package br.com.webhomebeta.service;
 
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.webhomebeta.dao.NotificacaoDAO;
@@ -20,8 +22,8 @@ public class NotificacaoService {
 		notificacaoDAO.remove(notificacao);
 	}
 	
-	public List<Notificacao> getNotificacoes(){
-		return notificacaoDAO.getPublicacoes();
+	public List<Notificacao> getNotificacoes(int id, boolean b){
+		return notificacaoDAO.getNotificacoes(id, b);
 	}
 }
 

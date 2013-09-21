@@ -2,6 +2,7 @@ package br.com.webhomebeta.service;
 
 import java.util.List;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,9 @@ public class PublicacaoService {
 	
 	public void update(int id, String imagem){
 		publicacaoDAO.update(id, imagem);
+	}
+	
+	public Publicacao getUnicaPublicacao(int idPublicacao){
+		return publicacaoDAO.getUnicaPublicacao(idPublicacao);
 	}
 }

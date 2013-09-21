@@ -66,5 +66,10 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		q.setParameter(1, idPublicacao);
 		q.executeUpdate();
 	}
+	@Override
+	public Publicacao getUnicaPublicacao(int idPublicacao) {
+		Publicacao p = (Publicacao) factory.getCurrentSession().get(Publicacao.class,idPublicacao);
+		return p;
+	}
 	
 }
