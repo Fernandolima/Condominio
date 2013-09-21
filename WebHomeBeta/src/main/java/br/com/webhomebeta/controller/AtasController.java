@@ -45,7 +45,7 @@ public class AtasController {
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
 	@RequestMapping(value = "atas", method = RequestMethod.GET)
-	public ModelAndView Atas(ModelMap model){
+	public ModelAndView Atas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
 		// beanUsuarios.getFileData();
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -73,7 +73,8 @@ public class AtasController {
 			@ModelAttribute("atas") final UploadArquivosAtasControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
-		salvar(bean.getFileData(), atasEntity, uploadArquivobeanUsuarios.getUsuario());
+		salvar(bean.getFileData(), atasEntity,
+				uploadArquivobeanUsuarios.getUsuario(),bean);
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
@@ -88,13 +89,6 @@ public class AtasController {
 
 		// cria um objeto de AtasEntity, compara com o dados to TO e salva no
 		// banco.
-		AtasEntity descricao = new AtasEntity();
-
-		BeanUtils.copyProperties(bean.getAtasTo(), descricao);
-		// // Salva no banco
-
-		atasService.save(descricao);
-
 		return new ModelAndView("atas", "atasBean", bean);
 	}
 
@@ -127,7 +121,7 @@ public class AtasController {
 	public String update(@ModelAttribute("atas") AtasEntity atasEntity,
 			BindingResult result) {
 
-		//atasService.update(result);
+		// atasService.update(result);
 
 		return "redirect:/inserirAtas/editar";
 
@@ -142,10 +136,10 @@ public class AtasController {
 	}
 
 	private void salvar(MultipartFile file, AtasEntity atasEntity,
-			Usuario usuario) throws Exception {
+			Usuario usuario,UploadArquivosAtasControllerBean bean) throws Exception {
 		File fileToDisk = null;
 		File caminho = null;
-
+		
 		String caminhoPasta = this.context.getRealPath("")
 				+ "/uploadedArquivos/" + usuario.getIdUser();
 
@@ -165,14 +159,19 @@ public class AtasController {
 				file.transferTo(fileToDisk);
 
 			}
-			atasEntity = new  AtasEntity();
+			atasEntity = new AtasEntity();
 			atasEntity.setArquivo("/WebHomeBeta/uploadedArquivos/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
+			atasEntity.setAtas(bean.getAtasTo().getAtas());
+			atasEntity.setDataATA(bean.getAtasTo().getDataAta());
+			atasEntity.setDataCriacao(bean.getAtasTo().getDataCriacao());
+			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
+			
 			atasService.save(atasEntity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
