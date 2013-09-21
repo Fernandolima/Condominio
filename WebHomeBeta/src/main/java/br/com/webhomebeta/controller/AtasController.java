@@ -90,10 +90,10 @@ public class AtasController {
 		// banco.
 		AtasEntity descricao = new AtasEntity();
 
-		//BeanUtils.copyProperties(bean.getAtasTo(), descricao);
+		BeanUtils.copyProperties(bean.getAtasTo(), descricao);
 		// // Salva no banco
 
-		//atasService.save(descricao);
+		atasService.save(descricao);
 
 		return new ModelAndView("uploadArquivo", "atas", bean);
 	}
