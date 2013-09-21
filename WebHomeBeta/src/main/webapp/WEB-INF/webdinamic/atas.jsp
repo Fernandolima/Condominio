@@ -10,7 +10,9 @@
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa</title>
 		<!-- <link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>-->
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/ckEditor.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery-ui-1.10.3.custom.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
@@ -67,19 +69,23 @@
 						<h2>Cadastrar Atas</h2>
 						<form:form modelAttribute="atasBean" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
 							<div id="contentFrm">
-								<div class="blocos">
-									<form:label for="tituloAta" path="atasTo.titulo">Título:</form:label>
-									<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" />
-									 
-									<form:label for="numAp" class="marginLabel" path="atasTo.atas">Atas</form:label>
-									<form:input type="text" id="numAp" class="inputBloco" path="atasTo.atas" autocomplete="off" />
-									
+								<form:label for="tituloAta" path="atasTo.titulo">Título:</form:label>
+								<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" />
+								
+								<div class="elInput">
+									<!--<form:input type="textarea" id="numAp" class="inputBloco" path="atasTo.atas" autocomplete="off" />-->
+									<textarea class="ckeditor" cols="80" id="editor1" name="atasTo.atas" rows="10">
+									</textarea>
+								</div>
+								
+								<div class="elInput">								
 									<form:label for="fileData" path="fileData">File</form:label>
 									<form:input path="fileData" id="arquivo" type="file" />
-									
-									<form:label for="numAp" class="marginLabel" path="atasTo.dataAta">Inicio da numeração:</form:label>
-									<form:input type="text" id="numAp" class="inputBloco" path="atasTo.dataAta" autocomplete="off" />
-									
+								</div>
+								
+								<div class="elInput">
+									<form:label for="numAp" path="atasTo.dataAta">Data:</form:label>
+									<form:input type="text" id="dataAssembleia" class="inputBloco" path="atasTo.dataAta" autocomplete="off" />
 								</div>
 							</div>
 							<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
@@ -92,5 +98,30 @@
 		</footer> -->
 		
 		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/ckeditor.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery-ui-1.10.3.custom.min.js"/>" type="text/javascript"></script>
+		<script>
+			$.datepicker.regional['pt-BR'] = {
+	                closeText: 'Fechar',
+	                prevText: '&#x3c;Anterior',
+	                nextText: 'Pr&oacute;ximo&#x3e;',
+	                currentText: 'Hoje',
+	                monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho',
+	                'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+	                'Jul','Ago','Set','Out','Nov','Dez'],
+	                dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sabado'],
+	                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+	                dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+	                weekHeader: 'Sm',
+	                dateFormat: 'dd/mm/yy',
+	                firstDay: 0,
+	                isRTL: false,
+	                showMonthAfterYear: false,
+	                yearSuffix: ''};
+	        $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+
+			$('#dataAssembleia').datepicker();
+		</script>
 	</body>
 </html>

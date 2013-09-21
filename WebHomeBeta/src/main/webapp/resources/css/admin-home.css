@@ -289,8 +289,29 @@ body {
 
 /*ATAS*/
 
+#cadastrar-atasView #contentFrm {
+	width:100%;
+	float: left;
+	margin-top:30px;
+}
+
 #cadastrarAtas {
 	width: 650px;
 	float: left;
 	margin-left: 25px;
+}
+
+#cadastrar-atasView label {
+	width: 43px;
+	text-align: right;
+}
+
+#tituloAta {
+	width: 590px;
+}
+
+#cadastrar-atasView .elInput {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
 }
