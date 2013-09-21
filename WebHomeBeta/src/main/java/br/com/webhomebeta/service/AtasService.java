@@ -32,8 +32,4 @@ public class AtasService {
 	 
 	}
 	
-	public  void update(String arquivo){
-		atasDao.update(arquivo);
-	}
-
 }

@@ -28,7 +28,7 @@ public class AtasEntity implements Serializable {
 	private int idAtas;
 
 	@Column(name = "TITULO")
-	private String comentario;
+	private String titulo;
 	
 	@Column(name = "DATA_CRIACAO")
 	private Date dataATA;
@@ -47,13 +47,7 @@ public class AtasEntity implements Serializable {
 		return idAtas;
 	}
 
-	/**
-	 * @return the comentario
-	 */
-	public String getComentario() {
-		return comentario;
-	}
-
+	
 	/**
 	 * @return the dataATA
 	 */
@@ -97,10 +91,17 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
-	 * @param comentario the comentario to set
+	 * @return the titulo
 	 */
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
+	public String getTitulo() {
+		return titulo;
+	}
+
+	/**
+	 * @param titulo the titulo to set
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	/**

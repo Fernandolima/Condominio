@@ -62,8 +62,8 @@ public class AtasController {
 		}
 		model.put("listaAtas", atas);
 		model.put("Arquivo", uploadArquivobeanUsuarios);
-		model.put("atasBean", new UploadArquivosAtasControllerBean());
-		return new ModelAndView("atas", model);
+		model.put("atas", new UploadArquivosAtasControllerBean());
+		return new ModelAndView("uploadArquivo", model);
 
 	}
 
@@ -90,12 +90,12 @@ public class AtasController {
 		// banco.
 		AtasEntity descricao = new AtasEntity();
 
-		BeanUtils.copyProperties(bean.getAtasTo(), descricao);
-		// Salva no banco
+		//BeanUtils.copyProperties(bean.getAtasTo(), descricao);
+		// // Salva no banco
 
-		atasService.save(descricao);
+		//atasService.save(descricao);
 
-		return new ModelAndView("atas", "atasBean", bean);
+		return new ModelAndView("uploadArquivo", "atas", bean);
 	}
 
 	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean,
@@ -168,9 +168,7 @@ public class AtasController {
 			atasEntity = new  AtasEntity();
 			atasEntity.setArquivo("/WebHomeBeta/uploadedArquivos/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
-			atasService.update("/WebHomeBeta/uploadedArquivos/"
-					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
-
+			atasService.save(atasEntity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

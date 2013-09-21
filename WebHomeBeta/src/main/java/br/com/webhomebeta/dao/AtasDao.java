@@ -17,8 +17,6 @@ public interface AtasDao {
 
 	public AtasEntity editar(int id);
 
-	public void update(String arquivo);
-
 	public void delete(AtasEntity atasEntity);
 
 }
