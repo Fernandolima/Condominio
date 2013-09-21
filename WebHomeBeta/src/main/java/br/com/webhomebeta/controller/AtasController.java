@@ -63,7 +63,7 @@ public class AtasController {
 		model.put("listaAtas", atas);
 		model.put("Arquivo", uploadArquivobeanUsuarios);
 		model.put("atasBean", new UploadArquivosAtasControllerBean());
-		return new ModelAndView("uploadArquivo", model);
+		return new ModelAndView("atas", model);
 
 	}
 
@@ -95,7 +95,7 @@ public class AtasController {
 
 		atasService.save(descricao);
 
-		return new ModelAndView("atasBean", "atas", bean);
+		return new ModelAndView("atas", "atasBean", bean);
 	}
 
 	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean,
