@@ -30,7 +30,7 @@ public class Assembleia {
 	@Column(name = "TITULO")
 	private String titulo;
 	
-	@Column(name = "DATA_ASSAMBLEIA")
+	@Column(name = "DATA_ASSEMBLEIA")
 	private Date dataAssembleia;
 	
 	
