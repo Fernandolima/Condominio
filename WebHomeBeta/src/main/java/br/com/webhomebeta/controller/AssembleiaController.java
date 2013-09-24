@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -73,7 +72,7 @@ public class AssembleiaController {
 			@ModelAttribute("assembleia") final UploadArquivosAssembleiaControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
-		salvar(bean.getFileData(), assembleia, beanUsuarios.getUsuario(),bean);
+		salvar(bean.getFileData(), assembleia, beanUsuarios.getUsuario(), bean);
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
@@ -89,7 +88,8 @@ public class AssembleiaController {
 	}
 
 	private void salvar(MultipartFile file, Assembleia assembleia,
-			Usuario usuario,UploadArquivosAssembleiaControllerBean bean) throws Exception {
+			Usuario usuario, UploadArquivosAssembleiaControllerBean bean)
+			throws Exception {
 		File fileToDisk = null;
 		File caminho = null;
 
@@ -119,10 +119,13 @@ public class AssembleiaController {
 			assembleia.setArquivo("/WebHomeBeta/uploadedArquivosAssembleia/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			assembleia.setAssembleia(bean.getAssembleiaTO().getAssembleia());
-			assembleia.setDataAssembleia((Date) bean.getAssembleiaTO().getDataAssembleia());
-			assembleia.setDataCriacao((Date) bean.getAssembleiaTO().getDataCriacao());
+			assembleia.setDataAssembleia((Date) bean.getAssembleiaTO()
+					.getDataAssembleia());
+			assembleia.setDataCriacao((Date) bean.getAssembleiaTO()
+					.getDataCriacao());
 			assembleia.setTitulo(bean.getAssembleiaTO().getTitulo());
-			assembleia.setUsuarioAssebleia(bean.getAssembleiaTO().getUsuarioAssebleia());
+			assembleia.setUsuarioAssebleia(bean.getAssembleiaTO()
+					.getUsuarioAssebleia());
 			assembleiaService.save(assembleia);
 
 		} catch (Exception e) {
@@ -142,12 +145,12 @@ public class AssembleiaController {
 			// cria um objeto de Assembleia, compara com o dados to TO e salva
 			// no
 			// banco.
-			Assembleia descricaoAssembleia = new Assembleia();
-			BeanUtils.copyProperties(AssembleiaBean.getAssembleiaTO(),
-					descricaoAssembleia);
+			// Assembleia descricaoAssembleia = new Assembleia();
+			// BeanUtils.copyProperties(AssembleiaBean.getAssembleiaTO(),
+			// descricaoAssembleia);
 			// Salva no banco
 
-			assembleiaService.save(descricaoAssembleia);
+			// assembleiaService.save(descricaoAssembleia);
 
 			return new ModelAndView("inserirAssembleia");
 		}
@@ -160,8 +163,9 @@ public class AssembleiaController {
 			UploadArquivosAssembleiaControllerBean assembleiaControllerBean) {
 
 		if (!validadorAssembleia.isValidAssembleia(assembleiaControllerBean
-				.getAssembleiaTO().getAssembleia()));
+				.getAssembleiaTO().getAssembleia()))
 			;
+		;
 		{
 			assembleiaControllerBean.isAssembleia(false);
 

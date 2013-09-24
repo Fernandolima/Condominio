@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -74,15 +73,18 @@ public class AtasController {
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
 		salvar(bean.getFileData(), atasEntity,
-				uploadArquivobeanUsuarios.getUsuario(),bean);
+				uploadArquivobeanUsuarios.getUsuario(), bean);
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				uploadArquivobeanUsuarios.getAtasTo().setUsuario(usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
+				uploadArquivobeanUsuarios
+						.getAtasTo()
+						.setUsuario(
+								usuarioService
+										.getUsuarioByLogin(((UserDetailsImp) authentication
+												.getPrincipal()).getUsername()));
 
 			}
 		}
@@ -136,10 +138,11 @@ public class AtasController {
 	}
 
 	private void salvar(MultipartFile file, AtasEntity atasEntity,
-			Usuario usuario,UploadArquivosAtasControllerBean bean) throws Exception {
+			Usuario usuario, UploadArquivosAtasControllerBean bean)
+			throws Exception {
 		File fileToDisk = null;
 		File caminho = null;
-		
+
 		String caminhoPasta = this.context.getRealPath("")
 				+ "/uploadedArquivos/" + usuario.getIdUser();
 
@@ -167,7 +170,7 @@ public class AtasController {
 			atasEntity.setDataCriacao(bean.getAtasTo().getDataCriacao());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
 			atasEntity.setUsuarioAtas(bean.getAtasTo().getUsuario());
-			
+
 			atasService.save(atasEntity);
 		} catch (Exception e) {
 			e.printStackTrace();
