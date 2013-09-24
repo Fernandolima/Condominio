@@ -80,7 +80,7 @@ public class AtasController {
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				uploadArquivobeanUsuarios.setUsuario(usuarioService
+				uploadArquivobeanUsuarios.getAtasTo().setUsuario(usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername()));
 
@@ -166,6 +166,7 @@ public class AtasController {
 			atasEntity.setDataATA(bean.getAtasTo().getDataAta());
 			atasEntity.setDataCriacao(bean.getAtasTo().getDataCriacao());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
+			atasEntity.setUsuarioAtas(bean.getAtasTo().getUsuario());
 			
 			atasService.save(atasEntity);
 		} catch (Exception e) {

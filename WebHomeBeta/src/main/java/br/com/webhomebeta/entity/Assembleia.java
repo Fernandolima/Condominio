@@ -21,8 +21,8 @@ public class Assembleia {
 	@Column(name = "ID_ASSEMBLEIA")
 	private int idAssembleia;
 
-	@Column(name = "COMENTARIO")
-	private String comentario;
+	@Column(name = "ASSEMBLEIA")
+	private String assembleia;
 
 	@Column(name = "ARQUIVO")
 	private String arquivo;
@@ -84,19 +84,27 @@ public class Assembleia {
 	private Date dataCriacao;
 
 	/**
+	 * @return the assembleia
+	 */
+	public String getAssembleia() {
+		return assembleia;
+	}
+
+	/**
+	 * @param assembleia the assembleia to set
+	 */
+	public void setAssembleia(String assembleia) {
+		this.assembleia = assembleia;
+	}
+
+	/**
 	 * @return the idAssembleia
 	 */
 	public int getIdAssembleia() {
 		return idAssembleia;
 	}
 
-	/**
-	 * @return the comentario
-	 */
-	public String getComentario() {
-		return comentario;
-	}
-
+	
 	/**
 	 * @return the usuarioAssebleia
 	 */
@@ -116,13 +124,6 @@ public class Assembleia {
 	 */
 	public void setIdAssembleia(int idAssembleia) {
 		this.idAssembleia = idAssembleia;
-	}
-
-	/**
-	 * @param comentario the comentario to set
-	 */
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
 	}
 
 	/**

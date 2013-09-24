@@ -13,14 +13,22 @@ public class UploadArquivosAtasControllerBean {
 	private boolean validDate = true;
 	private boolean arquivo;
 	private boolean hasErrorForm = false;
-	private Usuario usuario;
 	private CommonsMultipartFile fileData;
+	private Usuario usuario;
 
+	
 	/**
 	 * @return the usuario
 	 */
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**
@@ -34,15 +42,7 @@ public class UploadArquivosAtasControllerBean {
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	/**
-	 * @param fileData
-	 *            the fileData to set
-	 */
-	public void setFileData(CommonsMultipartFile fileData) {
+		public void setFileData(CommonsMultipartFile fileData) {
 		this.fileData = fileData;
 	}
 

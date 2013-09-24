@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -72,7 +73,7 @@ public class AssembleiaController {
 			@ModelAttribute("assembleia") final UploadArquivosAssembleiaControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
 		SecurityContext context = SecurityContextHolder.getContext();
-		salvar(bean.getFileData(), assembleia, beanUsuarios.getUsuario());
+		salvar(bean.getFileData(), assembleia, beanUsuarios.getUsuario(),bean);
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
@@ -88,7 +89,7 @@ public class AssembleiaController {
 	}
 
 	private void salvar(MultipartFile file, Assembleia assembleia,
-			Usuario usuario) throws Exception {
+			Usuario usuario,UploadArquivosAssembleiaControllerBean bean) throws Exception {
 		File fileToDisk = null;
 		File caminho = null;
 
@@ -113,10 +114,16 @@ public class AssembleiaController {
 
 			}
 
+			assembleia = new Assembleia();
 			usuario.setNome(result);
 			assembleia.setArquivo("/WebHomeBeta/uploadedArquivosAssembleia/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
-			assembleiaService.update(assembleia);
+			assembleia.setAssembleia(bean.getAssembleiaTO().getAssembleia());
+			assembleia.setDataAssembleia((Date) bean.getAssembleiaTO().getDataAssembleia());
+			assembleia.setDataCriacao((Date) bean.getAssembleiaTO().getDataCriacao());
+			assembleia.setTitulo(bean.getAssembleiaTO().getTitulo());
+			assembleia.setUsuarioAssebleia(bean.getAssembleiaTO().getUsuarioAssebleia());
+			assembleiaService.save(assembleia);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +160,7 @@ public class AssembleiaController {
 			UploadArquivosAssembleiaControllerBean assembleiaControllerBean) {
 
 		if (!validadorAssembleia.isValidAssembleia(assembleiaControllerBean
-				.getAssembleiaTO().getComentario()))
+				.getAssembleiaTO().getAssembleia()));
 			;
 		{
 			assembleiaControllerBean.isAssembleia(false);

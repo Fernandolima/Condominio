@@ -2,6 +2,8 @@ package br.com.webhomebeta.to;
 
 import java.util.Date;
 
+import br.com.webhomebeta.entity.Usuario;
+
 public class AtasTo {
 
 	private int idAtas;
@@ -10,6 +12,19 @@ public class AtasTo {
 	private String atas;
 	private String arquivo;
 	private Date dataAta;
+	private Usuario usuario;
+	/**
+	 * @return the usuario
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	/**
 	 * @return the idAtas
 	 */
