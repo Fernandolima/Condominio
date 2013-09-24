@@ -8,6 +8,9 @@ public class AssembleiaTO {
 	private int idAssembleia;
 	private String comentario;
 	private Usuario usuarioAssebleia;
+	private String arquivo;
+	private String titulo;
+	private Date dataAssembleia;
 	private Date dataCriacao;
 	/**
 	 * @return the idAssembleia

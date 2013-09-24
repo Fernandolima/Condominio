@@ -150,7 +150,6 @@ public class UploadArquivosAtasControllerBean {
 		this.validDate = validDate;
 	}
 
-
 	/**
 	 * @return the titulo
 	 */
@@ -159,21 +158,22 @@ public class UploadArquivosAtasControllerBean {
 	}
 
 	/**
-	 * @param titulo the titulo to set
+	 * @param titulo
+	 *            the titulo to set
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
+
 	public boolean hasErrors() {
 		if (atasTo == null || atas == false || data == null
-				|| validDate == false || arquivo == false || fileData == null || titulo == null) {
+				|| validDate == false || arquivo == false || fileData == null
+				|| titulo == null) {
 			hasErrorForm = true;
 			return false;
 		}
 		hasErrorForm = false;
 		return true;
 	}
-
 
 }

@@ -12,9 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 @Entity
 @Table(name = "[dbo].[ASSEMBLEIA]")
 public class Assembleia {
@@ -30,6 +27,41 @@ public class Assembleia {
 	@Column(name = "ARQUIVO")
 	private String arquivo;
 	
+	@Column(name = "TITULO")
+	private String titulo;
+	
+	@Column(name = "DATA_ASSEMBLEIA")
+	private Date dataAssembleia;
+	
+	
+	/**
+	 * @return the titulo
+	 */
+	public String getTitulo() {
+		return titulo;
+	}
+
+	/**
+	 * @return the dataAssembleia
+	 */
+	public Date getDataAssembleia() {
+		return dataAssembleia;
+	}
+
+	/**
+	 * @param titulo the titulo to set
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	/**
+	 * @param dataAssembleia the dataAssembleia to set
+	 */
+	public void setDataAssembleia(Date dataAssembleia) {
+		this.dataAssembleia = dataAssembleia;
+	}
+
 	/**
 	 * @return the arquivo
 	 */
