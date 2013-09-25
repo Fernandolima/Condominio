@@ -23,7 +23,7 @@ public class Gostou {
 	@JoinColumn(name = "ID_PUBLICACAO", nullable = false)
 	private Publicacao publicacao;
 	
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_USER")
 	private int idUsuario;
 	
 	public Gostou(int id, Publicacao publicacao, int idUsuario) {

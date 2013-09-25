@@ -79,7 +79,7 @@ public class Publicacao implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Comentario> comentarios = new HashSet<>(0);
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "gostou")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Gostou> gostous = new HashSet<>(0);
 
 
