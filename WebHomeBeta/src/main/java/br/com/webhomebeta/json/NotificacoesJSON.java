@@ -6,6 +6,17 @@ public class NotificacoesJSON {
 	private int idComentario;
 	private String texto;
 	private String URL;
+	private String imagem;
+	
+	
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 
 	public int getIdPublicacao() {
 		return idPublicacao;

@@ -1,10 +1,12 @@
 package br.com.webhomebeta.bean;
 
+import java.io.Serializable;
+
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.to.ComentarioTO;
 import br.com.webhomebeta.to.PublicacaoTO;
 
-public class MoradorControllerBean {
+public class MoradorControllerBean implements Serializable {
 	private PublicacaoTO publicacaoTO;
 	private ComentarioTO comentarioTO;
 	private Usuario usuario;

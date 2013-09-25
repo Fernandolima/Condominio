@@ -67,6 +67,7 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		q.executeUpdate();
 	}
 	@Override
+	@Transactional
 	public Publicacao getUnicaPublicacao(int idPublicacao) {
 		Publicacao p = (Publicacao) factory.getCurrentSession().get(Publicacao.class,idPublicacao);
 		return p;

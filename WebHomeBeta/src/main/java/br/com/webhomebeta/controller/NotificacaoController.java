@@ -1,10 +1,10 @@
 package br.com.webhomebeta.controller;
 
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,77 +22,79 @@ import br.com.webhomebeta.service.NotificacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
-
 @Controller
 public class NotificacaoController {
-	
-	
+
 	@Autowired
 	private DadosUsuarioBean dadosUsuarioBean;
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private NotificacaoService notificacaoService;
-	
-	private Queue<DeferredResult<NotificacoesJSON>> queueNotificacaoJSON = new ConcurrentLinkedQueue<DeferredResult<NotificacoesJSON>>();
+
+	private Queue<NotificacoesJSON> queueNotificacaoJSON = new ConcurrentLinkedQueue<NotificacoesJSON>();
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
-	
-		@RequestMapping(value = "home/notificacaoInicial", method = RequestMethod.GET)
-		public NotificacoesJSON inicia(){
-			SecurityContext context = SecurityContextHolder.getContext();
-			if (context instanceof SecurityContext) {
-				// Pega as informacoes da autenticacao
-				Authentication authentication = context.getAuthentication();
-				if (authentication instanceof Authentication) {
-					// Pega o usuario que logou
-					dadosUsuarioBean.setUsuario(usuarioService
-							.getUsuarioByLogin(((UserDetailsImp) authentication
-									.getPrincipal()).getUsername()));
 
-				}
+	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
+	public NotificacoesJSON inicia() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				dadosUsuarioBean.setUsuario(usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername()));
+
 			}
-			return null;
 		}
-	
-		// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
-		// o ID da publicacao
-		// e o tipo de notificacao
+		return null;
+	}
 
-		// Testando
-		@RequestMapping(value = "home/notificacao", method = RequestMethod.POST)
-		public @ResponseBody
-		DeferredResult<NotificacoesJSON> receberNotificacao(
-				@RequestParam("id") int idPublicacao, @RequestParam("tipo") String tipo) {
-			
-			//adiociona a notificacaoJSON para a DeferredResult
-			DeferredResult<NotificacoesJSON> deferredResult = new DeferredResult<>();
-			this.queueNotificacaoJSON.add(deferredResult);
-			
-			Notificacao notificacao = new Notificacao(tipo, idPublicacao,
-					dadosUsuarioBean.getUsuario().getIdUser());
-			
-			//Adiociona a notificao salva na queue
-			this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
+	// o ID da publicacao
+	// e o tipo de notificacao
+
+	// Testando
+	@RequestMapping(value = "notificacao", method = RequestMethod.POST)
+	public void receberNotificacao(@RequestParam("id") int idPublicacao,
+			@RequestParam("tipo") String tipo,
+			@RequestParam("idPost") int idPost) {
+
+		// adiociona a notificacaoJSON no queue
+		NotificacoesJSON notificacoesJSON = new NotificacoesJSON();
+		this.queueNotificacaoJSON.add(notificacoesJSON);
+
+		Notificacao notificacao = new Notificacao(tipo, idPublicacao,
+				dadosUsuarioBean.getUsuario().getIdUser(), idPost);
+
+		// Adiociona a notificao salva na queue
+		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+
+	}
+
+	@RequestMapping(value = "verificaNotificacoes", method = RequestMethod.POST)
+	public @ResponseBody DeferredResult<ArrayList<NotificacoesJSON>> externalThread() {
+		DeferredResult<ArrayList<NotificacoesJSON>> deferred = new DeferredResult<ArrayList<NotificacoesJSON>>();
+		ArrayList<NotificacoesJSON> array = new ArrayList<>();
+
+		for (NotificacoesJSON result : this.queueNotificacaoJSON) {
+
+			Notificacao n = queueNotificacao.poll();
+			NotificacoesJSON json = new NotificacoesJSON();
+			json.setIdPublicacao(n.getIdNotificacado());
+			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
+					.getNome());
+			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			array.add(json);
+
+			this.queueNotificacaoJSON.remove(result);
+
+		}
 		
+		deferred.setResult(array);
+		return deferred;
+	}
 
-			return deferredResult;
-		}
-
-		@Scheduled(fixedRate = 3000)
-		public void externalThread() throws InterruptedException {
-			Thread.sleep(6000);
-			for (DeferredResult<NotificacoesJSON> result : this.queueNotificacaoJSON) {
-				
-				Notificacao n = queueNotificacao.poll();
-				
-				NotificacoesJSON json = new NotificacoesJSON();
-				json.setIdPublicacao(n.getIdNotificacado());
-				json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario().getNome());
-				
-				result.setResult(json);
-				
-				this.queueNotificacaoJSON.remove(result);
-			}
-		}
-	
 }

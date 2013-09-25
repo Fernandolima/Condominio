@@ -10,32 +10,46 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "[dbo].[NOTIFICACAO]")
 public class Notificacao {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_NOTIFICACAO")
 	private int idNotificacao;
-	
+
 	@Column(name = "TIPO_NOTIFICACAO")
 	private String tipoNotificacao;
-	
+
 	@Column(name = "ID_NOTIFICADO")
 	private int idNotificacado;
-	
+
 	@Column(name = "ID_NOTIFICADOR")
 	private int idNotificacador;
-	
+
 	@Column(name = "IS_VISUALIZADA", columnDefinition = "BOOLEAN")
 	private boolean isVisualizada;
+
+	@Column(name = "ID_POST")
+	private int idPost;
 	
+	private String texto;
+
 	@Column(name = "URL")
 	private String URL;
 
 	public Notificacao(String tipoNotificacao, int idNotificacado,
-			int idNotificacador) {
+			int idNotificacador, int idPost) {
 		this.tipoNotificacao = tipoNotificacao;
 		this.idNotificacado = idNotificacado;
 		this.idNotificacador = idNotificacador;
+		this.idPost = idPost;
+	}
+
+	public int getIdPost() {
+		return idPost;
+	}
+
+	public void setIdPost(int idPost) {
+		this.idPost = idPost;
 	}
 
 	public String getURL() {

@@ -244,11 +244,13 @@ public class HomeController {
 	@RequestMapping(value = "home/delete", method = RequestMethod.GET)
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {
-
+		
+		publicacaoService.getUnicaPublicacao(id);
 		publicacaoService.deletarPublicacao(id, moradorControllerBean
 				.getUsuario().getIdUser());
 
 		return "true";
+		
 	}
 
 	private class CustomComparator implements Comparator<ComentarioJSON> {

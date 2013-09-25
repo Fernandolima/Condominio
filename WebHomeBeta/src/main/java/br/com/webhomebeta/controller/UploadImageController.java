@@ -3,13 +3,21 @@ package br.com.webhomebeta.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.AbstractHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.server.ServletServerHttpResponse;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
@@ -21,6 +29,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -95,7 +104,8 @@ public class UploadImageController {
 			usuario.setImagem("/WebHomeBeta/uploadedImgs/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
-					+ usuario.getIdUser() + "/Redimensionada " + file.getOriginalFilename());
+					+ usuario.getIdUser() + "/Redimensionada "
+					+ file.getOriginalFilename());
 			usuarioService.update(usuario);
 
 			// redimensiona imagem para o tamanho para 43x43
@@ -143,6 +153,50 @@ public class UploadImageController {
 		}
 		return new ModelAndView("uploadImage", "uploadControllerBean",
 				beanUsuario);
+	}
+
+	@RequestMapping(value = "multiPartFileSingle", method = RequestMethod.POST)
+	public void uploadFile(HttpServletResponse response,
+			@RequestParam(value = "file") MultipartFile file) {
+
+		String back = "";
+		try {
+			if (!file.isEmpty()) {
+
+				file.getBytes();
+				back = "{successMessage : 'successMessage'}";
+			} else {
+				back = "{errorMessage : 'errorMessage'}";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			back = "{errorMessage : 'errorMessage'}";
+		}
+
+		response.setHeader("Pragma", "no-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+
+		try {// Changing to ISO, because standard AJAX response is in ISO and
+				// our string is in UTF-8
+			back = new String(back.getBytes("UTF-8"), "ISO8859_1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		// Write Json string in Json format
+		AbstractHttpMessageConverter<String> stringHttpMessageConverter = new StringHttpMessageConverter();
+		MediaType jsonMimeType = MediaType.APPLICATION_JSON;
+		if (stringHttpMessageConverter.canWrite(String.class, jsonMimeType)) {
+			try {
+				stringHttpMessageConverter.write(back, jsonMimeType,
+						new ServletServerHttpResponse(response));
+			} catch (IOException m_Ioe) {
+				m_Ioe.printStackTrace();
+			} catch (HttpMessageNotWritableException p_Nwe) {
+				p_Nwe.printStackTrace();
+			}
+		}
 	}
 
 	@Async

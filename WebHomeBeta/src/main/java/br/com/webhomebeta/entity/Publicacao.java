@@ -78,9 +78,18 @@ public class Publicacao implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
 	private Set<Comentario> comentarios = new HashSet<>(0);
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "gostou")
+	private Set<Gostou> gostous = new HashSet<>(0);
+
 
 	
-	
+	public Set<Gostou> getGostous() {
+		return gostous;
+	}
+	public void setGostous(Set<Gostou> gostous) {
+		this.gostous = gostous;
+	}
 	public String getImagem() {
 		return imagem;
 	}
