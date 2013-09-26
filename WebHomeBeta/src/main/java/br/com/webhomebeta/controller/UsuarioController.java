@@ -52,6 +52,7 @@ public class UsuarioController {
 			// Seta a role
 			bean.getUsuarioTO().setLogin(bean.getUsuarioTO().getEmail());
 			bean.getUsuarioTO().setPermissao("ROLE_MORADOR");
+			bean.getUsuarioTO().setImagem("/WebHomeBeta/img/anonimos.jpg");
 			bean.getUsuarioTO().setStatus(false);
 			bean.getUsuarioTO().setCargo("Morador");
 			// Insere a data

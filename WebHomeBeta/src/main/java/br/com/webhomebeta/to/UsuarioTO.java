@@ -29,6 +29,31 @@ public class UsuarioTO {
 	
 	private String ap;
 	
+	private String imagem;
+	
+	private String imagemView;
+	
+	
+
+	public String getImagem() {
+		return imagem;
+	}
+
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+
+	public String getImagemView() {
+		return imagemView;
+	}
+
+
+	public void setImagemView(String imagemView) {
+		this.imagemView = imagemView;
+	}
+
 
 	public int getIdUser() {
 		return idUser;

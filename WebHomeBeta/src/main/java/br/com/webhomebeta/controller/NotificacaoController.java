@@ -69,7 +69,7 @@ public class NotificacaoController {
 		Notificacao notificacao = new Notificacao(tipo, idNotificado,
 				dadosUsuarioBean.getUsuario().getIdUser(), idPost);
 
-		// Adiociona a notificao salva na queue
+		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
 		
 		return "true";
