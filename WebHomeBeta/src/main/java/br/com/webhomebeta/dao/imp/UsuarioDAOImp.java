@@ -21,7 +21,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 	@Transactional
 	public Usuario save(Usuario usuario) {
-		String sql = "exec [dbo].[USUARIO_CRIPTOGRAFADO_I] ?,?,?,?,?,?,?,?,?,?,?,?";
+		String sql = "exec [dbo].[USUARIO_CRIPTOGRAFADO_I] ?,?,?,?,?,?,?,?,?,?,?,?,?";
 		Query q = factory.getCurrentSession().createSQLQuery(sql)
 				.addEntity(Usuario.class);
 		q.setParameter(0, usuario.getBloco());
@@ -36,6 +36,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		q.setParameter(9, usuario.getSenha());
 		q.setParameter(10, usuario.isStatus());
 		q.setParameter(11, usuario.getImagem());
+		q.setParameter(12,usuario.getImagemView());
 		
 		q.executeUpdate();
 
