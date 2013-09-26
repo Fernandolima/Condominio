@@ -36,7 +36,7 @@ public class NotificacaoController {
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
-	public NotificacoesJSON inicia() {
+	public ArrayList<NotificacoesJSON> inicia() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
@@ -49,7 +49,18 @@ public class NotificacaoController {
 
 			}
 		}
-		return null;
+		ArrayList<NotificacoesJSON> list = new ArrayList<>();
+		for (Notificacao n : notificacaoService.getNotificacoes(
+				dadosUsuarioBean.getUsuario().getIdUser(), false)) {
+			NotificacoesJSON json = new NotificacoesJSON();
+			json.setIdPublicacao(n.getIdNotificacado());
+			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
+					.getNome());
+			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			list.add(json);
+		}
+
+		return list;
 	}
 
 	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
@@ -71,12 +82,13 @@ public class NotificacaoController {
 
 		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
-		
+
 		return "true";
 	}
 
 	@RequestMapping(value = "verificaNotificacoes", method = RequestMethod.POST)
-	public @ResponseBody DeferredResult<ArrayList<NotificacoesJSON>> externalThread() {
+	public @ResponseBody
+	DeferredResult<ArrayList<NotificacoesJSON>> externalThread() {
 		DeferredResult<ArrayList<NotificacoesJSON>> deferred = new DeferredResult<ArrayList<NotificacoesJSON>>();
 		ArrayList<NotificacoesJSON> array = new ArrayList<>();
 
@@ -93,7 +105,7 @@ public class NotificacaoController {
 			this.queueNotificacaoJSON.remove(result);
 
 		}
-		
+
 		deferred.setResult(array);
 		return deferred;
 	}
