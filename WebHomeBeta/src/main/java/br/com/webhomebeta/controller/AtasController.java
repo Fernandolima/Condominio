@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -40,6 +41,7 @@ public class AtasController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private UploadArquivosAtasControllerBean uploadArquivobeanUsuarios;
+
 	private ValidadorAtas validadorAtas = new ValidadorAtas();
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
@@ -60,55 +62,53 @@ public class AtasController {
 			}
 		}
 		model.put("listaAtas", atas);
-		model.put("Arquivo", uploadArquivobeanUsuarios);
-		model.put("atasBean", new UploadArquivosAtasControllerBean());
+		model.put("bean", uploadArquivobeanUsuarios);
 		return new ModelAndView("atas", model);
 
 	}
 
 	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
-	public ModelAndView AtasArquivos(
-			@ModelAttribute("atas") final UploadArquivosAtasControllerBean bean,
+	public String AtasArquivos(
+			@ModelAttribute("bean") final UploadArquivosAtasControllerBean bean,
 			BindingResult result, HttpServletRequest request) throws Exception {
-		SecurityContext context = SecurityContextHolder.getContext();
-		salvar(bean.getFileData(), atasEntity,
-				uploadArquivobeanUsuarios.getUsuario(), bean);
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				uploadArquivobeanUsuarios
-						.getAtasTo()
-						.setUsuario(
-								usuarioService
-										.getUsuarioByLogin(((UserDetailsImp) authentication
-												.getPrincipal()).getUsername()));
-
-			}
+		// Chama o metodo validar Atas
+		ValidadorAtas(bean);
+		// passa o bean do validar.
+		if (bean.hasErrors()) {
+			salvar(bean.getFileData(), atasEntity,
+					uploadArquivobeanUsuarios.getUsuario(), bean);
 		}
-
 		// cria um objeto de AtasEntity, compara com o dados to TO e salva no
 		// banco.
-		return new ModelAndView("atas", "atasBean", bean);
+		uploadArquivobeanUsuarios = bean;
+
+		return "redirect:/atas";
 	}
 
-	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean,
-			UploadControllerBean bean) {
+	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean) {
+
+		if (!validadorAtas.isValiTitulo(atasBean.getAtasTo().getTitulo()))
+			atasBean.setTitulo(false);
+		else
+			atasBean.setTitulo(true);
 
 		if (!validadorAtas.isValidAtas(atasBean.getAtasTo().getAtas()))
-			;
+
 		{
-			atasBean.isAtas(false);
+			atasBean.setAtas(false);
+		} else {
+			atasBean.setAtas(true);
+		}
+		if (!validadorAtas.validaData(atasBean.getData()))
+
+		{
+			atasBean.setDataVal(false);
+
+		} else {
+			atasBean.setDataVal(true);
 
 		}
-		atasBean.isAtas(true);
-		if (!validadorAtas.validaData(atasBean.getData())) {
-			atasBean.isValidDate(false);
-		} else
-			atasBean.isValidDate(true);
-
 	}
 
 	@RequestMapping(value = "atas/editar", method = RequestMethod.POST)
@@ -167,11 +167,18 @@ public class AtasController {
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			atasEntity.setAtas(bean.getAtasTo().getAtas());
 			atasEntity.setDataATA(bean.getAtasTo().getDataAta());
-			atasEntity.setDataCriacao(bean.getAtasTo().getDataCriacao());
+			atasEntity.setDataCriacao(new Date());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
-			atasEntity.setUsuarioAtas(bean.getAtasTo().getUsuario());
+			atasEntity.setUsuarioAtas(uploadArquivobeanUsuarios.getUsuario());
 
+			bean.getAtasTo().setArquivo(null);
+			bean.getAtasTo().setAtas(null);
+			bean.getAtasTo().setDataAta(null);
+			bean.getAtasTo().setDataCriacao(null);
+			bean.getAtasTo().setTitulo(null);
+			bean.getAtasTo().setUsuario(null);
 			atasService.save(atasEntity);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
