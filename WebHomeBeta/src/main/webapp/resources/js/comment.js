@@ -97,7 +97,7 @@ var POST_COMMENT  = {
 		successPost: function(e) {
 			var htmlInserPost = "";
 			
-			htmlInserPost += '<div class="post" data-id-post="'+e.idPublicacao+'">';
+			htmlInserPost += '<div class="post" data-id-user="'+e.idUsuario+'" data-id-post="'+e.idPublicacao+'">';
 			htmlInserPost += '<a href="#" class="deletePost hidden">Excluir</a>';
 			htmlInserPost += '<img src="'+e.caminhoImg+'" class="thumb-post" />';
 			htmlInserPost += '<div class="comments-post">';
@@ -208,7 +208,7 @@ $(function() {
 	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
-	console.log('tati');
+	
 	setInterval(function(){
 		POST_COMMENT.verificaNotificacoes();
 	},50000);	
