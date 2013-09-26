@@ -167,7 +167,7 @@ var POST_COMMENT  = {
 		verificaNotificacoes: function() {
 			$.ajax({
 				type: 'POST',
-		      	url:'/verificaNotificacoes',
+		      	url:'verificaNotificacoes',
 		      	dataType: 'json',	
 		      	success: function(e) {
 		      		console.log('====', e);
