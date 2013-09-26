@@ -9,7 +9,7 @@ public class ValidadorAtas {
 	
 	public boolean validaData(String data) {
 		//Verifica se a data nao esta null
-		if (data.equals(null) || data.equals("") || data.equals(" ")) {
+		if (data == (null) || data.equals("") || data.equals(" ")) {
 			return false;
 		} else {
 			//Formata a data
@@ -57,13 +57,22 @@ public class ValidadorAtas {
 	}
 	
 	public boolean isValidAtas( String atas) {
-		if (atas.length() < 3
-				|| atas.length() > 2500)
+		if (atas == null ||atas.length() < 3
+				|| atas.length() > 1500)
 			return false;
 		else
 			return true;
 
 	}
-
+	public boolean isValiTitulo( String titulo) {
+		if ( titulo == null ||titulo.length() < 3
+				|| titulo.length() > 30)
+			return false;
+		else
+			return true;
+	}
+	
+	
+	
 
 }
