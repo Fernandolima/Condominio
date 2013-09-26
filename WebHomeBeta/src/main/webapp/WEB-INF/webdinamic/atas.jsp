@@ -67,14 +67,15 @@
 				<section id="content-admin">
 					<div id="cadastrarAtas">
 						<h2>Cadastrar Atas</h2>
-						<form:form modelAttribute="atasBean" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
+						<form:form modelAttribute="bean" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
 							<div id="contentFrm">
 								<form:label for="tituloAta" path="atasTo.titulo">Título:</form:label>
-								<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" />
+								<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" class="${(bean.titulo) ? '' : 'error'}" />
+								
 								
 								<div class="elInput">
 									<!--<form:input type="textarea" id="numAp" class="inputBloco" path="atasTo.atas" autocomplete="off" />-->
-									<textarea class="ckeditor" cols="80" id="editor1" name="atasTo.atas" rows="10">
+									<textarea class="ckeditor" cols="80" id="editor1" name="atasTo.atas" rows="10" class="${(bean.atas) ? '' : 'error'}">
 									</textarea>
 								</div>
 								
@@ -84,8 +85,8 @@
 								</div>
 								
 								<div class="elInput">
-									<form:label for="numAp" path="atasTo.dataAta">Data:</form:label>
-									<form:input type="text" id="dataAssembleia" class="inputBloco" path="atasTo.dataAta" autocomplete="off" />
+									<form:label for="numAp" path="data">Data:</form:label>
+									<form:input type="text" id="dataAssembleia" path="data" autocomplete="off" class="inputBloco ${(bean.dataVal) ? '' : 'error'}" />
 								</div>
 							</div>
 							<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
