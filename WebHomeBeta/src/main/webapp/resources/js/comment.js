@@ -15,7 +15,7 @@ var POST_COMMENT  = {
 			$.each(data, function(e, val){
 				htmlHome = '';
 				
-				htmlHome += '<div class="post" data-id-post="'+val.idPublicacao+'">';
+				htmlHome += '<div class="post" data-id-user="'+val.usuarioPublicacao.idUsuarioPublicacao+'" data-id-post="'+val.idPublicacao+'">';
 					if(val.proprietario){
 						htmlHome += '<a href="#" class="deletePost hidden">Excluir</a>';
 					}
@@ -117,9 +117,10 @@ var POST_COMMENT  = {
 		submitComment: function() {
 			var el = $(this),
 				idPub = $(this).closest('.post').attr('data-id-post'),
+				idUserPost = $(this).closest('.post').attr('data-id-user'),
 				dataForm = '',
 				htmlComment = '',
-				dataNotificacao = "tipo=comentou&idPost="+idPub;
+				dataNotificacao = "tipo=comentou&idPost=" + idPub + '&id=' + idUserPost;
 			
 			$(this).closest('.post').find('.idPub').val(idPub);
 			
