@@ -118,7 +118,8 @@ var POST_COMMENT  = {
 			var el = $(this),
 				idPub = $(this).closest('.post').attr('data-id-post'),
 				dataForm = '',
-				htmlComment = '';
+				htmlComment = '',
+				dataNotificacao = "tipo=comentou&idPost="+idPub;
 			
 			$(this).closest('.post').find('.idPub').val(idPub);
 			
@@ -138,11 +139,31 @@ var POST_COMMENT  = {
 		      		htmlComment += '</div>';
 		      		
 		      		el.closest('.post').find('.main-comment').append(htmlComment);
-		      		el.closest('.post').find('.inputComment').val('');
+		      		el.closest('.post').find('.inputComment').val('');		      		
 		      	}
 		    });
+			
+			POST_COMMENT.salvarNotificacao(dataNotificacao);
 			 
 			return false;			
+		},
+		
+		salvarNotificacao: function(dataNotificacao) {
+			console.log('teste = ', dataNotificacao);
+						
+			$.ajax({
+	            type: "post",
+	            url: "notificacao/",
+	            data: dataNotificacao,
+	            success: function () {
+	               console.log('qqq');
+	            },
+	            error: function () {
+	            	console.log('errormessage');
+	                //do something else
+
+	            }
+	        });
 		},
 		
 		onDeletePost: function(e) {
@@ -189,7 +210,7 @@ $(function() {
 	console.log('tati');
 	setInterval(function(){
 		POST_COMMENT.verificaNotificacoes();
-	},5000);	
+	},50000);	
 	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
 });
