@@ -9,26 +9,53 @@ public class UploadArquivosAtasControllerBean {
 	private AtasTo atasTo;
 	private boolean atas;
 	private String data;
-	private String titulo;
-	private boolean validDate = true;
-	private boolean arquivo;
-	private boolean hasErrorForm = false;
+	private boolean dataVal;
+	private boolean titulo;
+    boolean hasErrorForm = false;
 	private CommonsMultipartFile fileData;
 	private Usuario usuario;
 
-	
+
 	/**
-	 * @return the usuario
+	 * @return the atasTo
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public AtasTo getAtasTo() {
+		return atasTo;
 	}
 
 	/**
-	 * @param usuario the usuario to set
+	 * @return the atas
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public boolean isAtas() {
+		return atas;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public String getData() {
+		return data;
+	}
+
+	/**
+	 * @return the dataVal
+	 */
+	public boolean isDataVal() {
+		return dataVal;
+	}
+
+	/**
+	 * @return the titulo
+	 */
+	public boolean isTitulo() {
+		return titulo;
+	}
+
+	/**
+	 * @return the hasErrorForm
+	 */
+	public boolean isHasErrorForm() {
+		return hasErrorForm;
 	}
 
 	/**
@@ -39,22 +66,18 @@ public class UploadArquivosAtasControllerBean {
 	}
 
 	/**
-	 * @param usuario
-	 *            the usuario to set
+	 * @return the usuario
 	 */
-		public void setFileData(CommonsMultipartFile fileData) {
-		this.fileData = fileData;
-	}
-
-	public boolean isAtas(boolean b) {
-		return atas;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
-	 * @return the data
+	 * @param atasTo
+	 *            the atasTo to set
 	 */
-	public String getData() {
-		return data;
+	public void setAtasTo(AtasTo atasTo) {
+		this.atasTo = atasTo;
 	}
 
 	/**
@@ -69,106 +92,54 @@ public class UploadArquivosAtasControllerBean {
 	 * @param data
 	 *            the data to set
 	 */
-
 	public void setData(String data) {
 		this.data = data;
 	}
 
 	/**
-	 * @return the hasErrorForm
+	 * @param dataVal
+	 *            the dataVal to set
 	 */
-	public boolean isHasErrorForm() {
-		return hasErrorForm;
-	}
-
-	/**
-	 * @param hasErrorForm
-	 *            the hasErrorForm to set
-	 */
-
-	/**
-	 * @return the validDate
-	 */
-	public boolean isValidDate() {
-		return validDate;
-	}
-
-	/**
-	 * @return the arquivo
-	 */
-	public boolean isArquivo() {
-		return arquivo;
-	}
-
-	/**
-	 * @param arquivo
-	 *            the arquivo to set
-	 */
-	public void setArquivo(boolean arquivo) {
-		this.arquivo = arquivo;
-	}
-
-	/**
-	 * @return the atasTo
-	 */
-	public AtasTo getAtasTo() {
-		return atasTo;
-	}
-
-	/**
-	 * @param atasTo
-	 *            the atasTo to set
-	 */
-	public void setAtasTo(AtasTo atasTo) {
-		this.atasTo = atasTo;
-	}
-
-	public void setHasErrorForm(boolean hasErrorForm) {
-		this.hasErrorForm = hasErrorForm;
-	}
-
-	/**
-	 * @return the atas
-	 */
-	public boolean isAtas() {
-		return atas;
-	}
-
-	/**
-	 * @param b
-	 * @return the validDate
-	 */
-	public boolean isValidDate(boolean b) {
-		return validDate;
-	}
-
-	/**
-	 * @param validDate
-	 *            the validDate to set
-	 */
-	public void setValidDate(boolean validDate) {
-		this.validDate = validDate;
-	}
-
-	/**
-	 * @return the titulo
-	 */
-	public String getTitulo() {
-		return titulo;
+	public void setDataVal(boolean dataVal) {
+		this.dataVal = dataVal;
 	}
 
 	/**
 	 * @param titulo
 	 *            the titulo to set
 	 */
-	public void setTitulo(String titulo) {
+	public void setTitulo(boolean titulo) {
 		this.titulo = titulo;
 	}
 
+
+	/**
+	 * @param hasErrorForm
+	 *            the hasErrorForm to set
+	 */
+	public void setHasErrorForm(boolean hasErrorForm) {
+		this.hasErrorForm = hasErrorForm;
+	}
+
+	/**
+	 * @param fileData
+	 *            the fileData to set
+	 */
+	public void setFileData(CommonsMultipartFile fileData) {
+		this.fileData = fileData;
+	}
+
+	/**
+	 * @param usuario
+	 *            the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public boolean hasErrors() {
-		if (atasTo == null || atas == false || data == null
-				|| validDate == false || arquivo == false || fileData == null
-				|| titulo == null) {
+		if (atas == false || dataVal == false
+				|| titulo == false) {
 			hasErrorForm = true;
 			return false;
 		}
