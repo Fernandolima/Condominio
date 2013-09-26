@@ -1,6 +1,15 @@
 var POST_COMMENT  = {	
 		
 		init: function() {
+			
+			$.ajax({
+		    	type: 'get',
+		      	url:'notificacaoInicial',
+		      	dataType: 'json',	
+		      	success: POST_COMMENT.loadNotificacao
+
+		    });
+			
 			$.ajax({
 		    	type: 'post',
 		      	url:'home/getPublicacao',
@@ -8,6 +17,11 @@ var POST_COMMENT  = {
 		      	success: POST_COMMENT.loadHome
 
 		    });
+			
+		},
+		
+		loadNotificacao: function(data) {
+			console.log('data inicial = ', data);
 		},
 		
 		loadHome: function(data) {
