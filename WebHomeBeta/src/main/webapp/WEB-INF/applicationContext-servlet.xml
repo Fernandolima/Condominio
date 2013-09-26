@@ -185,6 +185,8 @@
 		class="br.com.webhomebeta.bean.UploadArquivosAtasControllerBean"></bean>
 	<bean id="assebleiaDao" class="br.com.webhomebeta.dao.imp.AssembleiaImp"></bean>
 	<bean id="assembleiaService" class="br.com.webhomebeta.service.AssembleiaService"></bean>
+	<bean id="uploadArquivosAssembleiaControllerBean"
+		class="br.com.webhomebeta.bean.UploadArquivosAtasControllerBean"></bean>
 	<bean id="funcionarioService" class="br.com.webhomebeta.service.FuncionarioService"></bean>
 	<bean id="funcionarioDao" class="br.com.webhomebeta.dao.imp.FuncionarioDaoImp"></bean>
 	<bean id="beanUsuario" class="br.com.webhomebeta.bean.UploadControllerBean"
@@ -212,6 +214,7 @@
 	<bean id="perfilSerivce" class="br.com.webhomebeta.service.PerfilService"></bean>
 	<bean id="gostouDAO" class="br.com.webhomebeta.dao.imp.GostouDAOImp"></bean>
 	<bean id="gostouSerivce" class="br.com.webhomebeta.service.GostouService"></bean>
+	
 
 
 
