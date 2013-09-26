@@ -165,6 +165,7 @@ var POST_COMMENT  = {
 		    });
 		},
 		verificaNotificacoes: function() {
+			console.log('************');
 			$.ajax({
 				type: 'POST',
 		      	url:'verificaNotificacoes',
@@ -185,7 +186,7 @@ $(function() {
 	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
-	
+	console.log('tati');
 	setInterval(function(){
 		POST_COMMENT.verificaNotificacoes();
 	},5000);	
