@@ -163,6 +163,16 @@ var POST_COMMENT  = {
 		      		}
 		      	}
 		    });
+		},
+		verificaNotificacoes: function() {
+			$.ajax({
+				type: 'POST',
+		      	url:'/verificaNotificacoes',
+		      	dataType: 'json',	
+		      	success: function(e) {
+		      		console.log('====', e);
+		      	}
+		    });
 		}
 }
 
@@ -175,6 +185,10 @@ $(function() {
 	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
+	
+	setInterval(function(){
+		POST_COMMENT.verificaNotificacoes();
+	},5000);	
 	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
 });
