@@ -210,6 +210,8 @@
 	<bean id="notificacaoSerivce" class="br.com.webhomebeta.service.NotificacaoService"></bean>
 	<bean id="perfilDAO" class="br.com.webhomebeta.dao.imp.PerfilDAOImp"></bean>
 	<bean id="perfilSerivce" class="br.com.webhomebeta.service.PerfilService"></bean>
+	<bean id="gostouDAO" class="br.com.webhomebeta.dao.imp.GostouDAOImp"></bean>
+	<bean id="gostouSerivce" class="br.com.webhomebeta.service.GostouService"></bean>
 
 
 
