@@ -58,7 +58,7 @@ public class NotificacaoController {
 
 	// Testando
 	@RequestMapping(value = "notificacao", method = RequestMethod.POST)
-	public void receberNotificacao(@RequestParam("id") int idPublicacao,
+	public String receberNotificacao(@RequestParam("id") int idNotificado,
 			@RequestParam("tipo") String tipo,
 			@RequestParam("idPost") int idPost) {
 
@@ -66,12 +66,13 @@ public class NotificacaoController {
 		NotificacoesJSON notificacoesJSON = new NotificacoesJSON();
 		this.queueNotificacaoJSON.add(notificacoesJSON);
 
-		Notificacao notificacao = new Notificacao(tipo, idPublicacao,
+		Notificacao notificacao = new Notificacao(tipo, idNotificado,
 				dadosUsuarioBean.getUsuario().getIdUser(), idPost);
 
 		// Adiociona a notificao salva na queue
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
-
+		
+		return "true";
 	}
 
 	@RequestMapping(value = "verificaNotificacoes", method = RequestMethod.POST)
