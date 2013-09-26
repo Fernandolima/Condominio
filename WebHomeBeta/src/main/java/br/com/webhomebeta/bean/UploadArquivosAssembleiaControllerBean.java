@@ -4,61 +4,23 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.to.AssembleiaTO;
+import br.com.webhomebeta.to.AtasTo;
 
 public class UploadArquivosAssembleiaControllerBean {
 	private AssembleiaTO assembleiaTO;
 	private boolean assembleia;
+	private boolean validDate;
 	private String data;
-	private String titulo;
-	private boolean validDate = true;
-	private boolean arquivo;
+	private boolean titulo;
 	private CommonsMultipartFile fileData;
 	private Usuario usuario;
 	private boolean hasErrorForm = false;
 
 	/**
-	 * @return the titulo
+	 * @return the assembleiaTO
 	 */
-	public String getTitulo() {
-		return titulo;
-	}
-
-	/**
-	 * @return the validDate
-	 */
-	public boolean isValidDate() {
-		return validDate;
-	}
-
-	/**
-	 * @return the arquivo
-	 */
-	public boolean isArquivo() {
-		return arquivo;
-	}
-
-	/**
-	 * @param titulo
-	 *            the titulo to set
-	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	/**
-	 * @param validDate
-	 *            the validDate to set
-	 */
-	public void setValidDate(boolean validDate) {
-		this.validDate = validDate;
-	}
-
-	/**
-	 * @param arquivo
-	 *            the arquivo to set
-	 */
-	public void setArquivo(boolean arquivo) {
-		this.arquivo = arquivo;
+	public AssembleiaTO getAssembleiaTO() {
+		return assembleiaTO;
 	}
 
 	/**
@@ -69,10 +31,24 @@ public class UploadArquivosAssembleiaControllerBean {
 	}
 
 	/**
-	 * @return the usuario
+	 * @return the validDate
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public boolean isValidDate() {
+		return validDate;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public String getData() {
+		return data;
+	}
+
+	/**
+	 * @return the titulo
+	 */
+	public boolean isTitulo() {
+		return titulo;
 	}
 
 	/**
@@ -83,41 +59,10 @@ public class UploadArquivosAssembleiaControllerBean {
 	}
 
 	/**
-	 * @param usuario
-	 *            the usuario to set
+	 * @return the usuario
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	/**
-	 * @param fileData
-	 *            the fileData to set
-	 */
-	public void setFileData(CommonsMultipartFile fileData) {
-		this.fileData = fileData;
-	}
-
-	/**
-	 * @return the assembleiaTO
-	 */
-	public AssembleiaTO getAssembleiaTO() {
-		return assembleiaTO;
-	}
-
-	/**
-	 * @param resultado
-	 * @return the assembleia
-	 */
-	public boolean isAssembleia(boolean resultado) {
-		return assembleia;
-	}
-
-	/**
-	 * @return the data
-	 */
-	public String getData() {
-		return data;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
@@ -144,11 +89,43 @@ public class UploadArquivosAssembleiaControllerBean {
 	}
 
 	/**
+	 * @param validDate
+	 *            the validDate to set
+	 */
+	public void setValidDate(boolean validDate) {
+		this.validDate = validDate;
+	}
+
+	/**
 	 * @param data
 	 *            the data to set
 	 */
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	/**
+	 * @param titulo
+	 *            the titulo to set
+	 */
+	public void setTitulo(boolean titulo) {
+		this.titulo = titulo;
+	}
+
+	/**
+	 * @param fileData
+	 *            the fileData to set
+	 */
+	public void setFileData(CommonsMultipartFile fileData) {
+		this.fileData = fileData;
+	}
+
+	/**
+	 * @param usuario
+	 *            the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**
@@ -160,8 +137,7 @@ public class UploadArquivosAssembleiaControllerBean {
 	}
 
 	public boolean hasErrors() {
-		if (assembleia == false || usuario == null || fileData == null
-				|| data == null || arquivo == false || titulo == null) {
+		if (assembleia == false || validDate == false || titulo == false) {
 			hasErrorForm = true;
 			return false;
 		}

@@ -34,6 +34,8 @@ public class Assembleia {
 	private Date dataAssembleia;
 	
 	
+	
+	
 	/**
 	 * @return the titulo
 	 */

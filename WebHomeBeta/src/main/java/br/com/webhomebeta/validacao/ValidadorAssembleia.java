@@ -64,4 +64,12 @@ public class ValidadorAssembleia {
 
 	}
 
+	public boolean isValiTitulo(String titulo) {
+		if (titulo.length() < 3 || titulo.length() > 30)
+			return false;
+		else {
+			return true;
+		}
+
+	}
 }
