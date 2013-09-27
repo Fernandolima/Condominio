@@ -35,6 +35,7 @@ public class NotificacaoController {
 	private Queue<NotificacoesJSON> queueNotificacaoJSON = new ConcurrentLinkedQueue<NotificacoesJSON>();
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
+	//ve
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
 	public ArrayList<NotificacoesJSON> inicia() {
 		SecurityContext context = SecurityContextHolder.getContext();

@@ -29,13 +29,14 @@ public class NotificacaoDAOImp implements NotificacaoDAO {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Notificacao> getNotificacoes(int id, boolean b) {
 		Query q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[NOTIFICACAO] WHERE ID_NOTIFICADO = ? AND IS_VISUALIZADA = ?");
 		q.setInteger(0,id);
 		q.setBoolean(1, b);
-		return q.list();
+		return (List<Notificacao>)q.list();
 	}
 
 }
