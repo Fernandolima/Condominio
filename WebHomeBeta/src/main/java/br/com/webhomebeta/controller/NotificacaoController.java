@@ -70,7 +70,7 @@ public class NotificacaoController {
 
 	// Testando
 	@RequestMapping(value = "notificacao", method = RequestMethod.POST)
-	public String receberNotificacao(@RequestParam("id") int idNotificado,
+	public @ResponseBody String receberNotificacao(@RequestParam("id") int idNotificado,
 			@RequestParam("tipo") String tipo,
 			@RequestParam("idPost") int idPost) {
 
