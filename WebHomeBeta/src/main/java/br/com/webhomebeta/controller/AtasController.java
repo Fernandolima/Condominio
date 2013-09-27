@@ -67,6 +67,7 @@ public class AtasController {
 
 	}
 
+	// Tela de Listar Atas
 	@RequestMapping(value = "listaAtas", method = RequestMethod.GET)
 	public ModelAndView ListAtas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
