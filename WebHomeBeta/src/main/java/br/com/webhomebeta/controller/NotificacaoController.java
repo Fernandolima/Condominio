@@ -32,6 +32,9 @@ public class NotificacaoController {
 	@Autowired
 	private NotificacaoService notificacaoService;
 
+	
+	
+	
 	private Queue<NotificacoesJSON> queueNotificacaoJSON = new ConcurrentLinkedQueue<NotificacoesJSON>();
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
