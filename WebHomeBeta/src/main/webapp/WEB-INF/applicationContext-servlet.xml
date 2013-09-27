@@ -36,8 +36,9 @@
 	<mvc:resources mapping="/bootstrap/**" location="/resources/bootstrap/" />
 	<mvc:resources mapping="/bootstrap/css/**" location="/resources/bootstrap/css/" />
 	<mvc:resources mapping="/bootstrap/js/**" location="/resources/bootstrap/js/" />
-	<mvc:resources mapping="/js/jquery-ui-1.10.3/ui/**" location="/js/jquery-ui-1.10.3/ui/" />
-	
+	<mvc:resources mapping="/js/jquery-ui-1.10.3/ui/**"
+		location="/js/jquery-ui-1.10.3/ui/" />
+
 	<mvc:resources mapping="/uploadedImgs/**" location="/uploadedImgs/" />
 	<mvc:annotation-driven />
 
@@ -47,10 +48,10 @@
 		<property name="prefix" value="/WEB-INF/webdinamic/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-		<!-- Define a pagina inical -->
+
+	<!-- Define a pagina inical -->
 	<mvc:view-controller path="/" view-name="index" />
-	
+
 	<!-- define que as transaçoes irao ser anotadas -->
 	<tx:annotation-driven />
 
@@ -114,18 +115,41 @@
 			token-validity-seconds="186000" />
 		<sec:intercept-url pattern="/index.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			<sec:intercept-url pattern="/index"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/cadastro.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/admin" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/home" access="ROLE_MORADOR,ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/home.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
+		<sec:intercept-url pattern="/atas.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/atas" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/perfil" access="ROLE_MORADOR,ROLE_ADMIN" />
+		<sec:intercept-url pattern="/perfil.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
 	</sec:http>
+
+	<bean id="defaultTargetUrl" class="java.lang.String">
+		<constructor-arg value="/content" />
+	</bean>
+
+	<bean id="authenticationTrustResolver"
+		class="org.springframework.security.authentication.AuthenticationTrustResolverImpl" />
+
+	<bean id="authenticationSuccessHandler"
+		class="com.example.spring.security.MyAuthenticationSuccessHandler">
+		<property name="defaultTargetUrl" ref="defaultTargetUrl" />
+	</bean>
 
 	<bean id="myAuthenticationSuccessHandler"
 		class="br.com.webhomebeta.controller.MyAuthenticationSuccessHandler">
 	</bean>
 
+	<bean id="securityContextAccessor"
+    class="com.example.spring.security.SecurityContextAccessorImpl" />
+	
 	<sec:authentication-manager>
 		<sec:authentication-provider
 			user-service-ref="customLogin">
@@ -212,7 +236,8 @@
 	<bean id="perfilSerivce" class="br.com.webhomebeta.service.PerfilService"></bean>
 	<bean id="gostouDAO" class="br.com.webhomebeta.dao.imp.GostouDAOImp"></bean>
 	<bean id="gostouSerivce" class="br.com.webhomebeta.service.GostouService"></bean>
-	<bean id="uploadArquivosAssembleiaControllerBean" class="br.com.webhomebeta.bean.UploadArquivosAssembleiaControllerBean"></bean>
+	<bean id="uploadArquivosAssembleiaControllerBean"
+		class="br.com.webhomebeta.bean.UploadArquivosAssembleiaControllerBean"></bean>
 
 
 </beans>

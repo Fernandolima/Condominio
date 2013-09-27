@@ -49,19 +49,19 @@ public class MyAuthenticationSuccessHandler implements
 		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROLE_MORADOR")) {
+			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				isMorador = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+			} else if (grantedAuthority.getAuthority().equals("ROLE_MORADOR")) {
 				isAdmin = true;
 				break;
 			}
 		}
 
-		if (isMorador) {
-			return "/home";
-		} else if (isAdmin) {
+		if (isAdmin) {
 			return "/admin";
+		} else if (isMorador) {
+			return "/home";
 		} else {
 			throw new IllegalStateException();
 		}
