@@ -29,7 +29,7 @@ import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.validacao.ValidadorAtas;
-
+//atas de assembleia
 @Controller
 public class AtasController {
 	@Autowired
