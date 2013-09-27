@@ -29,6 +29,7 @@ import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.validacao.ValidadorAtas;
+
 //atas de assembleia
 @Controller
 public class AtasController {
@@ -68,17 +69,13 @@ public class AtasController {
 	}
 
 	// Tela de Listar Atas
-	@RequestMapping(value = "listaAtas", method = RequestMethod.GET)
+	@RequestMapping(value = "listaAtas")
 	public ModelAndView ListAtas(ModelMap model) {
-		List<AtasEntity> atas = atasService.getList();
-
-		model.put("listaAtas", atas);
-		return new ModelAndView("listaAtas", model);
+		atasService.getList();
+		return new ModelAndView("listaAtas", "model", atasService.getList());
 
 	}
 
-	
-	
 	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public String AtasArquivos(
