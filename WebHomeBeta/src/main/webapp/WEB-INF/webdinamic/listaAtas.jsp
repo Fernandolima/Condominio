@@ -50,8 +50,13 @@
 				</nav>
 				<section id="content-admin">
 					<div id="cadastrarAtas">
-						<h2>Atas Cadastradas</h2>
-						
+						<h2>Atas Cadastradas =)</h2>
+						<c:forEach items="${atas}" var="item">
+							<p><c:out value="${item.id}"/></p>
+							<p><c:out value="${item.titulo}"/></p>
+							<p><c:out value="${item.dataCriacao}"/></p>
+							<p><c:out value="${item.atas}"/></p>
+						</c:forEach>						
 					</div>
 				</section>
 			</div>
