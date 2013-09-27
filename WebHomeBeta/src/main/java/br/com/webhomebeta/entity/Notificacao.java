@@ -41,6 +41,10 @@ public class Notificacao {
 	@Column(name = "URL")
 	private String URL;
 
+	public Notificacao(){
+		
+	}
+	
 	public Notificacao(String tipoNotificacao, int idNotificacado,
 			int idNotificacador, int idPublicacao, boolean isVisualizada, String URL) {
 		this.tipoNotificacao = tipoNotificacao;

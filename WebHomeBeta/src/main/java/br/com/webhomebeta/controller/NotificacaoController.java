@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -32,15 +33,13 @@ public class NotificacaoController {
 	@Autowired
 	private NotificacaoService notificacaoService;
 
-	
-	
-	
 	private Queue<NotificacoesJSON> queueNotificacaoJSON = new ConcurrentLinkedQueue<NotificacoesJSON>();
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
 
-	//ve
+	// ve
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
-	public @ResponseBody ArrayList<NotificacoesJSON> inicia() {
+	public @ResponseBody
+	ArrayList<NotificacoesJSON> inicia() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
@@ -54,8 +53,9 @@ public class NotificacaoController {
 			}
 		}
 		ArrayList<NotificacoesJSON> list = new ArrayList<>();
-		for (Notificacao n : notificacaoService.getNotificacoes(
-				dadosUsuarioBean.getUsuario().getIdUser(), false)) {
+		List<Notificacao> listNotificacao = notificacaoService.getNotificacoes(
+				dadosUsuarioBean.getUsuario().getIdUser(), false);
+		for (Notificacao n : listNotificacao) {
 			NotificacoesJSON json = new NotificacoesJSON();
 			json.setIdPublicacao(n.getIdNotificacado());
 			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
@@ -73,7 +73,8 @@ public class NotificacaoController {
 
 	// Testando
 	@RequestMapping(value = "notificacao", method = RequestMethod.POST)
-	public @ResponseBody String receberNotificacao(@RequestParam("id") int idNotificado,
+	public @ResponseBody
+	String receberNotificacao(@RequestParam("id") int idNotificado,
 			@RequestParam("tipo") String tipo,
 			@RequestParam("idPost") int idPost) {
 
@@ -82,7 +83,8 @@ public class NotificacaoController {
 		this.queueNotificacaoJSON.add(notificacoesJSON);
 
 		Notificacao notificacao = new Notificacao(tipo, idNotificado,
-				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false, "ainda nao tem");
+				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false,
+				"ainda nao tem");
 
 		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
