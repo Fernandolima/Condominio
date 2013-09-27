@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 @Entity
 @Table(name = "[dbo].[NOTIFICACAO]")
@@ -31,17 +32,31 @@ public class Notificacao {
 	@Column(name = "ID_POST")
 	private int idPost;
 	
+	@Column(name = "ID_PUBLICACAO")
+	private int idPublicacao;
+
+	@Column(name = "TEXTO")
 	private String texto;
 
 	@Column(name = "URL")
 	private String URL;
 
 	public Notificacao(String tipoNotificacao, int idNotificacado,
-			int idNotificacador, int idPost) {
+			int idNotificacador, int idPublicacao, boolean isVisualizada, String URL) {
 		this.tipoNotificacao = tipoNotificacao;
 		this.idNotificacado = idNotificacado;
 		this.idNotificacador = idNotificacador;
-		this.idPost = idPost;
+		this.idPublicacao = idPublicacao;
+		this.isVisualizada = isVisualizada;
+		this.URL = URL;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
 	public int getIdPost() {

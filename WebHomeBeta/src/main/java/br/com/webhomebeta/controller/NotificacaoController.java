@@ -78,7 +78,7 @@ public class NotificacaoController {
 		this.queueNotificacaoJSON.add(notificacoesJSON);
 
 		Notificacao notificacao = new Notificacao(tipo, idNotificado,
-				dadosUsuarioBean.getUsuario().getIdUser(), idPost);
+				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false, "ainda nao tem");
 
 		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));

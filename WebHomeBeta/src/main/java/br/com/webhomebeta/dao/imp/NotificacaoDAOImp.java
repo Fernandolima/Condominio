@@ -32,7 +32,7 @@ public class NotificacaoDAOImp implements NotificacaoDAO {
 	@Override
 	@Transactional
 	public List<Notificacao> getNotificacoes(int id, boolean b) {
-		Query q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[NOTIFICACAO] WHERE ID_USER = ? AND IS_VISUALIZADA = ?");
+		Query q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[NOTIFICACAO] WHERE ID_NOTIFICADO = ? AND IS_VISUALIZADA = ?");
 		q.setInteger(0,id);
 		q.setBoolean(1, b);
 		return q.list();
