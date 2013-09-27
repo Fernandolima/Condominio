@@ -500,3 +500,33 @@ input#submitComment {
     cursor: pointer;
     display: none;
 }
+
+/*PERFIL*/
+
+#perfil #rigth-content {
+	width: 100%;
+	margin: 0;
+}
+
+#perfil-user {
+	width: 100%;
+	float: left;
+}
+
+#content-titulo {
+	width: 100%;
+	height: 65px;
+	background: #f6f7f8;
+	background-bottom: 1px solid #d3d6db;
+	padding-top: 15px;
+}
+
+#content-titulo h2 {
+	color: #37404e;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	height: 24px;
+	line-height: 1;
+	margin: 16px 12px 5px;
+}

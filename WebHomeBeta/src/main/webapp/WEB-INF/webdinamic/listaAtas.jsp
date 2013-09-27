@@ -51,6 +51,7 @@
 				<section id="content-admin">
 					<div id="cadastrarAtas">
 						<h2>Atas Cadastradas =)</h2>
+						<p><c:out value="${atas}"/></p>
 						<c:forEach items="${atas}" var="item">
 							<p><c:out value="${item.id}"/></p>
 							<p><c:out value="${item.titulo}"/></p>

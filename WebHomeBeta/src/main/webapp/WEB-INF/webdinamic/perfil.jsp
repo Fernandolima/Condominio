@@ -1,52 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<title>jQuery File Upload Example</title>
- 
-<script src="<c:url value = "/js/jquery.1.9.1.min.js"/>" type="text/javascript"></script>
- 
-<!-- bootstrap just to have good looking page -->
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+	<meta charset="UTF-8" />
+		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+		<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
+		
+		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+	<head>
+	<body id="perfil" class="rede-social">
+		<header id="header-site" class="connected">
+			<div class="content">
+				<h1><a href="index" title="Web Home">Web Home</a></h1>
+				<div id="data-user">
+					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
+					<span>|</span>
+					<a href="perfil">Configuracoes</a>
+					<span>|</span>
+					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
+				</div>
+			</div>
+		</header>
+		<section id="contentSite">	
+			<div id="main-site">			
+				<div id="leftCol">
+					<div id="user-connected">
+						<div id="photo-user">
+							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
+							
+						</div>
+						<div id="nav-user">
+							<h3>Categoria</h3>
+							<ul class="list-nav">
+								<li><a href="#">Assembleias</a></li>
+								<li><a href="#">Enquetes</a></li>
+								<li><a href="#">Gastos</a></li>
+								<li><a href="#">Reserva de espa&ccedil;os</a></li>
+								<li class="last-link"><a href="#">Usu&aacute;rios</a></li>
+							</ul>
 
-<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap.css"/>"/>
- 
-<!-- we code these -->
-<link rel="stylesheet" type="text/css" href="<c:url value = "/css/dropzone.css"/>"/>
-
-</head>
- 
-<body>
-<h1>Spring MVC - jQuery File Upload</h1>
-<div style="width:500px;padding:20px">
-
-	<input id="fileupload" type="file" name="files[]" data-url="perfil/upload" multiple>
-	
-	<div id="dropzone" class="fade well">Drop files here</div>
-	
-	<div id="progress" class="progress">
-    	<div class="bar" style="width: 0%;"></div>
-	</div>
-
-	<table id="uploaded-files" class="table">
-		<tr>
-			<th>File Name</th>
-			<th>File Size</th>
-			<th>File Type</th>
-			<th>Download</th>
-		</tr>
-	</table>
-	
-</div>
-<script src="<c:url value = "/js/jquery.ui.widget.js"/>" type="text/javascript"></script>
-<script src="<c:url value = "/js/jquery.iframe-transport.js"/>" type="text/javascript"></script>
-<script src="<c:url value = "/js/jquery.fileupload.js"/>" type="text/javascript"></script>
-<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
-<script src="<c:url value = "/js/myuploadfunction.js"/>" type="text/javascript"></script>
-</body> 
+						</div>
+					</div>
+				</div>
+				<div id="rightCol">
+					<div id="rigth-content">
+						<div id="perfil-user">
+							<div id="content-titulo">
+								<h2>Editar perfil</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- <footer id="footer-site">
+		</footer> -->
+		<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
+	</body>
 </html>
