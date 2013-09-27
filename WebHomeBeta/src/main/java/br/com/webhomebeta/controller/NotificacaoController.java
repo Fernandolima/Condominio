@@ -37,7 +37,7 @@ public class NotificacaoController {
 
 	//ve
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
-	public ArrayList<NotificacoesJSON> inicia() {
+	public @ResponseBody ArrayList<NotificacoesJSON> inicia() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
