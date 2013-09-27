@@ -67,6 +67,17 @@ public class AtasController {
 
 	}
 
+	@RequestMapping(value = "listaAtas", method = RequestMethod.GET)
+	public ModelAndView ListAtas(ModelMap model) {
+		List<AtasEntity> atas = atasService.getList();
+
+		model.put("listaAtas", atas);
+		return new ModelAndView("listaAtas", model);
+
+	}
+
+	
+	
 	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public String AtasArquivos(
