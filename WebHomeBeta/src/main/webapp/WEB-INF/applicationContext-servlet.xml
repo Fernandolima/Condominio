@@ -115,7 +115,7 @@
 			token-validity-seconds="186000" />
 		<sec:intercept-url pattern="/index.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-			<sec:intercept-url pattern="/index"
+		<sec:intercept-url pattern="/index"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/cadastro.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -130,26 +130,12 @@
 		<sec:intercept-url pattern="/perfil" access="ROLE_MORADOR,ROLE_ADMIN" />
 		<sec:intercept-url pattern="/perfil.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
 	</sec:http>
-
-	<bean id="defaultTargetUrl" class="java.lang.String">
-		<constructor-arg value="/content" />
-	</bean>
-
-	<bean id="authenticationTrustResolver"
-		class="org.springframework.security.authentication.AuthenticationTrustResolverImpl" />
-
-	<bean id="authenticationSuccessHandler"
-		class="com.example.spring.security.MyAuthenticationSuccessHandler">
-		<property name="defaultTargetUrl" ref="defaultTargetUrl" />
-	</bean>
-
+       
+ 
 	<bean id="myAuthenticationSuccessHandler"
 		class="br.com.webhomebeta.controller.MyAuthenticationSuccessHandler">
 	</bean>
 
-	<bean id="securityContextAccessor"
-    class="com.example.spring.security.SecurityContextAccessorImpl" />
-	
 	<sec:authentication-manager>
 		<sec:authentication-provider
 			user-service-ref="customLogin">

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -50,10 +52,10 @@ public class MyAuthenticationSuccessHandler implements
 				.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-				isMorador = true;
+				isAdmin = true;
 				break;
 			} else if (grantedAuthority.getAuthority().equals("ROLE_MORADOR")) {
-				isAdmin = true;
+				isMorador = true;
 				break;
 			}
 		}
@@ -79,8 +81,5 @@ public class MyAuthenticationSuccessHandler implements
 		this.redirectStrategy = redirectStrategy;
 	}
 
-	protected RedirectStrategy getRedirectStrategy() {
-		return redirectStrategy;
-	}
-
+	
 }
