@@ -1,7 +1,10 @@
 package br.com.webhomebeta.to;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
 
 public class EnquetesTo {
@@ -11,8 +14,23 @@ public class EnquetesTo {
 	private Date dataequete;
 	private Usuario usuarioEnquete;
 	private Date titulo;
-	private String aprovacao;
-	private String reprovacao;
+	private Set<Opcao> opcoes = new HashSet<>(0);
+	
+	public void addOpcao(Opcao opcao){
+		opcoes.add(opcao);
+	}
+	/**
+	 * @return the opcoes
+	 */
+	public Set<Opcao> getOpcoes() {
+		return opcoes;
+	}
+	/**
+	 * @param opcoes the opcoes to set
+	 */
+	public void setOpcoes(Set<Opcao> opcoes) {
+		this.opcoes = opcoes;
+	}
 	/**
 	 * @return the aprovacao
 
@@ -29,29 +47,7 @@ public class EnquetesTo {
 		this.titulo = titulo;
 	}
 	/**
-	 * @return the aprovacao
-	 */
-	public String getAprovacao() {
-		return aprovacao;
-	}
-	/**
-	 * @return the reprovacao
-	 */
-	public String getReprovacao() {
-		return reprovacao;
-	}
-	/**
-	 * @param aprovacao the aprovacao to set
-	 */
-	public void setAprovacao(String aprovacao) {
-		this.aprovacao = aprovacao;
-	}
-	/**
-	 * @param reprovacao the reprovacao to set
-	 */
-	public void setReprovacao(String reprovacao) {
-		this.reprovacao = reprovacao;
-	}
+	
 	/**
 	 * @return the idEquete
 	 */

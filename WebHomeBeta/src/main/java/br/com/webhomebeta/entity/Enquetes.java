@@ -1,6 +1,8 @@
 package br.com.webhomebeta.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 public class Enquetes {
 	@Id
@@ -17,23 +20,21 @@ public class Enquetes {
 	private int idEquete;
 
 	@Column(name = "ENQUETE")
-	private String equete;
+	private String enquete;
 
 	@Column(name = "DATA_ENQUETE")
 	private Date dataequete;
 
 	@Column(name = "TITULO")
 	private Date titulo;
-	
-	@Column(name = "APROVACOES")
-	private String aprovacao;
 
-	@Column(name = "REPROVACOES")
-	private String reprovacao;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioEnquete;
+
+	// Um usuario pode fazer varias opcao
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquete")
+	private Set<Opcao> opcao = new HashSet<>(0);
 
 	/**
 	 * @return the titulo
@@ -61,7 +62,7 @@ public class Enquetes {
 	 * @return the equete
 	 */
 	public String getEquete() {
-		return equete;
+		return enquete;
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class Enquetes {
 	 *            the equete to set
 	 */
 	public void setEquete(String equete) {
-		this.equete = equete;
+		this.enquete = equete;
 	}
 
 	/**
@@ -109,34 +110,5 @@ public class Enquetes {
 	public void setUsuarioEnquete(Usuario usuarioEnquete) {
 		this.usuarioEnquete = usuarioEnquete;
 	}
-
-	/**
-	 * @return the aprovacao
-	 */
-	public String getAprovacao() {
-		return aprovacao;
-	}
-
-	/**
-	 * @return the reprovacao
-	 */
-	public String getReprovacao() {
-		return reprovacao;
-	}
-
-	/**
-	 * @param aprovacao the aprovacao to set
-	 */
-	public void setAprovacao(String aprovacao) {
-		this.aprovacao = aprovacao;
-	}
-
-	/**
-	 * @param reprovacao the reprovacao to set
-	 */
-	public void setReprovacao(String reprovacao) {
-		this.reprovacao = reprovacao;
-	}
-
 
 }

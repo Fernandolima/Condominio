@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.EnqueteDao;
+import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Enquetes;
 
 public class EnqueteDaoImp implements EnqueteDao {
@@ -35,10 +36,10 @@ public class EnqueteDaoImp implements EnqueteDao {
 	}
 
 	@Transactional
-	public List<Enquetes> getEnquetes() {
-		String sql = "exe[dbo].[ENQUETE]";
-		Query q = factory.getCurrentSession().createSQLQuery(
-				"SELECT  * FROM [dbo].[ENQUETE]");
+	public List<Enquetes> getEnquetes() {	
+		Query q = factory.getCurrentSession()
+				.createSQLQuery("SELECT  * FROM [dbo].[ENQUETE]")
+				.addEntity(Enquetes.class);
 		return q.list();
 	}
 }

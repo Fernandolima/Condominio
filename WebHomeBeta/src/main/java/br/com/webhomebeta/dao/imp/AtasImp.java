@@ -44,8 +44,7 @@ public class AtasImp implements AtasDao {
 
 		@Transactional
 		public List<AtasEntity> getAtas() {		
-			String sql = "exe[dbo].[ATAS]";
-			Query q = factory.getCurrentSession().createSQLQuery("SELECT  * FROM [dbo].[ATAS]");
+			Query q = factory.getCurrentSession().createSQLQuery("SELECT  * FROM [dbo].[ATAS]").addEntity(AtasEntity.class);
 			return q.list();
 		
 		}
