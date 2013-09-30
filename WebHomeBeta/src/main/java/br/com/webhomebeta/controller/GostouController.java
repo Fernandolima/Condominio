@@ -37,9 +37,15 @@ public class GostouController {
 			return "true";
 
 	}
+
 	@RequestMapping(value = "removeGostou", method = RequestMethod.POST)
-	public String removeGostou(@RequestParam("id") int id){
-		return null;
+	public String removeGostou(@RequestParam("id") int id) {
+		
+		if (getUsuario().getIdUser() == gostouService.get(id).getIdUsuario()) {
+			gostouService.delete(getUsuario().getIdUser(), id);
+			return "true";
+		} else
+			return "false";
 	}
 
 	public Usuario getUsuario() {

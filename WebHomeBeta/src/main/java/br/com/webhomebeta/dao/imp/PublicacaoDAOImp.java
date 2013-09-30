@@ -31,10 +31,12 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Publicacao> getPublicacoes() {
+	public List<Publicacao> getPublicacoes(int colunaInicial, int tamanhoColuna) {
 		
-		String sql = "exec [dbo].[SELECT_PUBLICACOES]";
+		String sql = "exec [dbo].[SELECT_PUBLICACOES_CERTOOO] ?,?";
 		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class).setCacheable(true);
+		q.setInteger(0, colunaInicial);
+		q.setInteger(1,tamanhoColuna);
 		
 		return q.list();
 		

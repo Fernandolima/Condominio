@@ -1,5 +1,6 @@
 package br.com.webhomebeta.dao.imp;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,15 @@ public class GostouDAOImp implements GostouDAO{
 
 	@Override
 	@Transactional
-	public void delete(Gostou gostou){
-		factory.getCurrentSession().delete(gostou);
+	public void delete(int idUsuario, int idGostou){
+		Query q = factory.getCurrentSession().createSQLQuery("DELETE FROM [dbo].[GOSTOU] WHERE ID_USER = ? AND ID_GOSTOU = ?");
+		q.setInteger(0, idUsuario);
+		q.setInteger(1, idGostou);
+	}
+
+	@Override
+	public Gostou get(int id) {
+		return (Gostou) factory.getCurrentSession().get(Gostou.class, id );
 	}
 
 }

@@ -62,6 +62,8 @@ public class HomeController {
 	private MoradorControllerBean moradorControllerBean;
 	@Autowired
 	private NotificacaoService notificacaoService;
+	
+	private int colunaInicial = 1;
 
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
@@ -131,7 +133,8 @@ public class HomeController {
 	ArrayList<JsonPublicacao> sendJsonPublicacao() {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
-		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes();
+		final int tamanhoColuna = 10;
+		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(colunaInicial,tamanhoColuna);
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
 			// Cria uma lista para os comentarios desta publicacao
@@ -170,7 +173,8 @@ public class HomeController {
 			// Seta as publicacoes filtradas e as retorna para a VIEW
 			jsonPublicacaos.add(jsonPublicacao);
 		}
-
+		
+		colunaInicial += publicacaoes.size() - 1;
 		return jsonPublicacaos;
 	}
 
@@ -240,7 +244,7 @@ public class HomeController {
 
 	}
 
-	// deleta uma publicação
+	// deleta uma publicaï¿½ï¿½o
 	@RequestMapping(value = "home/delete", method = RequestMethod.GET)
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {

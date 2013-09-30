@@ -18,8 +18,8 @@ public class PublicacaoService {
 		return publicacaoDAO.salvarPublicacao(publicacao);
 	}
 	
-	public List<Publicacao> getPublicacoes(){
-		return publicacaoDAO.getPublicacoes();
+	public List<Publicacao> getPublicacoes(int colunaInicial, int tamanhoColuna){
+		return publicacaoDAO.getPublicacoes(colunaInicial,tamanhoColuna);
 	}
 	
 	public List<Publicacao> getPublicacao(int idUser){

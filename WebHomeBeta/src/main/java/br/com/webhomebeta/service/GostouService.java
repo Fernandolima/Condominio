@@ -16,7 +16,11 @@ public class GostouService {
 		return gostouDAO.salvar(gostou);
 	}
 	
-	public void delete(Gostou gostou){
-		gostouDAO.delete(gostou);
+	public void delete(int idUsuario, int idGostou){
+		gostouDAO.delete(idUsuario, idGostou);
+	}
+	
+	public Gostou get ( int id){
+		return gostouDAO.get(id);
 	}
 }
