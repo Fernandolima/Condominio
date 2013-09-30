@@ -13,7 +13,7 @@
 
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
   <% 
-  	//verifica se o usuario ja esta logado, evitando que o mesmo veja a pagina de login
+  	//verifica se o usuario ja esta logado, evitando que o mesmo veja a pagina de login se estiver logado
   	String path = null;
  	SecurityContext context = SecurityContextHolder.getContext();
  	if (context instanceof SecurityContext){

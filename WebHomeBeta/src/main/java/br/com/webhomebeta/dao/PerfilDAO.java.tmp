@@ -8,4 +8,5 @@ public interface PerfilDAO {
 	public void update(Perfil perfil);
 	public void remover(Perfil perfil);
 	public Perfil get(int idPerfil);
+	
 }

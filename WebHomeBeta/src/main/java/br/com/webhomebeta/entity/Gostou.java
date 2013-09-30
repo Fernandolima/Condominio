@@ -26,9 +26,7 @@ public class Gostou {
 	@Column(name = "ID_USER")
 	private int idUsuario;
 	
-	public Gostou(int id, Publicacao publicacao, int idUsuario) {
-		super();
-		this.id = id;
+	public Gostou(Publicacao publicacao, int idUsuario) {
 		this.publicacao = publicacao;
 		this.idUsuario = idUsuario;
 	}

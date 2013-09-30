@@ -26,9 +26,12 @@ public class PerfilDAOImp implements PerfilDAO {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public Perfil get(int idPerfil){
-		return (Perfil) factory.getCurrentSession().get(Perfil.class, idPerfil);
+
+	@Override
+	public Perfil get(int idPerfil) {
+		
+		Perfil p = (Perfil) factory.getCurrentSession().get(Perfil.class,idPerfil);
+		return p;
 	}
 
 }

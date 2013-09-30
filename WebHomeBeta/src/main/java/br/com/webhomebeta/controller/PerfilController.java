@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.PerfilControllerBean;
 import br.com.webhomebeta.entity.FileData;
 import br.com.webhomebeta.entity.Perfil;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -48,26 +49,17 @@ public class PerfilController {
 
 	@RequestMapping(value = "perfil", method = RequestMethod.GET)
 	public ModelAndView visualizarPerfil(ModelMap model) {
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				perfilControllerBean.setUsuario(usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
 
-			}
+		if (getPerfilTO() == null)
+			model.put("perfilControllerBean", perfilControllerBean);
+		else {
+			perfilControllerBean.setPerfilTO(getPerfilTO());
+			model.put("perfilControllerBean", perfilControllerBean);
 		}
-
-		model.put("perfilControllerBean", perfilControllerBean);
 
 		return new ModelAndView("perfil", model);
 	}
 
-	
-	
 	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
 	public @ResponseBody
 	LinkedList<FileData> uploadFoto(MultipartHttpServletRequest request,
@@ -94,7 +86,7 @@ public class PerfilController {
 
 			try {
 				fileData.setBytes(mpf.getBytes());
-
+				
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(
 						"C:/imgs/" + mpf.getOriginalFilename()));
 
@@ -140,4 +132,35 @@ public class PerfilController {
 
 	}
 
+	public PerfilTO getPerfilTO() {
+
+		Perfil p = perfilService.get(getUsuario().getIdUser());
+		if (p == null)
+			return null;
+		else {
+			PerfilTO pTO = new PerfilTO();
+			BeanUtils.copyProperties(p, pTO);
+			return pTO;
+		}
+
+	}
+
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
+	}
 }

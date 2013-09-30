@@ -11,29 +11,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.webhomebeta.bean.DadosUsuarioBean;
+import br.com.webhomebeta.entity.Gostou;
+import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.GostouService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
-
 @Controller
 public class GostouController {
-	
+
 	@Autowired
 	private GostouService gostouService;
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@RequestMapping(value = "gostou", method = RequestMethod.POST)
-	public @ResponseBody String gostou(@RequestParam("id") int id){
-		
+	public @ResponseBody
+	String gostou(@RequestParam("id") int id) {
+
+		Gostou gostou = new Gostou(new Publicacao(id), getUsuario().getIdUser());
+		if (gostouService.salvar(gostou).getId() == 0)
+			return "false";
+		else
+			return "true";
+
+	}
+	@RequestMapping(value = "removeGostou", method = RequestMethod.POST)
+	public String removeGostou(@RequestParam("id") int id){
 		return null;
 	}
-	
-	
-	public Usuario getUsuario(){
-		
+
+	public Usuario getUsuario() {
+
 		Usuario usuario = null;
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
@@ -41,13 +51,13 @@ public class GostouController {
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				 usuario = usuarioService
+				usuario = usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
 								.getPrincipal()).getUsername());
 
 			}
 		}
-		
+
 		return usuario;
 	}
 }

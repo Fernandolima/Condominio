@@ -13,4 +13,8 @@ public class PerfilService {
 	public void update(Perfil perfil){
 		perfilDAO.update(perfil);
 	}
+	
+	public Perfil get(int idPerfil){
+		return perfilDAO.get(idPerfil);
+	}
 }

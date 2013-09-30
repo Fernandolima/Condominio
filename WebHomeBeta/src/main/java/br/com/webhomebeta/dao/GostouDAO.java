@@ -1,5 +1,6 @@
 package br.com.webhomebeta.dao;
 
+
 import br.com.webhomebeta.entity.Gostou;
 
 public interface GostouDAO {

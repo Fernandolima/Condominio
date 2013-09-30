@@ -14,14 +14,14 @@ public class GostouDAOImp implements GostouDAO{
 	
 	@Override
 	@Transactional
-	public Gostou salvar(Gostou gostou) {
+	public Gostou salvar(Gostou gostou){
 		factory.getCurrentSession().save(gostou);
 		return gostou;
 	}
 
 	@Override
 	@Transactional
-	public void delete(Gostou gostou) {
+	public void delete(Gostou gostou){
 		factory.getCurrentSession().delete(gostou);
 	}
 
