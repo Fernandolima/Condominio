@@ -26,7 +26,7 @@ public class Enquetes {
 	private Date dataequete;
 
 	@Column(name = "TITULO")
-	private Date titulo;
+	private String titulo;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
@@ -39,7 +39,7 @@ public class Enquetes {
 	/**
 	 * @return the titulo
 	 */
-	public Date getTitulo() {
+	public String getTitulo() {
 		return titulo;
 	}
 
@@ -47,7 +47,7 @@ public class Enquetes {
 	 * @param titulo
 	 *            the titulo to set
 	 */
-	public void setTitulo(Date titulo) {
+	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 

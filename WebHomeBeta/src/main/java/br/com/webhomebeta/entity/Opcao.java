@@ -18,9 +18,7 @@ public class Opcao {
 	@Column(name = "OPCAO")
 	private String opcao;
 
-	@Column(name = "ID_ENQUETE")
-	private int idEnquete;
-
+	
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
 	
@@ -28,6 +26,13 @@ public class Opcao {
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
 	private Enquetes enquete;
 
+	public Opcao(){
+		
+	}
+	
+	public Opcao(String opcao){
+		this.opcao = opcao;
+	}
 	/**
 	 * @return the idOpcao
 	 */
@@ -40,13 +45,6 @@ public class Opcao {
 	 */
 	public String getOpcao() {
 		return opcao;
-	}
-
-	/**
-	 * @return the idEnquete
-	 */
-	public int getIdEnquete() {
-		return idEnquete;
 	}
 
 	/**
@@ -70,13 +68,7 @@ public class Opcao {
 		this.opcao = opcao;
 	}
 
-	/**
-	 * @param idEnquete the idEnquete to set
-	 */
-	public void setIdEnquete(int idEnquete) {
-		this.idEnquete = idEnquete;
-	}
-
+	
 	/**
 	 * @param quatVots the quatVots to set
 	 */
