@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +36,23 @@ public class AtasEntity implements Serializable {
 
 	@Column(name = "DATA_CRIACAO")
 	private Date dataATA;
+	
+	@Transient
+	private String dataFormt;
+
+	/**
+	 * @return the dataFormt
+	 */
+	public String getDataFormt() {
+		return dataFormt;
+	}
+
+	/**
+	 * @param dataFormt the dataFormt to set
+	 */
+	public void setDataFormt(String dataFormt) {
+		this.dataFormt = dataFormt;
+	}
 
 	@Column(name = "ARQUIVO")
 	private String arquivo;
