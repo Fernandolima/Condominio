@@ -1,6 +1,8 @@
 package br.com.webhomebeta.controller;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +49,11 @@ public class AtasController {
 	@RequestMapping(value = "atas", method = RequestMethod.GET)
 	public ModelAndView Atas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		for( AtasEntity listAtas : atas){
+			listAtas.setDataFormt(df.format(listAtas.getDataCriacao()));
+		}
 		
 		// beanUsuarios.getFileData();
 		SecurityContext context = SecurityContextHolder.getContext();
