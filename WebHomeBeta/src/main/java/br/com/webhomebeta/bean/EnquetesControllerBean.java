@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.webhomebeta.to.EnquetesTo;
 
 public class EnquetesControllerBean {
-	
 
 	private List<String> listOpcoes;
 	private EnquetesTo enquetesTo;
