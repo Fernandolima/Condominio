@@ -1,8 +1,6 @@
 package br.com.webhomebeta.controller;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.EnquetesControllerBean;
+import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
-import br.com.webhomebeta.to.EnquetesTo;
 
 public class EnquetesController {
 	@Autowired
@@ -82,5 +79,14 @@ public class EnquetesController {
 
 		return usuario;
 	}
+	
+	@RequestMapping(value = "enquetes/delete", method = RequestMethod.POST)
+	public String delete(@ModelAttribute("enquetes") Enquetes enquetes,
+			BindingResult result) {
+		enquetesService.delete(enquetes);
+
+		return "redirect:/inserirAtas/delete";
+	}
+
 
 }

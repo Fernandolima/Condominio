@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
-import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.AtasService;
