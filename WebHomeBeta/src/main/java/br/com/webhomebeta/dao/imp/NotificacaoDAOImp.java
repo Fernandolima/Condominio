@@ -39,4 +39,14 @@ public class NotificacaoDAOImp implements NotificacaoDAO {
 		return (List<Notificacao>)q.list();
 	}
 
+	@Override
+	@Transactional
+	public void update(int idNoticacao, boolean b) {
+		
+		Query q = sessionFactory.getCurrentSession().createSQLQuery("UPDATE [dbo].[NOTIFICACAO] SET IS_VISUALIZADA = ? WHERE ID_NOTIFICADO = ?");
+		q.setBoolean(0, b);
+		q.setInteger(1,idNoticacao);
+		
+	}
+
 }

@@ -14,6 +14,8 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PERFIL")
 	private int idPerfil;
+	@Column(name = "ID_USER")
+	private int idUser;
 	@Column(name = "ESTILOS_MUSICAS")
 	private String estilosMusicais;
 	@Column(name = "LIVROS")
@@ -33,6 +35,28 @@ public class Perfil {
 		this.idade = idade;
 		this.profissao = profissao;
 	}
+	
+	
+	public int getIdPerfil() {
+		return idPerfil;
+	}
+
+
+	public void setIdPerfil(int idPerfil) {
+		this.idPerfil = idPerfil;
+	}
+
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+
 	public String getEstilosMusicais() {
 		return estilosMusicais;
 	}

@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UsuarioControllerBean;
+import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
 
 import br.com.webhomebeta.service.EmailServico;
+import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.validacao.Validator;
 
@@ -28,6 +30,8 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EmailServico emailServico;
+	@Autowired
+	private PerfilService perfilService;
 
 	private Validator validator = new Validator();
 
@@ -75,6 +79,9 @@ public class UsuarioController {
 			bean.getUsuarioTO().setBloco(null);
 			bean.getUsuarioTO().setAp(null);
 			bean.getUsuarioTO().setCargo(null);
+			
+			Perfil perfil = new Perfil("","","", 0, "");
+			perfilService.salvar(perfil);
 
 			return new ModelAndView("cadastro", "bean", bean);
 		}

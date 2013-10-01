@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javax.ws.rs.PUT;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -61,6 +63,13 @@ public class NotificacaoController {
 		return list;
 	}
 
+	@RequestMapping(value = "notificacaoVista", method = RequestMethod.POST)
+	public void notificacaoVista(){
+		
+		notificacaoService.update(dadosUsuarioBean.getUsuario().getIdUser(), true);
+		
+	}
+	
 	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
 	// o ID da publicacao
 	// e o tipo de notificacao

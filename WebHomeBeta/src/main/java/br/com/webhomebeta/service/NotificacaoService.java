@@ -25,5 +25,9 @@ public class NotificacaoService {
 	public List<Notificacao> getNotificacoes(int id, boolean b){
 		return notificacaoDAO.getNotificacoes(id, b);
 	}
+	
+	public void update(int idNotificacao, boolean b){
+		notificacaoDAO.update(idNotificacao, b);
+	}
 }
 
