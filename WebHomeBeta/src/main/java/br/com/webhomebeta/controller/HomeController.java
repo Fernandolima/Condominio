@@ -51,7 +51,9 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class HomeController {
-
+	
+	
+	
 	@Autowired
 	private ComentarioService comentarioService;
 	@Autowired

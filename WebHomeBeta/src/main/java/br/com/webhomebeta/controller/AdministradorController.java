@@ -23,6 +23,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class AdministradorController {
+	
 
 	@Autowired
 	private UsuarioService usuarioService;

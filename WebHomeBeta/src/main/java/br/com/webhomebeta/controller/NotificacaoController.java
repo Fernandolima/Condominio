@@ -25,7 +25,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class NotificacaoController {
-
+ 
 	@Autowired
 	private DadosUsuarioBean dadosUsuarioBean;
 	@Autowired

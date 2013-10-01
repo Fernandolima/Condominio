@@ -19,7 +19,7 @@ import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
-public class GostouController {
+public class GostouController { 
 
 	@Autowired
 	private GostouService gostouService;
