@@ -20,7 +20,7 @@
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
 					<span>|</span>
-					<a href="#" title="Ver site">Ver site</a>
+					<a href="home" title="Ver site">Ver site</a>
 					<span>|</span>
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
 				</div>
@@ -30,7 +30,13 @@
 			<div class="content">
 				<nav id="nav-admin">
 					<h2>Administrador</h2>
-					
+						
+						<span class="item-menu title-menu-drop"><b>></b> Atas</span>
+						<ul class="sub-menu">
+							<li class="item-menu"><a href="listaAtas" class="menu-drop">Listar Atas</a></li>
+							<li class="item-menu"><a href="atas" class="menu-drop">Cadastrar Atas</a></li>
+						</ul>
+						
 						<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
 						<ul class="sub-menu">
 							<li class="item-menu"><a href="cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>

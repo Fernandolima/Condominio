@@ -36,7 +36,7 @@
 						
 						<span class="item-menu title-menu-drop"><b>></b> Atas</span>
 						<ul class="sub-menu">
-							<li class="item-menu"><a href="listarAtas" class="menu-drop">Listar Atas</a></li>
+							<li class="item-menu"><a href="listaAtas" class="menu-drop">Listar Atas</a></li>
 							<li class="item-menu"><a href="atas" class="menu-drop">Cadastrar Atas</a></li>
 						</ul>
 						
@@ -54,9 +54,9 @@
 						
 						<div id="tabelaBlocos">
 							<div class="lineTabelaBlocos">
-								<p class="itemBlocos pBloco title">Título</p>
-								<p class="itemBlocos title">Data da Criação</p>
-								<p class="itemBlocos title">Atas</p>
+								<p class="itemBlocos pBloco title">Título da Ata</p>
+								<p class="itemBlocos title">Data</p>
+								<p class="itemBlocos title">Editar</p>
 								<p class="itemBlocos title">Download</p>
 							</div>
 							<c:forEach items="${listaAtas}" var="item">
