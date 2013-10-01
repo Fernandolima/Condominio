@@ -1,9 +1,13 @@
 package br.com.webhomebeta.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.webhomebeta.dao.PerfilDAO;
 import br.com.webhomebeta.entity.Perfil;
 
 public class PerfilService {
+	
+	@Autowired
 	private PerfilDAO perfilDAO; 
 	
 	public Perfil salvar(Perfil perfil){

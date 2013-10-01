@@ -16,12 +16,48 @@
 		<param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
 	</context-param>
 
+
+	<!-- Atmosphere + SPRING MVC ??? -->
 	<servlet>
 		<servlet-name>Spring-Servlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<servlet-class>org.atmosphere.cpr.MeteorServlet</servlet-class>
+		
+		<init-param>
+			<!-- When MeteorServlet is used, this is the parameter that will be looked 
+				and all requests will be delegated to this servlet, Of course, since we are 
+				using, Spring MVC, we delegate to DispatcherServlet -->
+			<param-name>org.atmosphere.servlet</param-name>
+			<param-value>org.springframework.web.servlet.DispatcherServlet</param-value>
+		</init-param>
+		<!-- Bunch of Atmosphere specific properties -->
+		
+		<init-param>
+			<param-name>org.atmosphere.cpr.broadcasterClass</param-name>
+			<param-value>org.atmosphere.cpr.DefaultBroadcaster</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.useNative</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.useWebSocket</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.useStream</param-name>
+			<param-value>true</param-value>
+		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.useBlocking</param-name>
+			<param-value>true</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>

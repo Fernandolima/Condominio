@@ -4,11 +4,28 @@ public class NotificacoesJSON {
 
 	private int idPublicacao;
 	private int idComentario;
+	private int idUser;
+	private int idUserComentou;
 	private String texto;
 	private String URL;
 	private String imagem;
 	
 	
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+	public int getIdUserComentou() {
+		return idUserComentou;
+	}
+
+	public void setIdUserComentou(int idUserComentou) {
+		this.idUserComentou = idUserComentou;
+	}
 
 	public String getImagem() {
 		return imagem;

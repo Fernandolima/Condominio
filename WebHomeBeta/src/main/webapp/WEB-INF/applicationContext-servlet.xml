@@ -40,7 +40,12 @@
 		location="/js/jquery-ui-1.10.3/ui/" />
 
 	<mvc:resources mapping="/uploadedImgs/**" location="/uploadedImgs/" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean
+				class="br.com.webhomebeta.resolver.AtmoSpringControllerResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<!-- Diz ao Spring onde as paginas JSP estao -->
 	<bean
@@ -130,8 +135,8 @@
 		<sec:intercept-url pattern="/perfil" access="ROLE_MORADOR,ROLE_ADMIN" />
 		<sec:intercept-url pattern="/perfil.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
 	</sec:http>
-       
- 
+
+
 	<bean id="myAuthenticationSuccessHandler"
 		class="br.com.webhomebeta.controller.MyAuthenticationSuccessHandler">
 	</bean>
@@ -224,13 +229,10 @@
 	<bean id="gostouSerivce" class="br.com.webhomebeta.service.GostouService"></bean>
 	<bean id="uploadArquivosAssembleiaControllerBean"
 		class="br.com.webhomebeta.bean.UploadArquivosAssembleiaControllerBean"></bean>
-		<bean id="enquetesService"
-		class="br.com.webhomebeta.service.EnquetesService"></bean>
-		<bean id="dao"
-		class="br.com.webhomebeta.dao.imp.EnqueteDaoImp"></bean>
-		
-		<bean id="enquetesControllerBean"
-		class="br.com.webhomebeta.bean.EnquetesControllerBean"></bean>
+	<bean id="enquetesService" class="br.com.webhomebeta.service.EnquetesService"></bean>
+	<bean id="dao" class="br.com.webhomebeta.dao.imp.EnqueteDaoImp"></bean>
+
+	<bean id="enquetesControllerBean" class="br.com.webhomebeta.bean.EnquetesControllerBean"></bean>
 
 
 </beans>

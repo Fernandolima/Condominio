@@ -18,6 +18,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import br.com.webhomebeta.bean.DadosUsuarioBean;
 import br.com.webhomebeta.entity.Notificacao;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.NotificacoesJSON;
 import br.com.webhomebeta.service.NotificacaoService;
 import br.com.webhomebeta.service.UsuarioService;
@@ -40,18 +41,9 @@ public class NotificacaoController {
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
 	public @ResponseBody
 	ArrayList<NotificacoesJSON> inicia() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				dadosUsuarioBean.setUsuario(usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
-
-			}
-		}
+		
+		dadosUsuarioBean.setUsuario(getUsuario());
+		
 		ArrayList<NotificacoesJSON> list = new ArrayList<>();
 		List<Notificacao> listNotificacao = notificacaoService.getNotificacoes(
 				dadosUsuarioBean.getUsuario().getIdUser(), false);
@@ -61,6 +53,8 @@ public class NotificacaoController {
 			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
 					.getNome());
 			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			json.setIdUser(n.getIdNotificacado());
+			json.setIdUserComentou(dadosUsuarioBean.getUsuario().getIdUser());
 			list.add(json);
 		}
 
@@ -106,6 +100,8 @@ public class NotificacaoController {
 			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
 					.getNome());
 			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			json.setIdUser(n.getIdNotificacado());
+			json.setIdUserComentou(dadosUsuarioBean.getUsuario().getIdUser());
 			array.add(json);
 
 			this.queueNotificacaoJSON.remove(result);
@@ -114,6 +110,25 @@ public class NotificacaoController {
 
 		deferred.setResult(array);
 		return deferred;
+	}
+	
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 
 }

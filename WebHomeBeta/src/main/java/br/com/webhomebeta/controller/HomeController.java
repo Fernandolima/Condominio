@@ -36,6 +36,7 @@ import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
 import br.com.webhomebeta.entity.Notificacao;
 import br.com.webhomebeta.entity.Publicacao;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
 import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.json.JsonPublicacao;
@@ -70,18 +71,9 @@ public class HomeController {
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				moradorControllerBean.setUsuario(usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
-
-			}
-		}
+		
+		moradorControllerBean.setUsuario(getUsuario());
+		
 		model.put("moradorControllerBean", moradorControllerBean);
 
 		return new ModelAndView("home", model);
@@ -258,7 +250,26 @@ public class HomeController {
 		return "true";
 		
 	}
+	
+	public Usuario getUsuario() {
 
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
+	}
+	
 	private class CustomComparator implements Comparator<ComentarioJSON> {
 
 		@Override
