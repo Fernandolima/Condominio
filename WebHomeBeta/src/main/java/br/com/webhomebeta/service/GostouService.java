@@ -7,7 +7,7 @@ import br.com.webhomebeta.dao.GostouDAO;
 import br.com.webhomebeta.entity.Gostou;
 
 @Service
-public class GostouService {
+public class GostouService {  
 	
 	@Autowired
 	private GostouDAO gostouDAO;

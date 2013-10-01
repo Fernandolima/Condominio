@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.webhomebeta.dao.NotificacaoDAO;
 import br.com.webhomebeta.entity.Notificacao;
 
-public class NotificacaoService {
+public class NotificacaoService {  
 	
 	@Autowired
 	private NotificacaoDAO notificacaoDAO;

@@ -13,8 +13,7 @@ import br.com.webhomebeta.entity.Publicacao;
 public class PublicacaoService {
 	@Autowired
 	private PublicacaoDAO publicacaoDAO;
-	
-	
+		
 	public Publicacao salvar(Publicacao publicacao){
 		return publicacaoDAO.salvarPublicacao(publicacao);
 	}

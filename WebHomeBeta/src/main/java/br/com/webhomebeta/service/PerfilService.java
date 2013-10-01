@@ -4,7 +4,7 @@ import br.com.webhomebeta.dao.PerfilDAO;
 import br.com.webhomebeta.entity.Perfil;
 
 public class PerfilService {
-	private PerfilDAO perfilDAO;
+	private PerfilDAO perfilDAO; 
 	
 	public Perfil salvar(Perfil perfil){
 		return perfilDAO.salvar(perfil);
