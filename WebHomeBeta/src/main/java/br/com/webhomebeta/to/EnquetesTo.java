@@ -9,11 +9,12 @@ import br.com.webhomebeta.entity.Usuario;
 
 public class EnquetesTo {
 
+	
 	private int idEquete;
 	private String equete;
 	private Date dataequete;
 	private Usuario usuarioEnquete;
-	private Date titulo;
+	private String titulo;
 	private Set<Opcao> opcoes = new HashSet<>(0);
 	
 	public void addOpcao(Opcao opcao){
@@ -37,13 +38,13 @@ public class EnquetesTo {
 	/**
 	 * @return the titulo
 	 */
-	public Date getTitulo() {
+	public String getTitulo() {
 		return titulo;
 	}
 	/**
 	 * @param titulo the titulo to set
 	 */
-	public void setTitulo(Date titulo) {
+	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 	/**
