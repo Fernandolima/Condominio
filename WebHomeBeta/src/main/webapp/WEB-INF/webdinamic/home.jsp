@@ -13,12 +13,19 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
-		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 	<head>
 	<body id="home" class="rede-social">
 		<header id="header-site" class="connected">
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
+				<div id="comentario-display">
+					<a href="#" id="alerta-notificacao" class="hidden">Notificação</a>
+					<p id="numeroNotificacao"></p>
+					<div id="main-notificacao">
+						
+					</div>
+				</div>
 				<div id="data-user">
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
