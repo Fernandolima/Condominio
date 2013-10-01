@@ -228,6 +228,9 @@
 		class="br.com.webhomebeta.service.EnquetesService"></bean>
 		<bean id="dao"
 		class="br.com.webhomebeta.dao.imp.EnqueteDaoImp"></bean>
+		
+		<bean id="enquetesControllerBean"
+		class="br.com.webhomebeta.bean.EnquetesControllerBean"></bean>
 
 
 </beans>
