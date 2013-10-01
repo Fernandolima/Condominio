@@ -16,6 +16,7 @@
 		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 	<head>
 	<body id="home" class="rede-social">
+		<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 		<header id="header-site" class="connected">
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>

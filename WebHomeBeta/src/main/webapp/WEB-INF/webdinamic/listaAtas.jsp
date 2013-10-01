@@ -50,13 +50,25 @@
 				</nav>
 				<section id="content-admin">
 					<div id="cadastrarAtas">
-						<h2>Atas Cadastradas =)</h2>
-						<!-- <p><c:out value="${listaAtas}"/></p> -->
-						<c:forEach items="${listaAtas}" var="item">
-							<p><c:out value="${item.titulo}"/></p>
-							<p><c:out value="${item.dataCriacao}"/></p>
-							<p><c:out value="${item.atas}"/></p>
-						</c:forEach>						
+						<h2>Atas Cadastradas</h2>
+						
+						<div id="tabelaBlocos">
+							<div class="lineTabelaBlocos">
+								<p class="itemBlocos pBloco title">Título</p>
+								<p class="itemBlocos title">Data da Criação</p>
+								<p class="itemBlocos title">Atas</p>
+								<p class="itemBlocos title">Download</p>
+							</div>
+							<c:forEach items="${listaAtas}" var="item">
+						    	<div class="lineTabelaBlocos">
+									<p class="itemBlocos pBloco"><c:out value="${item.titulo}"/></p>
+									<p class="itemBlocos"><c:out value="${item.dataCriacao}"/></p>
+									<p class="itemBlocos"><a href="atas/update?<c:out value="${item.idAtas}"/>">Editar</a></p>
+									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank">Baixar</a></p>
+								</div>							    	
+						    </c:forEach>
+						</div>
+									
 					</div>
 				</section>
 			</div>
