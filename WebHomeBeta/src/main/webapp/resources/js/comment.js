@@ -21,7 +21,17 @@ var POST_COMMENT  = {
 		},
 		
 		loadNotificacao: function(data) {
-			console.log('data inicial = ', data);
+			var htmlNotificacao = '';
+			if(data.length > 0) {
+				$('#alerta-notificacao').addClass('temNotificacao');
+				$('#numeroNotificacao').text(data.length);
+				$.each(data, function(i, val){
+					htmlNotificacao += '<div class="notificacao">';
+						htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
+					htmlNotificacao += '</div>';
+				});
+				$('#main-notificacao').html(htmlNotificacao);
+			}			
 		},
 		
 		loadHome: function(data) {
@@ -83,9 +93,6 @@ var POST_COMMENT  = {
 					htmlComment += '<input type="hidden" class="idPub" name="idPublicacao" />';
 				htmlComment += '</form>';
 			htmlComment += '</div>';
-
-			console.log('html = ', htmlComment);
-			console.log('el = ', $(this));
 
 			$(this).closest('.post').append(htmlComment);
 			$(this).closest('.post').find('.comments-holder').fadeIn(1500);
@@ -164,14 +171,13 @@ var POST_COMMENT  = {
 		},
 		
 		salvarNotificacao: function(dataNotificacao) {
-			console.log('teste = ', dataNotificacao);
-						
+			
 			$.ajax({
 	            type: "post",
 	            url: "notificacao/",
 	            data: dataNotificacao,
 	            success: function () {
-	               console.log('qqq');
+	               
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -201,15 +207,48 @@ var POST_COMMENT  = {
 		    });
 		},
 		verificaNotificacoes: function() {
-			console.log('************');
 			$.ajax({
-				type: 'POST',
+				type: 'post',
 		      	url:'verificaNotificacoes',
 		      	dataType: 'json',	
-		      	success: function(e) {
-		      		console.log('====', e);
+		      	success: function(data) {
+		      		if(data.length > 0) {
+		      			var num,
+		      				htmlNotificacao = '';
+		      			
+		      			if($('#numeroNotificacao').text().length == 0) {
+		      				num = 0;
+		      			} else {
+		      				num = parseInt($('#numeroNotificacao').text(), 10);
+		      			}
+		      			
+		      			$('#numeroNotificacao').html(num + data.length);
+		      			$('#alerta-notificacao').addClass('temNotificacao');
+		      			$.each(data, function(i, val){
+		      				htmlNotificacao += '<div class="notificacao">';
+								htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
+							htmlNotificacao += '</div>';
+		      			});
+						
+						$('#main-notificacao').append(htmlNotificacao);
+		      		}
+		      	},
+		      	error: function(data) {
+		      		console.log('error = ', e);
 		      	}
 		    });
+		},
+		visualizaNotificacao: function(e) {
+			e.preventDefault();
+			$('#main-notificacao').toggle('show', function(){
+				if($('#main-notificacao').css('display') == 'block') {
+					$('#alerta-notificacao').removeClass('temNotificacao');
+					$('#numeroNotificacao').text('');
+				} else {
+					$('#main-notificacao').html('');
+				}				
+			});		
+			
 		}
 }
 
@@ -223,9 +262,11 @@ $(function() {
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
 	
+	$('#alerta-notificacao').on('click', POST_COMMENT.visualizaNotificacao);
+	
 	setInterval(function(){
 		POST_COMMENT.verificaNotificacoes();
-	},50000);	
+	},10000);	
 	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
 });
