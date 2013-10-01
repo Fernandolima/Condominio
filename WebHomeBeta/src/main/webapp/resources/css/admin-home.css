@@ -315,3 +315,23 @@ body {
 	float: left;
 	margin-top: 10px;
 }
+
+/*Listar atas*/
+
+#cadastrarAtas #tabelaBlocos {
+	width: 635px;
+}
+
+#cadastrarAtas .itemBlocos {
+	width: 95px;
+	overflow: hidden;
+}
+
+#cadastrarAtas .itemBlocos.pBloco {
+	overflow: hidden;
+    padding: 0 10px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 310px;
+}
