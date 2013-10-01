@@ -1,7 +1,8 @@
 var POST_COMMENT  = {	
 		
+		idUser: $('#userSessao').val(),
+		
 		init: function() {
-			
 			$.ajax({
 		    	type: 'get',
 		      	url:'notificacaoInicial',
@@ -222,12 +223,15 @@ var POST_COMMENT  = {
 		      				num = parseInt($('#numeroNotificacao').text(), 10);
 		      			}
 		      			
-		      			$('#numeroNotificacao').html(num + data.length);
-		      			$('#alerta-notificacao').addClass('temNotificacao');
-		      			$.each(data, function(i, val){
-		      				htmlNotificacao += '<div class="notificacao">';
-								htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
-							htmlNotificacao += '</div>';
+		      			$.each(data, function(i, val) {
+		      				if(POST_COMMENT.idUser == val.idUser) {
+		      					$('#numeroNotificacao').html(num + data.length);
+				      			$('#alerta-notificacao').addClass('temNotificacao');
+				      			
+		      					htmlNotificacao += '<div class="notificacao">';
+									htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
+								htmlNotificacao += '</div>';
+		      				}
 		      			});
 						
 						$('#main-notificacao').append(htmlNotificacao);
