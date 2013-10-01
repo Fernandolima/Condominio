@@ -1,5 +1,10 @@
 package br.com.webhomebeta.controller;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -11,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.webhomebeta.bean.EnquetesControllerBean;
+import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -20,26 +28,40 @@ import br.com.webhomebeta.to.EnquetesTo;
 public class EnquetesController {
 	@Autowired
 	private EnquetesService enquetesService;
-	private EnquetesTo enquetesTo;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private EnquetesControllerBean enquetesControllerBean;
 
 	// mapeia a URL principal (Enquetes) e retorna um novo objeto atas
 	@RequestMapping(value = "enquetes", method = RequestMethod.GET)
 	public ModelAndView Enquetes(ModelMap model) {
 
-		model.put("enqueteTO", new EnquetesTo());
 		model.put("listaEnquetes", enquetesService.getList());
 		model.put("usuario", getUsuario());
+		model.put("bean", enquetesControllerBean);
+
 		return new ModelAndView("enquetes", model);
 	}
 
+	// tati vai passa a string com as opcoes
 	@RequestMapping(value = "enquetes/salvar", method = RequestMethod.POST)
 	public void salvarEnquete(
-			@ModelAttribute("enqueteTO") EnquetesTo enquetesTo,
+			@ModelAttribute("bean") EnquetesControllerBean bean,
 			BindingResult result) {
-		
+		//criar a data da enquete
+		bean.getEnquetesTo().setDataequete(new Date());
+		bean.getEnquetesTo().setUsuarioEnquete(getUsuario());
+		// adiocina as opcoes para a enqueteto
+		for (String opcao : bean.getListOpcoes()) {
 
+			bean.getEnquetesTo().addOpcao(new Opcao(opcao));
+
+		}
+		
+		Enquetes enquetes = new Enquetes();
+		BeanUtils.copyProperties(bean.getEnquetesTo(), enquetes);
+		enquetesService.save(enquetes);
 	}
 
 	public Usuario getUsuario() {
