@@ -540,6 +540,13 @@ input#submitComment {
 	margin: 23px 0 0 10px;
 }
 
+#carrengandoComentario {
+	float: left;
+    height: 19px;
+    margin: 10px 0 10px 160px;
+    width: 220px;
+}
+
 #alerta-notificacao {
 	background: url(../img/notificacao.png) no-repeat transparent 0 0;
 	width: 21px;

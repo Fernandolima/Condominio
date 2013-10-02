@@ -1,6 +1,7 @@
 var POST_COMMENT  = {	
 		
 		idUser: $('#userSessao').val(),
+		isScroll: true,
 		
 		init: function() {
 			$.ajax({
@@ -13,7 +14,7 @@ var POST_COMMENT  = {
 			
 			$.ajax({
 		    	type: 'post',
-		      	url:'home/getPublicacao',
+		      	url:'getPublicacao',
 		      	dataType: 'json',	
 		      	success: POST_COMMENT.loadHome
 
@@ -73,8 +74,9 @@ var POST_COMMENT  = {
 						htmlHome += '<a href="#" class="add-comments">>> Comentar</a>';
 					}
 				htmlHome += '</div>';
-				
+				$('#carrengandoComentario').remove();
 				$('#main-comments').append(htmlHome);
+				POST_COMMENT.isScroll = true;
 			});			
 		},
 		
@@ -178,7 +180,7 @@ var POST_COMMENT  = {
 	            url: "notificacao/",
 	            data: dataNotificacao,
 	            success: function () {
-	               
+	            	console.log('sucesso');
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -248,6 +250,7 @@ var POST_COMMENT  = {
 				if($('#main-notificacao').css('display') == 'block') {
 					$('#alerta-notificacao').removeClass('temNotificacao');
 					$('#numeroNotificacao').text('');
+				 	$.post('notificacaoVista');
 				} else {
 					$('#main-notificacao').html('');
 				}				
@@ -273,4 +276,20 @@ $(function() {
 	},10000);	
 	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
+	var alturaPagina, scroolTop;
+	
+	$(window).scroll(function(){
+		if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+			if(POST_COMMENT.isScroll) {
+				POST_COMMENT.isScroll = false;
+				$('#main-comments').append('<img src="img/loadComentario.gif" id="carrengandoComentario" alt="Aguarde, carregando" />');
+				$.ajax({
+			    	type: 'post',
+			      	url:'getPublicacao',
+			      	dataType: 'json',	
+			      	success: POST_COMMENT.loadHome
+				});
+			}			
+		}
+	});
 });
