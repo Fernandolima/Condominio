@@ -124,7 +124,7 @@ public class HomeController {
 	/*
 	 * Cria um JSON com os dados necessarios para a publicacao
 	 */
-	@RequestMapping(value = "home/getPublicacao", method = RequestMethod.POST)
+	@RequestMapping(value = "getPublicacao", method = RequestMethod.POST)
 	public @ResponseBody
 	ArrayList<JsonPublicacao> sendJsonPublicacao() {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
