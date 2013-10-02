@@ -3,20 +3,16 @@ package br.com.webhomebeta.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.imgscalr.Scalr.Method;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.scheduling.annotation.Scheduled;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,18 +25,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.async.DeferredResult;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
-import br.com.webhomebeta.entity.Notificacao;
+
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
-import br.com.webhomebeta.json.Json;
+
 import br.com.webhomebeta.json.JsonPublicacao;
-import br.com.webhomebeta.json.NotificacoesJSON;
+
 import br.com.webhomebeta.json.NovaPublicacaoJSON;
 import br.com.webhomebeta.json.NovoComentarioJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
@@ -52,9 +48,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class HomeController {
-	
-	
-	
+
 	@Autowired
 	private ComentarioService comentarioService;
 	@Autowired
@@ -65,17 +59,17 @@ public class HomeController {
 	private MoradorControllerBean moradorControllerBean;
 	@Autowired
 	private NotificacaoService notificacaoService;
-	
+
 	private int colunaInicial = 1;
 
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
-		
+
 		moradorControllerBean.setUsuario(getUsuario());
-		
+
 		model.put("moradorControllerBean", moradorControllerBean);
-		
+
 		colunaInicial = 1;
 
 		return new ModelAndView("home", model);
@@ -92,20 +86,19 @@ public class HomeController {
 				new UsuarioPublicacaoJSON(publicacao.getUsuarioPublicacao()
 						.getIdUser(), publicacao.getUsuarioPublicacao()
 						.getNome()));
-		 
+
 		ArrayList<ComentarioJSON> comentariosJSON = new ArrayList<>();
-		
+
 		for (Comentario c : publicacao.getComentarios()) {
 			// Adiciona os dados do comentario
-			ComentarioJSON cJSON = new ComentarioJSON(c
-					.getUsuarioComentario().getIdUser(), c
-					.getUsuarioComentario().getNome(), c.getImagem(),
-					c.getIdComentario(), df.format(c.getData()),
+			ComentarioJSON cJSON = new ComentarioJSON(c.getUsuarioComentario()
+					.getIdUser(), c.getUsuarioComentario().getNome(),
+					c.getImagem(), c.getIdComentario(), df.format(c.getData()),
 					c.getComentario());
 			// Adiciona a lista cada comentario
 			comentariosJSON.add(cJSON);
 		}
-		
+
 		Collections.sort(comentariosJSON, new CustomComparator());
 		jsonPublicacao.setComentarios(comentariosJSON);
 		jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
@@ -122,7 +115,7 @@ public class HomeController {
 	}
 
 	/*
-	 * Cria um JSON com os dados necessarios para a publicacao
+	 * Cria um JSON com os dados necessarios para a publicacao ;D
 	 */
 	@RequestMapping(value = "getPublicacao", method = RequestMethod.POST)
 	public @ResponseBody
@@ -130,7 +123,8 @@ public class HomeController {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
 		final int tamanhoColuna = 10;
-		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(colunaInicial,tamanhoColuna);
+		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
+				colunaInicial, tamanhoColuna);
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
 			// Cria uma lista para os comentarios desta publicacao
@@ -169,7 +163,7 @@ public class HomeController {
 			// Seta as publicacoes filtradas e as retorna para a VIEW
 			jsonPublicacaos.add(jsonPublicacao);
 		}
-		
+
 		colunaInicial += publicacaoes.size() - 1;
 		return jsonPublicacaos;
 	}
@@ -244,15 +238,15 @@ public class HomeController {
 	@RequestMapping(value = "home/delete", method = RequestMethod.GET)
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {
-		
+
 		publicacaoService.getUnicaPublicacao(id);
 		publicacaoService.deletarPublicacao(id, moradorControllerBean
 				.getUsuario().getIdUser());
 
 		return "true";
-		
+
 	}
-	
+
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;
@@ -271,7 +265,7 @@ public class HomeController {
 
 		return usuario;
 	}
-	
+
 	private class CustomComparator implements Comparator<ComentarioJSON> {
 
 		@Override
