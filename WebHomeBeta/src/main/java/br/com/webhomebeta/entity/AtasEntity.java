@@ -22,12 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "[dbo].[ATAS]")
-public class AtasEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static long serialVersionUID = 8688347079158220711L;
+public class AtasEntity  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,27 +32,10 @@ public class AtasEntity implements Serializable {
 	@Column(name = "TITULO")
 	private String titulo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name = "DATA_ATA")
-	private Date dataATA;
 	
-	@Transient
-	private String dataFormt;
+	@Column(name = "DATA_FORMAT")
+	private String dataFormat;
 
-	/**
-	 * @return the dataFormt
-	 */
-	public String getDataFormt() {
-		return dataFormt;
-	}
-
-	/**
-	 * @param dataFormt the dataFormt to set
-	 */
-	public void setDataFormt(String dataFormt) {
-		this.dataFormt = dataFormt;
-	}
 
 	@Column(name = "ARQUIVO")
 	private String arquivo;
@@ -73,11 +51,17 @@ public class AtasEntity implements Serializable {
 	@Column(name = "ATAS")
 	private String atas;
 
-	/**
-	 * @return the serialVersionUID
-	 */
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
+	
+	
+	
+	
+	
+	public String getDataFormat() {
+		return dataFormat;
+	}
+
+	public void setDataFormat(String dataFormat) {
+		this.dataFormat = dataFormat;
 	}
 
 	/**
@@ -87,12 +71,6 @@ public class AtasEntity implements Serializable {
 		return idAtas;
 	}
 
-	/**
-	 * @return the dataATA
-	 */
-	public Date getDataATA() {
-		return dataATA;
-	}
 
 	/**
 	 * @return the arquivo
@@ -119,10 +97,7 @@ public class AtasEntity implements Serializable {
 	 * @param serialVersionUID
 	 *            the serialVersionUID to set
 	 */
-	public static void setSerialVersionUID(long serialVersionUID) {
-		AtasEntity.serialVersionUID = serialVersionUID;
-	}
-
+	
 	/**
 	 * @param idAtas
 	 *            the idAtas to set
@@ -131,27 +106,15 @@ public class AtasEntity implements Serializable {
 		this.idAtas = idAtas;
 	}
 
-	/**
-	 * @return the titulo
-	 */
-	public String getTitulo() {
-		return titulo;
-	}
-
-	/**
-	 * @param titulo
-	 *            the titulo to set
-	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
 	/**
-	 * @param date
-	 *            the dataATA to set
+	 * @return the titulo
 	 */
-	public void setDataATA(Date date) {
-		this.dataATA = date;
+	public String getTitulo() {
+		return titulo;
 	}
 
 	/**

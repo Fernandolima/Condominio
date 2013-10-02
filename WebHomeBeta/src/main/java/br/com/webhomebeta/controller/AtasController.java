@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -30,6 +31,7 @@ import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
+import br.com.webhomebeta.to.AtasTo;
 import br.com.webhomebeta.validacao.ValidadorAtas;
 
 //atas de assembleia
@@ -51,9 +53,7 @@ public class AtasController {
 	@RequestMapping(value = "atas", method = RequestMethod.GET)
 	public ModelAndView Atas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		
-
 		// beanUsuarios.getFileData();
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
@@ -178,18 +178,17 @@ public class AtasController {
 			atasEntity.setArquivo("/WebHomeBeta/uploadedArquivos/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			atasEntity.setAtas(bean.getAtasTo().getAtas());
-			atasEntity.setDataATA(new Date(bean.getData()));
 			atasEntity.setDataCriacao(new Date());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
+			atasEntity.setDataFormat(bean.getData());
 			atasEntity.setUsuarioAtas(uploadArquivobeanUsuarios.getUsuario());
 
 			bean.getAtasTo().setArquivo(null);
 			bean.getAtasTo().setAtas(null);
-			bean.getAtasTo().setDataAta(null);
+			bean.getAtasTo().setDataFormat(null);
 			bean.getAtasTo().setDataCriacao(null);
-			bean.getAtasTo().setDataAta(null);
 			bean.getAtasTo().setTitulo(null);
-			bean.getAtasTo().setUsuario(null);
+			bean.getAtasTo().setUsuarioAtas(null);
 			atasService.save(atasEntity);
 
 		} catch (Exception e) {

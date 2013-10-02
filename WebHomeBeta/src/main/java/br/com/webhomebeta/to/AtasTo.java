@@ -11,90 +11,112 @@ public class AtasTo {
 	private Date dataCriacao;
 	private String atas;
 	private String arquivo;
-	private Date dataAta;
-	private Usuario usuario;
-	/**
-	 * @return the usuario
-	 */
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	/**
-	 * @param usuario the usuario to set
-	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	private String dataFormat;
+	private Usuario usuarioAtas;
+
 	/**
 	 * @return the idAtas
 	 */
 	public int getIdAtas() {
 		return idAtas;
 	}
+
 	/**
 	 * @return the titulo
 	 */
 	public String getTitulo() {
 		return titulo;
 	}
+
 	/**
 	 * @return the dataCriacao
 	 */
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
+
 	/**
 	 * @return the atas
 	 */
 	public String getAtas() {
 		return atas;
 	}
+
 	/**
 	 * @return the arquivo
 	 */
 	public String getArquivo() {
 		return arquivo;
 	}
+
 	/**
-	 * @return the dataAta
+	 * @return the dataFormat
 	 */
-	public Date getDataAta() {
-		return dataAta;
+	public String getDataFormat() {
+		return dataFormat;
 	}
+
 	/**
-	 * @param idAtas the idAtas to set
+	 * @return the usuarioAtas
+	 */
+	public Usuario getUsuarioAtas() {
+		return usuarioAtas;
+	}
+
+	/**
+	 * @param idAtas
+	 *            the idAtas to set
 	 */
 	public void setIdAtas(int idAtas) {
 		this.idAtas = idAtas;
 	}
+
 	/**
-	 * @param titulo the titulo to set
+	 * @param titulo
+	 *            the titulo to set
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	/**
-	 * @param dataCriacao the dataCriacao to set
+	 * @param dataCriacao
+	 *            the dataCriacao to set
 	 */
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
+
 	/**
-	 * @param atas the atas to set
+	 * @param atas
+	 *            the atas to set
 	 */
 	public void setAtas(String atas) {
 		this.atas = atas;
 	}
+
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param arquivo
+	 *            the arquivo to set
 	 */
 	public void setArquivo(String arquivo) {
 		this.arquivo = arquivo;
 	}
+
 	/**
-	 * @param dataAta the dataAta to set
+	 * @param dataFormat
+	 *            the dataFormat to set
 	 */
-	public void setDataAta(Date dataAta) {
-		this.dataAta = dataAta;
+	public void setDataFormat(String dataFormat) {
+		this.dataFormat = dataFormat;
 	}
+
+	/**
+	 * @param usuarioAtas
+	 *            the usuarioAtas to set
+	 */
+	public void setUsuarioAtas(Usuario usuarioAtas) {
+		this.usuarioAtas = usuarioAtas;
+	}
+
 }

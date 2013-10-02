@@ -60,9 +60,10 @@
 								<p class="itemBlocos title">Download</p>
 							</div>
 							<c:forEach items="${listaAtas}" var="item">
+						    	<h3>DATA FORMATADA = <c:out value="${item.dataFormat}"/></h3>
 						    	<div class="lineTabelaBlocos">
 									<p class="itemBlocos pBloco"><c:out value="${item.titulo}"/></p>
-									<p class="itemBlocos"><c:out value="${item.dataATA}"/></p>
+									<p class="itemBlocos"><c:out value="${item.dataFormat}"/></p>
 									<p class="itemBlocos"><a href="atas/id=<c:out value="${item.idAtas}"/>">Editar</a></p>
 									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank">Baixar</a></p>
 								</div>							    	
