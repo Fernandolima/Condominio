@@ -59,7 +59,17 @@ public class PerfilController {
 
 		return new ModelAndView("perfil", model);
 	}
-
+	
+	@RequestMapping(value ="/perfil/id={id}")
+	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id){
+		if(id > 0){
+		Perfil p = perfilService.get(id);
+		return new ModelAndView("perfilUsuario", "perfil", p);
+		}else{
+			return new ModelAndView("perfilNaoExiste");
+		}
+	}
+	
 	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
 	public @ResponseBody
 	LinkedList<FileData> uploadFoto(MultipartHttpServletRequest request,

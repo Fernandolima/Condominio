@@ -75,6 +75,8 @@ public class HomeController {
 		moradorControllerBean.setUsuario(getUsuario());
 		
 		model.put("moradorControllerBean", moradorControllerBean);
+		
+		colunaInicial = 1;
 
 		return new ModelAndView("home", model);
 	}

@@ -33,21 +33,21 @@ private final Logger log = LoggerFactory.getLogger(AtmoController.class);
 	
 	@RequestMapping(value="/dates", method = RequestMethod.GET)
 	@ResponseBody
-	public void getCurrentDate(@PathVariable("nome")String nome, AtmosphereResource atmosphereResourceUserBrowser){
+	public void getCurrentDate(AtmosphereResource atmosphereResource){
 		System.out.println("Entering");
 		log.info("===== Entering AtmoController method =====");
-		this.suspend(atmosphereResourceUserBrowser);
+		this.suspend(atmosphereResource);
 		
 		String transportUsed = 
-				atmosphereResourceUserBrowser.getRequest().getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT);
+				atmosphereResource.getRequest().getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT);
 		
 		System.out.println("====== Tranport to be used : " + transportUsed + " ======");
 		
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().get();
 		System.out.println("=========== broadcaster is:"+broadcaster.toString());
-		broadcaster.addAtmosphereResource(atmosphereResourceUserBrowser);
+		broadcaster.addAtmosphereResource(atmosphereResource);
 		
-		atmosphereResourceUserBrowser.addEventListener(new OnDisconnectListener(broadcaster));
+		atmosphereResource.addEventListener(new OnDisconnectListener(broadcaster));
 				
 		log.info("===== Broadcasting the Current Date =====");
 		broadcaster.scheduleFixedBroadcast(new DateProvider(), 10, TimeUnit.SECONDS);

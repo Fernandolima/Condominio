@@ -26,6 +26,10 @@ public class Gostou {
 	@Column(name = "ID_USER")
 	private int idUsuario;
 	
+	public Gostou(){
+		
+	}
+	
 	public Gostou(Publicacao publicacao, int idUsuario) {
 		this.publicacao = publicacao;
 		this.idUsuario = idUsuario;

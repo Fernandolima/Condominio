@@ -14,6 +14,10 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PERFIL")
 	private int idPerfil;
+	@Column(name = "NOME_USUARIO")
+	private String nomeUsuario;
+	@Column(name = "IMAGEM_USUARIO")
+	private String imagemUsuario;
 	@Column(name = "ID_USER")
 	private int idUser;
 	@Column(name = "ESTILOS_MUSICAS")
@@ -26,6 +30,10 @@ public class Perfil {
 	private int idade;
 	@Column(name = "PROFISSAO")
 	private String profissao;
+	
+	public Perfil(){
+		
+	}
 	
 	public Perfil(String estilosMusicais, String livros, String sobreMim,
 			int idade, String profissao) {
