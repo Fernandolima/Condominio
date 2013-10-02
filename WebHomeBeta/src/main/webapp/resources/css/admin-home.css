@@ -335,3 +335,54 @@ body {
     white-space: nowrap;
     width: 310px;
 }
+
+/*Cadastrar Enquetes*/
+
+#cadastrarEnquete {
+	width: 645px;
+	float: left;
+}
+
+#cadastrarEnquete #contentFrm {
+	width: 600px;
+	float: left;
+	margin: 20px 0 0 7px;
+}
+
+#tituloEnquete,
+.opcaoEnquete {
+	width: 500px;
+}
+
+#cadastrarEnquete label {
+	width: 70px;
+}
+
+#perguntaEnquete {
+	width: 500px;
+}
+
+#btn-adiciona-opcao {
+	background-color: #DE2844;
+    color: #FFFFFF;
+    float: right;
+    font-size: 38px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin: 14px 53px 0 0;
+    text-align: center;
+    text-decoration: none;
+    width: 30px;
+}
+
+#btn-adiciona-opcao:hover {
+	color: #BDE2F0;
+}
+
+#btSubmitEnquete {
+	float: right;
+    height: 30px;
+    margin-right: 50px;
+    width: 100px;
+}

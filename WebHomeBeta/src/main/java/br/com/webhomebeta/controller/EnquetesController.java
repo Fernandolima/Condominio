@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
+@Controller
 public class EnquetesController {
 	@Autowired
 	private EnquetesService enquetesService;
@@ -43,7 +45,7 @@ public class EnquetesController {
 
 	// tati vai passa a string com as opcoes
 	@RequestMapping(value = "enquetes/salvar", method = RequestMethod.POST)
-	public void salvarEnquete(
+	public String salvarEnquete(
 			@ModelAttribute("bean") EnquetesControllerBean bean,
 			BindingResult result) {
 		//criar a data da enquete
@@ -59,6 +61,8 @@ public class EnquetesController {
 		Enquetes enquetes = new Enquetes();
 		BeanUtils.copyProperties(bean.getEnquetesTo(), enquetes);
 		enquetesService.save(enquetes);
+		
+		return "redirect:/enquetes";
 	}
 
 	public Usuario getUsuario() {

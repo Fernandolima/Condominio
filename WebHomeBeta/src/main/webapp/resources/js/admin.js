@@ -12,6 +12,18 @@ var ADMIN = {
 	onClickItemMenu: function(e) {
 		e.preventDefault();
 		$(this).next('.sub-menu').fadeToggle();
+	},
+	
+	onAddOpcao: function(e) {
+		e.preventDefault();
+		var htmlOpcao = '';
+		
+		var numEnquete = $('.opcaoEnquete').length;
+		
+		htmlOpcao += '<label for="listOpcoes">Opção '+ (numEnquete+1) + ':</label>';
+		htmlOpcao += '<input class="opcaoEnquete" type="text" autocomplete="off" value="" name="listOpcoes['+numEnquete+']">';
+		
+		$('#contentFrm').append(htmlOpcao);
 	}
 }
 
@@ -31,5 +43,7 @@ $(function() {
 	});
 	
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
+	
+	$('#btn-adiciona-opcao').on('click', ADMIN.onAddOpcao);
 	
 });

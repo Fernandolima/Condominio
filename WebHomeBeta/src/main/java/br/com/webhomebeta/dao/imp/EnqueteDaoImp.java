@@ -38,7 +38,7 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@Transactional
 	public List<Enquetes> getEnquetes() {	
 		Query q = factory.getCurrentSession()
-				.createSQLQuery("SELECT  * FROM [dbo].[ENQUETE]")
+				.createSQLQuery("SELECT  * FROM [dbo].[ENQUETES]")
 				.addEntity(Enquetes.class);
 		return q.list();
 	}

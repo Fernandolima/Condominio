@@ -1,13 +1,17 @@
 package br.com.webhomebeta.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Table;
+@Entity
+@Table(name = "[dbo].[OPCAO]")
 public class Opcao {
 
 	@Id
@@ -22,7 +26,7 @@ public class Opcao {
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade= CascadeType.PERSIST , fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
 	private Enquetes enquete;
 
@@ -33,13 +37,23 @@ public class Opcao {
 	public Opcao(String opcao){
 		this.opcao = opcao;
 	}
+	
+	
+	public Enquetes getEnquete() {
+		return enquete;
+	}
+
+	public void setEnquete(Enquetes enquete) {
+		this.enquete = enquete;
+	}
+
 	/**
 	 * @return the idOpcao
 	 */
 	public int getIdOpcao() {
 		return idOpcao;
 	}
-
+	
 	/**
 	 * @return the opcao
 	 */

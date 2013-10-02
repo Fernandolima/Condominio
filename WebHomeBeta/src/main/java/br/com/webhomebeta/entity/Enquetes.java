@@ -1,10 +1,13 @@
 package br.com.webhomebeta.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-public class Enquetes {
+@Entity
+@Table(name="[dbo].[ENQUETES]")
+public class Enquetes implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ENQUETE")
@@ -33,8 +39,26 @@ public class Enquetes {
 	private Usuario usuarioEnquete;
 
 	// Um usuario pode fazer varias opcao
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquete")
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "enquete")
 	private Set<Opcao> opcao = new HashSet<>(0);
+
+	
+	
+	public String getEnquete() {
+		return enquete;
+	}
+
+	public void setEnquete(String enquete) {
+		this.enquete = enquete;
+	}
+
+	public Set<Opcao> getOpcao() {
+		return opcao;
+	}
+
+	public void setOpcao(Set<Opcao> opcao) {
+		this.opcao = opcao;
+	}
 
 	/**
 	 * @return the titulo
