@@ -26,7 +26,7 @@ public class Opcao {
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
 	
-	@ManyToOne(cascade= CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
 	private Enquetes enquete;
 

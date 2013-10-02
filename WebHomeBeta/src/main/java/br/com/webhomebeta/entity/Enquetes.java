@@ -3,6 +3,7 @@ package br.com.webhomebeta.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="[dbo].[ENQUETES]")
@@ -39,8 +42,9 @@ public class Enquetes implements Serializable {
 	private Usuario usuarioEnquete;
 
 	// Um usuario pode fazer varias opcao
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "enquete")
-	private Set<Opcao> opcao = new HashSet<>(0);
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "enquete")
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private List<Opcao> opcao;
 
 	
 	
@@ -52,11 +56,11 @@ public class Enquetes implements Serializable {
 		this.enquete = enquete;
 	}
 
-	public Set<Opcao> getOpcao() {
+	public List<Opcao> getOpcao() {
 		return opcao;
 	}
 
-	public void setOpcao(Set<Opcao> opcao) {
+	public void setOpcao(List<Opcao> opcao) {
 		this.opcao = opcao;
 	}
 

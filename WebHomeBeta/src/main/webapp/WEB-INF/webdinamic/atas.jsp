@@ -52,13 +52,19 @@
 						
 						<span class="item-menu title-menu-drop"><b>></b> Atas</span>
 						<ul class="sub-menu">
-							<li class="item-menu"><a href="listarAtas" class="menu-drop">Listar Atas</a></li>
+							<li class="item-menu"><a href="listaAtas" class="menu-drop">Listar Atas</a></li>
 							<li class="item-menu"><a href="atas" class="menu-drop">Cadastrar Atas</a></li>
 						</ul>
 						
 						<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
 						<ul class="sub-menu">
 							<li class="item-menu"><a href="cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
+						</ul>
+						
+						<span class="item-menu title-menu-drop"><b>></b> Enquete</span>
+						<ul class="sub-menu">
+							<li class="item-menu"><a href="listarEnquetes" class="menu-drop">Listar Enquetes</a></li>
+							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						
 						<a href="validarMoradores" class="item-menu">Morador</a>

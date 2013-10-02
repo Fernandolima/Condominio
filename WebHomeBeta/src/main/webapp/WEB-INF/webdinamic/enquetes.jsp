@@ -38,7 +38,7 @@
 						
 						<span class="item-menu title-menu-drop"><b>></b> Atas</span>
 						<ul class="sub-menu">
-							<li class="item-menu"><a href="listarAtas" class="menu-drop">Listar Atas</a></li>
+							<li class="item-menu"><a href="listaAtas" class="menu-drop">Listar Atas</a></li>
 							<li class="item-menu"><a href="atas" class="menu-drop">Cadastrar Atas</a></li>
 						</ul>
 						
