@@ -12,10 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "[dbo].[ATAS]")
@@ -33,8 +36,10 @@ public class AtasEntity implements Serializable {
 
 	@Column(name = "TITULO")
 	private String titulo;
-
-	@Column(name = "DATA_CRIACAO")
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "DATA_ATA")
 	private Date dataATA;
 	
 	@Transient
@@ -62,7 +67,7 @@ public class AtasEntity implements Serializable {
 	private Usuario usuarioAtas;
 	
 	
-	@Column(name = "DATA_ATA")
+	@Column(name = "DATA_CRIACAO")
 	private Date dataCriacao;
 
 	@Column(name = "ATAS")
@@ -174,6 +179,7 @@ public class AtasEntity implements Serializable {
 	}
 
 	/**
+	 * @param atasEntity 
 	 * @return the atas
 	 */
 	public String getAtas() {

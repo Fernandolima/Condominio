@@ -62,8 +62,8 @@
 							<c:forEach items="${listaAtas}" var="item">
 						    	<div class="lineTabelaBlocos">
 									<p class="itemBlocos pBloco"><c:out value="${item.titulo}"/></p>
-									<p class="itemBlocos"><c:out value="${item.dataCriacao}"/></p>
-									<p class="itemBlocos"><a href="atas/update?<c:out value="${item.idAtas}"/>">Editar</a></p>
+									<p class="itemBlocos"><c:out value="${item.dataATA}"/></p>
+									<p class="itemBlocos"><a href="atas/id=<c:out value="${item.idAtas}"/>">Editar</a></p>
 									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank">Baixar</a></p>
 								</div>							    	
 						    </c:forEach>

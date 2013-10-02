@@ -14,7 +14,6 @@ public class AtasImp implements AtasDao {
 
 	@Autowired
 	private SessionFactory factory;
-	
 
 	@Transactional
 	public AtasEntity save(AtasEntity atasEntity) {
@@ -30,24 +29,45 @@ public class AtasImp implements AtasDao {
 		AtasEntity atasEntity = (AtasEntity) q.uniqueResult();
 		return atasEntity;
 	}
+
 	@Transactional
 	public void update(String arquivo) {
-		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[ATAS] SET ARQUIVO = ?");
+		Query q = factory.getCurrentSession().createSQLQuery(
+				"UPDATE [dbo].[ATAS] SET ARQUIVO = ?");
 		q.setParameter(0, arquivo);
 		q.executeUpdate();
 	}
-		@Transactional
-		public void delete(AtasEntity atasEntity) {
+
+	@Transactional
+	public void delete(AtasEntity atasEntity) {
 		factory.getCurrentSession().delete(atasEntity);
 
 	}
 
-		@Transactional
-		public List<AtasEntity> getAtas() {		
-			Query q = factory.getCurrentSession().createSQLQuery("SELECT  * FROM [dbo].[ATAS]").addEntity(AtasEntity.class);
-			return q.list();
-		
-		}
-		
+	@Transactional
+	public List<AtasEntity> getAtas() {
+		Query q = factory.getCurrentSession()
+				.createSQLQuery("SELECT  * FROM [dbo].[ATAS] ")
+				.addEntity(AtasEntity.class);
+		return q.list();
 
+	}
+
+	@Transactional
+	public AtasEntity getidAtas(int id) {
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ATAS] WHERE ID_ATAS = ?").addEntity(AtasEntity.class);
+				q.setParameter(0, id);
+			return (AtasEntity) q.uniqueResult(); 
+		
+	}
+	
+	@Transactional
+	public void updadeAtas(int id, String ata) {
+		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[ATAS] SET ATAS = ? WHERE ID_ATAS = ?").addEntity(AtasEntity.class);
+				q.setString(0, ata);
+				q.setInteger(1, id);
+				q.executeUpdate();	
+				
+			//tem que ter um retorno
+	}
 }

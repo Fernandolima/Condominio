@@ -3,6 +3,7 @@ package br.com.webhomebeta.controller;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +31,7 @@ import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.validacao.ValidadorAtas;
+
 //atas de assembleia
 @Controller
 public class AtasController {
@@ -49,12 +51,9 @@ public class AtasController {
 	@RequestMapping(value = "atas", method = RequestMethod.GET)
 	public ModelAndView Atas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
-		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		for( AtasEntity listAtas : atas){
-			listAtas.setDataFormt(df.format(listAtas.getDataCriacao()));
-		}
 		
+
 		// beanUsuarios.getFileData();
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
@@ -84,8 +83,6 @@ public class AtasController {
 
 	}
 
-	
-	
 	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public String AtasArquivos(
@@ -130,21 +127,17 @@ public class AtasController {
 		}
 	}
 
-	@RequestMapping(value = "atas/editar", method = RequestMethod.POST)
-	public ModelAndView editar(@RequestParam("idAta") int id,
-			BindingResult result, HttpServletRequest request) {
-		AtasEntity descricaoAtas = atasService.editar(id);
-		return new ModelAndView("inserirAtas/editar", "atas", atasEntity);
+	@RequestMapping(value = "atas/id={id}", method = RequestMethod.GET)
+	public ModelAndView update(@PathVariable("id") int id, String ata) {
+		AtasEntity atasEntity = atasService.getidAtas(id);
+		return new ModelAndView("editarAtas", "editar", atasEntity);
 
 	}
 
-	@RequestMapping(value = "atas/update", method = RequestMethod.POST)
-	public String update(@ModelAttribute("atas") AtasEntity atasEntity,
-			BindingResult result) {
-
-		// atasService.update(result);
-
-		return "redirect:/inserirAtas/editar";
+	@RequestMapping(value = "updateAtas", method = RequestMethod.POST)
+	public String updateAtas(@ModelAttribute("editar") AtasEntity atasEntity, BindingResult result) {
+		atasService.updateAtas(atasEntity.getIdAtas(), atasEntity.getAtas());
+		return "redirect:/listaAtas";
 
 	}
 
@@ -185,7 +178,7 @@ public class AtasController {
 			atasEntity.setArquivo("/WebHomeBeta/uploadedArquivos/"
 					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			atasEntity.setAtas(bean.getAtasTo().getAtas());
-			atasEntity.setDataATA(bean.getAtasTo().getDataAta());
+			atasEntity.setDataATA(new Date(bean.getData()));
 			atasEntity.setDataCriacao(new Date());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
 			atasEntity.setUsuarioAtas(uploadArquivobeanUsuarios.getUsuario());
@@ -194,6 +187,7 @@ public class AtasController {
 			bean.getAtasTo().setAtas(null);
 			bean.getAtasTo().setDataAta(null);
 			bean.getAtasTo().setDataCriacao(null);
+			bean.getAtasTo().setDataAta(null);
 			bean.getAtasTo().setTitulo(null);
 			bean.getAtasTo().setUsuario(null);
 			atasService.save(atasEntity);

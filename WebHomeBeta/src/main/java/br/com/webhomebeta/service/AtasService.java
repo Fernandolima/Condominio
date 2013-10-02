@@ -16,20 +16,24 @@ public class AtasService {
 	private AtasDao atasDao;
 
 	public void save(AtasEntity atasEntity) {
-		 atasDao.save(atasEntity);
+		atasDao.save(atasEntity);
 	}
 
 	public List<AtasEntity> getList() {
 		return atasDao.getAtas();
 	}
-	
-	public AtasEntity editar(int id){
-		 return atasDao.editar(id);
+
+	public AtasEntity getidAtas(int id) {
+		return atasDao.getidAtas(id);
 	}
-	
-	public void delete(AtasEntity atasEntity){
-	 atasDao.delete(atasEntity);
-	 
+
+	public void updateAtas(int id, String ata) {
+		 atasDao.updadeAtas(id, ata);
 	}
-	
+
+	public void delete(AtasEntity atasEntity) {
+		atasDao.delete(atasEntity);
+
+	}
+
 }
