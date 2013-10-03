@@ -312,10 +312,37 @@ input[type="password"]:focus {
 
 .comments-post {
     float: left;
+    position: relative;
     margin: 10px 0 0 15px;
     padding-bottom: 20px;
     width: 447px;
-    overflow: hidden;
+    /*overflow: hidden;*/
+}
+
+.gosteiPublicacao {
+	width:100%;
+	position: absolute; 
+	left: 0px; 
+	bottom: -10px;
+}
+
+.iconSmile {
+	background: url(../img/icon-gostei.png) no-repeat -22px 0;
+	width: 22px;
+	height: 19px;
+	float: left;
+	cursor: pointer;
+}
+
+.iconSmile.active {
+	background-position: 0 0;
+}
+
+.labelGostei {
+	float: left;
+    margin-left: 6px;
+    margin-top: 1px;
+    width: auto;
 }
 
 .name-user-comment {
@@ -341,8 +368,7 @@ input[type="password"]:focus {
 .comments-holder {
     background-color: #BDE2F0;
     float: left;
-    margin-bottom: 20px;
-    margin-left: 60px;
+    margin:25px 0 20px 60px;
     width: 450px;
     border-radius: 15px;
 }

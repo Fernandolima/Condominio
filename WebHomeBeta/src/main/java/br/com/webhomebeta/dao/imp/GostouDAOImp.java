@@ -29,6 +29,7 @@ public class GostouDAOImp implements GostouDAO{
 	}
 
 	@Override
+	@Transactional
 	public Gostou get(int id) {
 		return (Gostou) factory.getCurrentSession().get(Gostou.class, id );
 	}

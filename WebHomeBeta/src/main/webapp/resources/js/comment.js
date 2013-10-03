@@ -50,6 +50,9 @@ var POST_COMMENT  = {
 						htmlHome += '<a href="#" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
 						htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';
 						htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
+						htmlHome += '<div class="gosteiPublicacao">';
+							htmlHome += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
+						htmlHome += '</div>'
 					htmlHome += '</div>';
 					
 					if(val.comentarios.length > 0) {
@@ -256,6 +259,52 @@ var POST_COMMENT  = {
 				}				
 			});		
 			
+		},
+		
+		onClickGostei: function(e) {
+			e.preventDefault();
+			var el = $(this),
+				dataCurtir = 'id=' + $(this).closest('.post').attr('data-id-post');
+			
+			$.ajax({
+	            type: "post",
+	            url: "gostou",
+	            data: dataCurtir,
+	            success: function () {
+	            	el.addClass('active');
+	            	el.addClass('iconGostei');
+	            	el.removeClass('iconGostar');
+	    			el.next('.labelGostei').text('Gostei');
+	            },
+	            error: function () {
+	            	console.log('errormessage');
+	                //do something else
+
+	            }
+	        });
+		},
+		
+		onClickRemoveGostei: function(e) {
+			e.preventDefault();
+			var el = $(this),
+				dataCurtir = 'idPost=' + $(this).closest('.post').attr('data-id-post') + '&idUser = ' + $('#userSessao').val();
+			
+			$.ajax({
+	            type: "post",
+	            url: "removeGostou",
+	            data: dataCurtir,
+	            success: function () {
+	            	el.removeClass('active');
+	            	el.removeClass('iconGostei');
+	            	el.addClass('iconGostar');
+	    			el.next('.labelGostei').text('');
+	            },
+	            error: function () {
+	            	console.log('errormessage');
+	                //do something else
+
+	            }
+	        });
 		}
 }
 
@@ -268,6 +317,8 @@ $(function() {
 	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
+	$('body').on('click', '.iconGostar', POST_COMMENT.onClickGostei);
+	$('body').on('click', '.iconGostei', POST_COMMENT.onClickRemoveGostei);
 	
 	$('#alerta-notificacao').on('click', POST_COMMENT.visualizaNotificacao);
 	
