@@ -386,3 +386,83 @@ body {
     margin-right: 50px;
     width: 100px;
 }
+
+/*Index Admin*/
+
+#statusMorador {
+	width: 650px;
+	float: left;
+	margin: 25px 0 0 25px;
+	background-color: #eee;
+}
+
+#iconPeople {
+	background: url(../img/itAdmin.png) no-repeat 0 0;
+	width: 26px;
+	height: 21px;
+	float: left;
+	margin: 10px 0 0 10px;
+}
+
+#content-admin p {
+	font-size: 13px;
+	float: left;
+    margin: 10px 0 0 10px;
+    width: 600px;
+    line-height: 20px;
+}
+
+#statusEnquete {
+	width: 650px;
+	float: left;
+	background-color: #dbf0f8;
+	margin: 25px 0 0 25px;
+}
+
+#iconEnquete {
+	background: url(../img/itAdmin.png) no-repeat -26px 0;
+	width: 20px;
+	height: 21px;
+	float: left;
+	margin: 10px 0 0 10px;
+}
+
+#graficoEnquete {
+	width: 100%;
+	padding-bottom: 20px;
+	min-height: 60px;
+	float: left;
+	margin-top: 15px;
+}
+
+#graficoEnquete.load {
+	background: url(../img/load-login.gif) center center no-repeat;
+}
+
+.respostas {
+	width: 100%;
+	float: left;
+}
+
+#content-admin p.labelResposta {
+	float: left;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 55px;
+}
+
+.statusResposta {
+	background-color: #DE2844;
+	height: 20px;
+	float: left;
+	margin: 10px 0 0 20px;
+}
+
+#content-admin p.numPessoas {
+	width: auto;
+	float: left;
+	margin-left: 10px;
+	font-weight: bold;
+}
