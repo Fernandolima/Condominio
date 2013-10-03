@@ -51,13 +51,13 @@ public class NotificacaoController {
 		List<Notificacao> listNotificacao = notificacaoService.getNotificacoes(
 				dadosUsuarioBean.getUsuario().getIdUser(), false);
 		for (Notificacao n : listNotificacao) {
+			Usuario usuario = usuarioService.getById(n.getIdNotificacador());
 			NotificacoesJSON json = new NotificacoesJSON();
-			json.setIdPublicacao(n.getIdNotificacado());
-			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
-					.getNome());
-			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			json.setIdPublicacao(n.getIdPost());
+			json.SetTipo(n.getTipoNotificacao(), usuario.getNome());
+			json.setImagem(usuario.getImagemView());
 			json.setIdUser(n.getIdNotificacado());
-			json.setIdUserComentou(dadosUsuarioBean.getUsuario().getIdUser());
+			json.setIdUserComentou(n.getIdNotificacador());
 			list.add(json);
 		}
 

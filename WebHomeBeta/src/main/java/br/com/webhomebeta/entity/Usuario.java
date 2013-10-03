@@ -73,6 +73,14 @@ public class Usuario implements Serializable {
 	@Column(name = "IMAGEM_VIEW")
 	private String imagemView;
 
+	public Usuario(){
+		
+	}
+	
+	public Usuario(String nome){
+		this.nome = nome;
+	}
+	
 	// Um usuario pode fazer varias publicacoes
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioPublicacao")
 	private Set<Publicacao> publicacoes = new HashSet<>(0);
