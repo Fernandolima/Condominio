@@ -7,13 +7,13 @@
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa</title>
-		<!-- <link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>-->
+		<link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 	<head>
-	<body id="register-view">
+	<body id="adminView">
 		<header id="header-site">
 			<div class="content">
 				<h1><a href="index" title="Web Home">Web Home</a></h1>
@@ -48,10 +48,22 @@
 							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						
-						<a href="validarMoradores" class="item-menu">Morador</a>
+						<a href="admin/validarMoradores" class="item-menu">Morador</a>
 						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
+					<div id="statusMorador">
+						<span id="iconPeople"></span><h2>Moradores</h2>
+						<p>Você possui <b>20</b> cadastros para serem aprovados. <a href="admin/validarMoradores">Clique aqui para moderar</a><p>
+					</div>
+					
+					<div id="statusEnquete">
+						<span id="iconEnquete"></span><h2>Enquete</h2>
+						<p><b>Enquete ativa no momento:</b> O que você acha do sistema de segurança do condomínio?<br/>
+						<b>Números de pessoas participando:</b> 35<p>
+						<div id="graficoEnquete" class="load">
+						</div>
+					</div>
 				</section>
 			</div>
 		</section>
