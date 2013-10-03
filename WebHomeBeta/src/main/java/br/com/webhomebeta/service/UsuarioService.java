@@ -42,4 +42,7 @@ public class UsuarioService {
 		dao.update(usuario);
 	}
 	
+	public Usuario getById(int id){
+		return dao.getById(id);
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,10 +65,10 @@ public class NotificacaoController {
 	}
 
 	@RequestMapping(value = "notificacaoVista", method = RequestMethod.POST)
-	public void notificacaoVista(){
+	public String notificacaoVista(){
 		
 		notificacaoService.update(dadosUsuarioBean.getUsuario().getIdUser(), true);
-		
+		return "oi";
 	}
 	
 	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
@@ -102,15 +103,15 @@ public class NotificacaoController {
 		ArrayList<NotificacoesJSON> array = new ArrayList<>();
 
 		for (NotificacoesJSON result : this.queueNotificacaoJSON) {
-
+			
 			Notificacao n = queueNotificacao.poll();
+			Usuario usuario = usuarioService.getById(n.getIdNotificacador());
 			NotificacoesJSON json = new NotificacoesJSON();
-			json.setIdPublicacao(n.getIdNotificacado());
-			json.SetTipo(n.getTipoNotificacao(), dadosUsuarioBean.getUsuario()
-					.getNome());
-			json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
+			json.setIdPublicacao(n.getIdPost());
+			json.SetTipo(n.getTipoNotificacao(), usuario.getNome());
+			json.setImagem(usuario.getImagemView());
 			json.setIdUser(n.getIdNotificacado());
-			json.setIdUserComentou(dadosUsuarioBean.getUsuario().getIdUser());
+			json.setIdUserComentou(n.getIdNotificacador());
 			array.add(json);
 
 			this.queueNotificacaoJSON.remove(result);

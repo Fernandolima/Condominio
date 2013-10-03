@@ -85,4 +85,11 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		q.executeUpdate();
 	}
 
+	@Override
+	public Usuario getById(int id) {
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[USER] WHERE ID_USER = ?");
+		q.setInteger(0, id);
+		return (Usuario) q.uniqueResult();
+	}
+
 }

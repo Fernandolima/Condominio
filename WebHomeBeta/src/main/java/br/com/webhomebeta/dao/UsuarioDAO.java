@@ -14,6 +14,7 @@ public interface UsuarioDAO {
 		  public List<Usuario> getUsuarioNaoAtivo();
 		  public Usuario getUsuarioByLogin(String login);
 		  public void update(Usuario usuario);
+		  public Usuario getById(int id);
 		  
 	}
 

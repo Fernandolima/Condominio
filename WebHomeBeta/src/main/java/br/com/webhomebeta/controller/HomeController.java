@@ -60,8 +60,8 @@ public class HomeController {
 	@Autowired
 	private NotificacaoService notificacaoService;
 
-	private int colunaInicial = 1;
-
+	private int colunaInicial;
+	
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
@@ -165,6 +165,7 @@ public class HomeController {
 		}
 
 		colunaInicial += publicacaoes.size() - 1;
+		
 		return jsonPublicacaos;
 	}
 
