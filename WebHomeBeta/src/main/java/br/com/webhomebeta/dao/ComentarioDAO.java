@@ -9,5 +9,5 @@ public interface ComentarioDAO {
 	public Comentario getComentarios(Publicacao publicacao);
 	public Comentario getComentarios();
 	public void update(int id, String imagem);
-	
+	public void evictCache();
 }

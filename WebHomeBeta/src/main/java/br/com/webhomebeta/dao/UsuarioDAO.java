@@ -15,6 +15,7 @@ public interface UsuarioDAO {
 		  public Usuario getUsuarioByLogin(String login);
 		  public void update(Usuario usuario);
 		  public Usuario getById(int id);
+		  public void evictCache();
 		  
 	}
 

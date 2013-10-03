@@ -45,4 +45,8 @@ public class UsuarioService {
 	public Usuario getById(int id){
 		return dao.getById(id);
 	}
+	
+	public void evitcCache(){
+		dao.evictCache();
+	}
 }

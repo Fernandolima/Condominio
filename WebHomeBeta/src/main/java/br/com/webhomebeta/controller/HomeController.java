@@ -188,7 +188,9 @@ public class HomeController {
 				comentario);
 
 		Comentario c = comentarioService.save(comentario);
-
+						
+		comentarioService.evictCache();
+		
 		NovoComentarioJSON comentarioJSON = new NovoComentarioJSON(
 				moradorControllerBean.getComentarioTO().getComentario(),
 				c.getIdComentario(), this.moradorControllerBean.getUsuario()
@@ -232,7 +234,6 @@ public class HomeController {
 						.getUsuario().getNome(), moradorControllerBean
 						.getUsuario().getImagemView());
 		return novaPublicacaoJSON;
-
 	}
 
 	// deleta uma publica��o

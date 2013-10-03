@@ -44,5 +44,11 @@ public class ComentarioDAOImp implements ComentarioDAO{
 		q.setParameter(1,id);
 		q.executeUpdate();
 	}
+	
+	public void evictCache() {
+
+		factory.getCache().evictEntityRegions();
+
+	}
 
 }

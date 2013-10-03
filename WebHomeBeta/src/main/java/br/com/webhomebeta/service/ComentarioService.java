@@ -18,4 +18,8 @@ public class ComentarioService {
 	public void update(int id, String imagem){
 		comentarioDAO.update(id, imagem);
 	}
+	
+	public void evictCache(){
+		comentarioDAO.evictCache();
+	}
 }
