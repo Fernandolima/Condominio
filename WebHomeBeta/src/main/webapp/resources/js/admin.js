@@ -24,6 +24,31 @@ var ADMIN = {
 		htmlOpcao += '<input class="opcaoEnquete" type="text" autocomplete="off" value="" name="listOpcoes['+numEnquete+']">';
 		
 		$('#contentFrm').append(htmlOpcao);
+	},
+	
+	loadEnquete: function() {
+		//fazer uma requisição ajax para popular o grafico
+		var htmlGrafico = '';
+		
+		htmlGrafico += '<div class="respostas">';
+			htmlGrafico += '<p class="labelResposta">Ruim</p>';
+			htmlGrafico += '<span class="statusResposta" style="width:100px;"></span>';
+			htmlGrafico += '<p class="numPessoas">10</p>';
+		htmlGrafico += '</div>';
+		
+		htmlGrafico += '<div class="respostas">';
+			htmlGrafico += '<p class="labelResposta">Bom</p>';
+			htmlGrafico += '<span class="statusResposta" style="width:50px;"></span>';
+			htmlGrafico += '<p class="numPessoas">5</p>';
+		htmlGrafico += '</div>';
+		
+		htmlGrafico += '<div class="respostas">';
+			htmlGrafico += '<p class="labelResposta">Ótimo</p>';
+			htmlGrafico += '<span class="statusResposta" style="width:200px;"></span>';
+			htmlGrafico += '<p class="numPessoas">20</p>';
+		htmlGrafico += '</div>';
+		
+		$('#graficoEnquete').removeClass('load').html(htmlGrafico);
 	}
 }
 
@@ -45,5 +70,9 @@ $(function() {
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 	
 	$('#btn-adiciona-opcao').on('click', ADMIN.onAddOpcao);
+	
+	if($('#adminView')[0]) {
+		ADMIN.loadEnquete();
+	}
 	
 });
