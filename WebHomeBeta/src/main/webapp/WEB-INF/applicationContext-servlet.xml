@@ -228,6 +228,8 @@
 	<bean id="perfilSerivce" class="br.com.webhomebeta.service.PerfilService"></bean>
 	<bean id="gostouDAO" class="br.com.webhomebeta.dao.imp.GostouDAOImp"></bean>
 	<bean id="gostouSerivce" class="br.com.webhomebeta.service.GostouService"></bean>
+	
+	<bean id="opcaoService" class="br.com.webhomebeta.service.OpcaoService"></bean>
 	<bean id="uploadArquivosAssembleiaControllerBean"
 		class="br.com.webhomebeta.bean.UploadArquivosAssembleiaControllerBean"></bean>
 	<bean id="enquetesService" class="br.com.webhomebeta.service.EnquetesService"></bean>
