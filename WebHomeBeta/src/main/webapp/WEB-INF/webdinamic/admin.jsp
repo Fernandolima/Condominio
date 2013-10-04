@@ -16,7 +16,7 @@
 	<body id="adminView">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="index" title="Web Home">Web Home</a></h1>
+				<h1><a href="admin" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
 					<span>|</span>

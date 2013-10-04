@@ -16,13 +16,13 @@
 	<body id="list-user-register">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="index" title="Web Home">Web Home</a></h1>
+				<h1><a href="admin" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
-					<p>Entrou como Administrador<p>
+					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
 					<span>|</span>
-					<a href="#" title="Ver site">Ver site</a>
+					<a href="home" title="Ver site">Ver site</a>
 					<span>|</span>
-					<a href="#" title="Sair">Sair</a>
+					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
 				</div>
 			</div>
 		</header>
