@@ -466,3 +466,27 @@ body {
 	margin-left: 10px;
 	font-weight: bold;
 }
+
+.icon-editar {
+	background: url(../img/itAdmin.png) no-repeat -46px 0;
+	width: 20px;
+	height: 21px;
+	float: left;
+	margin: 7px 0 0 37px;
+}
+
+.icon-editar:hover {
+	background-position: -66px 0;
+}
+
+.icon-download {
+	background: url(../img/itAdmin.png) no-repeat -86px 0;
+	width: 18px;
+	height: 21px;
+	float: left;
+	margin: 9px 0 0 40px;
+}
+
+.icon-download:hover {
+	background-position: -104px 0;
+}
