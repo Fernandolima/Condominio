@@ -5,13 +5,13 @@
 <!-- Mapeia as entidades.. -->
 <hibernate-configuration>
 	<session-factory>
-		
+
 		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
 		<property name="hibernate.cache.use_query_cache">true</property>
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		<property name="hibernate.cache.provider_class"> net.sf.ehcache.hibernate.EhCacheProvider</property>
 		<property name="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</property>
-		
+
 		<mapping class="br.com.webhomebeta.entity.Usuario"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Comentario"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Publicacao"></mapping>
@@ -25,7 +25,8 @@
 		<mapping class="br.com.webhomebeta.entity.Gostou"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Enquetes"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Opcao"></mapping>
-		
-		
+		<mapping class="br.com.webhomebeta.entity.OpcaoVotada"></mapping>
+
+
 	</session-factory>
 </hibernate-configuration>

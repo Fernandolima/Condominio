@@ -16,6 +16,7 @@ public interface UsuarioDAO {
 		  public void update(Usuario usuario);
 		  public Usuario getById(int id);
 		  public void evictCache();
+		  public Integer getRowCount(boolean b);
 		  
 	}
 

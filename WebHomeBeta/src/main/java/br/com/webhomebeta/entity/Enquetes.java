@@ -41,18 +41,34 @@ public class Enquetes implements Serializable {
 
 	@Column(name = "TITULO")
 	private String titulo;
+	
+	@Column(name = "ATIVA", columnDefinition = "BOOLEAN")
+	private boolean isAtiva;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioEnquete;
 
-	// Um usuario pode fazer varias opcao
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquetes")
-	private Set<Opcao> opcao = new HashSet<>(0);
+	// Um usuario pode criar varias opcoes
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquetes", orphanRemoval = true)
+	private List<Opcao> opcao;
 
 	
 	
+	
+	public boolean isAtiva() {
+		return isAtiva;
+	}
+
+	public void setAtiva(boolean isAtiva) {
+		this.isAtiva = isAtiva;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getEnquete() {
 		return enquete;
 	}
@@ -62,12 +78,11 @@ public class Enquetes implements Serializable {
 	}
 
 	
-
-	public Set<Opcao> getOpcao() {
+	public List<Opcao> getOpcao() {
 		return opcao;
 	}
 
-	public void setOpcao(Set<Opcao> opcao) {
+	public void setOpcao(List<Opcao> opcao) {
 		this.opcao = opcao;
 	}
 

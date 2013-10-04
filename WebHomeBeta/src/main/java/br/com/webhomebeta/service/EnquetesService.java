@@ -31,5 +31,13 @@ public class EnquetesService {
 		return dao.getEnquetes();
 
 	}
+	
+	public Enquetes get(int idEnquete){
+		return dao.get(idEnquete);
+	}
+	
+	public List<Enquetes> get(boolean b){
+		return dao.get(b);
+	}
 
 }

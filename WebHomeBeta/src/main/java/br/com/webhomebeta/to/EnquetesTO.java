@@ -7,7 +7,7 @@ import java.util.Set;
 import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
 
-public class EnquetesTo {
+public class EnquetesTO {
 
 	
 	private int idEquete;
@@ -17,9 +17,6 @@ public class EnquetesTo {
 	private String titulo;
 	private Set<Opcao> opcoes = new HashSet<>(0);
 	
-	public void addOpcao(Opcao opcao){
-		opcoes.add(opcao);
-	}
 	/**
 	 * @return the opcoes
 	 */

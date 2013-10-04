@@ -234,6 +234,8 @@
 	<bean id="dao" class="br.com.webhomebeta.dao.imp.EnqueteDaoImp"></bean>
 
 	<bean id="enquetesControllerBean" class="br.com.webhomebeta.bean.EnquetesControllerBean"></bean>
+	<bean id="opcaoVotadaDAO" class="br.com.webhomebeta.dao.imp.opcaoVotadaDAOImp"></bean>
+	<bean id="opcaoVotadaService" class="br.com.webhomebeta.service.opcaoVotadaService"></bean>
 
 
 </beans>

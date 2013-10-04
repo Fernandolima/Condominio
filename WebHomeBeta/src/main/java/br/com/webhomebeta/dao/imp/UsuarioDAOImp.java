@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -106,4 +109,13 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		factory.getCache().evictEntityRegions();
 
 	}
+
+	@Override
+	@Transactional
+	public Integer getRowCount(boolean b) {
+		return (Integer) factory.getCurrentSession().createCriteria(Usuario.class)
+				.add(Restrictions.eq("STATUS", b))
+				.setProjection(Projections.rowCount()).uniqueResult();
+	}
+
 }

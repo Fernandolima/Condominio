@@ -15,6 +15,10 @@ public interface EnqueteDao {
 
 	public Enquetes update(Enquetes enquetes);
 
+	public Enquetes get(int idEnquete);
+	
+	public List<Enquetes> get(boolean b);
+	
 	public List<Enquetes> getEnquetes();
 
 }

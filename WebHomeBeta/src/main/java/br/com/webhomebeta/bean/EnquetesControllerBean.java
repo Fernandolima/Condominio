@@ -2,12 +2,12 @@ package br.com.webhomebeta.bean;
 
 import java.util.List;
 
-import br.com.webhomebeta.to.EnquetesTo;
+import br.com.webhomebeta.to.EnquetesTO;
 
 public class EnquetesControllerBean {
 
 	private List<String> listOpcoes;
-	private EnquetesTo enquetesTo;
+	private EnquetesTO enquetesTo;
 	/**
 	 * @return the listOpcoes
 	 */
@@ -17,7 +17,7 @@ public class EnquetesControllerBean {
 	/**
 	 * @return the enquetesTo
 	 */
-	public EnquetesTo getEnquetesTo() {
+	public EnquetesTO getEnquetesTo() {
 		return enquetesTo;
 	}
 	/**
@@ -29,7 +29,7 @@ public class EnquetesControllerBean {
 	/**
 	 * @param enquetesTo the enquetesTo to set
 	 */
-	public void setEnquetesTo(EnquetesTo enquetesTo) {
+	public void setEnquetesTo(EnquetesTO enquetesTo) {
 		this.enquetesTo = enquetesTo;
 	}
 	

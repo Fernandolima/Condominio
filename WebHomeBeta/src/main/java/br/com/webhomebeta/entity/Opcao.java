@@ -1,5 +1,8 @@
 package br.com.webhomebeta.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -28,11 +32,14 @@ public class Opcao {
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
 	
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
 	private Enquetes enquetes;
 	
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "opcao", orphanRemoval = true)
+	private Set<OpcaoVotada> opcaoVotadas = new  HashSet<>(0);
 
 	public Opcao(){
 		
