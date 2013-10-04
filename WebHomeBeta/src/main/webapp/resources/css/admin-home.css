@@ -404,7 +404,8 @@ body {
 	margin: 10px 0 0 10px;
 }
 
-#adminView p {
+#adminView #statusMorador p,
+#adminView #statusEnquete p {
 	font-size: 13px;
 	float: left;
     margin: 10px 0 0 10px;
@@ -444,7 +445,7 @@ body {
 	float: left;
 }
 
-#adminView p.labelResposta {
+#adminView #graficoEnquete p.labelResposta {
 	float: left;
     overflow: hidden;
     text-align: right;
@@ -460,7 +461,7 @@ body {
 	margin: 10px 0 0 20px;
 }
 
-#adminView p.numPessoas {
+#adminView #graficoEnquete p.numPessoas {
 	width: auto;
 	float: left;
 	margin-left: 10px;
@@ -489,4 +490,14 @@ body {
 
 .icon-download:hover {
 	background-position: -104px 0;
+}
+
+#file {
+	background: none repeat scroll 0 0 #F1F1F1;
+    border: 1px solid #000000;
+    border-radius: 8px 8px 8px 8px;
+    float: left;
+    padding: 10px;
+    width: auto;
+    cursor: pointer;
 }

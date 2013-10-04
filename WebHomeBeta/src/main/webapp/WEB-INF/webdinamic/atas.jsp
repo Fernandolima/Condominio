@@ -9,7 +9,7 @@
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa - Atas</title>
-		<!-- <link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>-->
+		<link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/ckEditor.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery-ui-1.10.3.custom.min.css"/>"/>
@@ -86,8 +86,8 @@
 								</div>
 								
 								<div class="elInput">								
-									<form:label for="fileData" path="fileData">File</form:label>
-									<form:input path="fileData" id="arquivo" type="file" />
+									<div id="file">Selecione um arquivo</div>
+									<input type="file" id="arquivo" name="file" />	
 								</div>
 								
 								<div class="elInput">
