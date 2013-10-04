@@ -45,7 +45,13 @@
 							<li class="item-menu"><a href="cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
 						</ul>
 						
-						<a href="validarMoradores" class="item-menu">Morador</a>
+						<span class="item-menu title-menu-drop"><b>></b> Enquete</span>
+						<ul class="sub-menu">
+							<li class="item-menu"><a href="listarEnquetes" class="menu-drop">Listar Enquetes</a></li>
+							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
+						</ul>
+						
+						<a href="admin/validarMoradores" class="item-menu">Morador</a>
 						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
@@ -60,12 +66,11 @@
 								<p class="itemBlocos title">Download</p>
 							</div>
 							<c:forEach items="${listaAtas}" var="item">
-						    	<h3>DATA FORMATADA = <c:out value="${item.dataFormat}"/></h3>
 						    	<div class="lineTabelaBlocos">
 									<p class="itemBlocos pBloco"><c:out value="${item.titulo}"/></p>
 									<p class="itemBlocos"><c:out value="${item.dataFormat}"/></p>
-									<p class="itemBlocos"><a href="atas/id=<c:out value="${item.idAtas}"/>">Editar</a></p>
-									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank">Baixar</a></p>
+									<p class="itemBlocos"><a href="atas/id=<c:out value="${item.idAtas}"/>" class="icon-editar hidden">Editar</a></p>
+									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank" class="icon-download hidden">Baixar</a></p>
 								</div>							    	
 						    </c:forEach>
 						</div>
