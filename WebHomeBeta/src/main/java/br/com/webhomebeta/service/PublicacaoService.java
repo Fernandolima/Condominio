@@ -37,4 +37,8 @@ public class PublicacaoService {
 	public Publicacao getUnicaPublicacao(int idPublicacao){
 		return publicacaoDAO.getUnicaPublicacao(idPublicacao);
 	}
+	
+	public void delete(Publicacao p){
+		publicacaoDAO.delete(p);
+	}
 }

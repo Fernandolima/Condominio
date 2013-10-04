@@ -34,7 +34,7 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 	public List<Publicacao> getPublicacoes(int colunaInicial, int tamanhoColuna) {
 		
 		String sql = "exec [dbo].[SELECT_PUBLICACOES_CERTOOO] ?,?";
-		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class).setCacheable(true);
+		Query q = factory.getCurrentSession().createSQLQuery(sql).addEntity(Publicacao.class).setCacheable(false);
 		q.setInteger(0, colunaInicial);
 		q.setInteger(1,tamanhoColuna);
 		
@@ -61,6 +61,11 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 		q.executeUpdate();
 	}
 
+	@Transactional
+	public void delete(Publicacao p){
+		factory.getCurrentSession().delete(p);
+	}
+	
 	@Transactional
 	public void deletarPublicacao(int idUsuario, int idPublicacao) {
 		Query q = factory.getCurrentSession().createSQLQuery("DELETE FROM [dbo].[PUBLICACAO]  WHERE ID_USER = ? AND ID_PUBLICACAO = ?");

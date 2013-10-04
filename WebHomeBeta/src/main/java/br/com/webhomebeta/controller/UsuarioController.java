@@ -80,7 +80,7 @@ public class UsuarioController {
 			bean.getUsuarioTO().setAp(null);
 			bean.getUsuarioTO().setCargo(null);
 			
-			Perfil perfil = new Perfil("","","", 0, "");
+			Perfil perfil = new Perfil("","","", 0, "", usuario.getNome(), "/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
 
 			return new ModelAndView("cadastro", "bean", bean);

@@ -12,6 +12,7 @@ public interface PublicacaoDAO {
 	public List<Publicacao> getPublicacao(int idUser);
 	public Publicacao getUnicaPublicacao(int idPublicacao);
 	public void update(int id, String imagem);
+	public void delete(Publicacao p);
 }
 		
 	

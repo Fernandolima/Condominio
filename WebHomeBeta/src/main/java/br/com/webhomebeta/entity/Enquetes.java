@@ -23,6 +23,11 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name="[dbo].[ENQUETES]")
 public class Enquetes implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7501462270022936425L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ENQUETE")
@@ -42,9 +47,9 @@ public class Enquetes implements Serializable {
 	private Usuario usuarioEnquete;
 
 	// Um usuario pode fazer varias opcao
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "enquete")
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<Opcao> opcao;
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquetes")
+	private Set<Opcao> opcao = new HashSet<>(0);
 
 	
 	
@@ -56,11 +61,13 @@ public class Enquetes implements Serializable {
 		this.enquete = enquete;
 	}
 
-	public List<Opcao> getOpcao() {
+	
+
+	public Set<Opcao> getOpcao() {
 		return opcao;
 	}
 
-	public void setOpcao(List<Opcao> opcao) {
+	public void setOpcao(Set<Opcao> opcao) {
 		this.opcao = opcao;
 	}
 

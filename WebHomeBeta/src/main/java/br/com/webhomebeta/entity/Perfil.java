@@ -14,9 +14,9 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PERFIL")
 	private int idPerfil;
-	@Column(name = "NOME_USUARIO")
+	@Column(name = "NOME_USER")
 	private String nomeUsuario;
-	@Column(name = "IMAGEM_USUARIO")
+	@Column(name = "IMAGEM")
 	private String imagemUsuario;
 	@Column(name = "ID_USER")
 	private int idUser;
@@ -36,15 +36,34 @@ public class Perfil {
 	}
 	
 	public Perfil(String estilosMusicais, String livros, String sobreMim,
-			int idade, String profissao) {
+			int idade, String profissao, String nome, String imagem) {
 		this.estilosMusicais = estilosMusicais;
 		this.livros = livros;
 		this.sobreMim = sobreMim;
 		this.idade = idade;
 		this.profissao = profissao;
+		this.nomeUsuario = nome;
+		this.imagemUsuario = imagem;
 	}
 	
 	
+	
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getImagemUsuario() {
+		return imagemUsuario;
+	}
+
+	public void setImagemUsuario(String imagemUsuario) {
+		this.imagemUsuario = imagemUsuario;
+	}
+
 	public int getIdPerfil() {
 		return idPerfil;
 	}

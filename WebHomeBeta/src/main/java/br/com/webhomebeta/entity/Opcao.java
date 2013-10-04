@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name = "[dbo].[OPCAO]")
 public class Opcao {
@@ -26,25 +28,29 @@ public class Opcao {
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
 	
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
-	private Enquetes enquete;
+	private Enquetes enquetes;
+	
 
 	public Opcao(){
 		
 	}
 	
-	public Opcao(String opcao){
+	public Opcao(String opcao, Enquetes enquetes){
 		this.opcao = opcao;
-	}
-	
-	
-	public Enquetes getEnquete() {
-		return enquete;
+		this.enquetes = enquetes;
 	}
 
-	public void setEnquete(Enquetes enquete) {
-		this.enquete = enquete;
+
+	
+	public Enquetes getEnquetes() {
+		return enquetes;
+	}
+
+	public void setEnquetes(Enquetes enquetes) {
+		this.enquetes = enquetes;
 	}
 
 	/**

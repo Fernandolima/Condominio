@@ -1,6 +1,8 @@
 package br.com.webhomebeta.controller;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,15 +53,17 @@ public class EnquetesController {
 		//criar a data da enquete
 		bean.getEnquetesTo().setDataequete(new Date());
 		bean.getEnquetesTo().setUsuarioEnquete(getUsuario());
-		// adiocina as opcoes para a enqueteto
-		for (String opcao : bean.getListOpcoes()) {
-
-			bean.getEnquetesTo().addOpcao(new Opcao(opcao));
-
-		}
-		
 		Enquetes enquetes = new Enquetes();
 		BeanUtils.copyProperties(bean.getEnquetesTo(), enquetes);
+		Set<Opcao> opcao = new HashSet<>(0);
+		// adiocina as opcoes para a enqueteto
+		for (String opcaos : bean.getListOpcoes()) {
+
+			opcao.add(new Opcao(opcaos,enquetes));
+			
+		}
+		
+		enquetes.setOpcao(opcao);
 		enquetesService.save(enquetes);
 		
 		return "redirect:/enquetes";

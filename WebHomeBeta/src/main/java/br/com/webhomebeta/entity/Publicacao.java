@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -74,12 +76,13 @@ public class Publicacao implements Serializable {
 	@Column(name = "IMAGEM")
 	private String imagem;
 	// Mapeamento 1 - N
-	// Utiliza Second level cache, para melhorar o desempenho do servidor
-	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
+	
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao", orphanRemoval = true)
 	private Set<Comentario> comentarios = new HashSet<>(0);
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao")
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao", orphanRemoval = true)
 	private Set<Gostou> gostous = new HashSet<>(0);
 
 

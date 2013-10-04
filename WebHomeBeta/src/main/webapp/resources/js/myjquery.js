@@ -25,4 +25,10 @@ $(document).ready(function() {
             	alert(response.state);
             }    
         }
+}
+
+$(function(){
+	$("#inputNome").on("click")
 });
+
+

@@ -64,7 +64,7 @@ public class NotificacaoController {
 		return list;
 	}
 
-	@RequestMapping(value = "notificacaoVista", method = RequestMethod.POST)
+	@RequestMapping(value = "notificacaoVista")
 	public String notificacaoVista(){
 		
 		notificacaoService.update(dadosUsuarioBean.getUsuario().getIdUser(), true);
@@ -81,14 +81,14 @@ public class NotificacaoController {
 	String receberNotificacao(@RequestParam("id") int idNotificado,
 			@RequestParam("tipo") String tipo,
 			@RequestParam("idPost") int idPost) {
-
+		
 		// adiociona a notificacaoJSON no queue
 		NotificacoesJSON notificacoesJSON = new NotificacoesJSON();
 		this.queueNotificacaoJSON.add(notificacoesJSON);
 
 		Notificacao notificacao = new Notificacao(tipo, idNotificado,
 				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false,
-				"ainda nao tem");
+				"show/id="+idPost);
 
 		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));

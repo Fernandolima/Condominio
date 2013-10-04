@@ -75,7 +75,7 @@ public class HomeController {
 		return new ModelAndView("home", model);
 	}
 
-	@RequestMapping(value = "home/{idPublicacao}", method = RequestMethod.POST)
+	@RequestMapping(value = "show/id={idPublicacao}", method = RequestMethod.POST)
 	public @ResponseBody
 	JsonPublicacao visualizaNotificacao(@PathVariable("idPublicacao") int id) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -175,8 +175,8 @@ public class HomeController {
 			@ModelAttribute("moradorControllerBean") MoradorControllerBean moradorControllerBean,
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		moradorControllerBean.getComentarioTO().setPublicacao(
-				new Publicacao(moradorControllerBean.getIdPublicacao()));
+		Publicacao p = publicacaoService.getUnicaPublicacao(moradorControllerBean.getIdPublicacao());
+		moradorControllerBean.getComentarioTO().setPublicacao(p);
 		moradorControllerBean.getComentarioTO().setUsuarioComentario(
 				this.moradorControllerBean.getUsuario());
 		moradorControllerBean.getComentarioTO().setData(new Date());
@@ -190,6 +190,7 @@ public class HomeController {
 		Comentario c = comentarioService.save(comentario);
 						
 		comentarioService.evictCache();
+		usuarioService.evitcCache();
 		
 		NovoComentarioJSON comentarioJSON = new NovoComentarioJSON(
 				moradorControllerBean.getComentarioTO().getComentario(),
@@ -226,6 +227,10 @@ public class HomeController {
 		// salva no banco
 		BeanUtils.copyProperties(bean.getPublicacaoTO(), publicacao);
 		Publicacao p = publicacaoService.salvar(publicacao);
+		
+		
+		comentarioService.evictCache();
+		usuarioService.evitcCache();
 		// monta o JSON de Publicacao.
 		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
 				p.getIdPublicacao(), publicacaoEscape, df.format(bean
@@ -234,6 +239,7 @@ public class HomeController {
 						.getUsuario().getNome(), moradorControllerBean
 						.getUsuario().getImagemView());
 		return novaPublicacaoJSON;
+		
 	}
 
 	// deleta uma publica��o
@@ -241,9 +247,10 @@ public class HomeController {
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {
 
-		publicacaoService.getUnicaPublicacao(id);
-		publicacaoService.deletarPublicacao(id, moradorControllerBean
-				.getUsuario().getIdUser());
+		Publicacao p =publicacaoService.getUnicaPublicacao(id);
+		if(p.getUsuarioPublicacao().getIdUser() == moradorControllerBean.getUsuario().getIdUser()){
+		publicacaoService.delete(p);
+		}
 
 		return "true";
 
