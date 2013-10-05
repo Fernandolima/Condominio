@@ -69,19 +69,17 @@ body {
     margin: 0 auto;
 }
 
-#header-site h1 {
-    width: 150px;
-    float: left;
-    font-size: 30px;
-    color: #DE2844;
-    text-transform: uppercase;
-    font-family: 'Chela One', Arial, Verdana;
-    margin-top: 20px;
-}
-
 #header-site a {
 	color: #DE2844;
     text-decoration: none;
+}
+
+#logo-site {
+	background: url(../img/logo-site.png) no-repeat 0 0;
+	width: 75px;
+	height: 41px;
+	float: left;
+	margin-top: 15px;
 }
 
 /*STYLE FORM - BEGIN*/
@@ -437,13 +435,13 @@ input[type="password"]:focus {
 
 #verNotificaco {
 	background: url(../img/notificacao.png) no-repeat 0 0;
-	width: 21px;
-	height: 27px;
+	width: 19px;
+	height: 19px;
 	float: left;
 }
 
 #verNotificaco.alert {
-	background-position: -21px 0;
+	background-position: -19px 0;
 }
 
 #mainNotificacao {
@@ -575,13 +573,14 @@ input#submitComment {
 
 #alerta-notificacao {
 	background: url(../img/notificacao.png) no-repeat transparent 0 0;
-	width: 21px;
+	width: 18px;
 	height: 27px;
 	float: left;
+	margin: 6px 0 0 30px;
 }
 
 #alerta-notificacao.temNotificacao {
-	background-position: -21px 0;
+	background-position: -19px 0;
 }
 
 #numeroNotificacao {

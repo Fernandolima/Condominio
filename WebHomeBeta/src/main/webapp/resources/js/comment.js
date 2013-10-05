@@ -52,7 +52,7 @@ var POST_COMMENT  = {
 						htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
 						htmlHome += '<div class="gosteiPublicacao">';
 							htmlHome += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
-						htmlHome += '</div>'
+						htmlHome += '</div>';
 					htmlHome += '</div>';
 					
 					if(val.comentarios.length > 0) {
@@ -131,6 +131,9 @@ var POST_COMMENT  = {
 				htmlInserPost += '<a href="#" class="name-user-comment">'+e.nome+'</a>';
 				htmlInserPost += '<p class="time-comments">'+e.dataPublicacao+'</p>';
 				htmlInserPost += '<p class="comment-user">'+e.publicacao+'</p>';
+				htmlInserPost += '<div class="gosteiPublicacao">';
+					htmlInserPost += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
+				htmlInserPost += '</div>'
 			htmlInserPost += '</div>';
 			htmlInserPost += '<a href="#" class="add-comments">>> Comentar</a>';
 			htmlInserPost += '</div>';

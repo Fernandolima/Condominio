@@ -9,7 +9,6 @@
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
-		<!-- link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />-->
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
@@ -19,7 +18,7 @@
 		<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 		<header id="header-site" class="connected">
 			<div class="content">
-				<h1><a href="index" title="Web Home">Web Home</a></h1>
+				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="comentario-display">
 					<a href="#" id="alerta-notificacao" class="hidden">Notificação</a>
 					<p id="numeroNotificacao"></p>

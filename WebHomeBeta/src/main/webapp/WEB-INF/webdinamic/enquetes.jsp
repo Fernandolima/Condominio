@@ -9,7 +9,6 @@
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa - Atas</title>
-		<!-- <link href="<c:url value = "http://fonts.googleapis.com/css?family=Chela+One"/>" rel='stylesheet' type='text/css'/>-->
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery-ui-1.10.3.custom.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
@@ -21,7 +20,7 @@
 	<body id="cadastrar-atasView">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="admin" title="Web Home">Web Home</a></h1>
+				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
 					<span>|</span>
