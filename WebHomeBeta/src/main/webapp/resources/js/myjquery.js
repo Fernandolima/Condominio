@@ -27,8 +27,4 @@ $(document).ready(function() {
         }
 }
 
-$(function(){
-	$("#inputNome").on("click")
-});
-
 
