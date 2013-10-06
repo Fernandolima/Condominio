@@ -8,8 +8,6 @@ import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
 
 public class EnquetesTo {
-
-	
 	private int idEquete;
 	private String equete;
 	private Date dataequete;
