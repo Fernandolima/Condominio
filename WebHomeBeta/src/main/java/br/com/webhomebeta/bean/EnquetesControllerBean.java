@@ -3,8 +3,8 @@ package br.com.webhomebeta.bean;
 import java.util.List;
 
 import br.com.webhomebeta.to.EnquetesTO;
-
-public class EnquetesControllerBean { 
+//a
+public class EnquetesControllerBean {
 
 	private List<String> listOpcoes;
 	private EnquetesTO enquetesTo;
