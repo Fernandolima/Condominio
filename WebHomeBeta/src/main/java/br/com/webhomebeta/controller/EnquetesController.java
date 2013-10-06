@@ -32,7 +32,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class EnquetesController {
-	@Autowired 
+	@Autowired
 	private EnquetesService enquetesService;
 	@Autowired
 	private UsuarioService usuarioService;
@@ -60,6 +60,7 @@ public class EnquetesController {
 		//criar a data da enquete
 		bean.getEnquetesTo().setDataequete(new Date());
 		bean.getEnquetesTo().setUsuarioEnquete(getUsuario());
+		bean.getEnquetesTo().setAtiva(true);
 		Enquetes enquetes = new Enquetes();
 		BeanUtils.copyProperties(bean.getEnquetesTo(), enquetes);
 		List<Opcao> opcao = new ArrayList<>();
