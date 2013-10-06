@@ -66,7 +66,7 @@
 							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						
-						<a href="validarMoradores" class="item-menu">Morador</a>
+						<a href="admin/validarMoradores" class="item-menu">Morador</a>
 						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
