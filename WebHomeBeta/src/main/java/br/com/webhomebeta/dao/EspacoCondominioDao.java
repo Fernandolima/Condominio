@@ -1,5 +1,7 @@
 package br.com.webhomebeta.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.webhomebeta.entity.EspacoCondominio;
@@ -14,6 +16,8 @@ public interface EspacoCondominioDao {
 	public void update(EspacoCondominio condominio);
 
 	public void delete(EspacoCondominio espacoCondominio);
+	
+	public List<EspacoCondominio> getLisEspacoCondominios();
 	
 
 }

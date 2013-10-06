@@ -13,62 +13,97 @@ public class EspacoCondominio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ESPACO_CONDOMINIO")
-	private int idEspacoCondominio;
+	private int idEspaco;
 	
 	@Column(name = "ESPACOS")
-	private String espacoCondominio;
+	private String espaco;
 	
-	@Column(name = "DATA_RESERVA")
-	private String dataReserva;
+	@Column(name = "QUAT_ESPACO")
+	private String quatEspaco;
+	
+	@Column(name = "ATIVA")
+	private boolean ativa;
+	
+	@Column(name = "ID_RESERVA")
+	private int idReserva;
+	
+	@Column(name = "ID_USER")
+	private int idUser;
+	
+	@Column(name = "NOME")
+	private String nome;
+	
+	
 	
 
-	public EspacoCondominio() {
+	public EspacoCondominio(String espaco, String quatEspaco, boolean ativa,
+			String nome) {
 		super();
-		this.idEspacoCondominio = idEspacoCondominio;
-		this.espacoCondominio = espacoCondominio;
-		this.dataReserva = dataReserva;
+		this.espaco = espaco;
+		this.quatEspaco = quatEspaco;
+		this.ativa = ativa;
+		this.nome = nome;
 	}
 
-	/**
-	 * @return the dataReserva
-	 */
-	public String getDataReserva() {
-		return dataReserva;
+	public int getIdEspaco() {
+		return idEspaco;
 	}
 
-	/**
-	 * @param dataReserva the dataReserva to set
-	 */
-	public void setDataReserva(String dataReserva) {
-		this.dataReserva = dataReserva;
+	public String getEspaco() {
+		return espaco;
 	}
 
-	/**
-	 * @return the idEspacoCondominio
-	 */
-	public int getIdEspacoCondominio() {
-		return idEspacoCondominio;
+	public String getQuatEspaco() {
+		return quatEspaco;
 	}
 
-	/**
-	 * @return the espacoCondominio
-	 */
-	public String getEspacoCondominio() {
-		return espacoCondominio;
+	public boolean isAtiva() {
+		return ativa;
 	}
 
-	/**
-	 * @param idEspacoCondominio the idEspacoCondominio to set
-	 */
-	public void setIdEspacoCondominio(int idEspacoCondominio) {
-		this.idEspacoCondominio = idEspacoCondominio;
+	public int getIdReserva() {
+		return idReserva;
 	}
 
-	/**
-	 * @param espacoCondominio the espacoCondominio to set
-	 */
-	public void setEspacoCondominio(String espacoCondominio) {
-		this.espacoCondominio = espacoCondominio;
+	public int getIdUser() {
+		return idUser;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setIdEspaco(int idEspaco) {
+		this.idEspaco = idEspaco;
+	}
+
+	public void setEspaco(String espaco) {
+		this.espaco = espaco;
+	}
+
+	public void setQuatEspaco(String quatEspaco) {
+		this.quatEspaco = quatEspaco;
+	}
+
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
+	}
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	
+	
+
+	
 }

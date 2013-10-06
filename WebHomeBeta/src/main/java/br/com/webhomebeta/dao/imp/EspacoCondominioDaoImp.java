@@ -1,5 +1,7 @@
 package br.com.webhomebeta.dao.imp;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,12 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 	public void delete(EspacoCondominio espacoCondominio) {
 		factory.getCurrentSession().delete(espacoCondominio);
 
+	}
+
+	@Override
+	public List<EspacoCondominio> getLisEspacoCondominios() {
+		return factory.getCurrentSession()
+				.createCriteria(EspacoCondominio.class).list();
 	}
 
 }

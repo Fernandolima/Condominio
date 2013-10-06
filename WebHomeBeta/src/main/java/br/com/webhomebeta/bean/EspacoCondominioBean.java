@@ -1,13 +1,25 @@
 package br.com.webhomebeta.bean;
 
+import java.util.List;
+
 import br.com.webhomebeta.to.EspacoCondominioTo;
 
 public class EspacoCondominioBean {
 	private EspacoCondominioTo espacoCondominioTo;
-	private boolean idEspaco = false;
-	private boolean nameEspaco = false;
-	private boolean hasErrorForm = false;
+	private boolean idEspaco;
+	private boolean nameEspaco;
 	private boolean validDate ;
+	private List<String> listEspaco;
+	
+	
+
+	public List<String> getListEspaco() {
+		return listEspaco;
+	}
+
+	public void setListEspaco(List<String> listEspaco) {
+		this.listEspaco = listEspaco;
+	}
 
 	/**
 	 * @param validDate 
@@ -44,13 +56,7 @@ public class EspacoCondominioBean {
 		this.nameEspaco = nameEspaco;
 	}
 
-	/**
-	 * @return the hasErrorForm
-	 */
-	public boolean isHasErrorForm() {
-		return hasErrorForm;
-	}
-
+	
 	/**
 	 * @param espacoCondominioTo
 	 *            the espacoCondominioTo to set
@@ -75,20 +81,4 @@ public class EspacoCondominioBean {
 		this.nameEspaco = nameEspaco;
 	}
 
-	/**
-	 * @param hasErrorForm
-	 *            the hasErrorForm to set
-	 */
-	public void setHasErrorForm(boolean hasErrorForm) {
-		this.hasErrorForm = hasErrorForm;
 	}
-
-	public boolean hasErrors() {
-		if (idEspaco == false || nameEspaco == false) {
-			hasErrorForm = true;
-			return false;
-		}
-		hasErrorForm = false;
-		return true;
-	}
-}

@@ -1,5 +1,7 @@
 package br.com.webhomebeta.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class EspacoCondominioServe {
 	@Autowired
 	public EspacoCondominioDao condominioDao;
 
-	public void  save(EspacoCondominio condominio) {
+	public void save(EspacoCondominio condominio) {
 		condominioDao.save(condominio);
 	}
 
@@ -24,6 +26,11 @@ public class EspacoCondominioServe {
 
 	public void delete(EspacoCondominio espacoCondominio) {
 		condominioDao.delete(espacoCondominio);
+	}
+	
+	public List<EspacoCondominio> getLisEspacoCondominios() {
+		return condominioDao.getLisEspacoCondominios();
+		
 	}
 
 }

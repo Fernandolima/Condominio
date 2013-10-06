@@ -1,9 +1,9 @@
 package br.com.webhomebeta.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.EspacoCondominioBean;
 import br.com.webhomebeta.entity.EspacoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.EspacoCondominioTo;
 import br.com.webhomebeta.validacao.ValidadorEspaco;
 
@@ -27,9 +29,9 @@ public class EspacoCondominioController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EspacoCondominioServe condominioServe;
-	
+
 	private EspacoCondominio condominio;
-	
+
 	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
 
 	@RequestMapping(value = "espaco", method = RequestMethod.GET)
@@ -42,48 +44,44 @@ public class EspacoCondominioController {
 	}
 
 	@RequestMapping(value = "inserirEspaco", method = RequestMethod.POST)
-	// valor da action
-	public ModelAndView InserirEspaco(
-			@ModelAttribute("espaco") final EspacoCondominioBean Bean,
-			BindingResult result, HttpServletRequest request) {
-		ValidadorEspaco(Bean);
-		if (Bean.hasErrors()) {
+	public void InserirEspaco(
+			@ModelAttribute("bean") EspacoCondominioBean bean,
+			BindingResult result) {
+		// vare a lista e adiciona os dados do espaço.
+		for (String novoEespaco : bean.getListEspaco()) {
+			EspacoCondominio espacoCondominio = new EspacoCondominio(bean
+					.getEspacoCondominioTo().getNovoEspaco(), bean
+					.getEspacoCondominioTo().getQuatEspaco(), false, bean
+					.getEspacoCondominioTo().getNome());
 
-			// cria um objeto de EspacoCondominio, compara com o dados to TO e
-			// salva
-			// no
-			// banco.
-			EspacoCondominio descricao = new EspacoCondominio();
-			BeanUtils.copyProperties(Bean.getEspacoCondominioTo(), descricao);
-			// Salva no banco
+			condominioServe.save(espacoCondominio);
 
-			condominioServe.save(descricao);
-
-			return new ModelAndView("inserirEspaco");
 		}
-
-		return new ModelAndView("inserirEspaco", "espaco", Bean);
 	}
 
-	public void ValidadorEspaco(EspacoCondominioBean espacoCondominioBean) {
+	@RequestMapping(value = "deleteEspaco", method = RequestMethod.POST)
+	public void deleteEspaco(
+			@ModelAttribute("bean") EspacoCondominio espacoCondominio) {
+		condominioServe.delete(espacoCondominio);
+	}
 
-		if (!ValidadorEspaco.isValidEspaco(espacoCondominioBean
-				.getEspacoCondominioTo().getEspaco()))
-			;
-		;
-		{
-			espacoCondominioBean.isNameEspaco(false);
+	public Usuario getUsuario() {
 
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
 		}
-		espacoCondominioBean.isNameEspaco(true);
 
-		if (!ValidadorEspaco.validaData(espacoCondominioBean
-				.getEspacoCondominioTo().getData())) {
-			espacoCondominioBean.isValidDate(false);
-
-		}
-		espacoCondominioBean.isValidDate(true);
-
+		return usuario;
 	}
 
 }
