@@ -46,7 +46,7 @@
 						
 						<span class="item-menu title-menu-drop"><b>></b> Enquete</span>
 						<ul class="sub-menu">
-							<li class="item-menu"><a href="listarEnquetes" class="menu-drop">Listar Enquetes</a></li>
+							<li class="item-menu"><a href="listaEnquetes" class="menu-drop">Listar Enquetes</a></li>
 							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						

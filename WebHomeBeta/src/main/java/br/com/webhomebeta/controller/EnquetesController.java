@@ -73,7 +73,7 @@ public class EnquetesController {
 		enquetes.setOpcao(opcao);
 		enquetesService.save(enquetes);
 		
-		return "redirect:enquetes";
+		return "redirect:/enquetes";
 	}
 	@RequestMapping(value = "computarVoto", method = RequestMethod.POST)
 	public @ResponseBody String computarVoto(){
