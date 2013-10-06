@@ -41,15 +41,23 @@ public class EnquetesController {
 	@Autowired
 	private OpcaoVotadaService opcaoVotadaService;
 
-	// mapeia a URL principal (Enquetes) e retorna um novo objeto atas
+	// mapeia a URL principal (Enquetes) e retorna um novo objeto
 	@RequestMapping(value = "enquetes", method = RequestMethod.GET)
 	public ModelAndView Enquetes(ModelMap model) {
 
-		model.put("listaEnquetes", enquetesService.getList());
 		model.put("usuario", getUsuario());
 		model.put("bean", enquetesControllerBean);
 
 		return new ModelAndView("enquetes", model);
+	}
+
+	// mapeia a URL principal (Enquetes) e retorna um novo objeto
+	@RequestMapping(value = "listaEnquetes", method = RequestMethod.GET)
+	public ModelAndView Lista(ModelMap model) {
+		model.put("listaEnquetes", enquetesService.getList());
+
+		return new ModelAndView("listaEnquetes", model);
+
 	}
 
 	// tati vai passa a string com as opcoes
@@ -57,7 +65,7 @@ public class EnquetesController {
 	public String salvarEnquete(
 			@ModelAttribute("bean") EnquetesControllerBean bean,
 			BindingResult result) {
-		//criar a data da enquete
+		// criar a data da enquete
 		bean.getEnquetesTo().setDataequete(new Date());
 		bean.getEnquetesTo().setUsuarioEnquete(getUsuario());
 		Enquetes enquetes = new Enquetes();
@@ -66,18 +74,20 @@ public class EnquetesController {
 		// adiocina as opcoes para a enqueteto
 		for (String opcaos : bean.getListOpcoes()) {
 
-			opcao.add(new Opcao(opcaos,enquetes));
-			
+			opcao.add(new Opcao(opcaos, enquetes));
+
 		}
-		
+
 		enquetes.setOpcao(opcao);
 		enquetesService.save(enquetes);
-		
+
 		return "redirect:/enquetes";
 	}
+
 	@RequestMapping(value = "computarVoto", method = RequestMethod.POST)
-	public @ResponseBody String computarVoto(){
-		
+	public @ResponseBody
+	String computarVoto() {
+
 		return "true";
 	}
 
@@ -99,15 +109,14 @@ public class EnquetesController {
 
 		return usuario;
 	}
-	
+
 	@RequestMapping(value = "enquetes/delete", method = RequestMethod.POST)
 	public String delete(@RequestParam("idEnquete") int idEnquete) {
-		
+
 		Enquetes enquete = enquetesService.get(idEnquete);
 		enquetesService.delete(enquete);
 
 		return "redirect:enquetes";
 	}
-
 
 }
