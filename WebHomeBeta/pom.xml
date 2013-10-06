@@ -220,9 +220,23 @@
 			<version>3.1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.atmosphere</groupId>
-			<artifactId>atmosphere-runtime</artifactId>
-			<version>1.0.2</version>
+			<groupId>
+				org.atmosphere
+			</groupId>
+				<artifactId>
+					atmosphere-runtime
+				</artifactId>
+					<version>2.0.1</version>
+					<exclusions>
+						<exclusion>
+							<artifactId>
+								atmosphere-compat-tomcat7
+							</artifactId>
+								<groupId>
+									org.atmosphere
+								</groupId>
+						</exclusion>
+					</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>

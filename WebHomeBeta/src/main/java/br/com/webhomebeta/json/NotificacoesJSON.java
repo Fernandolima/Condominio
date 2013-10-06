@@ -72,9 +72,9 @@ public class NotificacoesJSON {
 
 			this.texto = nome + " gostou da sua publicação!";
 
-		} else if (tipo.equals("ngostou")) {
+		} else if (tipo.equals("comentouse")) {
 
-			this.texto = nome + " não gostou da sua publicação!";
+			this.texto = nome + " comentou a própria publicação!";
 
 		} else {
 

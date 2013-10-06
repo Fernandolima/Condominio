@@ -24,6 +24,7 @@ import br.com.webhomebeta.entity.Notificacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.NotificacoesJSON;
 import br.com.webhomebeta.service.NotificacaoService;
+import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
@@ -34,6 +35,8 @@ public class NotificacaoController {
 	private DadosUsuarioBean dadosUsuarioBean;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private PublicacaoService publicacaoService;
 	@Autowired
 	private NotificacaoService notificacaoService;
 
@@ -75,7 +78,7 @@ public class NotificacaoController {
 	// o ID da publicacao
 	// e o tipo de notificacao
 
-	// Testando
+	// Testando, ver com a tati
 	@RequestMapping(value = "notificacao", method = RequestMethod.POST)
 	public @ResponseBody
 	String receberNotificacao(@RequestParam("id") int idNotificado,
@@ -106,6 +109,7 @@ public class NotificacaoController {
 			
 			Notificacao n = queueNotificacao.poll();
 			Usuario usuario = usuarioService.getById(n.getIdNotificacador());
+		
 			NotificacoesJSON json = new NotificacoesJSON();
 			json.setIdPublicacao(n.getIdPost());
 			json.SetTipo(n.getTipoNotificacao(), usuario.getNome());

@@ -15,8 +15,17 @@ public class EnquetesTO {
 	private Date dataequete;
 	private Usuario usuarioEnquete;
 	private String titulo;
+	private boolean isAtiva;
 	private Set<Opcao> opcoes = new HashSet<>(0);
 	
+	
+	
+	public boolean isAtiva() {
+		return isAtiva;
+	}
+	public void setAtiva(boolean isAtiva) {
+		this.isAtiva = isAtiva;
+	}
 	/**
 	 * @return the opcoes
 	 */
