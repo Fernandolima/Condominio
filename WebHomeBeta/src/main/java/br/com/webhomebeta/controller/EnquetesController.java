@@ -32,7 +32,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class EnquetesController {
-	@Autowired
+	@Autowired 
 	private EnquetesService enquetesService;
 	@Autowired
 	private UsuarioService usuarioService;
