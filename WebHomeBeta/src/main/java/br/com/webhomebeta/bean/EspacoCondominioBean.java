@@ -6,12 +6,8 @@ import br.com.webhomebeta.to.EspacoCondominioTo;
 
 public class EspacoCondominioBean {
 	private EspacoCondominioTo espacoCondominioTo;
-	private boolean idEspaco;
 	private boolean nameEspaco;
-	private boolean validDate ;
 	private List<String> listEspaco;
-	
-	
 
 	public List<String> getListEspaco() {
 		return listEspaco;
@@ -22,20 +18,6 @@ public class EspacoCondominioBean {
 	}
 
 	/**
-	 * @param validDate 
-	 */
-	public void isValidDate(boolean validDate) {
-		this.validDate = validDate;
-	}
-
-	/**
-	 * @param validDate the validDate to set
-	 */
-	public void setValidDate(boolean validDate) {
-		this.validDate = validDate;
-	}
-
-	/**
 	 * @return the espacoCondominioTo
 	 */
 	public EspacoCondominioTo getEspacoCondominioTo() {
@@ -43,34 +25,18 @@ public class EspacoCondominioBean {
 	}
 
 	/**
-	 * @return the idEspaco
-	 */
-	public boolean isIdEspaco() {
-		return idEspaco;
-	}
-
-	/**
-	 * @param b 
+	 * @param b
 	 */
 	public void isNameEspaco(boolean nameEspaco) {
 		this.nameEspaco = nameEspaco;
 	}
 
-	
 	/**
 	 * @param espacoCondominioTo
 	 *            the espacoCondominioTo to set
 	 */
 	public void setEspacoCondominioTo(EspacoCondominioTo espacoCondominioTo) {
 		this.espacoCondominioTo = espacoCondominioTo;
-	}
-
-	/**
-	 * @param idEspaco
-	 *            the idEspaco to set
-	 */
-	public void setIdEspaco(boolean idEspaco) {
-		this.idEspaco = idEspaco;
 	}
 
 	/**
@@ -81,4 +47,4 @@ public class EspacoCondominioBean {
 		this.nameEspaco = nameEspaco;
 	}
 
-	}
+}
