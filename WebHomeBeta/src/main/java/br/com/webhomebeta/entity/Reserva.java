@@ -21,22 +21,33 @@ public class Reserva {
 	@Column(name = "RESERVA")
 	private String reserva;
 
+
 	@Column(name = "DATA_RESERVA")
 	private Date dateReserva;
 
 	@Column(name = "ID_USER")
 	private int idUser;
-	
+
 	@Column(name = "NOME")
 	private String nome;
-	
 
 	public Reserva(String reserva, Date dateReserva, String nome) {
 		super();
 		this.reserva = reserva;
 		this.dateReserva = dateReserva;
-		this.nome= nome;
+		this.nome = nome;
 		
+
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public int getIdReserva() {
@@ -67,7 +78,6 @@ public class Reserva {
 		this.dateReserva = dateReserva;
 	}
 
-	
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}

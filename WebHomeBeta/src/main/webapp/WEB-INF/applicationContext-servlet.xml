@@ -236,6 +236,9 @@
 	<bean id="enquetesControllerBean" class="br.com.webhomebeta.bean.EnquetesControllerBean"></bean>
 	<bean id="reservaControllerBean" class="br.com.webhomebeta.bean.ReservaControllerBean"></bean>
 	<bean id="reservaService" class="br.com.webhomebeta.service.ReservaService"></bean>
+	<bean id="opcaoVotadaDAO" class="br.com.webhomebeta.dao.imp.OpcaoVotadaDAOImp"></bean>
+	<bean id="reservaDao" class="br.com.webhomebeta.dao.imp.ReservaDAOImp"></bean>
+ <bean id="opcaoVotadaService" class="br.com.webhomebeta.service.OpcaoVotadaService"></bean>
 		
 
 

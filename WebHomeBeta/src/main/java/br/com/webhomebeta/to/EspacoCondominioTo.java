@@ -6,11 +6,7 @@ import java.util.Date;
 public class EspacoCondominioTo {
 
 	private String data;
-	private int idEspaco;
 	private String novoEspaco;
-	private String quatEspaco;
-	private boolean ativa;
-	private int idReserva;
 	private int idUser;
 	private String nome;
 
@@ -66,24 +62,8 @@ public class EspacoCondominioTo {
 		this.espaco = espaco;
 	}
 
-	public int getIdEspaco() {
-		return idEspaco;
-	}
-
 	public String getNovoEspaco() {
 		return novoEspaco;
-	}
-
-	public String getQuatEspaco() {
-		return quatEspaco;
-	}
-
-	public boolean isAtiva() {
-		return ativa;
-	}
-
-	public int getIdReserva() {
-		return idReserva;
 	}
 
 	public int getIdUser() {
@@ -94,24 +74,8 @@ public class EspacoCondominioTo {
 		return nome;
 	}
 
-	public void setIdEspaco(int idEspaco) {
-		this.idEspaco = idEspaco;
-	}
-
 	public void setNovoEspaco(String novoEspaco) {
 		this.novoEspaco = novoEspaco;
-	}
-
-	public void setQuatEspaco(String quatEspaco) {
-		this.quatEspaco = quatEspaco;
-	}
-
-	public void setAtiva(boolean ativa) {
-		this.ativa = ativa;
-	}
-
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
 	}
 
 	public void setIdUser(int idUser) {
@@ -122,5 +86,4 @@ public class EspacoCondominioTo {
 		this.nome = nome;
 	}
 
-	
 }

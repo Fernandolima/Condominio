@@ -39,6 +39,7 @@ public class EspacoCondominioController {
 		EspacoCondominioTo acessaLista = new EspacoCondominioTo();
 		acessaLista.getEspaco();
 		map.put("ListaEspaco", acessaLista);
+		map.put("usuario", getUsuario());
 		return new ModelAndView("espaco", map);
 
 	}
@@ -49,14 +50,12 @@ public class EspacoCondominioController {
 			BindingResult result) {
 		// vare a lista e adiciona os dados do espaço.
 		for (String novoEespaco : bean.getListEspaco()) {
-			EspacoCondominio espacoCondominio = new EspacoCondominio(bean
-					.getEspacoCondominioTo().getNovoEspaco(), bean
-					.getEspacoCondominioTo().getQuatEspaco(), false, bean
-					.getEspacoCondominioTo().getNome());
+			EspacoCondominio espacoCondominio = new EspacoCondominio(novoEespaco, getUsuario().getNome());
 
 			condominioServe.save(espacoCondominio);
 
 		}
+		
 	}
 
 	@RequestMapping(value = "deleteEspaco", method = RequestMethod.POST)
