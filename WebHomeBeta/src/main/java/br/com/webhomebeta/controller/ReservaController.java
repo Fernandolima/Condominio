@@ -46,11 +46,8 @@ public class ReservaController {
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto Reserva
 	@RequestMapping(value = "reserva", method = RequestMethod.GET)
-	public ModelAndView Reserva(ModelMap model) {
+	public ModelAndView reserva(ModelMap model) {
 
-		model.put("listaReserva", reservaService.getLisReservas());
-		model.put("listaespacos",
-				espacoCondominioServe.getLisEspacoCondominios());
 		model.put("usuario", getUsuario());
 		model.put("bean", reservaControllerBean);
 
@@ -63,6 +60,25 @@ public class ReservaController {
 		reservaService.delete(reserva);
 
 		return "redirect:/reserva/delete";
+	}
+
+	// mapeia a URL principal (Reserva) e retorna um novo objeto
+	@RequestMapping(value = "listaReserva", method = RequestMethod.GET)
+	public ModelAndView listaReserva(ModelMap model) {
+		model.put("listaReserva", reservaService.getLisReservas());
+
+		return new ModelAndView("listaReserva", model);
+
+	}
+
+	// mapeia a URL principal (Reserva) e retorna um novo objeto
+	@RequestMapping(value = "listaespacos", method = RequestMethod.GET)
+	public ModelAndView listaEspaco(ModelMap model) {
+		model.put("listaespacos",
+				espacoCondominioServe.getLisEspacoCondominios());
+
+		return new ModelAndView("listaespacos", model);
+
 	}
 
 	@RequestMapping(value = "reserva/salvar", method = RequestMethod.POST)

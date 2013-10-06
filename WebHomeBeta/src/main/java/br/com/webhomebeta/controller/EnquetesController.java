@@ -43,7 +43,7 @@ public class EnquetesController {
 
 	// mapeia a URL principal (Enquetes) e retorna um novo objeto
 	@RequestMapping(value = "enquetes", method = RequestMethod.GET)
-	public ModelAndView Enquetes(ModelMap model) {
+	public ModelAndView enquetes(ModelMap model) {
 
 		model.put("usuario", getUsuario());
 		model.put("bean", enquetesControllerBean);
@@ -53,7 +53,7 @@ public class EnquetesController {
 
 	// mapeia a URL principal (Enquetes) e retorna um novo objeto
 	@RequestMapping(value = "listaEnquetes", method = RequestMethod.GET)
-	public ModelAndView Lista(ModelMap model) {
+	public ModelAndView lista(ModelMap model) {
 		model.put("listaEnquetes", enquetesService.getList());
 
 		return new ModelAndView("listaEnquetes", model);
