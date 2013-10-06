@@ -3,7 +3,7 @@ package br.com.webhomebeta.bean;
 import java.util.List;
 
 import br.com.webhomebeta.to.EnquetesTO;
-//a
+
 public class EnquetesControllerBean {
 
 	private List<String> listOpcoes;
