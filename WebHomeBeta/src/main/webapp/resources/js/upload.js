@@ -1,6 +1,7 @@
 $(function() {
 	$("#btn-upload").on("click", function(e){
 		e.preventDefault();
+		console.log('tatu');
 		var el = $(this).closest("#main-upload");
 		el.find('progress').attr({value:0,max:100});
         //create a FormData Object that will be sent
