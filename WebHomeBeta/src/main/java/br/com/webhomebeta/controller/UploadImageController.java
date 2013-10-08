@@ -35,6 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.mail.handlers.image_jpeg;
+
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.ComentarioService;
@@ -56,7 +58,7 @@ public class UploadImageController {
 	@Autowired
 	private UploadControllerBean beanUsuario;
 
-	private void salvar(MultipartFile file, Usuario usuario) throws Exception {
+	private void salvar(MultipartFile file, Usuario usuario, int x, int y, int w, int h) throws Exception {
 		File fileToDisk = null;
 		File fileToDiskRedimensionada = null;
 		File caminho = null;
@@ -68,46 +70,41 @@ public class UploadImageController {
 				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
 
 		String resultRedimensionada = this.context.getRealPath("")
-				+ "/uploadedImgs/" + usuario.getIdUser() + "/Redimensionada "
+				+ "/uploadedImgs/" + usuario.getIdUser() + "/r-"
 				+ file.getOriginalFilename();
+		
+		String imagem = "/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
+		String imagem43x43 = "/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/r-" + file.getOriginalFilename();
+		
+		BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+		BufferedImage cropedImage = originalImage.getSubimage(x, y, w, h);
+		
 		try {
-
-			InputStream stream = new ByteArrayInputStream(file.getBytes());
-
-			// redimensiona imagem para o tamanho 240x240
-			BufferedImage bufferImage = ImageIO.read(stream);
-			BufferedImage imagemRedimensionada = Scalr.resize(bufferImage,
-					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 240, 240,
-					Scalr.OP_ANTIALIAS);
+			
+			
+			caminho = new File(caminhoPasta);
+			if(!caminho.isDirectory()){
+				caminho.mkdirs();
+			}
+			
+			//salva imagem cropada
+			
 			if (file.getOriginalFilename().endsWith("jpg")) {
-				caminho = new File(caminhoPasta);
-
 				fileToDisk = new File(result);
-
-				if (!caminho.isDirectory()) {
-					caminho.mkdirs();
-				}
-				ImageIO.write(imagemRedimensionada, "JPEG", fileToDisk);
+				ImageIO.write(cropedImage, "JPEG",
+						fileToDisk);
 			}
-
 			if (file.getOriginalFilename().endsWith("png")) {
-				caminho = new File(caminhoPasta);
-
 				fileToDisk = new File(result);
-
-				if (!caminho.isDirectory()) {
-					caminho.mkdirs();
-				}
-				ImageIO.write(imagemRedimensionada, "png", fileToDisk);
+				ImageIO.write(cropedImage, "PNG",
+						fileToDisk);
 			}
-
-			usuario.setImagem("/WebHomeBeta/uploadedImgs/"
-					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
-			usuario.setImagemView("/WebHomeBeta/uploadedImgs/"
-					+ usuario.getIdUser() + "/Redimensionada "
-					+ file.getOriginalFilename());
+			
+			usuario.setImagem(imagem);
 			usuarioService.update(usuario);
-
+			
 			// redimensiona imagem para o tamanho para 43x43
 			InputStream stream2 = new ByteArrayInputStream(file.getBytes());
 			BufferedImage bufferImage2 = ImageIO.read(stream2);
@@ -125,12 +122,9 @@ public class UploadImageController {
 						fileToDiskRedimensionada);
 			}
 
-			publicacaoService.update(usuario.getIdUser(),
-					"/WebHomeBeta/uploadedImgs/" + usuario.getIdUser()
-							+ "/Redimensionada " + file.getOriginalFilename());
-			comentarioService.update(usuario.getIdUser(),
-					"/WebHomeBeta/uploadedImgs/" + usuario.getIdUser()
-							+ "/Redimensionada " + file.getOriginalFilename());
+			publicacaoService.update(usuario.getIdUser(), imagem43x43);
+
+			comentarioService.update(usuario.getIdUser(), imagem43x43);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,18 +133,7 @@ public class UploadImageController {
 
 	@RequestMapping(value = "uploadImage", method = RequestMethod.GET)
 	public ModelAndView showForm() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				beanUsuario.setUsuario(usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
-
-			}
-		}
+		beanUsuario.setUsuario(getUsuario());
 		return new ModelAndView("uploadImage", "uploadControllerBean",
 				beanUsuario);
 	}
@@ -204,15 +187,34 @@ public class UploadImageController {
 	public String upload(
 			@ModelAttribute("uploadControllerBean") UploadControllerBean uploadControllerBean,
 			BindingResult result) {
-
+		int x=370,y=370,w=240,h=240;
 		MultipartFile file = uploadControllerBean.getFileData();
 		try {
-			salvar(file, beanUsuario.getUsuario());
+			salvar(file, beanUsuario.getUsuario(),x,y,w,h);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return "redirect:/uploadImage";
+	}
+	
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 }

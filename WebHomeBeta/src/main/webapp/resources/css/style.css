@@ -75,7 +75,7 @@ body {
 }
 
 #logo-site {
-	background: url(../img/logo-site.png) no-repeat 0 0;
+	background: url(../img/logo-site-red.png) no-repeat 0 0;
 	width: 75px;
 	height: 41px;
 	float: left;
@@ -641,56 +641,18 @@ input#submitComment {
 	border-bottom: 1px dotted #000;
 }
 
-.containerEdicao {
+#editarFoto {
 	border: 1px solid;
     border-radius: 5px 5px 5px 5px;
+    display: none;
     float: left;
     margin-left: 13px;
     margin-top: 30px;
     width: 675px;
-    overflow: hidden;
 }
 
-#editarFoto {
-	display: none;
-}
-
-#content-titulo .containerEdicao h2 {
+#editarFoto h2 {
 	font-size: 14px;
     height: auto;
     margin: 10px 0 0 10px;
-}
-
-#editarFoto #main-upload {
-	float: left;
-    margin: 10px 0 10px 10px;
-    width: 560px;
-}
-
-#dadosUsuario h2 {
-	background: #DE2844;
-	color: #fff;
-}
-
-#usuario {
-	width: 100%;
-	float: left;
-}
-
-#dadosUsuario input {
-	float: left;
-    margin: 10px 0 0 10px;
-    width: 645px;
-}
-
-#dadosUsuario input.dadosApartamento {
-	width: 100px;
-}
-
-#content-titulo #dadosUsuario h2 {
-	font-size: 14px;
-    height: auto;
-    margin: 0;
-    padding: 10px;
-    width: 655px;
 }

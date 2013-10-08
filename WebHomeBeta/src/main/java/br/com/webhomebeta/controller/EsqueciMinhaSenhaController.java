@@ -42,7 +42,7 @@ public class EsqueciMinhaSenhaController {
 		for (Usuario user : usuarios) {
 			// se existir envia email de perda de senha
 			if (user.getEmail().equals(usuarioTO.getEmail())) {
-				emailServico.enviarEmail(user);
+				emailServico.emailNovoMorador(user);
 			} else {
 				validEmail = false;
 			}

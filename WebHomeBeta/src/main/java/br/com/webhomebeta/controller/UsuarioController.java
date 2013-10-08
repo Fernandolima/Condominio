@@ -82,6 +82,8 @@ public class UsuarioController {
 			
 			Perfil perfil = new Perfil("","","", 0, "", usuario.getNome(), "/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
+			
+			emailServico.emailNovoMorador(usuario);
 
 			return new ModelAndView("cadastro", "bean", bean);
 		}

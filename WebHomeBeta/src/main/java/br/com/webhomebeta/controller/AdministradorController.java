@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,6 +64,14 @@ public class AdministradorController {
 		
 		return new ModelAndView("admin", model);
 	}
+	
+	
+	
+	public @ResponseBody String alterarFlag(@RequestParam("id") int id){
+		usuarioService.update(id, true);
+		return "true";
+	}
+	
 
 	@RequestMapping(value = "admin/validarMoradores")
 	public ModelAndView validarMoradores() {
@@ -74,7 +83,7 @@ public class AdministradorController {
 	@RequestMapping(value = "admin/editarCadastro")
 	public ModelAndView editarUsuario(@RequestParam("id") int id) {
 
-		return new ModelAndView("admin/editarCadastro", "usuario",
+		return new ModelAndView("editarCadastro", "usuario",
 				usuarioService.getById(id));
 	}
 	

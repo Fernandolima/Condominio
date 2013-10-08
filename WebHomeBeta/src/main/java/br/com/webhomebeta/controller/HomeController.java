@@ -75,7 +75,7 @@ public class HomeController {
 		return new ModelAndView("home", model);
 	}
 
-	@RequestMapping(value = "show/id={idPublicacao}", method = RequestMethod.POST)
+	@RequestMapping(value = "home/publicacao?id={idPublicacao}", method = RequestMethod.POST)
 	public @ResponseBody
 	JsonPublicacao visualizaNotificacao(@PathVariable("idPublicacao") int id) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

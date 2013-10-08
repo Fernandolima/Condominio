@@ -1,15 +1,23 @@
 package br.com.webhomebeta.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.annotations.MetaValue;
+import org.imgscalr.Scalr;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,16 +29,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.PerfilControllerBean;
+import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.FileData;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PerfilService;
+import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.PerfilTO;
@@ -39,40 +51,78 @@ import br.com.webhomebeta.to.PerfilTO;
 public class PerfilController {
 
 	@Autowired
+	private ServletContext context;
+	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private PerfilControllerBean perfilControllerBean;
 	@Autowired
 	private PerfilService perfilService;
+	@Autowired
+	private UploadControllerBean uploadControllerBean;
+	@Autowired
+	private ComentarioService comentarioService;
+	@Autowired
+	private PublicacaoService publicacaoService;
 
 	private FileData fileData;
 
 	@RequestMapping(value = "perfil", method = RequestMethod.GET)
 	public ModelAndView visualizarPerfil(ModelMap model) {
 
-		if (getPerfilTO() == null)
+		if (getPerfilTO() == null){
 			model.put("perfilControllerBean", perfilControllerBean);
+			model.put("uploadControllerBean", uploadControllerBean);
+		}
 		else {
 			perfilControllerBean.setPerfilTO(getPerfilTO());
 			model.put("perfilControllerBean", perfilControllerBean);
+			model.put("uploadControllerBean", uploadControllerBean);
 		}
 
 		return new ModelAndView("perfil", model);
 	}
 	
-	@RequestMapping(value ="/perfil/id={id}")
-	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id){
-		if(id > 0){
-		Perfil p = perfilService.get(id);
-		return new ModelAndView("perfilUsuario", "perfil", p);
-		}else{
+	//Upload do PERFIL
+	@Async
+	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
+	public @ResponseBody String upload(
+			@ModelAttribute("uploadControllerBean") UploadControllerBean uploadControllerBean,
+			BindingResult result) {
+		String caminho = null;
+		int x=370,y=370,w=240,h=240;
+		MultipartFile file = uploadControllerBean.getFileData();
+		try {
+			caminho = salvar(file, perfilControllerBean.getUsuario(),x,y,w,h);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return caminho;
+	}
+
+	@RequestMapping(value = "/perfil?id={id}")
+	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id) {
+		if (id > 0) {
+			Perfil p = perfilService.get(id);
+			return new ModelAndView("perfilUsuario", "perfil", p);
+		} else {
 			return new ModelAndView("perfilNaoExiste");
 		}
 	}
-	
-	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
+
+	@RequestMapping(value = "cropAndUpload", method = RequestMethod.POST)
+	public void cropImage(@RequestParam("x1") int x1,
+			@RequestParam("y1") int y1, @RequestParam("w") int w,
+			@RequestParam("h") int h1) {
+		
+		
+	}
+
+	@RequestMapping(value = "perfil/uploadImagens", method = RequestMethod.POST)
 	public @ResponseBody
-	LinkedList<FileData> uploadFoto(MultipartHttpServletRequest request,
+	LinkedList<FileData> uploadFotos(MultipartHttpServletRequest request,
 			HttpServletResponse response) {
 		Iterator<String> itr = request.getFileNames();
 		MultipartFile mpf = null;
@@ -96,7 +146,7 @@ public class PerfilController {
 
 			try {
 				fileData.setBytes(mpf.getBytes());
-				
+
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(
 						"C:/imgs/" + mpf.getOriginalFilename()));
 
@@ -173,4 +223,91 @@ public class PerfilController {
 
 		return usuario;
 	}
+	
+	private String salvar(MultipartFile file, Usuario usuario, int x, int y, int w, int h) throws Exception {
+		File fileToBrowser = null;
+		File fileToDisk = null;
+		File fileToDiskRedimensionada = null;
+		File caminho = null;
+
+		String caminhoPasta = this.context.getRealPath("") + "/uploadedImgs/"
+				+ usuario.getIdUser();
+
+		String resultOriginal = this.context.getRealPath("") + "/uploadedImgs/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
+		
+		String resultPerfil = this.context.getRealPath("") + "/uploadedImgs/"
+				+ usuario.getIdUser() + "/perfil-" + file.getOriginalFilename();
+
+		String resultRedimensionada = this.context.getRealPath("")
+				+ "/uploadedImgs/" + usuario.getIdUser() + "/r-"
+				+ file.getOriginalFilename();
+		
+		String imagemOriginal = "/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
+		String imagemPerfil = "/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/perfil-" + file.getOriginalFilename();
+		String imagem43x43 = "/WebHomeBeta/uploadedImgs/"
+				+ usuario.getIdUser() + "/r-" + file.getOriginalFilename();
+		
+		BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+		BufferedImage cropedImage = originalImage.getSubimage(x, y, w, h);
+		
+		try {
+			
+			
+			caminho = new File(caminhoPasta);
+			if(!caminho.isDirectory()){
+				caminho.mkdirs();
+			}
+			
+			//salva imagem original
+			
+			fileToBrowser = new File(resultOriginal);
+			file.transferTo(fileToBrowser);
+			
+			//salva imagem cropada
+			
+			if (file.getOriginalFilename().endsWith("jpg")) {
+				fileToDisk = new File(resultPerfil);
+				ImageIO.write(cropedImage, "JPEG",
+						fileToDisk);
+			}
+			if (file.getOriginalFilename().endsWith("png")) {
+				fileToDisk = new File(resultPerfil);
+				ImageIO.write(cropedImage, "PNG",
+						fileToDisk);
+			}
+			
+			usuario.setImagem(imagemPerfil);
+			usuarioService.update(usuario);
+			
+			// redimensiona imagem para o tamanho para 43x43
+			InputStream stream2 = new ByteArrayInputStream(file.getBytes());
+			BufferedImage bufferImage2 = ImageIO.read(stream2);
+			BufferedImage imagemRedimensionada43x43 = Scalr.resize(
+					bufferImage2, Scalr.Method.ULTRA_QUALITY,
+					Scalr.Mode.FIT_EXACT, 43, 43, Scalr.OP_ANTIALIAS);
+			if (file.getOriginalFilename().endsWith("jpg")) {
+				fileToDiskRedimensionada = new File(resultRedimensionada);
+				ImageIO.write(imagemRedimensionada43x43, "JPEG",
+						fileToDiskRedimensionada);
+			}
+			if (file.getOriginalFilename().endsWith("png")) {
+				fileToDiskRedimensionada = new File(resultRedimensionada);
+				ImageIO.write(imagemRedimensionada43x43, "PNG",
+						fileToDiskRedimensionada);
+			}
+
+			publicacaoService.update(usuario.getIdUser(), imagem43x43);
+
+			comentarioService.update(usuario.getIdUser(), imagem43x43);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return imagemOriginal;
+	}
+
 }

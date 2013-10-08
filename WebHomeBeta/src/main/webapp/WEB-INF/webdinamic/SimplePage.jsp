@@ -12,8 +12,7 @@
 	</head>
 	
 	<body>
-		
-		<p>Insira seu nome: </p> <input id="inputNome" name="nome" size="10"/> 
+		 
 		<h1>Spring MVC and Atmosphere</h1>
 		<h2>The Time pushed from the Server is:</h2>
 		

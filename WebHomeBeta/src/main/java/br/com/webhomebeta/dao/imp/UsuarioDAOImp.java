@@ -9,6 +9,7 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,9 +114,28 @@ public class UsuarioDAOImp implements UsuarioDAO {
 	@Override
 	@Transactional
 	public Integer getRowCount(boolean b) {
-		return (Integer) factory.getCurrentSession().createCriteria(Usuario.class)
+		return (Integer) factory.getCurrentSession()
+				.createCriteria(Usuario.class)
 				.add(Restrictions.eq("STATUS", b))
 				.setProjection(Projections.rowCount()).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public void update(int id, boolean b) {
+		Query q = factory.getCurrentSession().createQuery(
+				"update Usuario u where u.idUser = ? and u.status = ?");
+		q.setInteger(0, id);
+		q.setBoolean(1, b);
+		q.executeUpdate();
+	}
+
+	@Override
+	@Transactional
+	public Usuario getByCargo(String cargo) {
+		return (Usuario) factory.getCurrentSession()
+				.createQuery("from Usuario u where u.cargo = ?")
+				.setString(0, cargo).uniqueResult();
 	}
 
 }

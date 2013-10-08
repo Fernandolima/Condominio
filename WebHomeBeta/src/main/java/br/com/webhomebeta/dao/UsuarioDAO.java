@@ -17,6 +17,8 @@ public interface UsuarioDAO {
 		  public Usuario getById(int id);
 		  public void evictCache();
 		  public Integer getRowCount(boolean b);
+		  public void update(int id, boolean b);
+		  public Usuario getByCargo(String cargo);
 		  
 	}
 

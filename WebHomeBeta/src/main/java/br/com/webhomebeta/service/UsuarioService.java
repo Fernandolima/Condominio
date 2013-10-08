@@ -49,4 +49,12 @@ public class UsuarioService {
 	public void evitcCache(){
 		dao.evictCache();
 	}
+	
+	public void update(int id, boolean b){
+		dao.update(id, b);
+	}
+	
+	public Usuario getByCargo(String cargo){
+		return dao.getByCargo(cargo);
+	}
 }
