@@ -50,8 +50,9 @@ public class EspacoCondominioController {
 			BindingResult result) {
 		// vare a lista e adiciona os dados do espaço.
 		for (String novoEespaco : bean.getListEspaco()) {
-			EspacoCondominio espacoCondominio = new EspacoCondominio(novoEespaco, getUsuario().getNome());
-
+			// split divide a string em pedaços
+			String pedaco[] = novoEespaco.split(",");
+			EspacoCondominio espacoCondominio = new EspacoCondominio( pedaco[0], getUsuario().getNome(), pedaco[1]);
 			condominioServe.save(espacoCondominio);
 
 		}

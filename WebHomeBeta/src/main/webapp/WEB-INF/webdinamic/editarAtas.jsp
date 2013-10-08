@@ -34,7 +34,7 @@
 	<body id="cadastrar-atasView">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
+				<h1><a href="../admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
 					<span>|</span>
@@ -66,7 +66,7 @@
 							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						
-						<a href="admin/validarMoradores" class="item-menu">Morador</a>
+						<a href="validarMoradores" class="item-menu">Morador</a>
 						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
@@ -75,11 +75,11 @@
 						<form:form modelAttribute="editar" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
 							<div id="contentFrm">
 								<form:label for="tituloAta" path="titulo">Título:</form:label>
-								<form:input type="text" id="tituloAta" value="teste" path="titulo" autocomplete="off" class="${(editar.titulo) ? '' : 'error'}" />
-								
+								<form:input type="text" id="tituloAta" path="titulo" autocomplete="off" class="${(editar.titulo) ? '' : 'error'}" />
 								
 								<div class="elInput">
 									<textarea class="ckeditor" cols="80" id="editor1" name="atas" rows="10" class="${(editar.atas) ? '' : 'error'}">
+										<c:out value="${editar.atas}"/>
 									</textarea>
 								</div>
 								
@@ -89,8 +89,8 @@
 								</div>
 								
 								<div class="elInput">
-									<form:label for="numAp" path="dataCriacao">Data:</form:label>
-									<form:input type="text" id="dataAssembleia" path="dataCriacao" autocomplete="off" class="inputBloco" />
+									<form:label for="numAp" path="dataFormat">Data:</form:label>
+									<form:input type="text" id="dataAssembleia" path="dataFormat" autocomplete="off" class="inputBloco" />
 								</div>
 							</div>
 							<input type="submit" id="btSubmitBlocos" class="btSubmit" value="Enviar" />

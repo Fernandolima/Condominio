@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,9 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.CadastroCondominioControllerBean;
 import br.com.webhomebeta.entity.DescricaoCondominio;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.json.JsonBlocos;
 import br.com.webhomebeta.service.CadastroCondominioService;
+import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.validacao.ValidatorDescricaoCondominio;
 
 @Controller
@@ -31,18 +37,41 @@ public class CadastroCondominioController {
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio();
 
 	private DescricaoCondominio getDescricaoById;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	// mapeia a URL principal (cadastro) e retorna um novo
 	// UsuarioControllerBean() e uma lista de blocos
 
-	@RequestMapping(value = "cadastrarBlocos", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/cadastrarBlocos", method = RequestMethod.GET)
 	public ModelAndView CadastraBlocos(ModelMap model) {
 		List<DescricaoCondominio> blocos = cadastroCondominioService
 				.getDescricao();
 		model.put("listaBlocos", blocos);
 		model.put("bloco", new CadastroCondominioControllerBean());
+		model.put("usuario", getUsuario());
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
+	}
+	
+	
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 
 	// Pega o Objeto blco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
@@ -110,7 +139,7 @@ public class CadastroCondominioController {
 	}
 
 	// ResponseBody retorna um JSON.
-	@RequestMapping(value = "cadastro/salvarBloco", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/cadastro/salvarBloco", method = RequestMethod.POST)
 	public @ResponseBody
 	//Nome da Class do Json Criado JsonBlocos e depois o metodo.
 	JsonBlocos save(

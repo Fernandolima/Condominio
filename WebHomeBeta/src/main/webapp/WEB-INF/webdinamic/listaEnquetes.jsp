@@ -18,9 +18,9 @@
 	<body id="cadastrar-atasView">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
+				<h1><a href="../admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
-					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
+					<p>Ol&aacute;, <c:out value="${usuario.nome}"/><p>
 					<span>|</span>
 					<a href="home" title="Ver site">Ver site</a>
 					<span>|</span>
@@ -50,7 +50,7 @@
 							<li class="item-menu"><a href="enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
 						</ul>
 						
-						<a href="admin/validarMoradores" class="item-menu">Morador</a>
+						<a href="validarMoradores" class="item-menu">Morador</a>
 						<a href="publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">

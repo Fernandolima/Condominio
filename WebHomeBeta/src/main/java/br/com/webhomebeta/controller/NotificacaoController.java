@@ -74,8 +74,7 @@ public class NotificacaoController {
 		return "oi";
 	}
 	
-	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
-	// o ID da publicacao
+	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro o ID da publicacao
 	// e o tipo de notificacao
 
 	// Testando, ver com a tati

@@ -18,6 +18,12 @@ public class EspacoCondominio {
 
 	@Column(name = "ESPACOS")
 	private String espaco;
+	
+
+	@Column(name = "DESCRICAO")
+	private String descricao;
+	
+	
 
 	@Column(name = "ID_USER")
 	private int idUser;
@@ -25,11 +31,24 @@ public class EspacoCondominio {
 	@Column(name = "NOME")
 	private String nome;
 
-	public EspacoCondominio(String espaco, String nome) {
+	public EspacoCondominio(String espaco, String nome, String descricao ) {
 		super();
 		this.espaco = espaco;
 		this.nome = nome;
+		this.descricao = descricao;
+		
 	}
+	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 
 	public int getIdEspaco() {
 		return idEspaco;

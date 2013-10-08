@@ -40,6 +40,9 @@ public class AtasEntity  {
 	@Column(name = "ARQUIVO")
 	private String arquivo;
 
+	@Column(name = "NOME")
+	private String nome;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAtas;
@@ -70,7 +73,16 @@ public class AtasEntity  {
 	public int getIdAtas() {
 		return idAtas;
 	}
+	
 
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	/**
 	 * @return the arquivo

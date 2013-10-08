@@ -27,7 +27,6 @@ var BLOCOS = {
 		}
 		
 		htmlBloco = "";			
-		
 		$.ajax({
 			url: 'cadastro/salvarBloco',
 			type: 'POST',

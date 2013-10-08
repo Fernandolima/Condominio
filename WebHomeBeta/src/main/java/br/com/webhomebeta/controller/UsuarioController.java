@@ -6,7 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +25,7 @@ import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.validacao.Validator;
 
 @Controller
@@ -38,9 +43,30 @@ public class UsuarioController {
 	// mapeia a URL principal (cadastro) e retorna um novo
 	// UsuarioControllerBean()
 	@RequestMapping(value = "cadastro", method = RequestMethod.GET)
-	public ModelAndView cadastro() {
+	public ModelAndView cadastro(ModelMap model) {
+		model.put("usuario", getUsuario());
+		model.put("bean", new UsuarioControllerBean());
 		// Retorna a pagina cadastro.jsp com um usuario criado
-		return new ModelAndView("cadastro", "bean", new UsuarioControllerBean());
+		return new ModelAndView("cadastro", model);
+	}
+
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 
 	// Pega o Objeto usuario e sava na tabela USER no banco.
@@ -79,11 +105,10 @@ public class UsuarioController {
 			bean.getUsuarioTO().setBloco(null);
 			bean.getUsuarioTO().setAp(null);
 			bean.getUsuarioTO().setCargo(null);
-			
-			Perfil perfil = new Perfil("","","", 0, "", usuario.getNome(), "/WebHomeBeta/img/anonimos.jpg");
+
+			Perfil perfil = new Perfil("", "", "", 0, "", usuario.getNome(),
+					"/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
-			
-			emailServico.emailNovoMorador(usuario);
 
 			return new ModelAndView("cadastro", "bean", bean);
 		}
@@ -122,19 +147,19 @@ public class UsuarioController {
 			bean.setValidEmail(false);
 		else
 			bean.setValidEmail(true);
-		
-		if(!validator.isValidApartamento(bean.getUsuarioTO().getAp()))
+
+		if (!validator.isValidApartamento(bean.getUsuarioTO().getAp()))
 			bean.setValidApartamento(false);
 		else
 			bean.setValidApartamento(true);
-		
-//		for (Usuario user : usuarioService.getUsuario()) {
-//			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
-//				bean.setValidBloco(false);
-//			}else{
-//				bean.setValidBloco(true);
-//			}
-//		}
+
+		// for (Usuario user : usuarioService.getUsuario()) {
+		// if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
+		// bean.setValidBloco(false);
+		// }else{
+		// bean.setValidBloco(true);
+		// }
+		// }
 		// recebe uma lista do banco com todos os usuarios e verifica se o email
 		// digitado ja existe no banco
 		for (Usuario user : usuarioService.getUsuario()) {

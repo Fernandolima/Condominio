@@ -47,7 +47,7 @@ public class AtasImp implements AtasDao {
 	@Transactional
 	public List<AtasEntity> getAtas() {
 		Query q = factory.getCurrentSession()
-				.createSQLQuery("SELECT  * FROM [dbo].[ATAS] ")
+				.createSQLQuery("SELECT  * FROM [dbo].[ATAS] ORDER BY [DATA_FORMAT] DESC ")
 				.addEntity(AtasEntity.class);
 		return q.list();
 

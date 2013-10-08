@@ -6,6 +6,7 @@ import java.util.Date;
 public class EspacoCondominioTo {
 
 	private String data;
+	private String descricao;
 	private String novoEspaco;
 	private int idUser;
 	private String nome;
@@ -52,6 +53,15 @@ public class EspacoCondominioTo {
 	 */
 	public ArrayList<String> getEspaco() {
 		return espaco;
+	}
+
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	/**

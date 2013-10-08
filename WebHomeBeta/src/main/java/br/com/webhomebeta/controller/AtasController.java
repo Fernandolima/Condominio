@@ -50,40 +50,47 @@ public class AtasController {
 	private ValidadorAtas validadorAtas = new ValidadorAtas();
 
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
-	@RequestMapping(value = "atas", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/atas", method = RequestMethod.GET)
 	public ModelAndView Atas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
-		
-		// beanUsuarios.getFileData();
+
+		model.put("listaAtas", atas);
+		model.put("usuario", getUsuario());
+		model.put("bean", uploadArquivobeanUsuarios);
+		return new ModelAndView("atas", model);
+
+	}
+
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context instanceof SecurityContext) {
 			// Pega as informacoes da autenticacao
 			Authentication authentication = context.getAuthentication();
 			if (authentication instanceof Authentication) {
 				// Pega o usuario que logou
-				uploadArquivobeanUsuarios.setUsuario(usuarioService
+				usuario = usuarioService
 						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername()));
+								.getPrincipal()).getUsername());
 
 			}
 		}
-		model.put("listaAtas", atas);
-		model.put("bean", uploadArquivobeanUsuarios);
-		return new ModelAndView("atas", model);
 
+		return usuario;
 	}
 
 	// Tela de Listar Atas
-	@RequestMapping(value = "listaAtas", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/listaAtas", method = RequestMethod.GET)
 	public ModelAndView ListAtas(ModelMap model) {
 		List<AtasEntity> atas = atasService.getList();
-
+		model.put("usuario", getUsuario());
 		model.put("listaAtas", atas);
 		return new ModelAndView("listaAtas", model);
 
 	}
 
-	@RequestMapping(value = "atas/addArquivos", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/atas/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public String AtasArquivos(
 			@ModelAttribute("bean") final UploadArquivosAtasControllerBean bean,
@@ -127,15 +134,16 @@ public class AtasController {
 		}
 	}
 
-	@RequestMapping(value = "atas/id={id}", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/atas/id={id}", method = RequestMethod.GET)
 	public ModelAndView update(@PathVariable("id") int id, String ata) {
 		AtasEntity atasEntity = atasService.getidAtas(id);
 		return new ModelAndView("editarAtas", "editar", atasEntity);
 
 	}
 
-	@RequestMapping(value = "updateAtas", method = RequestMethod.POST)
-	public String updateAtas(@ModelAttribute("editar") AtasEntity atasEntity, BindingResult result) {
+	@RequestMapping(value = "admin/updateAtas", method = RequestMethod.POST)
+	public String updateAtas(@ModelAttribute("editar") AtasEntity atasEntity,
+			BindingResult result) {
 		atasService.updateAtas(atasEntity.getIdAtas(), atasEntity.getAtas());
 		return "redirect:/listaAtas";
 

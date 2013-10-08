@@ -39,7 +39,7 @@
 					<span>|</span>
 					<a href="perfil">Configuracoes</a>
 					<span>|</span>
-					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
+					<p class="name-user-connected"><c:out value="${usuario.nome}"></c:out><p>					
 				</div>
 			</div>
 		</header>

@@ -5,7 +5,7 @@ import java.util.Date;
 import br.com.webhomebeta.entity.Usuario;
 
 public class AtasTo {
-
+	private String nome;
 	private int idAtas;
 	private String titulo;
 	private Date dataCriacao;
@@ -13,6 +13,15 @@ public class AtasTo {
 	private String arquivo;
 	private String dataFormat;
 	private Usuario usuarioAtas;
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	/**
 	 * @return the idAtas
