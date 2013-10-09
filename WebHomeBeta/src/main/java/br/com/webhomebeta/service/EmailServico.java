@@ -31,7 +31,7 @@ public class EmailServico {
 	private VelocityEngine velocityEngine;
 	
 	private static final String TEMPLATE = "template.vm";
-	private static final String TEMPLATE_SENHA = "templateSenha.vm";
+	private static final String TEMPLATE_ESQUECI_SENHA = "templateSenha.vm";
 	private static final String TEMPLATE_USUARIO_NAO_ACEITO = "templateUsuarioNaoAceito.vm";
 	private static final String TEMPLATE_USUARIO_ACEITO = "templateUsuarioAceito.vm";
 	private static final String TEMPLATE_NOVO_USUARIO = "templateNovoUsuario.vm";
@@ -109,6 +109,29 @@ public class EmailServico {
 		};
 		this.mailSender.send(preparator);
 	}
+	
+	public void emailAlteracaoSenha(final UsuarioTO usuario) {
+
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(usuario.getEmail());
+				message.setFrom(FROM);
+				message.setSubject(SUBJECT_MORADOR_ACEITO);
+				// passando os parâmetros para o template
+				Map<String, Object> model = new HashMap<String, Object>();
+				model.put("nome", usuario.getNome());
+
+				@SuppressWarnings("deprecation")
+				String text = VelocityEngineUtils.mergeTemplateIntoString(
+						velocityEngine, TEMPLATE_USUARIO_ACEITO, model);
+				message.setText(text, true);
+			}
+		};
+		this.mailSender.send(preparator);
+	}
+	
 	public JavaMailSender getMailSender() {
 		return mailSender;
 	}
@@ -134,7 +157,7 @@ public class EmailServico {
 	}
 
 	public static String getTemplateSenha() {
-		return TEMPLATE_SENHA;
+		return TEMPLATE_ESQUECI_SENHA;
 	}
 
 	public static String getTemplateUsuarioNaoAceito() {

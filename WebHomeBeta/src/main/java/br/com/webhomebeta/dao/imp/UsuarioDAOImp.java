@@ -138,4 +138,13 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				.setString(0, cargo).uniqueResult();
 	}
 
+	@Override
+	@Transactional
+	public void update(String senha, int idUser) {
+
+		factory.getCurrentSession().createSQLQuery("exec [dbo].[] ? ?")
+				.setString(0, senha).setInteger(1, idUser).executeUpdate();
+
+	}
+
 }

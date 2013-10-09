@@ -1,15 +1,29 @@
 package br.com.webhomebeta.controller;
 
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.annotations.MetaValue;
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Method;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,16 +35,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.PerfilControllerBean;
+import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.FileData;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.handler.ImageHandler;
+import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PerfilService;
+import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.PerfilTO;
@@ -39,41 +58,79 @@ import br.com.webhomebeta.to.PerfilTO;
 public class PerfilController {
 
 	@Autowired
+	private ServletContext context;
+	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private PerfilControllerBean perfilControllerBean;
 	@Autowired
 	private PerfilService perfilService;
+	@Autowired
+	private UploadControllerBean uploadControllerBean;
+	@Autowired
+	private ComentarioService comentarioService;
+	@Autowired
+	private PublicacaoService publicacaoService;
+	@Autowired
+	private ImageHandler imageHandler;
 
 	private FileData fileData;
 
 	@RequestMapping(value = "perfil", method = RequestMethod.GET)
 	public ModelAndView visualizarPerfil(ModelMap model) {
-		model.put("usuario", getUsuario());
 
-		if (getPerfilTO() == null)
+		if (getPerfilTO() == null) {
 			model.put("perfilControllerBean", perfilControllerBean);
-		else {
+			model.put("uploadControllerBean", uploadControllerBean);
+		} else {
 			perfilControllerBean.setPerfilTO(getPerfilTO());
 			model.put("perfilControllerBean", perfilControllerBean);
+			model.put("uploadControllerBean", uploadControllerBean);
 		}
 
 		return new ModelAndView("perfil", model);
 	}
-	
-	@RequestMapping(value ="/perfil/id={id}")
-	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id){
-		if(id > 0){
-		Perfil p = perfilService.get(id);
-		return new ModelAndView("perfilUsuario", "perfil", p);
-		}else{
+
+	// Upload do PERFIL
+	@Async
+	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
+	public @ResponseBody
+	String upload(
+			@ModelAttribute("uploadControllerBean") UploadControllerBean uploadControllerBean,
+			BindingResult result) {
+		String caminho = null;
+		// usado para passar o MultipartFIle para o metodo crop
+		this.uploadControllerBean = uploadControllerBean;
+
+		MultipartFile file = uploadControllerBean.getFileData();
+		caminho = imageHandler.getOriginalImagemResized(file, getUsuario());
+
+		return caminho;
+	}
+
+	@RequestMapping(value = "/perfil?id={id}")
+	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id) {
+		if (id > 0) {
+			Perfil p = perfilService.get(id);
+			return new ModelAndView("perfilUsuario", "perfil", p);
+		} else {
 			return new ModelAndView("perfilNaoExiste");
 		}
 	}
-	
-	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
+
+	@RequestMapping(value = "cropAndUpload", method = RequestMethod.POST)
+	public void cropImage(@RequestParam("x1") int x1,
+			@RequestParam("y1") int y1, @RequestParam("w") int w,
+			@RequestParam("h") int h) {
+		
+			imageHandler.cropResizedImage(uploadControllerBean.getFileData(), getUsuario(), x1, y1, w, h);
+		
+	}
+
+	// Possivel utilizacao para o album de fotos! 2_@@_@_@_@_
+	@RequestMapping(value = "perfil/uploadImagens", method = RequestMethod.POST)
 	public @ResponseBody
-	LinkedList<FileData> uploadFoto(MultipartHttpServletRequest request,
+	LinkedList<FileData> uploadFotos(MultipartHttpServletRequest request,
 			HttpServletResponse response) {
 		Iterator<String> itr = request.getFileNames();
 		MultipartFile mpf = null;
@@ -97,7 +154,7 @@ public class PerfilController {
 
 			try {
 				fileData.setBytes(mpf.getBytes());
-				
+
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(
 						"C:/imgs/" + mpf.getOriginalFilename()));
 
@@ -174,4 +231,6 @@ public class PerfilController {
 
 		return usuario;
 	}
+
+
 }
