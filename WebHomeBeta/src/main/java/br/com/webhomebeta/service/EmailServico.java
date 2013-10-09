@@ -55,7 +55,7 @@ public class EmailServico {
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", u.getNome());
 				model.put("nomeMorador", usuario.getNome());
-				model.put("link", "/WebHomeBeta/admin/validarMoradores");
+				model.put("link", "http://localhost:8080/WebHomeBeta/admin/validarMoradores");
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
 						velocityEngine, TEMPLATE_NOVO_USUARIO, model);
