@@ -12,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.UsuarioTO;
 
 @Service("emailServico")
@@ -122,7 +126,9 @@ public class EmailServico {
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
-
+				model.put("senha",usuario.getSenha());
+				model.put("link", "http://localhost:8080/WebHomeBeta");
+				usuarioService.update(getUsuario().getIdUser(), usuario.getSenha());
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
 						velocityEngine, TEMPLATE_USUARIO_ACEITO, model);
@@ -130,6 +136,25 @@ public class EmailServico {
 			}
 		};
 		this.mailSender.send(preparator);
+	}
+	
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 	
 	public JavaMailSender getMailSender() {

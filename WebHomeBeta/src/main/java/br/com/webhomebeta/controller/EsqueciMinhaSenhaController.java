@@ -42,20 +42,22 @@ public class EsqueciMinhaSenhaController {
 		for (Usuario user : usuarios) {
 			// se existir envia email de perda de senha
 			if (user.getEmail().equals(usuarioTO.getEmail())) {
-				emailServico.emailNovoMorador(user);
+				ModelAndView mv = new ModelAndView("pagina de confirmacao de email enviado");
+				// adiciona ao model a variavel validEmail
+				UUID uuid = UUID.randomUUID();
+				String myRandom = uuid.toString();
+				String senhaGerada = myRandom.substring(0, 6);
+				usuarioTO.setSenha(senhaGerada);
+				emailServico.emailAlteracaoSenha(usuarioTO);
+				return mv;
 			} else {
 				validEmail = false;
 			}
 		}
-		ModelAndView mv = new ModelAndView("esqueciMinhaSenha");
-		// adiciona ao model a variavel validEmail
-		mv.addObject("validEmail", validEmail);
-		UUID uuid = UUID.randomUUID();
-		String myRandom = uuid.toString();
-		String senhaGerada = myRandom.substring(0, 6);
-		return mv;
-
 		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("isValidEmail",validEmail);
+		return new ModelAndView("esqueciMinhaSenha", "usuario", new UsuarioTO());
 
 	}
 

@@ -31,11 +31,12 @@ public class ImageHandler {
 	@Autowired
 	private PublicacaoService publicacaoService;
 
-	public ImagePathAndSize getOriginalImagemResized(MultipartFile file, Usuario usuario) {
+	public ImagePathAndSize getOriginalImagemResized(MultipartFile file,
+			Usuario usuario) {
 
 		// tamanho que a imagem ira ficar
-		int width = 1024;
-		int height = 1024;
+		int width = 700;
+		int height = 700;
 
 		File fileToBrowser = null;
 
@@ -64,25 +65,46 @@ public class ImageHandler {
 					&& originalImage.getHeight() < height) {
 
 				fileToBrowser = new File(resultOriginal);
+
 				if (file.getOriginalFilename().endsWith("jpg"))
 					ImageIO.write(originalImage, "JPEG", fileToBrowser);
 				if (file.getOriginalFilename().endsWith("png"))
 					ImageIO.write(originalImage, "PNG", fileToBrowser);
 
 			} else if (originalImage.getWidth() > originalImage.getHeight()) {
-				float percent = (1024f / originalImage.getWidth()) * 100;
+				float percent = (700f / originalImage.getWidth()) * 100;
 				height = ((originalImage.getHeight() * (int) percent) - originalImage
 						.getHeight()) / 100;
 
+				rescaledImage = Scalr.resize(originalImage,
+						Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+						height, Scalr.OP_ANTIALIAS);
+
+				fileToBrowser = new File(resultOriginal);
+
+				if (file.getOriginalFilename().endsWith("jpg"))
+					ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+				if (file.getOriginalFilename().endsWith("png"))
+					ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
 			} else {
-				float percent = (1024f / originalImage.getHeight()) * 100;
+				float percent = (700f / originalImage.getHeight()) * 100;
 				width = ((originalImage.getWidth() * (int) percent) - originalImage
 						.getWidth()) / 100;
 
+				rescaledImage = Scalr.resize(originalImage,
+						Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+						height, Scalr.OP_ANTIALIAS);
+
+				fileToBrowser = new File(resultOriginal);
+
+				if (file.getOriginalFilename().endsWith("jpg"))
+					ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+				if (file.getOriginalFilename().endsWith("png"))
+					ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
 			}
 
-			rescaledImage = Scalr.resize(originalImage, Method.ULTRA_QUALITY,
-					Scalr.Mode.AUTOMATIC, width, height, Scalr.OP_ANTIALIAS);
 			// salva imagem original
 
 		} catch (Exception e) {
@@ -92,7 +114,7 @@ public class ImageHandler {
 		return new ImagePathAndSize(imagemOriginal, width, height);
 	}
 
-	public void cropResizedImage(MultipartFile file, Usuario usuario, int x,
+	public String cropResizedImage(MultipartFile file, Usuario usuario, int x,
 			int y, int w, int h) {
 		File fileToDisk = null;
 		File fileToDiskRedimensionada = null;
@@ -115,7 +137,8 @@ public class ImageHandler {
 
 		try {
 
-			BufferedImage cropedImage = Scalr.crop(rescaledImage, x, y, w, h, Scalr.OP_ANTIALIAS);
+			BufferedImage cropedImage = Scalr.crop(rescaledImage, x, y, w, h,
+					Scalr.OP_ANTIALIAS);
 
 			caminho = new File(caminhoPasta);
 			if (!caminho.isDirectory()) {
@@ -126,6 +149,7 @@ public class ImageHandler {
 
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDisk = new File(resultPerfil);
+				
 				ImageIO.write(cropedImage, "JPEG", fileToDisk);
 			}
 			if (file.getOriginalFilename().endsWith("png")) {
@@ -137,10 +161,10 @@ public class ImageHandler {
 			usuarioService.update(usuario);
 
 			// redimensiona imagem para o tamanho para 43x43
-			
-			BufferedImage imagemRedimensionada43x43 = Scalr.resize(
-					cropedImage, Scalr.Method.ULTRA_QUALITY,
-					Scalr.Mode.FIT_EXACT, 43, 43, Scalr.OP_ANTIALIAS);
+
+			BufferedImage imagemRedimensionada43x43 = Scalr.resize(cropedImage,
+					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43,
+					Scalr.OP_ANTIALIAS);
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
 				ImageIO.write(imagemRedimensionada43x43, "JPEG",
@@ -159,6 +183,8 @@ public class ImageHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return imagemPerfil;
 	}
 
 	public BufferedImage getRescaledImage() {

@@ -1,26 +1,13 @@
 package br.com.webhomebeta.controller;
 
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.annotations.MetaValue;
-import org.imgscalr.Scalr;
-import org.imgscalr.Scalr.Method;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -118,14 +105,15 @@ public class PerfilController {
 			return new ModelAndView("perfilNaoExiste");
 		}
 	}
-
+	
 	@RequestMapping(value = "cropAndUpload", method = RequestMethod.POST)
-	public void cropImage(@RequestParam("x1") int x1,
+	public @ResponseBody String cropImage(@RequestParam("x1") int x1,
 			@RequestParam("y1") int y1, @RequestParam("w") int w,
 			@RequestParam("h") int h) {
 		
-			imageHandler.cropResizedImage(uploadControllerBean.getFileData(), getUsuario(), x1, y1, w, h);
-		
+			
+			
+		return imageHandler.cropResizedImage(uploadControllerBean.getFileData(), getUsuario(), x1, y1, w, h);
 	}
 
 	// Possivel utilizacao para o album de fotos! 2_@@_@_@_@_

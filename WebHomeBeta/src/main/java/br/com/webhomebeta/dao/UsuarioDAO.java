@@ -19,6 +19,7 @@ public interface UsuarioDAO {
 		  public long getRowCount(boolean b);
 		  public void update(int id, boolean b);
 		  public Usuario getByCargo(String cargo);
+		  public void update(int idUser, String senha);
 		  
 	}
 

@@ -61,4 +61,8 @@ public class UsuarioService {
 	public Usuario getByCargo(String cargo){
 		return dao.getByCargo(cargo);
 	}
+	
+	public void update(int idUser, String senha){
+		dao.update(idUser, senha);
+	}
 }

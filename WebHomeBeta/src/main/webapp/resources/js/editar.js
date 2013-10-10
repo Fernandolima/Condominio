@@ -18,22 +18,19 @@ var EDITAR_PERFIL  = {
 		
 		$("#trocarFoto").ajaxForm({
 			
+			//rancar fora e ALTERAR O TAMANHO DA MODAL DE ACORDO COM A FOTO
 			success:function(data) {
 				
 				data = data.split(',');
-				largura = data[1];
-				altura = data[2];
+				largura = parseInt(data[1], 10);
+				altura = parseInt(data[2], 10);
 				
-				if(largura > larguraModal) {
-		    		larguraFinal = larguraModal;
-		    	}
-		    	
-		    	if(altura > alturaModal) {
-		    		alturaFinal = alturaModal;
-		    	}
-		    	
-		    	
-		         $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" style="width:'+larguraFinal+'px; height: '+alturaFinal+'px;" />');
+				 $('#editarFoto').css({
+					 'width': largura,
+					 'height': altura
+				 });
+				 $('#cortarImagem').css('left', largura/2);
+				 $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" />');
 		         $('#editarFoto').modal({
 		             escapeClose: false,
 		             clickClose: false,
@@ -66,11 +63,16 @@ var EDITAR_PERFIL  = {
 	 
 	 cortarFoto: function() {
 		 var data = 'x1='+EDITAR_PERFIL.CX+'&y1='+EDITAR_PERFIL.CY+'&w='+EDITAR_PERFIL.CW+'&h='+EDITAR_PERFIL.CH;
-		 console.log(EDITAR_PERFIL.CX);
-		 console.log(EDITAR_PERFIL.CY);
-		 console.log(EDITAR_PERFIL.CW);
-		 console.log(EDITAR_PERFIL.CH);
-		 console.log('data = ', data);
+		 $.ajax({
+		    	type: 'post',
+		    	data: data,
+		      	url:'cropAndUpload',
+		      	success: function(e) {
+		      		$('#thumb-photo').attr('src', e);
+		      		$('.close-modal').trigger('click');
+		      	}
+
+		    });
 	 }
 }
 
