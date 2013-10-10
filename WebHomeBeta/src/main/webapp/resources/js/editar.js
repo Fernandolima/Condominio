@@ -11,15 +11,20 @@ var EDITAR_PERFIL  = {
 		
 		var larguraModal = 700,
 			alturaModal = 500,
-			largura = 575,
-			altura = 676,
+			largura = '',
+			altura = '',
 			larguraFinal = '',
 			alturaFinal = '';
 		
 		$("#trocarFoto").ajaxForm({
-		    success:function(data) {
-		        
-		    	if(largura > larguraModal) {
+			
+			success:function(data) {
+				
+				data = data.split(',');
+				largura = data[1];
+				altura = data[2];
+				
+				if(largura > larguraModal) {
 		    		larguraFinal = larguraModal;
 		    	}
 		    	
@@ -27,7 +32,8 @@ var EDITAR_PERFIL  = {
 		    		alturaFinal = alturaModal;
 		    	}
 		    	
-		         $('#container-foto').html('<img src="'+data+'" id="imageUser" style="width:'+larguraFinal+'px; height: '+alturaFinal+'px;" />');
+		    	
+		         $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" style="width:'+larguraFinal+'px; height: '+alturaFinal+'px;" />');
 		         $('#editarFoto').modal({
 		             escapeClose: false,
 		             clickClose: false,
