@@ -44,6 +44,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.PerfilControllerBean;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.FileData;
+import br.com.webhomebeta.entity.ImagePathAndSize;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.handler.ImageHandler;
@@ -103,9 +104,9 @@ public class PerfilController {
 		this.uploadControllerBean = uploadControllerBean;
 
 		MultipartFile file = uploadControllerBean.getFileData();
-		caminho = imageHandler.getOriginalImagemResized(file, getUsuario());
+		ImagePathAndSize ipz = imageHandler.getOriginalImagemResized(file, getUsuario());
 
-		return caminho;
+		return ipz.getUrl()+","+ipz.getWidth()+","+ipz.getHeight();
 	}
 
 	@RequestMapping(value = "/perfil?id={id}")
