@@ -73,7 +73,6 @@
 								<li><a href="#">Reserva de espa&ccedil;os</a></li>
 								<li class="last-link"><a href="#">Usu&aacute;rios</a></li>
 							</ul>
-
 						</div>
 					</div>
 				</div>
