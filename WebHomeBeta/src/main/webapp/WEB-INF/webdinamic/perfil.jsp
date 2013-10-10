@@ -1,19 +1,23 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ page session="false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
-		<link href="http://fonts.googleapis.com/css?family=Chela+One" rel='stylesheet' type='text/css' />
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery.modal.css"/>"/>
+		<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
 		
 		<script type="text/javascript">
 			function Validate() {
@@ -39,17 +43,26 @@
 					<span>|</span>
 					<a href="perfil">Configuracoes</a>
 					<span>|</span>
-					<p class="name-user-connected"><c:out value="${usuario.nome}"></c:out><p>					
+					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
 				</div>
 			</div>
 		</header>
 		<section id="contentSite">	
+			
+			<!-- Modal HTML embedded directly into document -->
+		  	<div id="editarFoto" style="display:none;">
+		  		<div id="container-foto"></div>
+		  		<a href="#" id="cortarImagem">OK</a>
+		  	</div>
+		  	
 			<div id="main-site">			
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
 							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
-							<a href="#" id="alterarFoto">Alterar foto</a>
+							<form:form modelAttribute="uploadControllerBean" id="trocarFoto" action="perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
+								<form:input path="fileData" id="image" type="file" onchange="EDITAR_PERFIL.alterarFoto(this)" />
+							</form:form>
 						</div>
 						<div id="nav-user">
 							<h3>Categoria</h3>
@@ -68,19 +81,10 @@
 					<div id="rigth-content">
 						<div id="perfil-user">
 							<div id="content-titulo">
-								<h2>Editar perfil</h2>
-								
-								<div id="editarFoto">
-									<h2>Upload de foto</h2>
-									
-									<div id="main-upload">
-										<form enctype="multipart/form-data">
-											<input id="instanceValue" multiple="true" name="file" type="file">
-											<input type="button" id="btn-upload" value="Upload">
-										</form>
-									</div>
-								</div>
-								
+								<h2>Editar Perfil</h2>
+							</div>
+							<div id="alterar-senha">
+								<h2>Alterar Senha</h2>
 							</div>
 						</div>
 					</div>
@@ -90,6 +94,5 @@
 		<!-- <footer id="footer-site">
 		</footer> -->
 		<script src="<c:url value = "/js/editar.js"/>" type="text/javascript"></script>
-		<script type="text/javascript" src="<c:url value = "/js/upload.js"/>"></script>
 	</body>
 </html>
