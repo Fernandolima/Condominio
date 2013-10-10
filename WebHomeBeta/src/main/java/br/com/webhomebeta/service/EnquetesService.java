@@ -36,8 +36,11 @@ public class EnquetesService {
 		return dao.get(idEnquete);
 	}
 	
-	public List<Enquetes> get(boolean b){
-		return dao.get(b);
+	public List<Enquetes> getListAtiva(boolean ativa){
+		return dao.getListAtiva(ativa);
 	}
-
+	
+	public void update(int quantidadeVotos, int idEnquete) {
+		dao.update(quantidadeVotos, idEnquete);
+	}
 }

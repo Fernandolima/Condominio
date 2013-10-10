@@ -54,9 +54,26 @@ public class Enquetes implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "enquetes", orphanRemoval = true)
 	private List<Opcao> opcao;
 
+	@Column(name = "TOTAL_VOTOS")
+	private int totalVotos;
+	
+	public Enquetes(){
+		
+	}
+	
+	public Enquetes(int totalVotos){
+		this.totalVotos = totalVotos;
+	}
 	
 	
-	
+	public int getTotalVotos() {
+		return totalVotos;
+	}
+
+	public void setTotalVotos(int totalVotos) {
+		this.totalVotos = totalVotos;
+	}
+
 	public boolean isAtiva() {
 		return isAtiva;
 	}

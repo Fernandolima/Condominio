@@ -53,16 +53,17 @@
 				<section id="content-admin">
 					<div id="statusMorador">
 						<span id="iconPeople"></span><h2>Moradores</h2>
-						<p>Você possui <b>20</b> cadastros para serem aprovados. <a href="admin/validarMoradores">Clique aqui para moderar</a><p>
+						<p>Você possui <b><c:out value="${validarMoradores}"></c:out></b> cadastros para serem aprovados. <a href="admin/validarMoradores">Clique aqui para moderar</a><p>
 					</div>
-					
+				<c:forEach items="${enquetes}" var="item">
 					<div id="statusEnquete">
 						<span id="iconEnquete"></span><h2>Enquete</h2>
-						<p><b>Enquete ativa no momento:</b> O que você acha do sistema de segurança do condomínio?<br/>
-						<b>Números de pessoas participando:</b> 35<p>
+						<p><b>Enquete ativa no momento:</b>${item.enquete}<br/>
+						<b>Números de pessoas participando:</b><p>
 						<div id="graficoEnquete" class="load">
 						</div>
 					</div>
+				</c:forEach>
 				</section>
 			</div>
 		</section>

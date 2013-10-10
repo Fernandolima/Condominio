@@ -42,6 +42,10 @@ public class UsuarioService {
 		dao.update(usuario);
 	}
 	
+	public long getRowCount(boolean b){
+		return dao.getRowCount(b);
+	}
+	
 	public Usuario getById(int id){
 		return dao.getById(id);
 	}

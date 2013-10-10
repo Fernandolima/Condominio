@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name = "[dbo].[OPCAO]")
 public class Opcao {
@@ -28,30 +29,31 @@ public class Opcao {
 	@Column(name = "OPCAO")
 	private String opcao;
 
-	
 	@Column(name = "QUAT_VOTOS")
 	private int quatVots;
-	
+
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENQUETE", nullable = false)
 	private Enquetes enquetes;
-	
+
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "opcao", orphanRemoval = true)
-	private Set<OpcaoVotada> opcaoVotadas = new  HashSet<>(0);
+	private Set<OpcaoVotada> opcaoVotadas = new HashSet<>(0);
 
-	public Opcao(){
-		
+	public Opcao() {
+
 	}
-	
-	public Opcao(String opcao, Enquetes enquetes){
+
+	public Opcao(int idOpcao) {
+		this.idOpcao = idOpcao;
+	}
+
+	public Opcao(String opcao, Enquetes enquetes) {
 		this.opcao = opcao;
 		this.enquetes = enquetes;
 	}
 
-
-	
 	public Enquetes getEnquetes() {
 		return enquetes;
 	}
@@ -66,7 +68,7 @@ public class Opcao {
 	public int getIdOpcao() {
 		return idOpcao;
 	}
-	
+
 	/**
 	 * @return the opcao
 	 */
@@ -82,22 +84,24 @@ public class Opcao {
 	}
 
 	/**
-	 * @param idOpcao the idOpcao to set
+	 * @param idOpcao
+	 *            the idOpcao to set
 	 */
 	public void setIdOpcao(int idOpcao) {
 		this.idOpcao = idOpcao;
 	}
 
 	/**
-	 * @param opcao the opcao to set
+	 * @param opcao
+	 *            the opcao to set
 	 */
 	public void setOpcao(String opcao) {
 		this.opcao = opcao;
 	}
 
-	
 	/**
-	 * @param quatVots the quatVots to set
+	 * @param quatVots
+	 *            the quatVots to set
 	 */
 	public void setQuatVots(int quatVots) {
 		this.quatVots = quatVots;

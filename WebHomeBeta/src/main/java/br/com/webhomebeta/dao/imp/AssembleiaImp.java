@@ -25,16 +25,6 @@ public class AssembleiaImp implements  AssembleiaDao {
 	}
 
 	@Transactional
-	public List<Assembleia> getAssembleia() {
-		String sql = "exe[dbo].[ASSEMBLEIA]";
-		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(AtasEntity.class);
-		@SuppressWarnings("unchecked")
-		List<Assembleia> assembleia = q.list();
-		return assembleia;
-
-	}
-
 	public Assembleia save(Assembleia assembleia) {
 		factory.getCurrentSession().save(assembleia);
 		return assembleia;
@@ -58,10 +48,15 @@ public class AssembleiaImp implements  AssembleiaDao {
 
 	}
 
-	@Override
+	@Transactional
 	public List<Assembleia> getAssembleias() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "exe[dbo].[ASSEMBLEIA]";
+		Query q = factory.getCurrentSession().createSQLQuery(sql)
+				.addEntity(AtasEntity.class);
+		@SuppressWarnings("unchecked")
+		List<Assembleia> assembleia = q.list();
+		return assembleia;
 	}
+
 
 }

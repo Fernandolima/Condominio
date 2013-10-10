@@ -24,18 +24,25 @@ public class Assembleia {
 	@Column(name = "ASSEMBLEIA")
 	private String assembleia;
 
-	@Column(name = "ARQUIVO")
-	private String arquivo;
-	
 	@Column(name = "TITULO")
 	private String titulo;
-	
+
 	@Column(name = "DATA_ASSEMBLEIA")
 	private Date dataAssembleia;
 	
+	@Column(name = "ASSEMBLEIA_ATIVA")
+	private boolean assembleiaAtiva;
+
 	
-	
-	
+
+	public boolean isAssembleiaAtiva() {
+		return assembleiaAtiva;
+	}
+
+	public void setAssembleiaAtiva(boolean assembleiaAtiva) {
+		this.assembleiaAtiva = assembleiaAtiva;
+	}
+
 	/**
 	 * @return the titulo
 	 */
@@ -51,14 +58,16 @@ public class Assembleia {
 	}
 
 	/**
-	 * @param titulo the titulo to set
+	 * @param titulo
+	 *            the titulo to set
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
 	/**
-	 * @param dataAssembleia the dataAssembleia to set
+	 * @param dataAssembleia
+	 *            the dataAssembleia to set
 	 */
 	public void setDataAssembleia(Date dataAssembleia) {
 		this.dataAssembleia = dataAssembleia;
@@ -67,17 +76,6 @@ public class Assembleia {
 	/**
 	 * @return the arquivo
 	 */
-	public String getArquivo() {
-		return arquivo;
-	}
-
-	/**
-	 * @param arquivo the arquivo to set
-	 */
-	public void setArquivo(String arquivo) {
-		this.arquivo = arquivo;
-	}
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAssebleia;
@@ -93,7 +91,8 @@ public class Assembleia {
 	}
 
 	/**
-	 * @param assembleia the assembleia to set
+	 * @param assembleia
+	 *            the assembleia to set
 	 */
 	public void setAssembleia(String assembleia) {
 		this.assembleia = assembleia;
@@ -106,7 +105,6 @@ public class Assembleia {
 		return idAssembleia;
 	}
 
-	
 	/**
 	 * @return the usuarioAssebleia
 	 */
@@ -122,26 +120,27 @@ public class Assembleia {
 	}
 
 	/**
-	 * @param idAssembleia the idAssembleia to set
+	 * @param idAssembleia
+	 *            the idAssembleia to set
 	 */
 	public void setIdAssembleia(int idAssembleia) {
 		this.idAssembleia = idAssembleia;
 	}
 
 	/**
-	 * @param usuarioAssebleia the usuarioAssebleia to set
+	 * @param usuarioAssebleia
+	 *            the usuarioAssebleia to set
 	 */
 	public void setUsuarioAssebleia(Usuario usuarioAssebleia) {
 		this.usuarioAssebleia = usuarioAssebleia;
 	}
 
 	/**
-	 * @param dataCriacao the dataCriacao to set
+	 * @param dataCriacao
+	 *            the dataCriacao to set
 	 */
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-
-
 
 }

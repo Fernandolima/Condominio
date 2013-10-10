@@ -42,25 +42,23 @@ public class AdministradorController {
 		
 		int aux = 0;
 		
-		List<Integer> quantidadeVotos = new ArrayList<>();
 		
-		List<Enquetes> enquetes = enquetesService.get(true);
 		
-		for(Enquetes enquete : enquetes){
-			for(Opcao opcao : enquete.getOpcao()){
-				aux += opcao.getQuatVots();
-			}
-			quantidadeVotos.add(aux);
-			aux = 0;
-		}
+		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
+		
+		
 		
 		bean.setUsuario(getUsuario());
+		
+		long validarModadores = usuarioService.getRowCount(false);
 		
 		model.put("enquetes", enquetes);
-		model.put("quantidadeVotos", quantidadeVotos);
+		
 		model.put("dadosUsuarioBean", bean);
 		model.put("usuario", getUsuario());
+		model.put("validarMoradores", validarModadores);
 		bean.setUsuario(getUsuario());
+		
 		
 		return new ModelAndView("admin", model);
 	}

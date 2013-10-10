@@ -8,10 +8,24 @@ public class AssembleiaTO {
 	private int idAssembleia;
 	private String assembleia;
 	private Usuario usuarioAssebleia;
-	private String arquivo;
 	private String titulo;
 	private Date dataAssembleia;
 	private Date dataCriacao;
+	private boolean assembleiaAtiva;
+	
+	
+	
+
+	public boolean isAssembleiaAtiva() {
+		return assembleiaAtiva;
+	}
+
+
+	public boolean setAssembleiaAtiva(boolean assembleiaAtiva) {
+		return this.assembleiaAtiva = assembleiaAtiva;
+	}
+
+
 	/**
 	 * @return the assembleia
 	 */
@@ -19,13 +33,7 @@ public class AssembleiaTO {
 		return assembleia;
 	}
 
-	/**
-	 * @return the arquivo
-	 */
-	public String getArquivo() {
-		return arquivo;
-	}
-
+	
 	/**
 	 * @return the titulo
 	 */
@@ -45,13 +53,6 @@ public class AssembleiaTO {
 	 */
 	public void setAssembleia(String assembleia) {
 		this.assembleia = assembleia;
-	}
-
-	/**
-	 * @param arquivo the arquivo to set
-	 */
-	public void setArquivo(String arquivo) {
-		this.arquivo = arquivo;
 	}
 
 	/**

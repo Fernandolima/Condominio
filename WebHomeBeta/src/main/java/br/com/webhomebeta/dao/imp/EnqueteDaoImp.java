@@ -52,9 +52,24 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<Enquetes> get(boolean b) {
+	public List<Enquetes> getListAtiva(boolean ativa) {
 		return factory.getCurrentSession()
 				.createQuery("from Enquetes e where e.isAtiva = ?")
-				.setBoolean(0, b).list();
+				.setBoolean(0, ativa).list();
+	}
+
+	@Transactional
+	public void update(int quantidadeVotos, int idEnquete) {
+		Enquetes enquetes = (Enquetes) factory
+				.getCurrentSession()
+				.createQuery(
+						"select new Enquetes(e.totalVotos) from Enquetes e where e.idEquete = ?")
+				.setInteger(0, idEnquete);
+
+		factory.getCurrentSession()
+				.createQuery(
+						"update Enquetes e set e.totalVotos = ? where e.idEquete = ?")
+				.setInteger(0, quantidadeVotos + enquetes.getTotalVotos())
+				.setInteger(1, idEnquete).executeUpdate();
 	}
 }

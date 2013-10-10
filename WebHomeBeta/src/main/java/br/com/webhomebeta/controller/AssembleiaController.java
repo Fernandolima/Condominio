@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -113,8 +112,6 @@ public class AssembleiaController {
 
 			assembleia = new Assembleia();
 			usuario.setNome(result);
-			assembleia.setArquivo("/WebHomeBeta/uploadedArquivosAssembleia/"
-					+ usuario.getIdUser() + "/" + file.getOriginalFilename());
 			assembleia.setAssembleia(bean.getAssembleiaTO().getAssembleia());
 			assembleia.setDataAssembleia((Date) bean.getAssembleiaTO()
 					.getDataAssembleia());
@@ -122,10 +119,10 @@ public class AssembleiaController {
 			assembleia.setTitulo(bean.getAssembleiaTO().getTitulo());
 			assembleia.setUsuarioAssebleia(bean.getAssembleiaTO()
 					.getUsuarioAssebleia());
+			//assembleiaService.getList();
 
 			AssembleiaTO assembleiaTO = new AssembleiaTO();
 
-			assembleiaTO.setArquivo(null);
 			assembleiaTO.setAssembleia(null);
 			assembleiaTO.setDataAssembleia(null);
 			assembleiaTO.setDataCriacao(null);
@@ -161,14 +158,6 @@ public class AssembleiaController {
 		}
 	}
 
-	@RequestMapping(value = "assembelia/editar", method = RequestMethod.POST)
-	public ModelAndView editar(@RequestParam("idAssembleia") int id,
-			BindingResult result, HttpServletRequest request) {
-		Assembleia descricaoAssembleia = assembleiaService.editar(id);
-		return new ModelAndView("inserirAtas/editar", "assembleia",
-				descricaoAssembleia);
-
-	}
 
 	@RequestMapping(value = "assembelia/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("assembleia") Assembleia assembleia,

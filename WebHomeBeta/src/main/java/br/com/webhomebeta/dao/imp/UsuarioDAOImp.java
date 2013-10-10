@@ -113,10 +113,10 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 	@Override
 	@Transactional
-	public Integer getRowCount(boolean b) {
-		return (Integer) factory.getCurrentSession()
+	public long getRowCount(boolean b) {
+		return (long) factory.getCurrentSession()
 				.createCriteria(Usuario.class)
-				.add(Restrictions.eq("STATUS", b))
+				.add(Restrictions.eq("status", b))
 				.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
@@ -136,15 +136,6 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		return (Usuario) factory.getCurrentSession()
 				.createQuery("from Usuario u where u.cargo = ?")
 				.setString(0, cargo).uniqueResult();
-	}
-
-	@Override
-	@Transactional
-	public void update(String senha, int idUser) {
-
-		factory.getCurrentSession().createSQLQuery("exec [dbo].[] ? ?")
-				.setString(0, senha).setInteger(1, idUser).executeUpdate();
-
 	}
 
 }

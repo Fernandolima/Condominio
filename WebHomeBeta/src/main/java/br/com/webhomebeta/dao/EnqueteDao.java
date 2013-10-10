@@ -14,11 +14,14 @@ public interface EnqueteDao {
 	public Enquetes delete(Enquetes enquetes);
 
 	public Enquetes update(Enquetes enquetes);
-
-	public Enquetes get(int idEnquete);
 	
-	public List<Enquetes> get(boolean b);
+	public Enquetes get(int idEnquete);
+		
+	public List<Enquetes> getListAtiva(boolean ativa);
 	
 	public List<Enquetes> getEnquetes();
+	
+	public void update(int quantidadeVotos, int idEnquete);
+	
 
 }

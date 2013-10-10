@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javassist.bytecode.Opcode;
+
+import org.apache.commons.collections.functors.IfClosure;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,11 +24,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.mail.handlers.message_rfc822;
+
 import br.com.webhomebeta.bean.EnquetesControllerBean;
 import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.entity.Opcao;
+import br.com.webhomebeta.entity.OpcaoVotada;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EnquetesService;
+import br.com.webhomebeta.service.OpcaoService;
 import br.com.webhomebeta.service.OpcaoVotadaService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -40,6 +47,8 @@ public class EnquetesController {
 	private EnquetesControllerBean enquetesControllerBean;
 	@Autowired
 	private OpcaoVotadaService opcaoVotadaService;
+	@Autowired
+	private OpcaoService opcaoService;
 
 	// mapeia a URL principal (Enquetes) e retorna um novo objeto
 	@RequestMapping(value = "admin/enquetes", method = RequestMethod.GET)
@@ -58,6 +67,14 @@ public class EnquetesController {
 		model.put("usuario", getUsuario());
 
 		return new ModelAndView("listaEnquetes", model);
+
+	}
+
+	@RequestMapping(value = "listaEnqutesAtivas", method = RequestMethod.GET)
+	public ModelAndView listaEnquete(ModelMap modelMap) {
+		modelMap.put("listaEnquete", enquetesService.getListAtiva(true));
+
+		return new ModelAndView("listaEnquetesAtiva", modelMap);
 
 	}
 
@@ -87,7 +104,19 @@ public class EnquetesController {
 
 	@RequestMapping(value = "computarVoto", method = RequestMethod.POST)
 	public @ResponseBody
-	String computarVoto() {
+	String computarVoto(@RequestParam("idUser") int idUser,
+			@RequestParam("idOpcao") int idOpcao,
+			@RequestParam("idEnquete") int idEnquete) {
+		OpcaoVotada opcaoVotada = new OpcaoVotada(new Opcao(idOpcao), idUser);
+		if (idUser == getUsuario().getIdUser()) {
+			opcaoVotadaService.save(opcaoVotada);
+
+			return "true";
+
+		}
+
+		opcaoService.update(1, idOpcao);
+		enquetesService.update(1, idEnquete);
 
 		return "true";
 	}
