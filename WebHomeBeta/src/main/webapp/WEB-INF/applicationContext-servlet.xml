@@ -238,9 +238,12 @@
 	<bean id="reservaService" class="br.com.webhomebeta.service.ReservaService"></bean>
 	<bean id="opcaoVotadaDAO" class="br.com.webhomebeta.dao.imp.OpcaoVotadaDAOImp"></bean>
 	<bean id="reservaDao" class="br.com.webhomebeta.dao.imp.ReservaDAOImp"></bean>
- <bean id="opcaoVotadaService" class="br.com.webhomebeta.service.OpcaoVotadaService"></bean>
- <bean id="opcaoService" class="br.com.webhomebeta.service.OpcaoService"></bean>
-<bean id="opcaoDAO" class="br.com.webhomebeta.dao.imp.OpcaoDAOImp"></bean>		
+ 	<bean id="opcaoVotadaService" class="br.com.webhomebeta.service.OpcaoVotadaService"></bean>
+ 	<bean id="opcaoService" class="br.com.webhomebeta.service.OpcaoService"></bean>
+	<bean id="opcaoDAO" class="br.com.webhomebeta.dao.imp.OpcaoDAOImp"></bean>		
+	<bean id="imageHandler" class = "br.com.webhomebeta.handler.ImageHandler" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
 
 
 </beans>
