@@ -13,6 +13,7 @@ import org.imgscalr.Scalr.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.webhomebeta.entity.ImagePathAndSize;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PublicacaoService;
@@ -30,7 +31,7 @@ public class ImageHandler {
 	@Autowired
 	private PublicacaoService publicacaoService;
 
-	public String getOriginalImagemResized(MultipartFile file, Usuario usuario) {
+	public ImagePathAndSize getOriginalImagemResized(MultipartFile file, Usuario usuario) {
 
 		// tamanho que a imagem ira ficar
 		int width = 1024;
@@ -88,7 +89,7 @@ public class ImageHandler {
 			e.printStackTrace();
 		}
 
-		return "{'url':" + imagemOriginal + ",'width':" + width + ",'height':" + height + "}";
+		return new ImagePathAndSize(imagemOriginal, width, height);
 	}
 
 	public void cropResizedImage(MultipartFile file, Usuario usuario, int x,
