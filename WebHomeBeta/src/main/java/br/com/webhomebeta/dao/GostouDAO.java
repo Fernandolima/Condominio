@@ -6,7 +6,7 @@ import br.com.webhomebeta.entity.Gostou;
 public interface GostouDAO {
 	
 	public Gostou salvar(Gostou gostou);
-	public void delete(int idUsuario, int idGostou);
+	public void delete(Gostou gostou);
 	public Gostou get(int id);
 	
 }

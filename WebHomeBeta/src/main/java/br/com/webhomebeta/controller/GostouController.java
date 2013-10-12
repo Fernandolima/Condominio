@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.webhomebeta.bean.DadosUsuarioBean;
 import br.com.webhomebeta.entity.Gostou;
+import br.com.webhomebeta.entity.NaoGostou;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.GostouService;
+import br.com.webhomebeta.service.NaoGostouService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
@@ -25,7 +27,33 @@ public class GostouController {
 	private GostouService gostouService;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private NaoGostouService naoGostouService;
+	
+	
+	@RequestMapping(value = "removeNaoGostou", method = RequestMethod.POST)
+	public String removeNaoGostou(@RequestParam("id") int id) {
+		NaoGostou naoGostou = naoGostouService.get(id);
+		if (getUsuario().getIdUser() == naoGostou.getIdUsuario()) {
+			naoGostouService.delete(naoGostou);
+			return "true";
+		} else
+			return "false";
+	}
+	
+	@RequestMapping(value = "naoGostou", method = RequestMethod.POST)
+	public @ResponseBody
+	String naoGostou(@RequestParam("id") int id) {
 
+		NaoGostou gostou = new NaoGostou(new Publicacao(id), getUsuario().getIdUser());
+		if (naoGostouService.salvar(gostou).getId() == 0)
+			return "false";
+		else
+			return "true";
+
+	}
+
+	
 	@RequestMapping(value = "gostou", method = RequestMethod.POST)
 	public @ResponseBody
 	String gostou(@RequestParam("id") int id) {
@@ -40,9 +68,9 @@ public class GostouController {
 
 	@RequestMapping(value = "removeGostou", method = RequestMethod.POST)
 	public String removeGostou(@RequestParam("id") int id) {
-		
-		if (getUsuario().getIdUser() == gostouService.get(id).getIdUsuario()) {
-			gostouService.delete(getUsuario().getIdUser(), id);
+		Gostou gostou = gostouService.get(id);
+		if (getUsuario().getIdUser() == gostou.getIdUsuario()) {
+			gostouService.delete(gostou);
 			return "true";
 		} else
 			return "false";

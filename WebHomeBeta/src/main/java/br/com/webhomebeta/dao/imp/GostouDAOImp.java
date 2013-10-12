@@ -22,10 +22,8 @@ public class GostouDAOImp implements GostouDAO{
 
 	@Override
 	@Transactional
-	public void delete(int idUsuario, int idGostou){
-		Query q = factory.getCurrentSession().createSQLQuery("DELETE FROM [dbo].[GOSTOU] WHERE ID_USER = ? AND ID_GOSTOU = ?");
-		q.setInteger(0, idUsuario);
-		q.setInteger(1, idGostou);
+	public void delete(Gostou gostou){
+		factory.getCurrentSession().delete(gostou);
 	}
 
 	@Override

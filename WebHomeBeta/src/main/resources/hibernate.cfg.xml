@@ -23,6 +23,7 @@
 		<mapping class="br.com.webhomebeta.entity.Notificacao"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Perfil"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Gostou"></mapping>
+		<mapping class="br.com.webhomebeta.entity.NaoGostou"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Enquetes"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Opcao"></mapping>
 		<mapping class="br.com.webhomebeta.entity.OpcaoVotada"></mapping>

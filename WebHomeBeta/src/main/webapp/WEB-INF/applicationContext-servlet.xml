@@ -244,6 +244,8 @@
 	<bean id="imageHandler" class = "br.com.webhomebeta.handler.ImageHandler" scope="session">
 		<aop:scoped-proxy/>
 	</bean>
+	<bean id="naoGostouService" class="br.com.webhomebeta.service.NaoGostouService"></bean>
+	<bean id="naoGostouDAO" class="br.com.webhomebeta.dao.imp.NaoGostouDAOImp"></bean>
 
 
 </beans>

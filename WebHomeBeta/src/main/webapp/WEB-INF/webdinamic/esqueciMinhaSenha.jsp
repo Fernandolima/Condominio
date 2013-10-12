@@ -23,7 +23,7 @@
 			<div class="content">
 				<h2>Esqueci minha senha</h2>
 				<div id="content-form">
-					<form action="enviarEmail" method="POST" id="frmForgotPassword">
+					<form:form modelAttribute="usuario" action="enviarEmail" method="POST" id="frmForgotPassword">
 						<p>Para solicitar uma nova senha, informe o e-mail cadastrado no sistema para solicitar uma nova senha.</p>
 						<div id="warnningMessage">
 							<p>Mensagem de erro</p>
@@ -31,8 +31,11 @@
 						<label>Digite seu e-mail</label>
 						<input type="text" name="email" />
 						<br>
+						<label>Digite seu CPF</label>
+						<input type="text" name="cpf" />
+						<br>
 						<input type="submit" value="Enviar" />			
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</section>

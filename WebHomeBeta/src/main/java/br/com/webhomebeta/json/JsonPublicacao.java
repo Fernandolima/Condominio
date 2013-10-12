@@ -1,7 +1,10 @@
 package br.com.webhomebeta.json;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import br.com.webhomebeta.entity.Gostou;
+import br.com.webhomebeta.entity.NaoGostou;
 
 public class JsonPublicacao {
 
@@ -13,23 +16,72 @@ public class JsonPublicacao {
 	private List<ComentarioJSON> comentarios;
 	private int quantidadeComentarios;
 	private boolean isProprietario;
+	private Set<Gostou> gostous;
+	private Set<NaoGostou> naoGostous;
+	private int quantidadeGostou;
+	private int quantidadeNaoGostou;
 
 	
-	
-	
+
 	public JsonPublicacao(String publicacao, int idPublicacao,
 			String dataPublicacao, String imagemPublicacao,
-			UsuarioPublicacaoJSON usuarioPublicacao) {
+			UsuarioPublicacaoJSON usuarioPublicacao, Set<Gostou> gostous,
+			Set<NaoGostou> naoGostous, int quantidadeGostou,
+			int quantidadeNaoGostou) {
+		super();
 		this.publicacao = publicacao;
 		this.idPublicacao = idPublicacao;
 		this.dataPublicacao = dataPublicacao;
 		this.imagemPublicacao = imagemPublicacao;
 		this.usuarioPublicacao = usuarioPublicacao;
+		this.gostous = gostous;
+		this.naoGostous = naoGostous;
+		this.quantidadeGostou = quantidadeGostou;
+		this.quantidadeNaoGostou = quantidadeNaoGostou;
 	}
 
-	
-	
-	
+
+
+	public int getQuantidadeGostou() {
+		return quantidadeGostou;
+	}
+
+
+
+	public void setQuantidadeGostou(int quantidadeGostou) {
+		this.quantidadeGostou = quantidadeGostou;
+	}
+
+
+
+	public int getQuantidadeNaoGostou() {
+		return quantidadeNaoGostou;
+	}
+
+
+
+	public void setQuantidadeNaoGostou(int quantidadeNaoGostou) {
+		this.quantidadeNaoGostou = quantidadeNaoGostou;
+	}
+
+
+
+	public Set<Gostou> getGostous() {
+		return gostous;
+	}
+
+	public void setGostous(Set<Gostou> gostous) {
+		this.gostous = gostous;
+	}
+
+	public Set<NaoGostou> getNaoGostous() {
+		return naoGostous;
+	}
+
+	public void setNaoGostous(Set<NaoGostou> naoGostous) {
+		this.naoGostous = naoGostous;
+	}
+
 	public String getDataPublicacao() {
 		return dataPublicacao;
 	}
@@ -38,15 +90,9 @@ public class JsonPublicacao {
 		return quantidadeComentarios;
 	}
 
-
-
-
 	public void setQuantidadeComentarios(int quantidadeComentarios) {
 		this.quantidadeComentarios = quantidadeComentarios;
 	}
-
-
-
 
 	public void setDataPublicacao(String dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
@@ -99,5 +145,5 @@ public class JsonPublicacao {
 	public void setImagemPublicacao(String imagemPublicacao) {
 		this.imagemPublicacao = imagemPublicacao;
 	}
-	
+
 }

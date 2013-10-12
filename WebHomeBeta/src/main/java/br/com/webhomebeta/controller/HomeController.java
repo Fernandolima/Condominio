@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
 
+import br.com.webhomebeta.entity.Gostou;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
@@ -61,7 +62,7 @@ public class HomeController {
 	private NotificacaoService notificacaoService;
 
 	private int colunaInicial;
-	
+
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
@@ -75,6 +76,10 @@ public class HomeController {
 		return new ModelAndView("home", model);
 	}
 
+	public ComentarioJSON atualizarComentario() {
+		return null;
+	}
+
 	@RequestMapping(value = "home/publicacao?id={idPublicacao}", method = RequestMethod.POST)
 	public @ResponseBody
 	JsonPublicacao visualizaNotificacao(@PathVariable("idPublicacao") int id) {
@@ -85,7 +90,9 @@ public class HomeController {
 				df.format(publicacao.getData()), publicacao.getImagem(),
 				new UsuarioPublicacaoJSON(publicacao.getUsuarioPublicacao()
 						.getIdUser(), publicacao.getUsuarioPublicacao()
-						.getNome()));
+						.getNome()), publicacao.getGostous(),
+				publicacao.getNaoGostous(), publicacao.getGostous().size(),
+				publicacao.getNaoGostous().size());
 
 		ArrayList<ComentarioJSON> comentariosJSON = new ArrayList<>();
 
@@ -123,8 +130,15 @@ public class HomeController {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
 		final int tamanhoColuna = 10;
+		
+
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
 				colunaInicial, tamanhoColuna);
+		
+		if(colunaInicial >= publicacaoes.size()){
+			return null;
+		}
+
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
 			// Cria uma lista para os comentarios desta publicacao
@@ -134,7 +148,9 @@ public class HomeController {
 					p.getPublicacao(), p.getIdPublicacao(), df.format(p
 							.getData()), p.getImagem(),
 					new UsuarioPublicacaoJSON(p.getUsuarioPublicacao()
-							.getIdUser(), p.getUsuarioPublicacao().getNome()));
+							.getIdUser(), p.getUsuarioPublicacao().getNome()),
+					p.getGostous(), p.getNaoGostous(), p.getGostous().size(), p
+							.getNaoGostous().size());
 			// Varre os comentarios dentro da publicacao
 			for (Comentario c : p.getComentarios()) {
 				// Adiciona os dados do comentario
@@ -166,6 +182,7 @@ public class HomeController {
 
 		colunaInicial += publicacaoes.size() - 1;
 		
+
 		return jsonPublicacaos;
 	}
 
@@ -175,7 +192,8 @@ public class HomeController {
 			@ModelAttribute("moradorControllerBean") MoradorControllerBean moradorControllerBean,
 			BindingResult bindingResult) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		Publicacao p = publicacaoService.getUnicaPublicacao(moradorControllerBean.getIdPublicacao());
+		Publicacao p = publicacaoService
+				.getUnicaPublicacao(moradorControllerBean.getIdPublicacao());
 		moradorControllerBean.getComentarioTO().setPublicacao(p);
 		moradorControllerBean.getComentarioTO().setUsuarioComentario(
 				this.moradorControllerBean.getUsuario());
@@ -188,10 +206,10 @@ public class HomeController {
 				comentario);
 
 		Comentario c = comentarioService.save(comentario);
-						
+
 		comentarioService.evictCache();
 		usuarioService.evitcCache();
-		
+
 		NovoComentarioJSON comentarioJSON = new NovoComentarioJSON(
 				moradorControllerBean.getComentarioTO().getComentario(),
 				c.getIdComentario(), this.moradorControllerBean.getUsuario()
@@ -227,8 +245,7 @@ public class HomeController {
 		// salva no banco
 		BeanUtils.copyProperties(bean.getPublicacaoTO(), publicacao);
 		Publicacao p = publicacaoService.salvar(publicacao);
-		
-		
+
 		comentarioService.evictCache();
 		usuarioService.evitcCache();
 		// monta o JSON de Publicacao.
@@ -239,7 +256,7 @@ public class HomeController {
 						.getUsuario().getNome(), moradorControllerBean
 						.getUsuario().getImagemView());
 		return novaPublicacaoJSON;
-		
+
 	}
 
 	// deleta uma publica��o
@@ -247,9 +264,10 @@ public class HomeController {
 	public @ResponseBody
 	String deletePost(@RequestParam("idPost") int id) {
 
-		Publicacao p =publicacaoService.getUnicaPublicacao(id);
-		if(p.getUsuarioPublicacao().getIdUser() == moradorControllerBean.getUsuario().getIdUser()){
-		publicacaoService.delete(p);
+		Publicacao p = publicacaoService.getUnicaPublicacao(id);
+		if (p.getUsuarioPublicacao().getIdUser() == moradorControllerBean
+				.getUsuario().getIdUser()) {
+			publicacaoService.delete(p);
 		}
 
 		return "true";

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.POST;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,25 @@ public class PerfilController {
 		return new ModelAndView("perfil", model);
 	}
 
+	
+	@RequestMapping(value = "perfil/alterarSenha", method = RequestMethod.POST)
+	public String alterarSenha(
+			@ModelAttribute("perfilControllerBean") PerfilControllerBean bean,
+			BindingResult result) {
+
+		if (getUsuario().getSenha().equals(bean.getSenha())) {
+			if (bean.getNovaSenha().equals(bean.getConfNovaSenha())) {
+				usuarioService.update(getUsuario().getIdUser(),
+						bean.getNovaSenha());
+				return "true";
+			} else {
+				return "senhaNaoConfere";
+			}
+		} else {
+			return "senhaAtualInvalida";
+		}
+	}
+
 	// Upload do PERFIL
 	@Async
 	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
@@ -91,9 +111,10 @@ public class PerfilController {
 		this.uploadControllerBean = uploadControllerBean;
 
 		MultipartFile file = uploadControllerBean.getFileData();
-		ImagePathAndSize ipz = imageHandler.getOriginalImagemResized(file, getUsuario());
+		ImagePathAndSize ipz = imageHandler.getOriginalImagemResized(file,
+				getUsuario());
 
-		return ipz.getUrl()+","+ipz.getWidth()+","+ipz.getHeight();
+		return ipz.getUrl() + "," + ipz.getWidth() + "," + ipz.getHeight();
 	}
 
 	@RequestMapping(value = "/perfil?id={id}")
@@ -105,15 +126,14 @@ public class PerfilController {
 			return new ModelAndView("perfilNaoExiste");
 		}
 	}
-	
+
 	@RequestMapping(value = "cropAndUpload", method = RequestMethod.POST)
-	public @ResponseBody String cropImage(@RequestParam("x1") int x1,
-			@RequestParam("y1") int y1, @RequestParam("w") int w,
-			@RequestParam("h") int h) {
-		
-			
-			
-		return imageHandler.cropResizedImage(uploadControllerBean.getFileData(), getUsuario(), x1, y1, w, h);
+	public @ResponseBody
+	String cropImage(@RequestParam("x1") int x1, @RequestParam("y1") int y1,
+			@RequestParam("w") int w, @RequestParam("h") int h) {
+
+		return imageHandler.cropResizedImage(
+				uploadControllerBean.getFileData(), getUsuario(), x1, y1, w, h);
 	}
 
 	// Possivel utilizacao para o album de fotos! 2_@@_@_@_@_
@@ -220,6 +240,5 @@ public class PerfilController {
 
 		return usuario;
 	}
-
 
 }

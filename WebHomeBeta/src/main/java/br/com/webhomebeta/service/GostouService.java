@@ -16,8 +16,8 @@ public class GostouService {
 		return gostouDAO.salvar(gostou);
 	}
 	
-	public void delete(int idUsuario, int idGostou){
-		gostouDAO.delete(idUsuario, idGostou);
+	public void delete(Gostou gostou){
+		gostouDAO.delete(gostou);
 	}
 	
 	public Gostou get ( int id){

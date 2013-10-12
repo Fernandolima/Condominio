@@ -38,6 +38,7 @@ var POST_COMMENT  = {
 		
 		loadHome: function(data) {
 			var htmlHome = '';
+			if(data){
 			$.each(data, function(e, val){
 				htmlHome = '';
 				
@@ -80,7 +81,8 @@ var POST_COMMENT  = {
 				$('#carrengandoComentario').remove();
 				$('#main-comments').append(htmlHome);
 				POST_COMMENT.isScroll = true;
-			});			
+			});
+		  }
 		},
 		
 		postFocus: function() {

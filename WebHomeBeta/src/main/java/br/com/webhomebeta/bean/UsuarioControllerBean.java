@@ -1,8 +1,4 @@
 package br.com.webhomebeta.bean;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-
 import br.com.webhomebeta.to.UsuarioTO;
 //Bean usada na view
 public class UsuarioControllerBean {
@@ -18,6 +14,7 @@ public class UsuarioControllerBean {
 	private boolean validDataNascimento = true;
 	private boolean validCpf = true;
 	private boolean validBloco = true;
+	private boolean hasErrorForm = false;
 	private boolean validApartamento = true;
 	public boolean isValidApartamento() {
 		return validApartamento;
@@ -26,12 +23,8 @@ public class UsuarioControllerBean {
 	public void setValidApartamento(boolean validApartamento) {
 		this.validApartamento = validApartamento;
 	}
-
-
-
-	private boolean hasErrorForm = false;
 	
-	
+
 	public String getData() {
 		return data;
 	}

@@ -43,6 +43,7 @@ public class EmailServico {
 	private static final String SUBJECT_NOVO_MORADOR = "Novo morador cadastrado!";
 	private static final String SUBJECT_MORADOR_ACEITO = "Seu cadastro na WebHome foi aceito!";
 	private static final String SUBJECT_MORADOR_NAO_ACEITO = "Seu cadastro na WebHome foi rejeitado!";
+	private static final String SUBJECT_SENHA = "Recuperacao de senha - WebHome";
 
 	public void emailNovoMorador(final Usuario usuario) {
 
@@ -119,42 +120,26 @@ public class EmailServico {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
 			public void prepare(MimeMessage mimeMessage) throws Exception {
+				Usuario usuarioB = usuarioService.getUsuarioByLogin(usuario.getEmail());
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo(usuario.getEmail());
 				message.setFrom(FROM);
-				message.setSubject(SUBJECT_MORADOR_ACEITO);
+				message.setSubject(SUBJECT_SENHA);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
-				model.put("nome", usuario.getNome());
+				model.put("nome", usuarioB.getNome());
 				model.put("senha",usuario.getSenha());
 				model.put("link", "http://localhost:8080/WebHomeBeta");
-				usuarioService.update(getUsuario().getIdUser(), usuario.getSenha());
+				//alterando senha no banco
+				
+				usuarioService.update(usuarioB.getIdUser(), usuario.getSenha());
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
-						velocityEngine, TEMPLATE_USUARIO_ACEITO, model);
+						velocityEngine, TEMPLATE_ESQUECI_SENHA, model);
 				message.setText(text, true);
 			}
 		};
 		this.mailSender.send(preparator);
-	}
-	
-	public Usuario getUsuario() {
-
-		Usuario usuario = null;
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				usuario = usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername());
-
-			}
-		}
-
-		return usuario;
 	}
 	
 	public JavaMailSender getMailSender() {

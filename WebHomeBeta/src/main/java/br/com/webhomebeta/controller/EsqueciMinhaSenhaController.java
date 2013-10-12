@@ -35,28 +35,36 @@ public class EsqueciMinhaSenhaController {
 	public ModelAndView enviarEmail(
 			@ModelAttribute("usuario") UsuarioTO usuarioTO) {
 		// Cria a variavel booleana validEmail
-		boolean validEmail = false;
+		boolean validEmail = true;
+		boolean validCpf = true;
 		// Recebe a lista de usuarios do banco
 		List<Usuario> usuarios = usuarioService.getUsuario();
 		// Compara cada usuario da lista e verifica se o email existe
 		for (Usuario user : usuarios) {
 			// se existir envia email de perda de senha
 			if (user.getEmail().equals(usuarioTO.getEmail())) {
-				ModelAndView mv = new ModelAndView("pagina de confirmacao de email enviado");
-				// adiciona ao model a variavel validEmail
-				UUID uuid = UUID.randomUUID();
-				String myRandom = uuid.toString();
-				String senhaGerada = myRandom.substring(0, 6);
-				usuarioTO.setSenha(senhaGerada);
-				emailServico.emailAlteracaoSenha(usuarioTO);
-				return mv;
+				if (user.getCpf().equals(usuarioTO.getCpf())) {
+					ModelAndView mv = new ModelAndView(
+							"pagina de confirmacao de email enviado");
+					// adiciona ao model a variavel validEmail
+					UUID uuid = UUID.randomUUID();
+					String myRandom = uuid.toString();
+					String senhaGerada = myRandom.substring(0, 6);
+					usuarioTO.setSenha(senhaGerada);
+					usuarioTO.setEmail(user.getEmail());
+					emailServico.emailAlteracaoSenha(usuarioTO);
+					return mv;
+				}else{
+					validCpf = false;
+				}
 			} else {
 				validEmail = false;
 			}
 		}
-		
+
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("isValidEmail",validEmail);
+		mv.addObject("isValidEmail", validEmail);
+		mv.addObject("validCpf",validCpf);
 		return new ModelAndView("esqueciMinhaSenha", "usuario", new UsuarioTO());
 
 	}

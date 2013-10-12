@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UsuarioControllerBean;
+import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
 
+import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
@@ -37,6 +40,8 @@ public class UsuarioController {
 	private EmailServico emailServico;
 	@Autowired
 	private PerfilService perfilService;
+	@Autowired
+	private CadastroCondominioService cadastroCondominioService;
 
 	private Validator validator = new Validator();
 
@@ -69,7 +74,7 @@ public class UsuarioController {
 		return usuario;
 	}
 
-	// Pega o Objeto usuario e sava na tabela USER no banco.
+	// Pega o Objeto usuario e salva na tabela USER no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ModelAndView cadastro(
@@ -153,13 +158,14 @@ public class UsuarioController {
 		else
 			bean.setValidApartamento(true);
 
-		// for (Usuario user : usuarioService.getUsuario()) {
-		// if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
-		// bean.setValidBloco(false);
-		// }else{
-		// bean.setValidBloco(true);
-		// }
-		// }
+		
+		for (Usuario user : usuarioService.getUsuario()) {
+			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
+				bean.setValidBloco(false);
+			} else {
+				bean.setValidBloco(true);
+			}
+		}
 		// recebe uma lista do banco com todos os usuarios e verifica se o email
 		// digitado ja existe no banco
 		for (Usuario user : usuarioService.getUsuario()) {
@@ -171,5 +177,4 @@ public class UsuarioController {
 
 		}
 	}
-
 }

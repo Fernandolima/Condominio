@@ -84,9 +84,18 @@ public class Publicacao implements Serializable {
 	@Cascade(CascadeType.REMOVE)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao", orphanRemoval = true)
 	private Set<Gostou> gostous = new HashSet<>(0);
-
+	
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "publicacao", orphanRemoval = true)
+	private Set<NaoGostou> naoGostous = new HashSet<>(0);
 
 	
+	public Set<NaoGostou> getNaoGostous() {
+		return naoGostous;
+	}
+	public void setNaoGostous(Set<NaoGostou> naoGostous) {
+		this.naoGostous = naoGostous;
+	}
 	public Set<Gostou> getGostous() {
 		return gostous;
 	}

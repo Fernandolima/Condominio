@@ -163,8 +163,7 @@ public class ImageHandler {
 			// redimensiona imagem para o tamanho para 43x43
 
 			BufferedImage imagemRedimensionada43x43 = Scalr.resize(cropedImage,
-					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43,
-					Scalr.OP_ANTIALIAS);
+					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43, Scalr.OP_ANTIALIAS);
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
 				ImageIO.write(imagemRedimensionada43x43, "JPEG",
