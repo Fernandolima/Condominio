@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "[dbo].[OPCAO_VOTADA]")
 public class OpcaoVotada {
@@ -27,6 +29,7 @@ public class OpcaoVotada {
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_OPCAO", nullable = false)
+	@JsonIgnoreProperties(value = "opcao")
 	private Opcao opcao;
 
 	public OpcaoVotada() {

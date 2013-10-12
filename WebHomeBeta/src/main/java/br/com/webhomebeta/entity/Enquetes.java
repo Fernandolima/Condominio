@@ -20,6 +20,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="[dbo].[ENQUETES]")
 public class Enquetes implements Serializable {
@@ -47,6 +49,7 @@ public class Enquetes implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
+	@JsonIgnoreProperties(value = "usuarioEnquete")
 	private Usuario usuarioEnquete;
 
 	// Um usuario pode criar varias opcoes

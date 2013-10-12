@@ -1,5 +1,15 @@
 var ADMIN = {
 	
+	init: function(){
+		
+		$.ajax({
+	    	type: 'post',
+	      	url:'loadEnquetes',
+	      	dataType: 'json',	
+	      	success: ADMIN.loadEnquete
+		});
+	},	
+		
 	esqueciMinhaSenha: function() {
 		//ajusta footer na parte inferior do site
 		var heightPage = $(window).height();
@@ -26,33 +36,38 @@ var ADMIN = {
 		$('#contentFrm').append(htmlOpcao);
 	},
 	
-	loadEnquete: function() {
+	loadEnquete: function(data) {
 		//fazer uma requisição ajax para popular o grafico
 		var htmlGrafico = '';
 		
-		htmlGrafico += '<div class="respostas">';
-			htmlGrafico += '<p class="labelResposta">Ruim</p>';
-			htmlGrafico += '<span class="statusResposta" style="width:100px;"></span>';
-			htmlGrafico += '<p class="numPessoas">10</p>';
-		htmlGrafico += '</div>';
-		
-		htmlGrafico += '<div class="respostas">';
-			htmlGrafico += '<p class="labelResposta">Bom</p>';
-			htmlGrafico += '<span class="statusResposta" style="width:50px;"></span>';
-			htmlGrafico += '<p class="numPessoas">5</p>';
-		htmlGrafico += '</div>';
-		
-		htmlGrafico += '<div class="respostas">';
-			htmlGrafico += '<p class="labelResposta">Ótimo</p>';
-			htmlGrafico += '<span class="statusResposta" style="width:200px;"></span>';
-			htmlGrafico += '<p class="numPessoas">20</p>';
-		htmlGrafico += '</div>';
-		
+		$.each(data, function(b, enquete){
+			htmlGrafico += '<div id = "statusEnquete">';
+			htmlGrafico += '<span id="iconEnquete"></span><h2>Enquete</h2>';
+			htmlGrafico += '<p><b>Enquete ativa no momento:</b>'+enquete.titulo+'<br/>';
+			htmlGrafico += '<b>Números de pessoas participando:</b>'+enquete.totalVotos+'<p>';
+			htmlGrafico += '<div id="graficoEnquete" class="load">';
+				
+			
+			$.each(enquete.opcoes, function(o, opc){
+				
+					htmlGrafico += '<div class="respostas">';
+					htmlGrafico += '<p class="labelResposta">'+opc.opcao+'</p>';
+					htmlGrafico += '<span class="statusResposta" style="width:100px;"></span>';
+					htmlGrafico += '<p class="numPessoas">'+opc.quantidadeVotos+'</p>';
+					htmlGrafico += '</div>';
+			});
+			htmlGrafico += '</div>';
 		$('#graficoEnquete').removeClass('load').html(htmlGrafico);
+		$('#enquetes').append(htmlGrafico);
+		htmlGrafico = '';
+		});
+		
 	}
 }
 
 $(function() {
+	console.log("a");
+	ADMIN.init();
 	//valida se está na página de cadastro
 	if($('#forgotPassword-view')[0]){
 		ADMIN.esqueciMinhaSenha();
@@ -72,7 +87,6 @@ $(function() {
 	$('#btn-adiciona-opcao').on('click', ADMIN.onAddOpcao);
 	
 	if($('#adminView')[0]) {
-		ADMIN.loadEnquete();
 	}
 	
 	if($('#cadastrar-atasView')[0]) {

@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
-		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 	<head>
 	<body id="adminView">
 		<header id="header-site">
@@ -55,15 +55,7 @@
 						<span id="iconPeople"></span><h2>Moradores</h2>
 						<p>Você possui <b><c:out value="${validarMoradores}"></c:out></b> cadastros para serem aprovados. <a href="admin/validarMoradores">Clique aqui para moderar</a><p>
 					</div>
-				<c:forEach items="${enquetes}" var="item">
-					<div id="statusEnquete">
-						<span id="iconEnquete"></span><h2>Enquete</h2>
-						<p><b>Enquete ativa no momento:</b>${item.enquete}<br/>
-						<b>Números de pessoas participando:</b><p>
-						<div id="graficoEnquete" class="load">
-						</div>
-					</div>
-				</c:forEach>
+					<div id="enquete"></div>
 				</section>
 			</div>
 		</section>
