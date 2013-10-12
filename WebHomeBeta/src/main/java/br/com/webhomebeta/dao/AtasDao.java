@@ -13,8 +13,10 @@ public interface AtasDao {
 
 	public AtasEntity save(AtasEntity atasEntity);
 
-	public List<AtasEntity> getAtas();
-
+	public List<AtasEntity> getAtas( boolean ativa);
+	
+	public void update(int idAtas, boolean atasAtiva);
+	
 	public AtasEntity getidAtas(int id);
 	
 	public void updadeAtas(int id , String ata);

@@ -19,8 +19,8 @@ public class AtasService {
 		atasDao.save(atasEntity);
 	}
 
-	public List<AtasEntity> getList() {
-		return atasDao.getAtas();
+	public List<AtasEntity> getList(boolean ativa) {
+		return atasDao.getAtas(ativa);
 	}
 
 	public AtasEntity getidAtas(int id) {
@@ -31,6 +31,10 @@ public class AtasService {
 		 atasDao.updadeAtas(id, ata);
 	}
 
+	public void  updateFalse(int idAtas, boolean atasAtivas) {
+		atasDao.update(idAtas, atasAtivas);
+		
+	}
 	public void delete(AtasEntity atasEntity) {
 		atasDao.delete(atasEntity);
 

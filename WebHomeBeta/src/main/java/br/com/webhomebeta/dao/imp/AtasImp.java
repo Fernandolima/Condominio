@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,30 +45,49 @@ public class AtasImp implements AtasDao {
 
 	}
 
+	// traz todos as atas ativas = true
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<AtasEntity> getAtas() {
-		Query q = factory.getCurrentSession()
-				.createSQLQuery("SELECT  * FROM [dbo].[ATAS] ORDER BY [DATA_FORMAT] DESC ")
-				.addEntity(AtasEntity.class);
-		return q.list();
+	public List<AtasEntity> getAtas(boolean ativa) {
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM ATAS WHERE  ATAS_ATIVA = ?").addEntity(AtasEntity.class);
+		return q.setBoolean(0, ativa).list();
 
 	}
 
 	@Transactional
 	public AtasEntity getidAtas(int id) {
-		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ATAS] WHERE ID_ATAS = ?").addEntity(AtasEntity.class);
-				q.setParameter(0, id);
-			return (AtasEntity) q.uniqueResult(); 
-		
+		Query q = factory.getCurrentSession()
+				.createSQLQuery("SELECT * FROM [dbo].[ATAS] WHERE ID_ATAS = ?")
+				.addEntity(AtasEntity.class);
+		q.setParameter(0, id);
+		return (AtasEntity) q.uniqueResult();
+
 	}
-	
+
 	@Transactional
 	public void updadeAtas(int id, String ata) {
-		Query q = factory.getCurrentSession().createSQLQuery("UPDATE [dbo].[ATAS] SET ATAS = ? WHERE ID_ATAS = ?").addEntity(AtasEntity.class);
-				q.setString(0, ata);
-				q.setInteger(1, id);
-				q.executeUpdate();	
-				
-			//tem que ter um retorno
+		Query q = factory
+				.getCurrentSession()
+				.createSQLQuery(
+						"UPDATE [dbo].[ATAS] SET ATAS = ? WHERE ID_ATAS = ?")
+				.addEntity(AtasEntity.class);
+		q.setString(0, ata);
+		q.setInteger(1, id);
+		q.executeUpdate();
+
+		// tem que ter um retorno
 	}
+
+	@Override
+	public void update(int idAtas, boolean atasAtiva) {
+		Query q = factory
+				.getCurrentSession()
+				.createSQLQuery(
+						"UPDATE [dbo].[ATAS] SET ATAS_ATIVA = ? WHERE ID_ATAS = ?")
+				.addEntity(AtasEntity.class);
+		q.setInteger(0, idAtas);
+		q.setBoolean(1, atasAtiva);
+		q.executeUpdate();
+	}
+
 }

@@ -46,29 +46,16 @@ public class AssembleiaController {
 	// mapeia a URL principal (Assembleia) e retorna um novo objeto assembleia
 	@RequestMapping(value = "inserirAssembleia", method = RequestMethod.GET)
 	public ModelAndView InserirAssembleia(ModelMap model) {
-		List<Assembleia> assembleias = assembleiaService.getList();
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				uploadArquivosAssembleiaControllerBean
-						.setUsuario(usuarioService
-								.getUsuarioByLogin(((UserDetailsImp) authentication
-										.getPrincipal()).getUsername()));
-
-			}
-		}
-
+		List<Assembleia> assembleias = assembleiaService.getList(true);
 		model.put("listaAssembleia", assembleias);
 		model.put("bean", new UploadArquivosAssembleiaControllerBean());
+		model.put("usuario", getUsuario());
 		// Retorna a pagina inserirAssembleia.jsp com uma Assembleia criado
 		return new ModelAndView("assembleia", model);
 
 	}
 
-	@RequestMapping(value = "Assembleia/addArquivos", method = RequestMethod.POST)
+	@RequestMapping(value = "assembleia/addArquivos", method = RequestMethod.POST)
 	// valor da action
 	public String AssembleiaArquivos(
 			@ModelAttribute("bean") final UploadArquivosAssembleiaControllerBean bean,
@@ -81,6 +68,14 @@ public class AssembleiaController {
 		}
 		uploadArquivosAssembleiaControllerBean = bean;
 		return "redirect:/assembleia";
+	}
+
+	@RequestMapping(value = "listaAssembleiaAtivas", method = RequestMethod.GET)
+	public ModelAndView listaAssembleia(ModelMap model) {
+		model.put("listaAssembleia", assembleiaService.getList(true));
+
+		return new ModelAndView("listaAssembleia", model);
+
 	}
 
 	private void salvar(MultipartFile file, Assembleia assembleia,
@@ -119,8 +114,6 @@ public class AssembleiaController {
 			assembleia.setTitulo(bean.getAssembleiaTO().getTitulo());
 			assembleia.setUsuarioAssebleia(bean.getAssembleiaTO()
 					.getUsuarioAssebleia());
-			//assembleiaService.getList();
-
 			AssembleiaTO assembleiaTO = new AssembleiaTO();
 
 			assembleiaTO.setAssembleia(null);
@@ -158,7 +151,6 @@ public class AssembleiaController {
 		}
 	}
 
-
 	@RequestMapping(value = "assembelia/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("assembleia") Assembleia assembleia,
 			BindingResult result) {
@@ -175,6 +167,25 @@ public class AssembleiaController {
 		assembleiaService.delete(assembleia);
 
 		return "redirect:/inserirAssembleia/delete";
+	}
+
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 
 }

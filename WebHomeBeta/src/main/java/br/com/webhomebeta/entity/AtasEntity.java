@@ -42,6 +42,9 @@ public class AtasEntity  {
 
 	@Column(name = "NOME")
 	private String nome;
+	
+	@Column(name = "ATAS_ATIVA")
+	private boolean atasAtivas;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
@@ -55,10 +58,14 @@ public class AtasEntity  {
 	private String atas;
 
 	
-	
-	
-	
-	
+	public boolean isAtasAtivas() {
+		return atasAtivas;
+	}
+
+	public void setAtasAtivas(boolean atasAtivas) {
+		this.atasAtivas = atasAtivas;
+	}
+
 	public String getDataFormat() {
 		return dataFormat;
 	}

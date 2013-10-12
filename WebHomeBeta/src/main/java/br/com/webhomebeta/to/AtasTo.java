@@ -13,7 +13,17 @@ public class AtasTo {
 	private String arquivo;
 	private String dataFormat;
 	private Usuario usuarioAtas;
+	private boolean atasAtivas;
 	
+	
+
+	public boolean isAtasAtivas() {
+		return atasAtivas;
+	}
+
+	public void setAtasAtivas(boolean atasAtivas) {
+		this.atasAtivas = atasAtivas;
+	}
 
 	public String getNome() {
 		return nome;

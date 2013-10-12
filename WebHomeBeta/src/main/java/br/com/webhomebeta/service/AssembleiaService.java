@@ -20,7 +20,7 @@ public class AssembleiaService {
 		assembleiaDao.save(assembleia);
 	}
 
-	public List<Assembleia> getList() {
+	public List<Assembleia> getList( boolean ativa) {
 		return assembleiaDao.getAssembleias();
 	}
 
