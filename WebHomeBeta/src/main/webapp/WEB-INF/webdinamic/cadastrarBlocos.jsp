@@ -21,7 +21,7 @@
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${usuario.nome}"/><p>
 					<span>|</span>
-					<a href="home" title="Ver site">Ver site</a>
+					<a href="/WebHomeBeta/home" title="Ver site">Ver site</a>
 					<span>|</span>
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
 				</div>

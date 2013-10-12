@@ -51,9 +51,23 @@ var POST_COMMENT  = {
 						htmlHome += '<a href="#" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
 						htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';
 						htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
-						htmlHome += '<div class="gosteiPublicacao">';
-							htmlHome += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
-						htmlHome += '</div>';
+							if(val.gostous.length > 0){
+								$.each(val.gostous, function(i, gostou){
+									if(gostou.idUsuario === val.usuarioPublicacao.idUsuarioPublicacao){
+									htmlHome += '<div class="gosteiPublicacao">';
+									htmlHome += '<span class="iconSmile iconGostei active"></span><p class="labelGostei">'+val.quantidadeGostou+'</p>';
+									htmlHome += '</div>';
+									}
+								});
+								
+							}else{
+								htmlHome += '<div class="gosteiPublicacao">';
+								htmlHome += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
+								htmlHome += '</div>';
+							}
+							
+						
+					
 					htmlHome += '</div>';
 					
 					if(val.comentarios.length > 0) {

@@ -1,7 +1,7 @@
 package br.com.webhomebeta.json;
 
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 import br.com.webhomebeta.entity.Gostou;
 import br.com.webhomebeta.entity.NaoGostou;
@@ -16,8 +16,8 @@ public class JsonPublicacao {
 	private List<ComentarioJSON> comentarios;
 	private int quantidadeComentarios;
 	private boolean isProprietario;
-	private Set<Gostou> gostous;
-	private Set<NaoGostou> naoGostous;
+	private List<GostouJSON> gostous;
+	private List<NaoGostouJSON> naoGostous;
 	private int quantidadeGostou;
 	private int quantidadeNaoGostou;
 
@@ -25,19 +25,13 @@ public class JsonPublicacao {
 
 	public JsonPublicacao(String publicacao, int idPublicacao,
 			String dataPublicacao, String imagemPublicacao,
-			UsuarioPublicacaoJSON usuarioPublicacao, Set<Gostou> gostous,
-			Set<NaoGostou> naoGostous, int quantidadeGostou,
-			int quantidadeNaoGostou) {
+			UsuarioPublicacaoJSON usuarioPublicacao) {
 		super();
 		this.publicacao = publicacao;
 		this.idPublicacao = idPublicacao;
 		this.dataPublicacao = dataPublicacao;
 		this.imagemPublicacao = imagemPublicacao;
 		this.usuarioPublicacao = usuarioPublicacao;
-		this.gostous = gostous;
-		this.naoGostous = naoGostous;
-		this.quantidadeGostou = quantidadeGostou;
-		this.quantidadeNaoGostou = quantidadeNaoGostou;
 	}
 
 
@@ -66,19 +60,19 @@ public class JsonPublicacao {
 
 
 
-	public Set<Gostou> getGostous() {
+	public List<GostouJSON> getGostous() {
 		return gostous;
 	}
 
-	public void setGostous(Set<Gostou> gostous) {
+	public void setGostous(List<GostouJSON> gostous) {
 		this.gostous = gostous;
 	}
 
-	public Set<NaoGostou> getNaoGostous() {
+	public List<NaoGostouJSON> getNaoGostous() {
 		return naoGostous;
 	}
 
-	public void setNaoGostous(Set<NaoGostou> naoGostous) {
+	public void setNaoGostous(List<NaoGostouJSON> naoGostous) {
 		this.naoGostous = naoGostous;
 	}
 

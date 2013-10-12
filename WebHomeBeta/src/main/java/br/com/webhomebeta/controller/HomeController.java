@@ -32,12 +32,15 @@ import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
 
 import br.com.webhomebeta.entity.Gostou;
+import br.com.webhomebeta.entity.NaoGostou;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
 
 import br.com.webhomebeta.json.JsonPublicacao;
 
+import br.com.webhomebeta.json.GostouJSON;
+import br.com.webhomebeta.json.NaoGostouJSON;
 import br.com.webhomebeta.json.NovaPublicacaoJSON;
 import br.com.webhomebeta.json.NovoComentarioJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
@@ -71,7 +74,7 @@ public class HomeController {
 
 		model.put("moradorControllerBean", moradorControllerBean);
 
-		colunaInicial = 1;
+		colunaInicial = 0;
 
 		return new ModelAndView("home", model);
 	}
@@ -90,11 +93,25 @@ public class HomeController {
 				df.format(publicacao.getData()), publicacao.getImagem(),
 				new UsuarioPublicacaoJSON(publicacao.getUsuarioPublicacao()
 						.getIdUser(), publicacao.getUsuarioPublicacao()
-						.getNome()), publicacao.getGostous(),
-				publicacao.getNaoGostous(), publicacao.getGostous().size(),
-				publicacao.getNaoGostous().size());
+						.getNome()));
 
 		ArrayList<ComentarioJSON> comentariosJSON = new ArrayList<>();
+		ArrayList<GostouJSON> gostouJSONs = new ArrayList<>();
+		ArrayList<NaoGostouJSON> naoGostouJSONs = new ArrayList<>();
+
+		for (Gostou gostou : publicacao.getGostous()) {
+			GostouJSON gostouJSON = new GostouJSON(gostou.getId(),
+					gostou.getIdUsuario(), gostou.getPublicacao()
+							.getIdPublicacao());
+			gostouJSONs.add(gostouJSON);
+		}
+
+		for (NaoGostou naoGostou : publicacao.getNaoGostous()) {
+			NaoGostouJSON gostouJSON = new NaoGostouJSON(naoGostou.getId(),
+					naoGostou.getIdUsuario(), naoGostou.getPublicacao()
+							.getIdPublicacao());
+			naoGostouJSONs.add(gostouJSON);
+		}
 
 		for (Comentario c : publicacao.getComentarios()) {
 			// Adiciona os dados do comentario
@@ -108,6 +125,10 @@ public class HomeController {
 
 		Collections.sort(comentariosJSON, new CustomComparator());
 		jsonPublicacao.setComentarios(comentariosJSON);
+		jsonPublicacao.setGostous(gostouJSONs);
+		jsonPublicacao.setNaoGostous(naoGostouJSONs);
+		jsonPublicacao.setQuantidadeGostou(gostouJSONs.size());
+		jsonPublicacao.setQuantidadeNaoGostou(naoGostouJSONs.size());
 		jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
 
 		// Verifica se a publicacao eh do usuario que esta logado
@@ -130,12 +151,11 @@ public class HomeController {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
 		final int tamanhoColuna = 10;
-		
 
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
 				colunaInicial, tamanhoColuna);
-		
-		if(colunaInicial >= publicacaoes.size()){
+
+		if (colunaInicial >= publicacaoes.size()) {
 			return null;
 		}
 
@@ -148,9 +168,26 @@ public class HomeController {
 					p.getPublicacao(), p.getIdPublicacao(), df.format(p
 							.getData()), p.getImagem(),
 					new UsuarioPublicacaoJSON(p.getUsuarioPublicacao()
-							.getIdUser(), p.getUsuarioPublicacao().getNome()),
-					p.getGostous(), p.getNaoGostous(), p.getGostous().size(), p
-							.getNaoGostous().size());
+							.getIdUser(), p.getUsuarioPublicacao().getNome()));
+			
+			ArrayList<GostouJSON> gostouJSONs = new ArrayList<>();
+			ArrayList<NaoGostouJSON> naoGostouJSONs = new ArrayList<>();
+
+			for (Gostou gostou : p.getGostous()) {
+				GostouJSON gostouJSON = new GostouJSON(gostou.getId(),
+						gostou.getIdUsuario(), gostou.getPublicacao()
+								.getIdPublicacao());
+				gostouJSONs.add(gostouJSON);
+			}
+
+			for (NaoGostou naoGostou : p.getNaoGostous()) {
+				NaoGostouJSON gostouJSON = new NaoGostouJSON(naoGostou.getId(),
+						naoGostou.getIdUsuario(), naoGostou.getPublicacao()
+								.getIdPublicacao());
+				naoGostouJSONs.add(gostouJSON);
+			}
+			
+			
 			// Varre os comentarios dentro da publicacao
 			for (Comentario c : p.getComentarios()) {
 				// Adiciona os dados do comentario
@@ -167,6 +204,10 @@ public class HomeController {
 			// ordena pela data
 			Collections.sort(comentariosJSON, new CustomComparator());
 			jsonPublicacao.setComentarios(comentariosJSON);
+			jsonPublicacao.setGostous(gostouJSONs);
+			jsonPublicacao.setNaoGostous(naoGostouJSONs);
+			jsonPublicacao.setQuantidadeGostou(gostouJSONs.size());
+			jsonPublicacao.setQuantidadeNaoGostou(naoGostouJSONs.size());
 			jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
 
 			// Verifica se a publicacao eh do usuario que esta logado
@@ -180,8 +221,7 @@ public class HomeController {
 			jsonPublicacaos.add(jsonPublicacao);
 		}
 
-		colunaInicial += publicacaoes.size() - 1;
-		
+		colunaInicial += publicacaoes.size();
 
 		return jsonPublicacaos;
 	}
