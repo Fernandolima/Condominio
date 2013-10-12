@@ -163,8 +163,17 @@ input[type="password"]:focus {
 /*LAYOUT USER*/
 
 #header-site.connected {
-    position: fixed;
-    /*z-index: 2000;*/
+	position: fixed;
+}
+
+#home #header-site.connected {
+	z-index: 2000;
+}
+
+#contentSite {
+    background: #fff;
+    width: 960px;
+    margin: 0 auto;
 }
 
 #contentSite {
@@ -722,4 +731,51 @@ input#submitComment {
 
 
 #alterar-senha {
+	float: left;
+    margin-left: 1px;
+    width: 698px;
+}
+
+#alterar-senha h2 {
+	background-color: #DE2844;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 25px;
+    margin-top: 15px;
+    padding: 4px 0;
+    text-align: center;
+    width: 100%;
+}
+
+#content-alterar-senha {
+	border: 1px solid #DE2844;
+    float: left;
+    min-height: 100px;
+    width: 696px;
+    display: none;
+}
+
+#content-alterar-senha p {
+	float: left;
+    font-size: 15px;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+#frmAlterarSenha {
+	float: left;
+    height: 130px;
+    margin-top: 18px;
+    width: 100%;
+}
+
+#frmAlterarSenha label {
+	width: 160px;
+	margin-left: 140px;
+}
+
+#frmAlterarSenha label {
+	clear: both;
 }
