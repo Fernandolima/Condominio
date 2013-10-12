@@ -83,7 +83,20 @@
 								<h2>Editar Perfil</h2>
 							</div>
 							<div id="alterar-senha">
-								<h2>Alterar Senha</h2>
+								<h2 id="btn-alterar-senha">Alterar Senha</h2>
+								<div id="content-alterar-senha">
+									<p>Preencha os campos abaixo para alterar a sua senha</p>
+									<form action="#" method="POST" id="frmAlterarSenha">
+										<label>Senha atual:</label>
+										<input type="password" id="txtSenha" />
+										
+										<label>Nova Senha:</label>
+										<input type="password" id="txtNovaSenha" />
+										
+										<label>Confirmar Nova Senha:</label>
+										<input type="password" id="txtNovaSenhaConf" />
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
