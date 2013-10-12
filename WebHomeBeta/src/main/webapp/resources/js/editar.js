@@ -49,6 +49,7 @@ var EDITAR_PERFIL  = {
 			onSelect: EDITAR_PERFIL.showCoords,
 			onChange: EDITAR_PERFIL.showCoords,
             minSize: [243,243],
+            maxSize: [300,300],
             aspectRatio: 1
 		});
 	},
@@ -72,6 +73,13 @@ var EDITAR_PERFIL  = {
 		      	}
 
 		    });
+	 },
+	 
+	 abrirAlterarSenha: function(e) {
+		 
+		 e.preventDefault();
+		 $('#content-alterar-senha').toggle();
+		 
 	 }
 }
 
@@ -82,4 +90,6 @@ $(function() {
 	
 	//Quando clica em cortar foto
 	$('#cortarImagem').on('click', EDITAR_PERFIL.cortarFoto);
+	
+	$('#btn-alterar-senha').on('click', EDITAR_PERFIL.abrirAlterarSenha);
 });
