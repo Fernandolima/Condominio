@@ -502,3 +502,17 @@ body {
     width: auto;
     cursor: pointer;
 }
+
+/*Cadastro de espaços*/
+
+.espacos {
+	border-top: 1px solid #000000;
+    float: left;
+    min-height: 35px;
+    margin: 20px 0 0 15px;
+    width: 670px;
+}
+
+.espacos select {
+	margin-top: 10px;
+}
