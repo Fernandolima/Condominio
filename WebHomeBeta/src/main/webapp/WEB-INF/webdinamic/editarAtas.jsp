@@ -72,7 +72,7 @@
 				<section id="content-admin">
 					<div id="cadastrarAtas">
 						<h2>Cadastrar Atas</h2>
-						<form:form modelAttribute="editar" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
+						<form:form modelAttribute="editar" action="/WebHomeBeta/admin/atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
 							<div id="contentFrm">
 								<form:label for="tituloAta" path="titulo">Título:</form:label>
 								<form:input type="text" id="tituloAta" path="titulo" autocomplete="off" class="${(editar.titulo) ? '' : 'error'}" />
