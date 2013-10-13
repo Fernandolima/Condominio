@@ -8,7 +8,7 @@
 <html lang="pt_BR">
 <head>
 	<meta charset="UTF-8" />
-	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<title>Web Home - &Aacute;rea Administrativa - Cadastrar Espaços</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>" />
 	
@@ -55,56 +55,11 @@
 				</nav>		
 			
 			<section id="content-admin">
-				<h2>Cadastro de Blocos e Apartamentos</h2>
-				
-				<form:form modelAttribute="bloco" action="#" method="post" id="frmBlocos">
-					<div id="contentFrm">
-						<div class="blocos">
-							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
-							<form:input type="text" id="bloco" class="inputBloco" path="descricaoCondominioTO.bloco" autocomplete="off" />
-							 
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quantAp">Nº de Apartamentos:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quantAp" autocomplete="off" />
-							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatApAndares">Ap. por Andar:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
-							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.numeroInicial">Inicio da numeração:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
-							
-						</div>
-					</div>
-					<input type="button" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
-				</form:form>
-				
-				<div id="blocosCadastrados">
-					<h2>Blocos Cadastrados</h2>					
-					<c:choose>
-						<c:when test="${fn:length(listaBlocos) gt 0}">
-							<div id="tabelaBlocos">
-								<div class="lineTabelaBlocos">
-									<p class="itemBlocos pBloco title">Bloco</p>
-									<p class="itemBlocos title">Nº de Apartamentos</p>
-									<p class="itemBlocos title">Ap. por Andar</p>
-									<p class="itemBlocos title">Inicio da numeração</p>
-									<p class="itemBlocos title deleteBloco">Excluir</p>
-								</div>
-								<c:forEach items="${listaBlocos}" var="item" varStatus="num">
-							    	<div class="lineTabelaBlocos">
-										<p class="itemBlocos pBloco"><c:out value="${item.bloco}"/></p>
-										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
-										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
-										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
-										<p class="itemBlocos delete"><a href="#" data-id="<c:out value="${item.idbloco}"/>" class="btn-delete-bloco hidden">Delete</a></p>
-									</div>							    	
-							    </c:forEach>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<p class="nenhumResultado">Nenhum bloco cadastrado</p>
-						</c:otherwise>
-					</c:choose>
-				</div>
+				<h2>Cadastro de Espaços</h2>
+				<p>lista:</p>
+				<c:forEach items="${listaEspaco}" var="item" varStatus="num">
+					<p class="itemBlocos pBloco">--<c:out value="${item}"/></p>
+				</c:forEach>
 			</section>
 		</div>
 	</section>
