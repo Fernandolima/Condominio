@@ -58,7 +58,7 @@
 				<section id="content-admin">
 					<div id="cadastrarEnquete">
 						<h2>Cadastrar Enquete</h2>
-						<form:form modelAttribute="bean" action="enquetes/salvar" method="post" id="frmEnquetes" enctype="multipart/form-data">
+						<form:form modelAttribute="bean" action="/WebHomeBeta/admin/enquetes/salvar" method="post" id="frmEnquetes" enctype="multipart/form-data">
 							<div id="contentFrm">
 								<form:label for="tituloEnquete" path="enquetesTo.titulo">Título:</form:label>
 								<form:input type="text" id="tituloEnquete" path="enquetesTo.titulo" autocomplete="off" />
