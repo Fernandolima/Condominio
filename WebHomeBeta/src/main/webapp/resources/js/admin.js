@@ -67,11 +67,15 @@ var ADMIN = {
 	espacos: function(e) {
 		
 		var el = $(e).attr('value'),
-			divPai = $(e).closest('.espacos').find('.outroEspaco');
+			divPai = $(e).closest('.espacos').find('.outroEspaco'),
+			descricao = $(e).closest('.espacos').find('.descricaoArea');
 		
-		
+		descricao.val('');
+				
 		if(el === 'outro') {
-			divPai.html('<p>aaaaaaa</p>');
+			divPai.html('<label>Outro Espaço: </label><input type="text" name="novoespao" />');
+		} else {
+			divPai.html('');			
 		}
 	}
 }
