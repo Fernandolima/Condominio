@@ -61,10 +61,10 @@
 				</c:forEach>
 				<form method="post" id="formCadEspaco" action="">
 					<div id="content-espaco">
-						<div class="espacos">
-							<div class="comboEspaco" id="comboEspacoList">
+						<div class="espacos" data-posicao="0">
+							<div class="comboEspaco">
 								<label>Espaço:</label>
-								<select onchange="ADMIN.espacos(this)">
+								<select onchange="ADMIN.espacos(this)" id="comboEspacoList" class="selectArea 0" name="listaArea[0]">
 									<option value="">Selecione</option>
 									<option value="churrasqueira">Churrasqueira</option>
 									<option value="piscina">Piscina</option>
@@ -74,7 +74,7 @@
 							<div class="outroEspaco"></div>
 							<div class="elInput">
 								<label>Descrição: </label>
-								<input type="text" class="descricaoArea" />
+								<input type="text" class="descricaoArea" name="descricao[0]" />
 							</div>
 						</div>
 					</div>					

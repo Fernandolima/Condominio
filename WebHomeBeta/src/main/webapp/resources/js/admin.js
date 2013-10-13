@@ -86,20 +86,26 @@ var ADMIN = {
 		
 		var htmlEspaco = '';
 		
-		htmlEspaco += '<div class="espacos">';
-			htmlEspaco += '<div class="comboEspaco '+ADMIN.numeroEspaco+'"></div>';
+		htmlEspaco += '<div class="espacos" data-posicao="'+ADMIN.numeroEspaco+'">';
+			htmlEspaco += '<div class="comboEspaco '+ADMIN.numeroEspaco+'">';
+				htmlEspaco += '<label>Espaço:</label>';
+				htmlEspaco += '<select onchange="ADMIN.espacos(this)" class="selectArea '+ADMIN.numeroEspaco+'" name="listaArea['+ADMIN.numeroEspaco+']"></select>';
+			htmlEspaco += '</div>';
 			htmlEspaco += '<div class="outroEspaco"></div>';
 				htmlEspaco += '<div class="elInput">';
 				htmlEspaco += '<label>Descrição: </label>';
-				htmlEspaco += '<input type="text" class="descricaoArea" />';
+				htmlEspaco += '<input type="text" class="descricaoArea" name="descricao['+ADMIN.numeroEspaco+']" />';
 			htmlEspaco += '</div>';
 		htmlEspaco += '</div>';
 		
 		$('#content-espaco').append(htmlEspaco);
 		
-		var criado = $('.comboEspaco.'+ADMIN.numeroEspaco);
-		
-		$('#comboEspacoList').clone().appendTo(criado);	
+		var criado = $('.selectArea'),
+			espacos = '';
+					
+		$('#comboEspacoList option').each(function(e, val) {
+			criado.append(val);			
+		});
 		
 		ADMIN.numeroEspaco++;
 	}
