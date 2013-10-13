@@ -9,6 +9,15 @@ var EDITAR_PERFIL  = {
 	alterarFoto: function(e) {
 		var foto = $('#image').val();
 		
+		$('#container-foto').html('<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/>');
+  		$('#cortarImagem').hide();
+  		$('#editarFoto').css({
+  			'width': 'auto',
+  			'height': 'auto'
+  		});
+		
+		$('#editarFoto').modal();
+		
 		var larguraModal = 700,
 			alturaModal = 500,
 			largura = '',
@@ -29,6 +38,8 @@ var EDITAR_PERFIL  = {
 					 'width': largura,
 					 'height': altura
 				 });
+				 
+				 $('#cortarImagem').show();
 				 $('#cortarImagem').css('left', largura/2);
 				 $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" />');
 		         $('#editarFoto').modal({
@@ -68,7 +79,7 @@ var EDITAR_PERFIL  = {
 		      	url:'cropAndUpload',
 		      	success: function(e) {
 		      		$('#thumb-photo').attr('src', e);
-		      		$('.close-modal').trigger('click');
+		      		$('.close-modal').trigger('click');	    
 		      	}
 
 		    });
