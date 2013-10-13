@@ -51,8 +51,10 @@
 			
 			<!-- Modal HTML embedded directly into document -->
 		  	<div id="editarFoto" style="display:none;">
-		  		<div id="container-foto"></div>
-		  		<a href="#" id="cortarImagem">OK</a>
+		  		<div id="container-foto">
+		  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
+		  		</div>
+		  		<a href="#" id="cortarImagem" style="display: none">OK</a>
 		  	</div>
 		  	
 			<div id="main-site">			
@@ -61,7 +63,10 @@
 						<div id="photo-user">
 							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
 							<form:form modelAttribute="uploadControllerBean" id="trocarFoto" action="perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
-								<form:input path="fileData" id="image" type="file" onchange="EDITAR_PERFIL.alterarFoto(this)" />
+								<label for="image" class="inputFile">Alterar foto</label>
+								<form:input path="fileData" id="image" type="file" style="display:none;" onchange="EDITAR_PERFIL.alterarFoto(this)" />
+									
+								
 							</form:form>
 						</div>
 						<div id="nav-user">
