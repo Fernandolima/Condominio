@@ -20,6 +20,7 @@ public interface UsuarioDAO {
 		  public void update(int id, boolean b);
 		  public Usuario getByCargo(String cargo);
 		  public void update(int idUser, String senha);
+		  public List<Usuario> getLisAtivo(boolean ativo);
 		  
 	}
 
