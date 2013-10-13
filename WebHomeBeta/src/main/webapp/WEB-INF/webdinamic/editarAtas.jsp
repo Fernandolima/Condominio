@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/ckeditor.js"/>" type="text/javascript"></script>
 		
 		<script type="JavaScript">
 			function Validate() {
@@ -76,13 +77,16 @@
 							<div id="contentFrm">
 								<form:label for="tituloAta" path="titulo">Título:</form:label>
 								<form:input type="text" id="tituloAta" path="titulo" autocomplete="off" class="${(editar.titulo) ? '' : 'error'}" />
-								
+								<form:hidden path="idAtas"/>
 								<div class="elInput">
 									<textarea class="ckeditor" cols="80" id="editor1" name="atas" rows="10" class="${(editar.atas) ? '' : 'error'}">
 										<c:out value="${editar.atas}"/>
 									</textarea>
 								</div>
-								
+								<script type="text/javascript">
+									CKEDITOR.replace( 'editor1' );
+									CKEDITOR.instances['editor1'].updateElement();
+								</script>
 								<div class="elInput">								
 									<div id="file">Selecione um arquivo</div>
 									<input type="file" id="arquivo" name="file" />	
@@ -103,7 +107,6 @@
 		</footer> -->
 		
 		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/ckeditor.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/jquery-ui-1.10.3.custom.min.js"/>" type="text/javascript"></script>
 		<script>
 			$.datepicker.regional['pt-BR'] = {
