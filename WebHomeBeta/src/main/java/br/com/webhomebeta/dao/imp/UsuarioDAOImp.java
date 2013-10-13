@@ -137,11 +137,19 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				.setString(0, cargo).uniqueResult();
 	}
 
-	@Override
+	@Transactional
 	public void update(int idUser, String senha) {
 		factory.getCurrentSession()
 				.createSQLQuery("exec [dbo].[USUARIOS_UPDATE_SENHA_ATIVO] ?,?")
 				.setInteger(0, idUser).setString(1, senha).executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Usuario> getLisAtivo(boolean ativo) {
+		return factory.getCurrentSession()
+				.createQuery("from Usuario e where e.status = ?")
+				.setBoolean(0, ativo).list();
 	}
 
 }
