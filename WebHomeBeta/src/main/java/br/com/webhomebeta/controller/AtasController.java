@@ -1,16 +1,12 @@
 package br.com.webhomebeta.controller;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -31,7 +27,6 @@ import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
-import br.com.webhomebeta.to.AtasTo;
 import br.com.webhomebeta.validacao.ValidadorAtas;
 
 //atas de assembleia
@@ -87,6 +82,14 @@ public class AtasController {
 		model.put("usuario", getUsuario());
 		model.put("listaAtas", atas);
 		return new ModelAndView("listaAtas", model);
+
+	}
+
+	@RequestMapping(value = "listaAtasAtivas", method = RequestMethod.GET)
+	public ModelAndView listaAtas(ModelMap modelMap) {
+		modelMap.put("listaAtas", atasService.getList(true));
+
+		return new ModelAndView("listaAtasAtivas", modelMap);
 
 	}
 
