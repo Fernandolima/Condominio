@@ -62,6 +62,17 @@ var ADMIN = {
 		htmlGrafico = '';
 		});
 		
+	},
+	
+	espacos: function(e) {
+		
+		var el = $(e).attr('value'),
+			divPai = $(e).closest('.espacos').find('.outroEspaco');
+		
+		
+		if(el === 'outro') {
+			divPai.html('<p>aaaaaaa</p>');
+		}
 	}
 }
 
