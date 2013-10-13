@@ -29,7 +29,7 @@
 				<div id="data-user">
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
-					<a href="perfil">Configuracoes</a>
+					<a href="perfil">Configurações</a>
 					<span>|</span>
 					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
 				</div>
@@ -59,7 +59,7 @@
 				<div id="rightCol">
 					<div id="rigth-content">
 						<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean">
-							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Tá pensando em que?"></form:textarea>
+							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Está pensando em que?"></form:textarea>
 							<input type="button" id="submitComment" value="Publicar" />
 						</form:form>
 						<div id="main-comments"></div>
