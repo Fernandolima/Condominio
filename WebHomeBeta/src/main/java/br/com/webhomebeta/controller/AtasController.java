@@ -52,7 +52,7 @@ public class AtasController {
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
 	@RequestMapping(value = "admin/atas", method = RequestMethod.GET)
 	public ModelAndView Atas(ModelMap model) {
-		List<AtasEntity> atas = atasService.getList();
+		List<AtasEntity> atas = atasService.getListAtas();
 		uploadArquivobeanUsuarios.setUsuario(getUsuario());
 		model.put("listaAtas", atas);
 		model.put("usuario", getUsuario());
@@ -83,7 +83,7 @@ public class AtasController {
 	// Tela de Listar Atas
 	@RequestMapping(value = "admin/listaAtas", method = RequestMethod.GET)
 	public ModelAndView ListAtas(ModelMap model) {
-		List<AtasEntity> atas = atasService.getList();
+		List<AtasEntity> atas = atasService.getListAtas();
 		model.put("usuario", getUsuario());
 		model.put("listaAtas", atas);
 		return new ModelAndView("listaAtas", model);

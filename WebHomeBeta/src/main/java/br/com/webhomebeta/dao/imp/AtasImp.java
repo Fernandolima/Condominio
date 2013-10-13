@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.AtasDao;
 import br.com.webhomebeta.entity.AtasEntity;
+import br.com.webhomebeta.entity.Usuario;
 
 public class AtasImp implements AtasDao {
 
@@ -88,6 +89,14 @@ public class AtasImp implements AtasDao {
 		q.setInteger(0, idAtas);
 		q.setBoolean(1, atasAtiva);
 		q.executeUpdate();
+	}
+
+	@Transactional
+	public List<AtasEntity> getListAtas() {
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM ATAS").addEntity(AtasEntity.class);
+		@SuppressWarnings("unchecked")
+		List<AtasEntity> atas = q.list();
+		return atas;
 	}
 
 }

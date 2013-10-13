@@ -15,6 +15,8 @@ public interface AtasDao {
 
 	public List<AtasEntity> getAtas( boolean ativa);
 	
+	public List<AtasEntity> getListAtas();
+	
 	public void update(int idAtas, boolean atasAtiva);
 	
 	public AtasEntity getidAtas(int id);

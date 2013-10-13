@@ -22,6 +22,12 @@ public class AtasService {
 	public List<AtasEntity> getList(boolean ativa) {
 		return atasDao.getAtas(ativa);
 	}
+	
+	public List<AtasEntity> getListAtas() {
+		return atasDao.getListAtas();
+	}
+	
+	
 
 	public AtasEntity getidAtas(int id) {
 		return atasDao.getidAtas(id);
