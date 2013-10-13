@@ -57,7 +57,7 @@
 			<section id="content-admin">
 				<h2>Cadastro de Espaços</h2>
 				<p>lista:</p>
-				<c:forEach items="${listaEspaco}" var="item" varStatus="num">
+				<c:forEach items="${ListaEspaco}" var="item" varStatus="num">
 					<p class="itemBlocos pBloco">--<c:out value="${item}"/></p>
 				</c:forEach>
 			</section>
