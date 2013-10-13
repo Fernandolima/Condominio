@@ -1,4 +1,6 @@
 var ADMIN = {
+		
+	numeroEspaco : 1,
 	
 	init: function(){
 		
@@ -77,11 +79,34 @@ var ADMIN = {
 		} else {
 			divPai.html('');			
 		}
+	},
+	
+	addEspaco: function(e) {
+		e.preventDefault();
+		
+		var htmlEspaco = '';
+		
+		htmlEspaco += '<div class="espacos">';
+			htmlEspaco += '<div class="comboEspaco '+ADMIN.numeroEspaco+'"></div>';
+			htmlEspaco += '<div class="outroEspaco"></div>';
+				htmlEspaco += '<div class="elInput">';
+				htmlEspaco += '<label>Descrição: </label>';
+				htmlEspaco += '<input type="text" class="descricaoArea" />';
+			htmlEspaco += '</div>';
+		htmlEspaco += '</div>';
+		
+		$('#content-espaco').append(htmlEspaco);
+		
+		var criado = $('.comboEspaco.'+ADMIN.numeroEspaco);
+		
+		$('#comboEspacoList').clone().appendTo(criado);	
+		
+		ADMIN.numeroEspaco++;
 	}
 }
 
 $(function() {
-	console.log("a");
+
 	ADMIN.init();
 	//valida se está na página de cadastro
 	if($('#forgotPassword-view')[0]){
@@ -100,6 +125,8 @@ $(function() {
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 	
 	$('#btn-adiciona-opcao').on('click', ADMIN.onAddOpcao);
+	
+	$('#addEspaco').on('click', ADMIN.addEspaco);
 	
 	if($('#adminView')[0]) {
 	}

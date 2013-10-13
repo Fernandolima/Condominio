@@ -59,35 +59,28 @@
 				<c:forEach items="${listaEspaco}" var="item" varStatus="num">
 					<p class="itemBlocos pBloco">--<c:out value="${item}"/></p>
 				</c:forEach>
-				<div class="espacos">
-					<label>Espaço:</label>
-					<select onchange="ADMIN.espacos(this)">
-						<option value="">Selecione</option>
-						<option value="churrasqueira">Churrasqueira</option>
-						<option value="piscina">Piscina</option>
-						<option value="outro">Outro</option>
-					</select>
-					<div class="outroEspaco"></div>
-					<div class="elInput">
-						<label>Descrição: </label>
-						<input type="text" class="descricaoArea" />
-					</div>
-				</div>
-				
-				<div class="espacos">
-					<label>Espaço:</label>
-					<select onchange="ADMIN.espacos(this)">
-						<option value="">Selecione</option>
-						<option value="churrasqueira">Churrasqueira</option>
-						<option value="piscina">Piscina</option>
-						<option value="outro">Outro</option>
-					</select>
-					<div class="outroEspaco"></div>
-					<div class="elInput">
-						<label>Descrição: </label>
-						<input type="text" class="descricaoArea" />
-					</div>
-				</div>
+				<form method="post" id="formCadEspaco" action="">
+					<div id="content-espaco">
+						<div class="espacos">
+							<div class="comboEspaco" id="comboEspacoList">
+								<label>Espaço:</label>
+								<select onchange="ADMIN.espacos(this)">
+									<option value="">Selecione</option>
+									<option value="churrasqueira">Churrasqueira</option>
+									<option value="piscina">Piscina</option>
+									<option value="outro">Outro</option>
+								</select>
+							</div>
+							<div class="outroEspaco"></div>
+							<div class="elInput">
+								<label>Descrição: </label>
+								<input type="text" class="descricaoArea" />
+							</div>
+						</div>
+					</div>					
+					<input type="button" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
+					<a href="#" id="addEspaco" class="btnAdiciona">+</a>
+				</form>
 			</section>
 		</div>
 	</section>

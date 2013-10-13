@@ -363,7 +363,8 @@ body {
 	width: 500px;
 }
 
-#btn-adiciona-opcao {
+#btn-adiciona-opcao,
+.btnAdiciona {
 	background-color: #DE2844;
     color: #FFFFFF;
     float: right;
@@ -377,8 +378,19 @@ body {
     width: 30px;
 }
 
-#btn-adiciona-opcao:hover {
+#btn-adiciona-opcao:hover,
+.btnAdiciona:hover {
 	color: #BDE2F0;
+}
+
+#formCadEspaco .btnAdiciona {
+	margin-right: 0;
+	margin-top: 20px;
+}
+
+#formCadEspaco .btSubmit {
+	clear: none;
+	margin-left: 20px;
 }
 
 #btSubmitEnquete {
@@ -505,11 +517,17 @@ body {
 
 /*Cadastro de espaços*/
 
+#formCadEspaco {
+	float: left;
+	width: 670px;
+	margin: 20px 0 0 10px;
+}
+
 .espacos {
 	border-top: 1px solid #000000;
     float: left;
     min-height: 35px;
-    margin: 20px 0 0 15px;
+    margin-top: 15px;
     width: 670px;
 }
 
