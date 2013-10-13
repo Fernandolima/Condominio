@@ -33,36 +33,40 @@ public class UsuarioService {
 	}
 
 	public Usuario getUsuarioByLogin(String login) {
-		
+
 		return dao.getUsuarioByLogin(login);
 	}
-	
-	public void update(Usuario usuario){
-		
+
+	public void update(Usuario usuario) {
+
 		dao.update(usuario);
 	}
-	
-	public long getRowCount(boolean b){
+
+	public long getRowCount(boolean b) {
 		return dao.getRowCount(b);
 	}
-	
-	public Usuario getById(int id){
+
+	public Usuario getById(int id) {
 		return dao.getById(id);
 	}
-	
-	public void evitcCache(){
+
+	public void evitcCache() {
 		dao.evictCache();
 	}
-	
-	public void update(int id, boolean b){
+
+	public void update(int id, boolean b) {
 		dao.update(id, b);
 	}
-	
-	public Usuario getByCargo(String cargo){
+
+	public Usuario getByCargo(String cargo) {
 		return dao.getByCargo(cargo);
 	}
-	
-	public void update(int idUser, String senha){
+
+	public void update(int idUser, String senha) {
 		dao.update(idUser, senha);
+	}
+
+	public List<Usuario> getListAtiva(boolean usuario) {
+		return dao.getLisAtivo(usuario);
 	}
 }
