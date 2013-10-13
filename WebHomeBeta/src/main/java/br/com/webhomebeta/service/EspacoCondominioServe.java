@@ -18,6 +18,11 @@ public class EspacoCondominioServe {
 	public void save(EspacoCondominio condominio) {
 		condominioDao.save(condominio);
 	}
+	
+	public void saveEspaco(String espacoCondominio)
+	{
+		condominioDao.saveEspaco(espacoCondominio);
+	}
 
 	public void update(EspacoCondominio espacoCondominio) {
 		condominioDao.update(espacoCondominio);

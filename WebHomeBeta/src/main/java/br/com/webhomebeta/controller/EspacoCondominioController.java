@@ -1,5 +1,8 @@
 package br.com.webhomebeta.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -35,9 +38,18 @@ public class EspacoCondominioController {
 	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
 
 	@RequestMapping(value = "espaco", method = RequestMethod.GET)
-	private ModelAndView ExibirEspaco(ModelMap map) {
-		EspacoCondominioTo acessaLista = new EspacoCondominioTo();
-		acessaLista.getEspaco();
+	private ModelAndView ExibirEspaco(EspacoCondominioTo espacoCondominioTo,
+			ModelMap map) {
+		List<String> acessaLista = espacoCondominioTo.getEspaco();
+		{
+			for (String espacoCondominio : acessaLista) {
+
+				condominioServe.saveEspaco(espacoCondominio);
+
+			}
+		}
+		;
+		((EspacoCondominio) acessaLista).getEspaco();
 		map.put("ListaEspaco", acessaLista);
 		map.put("usuario", getUsuario());
 		return new ModelAndView("espaco", map);
@@ -49,14 +61,15 @@ public class EspacoCondominioController {
 			@ModelAttribute("bean") EspacoCondominioBean bean,
 			BindingResult result) {
 		// vare a lista e adiciona os dados do espaço.
-		for (String novoEespaco : bean.getListEspaco()) {
+		for (String novoEspaco : bean.getListEspaco()) {
 			// split divide a string em pedaços
-			String pedaco[] = novoEespaco.split(",");
-			EspacoCondominio espacoCondominio = new EspacoCondominio( pedaco[0], getUsuario().getNome(), pedaco[1]);
+			String pedaco[] = novoEspaco.split(",");
+			EspacoCondominio espacoCondominio = new EspacoCondominio(pedaco[0],
+					getUsuario().getNome(), pedaco[1]);
 			condominioServe.save(espacoCondominio);
 
 		}
-		
+
 	}
 
 	@RequestMapping(value = "deleteEspaco", method = RequestMethod.POST)

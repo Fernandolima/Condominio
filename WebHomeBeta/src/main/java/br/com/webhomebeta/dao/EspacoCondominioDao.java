@@ -12,6 +12,8 @@ import br.com.webhomebeta.entity.EspacoCondominio;
 public interface EspacoCondominioDao {
 	
 	public void save(EspacoCondominio espacoCondominio);
+	
+	public void saveEspaco(String espacoCondominio);
 
 	public void update(EspacoCondominio condominio);
 

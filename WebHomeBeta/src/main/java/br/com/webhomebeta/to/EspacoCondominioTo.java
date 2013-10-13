@@ -11,6 +11,14 @@ public class EspacoCondominioTo {
 	private int idUser;
 	private String nome;
 
+	
+	
+	
+	public EspacoCondominioTo(ArrayList<String> espaco) {
+		super();
+		this.espaco = espaco;
+	}
+
 	public EspacoCondominioTo() {
 		espaco.add("Piscina");
 		espaco.add("Salão de festa");
