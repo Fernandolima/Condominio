@@ -109,7 +109,7 @@ public class AtasController {
 		// banco.
 		uploadArquivobeanUsuarios = bean;
 
-		return "redirect:/atas";
+		return "redirect:/admin/atas";
 	}
 
 	public void ValidadorAtas(UploadArquivosAtasControllerBean atasBean) {
