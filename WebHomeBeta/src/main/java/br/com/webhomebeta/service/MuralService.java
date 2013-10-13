@@ -24,4 +24,8 @@ public class MuralService {
 	public List<Mural> getList(){
 		return muralDAO.getList();
 	}
+	
+	public void update(Mural mural){
+		muralDAO.update(mural);
+	}
 }

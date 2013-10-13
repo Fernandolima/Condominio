@@ -36,4 +36,10 @@ public class MuralDAOImp implements MuralDAO{
 		return factory.getCurrentSession().createCriteria(Mural.class).list();
 	}
 
+	@Override
+	public void update(Mural mural) {
+		factory.getCurrentSession().update(mural);
+		
+	}
+
 }

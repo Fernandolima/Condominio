@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,10 +48,12 @@ public class AtasController {
 	private UploadArquivosAtasControllerBean uploadArquivobeanUsuarios;
 
 	private ValidadorAtas validadorAtas = new ValidadorAtas();
+
 	// mapeia a URL principal (Atas) e retorna um novo objeto atas
 	@RequestMapping(value = "admin/atas", method = RequestMethod.GET)
-	public ModelAndView atas(ModelMap model) {
-		List<AtasEntity> atas = atasService.getList(true);
+	public ModelAndView Atas(ModelMap model) {
+		List<AtasEntity> atas = atasService.getList();
+		uploadArquivobeanUsuarios.setUsuario(getUsuario());
 		model.put("listaAtas", atas);
 		model.put("usuario", getUsuario());
 		model.put("bean", uploadArquivobeanUsuarios);
@@ -82,7 +83,7 @@ public class AtasController {
 	// Tela de Listar Atas
 	@RequestMapping(value = "admin/listaAtas", method = RequestMethod.GET)
 	public ModelAndView ListAtas(ModelMap model) {
-		List<AtasEntity> atas = atasService.getList(true);
+		List<AtasEntity> atas = atasService.getList();
 		model.put("usuario", getUsuario());
 		model.put("listaAtas", atas);
 		return new ModelAndView("listaAtas", model);
@@ -137,14 +138,6 @@ public class AtasController {
 	public ModelAndView update(@PathVariable("id") int id, String ata) {
 		AtasEntity atasEntity = atasService.getidAtas(id);
 		return new ModelAndView("editarAtas", "editar", atasEntity);
-
-	}
-
-	//inativa atas
-	@RequestMapping(value = "admin/atas/id={idAtas}", method = RequestMethod.GET)
-	public ModelAndView atasFalse(@RequestParam("idAtas") int idAtas) {
-		atasService.updateFalse(idAtas, false);
-		return new ModelAndView("desativarAtas", "desativar", atasEntity);
 
 	}
 
