@@ -72,7 +72,7 @@
 				<section id="content-admin">
 					<div id="cadastrarAtas">
 						<h2>Cadastrar Atas</h2>
-						<form:form modelAttribute="bean" action="atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
+						<form:form modelAttribute="bean" action="/WebHomeBeta/admin/atas/addArquivos" method="post" id="frmAtas" enctype="multipart/form-data">
 							<div id="contentFrm">
 								<form:label for="tituloAta" path="atasTo.titulo">Título:</form:label>
 								<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" class="${(bean.titulo) ? '' : 'error'}" />
