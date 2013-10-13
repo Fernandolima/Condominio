@@ -513,6 +513,15 @@ body {
     width: 670px;
 }
 
+.espacos label {
+	width: auto;
+}
+
+.espacos .elInput {
+	width: 670px;
+	float: left;
+}
+
 .espacos select {
 	margin-top: 10px;
 }
