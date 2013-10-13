@@ -42,10 +42,7 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 
 	@Transactional
 	public void saveEspaco(String espacoCondominio) {
-		Query q = factory.getCurrentSession().createSQLQuery(
-				"INSERT INTO [dbo].[ESPACO ([ESPACO] ,[ID_USER],[NOME],[DESCRICAO]) VALUES = ?,?,?,?");
-		q.setParameter(0, espacoCondominio);
-		q.executeUpdate();
+		factory.getCurrentSession().save(espacoCondominio);
 		
 	}
 
