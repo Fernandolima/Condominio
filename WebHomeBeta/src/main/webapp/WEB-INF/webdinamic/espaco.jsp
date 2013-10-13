@@ -60,12 +60,33 @@
 					<p class="itemBlocos pBloco">--<c:out value="${item}"/></p>
 				</c:forEach>
 				<div class="espacos">
+					<label>Espaço:</label>
 					<select onchange="ADMIN.espacos(this)">
+						<option value="">Selecione</option>
 						<option value="churrasqueira">Churrasqueira</option>
 						<option value="piscina">Piscina</option>
 						<option value="outro">Outro</option>
 					</select>
 					<div class="outroEspaco"></div>
+					<div class="elInput">
+						<label>Descrição: </label>
+						<input type="text" class="descricaoArea" />
+					</div>
+				</div>
+				
+				<div class="espacos">
+					<label>Espaço:</label>
+					<select onchange="ADMIN.espacos(this)">
+						<option value="">Selecione</option>
+						<option value="churrasqueira">Churrasqueira</option>
+						<option value="piscina">Piscina</option>
+						<option value="outro">Outro</option>
+					</select>
+					<div class="outroEspaco"></div>
+					<div class="elInput">
+						<label>Descrição: </label>
+						<input type="text" class="descricaoArea" />
+					</div>
 				</div>
 			</section>
 		</div>
