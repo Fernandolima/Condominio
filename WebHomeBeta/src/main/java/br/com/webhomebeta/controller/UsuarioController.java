@@ -1,7 +1,6 @@
 package br.com.webhomebeta.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,17 +12,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.UsuarioControllerBean;
-import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
-
 import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.PerfilService;
@@ -74,6 +70,24 @@ public class UsuarioController {
 		return usuario;
 	}
 
+	@RequestMapping(value = "listaUsuarioAtivos", method = RequestMethod.GET)
+	public ModelAndView listaUsuario(ModelMap modelMap) {
+		modelMap.put("listaUsuario", usuarioService.getListAtiva(true));
+
+		return new ModelAndView("listaUsuarioAtivos", modelMap);
+
+	}
+	
+	@RequestMapping(value = "listaUsuarioInativo", method = RequestMethod.GET)
+	public ModelAndView listaOff(ModelMap modelMap) {
+		modelMap.put("listaUsuarioOff", usuarioService.getListAtiva(false));
+
+		return new ModelAndView("listaUsuarioInativo", modelMap);
+
+	}
+	
+	
+	
 	// Pega o Objeto usuario e salva na tabela USER no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "add", method = RequestMethod.POST)
