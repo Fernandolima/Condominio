@@ -49,7 +49,6 @@ var EDITAR_PERFIL  = {
 			onSelect: EDITAR_PERFIL.showCoords,
 			onChange: EDITAR_PERFIL.showCoords,
             minSize: [243,243],
-            maxSize: [300,300],
             aspectRatio: 1
 		});
 	},
