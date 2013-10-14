@@ -467,10 +467,10 @@ body {
 #adminView #graficoEnquete p.labelResposta {
 	float: left;
     overflow: hidden;
-    text-align: right;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 225px;
+    max-width: 225px;
 }
 
 .statusResposta {
