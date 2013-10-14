@@ -7,7 +7,7 @@ var ADMIN = {
 		$.ajax({
 		 	url: "inserirEspaco", 
 		    type: 'POST',
-		   		    data: "{\"novoEspaco\":\"testeNOvoEpsaco\",\"descricao\":\"descricao do novo espaco\",\"idUser\":2}", 
+		    //data: "[{\"novoEspaco\":\"testeNOvoEpsaco\",\"descricao\":\"descricao do novo espaco\",\"idUser\":2}]", 
 		    contentType: 'application/json',
 		    mimeType: 'application/json',
 		    success: function(data) { 
