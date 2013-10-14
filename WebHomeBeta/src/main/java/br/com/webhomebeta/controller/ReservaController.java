@@ -73,7 +73,7 @@ public class ReservaController {
 	}
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
-	@RequestMapping(value = "reserva", method = RequestMethod.GET)
+	@RequestMapping(value = "salvReserva", method = RequestMethod.GET)
 	public boolean listaReserva(@RequestParam("data") Date date,
 			@RequestParam("nome") String nome,
 			@RequestParam("idUser") int idUser) {
