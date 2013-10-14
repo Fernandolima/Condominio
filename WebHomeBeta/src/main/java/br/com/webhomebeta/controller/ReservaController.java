@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Parent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.ReservaControllerBean;
@@ -26,6 +29,8 @@ import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.ReservaService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
+import br.com.webhomebeta.to.ReservaTO;
+import br.com.webhomebeta.validacao.ValidadorEspaco;
 import br.com.webhomebeta.entity.Reserva;
 
 ;
@@ -40,7 +45,11 @@ public class ReservaController {
 	@Autowired
 	private EspacoCondominioServe espacoCondominioServe;
 	@Autowired
+	private EspacoCondominioController espacoCondominioController;
+	@Autowired
 	private ReservaControllerBean reservaControllerBean;
+
+	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
 
 	private Reserva reserva;
 
@@ -50,7 +59,8 @@ public class ReservaController {
 
 		model.put("usuario", getUsuario());
 		model.put("bean", reservaControllerBean);
-
+		model.put("listaReserva",
+				espacoCondominioServe.getLisEspacoCondominios());
 		return new ModelAndView("reserva", model);
 	}
 
@@ -59,15 +69,26 @@ public class ReservaController {
 			BindingResult result) {
 		reservaService.delete(reserva);
 
-		return "redirect:/reserva/delete";
+		return "redirect:/reserva";
 	}
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
-	@RequestMapping(value = "listaReserva", method = RequestMethod.GET)
-	public ModelAndView listaReserva(ModelMap model) {
-		model.put("listaReserva", reservaService.getLisReservas());
+	@RequestMapping(value = "reserva", method = RequestMethod.GET)
+	public boolean listaReserva(@RequestParam("data") Date date,
+			@RequestParam("nome") String nome,
+			@RequestParam("idUser") int idUser) {
 
-		return new ModelAndView("listaReserva", model);
+		for (Reserva reserva : reservaService.getLisReservas()) {
+
+			if (reserva.getDateReserva() == date) {
+				return false;
+			} else {
+				reserva.getDateReserva();
+				reservaService.save(reserva);
+			}
+
+		}
+		return true;
 
 	}
 

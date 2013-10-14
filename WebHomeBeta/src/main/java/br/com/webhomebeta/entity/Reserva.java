@@ -1,6 +1,5 @@
 package br.com.webhomebeta.entity;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,6 +20,8 @@ public class Reserva {
 	@Column(name = "RESERVA")
 	private String reserva;
 
+	@Column(name = "PRE_RESERVA")
+	private String preReserva;
 
 	@Column(name = "DATA_RESERVA")
 	private Date dateReserva;
@@ -39,6 +40,19 @@ public class Reserva {
 		
 
 	}
+
+
+	
+	public String getPreReserva() {
+		return preReserva;
+	}
+
+
+
+	public void setPreReserva(String preReserva) {
+		this.preReserva = preReserva;
+	}
+
 
 
 	public String getNome() {
