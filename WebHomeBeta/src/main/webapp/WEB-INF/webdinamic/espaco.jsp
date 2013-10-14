@@ -56,17 +56,13 @@
 			
 			<section id="content-admin" onload="ADMIN.inserirEspacoTeste()">
 				<h2>Cadastro de Espaços</h2>
-				<c:forEach items="${listaEspaco}" var="item" varStatus="num">
-					<p class="itemBlocos pBloco">--<c:out value="${item.key}"/></p>
-					<p class="itemBlocos pBloco">--<c:out value="${item.value}"/></p>
-				</c:forEach>
 				<div class="espacos">
 					<label>Espaço:</label>
 					<select onchange="ADMIN.espacos(this)">
 						<option value="">Selecione</option>
-						<option value="churrasqueira">Churrasqueira</option>
-						<option value="piscina">Piscina</option>
-						<option value="outro">Outro</option>
+						<c:forEach items="${listaEspaco}" var="item" varStatus="num">
+							<option value="${item.key}"><c:out value="${item.key}"/></p></option>
+						</c:forEach>
 					</select>
 					<div class="outroEspaco"></div>
 					<div class="elInput">
