@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import br.com.webhomebeta.entity.EspacoCondominio;
+import br.com.webhomebeta.entity.Reserva;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.UsuarioTO;
@@ -146,20 +147,19 @@ public class EmailServico {
 	}
 	
 	// manda email para reserva um espaço.
-	public void emailNovoEspacoReservado(final Usuario usuario , final EspacoCondominio espacoCondominio) {
+	public void emailNovoEspacoReservado(final Usuario usuario , final Reserva reserva) {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo(usuario.getEmail());
-				//message.setTo(espacoCondominio.getDateReservada());
 				message.setFrom(FROM);
 				message.setSubject(SUBJECT_ESPACO_ACEITO);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
-				//model.put("DataEspaco", espacoCondominio.getDateReservada());
+				model.put("DataEspaco", reserva.getPreReserva());
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(

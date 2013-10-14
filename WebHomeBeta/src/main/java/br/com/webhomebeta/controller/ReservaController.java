@@ -74,16 +74,18 @@ public class ReservaController {
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
 	@RequestMapping(value = "salvaReserva", method = RequestMethod.GET)
-	public boolean listaReserva(@RequestParam("data") Date date,
+	public boolean listaReserva(@RequestParam("data") String date,
 			@RequestParam("nome") String nome,
 			@RequestParam("idUser") int idUser) {
 
 		for (Reserva reserva : reservaService.getLisReservas()) {
 
-			if (reserva.getDateReserva() == date) {
+			if (reserva.getPreReserva() == date) {
 				return false;
 			} else {
+				
 				reserva.getDateReserva();
+				
 				reservaService.save(reserva);
 			}
 
