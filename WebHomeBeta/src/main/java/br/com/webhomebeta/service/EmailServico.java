@@ -1,31 +1,28 @@
 package br.com.webhomebeta.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
-import javax.persistence.UniqueConstraint;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Reserva;
 import br.com.webhomebeta.entity.Usuario;
-import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.UsuarioTO;
 
+/**
+ * @author Fernando
+ *
+ */
 @Service("emailServico")
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 public class EmailServico {
@@ -40,7 +37,7 @@ public class EmailServico {
 	private static final String TEMPLATE_ESQUECI_SENHA = "templateSenha.vm";
 	private static final String TEMPLATE_USUARIO_NAO_ACEITO = "templateUsuarioNaoAceito.vm";
 	private static final String TEMPLATE_USUARIO_ACEITO = "templateUsuarioAceito.vm";
-	private static final String TEMPLATE_ESPACO_ACEITO = "templateEspacoAceito.vm";
+	private static final String TEMPLATE_ESPACO_ACEITO = "templateEspaco.vm";
 	private static final String TEMPLATE_NOVO_USUARIO = "templateNovoUsuario.vm";
 	private static final String FROM = "webhomecondominios@gmail.com";
 	private static final String SUBJECT_NOVO_MORADOR = "Novo morador cadastrado!";
@@ -153,13 +150,14 @@ public class EmailServico {
 
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-				message.setTo(usuario.getEmail());
+				message.setTo("fernandolima66@gmail.com");
 				message.setFrom(FROM);
 				message.setSubject(SUBJECT_ESPACO_ACEITO);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
 				model.put("DataEspaco", reserva.getPreReserva());
+				model.put("link", "http://localhost:8080/WebHomeBeta");
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
@@ -227,7 +225,12 @@ public class EmailServico {
 	public static String getTemplateNovoUsuario() {
 		return TEMPLATE_NOVO_USUARIO;
 	}
-
+	
+	public static String getTemplateNovoEspaco() {
+		return SUBJECT_ESPACO_ACEITO;
+		
+	}
+	
 	
 
 }

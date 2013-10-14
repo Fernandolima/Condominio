@@ -25,6 +25,7 @@ import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.ReservaService;
 import br.com.webhomebeta.service.UsuarioService;
@@ -43,6 +44,7 @@ public class ReservaController {
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
+	private EmailServico emailServico;
 	private EspacoCondominioServe espacoCondominioServe;
 	@Autowired
 	private EspacoCondominioController espacoCondominioController;
@@ -85,7 +87,7 @@ public class ReservaController {
 			} else {
 				
 				reserva.getDateReserva();
-				
+				emailServico.emailNovoEspacoReservado(getUsuario(), reserva);
 				reservaService.save(reserva);
 			}
 
