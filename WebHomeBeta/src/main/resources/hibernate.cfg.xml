@@ -27,6 +27,7 @@
 		<mapping class="br.com.webhomebeta.entity.Enquetes"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Opcao"></mapping>
 		<mapping class="br.com.webhomebeta.entity.OpcaoVotada"></mapping>
+		<mapping class="br.com.webhomebeta.entity.Mural"></mapping>
 
 
 	</session-factory>

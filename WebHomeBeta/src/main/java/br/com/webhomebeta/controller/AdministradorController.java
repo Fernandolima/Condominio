@@ -44,8 +44,8 @@ public class AdministradorController {
 	List<EnqueteJSON> loadEnquetes() {
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
-		ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 		for (Enquetes e : enquetes) {
+			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
 					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
 			for (Opcao o : e.getOpcao()) {

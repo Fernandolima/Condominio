@@ -246,6 +246,8 @@
 	</bean>
 	<bean id="naoGostouService" class="br.com.webhomebeta.service.NaoGostouService"></bean>
 	<bean id="naoGostouDAO" class="br.com.webhomebeta.dao.imp.NaoGostouDAOImp"></bean>
+	<bean id="muralService" class="br.com.webhomebeta.service.MuralService"></bean>
+	<bean id="muralDAO" class="br.com.webhomebeta.dao.imp.MuralDAOImp"></bean>
 
 
 </beans>

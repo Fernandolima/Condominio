@@ -2,11 +2,14 @@ package br.com.webhomebeta.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.webhomebeta.dao.MuralDAO;
 import br.com.webhomebeta.entity.Mural;
 
 public class MuralService {
 	
+	@Autowired
 	private MuralDAO muralDAO;
 	
 	public Mural save(Mural mural){
