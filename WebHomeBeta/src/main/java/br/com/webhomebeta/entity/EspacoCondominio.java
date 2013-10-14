@@ -16,7 +16,7 @@ public class EspacoCondominio {
 	@Column(name = "ID_ESPACO")
 	private int idEspaco;
 
-	@Column(name = "ESPACOS")
+	@Column(name = "ESPACO")
 	private String espaco;
 	
 
