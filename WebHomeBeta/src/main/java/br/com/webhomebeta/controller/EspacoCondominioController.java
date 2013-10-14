@@ -39,8 +39,6 @@ public class EspacoCondominioController {
 
 	private EspacoCondominio condominio;
 
-	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
-	
 	private HashMap<String, String> espacos = new HashMap<>();
 
 	@RequestMapping(value = "espaco", method = RequestMethod.GET)
@@ -71,19 +69,20 @@ public class EspacoCondominioController {
 	}
 
 	@RequestMapping(value = "inserirEspaco", method = RequestMethod.POST)
-	public @ResponseBody EspacoCondominioJSON InserirEspaco(@RequestBody final EspacoCondominioJSON condominioJSON) {
+	public @ResponseBody List<EspacoCondominioJSON> InserirEspaco(@RequestBody final List<EspacoCondominioJSON> condominioJSON) {
 
-		//for (EspacoCondominioJSON espacoJSON : condominioJSON) {
-			// split divide a string em pedaços
-			// String pedaco[] = novoEspaco.split(",");
+		for (EspacoCondominioJSON espacoJSON : condominioJSON) {
+			
 			EspacoCondominio espacoCondominio = new EspacoCondominio();
-			espacoCondominio.setDescricao(condominioJSON.getDescricao());
-			espacoCondominio.setEspaco(condominioJSON.getNovoEspaco());
-			espacoCondominio.setIdUser(condominioJSON.getIdUser());
+			espacoCondominio.setDescricao(espacoJSON.getDescricao());
+			espacoCondominio.setEspaco(espacoJSON.getNovoEspaco());
+			espacoCondominio.setIdUser(espacoJSON.getIdUser());
+			
 			condominioServe.save(espacoCondominio);
+			
+			
+		}
 			return condominioJSON;
-		//}
-
 	}
 
 	@RequestMapping(value = "deleteEspaco", method = RequestMethod.POST)
