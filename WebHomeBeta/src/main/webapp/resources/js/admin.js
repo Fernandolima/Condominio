@@ -5,6 +5,21 @@ var ADMIN = {
 	init: function(){
 		
 		$.ajax({
+		 	url: "inserirEspaco", 
+		    type: 'POST', 
+		    dataType: 'json', 
+		    data: "{\"novoEspaco\":\"testeNOvoEpsaco\",\"descricao\":\"descricao do novo espaco\",\"idUser\":2}", 
+		    contentType: 'application/json',
+		    mimeType: 'application/json',
+		    success: function(data) { 
+		        alert(data.idUser + " " + data.novoEspaco + " " + data.descricao);
+		    },
+		    error:function(data,status,er) { 
+		        alert("error: "+data+" status: "+status+" er:"+er);
+		    }
+		});
+		
+		$.ajax({
 	    	type: 'post',
 	      	url:'loadEnquetes',
 	      	dataType: 'json',	

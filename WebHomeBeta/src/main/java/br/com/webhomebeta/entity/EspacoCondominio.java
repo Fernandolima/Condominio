@@ -23,21 +23,13 @@ public class EspacoCondominio {
 	@Column(name = "DESCRICAO")
 	private String descricao;
 	
-	
 
 	@Column(name = "ID_USER")
 	private int idUser;
 
 	@Column(name = "NOME")
 	private String nome;
-
-	public EspacoCondominio(String espaco, String nome, String descricao ) {
-		super();
-		this.espaco = espaco;
-		this.nome = nome;
-		this.descricao = descricao;
-		
-	}
+	
 	
 
 	public String getDescricao() {

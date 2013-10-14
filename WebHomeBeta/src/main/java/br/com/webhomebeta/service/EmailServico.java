@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.UsuarioTO;
@@ -38,10 +39,12 @@ public class EmailServico {
 	private static final String TEMPLATE_ESQUECI_SENHA = "templateSenha.vm";
 	private static final String TEMPLATE_USUARIO_NAO_ACEITO = "templateUsuarioNaoAceito.vm";
 	private static final String TEMPLATE_USUARIO_ACEITO = "templateUsuarioAceito.vm";
+	private static final String TEMPLATE_ESPACO_ACEITO = "templateEspacoAceito.vm";
 	private static final String TEMPLATE_NOVO_USUARIO = "templateNovoUsuario.vm";
 	private static final String FROM = "webhomecondominios@gmail.com";
 	private static final String SUBJECT_NOVO_MORADOR = "Novo morador cadastrado!";
 	private static final String SUBJECT_MORADOR_ACEITO = "Seu cadastro na WebHome foi aceito!";
+	private static final String SUBJECT_ESPACO_ACEITO = "A reserva realizada na WebHome foi aceita!";
 	private static final String SUBJECT_MORADOR_NAO_ACEITO = "Seu cadastro na WebHome foi rejeitado!";
 	private static final String SUBJECT_SENHA = "Recuperacao de senha - WebHome";
 
@@ -141,6 +144,36 @@ public class EmailServico {
 		};
 		this.mailSender.send(preparator);
 	}
+	
+	// manda email para reserva um espaço.
+	public void emailNovoEspacoReservado(final Usuario usuario , final EspacoCondominio espacoCondominio) {
+
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(usuario.getEmail());
+				//message.setTo(espacoCondominio.getDateReservada());
+				message.setFrom(FROM);
+				message.setSubject(SUBJECT_ESPACO_ACEITO);
+				// passando os parâmetros para o template
+				Map<String, Object> model = new HashMap<String, Object>();
+				model.put("nome", usuario.getNome());
+				//model.put("DataEspaco", espacoCondominio.getDateReservada());
+
+				@SuppressWarnings("deprecation")
+				String text = VelocityEngineUtils.mergeTemplateIntoString(
+						velocityEngine, TEMPLATE_ESPACO_ACEITO, model);
+				message.setText(text, true);
+			}
+		};
+		this.mailSender.send(preparator);
+	}
+	
+	
+	
+	
+	
 	
 	public JavaMailSender getMailSender() {
 		return mailSender;

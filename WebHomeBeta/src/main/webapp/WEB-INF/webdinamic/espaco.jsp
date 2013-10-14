@@ -54,10 +54,11 @@
 						<a href="/WebHomeBeta/admin/publicar" class="item-menu">Publicar</a>
 				</nav>		
 			
-			<section id="content-admin">
+			<section id="content-admin" onload="ADMIN.inserirEspacoTeste()">
 				<h2>Cadastro de Espaços</h2>
-				<c:forEach items="${espaco}" var="item" varStatus="num">
-					<p class="itemBlocos pBloco">--<c:out value="${item}"/></p>
+				<c:forEach items="${listaEspaco}" var="item" varStatus="num">
+					<p class="itemBlocos pBloco">--<c:out value="${item.key}"/></p>
+					<p class="itemBlocos pBloco">--<c:out value="${item.value}"/></p>
 				</c:forEach>
 				<div class="espacos">
 					<label>Espaço:</label>

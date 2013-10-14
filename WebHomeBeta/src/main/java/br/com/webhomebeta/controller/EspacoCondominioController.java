@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.EspacoCondominioBean;
 import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.json.EspacoCondominioJSON;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -36,39 +40,49 @@ public class EspacoCondominioController {
 	private EspacoCondominio condominio;
 
 	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
+	
+	private HashMap<String, String> espacos = new HashMap<>();
 
 	@RequestMapping(value = "espaco", method = RequestMethod.GET)
 	private ModelAndView ExibirEspaco(EspacoCondominioTo espacoCondominioTo,
 			ModelMap map) {
-		List<String> acessaLista = espacoCondominioTo.getEspaco();
-		{
-			for (String espacoCondominio : acessaLista) {
-
-				condominioServe.saveEspaco(espacoCondominio);
-
-			}
-		}
-		;
-		((EspacoCondominio) acessaLista).getEspaco();
-		map.put("ListaEspaco", acessaLista);
+		
+		espacos.put("Piscina", "Área de lazer");
+		espacos.put("Salão de festa", "Local reservado para festa entre familiares e amigos");
+		espacos.put("Quadra poliesportiva", "Quadra reservada para varios esportes");
+		espacos.put("Hipicas", "Espaço para se cuidar dos cavalos");
+		espacos.put("Campo de golf", "Espaço para se divertir");
+		espacos.put("Salão de jogos", "Area com espaco interativos de jogos, capacidade : 20 pessoas");
+		espacos.put("Hidromassagem", " Local para relaxar");
+		espacos.put("Quadra de futebol", " Espaço reservado para compeonatos de futebol. Capacidade : 20 pessoas");
+		espacos.put("Quadra de vôlei de areia", " Espaço reservado para vôlei. Capacidade : 20 pessoas");
+		espacos.put("Quadra de basquete", "Espaço reservado para basquete. Capacidade : 20 pessoas ");
+		espacos.put("Pista de cooper", "Espaço destinado para exercicios fisicos");
+		espacos.put("Cinema", "Espaço reservado para assistir filmes. Capacidade : 20 pessoas");
+		espacos.put("Academina", "Local para realizar exercicios fisicos");
+		espacos.put("Área exclusiva para cachorros", "Área reservada para animais no Condonínimo");
+		espacos.put("Vagas para visitantes", "Local para reservar vagas para visitantes ");
+		espacos.put("Churrasqueira", "Local para reserva churrasqueira");
+		
+		
+		map.put("listaEspaco", espacos);
 		map.put("usuario", getUsuario());
 		return new ModelAndView("espaco", map);
-
 	}
 
 	@RequestMapping(value = "inserirEspaco", method = RequestMethod.POST)
-	public void InserirEspaco(
-			@ModelAttribute("bean") EspacoCondominioBean bean,
-			BindingResult result) {
-		// vare a lista e adiciona os dados do espaço.
-		for (String novoEspaco : bean.getListEspaco()) {
-			// split divide a string em pedaços
-			String pedaco[] = novoEspaco.split(",");
-			EspacoCondominio espacoCondominio = new EspacoCondominio(pedaco[0],
-					getUsuario().getNome(), pedaco[1]);
-			condominioServe.save(espacoCondominio);
+	public @ResponseBody EspacoCondominioJSON InserirEspaco(@RequestBody final EspacoCondominioJSON condominioJSON) {
 
-		}
+		//for (EspacoCondominioJSON espacoJSON : condominioJSON) {
+			// split divide a string em pedaços
+			// String pedaco[] = novoEspaco.split(",");
+			EspacoCondominio espacoCondominio = new EspacoCondominio();
+			espacoCondominio.setDescricao(condominioJSON.getDescricao());
+			espacoCondominio.setEspaco(condominioJSON.getNovoEspaco());
+			espacoCondominio.setIdUser(condominioJSON.getIdUser());
+			condominioServe.save(espacoCondominio);
+			return condominioJSON;
+		//}
 
 	}
 

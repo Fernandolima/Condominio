@@ -41,7 +41,7 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 	}
 
 	@Transactional
-	public void saveEspaco(String espacoCondominio) {
+	public void saveEspaco(EspacoCondominio espacoCondominio) {
 		factory.getCurrentSession().save(espacoCondominio);
 		
 	}

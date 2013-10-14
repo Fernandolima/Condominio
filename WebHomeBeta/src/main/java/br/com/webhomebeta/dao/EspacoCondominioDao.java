@@ -13,7 +13,7 @@ public interface EspacoCondominioDao {
 	
 	public void save(EspacoCondominio espacoCondominio);
 	
-	public void saveEspaco(String espacoCondominio);
+	public void saveEspaco(EspacoCondominio espacoCondominio);
 
 	public void update(EspacoCondominio condominio);
 
