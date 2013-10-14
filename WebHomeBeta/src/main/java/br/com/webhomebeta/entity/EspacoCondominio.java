@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "[dbo][ESPACO_CONDOMINIO]")
+@Table(name = "[dbo].[ESPACO]")
 public class EspacoCondominio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_ESPACO_CONDOMINIO")
+	@Column(name = "ID_ESPACO")
 	private int idEspaco;
 
 	@Column(name = "ESPACOS")

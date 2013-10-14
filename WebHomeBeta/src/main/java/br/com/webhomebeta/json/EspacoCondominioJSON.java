@@ -2,6 +2,8 @@ package br.com.webhomebeta.json;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 public class EspacoCondominioJSON implements Serializable {
 	/**
 	 * 
@@ -10,12 +12,7 @@ public class EspacoCondominioJSON implements Serializable {
 	private String descricao;
 	private String novoEspaco;
 	private int idUser;
-	public EspacoCondominioJSON(String descricao, String novoEspaco, int idUser) {
-		super();
-		this.descricao = descricao;
-		this.novoEspaco = novoEspaco;
-		this.idUser = idUser;
-	}
+	
 
 	public String getDescricao() {
 		return descricao;
