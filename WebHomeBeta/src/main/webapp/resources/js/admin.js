@@ -4,19 +4,7 @@ var ADMIN = {
 	
 	init: function(){
 		
-		$.ajax({
-		 	url: "inserirEspaco", 
-		    type: 'POST',
-		    //data: "[{\"novoEspaco\":\"testeNOvoEpsaco\",\"descricao\":\"descricao do novo espaco\",\"idUser\":2}]", 
-		    contentType: 'application/json',
-		    mimeType: 'application/json',
-		    success: function(data) { 
-		        alert(data.idUser + " " + data.novoEspaco + " " + data.descricao);
-		    },
-		    error:function(data,status,er) { 
-		        alert("error: "+data+" status: "+status+" er:"+er);
-		    }
-		});
+		
 		
 		$.ajax({
 	    	type: 'post',
@@ -53,30 +41,35 @@ var ADMIN = {
 	},
 	
 	loadEnquete: function(data) {
-		//fazer uma requisição ajax para popular o grafico
-		var htmlGrafico = '';
+		var htmlGrafico = '',
+			numTotalVotos = ''
+			result = '';
 		
-		$.each(data, function(b, enquete){
-			htmlGrafico += '<div id = "statusEnquete">';
-			htmlGrafico += '<span id="iconEnquete"></span><h2>Enquete</h2>';
-			htmlGrafico += '<p><b>Enquete ativa no momento:</b>'+enquete.titulo+'<br/>';
-			htmlGrafico += '<b>Números de pessoas participando:</b>'+enquete.totalVotos+'<p>';
-			htmlGrafico += '<div id="graficoEnquete" class="load">';
-				
+		if(data.length > 0) {
+		
+			$.each(data, function(b, enquete){
+				htmlGrafico += '<div class="dataEnquete">';
+					htmlGrafico += '<p><b>Enquete ativa no momento:</b> '+enquete.titulo+'<br/>';
+					htmlGrafico += '<b>Números de pessoas participando:</b> '+enquete.totalVotos+'<p>';
+					numTotalVotos = enquete.totalVotos;
+					
+				$.each(enquete.opcoes, function(o, opc){
+						result = opc.quantidadeVotos * 100;
+						result = result / numTotalVotos;
+						htmlGrafico += '<div class="respostas">';
+							htmlGrafico += '<p class="labelResposta">'+opc.opcao+'</p>';
+							htmlGrafico += '<span class="statusResposta" style="width:'+result+'px;"></span>';
+							htmlGrafico += '<p class="numPessoas">'+opc.quantidadeVotos+'</p>';
+						htmlGrafico += '</div>'; 				
+				});
+				htmlGrafico += '</div>';
 			
-			$.each(enquete.opcoes, function(o, opc){
-				
-					htmlGrafico += '<div class="respostas">';
-					htmlGrafico += '<p class="labelResposta">'+opc.opcao+'</p>';
-					htmlGrafico += '<span class="statusResposta" style="width:100px;"></span>';
-					htmlGrafico += '<p class="numPessoas">'+opc.quantidadeVotos+'</p>';
-					htmlGrafico += '</div>';
+				$('#graficoEnquete').removeClass('load').append(htmlGrafico);
+				htmlGrafico = '';
 			});
-			htmlGrafico += '</div>';
-		$('#graficoEnquete').removeClass('load').html(htmlGrafico);
-		$('#enquetes').append(htmlGrafico);
-		htmlGrafico = '';
-		});
+		} else {
+			$('#graficoEnquete').removeClass('load').html('<p>Nenhuma enquete ativa no momento</p>');
+		}
 		
 	},
 	

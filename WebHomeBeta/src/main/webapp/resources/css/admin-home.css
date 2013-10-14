@@ -344,6 +344,12 @@ body {
 	float: left;
 }
 
+.dataEnquete {
+	border-top: 1px dotted #000000;
+    float: left;
+    padding-bottom: 30px;
+}
+
 #cadastrarEnquete #contentFrm {
 	width: 600px;
 	float: left;
@@ -464,7 +470,7 @@ body {
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 55px;
+    width: 225px;
 }
 
 .statusResposta {
