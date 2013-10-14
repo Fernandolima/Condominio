@@ -4,22 +4,10 @@ var ADMIN = {
 	
 	init: function(){
 		
-		var espaco = new Object();
-		espaco.novoEspaco = "teste";w
-		espaco.idUser = 2;
-		espaco.descricao = "descricao";
-		
-		var arrayEspaco = [espaco,espaco,espaco];
-		
-		var string = JSON.stringify(arrayEspaco);
-		
-		console.log(string);
-		
 		$.ajax({
 		 	url: "inserirEspaco", 
-		    type: 'POST', 
-		    dataType: 'json', 
-		    data: string, 
+		    type: 'POST',
+		   		    data: "{\"novoEspaco\":\"testeNOvoEpsaco\",\"descricao\":\"descricao do novo espaco\",\"idUser\":2}", 
 		    contentType: 'application/json',
 		    mimeType: 'application/json',
 		    success: function(data) { 
