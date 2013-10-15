@@ -54,25 +54,32 @@
 						<a href="/WebHomeBeta/admin/publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
-					<div id="cadastrarAtas">
-						<h2>Atas Cadastradas</h2>
+					<div id="cadastrarEnquetes">
+						<h2>Enquetes Cadastradas</h2>
 						
-						<!-- <div id="tabelaBlocos">
+						<div id="tabelaBlocos">
 							<div class="lineTabelaBlocos">
-								<p class="itemBlocos pBloco title">Título da Ata</p>
-								<p class="itemBlocos title">Data</p>
-								<p class="itemBlocos title">Editar</p>
-								<p class="itemBlocos title">Download</p>
+								<p class="itemBlocos pBloco title">Título</p>
+								<p class="itemBlocos title">Status</p>
+								<p class="itemBlocos excluir">Excluir</p>
+								<p class="itemBlocos excluir">Visualizar</p>
 							</div>
-							<c:forEach items="${listaAtas}" var="item">
+							<c:forEach items="${listaEnquetes}" var="item">
 						    	<div class="lineTabelaBlocos">
-									<p class="itemBlocos pBloco"><c:out value="${item.titulo}"/></p>
-									<p class="itemBlocos"><c:out value="${item.dataCriacao}"/></p>
-									<p class="itemBlocos"><a href="atas/update?<c:out value="${item.idAtas}"/>">Editar</a></p>
-									<p class="itemBlocos"><a href="<c:out value="${item.arquivo}" />" target="_blank">Baixar</a></p>
+									<p class="itemBlocos pBloco"><c:out value="${item.enquete}"/></p>
+									<c:choose>
+										<c:when test="${item.ativa}">
+									    	<a href="#" class="itemBlocos desativarEnquete" data-enquete="<c:out value="${item.idEquete}"/>">Desativar</a>
+									  	</c:when>
+									  	<c:otherwise>
+									    	<a href="#" class="itemBlocos ativarEnquete" data-enquete="<c:out value="${item.idEquete}"/>">Ativar</a>
+									  	</c:otherwise>
+									</c:choose>
+									<a href="#" class="itemBlocos excluirEnquete" data-enquete="<c:out value="${item.idEquete}"/>">Excluir</a>
+									<a href="#" class="itemBlocos visualizarEnquete" data-enquete="<c:out value="${item.idEquete}"/>">Visualizar</a>
 								</div>							    	
 						    </c:forEach>
-						</div> -->
+						</div>
 									
 					</div>
 				</section>

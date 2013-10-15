@@ -17,7 +17,7 @@
 		
 		
 	<head>
-	<body id="cadastrar-atasView">
+	<body id="listarEnquetesView">
 		<header id="header-site">
 			<div class="content">
 				<h1><a href="../admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>

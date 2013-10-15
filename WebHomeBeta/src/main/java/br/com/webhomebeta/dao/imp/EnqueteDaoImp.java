@@ -39,8 +39,9 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Enquetes> getEnquetes() {
-		return factory.getCurrentSession().createCriteria(Enquetes.class)
-				.list();
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ENQUETES]").addEntity(Enquetes.class);
+		return q.list();
+		
 	}
 
 	@Override
@@ -53,9 +54,9 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@Override
 	@Transactional
 	public List<Enquetes> getListAtiva(boolean ativa) {
-		return factory.getCurrentSession()
-				.createQuery("from Enquetes e where e.isAtiva = ?")
-				.setBoolean(0, ativa).list();
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ENQUETES] WHERE ATIVA = ?").addEntity(Enquetes.class);
+		q.setParameter(0, ativa);
+		return q.list();
 	}
 
 	@Transactional

@@ -328,7 +328,8 @@ body {
 	overflow: hidden;
 }
 
-#cadastrarAtas .itemBlocos.pBloco {
+#cadastrarAtas .itemBlocos.pBloco,
+#listarEnquetes .itemBlocos.pBloco {
 	overflow: hidden;
     padding: 0 10px;
     text-align: left;
@@ -342,6 +343,16 @@ body {
 #cadastrarEnquete {
 	width: 645px;
 	float: left;
+}
+
+#cadastrarEnquetes .itemBlocos {
+	width: 105px;
+}
+
+#cadastrarEnquetes .itemBlocos.pBloco {
+	padding-left: 10px;
+    text-align: left;
+    width: 340px;
 }
 
 .dataEnquete {

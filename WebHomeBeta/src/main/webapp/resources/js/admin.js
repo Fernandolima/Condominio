@@ -4,14 +4,14 @@ var ADMIN = {
 	
 	init: function(){
 		
-		
-		
-		$.ajax({
-	    	type: 'post',
-	      	url:'loadEnquetes',
-	      	dataType: 'json',	
-	      	success: ADMIN.loadEnquete
-		});
+		if($('#adminView')[0]) {
+			$.ajax({
+		    	type: 'post',
+		      	url:'loadEnquetes',
+		      	dataType: 'json',	
+		      	success: ADMIN.loadEnquete
+			});
+		}
 	},	
 		
 	esqueciMinhaSenha: function() {
