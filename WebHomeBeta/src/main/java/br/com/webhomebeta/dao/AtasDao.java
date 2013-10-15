@@ -21,7 +21,7 @@ public interface AtasDao {
 	
 	public AtasEntity getidAtas(int id);
 	
-	public void updadeAtas(int id , String ata);
+	public void updadeAtas(int id , String ata, String titulo);
 
 	public void delete(AtasEntity atasEntity);
 

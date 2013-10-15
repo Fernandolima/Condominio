@@ -147,8 +147,8 @@ public class AtasController {
 	@RequestMapping(value = "admin/updateAtas", method = RequestMethod.POST)
 	public String updateAtas(@ModelAttribute("editar") AtasEntity atasEntity,
 			BindingResult result) {
-		atasService.updateAtas(atasEntity.getIdAtas(), atasEntity.getAtas());
-		return "redirect:/listaAtas";
+		atasService.updateAtas(atasEntity.getIdAtas(), atasEntity.getAtas(), atasEntity.getTitulo());
+		return "redirect:/admin/listaAtas";
 
 	}
 

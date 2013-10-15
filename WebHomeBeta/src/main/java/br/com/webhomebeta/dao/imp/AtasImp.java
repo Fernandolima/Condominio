@@ -66,14 +66,15 @@ public class AtasImp implements AtasDao {
 	}
 
 	@Transactional
-	public void updadeAtas(int id, String ata) {
+	public void updadeAtas(int id, String ata, String titulo) {
 		Query q = factory
 				.getCurrentSession()
 				.createSQLQuery(
-						"UPDATE [dbo].[ATAS] SET ATAS = ? WHERE ID_ATAS = ?")
+						"UPDATE [dbo].[ATAS] SET ATAS = ? , TITULO = ? WHERE ID_ATAS = ? ")
 				.addEntity(AtasEntity.class);
 		q.setString(0, ata);
-		q.setInteger(1, id);
+		q.setString(1, titulo);
+		q.setInteger(2, id);
 		q.executeUpdate();
 
 		// tem que ter um retorno
@@ -93,7 +94,7 @@ public class AtasImp implements AtasDao {
 
 	@Transactional
 	public List<AtasEntity> getListAtas() {
-		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM ATAS").addEntity(AtasEntity.class);
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM ATAS ORDER BY DATA_FORMAT DESC").addEntity(AtasEntity.class);
 		@SuppressWarnings("unchecked")
 		List<AtasEntity> atas = q.list();
 		return atas;

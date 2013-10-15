@@ -33,8 +33,8 @@ public class AtasService {
 		return atasDao.getidAtas(id);
 	}
 
-	public void updateAtas(int id, String ata) {
-		 atasDao.updadeAtas(id, ata);
+	public void updateAtas(int id, String ata, String titulo) {
+		 atasDao.updadeAtas(id, ata, titulo);
 	}
 
 	public void  updateFalse(int idAtas, boolean atasAtivas) {
