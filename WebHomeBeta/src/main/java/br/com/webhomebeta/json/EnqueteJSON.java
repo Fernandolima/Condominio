@@ -18,6 +18,7 @@ public class EnqueteJSON {
 		this.idUser = idUser;
 		this.totalVotos = totalVotos;
 	}
+	
 
 	public int getTotalVotos() {
 		return totalVotos;
