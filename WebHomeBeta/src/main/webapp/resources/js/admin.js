@@ -74,14 +74,13 @@ var ADMIN = {
 	},
 	
 	espacos: function(e) {
-		
 		var el = $(e).attr('value'),
 			divPai = $(e).closest('.espacos').find('.outroEspaco'),
 			descricao = $(e).closest('.espacos').find('.descricaoArea');
 		
 		descricao.val('');
 				
-		if(el === 'outro') {
+		if(el === 'Outro') {
 			divPai.html('<label>Outro Espaço: </label><input type="text" name="novoespao" />');
 		} else {
 			divPai.html('');			
@@ -115,6 +114,34 @@ var ADMIN = {
 		});
 		
 		ADMIN.numeroEspaco++;
+	},
+	
+	submitEspaco: function(e) {
+		e.preventDefault();
+		
+		var array = new Array();
+
+		$('.espacos').each(function(e){
+		var obj = new Object();
+		    obj.novoEspaco = $(this).find('.selectArea option:selected').val();
+		    obj.idUser = $('#idUser').val();
+		    obj.descricao = $(this).find('.descricaoArea').val();
+		    array.push(obj);
+		    
+		});
+
+		var dataForm = JSON.stringify(array);
+		$.ajax({
+			data: dataForm,
+	    	type: 'post',
+	      	url:'inserirEspaco',
+	      	contentType: 'application/json',
+	      	mimeType: 'application/json',
+	      	success: function(e) {
+	      		//to do: redirect para listar areas
+	      		console.log('resposta -', e);
+	      	}
+		});
 	}
 }
 
@@ -143,6 +170,8 @@ $(function() {
 	
 	if($('#adminView')[0]) {
 	}
+	
+	$('#btSubmitBlocos').on('click', ADMIN.submitEspaco);
 	
 	if($('#cadastrar-atasView')[0]) {
 		var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});

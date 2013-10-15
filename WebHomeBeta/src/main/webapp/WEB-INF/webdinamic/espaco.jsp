@@ -52,39 +52,33 @@
 						
 						<a href="/WebHomeBeta/admin/validarMoradores" class="item-menu">Morador</a>
 						<a href="/WebHomeBeta/admin/publicar" class="item-menu">Publicar</a>
-				</nav>		
-			
-			<section id="content-admin" onload="ADMIN.inserirEspacoTeste()">
-				<h2>Cadastro de Espaços</h2>
-				<div class="espacos">
-					<label>Espaço:</label>
-					<select onchange="ADMIN.espacos(this)">
-						<option value="">Selecione</option>
-						<c:forEach items="${listaEspaco}" var="item" varStatus="num">
-							<option value="${item.key}"><c:out value="${item.key}"/></p></option>
-						</c:forEach>
-					</select>
-					<div class="outroEspaco"></div>
-					<div class="elInput">
-						<label>Descrição: </label>
-						<input type="text" class="descricaoArea" />
-					</div>
-				</div>
+				</nav>	
 				
-				<div class="espacos">
-					<label>Espaço:</label>
-					<select onchange="ADMIN.espacos(this)">
-						<option value="">Selecione</option>
-						<option value="churrasqueira">Churrasqueira</option>
-						<option value="piscina">Piscina</option>
-						<option value="outro">Outro</option>
-					</select>
-					<div class="outroEspaco"></div>
-					<div class="elInput">
-						<label>Descrição: </label>
-						<input type="text" class="descricaoArea" />
-					</div>
-				</div>
+				<section id="content-admin">
+				<h2>Cadastro de Espaços</h2>
+				<form method="post" id="formCadEspaco" action="inserirEspaco" accept-charset="UTF-8">
+					<input type="hidden" name="idUser" id="idUser" value="<c:out value="${usuario.idUser}"/>" />
+					<div id="content-espaco">
+						<div class="espacos" data-posicao="0">
+							<div class="comboEspaco">
+								<label>Espaço:</label>
+								<select onchange="ADMIN.espacos(this)" id="comboEspacoList" class="selectArea 0" name="novoEspaco[0]">
+									<option value="">Selecione</option>
+									<c:forEach items="${listaEspaco}" var="item" varStatus="num">
+										<option value="${item.key}"><c:out value="${item.key}"/></option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="outroEspaco"></div>
+							<div class="elInput">
+								<label>Descrição: </label>
+								<input type="text" class="descricaoArea" name="descricao[0]" />
+							</div>
+						</div>
+					</div>					
+					<input type="button" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
+					<a href="#" id="addEspaco" class="btnAdiciona">+</a>
+				</form>
 			</section>
 		</div>
 	</section>
