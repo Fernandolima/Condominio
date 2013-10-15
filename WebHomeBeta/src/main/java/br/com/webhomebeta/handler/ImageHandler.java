@@ -35,8 +35,8 @@ public class ImageHandler {
 			Usuario usuario) {
 
 		// tamanho que a imagem ira ficar
-		int width = 700;
-		int height = 700;
+		int width = 300;
+		int height = 300;
 
 		File fileToBrowser = null;
 
@@ -72,7 +72,7 @@ public class ImageHandler {
 					ImageIO.write(originalImage, "PNG", fileToBrowser);
 
 			} else if (originalImage.getWidth() > originalImage.getHeight()) {
-				float percent = (700f / originalImage.getWidth()) * 100;
+				float percent = (300f / originalImage.getWidth()) * 100;
 				height = ((originalImage.getHeight() * (int) percent) - originalImage
 						.getHeight()) / 100;
 
@@ -88,7 +88,7 @@ public class ImageHandler {
 					ImageIO.write(rescaledImage, "PNG", fileToBrowser);
 
 			} else {
-				float percent = (700f / originalImage.getHeight()) * 100;
+				float percent = (300f / originalImage.getHeight()) * 100;
 				width = ((originalImage.getWidth() * (int) percent) - originalImage
 						.getWidth()) / 100;
 

@@ -142,6 +142,22 @@ var ADMIN = {
 	      		console.log('resposta -', e);
 	      	}
 		});
+	},
+	
+	deleteEnquete: function(e) {
+		e.preventDefault();
+		
+		var idEnquete = 'idEnquete='+$(this).attr('data-enquete');
+		
+		$.ajax({
+			data: idEnquete,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/enquetes/delete',
+	      	success: function(e) {
+	      		//to do: redirect para listar areas
+	      		console.log('resposta -', e);
+	      	}
+		});
 	}
 }
 
@@ -167,6 +183,8 @@ $(function() {
 	$('#btn-adiciona-opcao').on('click', ADMIN.onAddOpcao);
 	
 	$('#addEspaco').on('click', ADMIN.addEspaco);
+	
+	$('.excluirEnquete').on('click', ADMIN.deleteEnquete);
 	
 	if($('#adminView')[0]) {
 	}
