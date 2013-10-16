@@ -146,7 +146,7 @@ public class EnquetesController {
 		Enquetes enquete = enquetesService.get(idEnquete);
 		enquetesService.delete(enquete);
 
-		return "redirect:enquetes";
+		return "redirect:admin/enquetes/delete";
 	}
 
 }

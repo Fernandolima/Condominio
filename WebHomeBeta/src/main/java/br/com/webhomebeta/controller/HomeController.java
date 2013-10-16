@@ -222,7 +222,7 @@ public class HomeController {
 		}
 
 		colunaInicial += publicacaoes.size();
-
+		
 		return jsonPublicacaos;
 	}
 
