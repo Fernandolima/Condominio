@@ -1,5 +1,7 @@
 package br.com.webhomebeta.handler;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -34,9 +36,12 @@ public class ImageHandler {
 	public ImagePathAndSize getOriginalImagemResized(MultipartFile file,
 			Usuario usuario) {
 
-		// tamanho que a imagem ira ficar
-		int width = 300;
-		int height = 300;
+		int width = 0;
+		int height = 0;
+		// Pega a resolucao do monitor do usuario
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+		Dimension screenSize = toolkit.getScreenSize();
 
 		File fileToBrowser = null;
 
@@ -51,64 +56,390 @@ public class ImageHandler {
 		String imagemOriginal = "/WebHomeBeta/uploadedImgs/"
 				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
 
-		try {
+		if (screenSize.height > 899 && screenSize.width > 1599) {
+			width = 500;
+			height = 500;
 
-			caminho = new File(caminhoPasta);
-			if (!caminho.isDirectory()) {
-				caminho.mkdirs();
+			try {
+
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
+
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
+
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
+
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (500f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				} else {
+					float percent = (500f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-			BufferedImage originalImage = ImageIO
-					.read(new ByteArrayInputStream(file.getBytes()));
+		} else if (screenSize.height == 900 && screenSize.width == 1440) {
+			
+			width = 400;
+			height = 300;
+			
+			try {
 
-			if (originalImage.getWidth() < width
-					&& originalImage.getHeight() < height) {
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
 
-				fileToBrowser = new File(resultOriginal);
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
 
-				if (file.getOriginalFilename().endsWith("jpg"))
-					ImageIO.write(originalImage, "JPEG", fileToBrowser);
-				if (file.getOriginalFilename().endsWith("png"))
-					ImageIO.write(originalImage, "PNG", fileToBrowser);
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
 
-			} else if (originalImage.getWidth() > originalImage.getHeight()) {
-				float percent = (300f / originalImage.getWidth()) * 100;
-				height = ((originalImage.getHeight() * (int) percent) - originalImage
-						.getHeight()) / 100;
+					fileToBrowser = new File(resultOriginal);
 
-				rescaledImage = Scalr.resize(originalImage,
-						Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-						height, Scalr.OP_ANTIALIAS);
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
 
-				fileToBrowser = new File(resultOriginal);
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (400f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
 
-				if (file.getOriginalFilename().endsWith("jpg"))
-					ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
-				if (file.getOriginalFilename().endsWith("png"))
-					ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
 
-			} else {
-				float percent = (300f / originalImage.getHeight()) * 100;
-				width = ((originalImage.getWidth() * (int) percent) - originalImage
-						.getWidth()) / 100;
+					fileToBrowser = new File(resultOriginal);
 
-				rescaledImage = Scalr.resize(originalImage,
-						Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-						height, Scalr.OP_ANTIALIAS);
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
 
-				fileToBrowser = new File(resultOriginal);
+				} else {
+					float percent = (300f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
 
-				if (file.getOriginalFilename().endsWith("jpg"))
-					ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
-				if (file.getOriginalFilename().endsWith("png"))
-					ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
 
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if (screenSize.height == 768 && screenSize.width == 1366) {
+			
+			width = 300;
+			height = 300;
+			
+			try {
+
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
+
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
+
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
+
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (300f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				} else {
+					float percent = (300f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-			// salva imagem original
+		} else if (screenSize.height == 720 && screenSize.width == 1280) {
+			try {
+				
+				width = 300;
+				height = 300;
+				
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
+
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
+
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (300f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				} else {
+					float percent = (300f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else if (screenSize.height > 768 && screenSize.width > 1024) {
+			
+			width = 300;
+			height = 280;
+			
+			try {
+
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
+
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
+
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
+
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (300f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				} else {
+					float percent = (280f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else if (screenSize.height > 600 && screenSize.width > 800) {
+			try {
+
+				caminho = new File(caminhoPasta);
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
+
+				BufferedImage originalImage = ImageIO
+						.read(new ByteArrayInputStream(file.getBytes()));
+
+				if (originalImage.getWidth() < width
+						&& originalImage.getHeight() < height) {
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(originalImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(originalImage, "PNG", fileToBrowser);
+
+				} else if (originalImage.getWidth() > originalImage.getHeight()) {
+					float percent = (300f / originalImage.getWidth()) * 100;
+					height = ((originalImage.getHeight() * (int) percent) - originalImage
+							.getHeight()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				} else {
+					float percent = (300f / originalImage.getHeight()) * 100;
+					width = ((originalImage.getWidth() * (int) percent) - originalImage
+							.getWidth()) / 100;
+
+					rescaledImage = Scalr.resize(originalImage,
+							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
+							height, Scalr.OP_ANTIALIAS);
+
+					fileToBrowser = new File(resultOriginal);
+
+					if (file.getOriginalFilename().endsWith("jpg"))
+						ImageIO.write(rescaledImage, "JPEG", fileToBrowser);
+					if (file.getOriginalFilename().endsWith("png"))
+						ImageIO.write(rescaledImage, "PNG", fileToBrowser);
+
+				}
+
+				// salva imagem original
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return new ImagePathAndSize(imagemOriginal, width, height);
@@ -149,7 +480,7 @@ public class ImageHandler {
 
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDisk = new File(resultPerfil);
-				
+
 				ImageIO.write(cropedImage, "JPEG", fileToDisk);
 			}
 			if (file.getOriginalFilename().endsWith("png")) {
@@ -158,12 +489,14 @@ public class ImageHandler {
 			}
 
 			usuario.setImagem(imagemPerfil);
+			usuario.setImagemView(imagem43x43);
 			usuarioService.update(usuario);
 
 			// redimensiona imagem para o tamanho para 43x43
 
 			BufferedImage imagemRedimensionada43x43 = Scalr.resize(cropedImage,
-					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43, Scalr.OP_ANTIALIAS);
+					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43,
+					Scalr.OP_ANTIALIAS);
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
 				ImageIO.write(imagemRedimensionada43x43, "JPEG",
@@ -175,14 +508,16 @@ public class ImageHandler {
 						fileToDiskRedimensionada);
 			}
 
+			usuario.setImagem(imagemPerfil);
+			usuario.setImagemView(imagem43x43);
+			usuarioService.update(usuario);
 			publicacaoService.update(usuario.getIdUser(), imagem43x43);
-
 			comentarioService.update(usuario.getIdUser(), imagem43x43);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return imagemPerfil;
 	}
 

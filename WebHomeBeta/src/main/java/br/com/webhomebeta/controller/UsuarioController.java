@@ -45,7 +45,6 @@ public class UsuarioController {
 	// UsuarioControllerBean()
 	@RequestMapping(value = "cadastro", method = RequestMethod.GET)
 	public ModelAndView cadastro(ModelMap model) {
-		model.put("usuario", getUsuario());
 		model.put("bean", new UsuarioControllerBean());
 		// Retorna a pagina cadastro.jsp com um usuario criado
 		return new ModelAndView("cadastro", model);
@@ -128,8 +127,12 @@ public class UsuarioController {
 			Perfil perfil = new Perfil("", "", "", 0, "", usuario.getNome(),
 					"/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
+			
+			emailServico.emailNovoMorador(getUsuario());
 
-			return new ModelAndView("cadastro", "bean", bean);
+			return new ModelAndView("cadastroRealizado");
+			
+			
 		}
 
 		return new ModelAndView("cadastro", "bean", bean);

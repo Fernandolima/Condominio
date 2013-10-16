@@ -38,6 +38,23 @@ public class AdministradorController {
 	private DadosUsuarioBean bean;
 	@Autowired
 	private EnquetesService enquetesService;
+	
+	
+	@RequestMapping(value = "admin/enquete?id={id}", method = RequestMethod.GET)
+	public @ResponseBody EnqueteJSON showEnquete(@PathVariable("id") int id){
+		Enquetes e = enquetesService.get(id);
+		ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
+		EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
+				e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+		for (Opcao o : e.getOpcao()) {
+			OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
+					o.getOpcao(), o.getQuatVots());
+			opcaoJSONs.add(opcaoJSON);
+		}
+		enqueteJSON.setOpcoes(opcaoJSONs);
+		
+		return enqueteJSON;
+	}
 
 	@RequestMapping(value = "loadEnquetes", method = RequestMethod.POST)
 	public @ResponseBody

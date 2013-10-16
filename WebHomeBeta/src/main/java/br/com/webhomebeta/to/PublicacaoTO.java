@@ -1,12 +1,20 @@
 package br.com.webhomebeta.to;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import br.com.webhomebeta.entity.Comentario;
 import br.com.webhomebeta.entity.Usuario;
 
-public class PublicacaoTO {
+public class PublicacaoTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4876328284589933191L;
+
+
 
 	public PublicacaoTO() {
 		
