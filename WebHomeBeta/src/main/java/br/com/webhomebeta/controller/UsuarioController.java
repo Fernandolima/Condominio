@@ -50,25 +50,6 @@ public class UsuarioController {
 		return new ModelAndView("cadastro", model);
 	}
 
-	public Usuario getUsuario() {
-
-		Usuario usuario = null;
-		SecurityContext context = SecurityContextHolder.getContext();
-		if (context instanceof SecurityContext) {
-			// Pega as informacoes da autenticacao
-			Authentication authentication = context.getAuthentication();
-			if (authentication instanceof Authentication) {
-				// Pega o usuario que logou
-				usuario = usuarioService
-						.getUsuarioByLogin(((UserDetailsImp) authentication
-								.getPrincipal()).getUsername());
-
-			}
-		}
-
-		return usuario;
-	}
-
 	@RequestMapping(value = "listaUsuarioAtivos", method = RequestMethod.GET)
 	public ModelAndView listaUsuario(ModelMap modelMap) {
 		modelMap.put("listaUsuario", usuarioService.getListAtiva(true));
@@ -128,7 +109,7 @@ public class UsuarioController {
 					"/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
 			
-			emailServico.emailNovoMorador(getUsuario());
+			emailServico.emailNovoMorador(usuario);
 
 			return new ModelAndView("cadastroRealizado");
 			

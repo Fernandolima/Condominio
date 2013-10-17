@@ -60,7 +60,7 @@
 				</div>
 				<div class="elInput">
 					<form:form modelAttribute="mural" action="mural/save" method="post">
-					    <textarea class="ckeditor" cols="80" id="editor1" name="noticia" rows="120" class="">
+					    <textarea class="ckeditor" cols="80" id="editor1" name="noticia" rows="50" class="">
 					    </textarea>
 					</form:form>
 				</div>
