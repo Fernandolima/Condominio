@@ -12,6 +12,7 @@ public interface OpcaoDAO {
 
 	public Opcao getId(int id);
 	
+
 	public void update(int quantidadeVotos, int idEnquete);
 	
 	

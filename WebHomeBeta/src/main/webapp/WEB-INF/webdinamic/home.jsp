@@ -64,6 +64,21 @@
 						</form:form>
 						<div id="main-comments"></div>
 					</div>
+					<div id="enquete-content">
+						<h2 class="titleEnquete">Enquetes</h2>
+						<div id="mainEnqueteSite">
+							<c:forEach items="${listaEnquetes}" var="item">
+								<div class="enquete">
+									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
+									<div class="opcoesEnquete">
+									<c:forEach items="${item.opcoes}" var="opc">
+										<a class="opcEnq" href="#"><c:out value="${opc.opcao}"/></a>
+									</c:forEach>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

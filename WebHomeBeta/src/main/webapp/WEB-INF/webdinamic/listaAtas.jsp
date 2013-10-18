@@ -18,11 +18,11 @@
 	<body id="cadastrar-atasView">
 		<header id="header-site">
 			<div class="content">
-				<h1><a href="../admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
+				<h1><a href="/WebHomeBeta/admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="data-user">
 					<p>Ol&aacute;, <c:out value="${usuario.nome}"/><p>
 					<span>|</span>
-					<a href="#" title="Ver site">Ver site</a>
+					<a href="/WebHomeBeta/home" title="Ver site">Ver site</a>
 					<span>|</span>
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
 				</div>
@@ -42,6 +42,7 @@
 						<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
 						<ul class="sub-menu">
 							<li class="item-menu"><a href="/WebHomeBeta/admin/cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
+							<li class="item-menu"><a href="/WebHomeBeta/espaco" class="menu-drop">Cadastro de espaços</a></li>
 						</ul>
 						
 						<span class="item-menu title-menu-drop"><b>></b> Enquete</span>
@@ -51,7 +52,6 @@
 						</ul>
 						
 						<a href="/WebHomeBeta/admin/validarMoradores" class="item-menu">Morador</a>
-						<a href="/WebHomeBeta/admin/publicar" class="item-menu">Publicar</a>
 				</nav>
 				<section id="content-admin">
 					<div id="cadastrarAtas">

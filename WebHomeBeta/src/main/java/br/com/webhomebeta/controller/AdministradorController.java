@@ -96,7 +96,9 @@ public class AdministradorController {
 	}
 
 	@RequestMapping(value = "admin/validarMoradores")
-	public ModelAndView validarMoradores() {
+	public ModelAndView validarMoradores(ModelMap model) {
+		
+		model.put("usuario", getUsuario());
 
 		return new ModelAndView("validarMoradores", "listaUsuarios",
 				usuarioService.getUsuarioNaoAtivo());

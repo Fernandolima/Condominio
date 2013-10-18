@@ -28,6 +28,7 @@
 		<mapping class="br.com.webhomebeta.entity.Opcao"></mapping>
 		<mapping class="br.com.webhomebeta.entity.OpcaoVotada"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Mural"></mapping>
+		<mapping class="br.com.webhomebeta.entity.Informativo"></mapping>
 
 
 	</session-factory>

@@ -17,4 +17,5 @@ public class OpcaoVotadaService {
 	public OpcaoVotada get(int idUser){
 		return opcaoVotadaDAO.get(idUser);
 	}
+	
 }

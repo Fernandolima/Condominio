@@ -24,6 +24,7 @@ public class OpcaoService {
 
 	}
 	
+	
 	public void update(int quantidadeVotos, int idOpcao) {
 		opcaoDAO.update(quantidadeVotos, idOpcao);
 	}

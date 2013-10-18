@@ -1,10 +1,14 @@
 package br.com.webhomebeta.dao.imp;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.OpcaoDAO;
+import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Opcao;
 
 public class OpcaoDAOImp implements OpcaoDAO {
@@ -48,4 +52,6 @@ public class OpcaoDAOImp implements OpcaoDAO {
 				.setInteger(1, idOpcao).executeUpdate();
 
 	}
+
+	
 }

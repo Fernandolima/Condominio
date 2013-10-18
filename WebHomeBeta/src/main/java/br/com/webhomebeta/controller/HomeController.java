@@ -31,21 +31,27 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.MoradorControllerBean;
 import br.com.webhomebeta.entity.Comentario;
 
+import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.entity.Gostou;
 import br.com.webhomebeta.entity.NaoGostou;
+import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.ComentarioJSON;
 
 import br.com.webhomebeta.json.JsonPublicacao;
 
+import br.com.webhomebeta.json.EnqueteJSON;
 import br.com.webhomebeta.json.GostouJSON;
 import br.com.webhomebeta.json.NaoGostouJSON;
 import br.com.webhomebeta.json.NovaPublicacaoJSON;
 import br.com.webhomebeta.json.NovoComentarioJSON;
+import br.com.webhomebeta.json.OpcaoJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
 import br.com.webhomebeta.service.ComentarioService;
+import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.NotificacaoService;
+import br.com.webhomebeta.service.OpcaoService;
 import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -63,16 +69,25 @@ public class HomeController {
 	private MoradorControllerBean moradorControllerBean;
 	@Autowired
 	private NotificacaoService notificacaoService;
+	@Autowired
+	private EnquetesService enquetesService;
+	@Autowired
+	private OpcaoService opcaoService;
 
 	private int colunaInicial;
 
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
+		
+		
 
 		moradorControllerBean.setUsuario(getUsuario());
 
 		model.put("moradorControllerBean", moradorControllerBean);
+
+		model.put("listaEnquetes", getEnquetes());
+		model.put("usuario", getUsuario());
 
 		colunaInicial = 0;
 
@@ -169,7 +184,7 @@ public class HomeController {
 							.getData()), p.getImagem(),
 					new UsuarioPublicacaoJSON(p.getUsuarioPublicacao()
 							.getIdUser(), p.getUsuarioPublicacao().getNome()));
-			
+
 			ArrayList<GostouJSON> gostouJSONs = new ArrayList<>();
 			ArrayList<NaoGostouJSON> naoGostouJSONs = new ArrayList<>();
 
@@ -186,8 +201,7 @@ public class HomeController {
 								.getIdPublicacao());
 				naoGostouJSONs.add(gostouJSON);
 			}
-			
-			
+
 			// Varre os comentarios dentro da publicacao
 			for (Comentario c : p.getComentarios()) {
 				// Adiciona os dados do comentario
@@ -222,7 +236,7 @@ public class HomeController {
 		}
 
 		colunaInicial += publicacaoes.size();
-		
+
 		return jsonPublicacaos;
 	}
 
@@ -331,6 +345,24 @@ public class HomeController {
 		}
 
 		return usuario;
+	}
+	
+	public ArrayList<EnqueteJSON> getEnquetes(){
+		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
+		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
+		for (Enquetes e : enquetes) {
+			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
+			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+			for (Opcao o : e.getOpcao()) {
+				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
+						o.getOpcao(), o.getQuatVots());
+				opcaoJSONs.add(opcaoJSON);
+			}
+			enqueteJSON.setOpcoes(opcaoJSONs);
+			enqueteJSONs.add(enqueteJSON);
+		}
+		return enqueteJSONs;
 	}
 
 	private class CustomComparator implements Comparator<ComentarioJSON> {

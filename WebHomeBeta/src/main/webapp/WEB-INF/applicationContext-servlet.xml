@@ -43,8 +43,7 @@
 	<mvc:resources mapping="/uploadedArquivos/**" location="/uploadedArquivos/" />
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
-			<bean
-				class="br.com.webhomebeta.resolver.AtmoSpringControllerResolver" />
+			<bean class="br.com.webhomebeta.resolver.AtmoSpringControllerResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -238,16 +237,21 @@
 	<bean id="reservaService" class="br.com.webhomebeta.service.ReservaService"></bean>
 	<bean id="opcaoVotadaDAO" class="br.com.webhomebeta.dao.imp.OpcaoVotadaDAOImp"></bean>
 	<bean id="reservaDao" class="br.com.webhomebeta.dao.imp.ReservaDAOImp"></bean>
- 	<bean id="opcaoVotadaService" class="br.com.webhomebeta.service.OpcaoVotadaService"></bean>
- 	<bean id="opcaoService" class="br.com.webhomebeta.service.OpcaoService"></bean>
-	<bean id="opcaoDAO" class="br.com.webhomebeta.dao.imp.OpcaoDAOImp"></bean>		
-	<bean id="imageHandler" class = "br.com.webhomebeta.handler.ImageHandler" scope="session">
-		<aop:scoped-proxy/>
+	<bean id="opcaoVotadaService" class="br.com.webhomebeta.service.OpcaoVotadaService"></bean>
+	<bean id="opcaoService" class="br.com.webhomebeta.service.OpcaoService"></bean>
+	<bean id="opcaoDAO" class="br.com.webhomebeta.dao.imp.OpcaoDAOImp"></bean>
+	<bean id="imageHandler" class="br.com.webhomebeta.handler.ImageHandler"
+		scope="session">
+		<aop:scoped-proxy />
 	</bean>
 	<bean id="naoGostouService" class="br.com.webhomebeta.service.NaoGostouService"></bean>
 	<bean id="naoGostouDAO" class="br.com.webhomebeta.dao.imp.NaoGostouDAOImp"></bean>
 	<bean id="muralService" class="br.com.webhomebeta.service.MuralService"></bean>
 	<bean id="muralDAO" class="br.com.webhomebeta.dao.imp.MuralDAOImp"></bean>
+	<bean id="informativoDao" class="br.com.webhomebeta.dao.imp.InformativoDaoImp"></bean>
+	<bean id="informativoService" class="br.com.webhomebeta.service.InformativoService"></bean>
+	<bean id="informativoBean" class="br.com.webhomebeta.bean.InformativoBean"></bean>
+	
 
 
 </beans>
