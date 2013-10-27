@@ -1,158 +1,18 @@
-body#login-view {
-	background: #bde2f0; /* Old browsers */
-	background: -moz-linear-gradient(45deg,  #bde2f0 1%, #153c63 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,#bde2f0), color-stop(100%,#153c63)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* IE10+ */
-	background: linear-gradient(45deg,  #bde2f0 1%,#153c63 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bde2f0', endColorstr='#153c63',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+html { height: 100%; }
 
-}
-
-body#login-view {
+body#login {
 	background: url(../img/background-login.jpg) no-repeat center bottom;
-}
-
-#login {
-	background: #fff;
-	width: 300px;
-	height: 320px;
-	float: left;
-	position: relative;
-	left: 50%;
-	margin-left: -150px;
-	top: 50%;
-	margin-top: 150px;
-	padding: 10px;
-	border-radius: 200px 200px 0px 200px;
-	border: 0px solid #0F3242;	
-	-moz-border-radius: 200px 200px 0px 200px;
-	-webkit-border-radius: 200px 200px 0px 200px;	
-	
-	-webkit-box-shadow: 4px 4px 18px 0 #0F3242;
-	-moz-box-shadow: 4px 4px 18px 0 #0F3242;
-	box-shadow: 4px 4px 18px 0 #0F3242;
-}
-
-#login h1 {
-	width: 100%;
-	text-align: center;
-	font-size: 25px;
-	color: #DE2844;
-	text-transform: uppercase;
-	font-family: 'Chela One', Arial, Verdana;
-	float: left;
-	margin-top: 40px;
-}
-
-#warnningMessage {
-	width: 100%;
-	height: 15px;
-	float: left;
-	text-align: center;
-	font-size: 14px;
-	color: #DE2844;
-	font-weight: bold;
-	margin-top: 15px;
-	visibility: hidden;
-}
-
-#warnningMessage p {
-	margin-top: 0;
-}
-
-.error #warnningMessage {
-	visibility: visible;
-}
-
-.lblRemember {
-	width: 130px;
-	font-size: 12px;
-	float: left;
-}
-
-.inpRemember {
-	width: 10px;
-	float: left;
-}
-
-#contentRemember {
-	width: auto;
-	float: right;
-	margin-right: 26px;	
-}
-
-#frm-login {
-	float: left;
-	margin-top: 15px;
-}
-
-a#forgotPassword {
-	color: #153C63;
-	font-size: 12px;
-	float: right;
-	margin: 5px 20px 0 0;
-	clear: both;
-}
-
-#btSubmitLogin {
-	width: 60px;
-	height: 40px;
-}
-
-#load-login {
-	float: right;
-	margin:20px 30px 0 0;
-	display: none;
-	clear: both;
 }
 
 #noRegister {
 	float: right;
-	margin: 7px 20px 0 0;
-	clear: both;
+	margin-top: 10px;
 }
 
-#noRegister a {
-	color: #DE2844;
+#login .form-signin {
+	padding-bottom: 40px;
 }
 
-#noRegister a:hover {
-	text-decoration: none;
-}
-
-/* LAYOUT MOBILE*/
-
-@media screen and (max-width: 340px){
-	#login {
-		width: 100%;
-		border-radius: 0;
-		left: 0;
-		margin-left: 0;
-		padding: 0;
-		height: auto;
-		padding-bottom: 20px;
-	}
-
-	label {
-		width: 100%;
-		text-align: center;
-	}
-
-	input {
-		width: 95%;
-		padding-left: 2%;
-		padding-right: 2%;
-		margin-top: 5px;
-	}
-
-	a#forgotPassword {
-		margin: 5px 0 0 0;
-	}
-
-	#btSubmitLogin,
-	#noRegister {
-		margin-right: 0;
-	}
+#titleLogin {
+	text-align: center;
 }

@@ -6,110 +6,193 @@
 
 <!DOCTYPE html>
 <html lang="pt_BR">
-<head>
+	<head>
 	<meta charset="UTF-8" />
-	<title>Web Home - &Aacute;rea Administrativa</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>" />
-	
-	<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
-<head>
-<body id="list-user-register">
-	<header id="header-site">
-			<div class="content">
-				<h1><a href="/WebHomeBeta/admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
-				<div id="data-user">
-					<p>Ol&aacute;, <c:out value="${usuario.nome}"/><p>
-					<span>|</span>
-					<a href="/WebHomeBeta/home" title="Ver site">Ver site</a>
-					<span>|</span>
-					<a href="WebHomeBeta/j_spring_security_logout" title="Sair">Sair</a>
-				</div>
-			</div>
-		</header>
-	<section id="main-admin-home">
-		<div class="content">
-			<nav id="nav-admin">
-					<h2>Administrador</h2>
-						
-						<span class="item-menu title-menu-drop"><b>></b> Atas</span>
-						<ul class="sub-menu">
-							<li class="item-menu"><a href="/WebHomeBeta/admin/listaAtas" class="menu-drop">Listar Atas</a></li>
-							<li class="item-menu"><a href="/WebHomeBeta/admin/atas" class="menu-drop">Cadastrar Atas</a></li>
-						</ul>
-						
-						<span class="item-menu title-menu-drop"><b>></b> Condomínio</span>
-						<ul class="sub-menu">
-							<li class="item-menu"><a href="/WebHomeBeta/admin/cadastrarBlocos" class="menu-drop">Cadastro de blocos</a></li>
-							<li class="item-menu"><a href="/WebHomeBeta/espaco" class="menu-drop">Cadastro de espaços</a></li>
-						</ul>
-						
-						<span class="item-menu title-menu-drop"><b>></b> Enquete</span>
-						<ul class="sub-menu">
-							<li class="item-menu"><a href="/WebHomeBeta/admin/listaEnquetes" class="menu-drop">Listar Enquetes</a></li>
-							<li class="item-menu"><a href="/WebHomeBeta/admin/enquetes" class="menu-drop">Cadastrar Enquetes</a></li>
-						</ul>
-						
-						<a href="/WebHomeBeta/admin/validarMoradores" class="item-menu">Morador</a>
-				</nav>		
-			
-			<section id="content-admin">
-				<h2>Cadastro de Blocos e Apartamentos</h2>
-				
-				<form:form modelAttribute="bloco" action="#" method="post" id="frmBlocos">
-					<div id="contentFrm">
-						<div class="blocos">
-							<form:label for="bloco" path="descricaoCondominioTO.bloco">Bloco:</form:label>
-							<form:input type="text" id="bloco" class="inputBloco" path="descricaoCondominioTO.bloco" autocomplete="off" />
-							 
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quantAp">Nº de Apartamentos:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quantAp" autocomplete="off" />
-							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.quatApAndares">Ap. por Andar:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
-							
-							<form:label for="numAp" class="marginLabel" path="descricaoCondominioTO.numeroInicial">Inicio da numeração:</form:label>
-							<form:input type="text" id="numAp" class="inputBloco" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
-							
-						</div>
-					</div>
-					<input type="button" id="btSubmitBlocos" class="btSubmit" value="Enviar" />
-				</form:form>
-				
-				<div id="blocosCadastrados">
-					<h2>Blocos Cadastrados</h2>					
-					<c:choose>
-						<c:when test="${fn:length(listaBlocos) gt 0}">
-							<div id="tabelaBlocos">
-								<div class="lineTabelaBlocos">
-									<p class="itemBlocos pBloco title">Bloco</p>
-									<p class="itemBlocos title">Nº de Apartamentos</p>
-									<p class="itemBlocos title">Ap. por Andar</p>
-									<p class="itemBlocos title">Inicio da numeração</p>
-									<p class="itemBlocos title deleteBloco">Excluir</p>
-								</div>
-								<c:forEach items="${listaBlocos}" var="item" varStatus="num">
-							    	<div class="lineTabelaBlocos">
-										<p class="itemBlocos pBloco"><c:out value="${item.bloco}"/></p>
-										<p class="itemBlocos"><c:out value="${item.quantAp}"/></p>
-										<p class="itemBlocos"><c:out value="${item.quatApAndares}"/></p>
-										<p class="itemBlocos"><c:out value="${item.numeroInicial}" /></p>
-										<p class="itemBlocos delete"><a href="#" data-id="<c:out value="${item.idbloco}"/>" class="btn-delete-bloco hidden">Delete</a></p>
-									</div>							    	
-							    </c:forEach>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<p class="nenhumResultado">Nenhum bloco cadastrado</p>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</section>
-		</div>
-	</section>
-	<!-- <footer id="footer-site">
-		</footer> -->
-	<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-	<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
-</body>
+		<title>Web Home - &Aacute;rea Administrativa</title>
+		
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
+		
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
+		
+		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
+	</head>
+		
+	<body id="adminView">
+		
+		<div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/WebHomeBeta/admin">Web Home - Área Administrativa</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <c:out value="${usuario.nome}"/> <i class="caret"></i>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a tabindex="-1" href="/WebHomeBeta/home">Ver site</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li>
+                            <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/listaAtas"><i class="icon-chevron-right"></i> Listar Atas</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/atas"><i class="icon-chevron-right"></i> Cadastrar Atas</a>
+                        </li>
+                        <li class="active">
+                            <a href="/WebHomeBeta/admin/cadastrarBlocos"><i class="icon-chevron-right"></i> Cadastrar Blocos</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/espaco"><i class="icon-chevron-right"></i> Cadastrar Espaços</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/listaEnquetes"><i class="icon-chevron-right"></i> Listar Enquetes</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/enquetes"><i class="icon-chevron-right"></i> Cadastrar Enquetes</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/validarMoradores"><i class="icon-chevron-right"></i> Morador</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!--/span-->
+                <div class="span9" id="content">
+                	
+                	<div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Cadastro de blocos</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                     <form:form modelAttribute="bloco" class="form-horizontal" action="#" method="post" id="frmBlocos">
+                                      <fieldset>
+                                        <legend>Blocos do condimínio</legend>
+                                        <div class="control-group">
+                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.bloco">Bloco:</form:label>
+	                                        <div class="controls">
+	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.bloco" autocomplete="off" />
+	                                        </div>
+                                        </div>
+                                        <div class="control-group">
+                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quantAp">Número de apartamentos:</form:label>
+	                                        <div class="controls">
+	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quantAp" autocomplete="off" />
+	                                        </div>
+                                        </div>
+                                        <div class="control-group">
+                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quatApAndares">Apartamentos por andar:</form:label>
+	                                        <div class="controls">
+	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
+	                                        </div>
+                                        </div>
+                                        <div class="control-group">
+                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.numeroInicial">Início da numeração:</form:label>
+	                                        <div class="controls">
+	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
+	                                        </div>
+                                        </div>
+                                        <div class="form-actions">
+                                        	<input type="button" id="btSubmitBlocos" class="btn btn-primary" value="Salvar" />
+                                        </div>
+                                      </fieldset>
+                                    </form:form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                        
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Blocos Cadastrados</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+  									<table class="table" id="listaBlocos">
+						              <thead>
+						                <tr>
+						                  <th>Bloco</th>
+						                  <th>Nº de Apartamentos</th>
+						                  <th>Ap. por Andar</th>
+						                  <th>Inicio da numeração</th>
+						                  <th>Excluir</th>
+						                </tr>
+						              </thead>
+						              <tbody>
+						              	<c:choose>
+											<c:when test="${fn:length(listaBlocos) gt 0}">
+								              	<c:forEach items="${listaBlocos}" var="item" varStatus="num">
+									                <tr>
+									                  <td><c:out value="${item.bloco}"/></td>
+									                  <td><c:out value="${item.quantAp}"/></td>
+									                  <td><c:out value="${item.quatApAndares}"/></td>
+									                  <td><c:out value="${item.numeroInicial}" /></td>
+									                  <td><a href="#" data-id="<c:out value="${item.idbloco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a></td>
+									                </tr>
+									            </c:forEach>	
+									        </c:when>
+											<c:otherwise>
+												<tr>
+									                  <td colspan="5"><p class="nenhumResultado">Nenhum bloco cadastrado</p></td>
+									            </tr>
+											</c:otherwise>	
+										</c:choose>				                
+						              </tbody>
+						            </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>	
+                					
+                </div>
+            </div>
+            <hr>
+            <footer>
+                <p>&copy; Web Home</p>
+            </footer>
+        </div>
+        <!--/.fluid-container-->
+        
+        <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
+        
+        <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+                
+	</body>	
+</html>
 </html>

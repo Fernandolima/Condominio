@@ -34,10 +34,14 @@ var ADMIN = {
 		
 		var numEnquete = $('.opcaoEnquete').length;
 		
-		htmlOpcao += '<label for="listOpcoes">Opção '+ (numEnquete+1) + ':</label>';
-		htmlOpcao += '<input class="opcaoEnquete" type="text" autocomplete="off" value="" name="listOpcoes['+numEnquete+']">';
+		htmlOpcao += '<div class="control-group">';
+			htmlOpcao += '<label for="listOpcoes" path="enquetesTo.opcoes" class="control-label">Opção '+(numEnquete+1)+':</label>';
+			htmlOpcao += '<div class="controls">';
+				htmlOpcao += '<input type="text" path="listOpcoes['+numEnquete+']" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
+			htmlOpcao += '</div>';
+		htmlOpcao += '</div>';
 		
-		$('#contentFrm').append(htmlOpcao);
+		$('#contentOpcao').append(htmlOpcao);
 	},
 	
 	loadEnquete: function(data) {

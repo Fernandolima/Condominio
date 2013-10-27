@@ -21,6 +21,11 @@ time, mark, audio, video {
     background:transparent;
 }
 
+.hidden {
+	text-indent: -9000px;
+	overflow: hidden;
+}
+
 /* paleta de cores http://www.colourlovers.com/palette/1424312/Am_I_brave_enough*/
 
 /*nova paleta http://www.colourlovers.com/palette/2955483/Quiet_Alert*/
