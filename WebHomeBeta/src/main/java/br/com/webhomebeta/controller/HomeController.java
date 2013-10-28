@@ -1,6 +1,7 @@
 package br.com.webhomebeta.controller;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -351,12 +352,14 @@ public class HomeController {
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		for (Enquetes e : enquetes) {
+			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
 					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
 			for (Opcao o : e.getOpcao()) {
+				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
-						o.getOpcao(), o.getQuatVots());
+						o.getOpcao(), f.format(((o.getQuatVots() * 100d) / totalVotos)));
 				opcaoJSONs.add(opcaoJSON);
 			}
 			enqueteJSON.setOpcoes(opcaoJSONs);

@@ -123,9 +123,9 @@ public class UsuarioDAOImp implements UsuarioDAO {
 	@Transactional
 	public void update(int id, boolean b) {
 		Query q = factory.getCurrentSession().createQuery(
-				"update Usuario u where u.idUser = ? and u.status = ?");
-		q.setInteger(0, id);
-		q.setBoolean(1, b);
+				"update Usuario u set u.status = ? where u.idUser = ?");
+		q.setBoolean(0, b);
+		q.setInteger(1, id);
 		q.executeUpdate();
 	}
 
@@ -150,6 +150,12 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		return factory.getCurrentSession()
 				.createQuery("from Usuario e where e.status = ?")
 				.setBoolean(0, ativo).list();
+	}
+
+	@Override
+	@Transactional
+	public Usuario getId(int id) {
+		return (Usuario) factory.getCurrentSession().get(Usuario.class,id);
 	}
 
 }

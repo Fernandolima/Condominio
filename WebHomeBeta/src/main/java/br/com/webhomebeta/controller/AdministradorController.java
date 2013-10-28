@@ -1,5 +1,8 @@
 package br.com.webhomebeta.controller;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,8 @@ import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.EnqueteJSON;
 import br.com.webhomebeta.json.OpcaoJSON;
+import br.com.webhomebeta.json.UsuarioJSON;
+import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -38,36 +43,42 @@ public class AdministradorController {
 	private DadosUsuarioBean bean;
 	@Autowired
 	private EnquetesService enquetesService;
-	
-	
+	@Autowired
+	private EmailServico emailServico;
+
 	@RequestMapping(value = "admin/enquete?id={id}", method = RequestMethod.GET)
-	public @ResponseBody EnqueteJSON showEnquete(@PathVariable("id") int id){
+	public @ResponseBody
+	EnqueteJSON showEnquete(@PathVariable("id") int id) {
 		Enquetes e = enquetesService.get(id);
 		ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
+		int totalVotos = e.getTotalVotos();
 		EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-				e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+				e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
+				e.getTotalVotos());
 		for (Opcao o : e.getOpcao()) {
-			OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
-					o.getOpcao(), o.getQuatVots());
+			DecimalFormat f = new DecimalFormat("##.##");
+			OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(), o.getOpcao(),
+					f.format(((o.getQuatVots() * 100d) / totalVotos)));
 			opcaoJSONs.add(opcaoJSON);
 		}
 		enqueteJSON.setOpcoes(opcaoJSONs);
-		
+
 		return enqueteJSON;
 	}
 
-	@RequestMapping(value = "loadEnquetes", method = RequestMethod.POST)
-	public @ResponseBody
-	List<EnqueteJSON> loadEnquetes() {
+	public List<EnqueteJSON> loadEnquetes() {
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		for (Enquetes e : enquetes) {
+			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
+					e.getTotalVotos());
 			for (Opcao o : e.getOpcao()) {
+				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
-						o.getOpcao(), o.getQuatVots());
+						o.getOpcao(), f.format(((o.getQuatVots() * 100d) / totalVotos)));
 				opcaoJSONs.add(opcaoJSON);
 			}
 			enqueteJSON.setOpcoes(opcaoJSONs);
@@ -90,6 +101,7 @@ public class AdministradorController {
 		model.put("dadosUsuarioBean", bean);
 		model.put("usuario", getUsuario());
 		model.put("validarMoradores", validarModadores);
+		model.put("enquetes", loadEnquetes());
 		bean.setUsuario(getUsuario());
 
 		return new ModelAndView("admin", model);
@@ -97,20 +109,37 @@ public class AdministradorController {
 
 	@RequestMapping(value = "admin/validarMoradores")
 	public ModelAndView validarMoradores(ModelMap model) {
-		
+
 		model.put("usuario", getUsuario());
 
 		return new ModelAndView("validarMoradores", "listaUsuarios",
 				usuarioService.getUsuarioNaoAtivo());
 	}
 
+	@RequestMapping(value = "admin/morador/val={valid}/login={log}/proc")
+	public void validar(@PathVariable("valid") boolean valid,
+			@PathVariable("log") String log) {
+		Usuario usuario = usuarioService.getUsuarioByLogin(log);
+		if (valid) {
+			usuarioService.update(usuario.getIdUser(), valid);
+			emailServico.emailNovoMoradorAceito(usuario);
+		} else {
+			emailServico.emailMoradorNaoAceito(usuario);
+		}
+
+	}
+
 	// Recebe como parametro o id do usuario e devolve o usuario com todas as
 	// informacoes
 	@RequestMapping(value = "admin/editarCadastro")
-	public ModelAndView editarUsuario(@RequestParam("id") int id) {
-
-		return new ModelAndView("admin/editarCadastro", "usuario",
-				usuarioService.getById(id));
+	public ModelAndView editarUsuario(@RequestParam("login") String login) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Usuario usuario = usuarioService.getUsuarioByLogin(login);
+		UsuarioJSON usuarioJSON = new UsuarioJSON(usuario.getNome(),
+				df.format(usuario.getDt_nascimento()), usuario.getCpf(),
+				usuario.getEmail(), usuario.getAp(), usuario.getBloco(),
+				usuario.getIdUser());
+		return new ModelAndView("editarCadastro", "usuario", usuarioJSON);
 	}
 
 	public Usuario getUsuario() {

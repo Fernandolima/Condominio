@@ -15,6 +15,7 @@ public interface UsuarioDAO {
 		  public Usuario getUsuarioByLogin(String login);
 		  public void update(Usuario usuario);
 		  public Usuario getById(int id);
+		  public Usuario getId(int id);
 		  public void evictCache();
 		  public long getRowCount(boolean b);
 		  public void update(int id, boolean b);

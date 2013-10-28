@@ -27,8 +27,8 @@ public class MuralController {
 	private MuralService muralService;
 	@Autowired
 	private DadosUsuarioBean bean;
-	
-	@RequestMapping(value = "mural", method = RequestMethod.GET)
+		
+	@RequestMapping(value = "admin/mural", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model){
 		bean.setUsuario(getUsuario());
 		model.put("mural", new MuralTO());

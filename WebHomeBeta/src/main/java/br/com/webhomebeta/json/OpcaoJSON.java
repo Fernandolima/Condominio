@@ -4,13 +4,15 @@ public class OpcaoJSON {
 	
 	private int idOpcao;
 	private String opcao;
-	private int quantidadeVotos;
+	private String porcentagemVotos;
 	
-	public OpcaoJSON(int idOpcao, String opcao, int quantidadeVotos) {
+	
+	
+	public OpcaoJSON(int idOpcao, String opcao, String porcentagemVotos) {
 		super();
 		this.idOpcao = idOpcao;
 		this.opcao = opcao;
-		this.quantidadeVotos = quantidadeVotos;
+		this.porcentagemVotos = porcentagemVotos;
 	}
 	public int getIdOpcao() {
 		return idOpcao;
@@ -24,12 +26,13 @@ public class OpcaoJSON {
 	public void setOpcao(String opcao) {
 		this.opcao = opcao;
 	}
-	public int getQuantidadeVotos() {
-		return quantidadeVotos;
+	public String getPorcentagemVotos() {
+		return porcentagemVotos;
 	}
-	public void setQuantidadeVotos(int quantidadeVotos) {
-		this.quantidadeVotos = quantidadeVotos;
+	public void setPorcentagemVotos(String porcentagemVotos) {
+		this.porcentagemVotos = porcentagemVotos;
 	}
+	
 	
 	
 }

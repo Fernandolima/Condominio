@@ -30,7 +30,7 @@ import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class NotificacaoController {
- 
+
 	@Autowired
 	private DadosUsuarioBean dadosUsuarioBean;
 	@Autowired
@@ -47,9 +47,9 @@ public class NotificacaoController {
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
 	public @ResponseBody
 	ArrayList<NotificacoesJSON> inicia() {
-		
+
 		dadosUsuarioBean.setUsuario(getUsuario());
-		
+
 		ArrayList<NotificacoesJSON> list = new ArrayList<>();
 		List<Notificacao> listNotificacao = notificacaoService.getNotificacoes(
 				dadosUsuarioBean.getUsuario().getIdUser(), false);
@@ -68,13 +68,15 @@ public class NotificacaoController {
 	}
 
 	@RequestMapping(value = "notificacaoVista")
-	public String notificacaoVista(){
-		
-		notificacaoService.update(dadosUsuarioBean.getUsuario().getIdUser(), true);
+	public String notificacaoVista() {
+
+		notificacaoService.update(dadosUsuarioBean.getUsuario().getIdUser(),
+				true);
 		return "oi";
 	}
-	
-	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro o ID da publicacao
+
+	// Salva no banco uma notificacao que usuario fez < Recebendo como parametro
+	// o ID da publicacao
 	// e o tipo de notificacao
 
 	// Testando, ver com a tati
@@ -83,17 +85,20 @@ public class NotificacaoController {
 	String receberNotificacao(@RequestParam("id") int idNotificado,
 			@RequestParam("tipo") String tipo,
 			@RequestParam("idPost") int idPost) {
-		
+
 		// adiociona a notificacaoJSON no queue
 		NotificacoesJSON notificacoesJSON = new NotificacoesJSON();
 		this.queueNotificacaoJSON.add(notificacoesJSON);
 
-		Notificacao notificacao = new Notificacao(tipo, idNotificado,
-				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false,
-				"show/id="+idPost);
+		if (idNotificado == dadosUsuarioBean.getUsuario().getIdUser()) {
 
-		// Adiociona a notificao salva na queue.
-		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+		} else {
+			Notificacao notificacao = new Notificacao(tipo, idNotificado,
+					dadosUsuarioBean.getUsuario().getIdUser(), idPost, false,
+					"show/id=" + idPost);
+			// Adiociona a notificao salva na queue.
+			this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+		}
 
 		return "true";
 	}
@@ -105,10 +110,10 @@ public class NotificacaoController {
 		ArrayList<NotificacoesJSON> array = new ArrayList<>();
 
 		for (NotificacoesJSON result : this.queueNotificacaoJSON) {
-			
+
 			Notificacao n = queueNotificacao.poll();
 			Usuario usuario = usuarioService.getById(n.getIdNotificacador());
-		
+
 			NotificacoesJSON json = new NotificacoesJSON();
 			json.setIdPublicacao(n.getIdPost());
 			json.SetTipo(n.getTipoNotificacao(), usuario.getNome());
@@ -124,7 +129,7 @@ public class NotificacaoController {
 		deferred.setResult(array);
 		return deferred;
 	}
-	
+
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;

@@ -116,8 +116,6 @@
 		<sec:form-login login-page="/index.jsp"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-		<sec:remember-me key="myAppKey"
-			token-validity-seconds="186000" />
 		<sec:intercept-url pattern="/index.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/index"
@@ -130,10 +128,21 @@
 		<sec:intercept-url pattern="/home" access="ROLE_MORADOR,ROLE_ADMIN" />
 		<sec:intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/home.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
-		<sec:intercept-url pattern="/atas.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/atas" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/atas.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/atas" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/listaAtas" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/listaAtas.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/cadastrarBlocos" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/cadastrarBlocos.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/enquetes" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/enquetes.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/listaEnquetes.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/listaEnquetes" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/espaco" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/espaco.jsp" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/perfil" access="ROLE_MORADOR,ROLE_ADMIN" />
 		<sec:intercept-url pattern="/perfil.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
+		<sec:remember-me key="myAppKey"/>
 	</sec:http>
 
 

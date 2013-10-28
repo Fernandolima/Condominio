@@ -69,4 +69,7 @@ public class UsuarioService {
 	public List<Usuario> getListAtiva(boolean usuario) {
 		return dao.getLisAtivo(usuario);
 	}
+	public Usuario getId(int id) {
+		return dao.getId(id);
+	}
 }

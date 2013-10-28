@@ -117,7 +117,7 @@ public class PerfilController {
 		return ipz.getUrl() + "," + ipz.getWidth() + "," + ipz.getHeight();
 	}
 
-	@RequestMapping(value = "/perfil?id={id}")
+	@RequestMapping(value = "/perfil/id={id}")
 	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id) {
 		if (id > 0) {
 			Perfil p = perfilService.get(id);

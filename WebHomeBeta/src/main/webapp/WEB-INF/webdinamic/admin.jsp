@@ -100,59 +100,50 @@
 
                                 </div>
                             </div>
+                            <c:forEach items="${enquetes}" var="enquete">
                             <div class="list-enquete">
-                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b> Aqui fica a pergunta da enquete</p>
+                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.titulo}</p>
 	                            <div class="block-content collapse in enquetes">
+	                            <c:forEach items="${enquete.opcoes}" var="opcao">
 	                            	<div class="span3">
-	                                    <div class="chart" data-percent="100">100%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Ótimo</span>
-	
+	                                    <div class="chart" data-percent="<c:out value="${opcao.porcentagemVotos}"></c:out>">${opcao.porcentagemVotos}%</div>
+	                                    <div class="chart-bottom-heading"><span class="label label-info">${opcao.opcao}</span>
 	                                    </div>
 	                                </div>
-	                                <div class="span3">
-	                                    <div class="chart" data-percent="53">53%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Bom</span>
-	
-	                                    </div>
-	                                </div>
-	                                <div class="span3">
-	                                    <div class="chart" data-percent="83">83%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Ruim</span>
-	
-	                                    </div>
-	                                </div>
+								</c:forEach>                            
 	                            </div>
 	                    	</div>
+	                    	</c:forEach>
 	                    	
-	                    	<div class="list-enquete">
-                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b> Aqui fica a pergunta da enquete</p>
-	                            <div class="block-content collapse in enquetes">
-	                            	<div class="span3">
-	                                    <div class="chart" data-percent="73">73%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Ótimo</span>
+<!-- 	                    	<div class="list-enquete"> -->
+<!--                             	<p class="perguntaEnquete"><b>Enquete Ativa:</b> Aqui fica a pergunta da enquete</p> -->
+<!-- 	                            <div class="block-content collapse in enquetes"> -->
+<!-- 	                            	<div class="span3"> -->
+<!-- 	                                    <div class="chart" data-percent="73">73%</div> -->
+<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Ótimo</span> -->
 	
-	                                    </div>
-	                                </div>
-	                                <div class="span3">
-	                                    <div class="chart" data-percent="53">53%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Bom</span>
+<!-- 	                                    </div> -->
+<!-- 	                                </div> -->
+<!-- 	                                <div class="span3"> -->
+<!-- 	                                    <div class="chart" data-percent="53">53%</div> -->
+<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Bom</span> -->
 	
-	                                    </div>
-	                                </div>
-	                                <div class="span3">
-	                                    <div class="chart" data-percent="83">83%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Ruim</span>
+<!-- 	                                    </div> -->
+<!-- 	                                </div> -->
+<!-- 	                                <div class="span3"> -->
+<!-- 	                                    <div class="chart" data-percent="83">83%</div> -->
+<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Ruim</span> -->
 	
-	                                    </div>
-	                                </div>
-	                                <div class="span3">
-	                                    <div class="chart" data-percent="13">13%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">Péssimo</span>
+<!-- 	                                    </div> -->
+<!-- 	                                </div> -->
+<!-- 	                                <div class="span3"> -->
+<!-- 	                                    <div class="chart" data-percent="13">13%</div> -->
+<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Péssimo</span> -->
 	
-	                                    </div>
-	                                </div>
-	                            </div>
-	                    	</div>
+<!-- 	                                    </div> -->
+<!-- 	                                </div> -->
+<!-- 	                            </div> -->
+<!-- 	                    	</div> -->
                            
     
                         </div>
