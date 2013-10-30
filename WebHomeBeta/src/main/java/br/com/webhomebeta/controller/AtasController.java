@@ -87,6 +87,26 @@ public class AtasController {
 		model.put("atas", atasTo);
 		return new ModelAndView("atasUsuario", model);
 	}
+	
+	@RequestMapping(value = "home/atas/id={id}", method = RequestMethod.GET)
+	public ModelAndView showAtaUser(@PathVariable("id") int id, ModelMap model) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		AtasEntity atasEntity = atasService.getidAtas(id);
+		AtasTo ataTo = new AtasTo();
+		ataTo.setArquivo(atasEntity.getArquivo());
+		ataTo.setAtas(atasEntity.getAtas());
+		ataTo.setAtasAtivas(atasEntity.isAtasAtivas());
+		ataTo.setCriacaoAta(df.format(atasEntity.getDataCriacao()));
+		ataTo.setDataFormat(atasEntity.getDataFormat());
+		ataTo.setNome(atasEntity.getNome());
+		ataTo.setIdAtas(atasEntity.getIdAtas());
+		ataTo.setTitulo(atasEntity.getTitulo());
+		ataTo.setAlterada(atasEntity.getAlterada());
+		uploadArquivobeanUsuarios.setAtasTo(ataTo);
+		model.addAttribute("editar", uploadArquivobeanUsuarios);
+		return new ModelAndView("editarAtas", model);
+
+	}
 
 	public Usuario getUsuario() {
 

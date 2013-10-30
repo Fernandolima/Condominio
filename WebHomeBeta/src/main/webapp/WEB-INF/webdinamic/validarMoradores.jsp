@@ -105,7 +105,7 @@
 						                <c:forEach items="${listaUsuarios}" var="item">
 						                	<tr>
 						                		<td><c:out value="${item.nome}"/></td>
-						                		<td class="link"><a href="#" data-link="${item.login}" class="btn btn-default">Visualizar</a></td>           		
+						                		<td class="link"><a href="/WebHomeBeta/admin/validarMoradores/login=${item.login}/proc" class="btn btn-default">Visualizar</a></td>           		
 						                	</tr>
 						                </c:forEach>
 						              </tbody>

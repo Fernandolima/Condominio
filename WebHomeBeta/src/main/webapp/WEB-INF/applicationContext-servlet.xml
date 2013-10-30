@@ -137,6 +137,8 @@
 		<sec:intercept-url pattern="/admin/enquetes" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/admin/enquetes.jsp" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/admin/listaEnquetes.jsp" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/validarMoradores" access="ROLE_ADMIN" />
+		<sec:intercept-url pattern="/admin/validarMoradores.jsp" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/admin/listaEnquetes" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/espaco" access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/espaco.jsp" access="ROLE_ADMIN" />

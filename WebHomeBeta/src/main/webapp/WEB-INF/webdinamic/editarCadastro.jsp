@@ -55,17 +55,17 @@
 					<div id="validarCadastro">
 						<span id="iconPeople"></span><h2>Morador</h2>
 						<br><br><br><p>Dados do morador<p><br>
-						<p>Nome:<c:out value=" ${usuario.nome}"></c:out></p><br>
-						<p>CPF:<c:out value=" ${usuario.CPF}"></c:out></p><br>
-						<p>E-mail:<c:out value=" ${usuario.email}"></c:out></p><br>
-						<p>Data de nascimento:<c:out value=" ${usuario.dataNascimento}"></c:out></p><br>
-						<p>Apartamento:<c:out value=" ${usuario.ap}"></c:out></p><br>
-						<p>Bloco:<c:out value=" ${usuario.bloco}"></c:out></p><br>
-						<p>Id:<c:out value=" ${usuario.id}"></c:out></p><br>
-						<form action="/WebHomeBeta/admin/morador/val=true/login=<c:out value="${usuario.email}"/>/proc">
+						<p>Nome:<c:out value=" ${usuarioValidar.nome}"></c:out></p><br>
+						<p>CPF:<c:out value=" ${usuarioValidar.CPF}"></c:out></p><br>
+						<p>E-mail:<c:out value=" ${usuarioValidar.email}"></c:out></p><br>
+						<p>Data de nascimento:<c:out value=" ${usuarioValidar.dataNascimento}"></c:out></p><br>
+						<p>Apartamento:<c:out value=" ${usuarioValidar.ap}"></c:out></p><br>
+						<p>Bloco:<c:out value=" ${usuarioValidar.bloco}"></c:out></p><br>
+						<p>Id:<c:out value=" ${usuarioValidar.id}"></c:out></p><br>
+						<form action="/WebHomeBeta/admin/morador/val=true/login=<c:out value="${usuarioValidar.email}"/>/proc">
 						<button type="submit" value="Aceitar">Aceitar</button>
 						</form>
-						<form action="/WebHomeBeta/admin/morador/val=false/login=<c:out value="${usuario.email}"/>/proc">
+						<form action="/WebHomeBeta/admin/morador/val=false/login=<c:out value="${usuarioValidar.email}"/>/proc">
 						<button type="submit" value="Rejeitar">Rejeitar</button>
 						</form>
 					</div>

@@ -131,15 +131,17 @@ public class AdministradorController {
 
 	// Recebe como parametro o id do usuario e devolve o usuario com todas as
 	// informacoes
-	@RequestMapping(value = "admin/editarCadastro")
-	public ModelAndView editarUsuario(@RequestParam("login") String login) {
+	@RequestMapping(value = "	admin/validarMoradores/login={login}/proc")
+	public ModelAndView editarUsuario(@PathVariable("login") String login, ModelMap map) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Usuario usuario = usuarioService.getUsuarioByLogin(login);
 		UsuarioJSON usuarioJSON = new UsuarioJSON(usuario.getNome(),
 				df.format(usuario.getDt_nascimento()), usuario.getCpf(),
 				usuario.getEmail(), usuario.getAp(), usuario.getBloco(),
 				usuario.getIdUser());
-		return new ModelAndView("editarCadastro", "usuario", usuarioJSON);
+		map.put("usuarioValidar", usuarioJSON);
+		map.put("usuario", getUsuario());
+		return new ModelAndView("editarCadastro", map);
 	}
 
 	public Usuario getUsuario() {
