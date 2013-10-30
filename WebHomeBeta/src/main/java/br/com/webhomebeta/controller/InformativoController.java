@@ -47,7 +47,7 @@ public class InformativoController {
 	@RequestMapping(value = "informativo/salvar", method = RequestMethod.POST)
 	public void salvarInformativo(@ModelAttribute("bean") InformativoBean bean,
 			BindingResult result) {
-		// criar a data da enquete
+		
 		Informativo informativo = new Informativo();
 		informativo.setDataPublicaco(new Date());
 		informativo.setEmail(bean.getInformativoTO().getEmail());

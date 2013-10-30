@@ -101,33 +101,42 @@
                                       <fieldset>
                                         <legend>Atas</legend>                                        
                                         	<div class="control-group">
-                                        		<form:hidden path="idAtas"/>
+                                        		<form:hidden path="atasTo.idAtas"/>
                                         		
-	                                        	<form:label class="control-label" for="tituloAta" path="titulo">Título </form:label>
+	                                        	<form:label class="control-label" for="tituloAta" path="atasTo.titulo">Título </form:label>
 	                                          	<div class="controls">
-	                                          		<form:input type="text" id="tituloAta" path="titulo" autocomplete="off" class="span6 ${(editar.titulo) ? '' : 'error'}" />
+	                                          		<form:input type="text" id="tituloAta" path="atasTo.titulo" autocomplete="off" class="span6 ${(editar.titulo) ? '' : 'error'}" />
 	                                            </div>
 	                                        </div>
 	                                        
 	                                    	<div class="control-group">
                                           		<div class="controls">
-                                            		<textarea class="input-xlarge textarea ${(editar.atas) ? '' : 'error'}" name="atas" placeholder="Texto da Ata" style="width: 700px; height: 200px">
-                                            			<c:out value="${editar.atas}"/>
+                                            		<textarea class="input-xlarge textarea ${(editar.atas) ? '' : 'error'}" name="atasTo.atas" placeholder="Texto da Ata" style="width: 700px; height: 200px">
+                                            			<c:out value="${editar.atasTo.atas}"/>
                                             		</textarea>
                                           		</div>
                                         	</div>
                                         	
                                         	<div class="control-group">
-	                                        	<label class="control-label" for="fileInput">Arquivo</label>
+	                                        	<label class="control-label" for="fileInput">Arquivo existente:</label>
 	                                          	<div class="controls">
-	                                            	<input class="input-file uniform_on" id="fileInput" name="fileData" type="file">
+	                                            	 <form:label path="atasTo.arquivo" title="atasTo.arquivo" >${editar.atasTo.arquivo}</form:label>    	
 	                                          	</div>
 	                                        </div>
+                                        	
+                                        	<div class="control-group">
+	                                        	<label class="control-label" for="fileInput">Arquivo:</label>
+	                                          	<div class="controls">
+	                                            	<input class="input-file uniform_on" id="fileInput" name="fileData" type="file">    	
+	                                          	</div>
+	                                        </div>
+	                                        
+	                                        
 	                                        
 	                                        <div class="control-group">
                                           		<label class="control-label" for="date01">Data</label>
                                           		<div class="controls">
-                                            		<form:input type="text" id="date01" path="dataFormat" autocomplete="off" placeholder="Data da Ata" value=" " class="input-xlarge datepicker ${(bean.dataVal) ? '' : 'error'}" />
+                                            		<form:input type="text" id="date01" path="atasTo.dataFormat" autocomplete="off" placeholder="Data da Ata" value=" " class="input-xlarge datepicker ${(bean.dataVal) ? '' : 'error'}" />
                                             	</div>
                                         	</div>
                                         

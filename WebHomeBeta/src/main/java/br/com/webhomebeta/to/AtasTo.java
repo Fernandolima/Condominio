@@ -14,8 +14,25 @@ public class AtasTo {
 	private String dataFormat;
 	private Usuario usuarioAtas;
 	private boolean atasAtivas;
+	private String criacaoAta;
+	private String alterada;
 	
-	
+
+	public String getAlterada() {
+		return alterada;
+	}
+
+	public void setAlterada(String alterada) {
+		this.alterada = alterada;
+	}
+
+	public String getCriacaoAta() {
+		return criacaoAta;
+	}
+
+	public void setCriacaoAta(String criacaoAta) {
+		this.criacaoAta = criacaoAta;
+	}
 
 	public boolean isAtasAtivas() {
 		return atasAtivas;

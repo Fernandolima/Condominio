@@ -50,6 +50,8 @@ public class AtasEntity  {
 	@JoinColumn(name = "ID_USER", nullable = false)
 	private Usuario usuarioAtas;
 	
+	@Column(name = "ALTERADAS")
+	private String alterada;
 	
 	@Column(name = "DATA_CRIACAO")
 	private Date dataCriacao;
@@ -82,6 +84,13 @@ public class AtasEntity  {
 	}
 	
 
+	public String getAlterada() {
+		return alterada;
+	}
+
+	public void setAlterada(String alterada) {
+		this.alterada = alterada;
+	}
 
 	public String getNome() {
 		return nome;

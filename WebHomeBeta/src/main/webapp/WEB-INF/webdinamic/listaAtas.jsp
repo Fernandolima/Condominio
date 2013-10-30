@@ -98,7 +98,9 @@
 						              <thead>
 						                <tr>
 						                  <th>Título da Ata</th>
-						                  <th>Data</th>
+						                  <th>Data da ata</th>
+						                  <th>Adicionada em</th>
+						                  <th>Alterado em</th>
 						                  <th>Editar</th>
 						                  <th>Download</th>
 						                </tr>
@@ -108,6 +110,8 @@
 						                	<tr>
 						                		<td><c:out value="${item.titulo}"/></td>
 						                		<td><c:out value="${item.dataFormat}"/></td>
+						                		<td><c:out value="${item.criacaoAta}"/></td>
+						                		<td><c:out value="${item.alterada}"/></td>
 						                		<td><a href="atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Editar</a></td>
 						                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
 						                	</tr>

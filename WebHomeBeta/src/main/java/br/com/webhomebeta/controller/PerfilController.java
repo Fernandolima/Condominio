@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.FileData;
 import br.com.webhomebeta.entity.ImagePathAndSize;
 import br.com.webhomebeta.entity.Perfil;
+import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.handler.ImageHandler;
 import br.com.webhomebeta.service.ComentarioService;
@@ -73,8 +75,10 @@ public class PerfilController {
 			model.put("uploadControllerBean", uploadControllerBean);
 		} else {
 			perfilControllerBean.setPerfilTO(getPerfilTO());
+			List<Publicacao> publicacoes = publicacaoService.getPublicacao(getUsuario().getIdUser());
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
+			model.put("publicacoes", publicacoes);
 		}
 
 		return new ModelAndView("perfil", model);

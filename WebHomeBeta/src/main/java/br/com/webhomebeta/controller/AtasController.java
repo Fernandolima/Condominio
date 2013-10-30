@@ -1,17 +1,22 @@
 package br.com.webhomebeta.controller;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,12 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
+
 import br.com.webhomebeta.bean.UploadArquivosAtasControllerBean;
 import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.AtasService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
+import br.com.webhomebeta.to.AtasTo;
 import br.com.webhomebeta.validacao.ValidadorAtas;
 
 //atas de assembleia
@@ -36,6 +44,7 @@ public class AtasController {
 	private ServletContext context;
 	@Autowired
 	private AtasService atasService;
+	
 	private AtasEntity atasEntity;
 	@Autowired
 	private UsuarioService usuarioService;
@@ -54,6 +63,29 @@ public class AtasController {
 		model.put("bean", uploadArquivobeanUsuarios);
 		return new ModelAndView("atas", model);
 
+	}
+	@RequestMapping(value = "home/atas", method = RequestMethod.POST)
+	public ModelAndView showAtasUser(ModelMap model){
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		List<AtasEntity> atas = atasService.getListAtas();
+		List<AtasTo> atasTo = new ArrayList<>();
+
+		for (AtasEntity ata : atas) {
+			AtasTo ataTo = new AtasTo();
+			ataTo.setArquivo(ata.getArquivo());
+			ataTo.setAtas(ata.getAtas());
+			ataTo.setAtasAtivas(ata.isAtasAtivas());
+			ataTo.setCriacaoAta(df.format(ata.getDataCriacao()));
+			ataTo.setDataFormat(ata.getDataFormat());
+			ataTo.setNome(ata.getNome());
+			ataTo.setIdAtas(ata.getIdAtas());
+			ataTo.setTitulo(ata.getTitulo());
+			ataTo.setAlterada(ata.getAlterada());
+			atasTo.add(ataTo);
+		}
+		
+		model.put("atas", atasTo);
+		return new ModelAndView("atasUsuario", model);
 	}
 
 	public Usuario getUsuario() {
@@ -78,9 +110,25 @@ public class AtasController {
 	// Tela de Listar Atas
 	@RequestMapping(value = "admin/listaAtas", method = RequestMethod.GET)
 	public ModelAndView ListAtas(ModelMap model) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		List<AtasEntity> atas = atasService.getListAtas();
+		List<AtasTo> atasTo = new ArrayList<>();
+
+		for (AtasEntity ata : atas) {
+			AtasTo ataTo = new AtasTo();
+			ataTo.setArquivo(ata.getArquivo());
+			ataTo.setAtas(ata.getAtas());
+			ataTo.setAtasAtivas(ata.isAtasAtivas());
+			ataTo.setCriacaoAta(df.format(ata.getDataCriacao()));
+			ataTo.setDataFormat(ata.getDataFormat());
+			ataTo.setNome(ata.getNome());
+			ataTo.setIdAtas(ata.getIdAtas());
+			ataTo.setTitulo(ata.getTitulo());
+			ataTo.setAlterada(ata.getAlterada());
+			atasTo.add(ataTo);
+		}
 		model.put("usuario", getUsuario());
-		model.put("listaAtas", atas);
+		model.put("listaAtas", atasTo);
 		return new ModelAndView("listaAtas", model);
 
 	}
@@ -104,10 +152,13 @@ public class AtasController {
 		if (bean.hasErrors()) {
 			salvar(bean.getFileData(), atasEntity,
 					uploadArquivobeanUsuarios.getUsuario(), bean);
+			uploadArquivobeanUsuarios.setFileData(null);
+			uploadArquivobeanUsuarios.setAtasTo(null);
+		} else {
+			uploadArquivobeanUsuarios = bean;
 		}
 		// cria um objeto de AtasEntity, compara com o dados to TO e salva no
 		// banco.
-		uploadArquivobeanUsuarios = bean;
 
 		return "redirect:/admin/atas";
 	}
@@ -138,16 +189,40 @@ public class AtasController {
 	}
 
 	@RequestMapping(value = "admin/atas/id={id}", method = RequestMethod.GET)
-	public ModelAndView update(@PathVariable("id") int id, String ata) {
+	public ModelAndView update(@PathVariable("id") int id, ModelMap model) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		AtasEntity atasEntity = atasService.getidAtas(id);
-		return new ModelAndView("editarAtas", "editar", atasEntity);
+		AtasTo ataTo = new AtasTo();
+		ataTo.setArquivo(atasEntity.getArquivo().substring(
+				atasEntity.getArquivo().lastIndexOf("/")+1));
+		ataTo.setAtas(atasEntity.getAtas());
+		ataTo.setAtasAtivas(atasEntity.isAtasAtivas());
+		ataTo.setCriacaoAta(df.format(atasEntity.getDataCriacao()));
+		ataTo.setDataFormat(atasEntity.getDataFormat());
+		ataTo.setNome(atasEntity.getNome());
+		ataTo.setIdAtas(atasEntity.getIdAtas());
+		ataTo.setTitulo(atasEntity.getTitulo());
+		ataTo.setAlterada(atasEntity.getAlterada());
+		uploadArquivobeanUsuarios.setAtasTo(ataTo);
+		model.addAttribute("editar", uploadArquivobeanUsuarios);
+		return new ModelAndView("editarAtas", model);
 
 	}
 
 	@RequestMapping(value = "admin/updateAtas", method = RequestMethod.POST)
-	public String updateAtas(@ModelAttribute("editar") AtasEntity atasEntity,
+	public String updateAtas(
+			@ModelAttribute("editar") UploadArquivosAtasControllerBean bean,
 			BindingResult result) {
-		atasService.updateAtas(atasEntity.getIdAtas(), atasEntity.getAtas(), atasEntity.getTitulo());
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		atasService
+				.updadeAtas(bean.getAtasTo().getIdAtas(), bean.getAtasTo()
+						.getAtas(), bean.getAtasTo().getTitulo(), df
+						.format(new Date()));
+		
+		if(!bean.getFileData().isEmpty()){
+			alterarArquivo(bean.getFileData(),getUsuario(), bean);
+		}
+		
 		return "redirect:/admin/listaAtas";
 
 	}
@@ -158,6 +233,38 @@ public class AtasController {
 		atasService.delete(atasEntity);
 
 		return "redirect:/inserirAtas/delete";
+	}
+
+	public void alterarArquivo(MultipartFile file, Usuario usuario, UploadArquivosAtasControllerBean bean) {
+		File fileToDisk = null;
+		File caminho = null;
+
+		String caminhoPasta = this.context.getRealPath("")
+				+ "/uploadedArquivos/" + usuario.getIdUser();
+
+		String result = this.context.getRealPath("") + "/uploadedArquivos/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename();
+		
+		atasService.updateAtas(bean.getAtasTo().getIdAtas(), "/WebHomeBeta/uploadedArquivos/"
+				+ usuario.getIdUser() + "/" + file.getOriginalFilename());
+		try {
+
+			if (file.getOriginalFilename().endsWith("pdf")) {
+				caminho = new File(caminhoPasta);
+
+				fileToDisk = new File(result);
+
+				if (!caminho.isDirectory()) {
+					caminho.mkdirs();
+				}
+
+				file.transferTo(fileToDisk);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void salvar(MultipartFile file, AtasEntity atasEntity,
@@ -192,6 +299,7 @@ public class AtasController {
 			atasEntity.setDataCriacao(new Date());
 			atasEntity.setTitulo(bean.getAtasTo().getTitulo());
 			atasEntity.setDataFormat(bean.getData());
+			atasEntity.setAlterada("Não alterada");
 			atasEntity.setUsuarioAtas(uploadArquivobeanUsuarios.getUsuario());
 
 			bean.getAtasTo().setArquivo(null);

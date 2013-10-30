@@ -59,7 +59,7 @@
 	            <input type="text" class="input-block-level" name="j_username" placeholder="E-mail">
 	            <input type="password" class="input-block-level" name="j_password" placeholder="Senha">
 	            <label for="j_remember" class="checkbox">
-	            <input type="checkbox" value="Continuar conectado" id="j_remember" name="_spring_security_remember_me"> Continuar conectado
+	            <input type="checkbox" id="j_remember" name="_spring_security_remember_me"> Continuar conectado
 	            </label>
 	            <input class="btn btn-large btn-primary" type="submit" value="Login"/>
 	            

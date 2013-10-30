@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.webhomebeta.bean.EspacoCondominioBean;
 import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.EspacoCondominioJSON;
@@ -26,22 +25,18 @@ import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.EspacoCondominioTo;
-import br.com.webhomebeta.validacao.ValidadorEspaco;
 
 @Controller
 public class EspacoCondominioController {
 
-	private EspacoCondominioTo espacoCondominioTo;
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private EspacoCondominioServe condominioServe;
 
-	private EspacoCondominio condominio;
-
 	private HashMap<String, String> espacos = new HashMap<>();
 
-	@RequestMapping(value = "espaco", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/espaco", method = RequestMethod.GET)
 	private ModelAndView ExibirEspaco(EspacoCondominioTo espacoCondominioTo,
 			ModelMap map) {
 		
@@ -68,7 +63,7 @@ public class EspacoCondominioController {
 		return new ModelAndView("espaco", map);
 	}
 
-	@RequestMapping(value = "inserirEspaco", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/inserirEspaco", method = RequestMethod.POST)
 	public @ResponseBody List<EspacoCondominioJSON> InserirEspaco(@RequestBody final List<EspacoCondominioJSON> condominioJSON) {
 
 		for (EspacoCondominioJSON espacoJSON : condominioJSON) {
@@ -85,7 +80,17 @@ public class EspacoCondominioController {
 			return condominioJSON;
 	}
 
-	@RequestMapping(value = "deleteEspaco", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/listarEspacos", method = RequestMethod.POST)
+	public @ResponseBody List<EspacoCondominioTo> listarEspacos(){
+		
+		List<EspacoCondominio> espacos = condominioServe.getLisEspacoCondominios();
+		List<EspacoCondominioTo> espacosTO = new ArrayList<>();
+		BeanUtils.copyProperties(espacos, espacosTO);
+		
+		return espacosTO;
+	}
+	
+	@RequestMapping(value = "admin/deleteEspaco", method = RequestMethod.POST)
 	public void deleteEspaco(
 			@ModelAttribute("bean") EspacoCondominio espacoCondominio) {
 		condominioServe.delete(espacoCondominio);

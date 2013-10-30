@@ -33,8 +33,8 @@ public class AtasService {
 		return atasDao.getidAtas(id);
 	}
 
-	public void updateAtas(int id, String ata, String titulo) {
-		 atasDao.updadeAtas(id, ata, titulo);
+	public void updateAtas(int id,String arquivo) {
+		 atasDao.updadeAtas(id, arquivo);
 	}
 
 	public void  updateFalse(int idAtas, boolean atasAtivas) {
@@ -44,6 +44,10 @@ public class AtasService {
 	public void delete(AtasEntity atasEntity) {
 		atasDao.delete(atasEntity);
 
+	}
+	
+	public void updadeAtas(int id, String ata, String titulo, String alterada) {
+		atasDao.updadeAtas(id, ata, titulo, alterada);
 	}
 
 }

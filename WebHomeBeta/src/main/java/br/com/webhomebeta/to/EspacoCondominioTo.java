@@ -1,90 +1,45 @@
 package br.com.webhomebeta.to;
 
-import java.util.ArrayList;
-import java.util.Date;
 
 public class EspacoCondominioTo {
 
-	private String data;
+	private int idEspaco;
 	private String descricao;
-	private String novoEspaco;
+	private String espaco;
 	private int idUser;
 	private String nome;
-
 	
-	
-	
-	public EspacoCondominioTo(ArrayList<String> espaco) {
-		super();
-		this.espaco = espaco;
+	public int getIdEspaco() {
+		return idEspaco;
 	}
-	public EspacoCondominioTo() {
-	
+	public void setIdEspaco(int idEspaco) {
+		this.idEspaco = idEspaco;
 	}
-
-	/**
-	 * @return the data
-	 */
-	public String getData() {
-		return data;
-	}
-
-	/**
-	 * @param data
-	 *            the data to set
-	 */
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	ArrayList<String> espaco = new ArrayList<>();
-
-	/**
-	 * @return the espaco
-	 */
-	public ArrayList<String> getEspaco() {
-		return espaco;
-	}
-
-	
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	/**
-	 * @param espaco
-	 *            the espaco to set
-	 */
-	public void setEspaco(ArrayList<String> espaco) {
+	public String getEspaco() {
+		return espaco;
+	}
+	public void setEspaco(String espaco) {
 		this.espaco = espaco;
 	}
-
-	public String getNovoEspaco() {
-		return novoEspaco;
-	}
-
 	public int getIdUser() {
 		return idUser;
 	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNovoEspaco(String novoEspaco) {
-		this.novoEspaco = novoEspaco;
-	}
-
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-
+	public String getNome() {
+		return nome;
+	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	
+	
 }

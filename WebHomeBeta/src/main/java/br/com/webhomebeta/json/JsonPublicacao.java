@@ -20,6 +20,7 @@ public class JsonPublicacao {
 	private List<NaoGostouJSON> naoGostous;
 	private int quantidadeGostou;
 	private int quantidadeNaoGostou;
+	private boolean fimPublicacoes;
 
 	
 
@@ -33,6 +34,23 @@ public class JsonPublicacao {
 		this.imagemPublicacao = imagemPublicacao;
 		this.usuarioPublicacao = usuarioPublicacao;
 	}
+
+	public JsonPublicacao(){
+		
+	}
+	
+	
+	public boolean isFimPublicacoes() {
+		return fimPublicacoes;
+	}
+
+
+
+
+	public void setFimPublicacoes(boolean fimPublicacoes) {
+		this.fimPublicacoes = fimPublicacoes;
+	}
+
 
 
 

@@ -172,7 +172,10 @@ public class HomeController {
 				colunaInicial, tamanhoColuna);
 
 		if (colunaInicial >= publicacaoes.size()) {
-			return null;
+			ArrayList<JsonPublicacao> jp = new ArrayList<>();
+			JsonPublicacao p = new JsonPublicacao();
+			p.setFimPublicacoes(true);
+			return jp;
 		}
 
 		// Varre cada publicacao

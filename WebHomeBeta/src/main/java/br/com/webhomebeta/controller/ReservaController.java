@@ -45,6 +45,7 @@ public class ReservaController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EmailServico emailServico;
+	@Autowired
 	private EspacoCondominioServe espacoCondominioServe;
 	@Autowired
 	private EspacoCondominioController espacoCondominioController;
@@ -56,7 +57,7 @@ public class ReservaController {
 	private Reserva reserva;
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto Reserva
-	@RequestMapping(value = "reserva", method = RequestMethod.GET)
+	@RequestMapping(value = "home/reserva", method = RequestMethod.GET)
 	public ModelAndView reserva(ModelMap model) {
 
 		model.put("usuario", getUsuario());
@@ -66,16 +67,16 @@ public class ReservaController {
 		return new ModelAndView("reserva", model);
 	}
 
-	@RequestMapping(value = "reserva/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "home/reserva/delete", method = RequestMethod.POST)
 	public String delete(@ModelAttribute("reserva") Reserva reserva,
 			BindingResult result) {
 		reservaService.delete(reserva);
 
-		return "redirect:/reserva";
+		return "redirect:/home/reserva";
 	}
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
-	@RequestMapping(value = "salvaReserva", method = RequestMethod.GET)
+	@RequestMapping(value = "home/salvaReserva", method = RequestMethod.GET)
 	public boolean listaReserva(@RequestParam("data") String date,
 			@RequestParam("nome") String nome,
 			@RequestParam("idUser") int idUser) {
@@ -97,7 +98,7 @@ public class ReservaController {
 	}
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
-	@RequestMapping(value = "listaespacos", method = RequestMethod.GET)
+	@RequestMapping(value = "home/listarEspacos", method = RequestMethod.GET)
 	public ModelAndView listaEspaco(ModelMap model) {
 		model.put("listaespacos",
 				espacoCondominioServe.getLisEspacoCondominios());
@@ -106,23 +107,23 @@ public class ReservaController {
 
 	}
 
-	@RequestMapping(value = "reserva/salvar", method = RequestMethod.POST)
-	public String salvarReserva(
-			@ModelAttribute("bean") ReservaControllerBean bean,
-			BindingResult result) {
-		// criar a data da enquete
-		for (String reserva : bean.getListReserva()) {
-			// split divide a string em pedaços
-			String pedaco[] = reserva.split(",");
-
-			Reserva reservaa = new Reserva(pedaco[0], new Date(pedaco[1]),
-					getUsuario().getNome());
-
-			reservaService.save(reservaa);
-		}
-
-		return "redirect:/enquetes";
-	}
+//	@RequestMapping(value = "home/reserva/salvar", method = RequestMethod.POST)
+//	public String salvarReserva(
+//			@ModelAttribute("bean") ReservaControllerBean bean,
+//			BindingResult result) {
+//		// criar a data da enquete
+//		for (String reserva : bean.getListReserva()) {
+//			// split divide a string em pedaços
+//			String pedaco[] = reserva.split(",");
+//
+//			Reserva reservaa = new Reserva(pedaco[0], new Date(pedaco[1]),
+//					getUsuario().getNome());
+//
+//			reservaService.save(reservaa);
+//		}
+//
+//		return "redirect:/home/reserva";
+//	}
 
 	public Usuario getUsuario() {
 
