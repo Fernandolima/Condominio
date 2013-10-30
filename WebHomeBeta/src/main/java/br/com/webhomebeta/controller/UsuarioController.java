@@ -1,5 +1,6 @@
 package br.com.webhomebeta.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.faces.facelets.PrivateApiFaceletCacheAdapter;
+
+import br.com.webhomebeta.bean.CadastroCondominioControllerBean;
 import br.com.webhomebeta.bean.UsuarioControllerBean;
+import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.CadastroCondominioService;
@@ -25,6 +32,7 @@ import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
+import br.com.webhomebeta.to.DescricaoCondominioTO;
 import br.com.webhomebeta.validacao.Validator;
 
 @Controller
@@ -57,7 +65,7 @@ public class UsuarioController {
 		return new ModelAndView("listaUsuarioAtivos", modelMap);
 
 	}
-	
+
 	@RequestMapping(value = "listaUsuarioInativo", method = RequestMethod.GET)
 	public ModelAndView listaOff(ModelMap modelMap) {
 		modelMap.put("listaUsuarioOff", usuarioService.getListAtiva(false));
@@ -65,17 +73,15 @@ public class UsuarioController {
 		return new ModelAndView("listaUsuarioInativo", modelMap);
 
 	}
-	
-	
-	
+
 	// Pega o Objeto usuario e salva na tabela USER no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ModelAndView cadastro(
-			@ModelAttribute("bean") final UsuarioControllerBean bean,
+			@ModelAttribute("bean") final UsuarioControllerBean bean,Usuario usuario,
 			BindingResult result, HttpServletRequest request) {
 
-		validarCadastro(bean);
+		validarCadastro(bean, usuario);
 
 		if (bean.hasErrors()) {
 			// Seta a role
@@ -88,11 +94,11 @@ public class UsuarioController {
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
 
-			Usuario usuario = new Usuario();
+			//Usuario usuario = new Usuario();
 			// Passa as propriedades do usuarioTO para a entidade usuario
 			BeanUtils.copyProperties(bean.getUsuarioTO(), usuario);
 			// Salva no banco
-			usuarioService.save(usuario);
+			
 
 			bean.getUsuarioTO().setCpf(null);
 			bean.getUsuarioTO().setDt_nascimento(null);
@@ -108,19 +114,35 @@ public class UsuarioController {
 			Perfil perfil = new Perfil("", "", "", 0, "", usuario.getNome(),
 					"/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
-			
-			emailServico.emailNovoMorador(usuario);
 
+			emailServico.emailNovoMorador(usuario);
 			return new ModelAndView("cadastroRealizado");
-			
-			
+
 		}
 
 		return new ModelAndView("cadastro", "bean", bean);
 
 	}
 
-	private void validarCadastro(UsuarioControllerBean bean) {
+	@RequestMapping(value = "aprovarEmail?id={id}", method = RequestMethod.POST)
+	public void validaEmailNovoMorador(@PathVariable("id") int id) {
+		Usuario usuario = usuarioService.getById(id);
+		
+		emailServico.validaEmailMorador(usuario);
+		
+
+
+	}
+
+	private void validarCadastro(UsuarioControllerBean bean, Usuario usuario) {
+
+		DescricaoCondominio descricao = new DescricaoCondominio();
+		DescricaoCondominioTO descricaoCondominioTO = new DescricaoCondominioTO();
+		if (descricao.getBloco() != descricaoCondominioTO.getBloco()) {
+			usuarioService.save(usuario);
+				
+		
+		}
 
 		if (!validator.isValidSenha(bean.getUsuarioTO().getSenha(),
 				bean.getConfSenha())) {
@@ -156,7 +178,6 @@ public class UsuarioController {
 		else
 			bean.setValidApartamento(true);
 
-		
 		for (Usuario user : usuarioService.getUsuario()) {
 			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
 				bean.setValidBloco(false);
