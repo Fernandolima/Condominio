@@ -39,9 +39,11 @@ public class EmailServico {
 	private static final String TEMPLATE_USUARIO_ACEITO = "templateUsuarioAceito.vm";
 	private static final String TEMPLATE_ESPACO_ACEITO = "templateEspaco.vm";
 	private static final String TEMPLATE_NOVO_USUARIO = "templateNovoUsuario.vm";
+	private static final String TEMPLATE_NOVO_APROVADO = "templateMoradorAprovado.vm";
 	private static final String FROM = "webhomecondominios@gmail.com";
 	private static final String SUBJECT_NOVO_MORADOR = "Novo morador cadastrado!";
 	private static final String SUBJECT_MORADOR_ACEITO = "Seu cadastro na WebHome foi aceito!";
+	private static final String SUBJECT_MORADOR_APROVADO = "Validação de email Web Home!";
 	private static final String SUBJECT_ESPACO_ACEITO = "A reserva realizada na WebHome foi aceita!";
 	private static final String SUBJECT_MORADOR_NAO_ACEITO = "Seu cadastro na WebHome foi rejeitado!";
 	private static final String SUBJECT_SENHA = "Recuperacao de senha - WebHome";
@@ -89,6 +91,29 @@ public class EmailServico {
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
 						velocityEngine, TEMPLATE, model);
 				message.setText(text, true);
+			}
+		};
+		this.mailSender.send(preparator);
+	}
+
+	public void validaEmailMorador(final Usuario usuario){
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+			MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+			message.setTo(usuario.getEmail());
+			message.setFrom(FROM);
+			message.setSubject(SUBJECT_MORADOR_APROVADO);
+			// passando os parâmetros para o template
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("nome", usuario.getNome());
+			model.put("link", "http://localhost:8080/WebHomeBeta/aprovarEmail?id="+ usuario.getIdUser());
+
+			@SuppressWarnings("deprecation")
+			String text = VelocityEngineUtils.mergeTemplateIntoString(
+					velocityEngine, TEMPLATE_NOVO_APROVADO, model);
+			message.setText(text, true);
+				
 			}
 		};
 		this.mailSender.send(preparator);
@@ -229,6 +254,9 @@ public class EmailServico {
 	public static String getTemplateNovoEspaco() {
 		return SUBJECT_ESPACO_ACEITO;
 		
+	}
+	public static String getTemplateMoradorAprovado(){
+		return SUBJECT_MORADOR_APROVADO;
 	}
 	
 	
