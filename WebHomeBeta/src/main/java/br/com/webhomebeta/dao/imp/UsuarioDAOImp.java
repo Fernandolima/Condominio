@@ -48,7 +48,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 		return usuario;
 	}
-
+/////
 	@Transactional
 	public List<Usuario> getUsuario() {
 		String sql = "exec [dbo].[USUARIOS_DESCRIPTOGRAFADO_ALL]";

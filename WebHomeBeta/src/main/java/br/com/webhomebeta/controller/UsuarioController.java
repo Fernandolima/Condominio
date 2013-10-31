@@ -78,10 +78,9 @@ public class UsuarioController {
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ModelAndView cadastro(
-			@ModelAttribute("bean") final UsuarioControllerBean bean,Usuario usuario,
-			BindingResult result, HttpServletRequest request) {
+			@ModelAttribute("bean") final UsuarioControllerBean bean, BindingResult result, HttpServletRequest request) {
 
-		validarCadastro(bean, usuario);
+		validarCadastro(bean);
 
 		if (bean.hasErrors()) {
 			// Seta a role
@@ -93,12 +92,11 @@ public class UsuarioController {
 			// Insere a data
 			Date data = new Date(bean.getData());
 			bean.getUsuarioTO().setDt_nascimento(data);
-
-			//Usuario usuario = new Usuario();
+			Usuario usuario = new Usuario();
+			// Usuario usuario = new Usuario();
 			// Passa as propriedades do usuarioTO para a entidade usuario
 			BeanUtils.copyProperties(bean.getUsuarioTO(), usuario);
 			// Salva no banco
-			
 
 			bean.getUsuarioTO().setCpf(null);
 			bean.getUsuarioTO().setDt_nascimento(null);
@@ -114,8 +112,8 @@ public class UsuarioController {
 			Perfil perfil = new Perfil("", "", "", 0, "", usuario.getNome(),
 					"/WebHomeBeta/img/anonimos.jpg");
 			perfilService.salvar(perfil);
-
-			emailServico.emailNovoMorador(usuario);
+			Usuario usuario2 = usuarioService.save(usuario);
+			emailServico.validaEmailMorador(usuario2);
 			return new ModelAndView("cadastroRealizado");
 
 		}
@@ -124,25 +122,14 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping(value = "aprovarEmail?id={id}", method = RequestMethod.POST)
-	public void validaEmailNovoMorador(@PathVariable("id") int id) {
-		Usuario usuario = usuarioService.getById(id);
-		
-		emailServico.validaEmailMorador(usuario);
-		
-
+	@RequestMapping(value = "aprovarEmail/email={email}/proc", method = RequestMethod.GET)
+	public void validaEmailNovoMorador(@PathVariable("email") String email) {
+		Usuario usuario = usuarioService.getUsuarioByLogin(email);
+		emailServico.emailNovoMorador(usuario);
 
 	}
 
-	private void validarCadastro(UsuarioControllerBean bean, Usuario usuario) {
-
-		DescricaoCondominio descricao = new DescricaoCondominio();
-		DescricaoCondominioTO descricaoCondominioTO = new DescricaoCondominioTO();
-		if (descricao.getBloco() != descricaoCondominioTO.getBloco()) {
-			usuarioService.save(usuario);
-				
-		
-		}
+	private void validarCadastro(UsuarioControllerBean bean) {
 
 		if (!validator.isValidSenha(bean.getUsuarioTO().getSenha(),
 				bean.getConfSenha())) {

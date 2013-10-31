@@ -107,7 +107,7 @@ public class EmailServico {
 			// passando os parâmetros para o template
 			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("nome", usuario.getNome());
-			model.put("link", "http://localhost:8080/WebHomeBeta/aprovarEmail?id="+ usuario.getIdUser());
+			model.put("link", "http://localhost:8080/WebHomeBeta/aprovarEmail/email="+ usuario.getEmail()+"/proc");
 
 			@SuppressWarnings("deprecation")
 			String text = VelocityEngineUtils.mergeTemplateIntoString(
