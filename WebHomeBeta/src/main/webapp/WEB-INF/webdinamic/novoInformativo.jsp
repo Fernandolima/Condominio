@@ -18,7 +18,7 @@
 		<input type="hidden" id="userSessao" value="<c:out value="${usuario.idUser}"></c:out>" />
 		<header id="header-site" class="connected">
 			<div class="content">
-				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
+				<h1><a href="/WebHomeBeta/home/" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="comentario-display">
 					<a href="#" id="alerta-notificacao" class="hidden">Notificação</a>
 					<p id="numeroNotificacao"></p>

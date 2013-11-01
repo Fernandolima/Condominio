@@ -338,24 +338,22 @@ var POST_COMMENT  = {
 			var el = $(this),
 				idOpc='',
 				idUser = '',
-				idEnquete = '';
+				idEnquete = '',
+				container = '';
 			
 			idOpc = el.closest('.enquete').find('.opcoesEnquete').find('input:checked').val();
 			
 			if(idOpc) {
 				idUser = $('#userSessao').val();
 				idEnquete = el.closest('.enquete').find('.opcoesEnquete').find('.idEnquete').val();
-				
-				console.log('**********************************************');
-				console.log(idOpc, idUser, idEnquete);
-				console.log('**********************************************');
+				container = el.closest('.enquete').attr('id');
 				
 				$.ajax({
 		            type: "post",
 		            url: "computarVoto",
 		            data: 'idUser=' + idUser + '&idOpcao=' + idOpc + '&idEnquete=' + idEnquete,
 		            success: function (data) {
-		            	console.log('votou =) retorno = ', data);
+		            	$('#' + container).hide('slow');
 		            },
 		            error: function () {
 		            	console.log('errormessage');

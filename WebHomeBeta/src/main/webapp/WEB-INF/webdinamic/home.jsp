@@ -18,7 +18,7 @@
 		<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 		<header id="header-site" class="connected">
 			<div class="content">
-				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
+				<h1><a href="/WebHomeBeta/home/" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
 				<div id="comentario-display">
 					<a href="#" id="alerta-notificacao" class="hidden">Notificação</a>
 					<p id="numeroNotificacao"></p>
@@ -68,7 +68,7 @@
 						<h2 class="titleEnquete">Enquetes</h2>
 						<div id="mainEnqueteSite">
 							<c:forEach items="${listaEnquetes}" var="item">
-								<div class="enquete">
+								<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
 									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
 									<div class="opcoesEnquete">
 									<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
