@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,44 +57,41 @@ public class EspacoCondominioController {
 		espacos.put("Área exclusiva para cachorros", "Área reservada para animais no Condonínimo");
 		espacos.put("Vagas para visitantes", "Local para reservar vagas para visitantes ");
 		espacos.put("Churrasqueira", "Local para reserva churrasqueira");
-		
-		
+		espacos.put("Outro", "Espaço ainda não existente");
+			
+		List<EspacoCondominio> espacosCadastrados = condominioServe.getLisEspacoCondominios();
+		map.put("espacosCadastrados", espacosCadastrados);
 		map.put("listaEspaco", espacos);
 		map.put("usuario", getUsuario());
 		return new ModelAndView("espaco", map);
 	}
 
 	@RequestMapping(value = "admin/inserirEspaco", method = RequestMethod.POST)
-	public @ResponseBody List<EspacoCondominioJSON> InserirEspaco(@RequestBody final List<EspacoCondominioJSON> condominioJSON) {
-
-		for (EspacoCondominioJSON espacoJSON : condominioJSON) {
-			
+	public @ResponseBody EspacoCondominioJSON inserirEspaco(@RequestBody final EspacoCondominioJSON condominioJSON) {
+		
 			EspacoCondominio espacoCondominio = new EspacoCondominio();
-			espacoCondominio.setDescricao(espacoJSON.getDescricao());
-			espacoCondominio.setEspaco(espacoJSON.getNovoEspaco());
-			espacoCondominio.setIdUser(espacoJSON.getIdUser());
+			espacoCondominio.setDescricao(condominioJSON.getDescricao());
+			espacoCondominio.setEspaco(condominioJSON.getNovoEspaco());
+			espacoCondominio.setIdUser(condominioJSON.getIdUser());
 			
-			condominioServe.save(espacoCondominio);
-			
-			
+			espacoCondominio = condominioServe.save(espacoCondominio);
+			condominioJSON.setIdEspaco(espacoCondominio.getIdEspaco());
+			return condominioJSON;	
 		}
-			return condominioJSON;
-	}
 
-	@RequestMapping(value = "admin/listarEspacos", method = RequestMethod.POST)
-	public @ResponseBody List<EspacoCondominioTo> listarEspacos(){
+	@RequestMapping(value = "admin/listarEspaco", method = RequestMethod.GET)
+	public ModelAndView listarEspacos(ModelMap model){
 		
 		List<EspacoCondominio> espacos = condominioServe.getLisEspacoCondominios();
-		List<EspacoCondominioTo> espacosTO = new ArrayList<>();
-		BeanUtils.copyProperties(espacos, espacosTO);
-		
-		return espacosTO;
+		model.put("listaEspacos", espacos);
+		model.put("usuario", getUsuario());
+		return new ModelAndView("listaEspacos", model);
 	}
 	
 	@RequestMapping(value = "admin/deleteEspaco", method = RequestMethod.POST)
-	public void deleteEspaco(
-			@ModelAttribute("bean") EspacoCondominio espacoCondominio) {
-		condominioServe.delete(espacoCondominio);
+	public void deleteEspaco(@RequestParam("idEspaco") int idEspaco) {
+		
+		condominioServe.delete(new EspacoCondominio(idEspaco));
 	}
 
 	public Usuario getUsuario() {

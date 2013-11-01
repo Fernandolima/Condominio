@@ -16,8 +16,9 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 	private SessionFactory factory;
 
 	@Transactional
-	public void save(EspacoCondominio espacoCondominio) {
+	public EspacoCondominio save(EspacoCondominio espacoCondominio) {
 		factory.getCurrentSession().save(espacoCondominio);
+		return espacoCondominio;
 
 	}
 
@@ -36,8 +37,7 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<EspacoCondominio> getLisEspacoCondominios() {
-		return factory.getCurrentSession()
-				.createCriteria(EspacoCondominio.class).list();
+		return factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ESPACO]").addEntity(EspacoCondominio.class).list();
 	}
 
 	@Transactional
@@ -46,4 +46,10 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 		
 	}
 
+	@Override
+	@Transactional
+	public EspacoCondominio get(int idEspaco) {
+		return (EspacoCondominio) factory.getCurrentSession().get(EspacoCondominio.class, idEspaco);
+	}
+	
 }

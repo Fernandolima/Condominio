@@ -39,4 +39,20 @@ public class InformativoDaoImp implements InformativoDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Informativo> getListInformativos(int idUser) {
+		return factory.getCurrentSession()
+				.createQuery("from Informativo i where i.idUser = ?")
+				.setInteger(0, idUser).list();
+	}
+
+	@Override
+	@Transactional
+	public Informativo getInformativo(int idInformativo) {
+		return (Informativo) factory.getCurrentSession().get(Informativo.class,
+				idInformativo);
+	}
+
 }

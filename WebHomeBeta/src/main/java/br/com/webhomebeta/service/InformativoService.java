@@ -27,5 +27,12 @@ public class InformativoService {
 	public void delete(Informativo informativo) {
 		informativoDao.delete(informativo);
 	}
-
+	
+	public List<Informativo> getListInformativos(int idUser){
+		return informativoDao.getListInformativos(idUser);
+	}
+	
+	public Informativo getInformativo(int idInformativo){
+		return informativoDao.getInformativo(idInformativo);
+	}
 }

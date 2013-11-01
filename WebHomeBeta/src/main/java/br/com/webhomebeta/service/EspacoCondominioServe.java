@@ -15,8 +15,8 @@ public class EspacoCondominioServe {
 	@Autowired
 	public EspacoCondominioDao condominioDao;
 
-	public void save(EspacoCondominio condominio) {
-		condominioDao.save(condominio);
+	public EspacoCondominio save(EspacoCondominio condominio) {
+		return condominioDao.save(condominio);
 	}
 	
 	public void saveEspaco(EspacoCondominio espacoCondominio)
@@ -36,6 +36,10 @@ public class EspacoCondominioServe {
 	public List<EspacoCondominio> getLisEspacoCondominios() {
 		return condominioDao.getLisEspacoCondominios();
 		
+	}
+	
+	public EspacoCondominio get(int idEspaco){
+		return condominioDao.get(idEspaco);
 	}
 
 }

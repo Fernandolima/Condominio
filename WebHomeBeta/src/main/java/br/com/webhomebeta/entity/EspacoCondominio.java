@@ -1,11 +1,19 @@
 package br.com.webhomebeta.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "[dbo].[ESPACO]")
@@ -30,8 +38,18 @@ public class EspacoCondominio {
 	@Column(name = "NOME")
 	private String nome;
 	
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "espacoCondominio", orphanRemoval = true)
+	private Set<Reserva> reservas = new HashSet<>(0);
 	
+	
+	public EspacoCondominio(){
+		
+	}
 
+	public EspacoCondominio(int idEspaco){
+		this.idEspaco = idEspaco;
+	}
 	public String getDescricao() {
 		return descricao;
 	}

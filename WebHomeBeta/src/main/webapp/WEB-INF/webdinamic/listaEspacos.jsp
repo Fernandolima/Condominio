@@ -1,8 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -65,10 +64,10 @@
                         <li>
                             <a href="/WebHomeBeta/admin/cadastrarBlocos"><i class="icon-chevron-right"></i> Cadastrar Blocos</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/WebHomeBeta/admin/listarEspaco"><i class="icon-chevron-right"></i> Listar Espaços</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/WebHomeBeta/admin/espaco"><i class="icon-chevron-right"></i> Cadastrar Espaços</a>
                         </li>
                         <li>
@@ -83,9 +82,6 @@
                         <li>
                             <a href="/WebHomeBeta/admin/reservas"><i class="icon-chevron-right"></i>Validar Reservas</a>
                         </li>
-                         <li>
-                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
-                        </li>
                     </ul>
                 </div>
                 
@@ -96,79 +92,26 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Cadastro de Espaços</div>
+                                <div class="muted pull-left">Espaços cadastrados</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                     <form class="form-horizontal" action="#" method="post" id="formCadEspaco" accept-charset="UTF-8">
-                                      <fieldset>
-                                        <legend>Espaços do condimínio</legend>
-                                        <input type="hidden" name="idUser" id="idUser" value="<c:out value="${usuario.idUser}"/>" />
-                                        
-                                        <div class="control-group" data-posicao="0">
-                                        	<label class="control-label">Espaço:</label>
-	                                        <div class="controls">
-	                                        	<select onchange="ADMIN.espacos(this)" id="comboEspacoList" class="chzn-select selectArea 0" name="espaco">
-	                                        	  <option value="">Selecione</option>
-	                                        	  <c:forEach items="${listaEspaco}" var="item" varStatus="num">
-												  	<option value="${item.key}"><c:out value="${item.key}"/></option>
-												  </c:forEach>
-	                                            </select>
-	                                        </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="control-group">
-                                        	<label class="control-label">Descrição:</label>
-	                                        <div class="controls">
-	                                        	<input type="text" id="descricao" class="input-xlarge focused descricaoArea" name="descricao" autocomplete="off" />
-	                                        </div>
-                                        </div>
-                                        
-                                        <div class="form-actions">
-                                        	<input type="button" id="btSubmitEspacos" class="btn btn-primary" value="Salvar" />
-                                        </div>
-                                      </fieldset>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /block -->
-                        
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Espaços Cadastrados</div>
-                            </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-  									<table class="table" id="listaEspacos">
+  									<table class="table">
 						              <thead>
 						                <tr>
 						                  <th>Espaço</th>
 						                  <th>Descrição</th>
-						                  <th>Excluir</th>
+						                  <th>Desativar</th>
 						                </tr>
 						              </thead>
 						              <tbody>
-						              	<c:choose>
-											<c:when test="${fn:length(espacosCadastrados) gt 0}">
-								              	<c:forEach items="${espacosCadastrados}" var="item" varStatus="num">
-									                <tr>
-									                  <td><c:out value="${item.espaco}"/></td>
-									                  <td><c:out value="${item.descricao}"/></td>
-									           
-									                  <td><a href="#" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a></td>
-									                </tr>
-									            </c:forEach>	
-									        </c:when>
-											<c:otherwise>
-												<tr>
-									                  <td colspan="5"><p class="nenhumResultado">Nenhum espaço cadastrado</p></td>
-									            </tr>
-											</c:otherwise>	
-										</c:choose>				                
+						                <c:forEach items="${listaEspacos}" var="item">
+						                	<tr>
+						                		<td><c:out value="${item.espaco}"/></td>
+						                		<td><c:out value="${item.descricao}"/></td>
+						                		<td><a href="#" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a></td>
+						                	</tr>
+						                </c:forEach>
 						              </tbody>
 						            </table>
                                 </div>
@@ -189,8 +132,8 @@
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-		
-    </body>	
+        
+        <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+                
+	</body>	
 </html>

@@ -11,7 +11,11 @@ public interface InformativoDao {
 	public Informativo save(Informativo informativo);
 
 	public List<Informativo> getListInformativos();
+	
+	public List<Informativo> getListInformativos(int idUser);
 
+	public Informativo getInformativo(int idInformativo);
+	
 	public void delete(Informativo informativo);
 
 }

@@ -26,5 +26,17 @@ public class ReservaService {
 		return reservaDao.getLisReserva();
 
 	}
-
+	
+	public Reserva get(int idReserva){
+		return reservaDao.get(idReserva);
+	}
+	
+	public List<Reserva> getHistorico(int idUser){
+		return reservaDao.getHistorico(idUser);
+	}
+	
+	public void update(int idReserva, boolean ativa){
+		reservaDao.update(idReserva, ativa);
+	}
 }
+

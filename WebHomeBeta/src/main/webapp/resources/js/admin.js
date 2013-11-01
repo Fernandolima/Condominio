@@ -120,6 +120,68 @@ var ADMIN = {
 		ADMIN.numeroEspaco++;
 	},
 	
+	inserirEspaco: function(e) {
+		
+		e.preventDefault();
+		
+		
+
+		var obj = new Object();
+		    obj.novoEspaco = $('#comboEspacoList option:selected').val();
+		    obj.idUser = $('#idUser').val();
+		    obj.descricao = $('#descricao').val();
+		
+		if(obj.descricao.lenght > 0) {
+			htmlBloco = "";
+			var dataForm = JSON.stringify(obj);
+			$.ajax({
+				data: dataForm,
+		    	type: 'post',
+		      	url:'/WebHomeBeta/admin/inserirEspaco',
+		      	contentType: 'application/json',
+		      	mimeType: 'application/json',
+		      	success: function(data) {
+		      		htmlBloco += '<tr>';
+		      			htmlBloco += '<td>'+data.novoEspaco+'</p>';
+		      			htmlBloco += '<td>'+data.descricao+'</p>';
+		      			htmlBloco += '<td><a href="#" data-id="'+data.idEspaco+'" class="btn btn-danger btn-delete-bloco">Delete</a></td>';
+					htmlBloco += '</tr>';
+				
+				if($('.nenhumResultado').css('display') == 'block') {
+					$('.nenhumResultado').hide();
+				}
+				
+				$('#listaEspacos tbody').prepend(htmlBloco);
+				$('input[type="text"]').val('');
+		      		
+		      	}
+			});
+		}
+	},
+	
+	excluirEspaco: function(e) {
+		e.preventDefault();
+		
+		var idEspaco = $(this).attr('data-id'),
+			el = $(this);
+		$.ajax({
+			url: 'admin/delete',
+			type: 'POST',
+			data: { idEspaco: idEspaco },
+			success: function(data) {
+				if(data.json) {
+					el.closest('tr').remove();
+				}
+			}
+		});
+		
+//		if($('.lineTabelaBlocos').length === 2) {
+//			console.log('entra');
+//			$('.nenhumResultado').show();
+//			$('#tabelaBlocos').remove();			
+//		}
+	},
+	
 	submitEspaco: function(e) {
 		e.preventDefault();
 		
@@ -181,6 +243,12 @@ $(function() {
 		
 		$("#frmEditarCadastro").submit();
 	});
+	
+	if($('#formCadEspaco')[0]) {
+		$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
+		$('body').on('click', '.btn-delete-bloco', BLOCOS.excluirBlocos);
+	}	
+	
 	
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 	

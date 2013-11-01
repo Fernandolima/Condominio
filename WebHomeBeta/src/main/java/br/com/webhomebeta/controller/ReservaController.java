@@ -1,12 +1,8 @@
 package br.com.webhomebeta.controller;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.Parent;
-import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -15,26 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.ReservaControllerBean;
-import br.com.webhomebeta.entity.AtasEntity;
-import br.com.webhomebeta.entity.Enquetes;
-import br.com.webhomebeta.entity.Opcao;
+import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.ReservaService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
-import br.com.webhomebeta.to.ReservaTO;
-import br.com.webhomebeta.validacao.ValidadorEspaco;
 import br.com.webhomebeta.entity.Reserva;
 
-;
 
 @Controller
 public class ReservaController {
@@ -51,10 +43,6 @@ public class ReservaController {
 	private EspacoCondominioController espacoCondominioController;
 	@Autowired
 	private ReservaControllerBean reservaControllerBean;
-
-	private ValidadorEspaco ValidadorEspaco = new ValidadorEspaco();
-
-	private Reserva reserva;
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto Reserva
 	@RequestMapping(value = "home/reserva", method = RequestMethod.GET)
@@ -77,24 +65,35 @@ public class ReservaController {
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
 	@RequestMapping(value = "home/salvaReserva", method = RequestMethod.GET)
-	public boolean listaReserva(@RequestParam("data") String date,
+	public boolean listaReserva(@RequestParam("data") String dataPreReserva,
+			@RequestParam("reserva") String nomeReserva,
 			@RequestParam("nome") String nome,
-			@RequestParam("idUser") int idUser) {
+			@RequestParam("idUser") int idUser,
+			@RequestParam("idEspaco") int idEspaco) {
 
-		for (Reserva reserva : reservaService.getLisReservas()) {
+		EspacoCondominio espaco = espacoCondominioServe.get(idEspaco);
 
-			if (reserva.getPreReserva() == date) {
+		for (Reserva r : reservaService.getLisReservas())
+			if (r.getPreReserva() == dataPreReserva && r.getEspacoCondominio().getEspaco().equals(nomeReserva))
 				return false;
-			} else {
-				
-				reserva.getDateReserva();
-				emailServico.emailNovoEspacoReservado(getUsuario(), reserva);
-				reservaService.save(reserva);
-			}
 
-		}
+		Reserva reserva = new Reserva(nomeReserva, dataPreReserva, idUser,
+				nome, espaco, false);
+		emailServico.emailNovoEspacoReservado(getUsuario(), reserva);
+		reservaService.save(reserva);
 		return true;
 
+	}
+	
+	@RequestMapping(value = "home/reserva/cancelar={id}", method = RequestMethod.GET)
+	public boolean cancelarReserva(@PathVariable("id") int idReserva){
+		Reserva reserva = reservaService.get(idReserva);
+		if(reserva.getIdUser() == getUsuario().getIdUser()){
+			reservaService.delete(reserva);
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
@@ -107,23 +106,59 @@ public class ReservaController {
 
 	}
 
-//	@RequestMapping(value = "home/reserva/salvar", method = RequestMethod.POST)
-//	public String salvarReserva(
-//			@ModelAttribute("bean") ReservaControllerBean bean,
-//			BindingResult result) {
-//		// criar a data da enquete
-//		for (String reserva : bean.getListReserva()) {
-//			// split divide a string em pedaços
-//			String pedaco[] = reserva.split(",");
-//
-//			Reserva reservaa = new Reserva(pedaco[0], new Date(pedaco[1]),
-//					getUsuario().getNome());
-//
-//			reservaService.save(reservaa);
-//		}
-//
-//		return "redirect:/home/reserva";
+	@RequestMapping(value = "admin/reservas", method = RequestMethod.GET)
+	public ModelAndView showReservas(ModelMap model) {
+		List<Reserva> reservas = reservaService.getLisReservas();
+		model.put("reservas", reservas);
+		model.put("usuario", getUsuario());
+		return new ModelAndView("listReserva", model);
+
+	}
+	
+	@RequestMapping(value = "admin/reservas/aceitar={bol}/id={id}")
+	public boolean aceitarReserva(@PathVariable("bol") boolean ativa, @PathVariable("id") int id){
+		if(ativa){
+			reservaService.update(id, ativa);
+			return true;
+		}else{
+			Reserva reserva = reservaService.get(id);
+			reservaService.delete(reserva);
+			return true;
+		}
+	}
+	
+//	@RequestMapping(value = "admin/reservas/id={id}", method = RequestMethod.GET)
+//	public ModelAndView decidirReserva(@PathVariable("id") int idReserva, ModelMap model){
+//		Reserva reserva = reservaService.get(idReserva);
+//		model.put("reserva", reserva);
+//		return new ModelAndView("visualizaReserva", model);
 //	}
+	
+	@RequestMapping(value = "admin/reservas/historico={id}", method = RequestMethod.GET)
+	public ModelAndView historico(@PathVariable("id") int idUser, ModelMap model){
+		List<Reserva> historicoReserva = reservaService.getHistorico(idUser);
+		model.put("historicoReservas", historicoReserva);
+		return new ModelAndView("historicoReserva", model);
+	}
+
+	// @RequestMapping(value = "home/reserva/salvar", method =
+	// RequestMethod.POST)
+	// public String salvarReserva(
+	// @ModelAttribute("bean") ReservaControllerBean bean,
+	// BindingResult result) {
+	// // criar a data da enquete
+	// for (String reserva : bean.getListReserva()) {
+	// // split divide a string em pedaços
+	// String pedaco[] = reserva.split(",");
+	//
+	// Reserva reservaa = new Reserva(pedaco[0], new Date(pedaco[1]),
+	// getUsuario().getNome());
+	//
+	// reservaService.save(reservaa);
+	// }
+	//
+	// return "redirect:/home/reserva";
+	// }
 
 	public Usuario getUsuario() {
 

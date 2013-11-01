@@ -12,7 +12,17 @@ public class EspacoCondominioJSON implements Serializable {
 	private String descricao;
 	private String novoEspaco;
 	private int idUser;
+	private int idEspaco;
 	
+	
+
+	public int getIdEspaco() {
+		return idEspaco;
+	}
+
+	public void setIdEspaco(int idEspaco) {
+		this.idEspaco = idEspaco;
+	}
 
 	public String getDescricao() {
 		return descricao;

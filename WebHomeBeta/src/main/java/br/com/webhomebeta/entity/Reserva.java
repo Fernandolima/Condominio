@@ -4,13 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "[dbo][RESERVA]")
+@Table(name = "[dbo].[RESERVA]")
 public class Reserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,34 +34,48 @@ public class Reserva {
 
 	@Column(name = "NOME")
 	private String nome;
-
-	public Reserva(String reserva, Date dateReserva, String nome) {
-		super();
-		this.reserva = reserva;
-		this.dateReserva = dateReserva;
-		this.nome = nome;
-		
-
-	}
-
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_ESPACO", nullable = false)
+	private EspacoCondominio espacoCondominio;
+	
+	@Column(name = "ATIVA")
+	private boolean ativa;
 
 	
+
+	public Reserva(String reserva, String preReserva, int idUser, String nome,
+			EspacoCondominio espacoCondominio, boolean ativa) {
+		super();
+		this.reserva = reserva;
+		this.preReserva = preReserva;
+		this.idUser = idUser;
+		this.nome = nome;
+		this.espacoCondominio = espacoCondominio;
+		this.ativa = ativa;
+	}
+
+	
+	
+	public boolean isAtiva() {
+		return ativa;
+	}
+
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
+	}
+
 	public String getPreReserva() {
 		return preReserva;
 	}
-
-
 
 	public void setPreReserva(String preReserva) {
 		this.preReserva = preReserva;
 	}
 
-
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -96,4 +113,13 @@ public class Reserva {
 		this.idUser = idUser;
 	}
 
+	public EspacoCondominio getEspacoCondominio() {
+		return espacoCondominio;
+	}
+
+	public void setEspacoCondominio(EspacoCondominio espacoCondominio) {
+		this.espacoCondominio = espacoCondominio;
+	}
+
+	
 }

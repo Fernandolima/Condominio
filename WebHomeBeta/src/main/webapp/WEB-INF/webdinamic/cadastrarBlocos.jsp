@@ -38,10 +38,6 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="/WebHomeBeta/home">Ver site</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
                                         <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
                                     </li>
                                 </ul>
@@ -58,7 +54,7 @@
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                         <li>
-                            <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i> Home</a>
+                            <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
                         <li>
                             <a href="/WebHomeBeta/admin/listaAtas"><i class="icon-chevron-right"></i> Listar Atas</a>
@@ -70,7 +66,10 @@
                             <a href="/WebHomeBeta/admin/cadastrarBlocos"><i class="icon-chevron-right"></i> Cadastrar Blocos</a>
                         </li>
                         <li>
-                            <a href="/WebHomeBeta/espaco"><i class="icon-chevron-right"></i> Cadastrar Espaços</a>
+                            <a href="/WebHomeBeta/admin/listarEspaco"><i class="icon-chevron-right"></i> Listar Espaços</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/espaco"><i class="icon-chevron-right"></i> Cadastrar Espaços</a>
                         </li>
                         <li>
                             <a href="/WebHomeBeta/admin/listaEnquetes"><i class="icon-chevron-right"></i> Listar Enquetes</a>
@@ -79,7 +78,13 @@
                             <a href="/WebHomeBeta/admin/enquetes"><i class="icon-chevron-right"></i> Cadastrar Enquetes</a>
                         </li>
                         <li>
-                            <a href="/WebHomeBeta/admin/validarMoradores"><i class="icon-chevron-right"></i> Morador</a>
+                            <a href="/WebHomeBeta/admin/validarMoradores"><i class="icon-chevron-right"></i>Validar Moradores</a>
+                        </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/reservas"><i class="icon-chevron-right"></i>Validar Reservas</a>
+                        </li>
+                         <li>
+                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
                         </li>
                     </ul>
                 </div>

@@ -11,13 +11,15 @@ import br.com.webhomebeta.entity.EspacoCondominio;
 @Repository("espacoCondominioDao")
 public interface EspacoCondominioDao {
 	
-	public void save(EspacoCondominio espacoCondominio);
+	public EspacoCondominio save(EspacoCondominio espacoCondominio);
 	
 	public void saveEspaco(EspacoCondominio espacoCondominio);
 
 	public void update(EspacoCondominio condominio);
 
 	public void delete(EspacoCondominio espacoCondominio);
+	
+	public EspacoCondominio get(int idEspaco);
 	
 	public List<EspacoCondominio> getLisEspacoCondominios();
 	
