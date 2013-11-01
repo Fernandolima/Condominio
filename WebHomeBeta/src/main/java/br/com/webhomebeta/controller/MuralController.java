@@ -51,8 +51,8 @@ public class MuralController {
 			BindingResult result) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Mural mural = new Mural();
-		mural.setData(df.format(new Date()));
-		BeanUtils.copyProperties(bean, mural);
+		bean.getMuralTO().setData((df.format(new Date())));
+		BeanUtils.copyProperties(bean.getMuralTO(), mural);
 		muralService.save(mural);
 		
 		return "redirect:/admin/mural";

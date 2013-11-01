@@ -105,13 +105,13 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                	<form:form modelAttribute="bean" class="form-horizontal" action="/WebHomeBeta/admin/mural/save" method="post">
+                                	<form:form modelAttribute="mural" class="form-horizontal" action="/WebHomeBeta/admin/mural/save" method="post">
                                       <fieldset>
                                         <legend>Mural</legend>                                        
-                                        	<input type="hidden" name="MuralTO.idUser" value="<c:out value="${usuario.idUser}" />"/>
+                                        	<input type="hidden" name="muralTO.idUser" value="<c:out value="${usuario.idUser}" />"/>
 	                                    	<div class="control-group">
                                           		<div class="controls">
-                                            		<textarea class="input-xlarge textarea" name="MuralTO.noticia" placeholder="Texto da Ata" style="width: 700px; height: 200px"></textarea>
+                                            		<textarea class="input-xlarge textarea" name="muralTO.noticia" placeholder="Texto da Ata" style="width: 700px; height: 200px"></textarea>
                                           		</div>
                                         	</div>                                       	
                                         	

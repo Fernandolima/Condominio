@@ -74,7 +74,7 @@ public class CadastroCondominioController {
 		return usuario;
 	}
 
-	// Pega o Objeto blco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
+	// Pega o Objeto bloco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "addBloco", method = RequestMethod.POST)
 	// valor da action
@@ -96,6 +96,7 @@ public class CadastroCondominioController {
 			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
 			bloco.getDescricaoCondominioTO().setQuantAp(null);
 			bloco.getDescricaoCondominioTO().setQuatApAndares(null);
+			
 			cadastroCondominioService.save(descricao);
 
 			return new ModelAndView("cadastrarBlocos");
