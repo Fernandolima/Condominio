@@ -37,7 +37,7 @@ var ADMIN = {
 		htmlOpcao += '<div class="control-group">';
 			htmlOpcao += '<label for="listOpcoes" path="enquetesTo.opcoes" class="control-label">Opção '+(numEnquete+1)+':</label>';
 			htmlOpcao += '<div class="controls">';
-				htmlOpcao += '<input type="text" path="listOpcoes['+numEnquete+']" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
+				htmlOpcao += '<input type="text" name="listOpcoes['+numEnquete+']" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
 			htmlOpcao += '</div>';
 		htmlOpcao += '</div>';
 		
