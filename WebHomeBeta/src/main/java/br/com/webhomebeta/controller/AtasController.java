@@ -103,8 +103,8 @@ public class AtasController {
 		ataTo.setTitulo(atasEntity.getTitulo());
 		ataTo.setAlterada(atasEntity.getAlterada());
 		uploadArquivobeanUsuarios.setAtasTo(ataTo);
-		model.addAttribute("editar", uploadArquivobeanUsuarios);
-		return new ModelAndView("editarAtas", model);
+		model.addAttribute("visualizar", uploadArquivobeanUsuarios);
+		return new ModelAndView("visualizarAtas", model);
 
 	}
 

@@ -56,41 +56,13 @@
 					</div>
 				</div>
 				<div id="rightCol">
-					<div id="rigth-content">
-						<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean">
-							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Está pensando em que?"></form:textarea>
-							<input type="button" id="submitComment" value="Publicar" />
-						</form:form>
-						<div id="main-comments"></div>
-					</div>
-					<div id="enquete-content">
-						<h2 class="titleEnquete">Enquetes</h2>
-						<div id="mainEnqueteSite">
-							<c:forEach items="${listaEnquetes}" var="item">
-								<div class="enquete">
-									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
-									<div class="opcoesEnquete">
-									<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
-									<c:forEach items="${item.opcoes}" var="opc">
-										<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/><br>
-									</c:forEach>
-									</div>
-									<a href="#" class="participarEnquete">Votar</a>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
+					<h2 id="tituloSubPaginas">Ata: <c:out value="${visualizar.atasTo.titulo	}"/></h2>
+					<p><c:out value="${visualizar.atasTo.dataFormat}"/></p>	
+					${visualizar.atasTo.atas}			
 				</div>
 			</div>
 		</section>
 		<!-- <footer id="footer-site">
-		</footer> -->
-		<script src="<c:url value = "/js/jquery.autosize.min.js"/>" type="text/javascript"></script>
-		<script>
-			$(document).ready(function(){
-			    $('textarea').autosize();   
-			});
-		</script>
-		<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
+		</footer> -->		
 	</body>
 </html>

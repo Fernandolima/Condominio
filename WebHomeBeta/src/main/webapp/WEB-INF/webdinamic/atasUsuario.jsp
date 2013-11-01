@@ -56,41 +56,32 @@
 					</div>
 				</div>
 				<div id="rightCol">
-					<div id="rigth-content">
-						<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean">
-							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Está pensando em que?"></form:textarea>
-							<input type="button" id="submitComment" value="Publicar" />
-						</form:form>
-						<div id="main-comments"></div>
-					</div>
-					<div id="enquete-content">
-						<h2 class="titleEnquete">Enquetes</h2>
-						<div id="mainEnqueteSite">
-							<c:forEach items="${listaEnquetes}" var="item">
-								<div class="enquete">
-									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
-									<div class="opcoesEnquete">
-									<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
-									<c:forEach items="${item.opcoes}" var="opc">
-										<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/><br>
-									</c:forEach>
-									</div>
-									<a href="#" class="participarEnquete">Votar</a>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
+					<h2 id="tituloSubPaginas">Lista de Atas</h2>
+					
+					<table class="table">
+		            	<thead>
+		                	<tr>
+				                <th>Título da Ata</th>
+				                <th>Data da ata</th>
+				                <th>Visualizar</th>
+				                <th>Download</th>
+		              		</tr>
+		              	</thead>
+		              	<tbody>
+		              	    <c:forEach items="${atas}" var="item">
+		                		<tr>
+			                		<td><c:out value="${item.titulo}"/></td>
+			                		<td><c:out value="${item.dataFormat}"/></td>
+			                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
+			                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
+		                		</tr>
+		                	</c:forEach>
+		              	</tbody>
+		        	</table>
 				</div>
 			</div>
 		</section>
 		<!-- <footer id="footer-site">
-		</footer> -->
-		<script src="<c:url value = "/js/jquery.autosize.min.js"/>" type="text/javascript"></script>
-		<script>
-			$(document).ready(function(){
-			    $('textarea').autosize();   
-			});
-		</script>
-		<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
+		</footer> -->		
 	</body>
 </html>
