@@ -1,46 +1,83 @@
 package br.com.webhomebeta.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.DadosUsuarioBean;
+import br.com.webhomebeta.bean.MuralBean;
+import br.com.webhomebeta.entity.Mural;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.MuralService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.MuralTO;
 
-
 @Controller
 public class MuralController {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private MuralService muralService;
 	@Autowired
 	private DadosUsuarioBean bean;
-		
+
 	@RequestMapping(value = "admin/mural", method = RequestMethod.GET)
-	public ModelAndView init(ModelMap model){
+	public ModelAndView init(ModelMap model) {
 		bean.setUsuario(getUsuario());
 		model.put("mural", new MuralTO());
 		model.put("usuario", bean);
-		return new ModelAndView("mural",model);
+		model.put("list", muralService.getList());
+		return new ModelAndView("mural", model);
+
 	}
-	
+
 	@RequestMapping(value = "mural/save", method = RequestMethod.POST)
-	public void save(){
-		
+	public void save(@ModelAttribute("bean") MuralBean bean,
+			BindingResult result) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Mural mural = new Mural();
+		mural.setData(df.format(new Date()));
+		BeanUtils.copyProperties(bean, mural);
+		muralService.save(mural);
+
 	}
-	
+
+	@RequestMapping(value = "mural/delete={idMural}", method = RequestMethod.GET)
+	public void delete(@PathVariable("idMural") int idMural) {
+		Mural mural = muralService.get(idMural);
+		muralService.delete(mural);
+	}
+
+	@RequestMapping(value = "mural/update", method = RequestMethod.POST)
+	public void updatemural(@ModelAttribute("editar") MuralBean bean,
+			BindingResult result) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Mural mural = new Mural();
+		mural.setData(bean.getMuralTO().getData());
+		mural.setDataAlterada(df.format(new Date()));
+		mural.setIdMural(bean.getMuralTO().getIdMural());
+		mural.setNoticia(bean.getMuralTO().getNoticia());
+
+		muralService.update(mural);
+
+	}
+
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;
@@ -59,5 +96,5 @@ public class MuralController {
 
 		return usuario;
 	}
-	
+
 }

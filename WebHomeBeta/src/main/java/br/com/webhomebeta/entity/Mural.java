@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "[dbo].[MURAL]")
 public class Mural {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_MURAL")
@@ -25,6 +25,51 @@ public class Mural {
 	private int idUser;
 	@Column(name = "DATA")
 	@Temporal(value = TemporalType.DATE)
-	private Date data;
+	private String data;
+	@Column(name= "DATA_ALTERADA")
+	@Temporal(value = TemporalType.DATE)
+	private String dataAlterada;
 	
+	
+
+	public String getDataAlterada() {
+		return dataAlterada;
+	}
+
+	public void setDataAlterada(String dataAlterada) {
+		this.dataAlterada = dataAlterada;
+	}
+
+	public int getIdMural() {
+		return idMural;
+	}
+
+	public String getNoticia() {
+		return noticia;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setIdMural(int idMural) {
+		this.idMural = idMural;
+	}
+
+	public void setNoticia(String noticia) {
+		this.noticia = noticia;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 }

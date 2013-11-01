@@ -7,7 +7,16 @@ public class MuralTO {
 	private int idMural;
 	private String noticia;
 	private int idUser;
-	private Date data;
+	private String data;
+	private String dataAlterada;
+	
+	
+	public String getDataAlterada() {
+		return dataAlterada;
+	}
+	public void setDataAlterada(String dataAlterada) {
+		this.dataAlterada = dataAlterada;
+	}
 	public int getIdMural() {
 		return idMural;
 	}
@@ -26,10 +35,10 @@ public class MuralTO {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	
