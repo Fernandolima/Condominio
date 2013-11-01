@@ -107,7 +107,8 @@ public class EnquetesController {
 	String computarVoto(@RequestParam("idUser") int idUser,
 			@RequestParam("idOpcao") int idOpcao,
 			@RequestParam("idEnquete") int idEnquete) {
-		OpcaoVotada opcaoVotada = new OpcaoVotada(new Opcao(idOpcao), idUser);
+		Opcao opcao = opcaoService.get(idOpcao);
+		OpcaoVotada opcaoVotada = new OpcaoVotada(opcao,idUser);
 		if (idUser == getUsuario().getIdUser()) {
 			opcaoVotadaService.save(opcaoVotada);
 

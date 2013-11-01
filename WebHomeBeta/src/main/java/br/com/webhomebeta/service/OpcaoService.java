@@ -24,7 +24,9 @@ public class OpcaoService {
 
 	}
 	
-	
+	public Opcao get(int id){
+		return opcaoDAO.getId(id);
+	}
 	public void update(int quantidadeVotos, int idOpcao) {
 		opcaoDAO.update(quantidadeVotos, idOpcao);
 	}

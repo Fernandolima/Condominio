@@ -329,12 +329,52 @@ var POST_COMMENT  = {
 
 	            }
 	        });
+		},
+		
+		onParticipaEnquete: function(e) {
+			
+			e.preventDefault();
+			
+			var el = $(this),
+				idOpc='',
+				idUser = '',
+				idEnquete = '';
+			
+			idOpc = el.closest('.enquete').find('.opcoesEnquete').find('input:checked').val();
+			
+			if(idOpc) {
+				idUser = $('#userSessao').val();
+				idEnquete = el.closest('.enquete').find('.opcoesEnquete').find('.idEnquete').val();
+				
+				console.log('**********************************************');
+				console.log(idOpc, idUser, idEnquete);
+				console.log('**********************************************');
+				
+				$.ajax({
+		            type: "post",
+		            url: "computarVoto",
+		            data: 'idUser=' + idUser + '&idOpcao=' + idOpc + '&idEnquete=' + idEnquete,
+		            success: function (data) {
+		            	console.log('votou =) retorno = ', data);
+		            },
+		            error: function () {
+		            	console.log('errormessage');
+		                //do something else
+
+		            }
+		        });
+			} else {
+				alert('escolha uma opcao para votar =)');
+			}
+			
 		}
 }
 
 $(function() {
 	
 	POST_COMMENT.init();
+	//enquete
+	$('.participarEnquete').on('click', POST_COMMENT.onParticipaEnquete);
 	
 	$('#txtComment').on('focus', POST_COMMENT.postFocus);	
 
@@ -366,5 +406,5 @@ $(function() {
 				});
 			}			
 		}
-	});
+	});	
 });

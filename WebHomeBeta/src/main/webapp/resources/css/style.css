@@ -828,7 +828,7 @@ input#submitComment {
 	border-bottom: 1px dotted;
     float: left;
     margin-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     width: 100%;
 }
 
@@ -840,4 +840,27 @@ input#submitComment {
 	width: 100%;
 	float: left;
 	line-height: 20px;
+}
+
+.opcoesEnquete input[type="radio"] {
+	float: none;
+	width: auto;
+	margin-top: 10px;
+	height: auto;
+	
+}
+
+.participarEnquete {
+	background: #BDE2F0;
+	color: #153C63;
+	padding: 7px;
+	float: right;
+	margin-top: 10px;
+	text-decoration: none;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+.participarEnquete:hover {
+	color: #fff;
 }

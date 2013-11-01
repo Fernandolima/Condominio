@@ -71,10 +71,12 @@
 								<div class="enquete">
 									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
 									<div class="opcoesEnquete">
+									<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
 									<c:forEach items="${item.opcoes}" var="opc">
-										<a class="opcEnq" href="#"><c:out value="${opc.opcao}"/></a>
+										<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/><br>
 									</c:forEach>
 									</div>
+									<a href="#" class="participarEnquete">Votar</a>
 								</div>
 							</c:forEach>
 						</div>

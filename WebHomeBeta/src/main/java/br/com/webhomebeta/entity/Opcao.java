@@ -48,8 +48,9 @@ public class Opcao {
 
 	}
 
-	public Opcao(int idOpcao) {
+	public Opcao(int idOpcao, Enquetes enquetes) {
 		this.idOpcao = idOpcao;
+		this.enquetes = enquetes;
 	}
 
 	public Opcao(String opcao, Enquetes enquetes) {

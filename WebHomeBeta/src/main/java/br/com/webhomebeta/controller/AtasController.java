@@ -64,7 +64,7 @@ public class AtasController {
 		return new ModelAndView("atas", model);
 
 	}
-	@RequestMapping(value = "home/atas", method = RequestMethod.POST)
+	@RequestMapping(value = "home/atas", method = RequestMethod.GET)
 	public ModelAndView showAtasUser(ModelMap model){
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		List<AtasEntity> atas = atasService.getListAtas();
