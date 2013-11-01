@@ -1,10 +1,13 @@
 package br.com.webhomebeta.json;
 
+import java.util.ArrayList;
+
 public class OpcaoJSON {
 	
 	private int idOpcao;
 	private String opcao;
 	private String porcentagemVotos;
+	private ArrayList<OpcaoVotadaJSON> opcaoVotadaJSONs = new ArrayList<>();
 	
 	
 	
@@ -31,6 +34,12 @@ public class OpcaoJSON {
 	}
 	public void setPorcentagemVotos(String porcentagemVotos) {
 		this.porcentagemVotos = porcentagemVotos;
+	}
+	public ArrayList<OpcaoVotadaJSON> getOpcaoVotadaJSONs() {
+		return opcaoVotadaJSONs;
+	}
+	public void setOpcaoVotadaJSONs(ArrayList<OpcaoVotadaJSON> opcaoVotadaJSONs) {
+		this.opcaoVotadaJSONs = opcaoVotadaJSONs;
 	}
 	
 	

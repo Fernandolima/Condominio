@@ -111,11 +111,8 @@ public class EnquetesController {
 		OpcaoVotada opcaoVotada = new OpcaoVotada(opcao,idUser);
 		if (idUser == getUsuario().getIdUser()) {
 			opcaoVotadaService.save(opcaoVotada);
-
 			return "true";
-
 		}
-
 		opcaoService.update(1, idOpcao);
 		enquetesService.update(1, idEnquete);
 

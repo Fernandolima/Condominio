@@ -1,5 +1,6 @@
 package br.com.webhomebeta.json;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnqueteJSON {
@@ -9,6 +10,7 @@ public class EnqueteJSON {
 	private int idUser;
 	private List<OpcaoJSON> opcoes;
 	private int totalVotos;
+	private List<Integer> idVoto = new ArrayList<>();
 
 	
 	public EnqueteJSON(String titulo, int idEnquete, int idUser, int totalVotos) {
@@ -19,6 +21,14 @@ public class EnqueteJSON {
 		this.totalVotos = totalVotos;
 	}
 	
+	public List<Integer> getIdVoto() {
+		return idVoto;
+	}
+
+	public void setIdVoto(List<Integer> idVoto) {
+		this.idVoto = idVoto;
+	}
+
 
 	public int getTotalVotos() {
 		return totalVotos;

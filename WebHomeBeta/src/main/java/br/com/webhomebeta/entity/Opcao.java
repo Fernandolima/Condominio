@@ -80,6 +80,15 @@ public class Opcao {
 		return opcao;
 	}
 
+	
+	public Set<OpcaoVotada> getOpcaoVotadas() {
+		return opcaoVotadas;
+	}
+
+	public void setOpcaoVotadas(Set<OpcaoVotada> opcaoVotadas) {
+		this.opcaoVotadas = opcaoVotadas;
+	}
+
 	/**
 	 * @return the quatVots
 	 */

@@ -57,4 +57,14 @@ public class OpcaoVotada {
 		this.opcao = opcao;
 	}
 
+	public int getIdOpcaoVotada() {
+		return idOpcaoVotada;
+	}
+
+	public void setIdOpcaoVotada(int idOpcaoVotada) {
+		this.idOpcaoVotada = idOpcaoVotada;
+	}
+	
+	
+
 }
