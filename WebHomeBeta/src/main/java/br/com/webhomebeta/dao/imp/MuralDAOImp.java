@@ -2,11 +2,13 @@ package br.com.webhomebeta.dao.imp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.MuralDAO;
+import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Mural;
 
 public class MuralDAOImp implements MuralDAO{
@@ -38,8 +40,13 @@ public class MuralDAOImp implements MuralDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Mural> getList() {
-		return factory.getCurrentSession().createCriteria(Mural.class).list();
-	}
+		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM MURAL ORDER BY DATA DESC").addEntity(Mural.class);
+		@SuppressWarnings("unchecked")
+		List<Mural> mural = q.list();
+		return mural;
+		
+		
+			}
 
 	@Transactional
 	@Override
