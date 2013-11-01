@@ -31,7 +31,7 @@
 					<span>|</span>
 					<a href="perfil">Configurações</a>
 					<span>|</span>
-					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
+					<p class="name-user-connected"><c:out value="${usuario.nome}"></c:out><p>					
 				</div>
 			</div>
 		</header>
@@ -40,7 +40,7 @@
 				<div id="leftCol">
 					<div id="user-connected">
 						<div id="photo-user">
-							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
+							<img id="thumb-photo" src="<c:out value="${usuario.imagem}"></c:out>"/>
 							
 						</div>
 						<div id="nav-user">
@@ -57,28 +57,16 @@
 					</div>
 				</div>
 				<div id="rightCol">
-					<h2 id="tituloSubPaginas">Lista de Atas</h2>
-					
-					<table class="table">
-		            	<thead>
-		                	<tr>
-				                <th>Título da Ata</th>
-				                <th>Data da ata</th>
-				                <th>Visualizar</th>
-				                <th>Download</th>
-		              		</tr>
-		              	</thead>
-		              	<tbody>
-		              	    <c:forEach items="${atas}" var="item">
-		                		<tr>
-			                		<td><c:out value="${item.titulo}"/></td>
-			                		<td><c:out value="${item.dataFormat}"/></td>
-			                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
-			                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
-		                		</tr>
-		                	</c:forEach>
-		              	</tbody>
-		        	</table>
+					<h2 id="tituloSubPaginas">Anúncios</h2>
+						<a href="/WebHomeBeta/home/novoInformativo">+ Adicionar Anuncio</a>
+						<c:forEach items="${listainformativo}" var="item">
+		                	<div style="float:left; background: red; margin:10px;">
+			                	<p><c:out value="${item.nomeUser}"/></p>
+			                	<p><c:out value="${item.email}"/></p>
+			                	<p><c:out value="${item.informativo}"/></p>
+		                	</div>
+		                </c:forEach>
+		              	
 				</div>
 			</div>
 		</section>

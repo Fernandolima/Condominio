@@ -68,7 +68,7 @@ public class InformativoController {
 		bean.getInformativoTO().setInformativo(null);
 		bean.getInformativoTO().setNomeUser(null);
 		
-		return "reditect:/home/informativo";
+		return "redirect:/home/informativo";
 	}
 
 	@RequestMapping(value = "home/informativo/delete", method = RequestMethod.POST)
