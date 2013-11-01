@@ -82,6 +82,9 @@
                         <li>
                             <a href="/WebHomeBeta/admin/reservas"><i class="icon-chevron-right"></i>Validar Reservas</a>
                         </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
+                        </li>
                          <li>
                             <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
                         </li>
@@ -119,38 +122,6 @@
 	                            </div>
 	                    	</div>
 	                    	</c:forEach>
-	                    	
-<!-- 	                    	<div class="list-enquete"> -->
-<!--                             	<p class="perguntaEnquete"><b>Enquete Ativa:</b> Aqui fica a pergunta da enquete</p> -->
-<!-- 	                            <div class="block-content collapse in enquetes"> -->
-<!-- 	                            	<div class="span3"> -->
-<!-- 	                                    <div class="chart" data-percent="73">73%</div> -->
-<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Ótimo</span> -->
-	
-<!-- 	                                    </div> -->
-<!-- 	                                </div> -->
-<!-- 	                                <div class="span3"> -->
-<!-- 	                                    <div class="chart" data-percent="53">53%</div> -->
-<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Bom</span> -->
-	
-<!-- 	                                    </div> -->
-<!-- 	                                </div> -->
-<!-- 	                                <div class="span3"> -->
-<!-- 	                                    <div class="chart" data-percent="83">83%</div> -->
-<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Ruim</span> -->
-	
-<!-- 	                                    </div> -->
-<!-- 	                                </div> -->
-<!-- 	                                <div class="span3"> -->
-<!-- 	                                    <div class="chart" data-percent="13">13%</div> -->
-<!-- 	                                    <div class="chart-bottom-heading"><span class="label label-info">Péssimo</span> -->
-	
-<!-- 	                                    </div> -->
-<!-- 	                                </div> -->
-<!-- 	                            </div> -->
-<!-- 	                    	</div> -->
-                           
-    
                         </div>
                         <!-- /block -->
                     </div>              

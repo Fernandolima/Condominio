@@ -39,22 +39,23 @@ public class MuralController {
 
 	@RequestMapping(value = "admin/mural", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
-		bean.setUsuario(getUsuario());
-		model.put("mural", new MuralTO());
-		model.put("usuario", bean);
+		model.put("mural", new MuralBean());
+		model.put("usuario", getUsuario());
 		model.put("list", muralService.getList());
 		return new ModelAndView("mural", model);
 
 	}
 
-	@RequestMapping(value = "mural/save", method = RequestMethod.POST)
-	public void save(@ModelAttribute("bean") MuralBean bean,
+	@RequestMapping(value = "admin/mural/save", method = RequestMethod.POST)
+	public String save(@ModelAttribute("bean") MuralBean bean,
 			BindingResult result) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Mural mural = new Mural();
 		mural.setData(df.format(new Date()));
 		BeanUtils.copyProperties(bean, mural);
 		muralService.save(mural);
+		
+		return "redirect:/admin/mural";
 
 	}
 
