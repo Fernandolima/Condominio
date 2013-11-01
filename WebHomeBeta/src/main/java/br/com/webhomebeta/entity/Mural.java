@@ -24,10 +24,10 @@ public class Mural {
 	@Column(name = "ID_USER")
 	private int idUser;
 	@Column(name = "DATA")
-	@Temporal(value = TemporalType.DATE)
+	
 	private String data;
 	@Column(name= "DATA_ALTERADA")
-	@Temporal(value = TemporalType.DATE)
+	
 	private String dataAlterada;
 	
 	
