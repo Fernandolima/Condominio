@@ -35,7 +35,7 @@ var ADMIN = {
 		var numEnquete = $('.opcaoEnquete').length;
 		
 		htmlOpcao += '<div class="control-group">';
-			htmlOpcao += '<label for="listOpcoes" path="enquetesTo.opcoes" class="control-label">Opção '+(numEnquete+1)+':</label>';
+			htmlOpcao += '<label for="listOpcoes" name="enquetesTo.opcoes" class="control-label">Opção '+(numEnquete+1)+':</label>';
 			htmlOpcao += '<div class="controls">';
 				htmlOpcao += '<input type="text" name="listOpcoes['+numEnquete+']" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
 			htmlOpcao += '</div>';
