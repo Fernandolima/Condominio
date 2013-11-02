@@ -69,6 +69,12 @@ public class EnquetesController {
 		return new ModelAndView("listaEnquetes", model);
 
 	}
+	
+	@RequestMapping(value = "admin/enquetes/ativar")
+	public @ResponseBody String ativarEnquete(@RequestParam("idEnquete") int idEnquete, @RequestParam("ativa") boolean ativa){
+		enquetesService.update(idEnquete, ativa);
+		return "true";
+	}
 
 	@RequestMapping(value = "listaEnqutesAtivas", method = RequestMethod.GET)
 	public ModelAndView listaEnquete(ModelMap modelMap) {
@@ -111,10 +117,10 @@ public class EnquetesController {
 		OpcaoVotada opcaoVotada = new OpcaoVotada(opcao,idUser);
 		if (idUser == getUsuario().getIdUser()) {
 			opcaoVotadaService.save(opcaoVotada);
+			opcaoService.update(1, idOpcao);
+			enquetesService.update(1, idEnquete);
 			return "true";
 		}
-		opcaoService.update(1, idOpcao);
-		enquetesService.update(1, idEnquete);
 
 		return "true";
 	}
@@ -139,12 +145,12 @@ public class EnquetesController {
 	}
 
 	@RequestMapping(value = "admin/enquetes/delete", method = RequestMethod.POST)
-	public String delete(@RequestParam("idEnquete") int idEnquete) {
+	public @ResponseBody String delete(@RequestParam("idEnquete") int idEnquete) {
 
 		Enquetes enquete = enquetesService.get(idEnquete);
 		enquetesService.delete(enquete);
 
-		return "redirect:admin/enquetes/delete";
+		return "true";
 	}
 
 }

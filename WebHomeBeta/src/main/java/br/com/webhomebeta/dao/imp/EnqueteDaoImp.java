@@ -39,9 +39,11 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Enquetes> getEnquetes() {
-		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ENQUETES]").addEntity(Enquetes.class);
+		Query q = factory.getCurrentSession()
+				.createSQLQuery("SELECT * FROM [dbo].[ENQUETES]")
+				.addEntity(Enquetes.class);
 		return q.list();
-		
+
 	}
 
 	@Override
@@ -55,7 +57,11 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@Override
 	@Transactional
 	public List<Enquetes> getListAtiva(boolean ativa) {
-		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ENQUETES] WHERE ATIVA = ?").addEntity(Enquetes.class);
+		Query q = factory
+				.getCurrentSession()
+				.createSQLQuery(
+						"SELECT * FROM [dbo].[ENQUETES] WHERE ATIVA = ?")
+				.addEntity(Enquetes.class);
 		q.setParameter(0, ativa);
 		return q.list();
 	}
@@ -66,12 +72,22 @@ public class EnqueteDaoImp implements EnqueteDao {
 				.getCurrentSession()
 				.createQuery(
 						"select new Enquetes(e.totalVotos) from Enquetes e where e.idEquete = ?")
-				.setInteger(0, idEnquete);
+				.setInteger(0, idEnquete).uniqueResult();
 
 		factory.getCurrentSession()
 				.createQuery(
 						"update Enquetes e set e.totalVotos = ? where e.idEquete = ?")
 				.setInteger(0, quantidadeVotos + enquetes.getTotalVotos())
 				.setInteger(1, idEnquete).executeUpdate();
+	}
+
+	@Override
+	@Transactional
+	public void update(int idEnquete, boolean ativa) {
+		factory.getCurrentSession()
+				.createQuery(
+						"update Enquetes e set e.isAtiva = ? where e.idEquete = ?")
+				.setBoolean(0, ativa).setInteger(1, idEnquete).executeUpdate();
+
 	}
 }

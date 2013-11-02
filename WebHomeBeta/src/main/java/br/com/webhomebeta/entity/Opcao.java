@@ -48,6 +48,11 @@ public class Opcao {
 
 	}
 
+	public Opcao(int quatVots) {
+		this.quatVots = quatVots;
+		
+	}
+	
 	public Opcao(int idOpcao, Enquetes enquetes) {
 		this.idOpcao = idOpcao;
 		this.enquetes = enquetes;

@@ -43,4 +43,8 @@ public class EnquetesService {
 	public void update(int quantidadeVotos, int idEnquete) {
 		dao.update(quantidadeVotos, idEnquete);
 	}
+	
+	public void update(int idEnquete, boolean ativa) {
+		dao.update(idEnquete, ativa);
+	}
 }

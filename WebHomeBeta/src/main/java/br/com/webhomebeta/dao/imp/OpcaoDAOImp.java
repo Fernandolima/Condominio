@@ -42,7 +42,7 @@ public class OpcaoDAOImp implements OpcaoDAO {
 				.getCurrentSession()
 				.createQuery(
 						"select new Opcao(e.quatVots) from Opcao e where e.idOpcao = ?")
-				.setInteger(0, idOpcao);
+				.setInteger(0, idOpcao).uniqueResult();
 
 		sessionFactory
 				.getCurrentSession()

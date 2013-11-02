@@ -54,7 +54,7 @@ public class AdministradorController {
 		int totalVotos = e.getTotalVotos();
 		EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
 				e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
-				e.getTotalVotos());
+				e.getTotalVotos(), e.getEnquete());
 		for (Opcao o : e.getOpcao()) {
 			DecimalFormat f = new DecimalFormat("##.##");
 			OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(), o.getOpcao(),
@@ -71,10 +71,13 @@ public class AdministradorController {
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		for (Enquetes e : enquetes) {
 			int totalVotos = e.getTotalVotos();
+			if(totalVotos == 0){
+				totalVotos = 1;
+			}
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
 					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
-					e.getTotalVotos());
+					e.getTotalVotos(), e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
 				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
@@ -90,19 +93,20 @@ public class AdministradorController {
 	@RequestMapping(value = "admin", method = RequestMethod.GET)
 	public ModelAndView show(ModelMap model) {
 
+		Usuario usuario = getUsuario();
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 
-		bean.setUsuario(getUsuario());
+		bean.setUsuario(usuario);
 
 		long validarModadores = usuarioService.getRowCount(false);
 
 		model.put("enquetes", enquetes);
 
 		model.put("dadosUsuarioBean", bean);
-		model.put("usuario", getUsuario());
+		model.put("usuario", usuario);
 		model.put("validarMoradores", validarModadores);
 		model.put("enquetes", loadEnquetes());
-		bean.setUsuario(getUsuario());
+		
 
 		return new ModelAndView("admin", model);
 	}

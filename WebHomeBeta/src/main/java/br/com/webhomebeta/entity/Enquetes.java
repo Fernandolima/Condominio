@@ -49,7 +49,6 @@ public class Enquetes implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER", nullable = false)
-	@JsonIgnoreProperties(value = "usuarioEnquete")
 	private Usuario usuarioEnquete;
 
 	// Um usuario pode criar varias opcoes

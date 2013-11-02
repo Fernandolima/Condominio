@@ -112,18 +112,18 @@
 						              </thead>
 						              <tbody>
 						                <c:forEach items="${listaEnquetes}" var="item">
-						                	<tr>
+						                	<tr id="listEnquete">
 						                		<td><c:out value="${item.enquete}"/></td>
 						                		<c:choose>
 													<c:when test="${item.ativa}">
-														<td><a href="#" class="desativarEnquete btn btn-inverse" data-enquete="<c:out value="${item.idEquete}"/>">Desativar</a></td>
+														<td><a href="#" class="desativarEnquete btn btn-inverse" id="btnDesativar"  data-enquete="<c:out value="${item.idEquete}"/>">Desativar</a></td>
 												    </c:when>
 												  	<c:otherwise>
-												  		<td><a href="#" class="ativarEnquete btn btn-success" data-enquete="<c:out value="${item.idEquete}"/>">Ativar</a></td>												    	
+												  		<td><a href="#" class="ativarEnquete btn btn-success" id="btnAtivar" data-enquete="<c:out value="${item.idEquete}"/>">Ativar</a></td>												    	
 												  	</c:otherwise>
 												</c:choose>
-						                		<td><a href="#" class="excluirEnquete btn btn-danger" data-enquete="<c:out value="${item.idEquete}"/>">Excluir</a></td>
-						                		<td><a href="#" class="visualizarEnquete btn btn-info" data-enquete="<c:out value="${item.idEquete}"/>">Visualizar</a></td>
+						                		<td><a href="#" class="excluirEnquete btn btn-danger" id="btnExcluir" data-enquete="<c:out value="${item.idEquete}"/>">Excluir</a></td>
+						                		<td><a href="#" class="visualizarEnquete btn btn-info" id="btnVisualizar" data-enquete="<c:out value="${item.idEquete}"/>">Visualizar</a></td>
 						                	</tr>
 						                </c:forEach>
 						              </tbody>

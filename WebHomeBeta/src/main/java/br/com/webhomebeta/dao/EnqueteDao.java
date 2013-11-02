@@ -23,5 +23,7 @@ public interface EnqueteDao {
 	
 	public void update(int quantidadeVotos, int idEnquete);
 	
+	public void update(int idEnquete, boolean ativa);
+	
 
 }

@@ -110,7 +110,7 @@
                             </div>
                             <c:forEach items="${enquetes}" var="enquete">
                             <div class="list-enquete">
-                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.titulo}</p>
+                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.enquete}</p>
 	                            <div class="block-content collapse in enquetes">
 	                            <c:forEach items="${enquete.opcoes}" var="opcao">
 	                            	<div class="span3">

@@ -210,18 +210,58 @@ var ADMIN = {
 		});
 	},
 	
+	ativarEnquete: function(e){
+		e.preventDefault();
+		
+		var data = 'idEnquete='+$(this).attr('data-enquete')+'&ativa=true',
+		 el = $(this);
+		$.ajax({
+			data: data,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/enquetes/ativar',
+	      	success: function(data) {
+	      		if(data){
+	      			el.removeClass('btn-success');
+	      			el.addClass('btn-inverse');
+	      			el.text('Desativar');
+	      		}
+	      	}
+		});
+	},
+	
+	desativarEnquete: function(e){
+		e.preventDefault();
+		
+		var data = 'idEnquete='+$(this).attr('data-enquete')+'&ativa=false',
+		 el = $(this);
+		$.ajax({
+			data: data,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/enquetes/ativar',
+	      	success: function(data) {
+	      		if(data){
+	      			el.removeClass('btn-inverse');
+	      			el.addClass('btn-success');
+	      			el.text('Ativar');
+	      		}
+	      	}
+		});
+	},
+	
 	deleteEnquete: function(e) {
 		e.preventDefault();
 		
-		var idEnquete = 'idEnquete='+$(this).attr('data-enquete');
+		var idEnquete = 'idEnquete='+$(this).attr('data-enquete'),
+			el = $(this);
 		
 		$.ajax({
 			data: idEnquete,
 	    	type: 'post',
 	      	url:'/WebHomeBeta/admin/enquetes/delete',
-	      	success: function(e) {
-	      		//to do: redirect para listar areas
-	      		console.log('resposta -', e);
+	      	success: function(data) {
+	      			console.log('aaa');
+	      			el.closest('tr').remove();
+	      		
 	      	}
 		});
 	}
@@ -246,9 +286,7 @@ $(function() {
 	
 	if($('#formCadEspaco')[0]) {
 		$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
-		$('body').on('click', '.btn-delete-bloco', BLOCOS.excluirBlocos);
 	}	
-	
 	
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 	
@@ -256,7 +294,11 @@ $(function() {
 	
 	$('#addEspaco').on('click', ADMIN.addEspaco);
 	
-	$('.excluirEnquete').on('click', ADMIN.deleteEnquete);
+	$('tbody').on('click', '.desativarEnquete', ADMIN.desativarEnquete);
+	
+	$('tbody').on('click', '.ativarEnquete', ADMIN.ativarEnquete);
+	
+	$('tbody').on('click', '.excluirEnquete', ADMIN.deleteEnquete);
 	
 	if($('#adminView')[0]) {
 	}

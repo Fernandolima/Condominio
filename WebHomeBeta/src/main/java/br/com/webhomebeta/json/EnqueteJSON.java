@@ -6,6 +6,7 @@ import java.util.List;
 public class EnqueteJSON {
 
 	private String titulo;
+	private String enquete;
 	private int idEnquete;
 	private int idUser;
 	private List<OpcaoJSON> opcoes;
@@ -13,14 +14,29 @@ public class EnqueteJSON {
 	private List<Integer> idVoto = new ArrayList<>();
 
 	
-	public EnqueteJSON(String titulo, int idEnquete, int idUser, int totalVotos) {
+	public EnqueteJSON(String titulo, int idEnquete, int idUser, int totalVotos, String enquete) {
 		super();
 		this.titulo = titulo;
 		this.idEnquete = idEnquete;
 		this.idUser = idUser;
 		this.totalVotos = totalVotos;
+		this.enquete = enquete;
 	}
 	
+	
+	
+	public String getEnquete() {
+		return enquete;
+	}
+
+
+
+	public void setEnquete(String enquete) {
+		this.enquete = enquete;
+	}
+
+
+
 	public List<Integer> getIdVoto() {
 		return idVoto;
 	}

@@ -361,7 +361,7 @@ public class HomeController {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos(), e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
 				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
@@ -392,7 +392,7 @@ public class HomeController {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos());
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos(), e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
 				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
