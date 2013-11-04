@@ -41,7 +41,7 @@
 				<div id="data-user">
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
-					<a href="perfil">Configuracoes</a>
+					<a href="/WebHomeBeta/home/perfil">Configuracoes</a>
 					<span>|</span>
 					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
 				</div>

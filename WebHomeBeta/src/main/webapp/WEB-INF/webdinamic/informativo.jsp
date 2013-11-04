@@ -29,7 +29,7 @@
 				<div id="data-user">
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
-					<a href="perfil">Configurações</a>
+					<a href="/WebHomeBeta/home/perfil">Configurações</a>
 					<span>|</span>
 					<p class="name-user-connected"><c:out value="${usuario.nome}"></c:out><p>					
 				</div>
