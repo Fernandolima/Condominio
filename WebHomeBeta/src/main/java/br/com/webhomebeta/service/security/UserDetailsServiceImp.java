@@ -36,7 +36,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		authoritiesAdmin.add(authorityAdmin);
 		authoritiesMorador.add(authorityMorador);
 		usuario = usuarioService.getUsuarioByLogin(username);
-		if (usuario == null) {
+		if (usuario == null || usuario.isStatus() == false) {
 			throw new UsernameNotFoundException("Usuario nao encontrado");
 		} else if (usuario.getPermissao().equals("ROLE_ADMIN")) {
 			
