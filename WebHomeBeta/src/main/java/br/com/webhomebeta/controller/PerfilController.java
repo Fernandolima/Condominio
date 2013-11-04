@@ -67,7 +67,7 @@ public class PerfilController {
 
 	private FileData fileData;
 
-	@RequestMapping(value = "perfil", method = RequestMethod.GET)
+	@RequestMapping(value = "home/perfil", method = RequestMethod.GET)
 	public ModelAndView visualizarPerfil(ModelMap model) {
 
 		if (getPerfilTO() == null) {
