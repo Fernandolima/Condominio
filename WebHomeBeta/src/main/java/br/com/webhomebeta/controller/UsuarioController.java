@@ -166,7 +166,7 @@ public class UsuarioController {
 			bean.setValidApartamento(true);
 
 		for (Usuario user : usuarioService.getUsuario()) {
-			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())) {
+			if (bean.getUsuarioTO().getBloco().equals(user.getBloco()) && bean.getUsuarioTO().getAp().equals(user.getAp())) {
 				bean.setValidBloco(false);
 			} else {
 				bean.setValidBloco(true);

@@ -17,8 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
-		
-		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/vendors/modernizr-2.6.2-respond-1.1.0.min.js"/>" type="text/javascript"></script>
 	</head>
 		
 	<body id="adminView">
@@ -111,22 +110,70 @@
 						                </tr>
 						              </thead>
 						              <tbody>
-						                <c:forEach items="${listaEnquetes}" var="item">
+						                <c:forEach items="${listaEnquetes}" var="item" varStatus="theCount">
 						                	<tr id="listEnquete">
 						                		<td><c:out value="${item.enquete}"/></td>
 						                		<c:choose>
 													<c:when test="${item.ativa}">
-														<td><a href="#" class="desativarEnquete btn btn-inverse" id="btnDesativar"  data-enquete="<c:out value="${item.idEquete}"/>">Desativar</a></td>
+														<td>
+														 <a id="${theCount.index}" href="#div${theCount.index}" data-toggle="modal" class="btn btn-inverse" data-enquete="<c:out value="${item.idEquete}"/>">Desativar</a>
+                       										<div id="div${theCount.index}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Desativação da enquete</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Confirma desativação da enquete?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn desativarEnquete btn-primary" href="#" data-id="${theCount.index}" data-enquete="<c:out value="${item.idEquete}"/>">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+														</td>
 												    </c:when>
 												  	<c:otherwise>
-												  		<td><a href="#" class="ativarEnquete btn btn-success" id="btnAtivar" data-enquete="<c:out value="${item.idEquete}"/>">Ativar</a></td>												    	
+												  		<td>
+												  		<a id="${theCount.index}" href="#div${theCount.index}" data-toggle="modal" class="btn btn-success" data-enquete="<c:out value="${item.idEquete}"/>">Ativar</a>
+                       										<div id="div${theCount.index}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Ativação da enquete</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Confirma ativação da enquete?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn ativarEnquete  btn-primary" href="#" data-id="${theCount.index}" data-enquete="<c:out value="${item.idEquete}"/>">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+												  		</td>
+												  													    	
 												  	</c:otherwise>
 												</c:choose>
-						                		<td><a href="#" class="excluirEnquete btn btn-danger" id="btnExcluir" data-enquete="<c:out value="${item.idEquete}"/>">Excluir</a></td>
+						                		<td>
+						                			<a href="#div${theCount.index}Excluir" data-toggle="modal" class="btn btn-danger" id="btnExcluir" data-enquete="<c:out value="${item.idEquete}"/>">Excluir</a>
+						                			<div id="div${theCount.index}Excluir" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Exclusão da enquete</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Deseja excluir?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn excluirEnquete btn-primary" href="#" data-id="${theCount.index}" data-enquete="<c:out value="${item.idEquete}"/>">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+						                		</td>
 						                		<td><a href="#" class="visualizarEnquete btn btn-info" id="btnVisualizar" data-enquete="<c:out value="${item.idEquete}"/>">Visualizar</a></td>
 						                	</tr>
 						                </c:forEach>
+						                
 						              </tbody>
+									
 						            </table>
                                 </div>
                             </div>
@@ -146,7 +193,7 @@
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
-        
+		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
                 
 	</body>	

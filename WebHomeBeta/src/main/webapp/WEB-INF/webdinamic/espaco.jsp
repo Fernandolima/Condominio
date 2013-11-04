@@ -14,9 +14,8 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
-		
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
-		
 		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 	</head>
 		
@@ -108,7 +107,7 @@
                                         <div class="control-group" data-posicao="0">
                                         	<label class="control-label">Espaço:</label>
 	                                        <div class="controls">
-	                                        	<select onchange="ADMIN.espacos(this)" id="comboEspacoList" class="chzn-select selectArea 0" name="espaco">
+	                                        	<select id="comboEspacoList" class="chzn-select selectArea 0" name="espaco">
 	                                        	  <option value="">Selecione</option>
 	                                        	  <c:forEach items="${listaEspaco}" var="item" varStatus="num">
 												  	<option value="${item.key}"><c:out value="${item.key}"/></option>
@@ -159,7 +158,22 @@
 									                  <td><c:out value="${item.espaco}"/></td>
 									                  <td><c:out value="${item.descricao}"/></td>
 									           
-									                  <td><a href="#" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a></td>
+									                  <td>
+									                  	<a href="#div${item.idEspaco}" data-toggle="modal" class="btn btn-danger btn-delete-bloco">Delete</a>
+									                  	<div id="div${item.idEspaco}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Exclusão da enquete</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Deseja excluir?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a  id="aExc" data-dismiss="modal" class="btn excluirEspaco btn-primary" href="#" data-id="<c:out value="${item.idEspaco}"/>">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+									                  </td>
 									                </tr>
 									            </c:forEach>	
 									        </c:when>
@@ -191,6 +205,11 @@
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
+		
+		 <div id="jGrowl" class="top-right jGrowl">
+			<div class="jGrowl-notification"></div>
+		</div>
 		
     </body>	
 </html>

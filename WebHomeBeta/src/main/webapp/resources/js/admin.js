@@ -124,14 +124,13 @@ var ADMIN = {
 		
 		e.preventDefault();
 		
-		
-
+		console.log('a');
 		var obj = new Object();
 		    obj.novoEspaco = $('#comboEspacoList option:selected').val();
 		    obj.idUser = $('#idUser').val();
 		    obj.descricao = $('#descricao').val();
-		
-		if(obj.descricao.lenght > 0) {
+		    console.log(obj);
+		if(obj.descricao.length > 0) {
 			htmlBloco = "";
 			var dataForm = JSON.stringify(obj);
 			$.ajax({
@@ -144,16 +143,29 @@ var ADMIN = {
 		      		htmlBloco += '<tr>';
 		      			htmlBloco += '<td>'+data.novoEspaco+'</p>';
 		      			htmlBloco += '<td>'+data.descricao+'</p>';
-		      			htmlBloco += '<td><a href="#" data-id="'+data.idEspaco+'" class="btn btn-danger btn-delete-bloco">Delete</a></td>';
+		      			htmlBloco += '<td><a href="#div'+data.idEspaco+'" data-toggle="modal" data-id="'+data.idEspaco+'" class="btn btn-danger btn-delete-bloco">Delete</a>';
+		      				htmlBloco += '<div id="div'+data.idEspaco+'" class="modal hide">';
+		      				htmlBloco += '<div class="modal-header">';
+		      					htmlBloco += '<button data-dismiss="modal" class="close" type="button">×</button>';
+		      					htmlBloco += '<h3>Exclusão de espaço</h3>';
+		      				htmlBloco += '</div>';
+		      			  htmlBloco += 	'<div class="modal-body">';
+		      			   htmlBloco += '<p>Confirma exclusão do espaço?</p>';
+		      			  htmlBloco += '</div>';
+		      			 htmlBloco += '<div class="modal-footer">';
+		      			 htmlBloco += 	'<a data-dismiss="modal" class="btn excluirEspaco btn-primary" href="#" data-id="'+data.idEspaco+'">Sim</a>';
+		      			 htmlBloco += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+		      			htmlBloco += '</div>';
+		      			htmlBloco += '</div>';
+		      			htmlBloco += '</td>';
 					htmlBloco += '</tr>';
 				
 				if($('.nenhumResultado').css('display') == 'block') {
 					$('.nenhumResultado').hide();
 				}
-				
 				$('#listaEspacos tbody').prepend(htmlBloco);
 				$('input[type="text"]').val('');
-		      		
+				$.jGrowl("Espaço adicionado!");
 		      	}
 			});
 		}
@@ -161,17 +173,15 @@ var ADMIN = {
 	
 	excluirEspaco: function(e) {
 		e.preventDefault();
-		
+		console.log('a');
 		var idEspaco = $(this).attr('data-id'),
 			el = $(this);
 		$.ajax({
-			url: 'admin/delete',
+			url: '/WebHomeBeta/admin/deleteEspaco',
 			type: 'POST',
 			data: { idEspaco: idEspaco },
 			success: function(data) {
-				if(data.json) {
 					el.closest('tr').remove();
-				}
 			}
 		});
 		
@@ -214,36 +224,124 @@ var ADMIN = {
 		e.preventDefault();
 		
 		var data = 'idEnquete='+$(this).attr('data-enquete')+'&ativa=true',
-		 el = $(this);
+		idEnquete = $(this).attr('data-enquete'),
+		id = $(this).attr('data-id'),
+		el = $('#'+id+'');
+		console.log(id);	
+		var html = '';
 		$.ajax({
 			data: data,
 	    	type: 'post',
 	      	url:'/WebHomeBeta/admin/enquetes/ativar',
 	      	success: function(data) {
-	      		if(data){
-	      			el.removeClass('btn-success');
-	      			el.addClass('btn-inverse');
-	      			el.text('Desativar');
-	      		}
+
+	      		html += '<div id="div'+id+'" class="modal hide">';
+				html += '<div class="modal-header">';
+					 html += '<button data-dismiss="modal" class="close" type="button">×</button>';
+					 html += '<h3>Desativação da enquete</h3>';
+					html += '</div>';
+				html += 	'<div class="modal-body">';
+					 html += '<p>Confirma desativação da enquete?</p>';
+					html += '</div>';
+							html += '<div class="modal-footer">';
+								html += 	'<a data-dismiss="modal" class="btn desativarEnquete btn-primary" href="#" data-id="'+id+'" data-enquete="'+idEnquete+'">Sim</a>';
+								html += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+								html += '</div>';
+			     html += '</div>';
+			     
+			     el.removeClass('btn-success');
+			     el.addClass('btn-inverse');
+			     el.text('Desativar');
+			     el.attr('href','#div'+id+'');
+			     el.closest('div.modal').remove();
+				 el.after(html);
 	      	}
 		});
 	},
 	
+	notificarEnqueteSalva: function(e) {
+		e.preventDefault();
+		var htmlOpcao = '';
+		var el = $('#contentOpcao');
+		$.ajax({
+			url: '/WebHomeBeta/admin/enquetes/salvar',
+			type: 'POST',
+			data : $('#frmEnquetes').serialize(),
+			success: function(data) {
+				$('input[type="text"]').val('');
+				el.empty();
+				
+				$.jGrowl("Enquete salva!");
+				
+				htmlOpcao += '<div class="control-group">';
+				htmlOpcao += '<label for="listOpcoes" name="enquetesTo.opcoes" class="control-label">Opção 1:</label>';
+					htmlOpcao += '<div class="controls">';
+						htmlOpcao += '<input type="text" name="listOpcoes[0]" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
+					htmlOpcao += '</div>';
+				htmlOpcao += '</div>';
+				
+				el.append(htmlOpcao);
+				
+			}
+		
+		});
+ 
+	},
+    
 	desativarEnquete: function(e){
 		e.preventDefault();
 		
 		var data = 'idEnquete='+$(this).attr('data-enquete')+'&ativa=false',
-		 el = $(this);
+		idEnquete = $(this).attr('data-enquete'),
+		id = $(this).attr('data-id'),
+		el = $('#'+id+'');
+		console.log(id);
+		var html = '';
 		$.ajax({
 			data: data,
 	    	type: 'post',
 	      	url:'/WebHomeBeta/admin/enquetes/ativar',
 	      	success: function(data) {
-	      		if(data){
-	      			el.removeClass('btn-inverse');
-	      			el.addClass('btn-success');
-	      			el.text('Ativar');
-	      		}
+	      		
+	      		
+	      		
+	      		html += '<div id="div'+id+'" class="modal hide">';
+				html += '<div class="modal-header">';
+					 html += '<button data-dismiss="modal" class="close" type="button">×</button>';
+					 html += '<h3>Ativação de enquete</h3>';
+					html += '</div>';
+				html += 	'<div class="modal-body">';
+					 html += '<p>Confirma ativação da enquete?</p>';
+					html += '</div>';
+							html += '<div class="modal-footer">';
+								html += 	'<a data-dismiss="modal" class="btn ativarEnquete btn-primary" href="#" data-id="'+id+'" data-enquete="'+idEnquete+'">Sim</a>';
+								html += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+								html += '</div>';
+			     html += '</div>';
+			     
+			     el.removeClass('btn-inverse');
+			     el.addClass('btn-success');
+			     el.text('Ativar');
+			     el.attr('href','#div'+id+'');
+			     el.closest('div.modal').remove();
+				 el.after(html);
+				
+	      	}
+		});
+	},
+	
+	verificaNotificacao: function() {
+		
+		$.ajax({
+	    	type: 'post',
+	      	url:'verificaNotificacoesNovoUser',
+	      	dataType: 'json',
+	      	success: function(data) {
+	      		if(data.length > 0){
+	      		$.each(data, function(i, val) {
+	      				$.jGrowl("Um novo morador acabou de realizar o cadastro!", { header: 'Atenção!' });
+      				});	
+	      	  }
 	      	}
 		});
 	},
@@ -253,7 +351,7 @@ var ADMIN = {
 		
 		var idEnquete = 'idEnquete='+$(this).attr('data-enquete'),
 			el = $(this);
-		
+			console.log('aaaaa');
 		$.ajax({
 			data: idEnquete,
 	    	type: 'post',
@@ -284,9 +382,9 @@ $(function() {
 		$("#frmEditarCadastro").submit();
 	});
 	
-	if($('#formCadEspaco')[0]) {
-		$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
-	}	
+	$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
+	
+	$('#btSubmitEnquete').on('click', ADMIN.notificarEnqueteSalva);
 	
 	$('.title-menu-drop').on('click', ADMIN.onClickItemMenu);
 	
@@ -294,11 +392,17 @@ $(function() {
 	
 	$('#addEspaco').on('click', ADMIN.addEspaco);
 	
+	$('.excluirEspaco').on('click', ADMIN.excluirEspaco);
+	
 	$('tbody').on('click', '.desativarEnquete', ADMIN.desativarEnquete);
 	
 	$('tbody').on('click', '.ativarEnquete', ADMIN.ativarEnquete);
 	
 	$('tbody').on('click', '.excluirEnquete', ADMIN.deleteEnquete);
+	
+	setInterval(function(){
+		ADMIN.verificaNotificacao();
+	},10000);	
 	
 	if($('#adminView')[0]) {
 	}

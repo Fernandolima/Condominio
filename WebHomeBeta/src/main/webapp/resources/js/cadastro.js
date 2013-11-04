@@ -14,7 +14,34 @@ var CADASTRO = {
 
 		$('#cpf').numeric();
 		$("#cpf").mask("999.999.999-99",{placeholder:" "});
-	}	
+	},
+	
+	notificar: function(e) {
+		e.preventDefault();
+		
+		if($('#frm-register').hasClass('error')) {
+			$('#warnningMessage').css('display', 'block');
+		}else{
+		
+		$.ajax({
+			url: 'add',
+			type: 'POST',
+			data : $('#frm-register').serialize(),
+			success: function(data) {
+				$.ajax({
+					url: 'notificacaoNovoUsuario',
+					type: 'POST',
+					dataType: 'json',
+					success: function(data2){
+							console.log('aaaaa')
+						}
+					});
+				
+			}
+		});
+		
+		}
+	}
 }
 
 $(function() {
@@ -24,10 +51,7 @@ $(function() {
 	}
 	
 	//verifica se há erro no formulário
-	if($('#frm-register').hasClass('error')) {
-		$('#warnningMessage').css('display', 'block');
-	}
-	
+	$('#btSubmitRegister').on('click', CADASTRO.notificar);
 	//quando o form for submetido exibe o load e esconde o botão
 	$('#frmLogin').on('submit', function(){
 		$('#btSubmitLogin').css('display', 'none');

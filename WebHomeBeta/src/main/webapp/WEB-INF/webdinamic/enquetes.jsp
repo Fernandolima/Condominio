@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>"/>
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
@@ -153,7 +154,12 @@
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+		
+		<div id="jGrowl" class="top-right jGrowl">
+			<div class="jGrowl-notification"></div>
+		</div>
     </body>	
 </html>

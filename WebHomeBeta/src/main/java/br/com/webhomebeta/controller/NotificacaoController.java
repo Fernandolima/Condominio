@@ -42,6 +42,7 @@ public class NotificacaoController {
 
 	private Queue<NotificacoesJSON> queueNotificacaoJSON = new ConcurrentLinkedQueue<NotificacoesJSON>();
 	private Queue<Notificacao> queueNotificacao = new ConcurrentLinkedQueue<>();
+	private Queue<String> queueNovoMorador = new ConcurrentLinkedQueue<>();
 
 	// ve
 	@RequestMapping(value = "notificacaoInicial", method = RequestMethod.GET)
@@ -103,6 +104,28 @@ public class NotificacaoController {
 		return "true";
 	}
 
+	@RequestMapping(value = "notificacaoNovoUsuario", method = RequestMethod.POST)
+	public @ResponseBody
+	String receberNotificacaoNovoUsuario() {
+		// adiociona a notificacaoJSON no queue
+		String user = "novoUsuario";
+		queueNovoMorador.add(user);
+		
+		return "true";
+	}
+	
+	@RequestMapping(value = "verificaNotificacoesNovoUser", method = RequestMethod.POST)
+	public @ResponseBody DeferredResult<ArrayList<String>> externalThreadNovoUser(){
+		DeferredResult<ArrayList<String>> deffered = new DeferredResult<ArrayList<String>>();
+		ArrayList<String> users = new ArrayList<>();
+		
+		for(String user : this.queueNovoMorador){
+			users.add(user);
+			queueNovoMorador.remove(user);
+		}
+		deffered.setResult(users);
+		return deffered;
+	}
 	@RequestMapping(value = "verificaNotificacoes", method = RequestMethod.POST)
 	public @ResponseBody
 	DeferredResult<ArrayList<NotificacoesJSON>> externalThread() {

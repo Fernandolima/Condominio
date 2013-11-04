@@ -89,9 +89,11 @@ public class EspacoCondominioController {
 	}
 	
 	@RequestMapping(value = "admin/deleteEspaco", method = RequestMethod.POST)
-	public void deleteEspaco(@RequestParam("idEspaco") int idEspaco) {
+	public @ResponseBody String deleteEspaco(@RequestParam("idEspaco") int idEspaco) {
 		
 		condominioServe.delete(new EspacoCondominio(idEspaco));
+		
+		return "true";
 	}
 
 	public Usuario getUsuario() {
