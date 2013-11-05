@@ -153,7 +153,7 @@ var ADMIN = {
 		      			   htmlBloco += '<p>Confirma exclusão do espaço?</p>';
 		      			  htmlBloco += '</div>';
 		      			 htmlBloco += '<div class="modal-footer">';
-		      			 htmlBloco += 	'<a data-dismiss="modal" class="btn excluirEspaco btn-primary" href="#" data-id="'+data.idEspaco+'">Sim</a>';
+		      			 htmlBloco += 	'<a id="hrefExcluir" data-dismiss="modal" class="btn excluirEspaco btn-primary" href="#" data-id="'+data.idEspaco+'">Sim</a>';
 		      			 htmlBloco += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
 		      			htmlBloco += '</div>';
 		      			htmlBloco += '</div>';
@@ -163,9 +163,10 @@ var ADMIN = {
 				if($('.nenhumResultado').css('display') == 'block') {
 					$('.nenhumResultado').hide();
 				}
-				$('#listaEspacos tbody').prepend(htmlBloco);
+				$('#listaEspacos tbody').append(htmlBloco);
 				$('input[type="text"]').val('');
 				$.jGrowl("Espaço adicionado!");
+				$('.excluirEspaco').on('click', ADMIN.excluirEspaco);
 		      	}
 			});
 		}
@@ -339,8 +340,9 @@ var ADMIN = {
 	      	success: function(data) {
 	      		if(data.length > 0){
 	      		$.each(data, function(i, val) {
-	      				$.jGrowl("Um novo morador acabou de realizar o cadastro!", { header: 'Atenção!' });
+	      				$.jGrowl("Um novo morador acabou de realizar o cadastro!", { header: 'Atenção!' },{ sticky: true });
       				});	
+	      		
 	      	  }
 	      	}
 		});

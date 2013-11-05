@@ -18,7 +18,7 @@ public interface DescricaoCondominioDAO {
 	
 	public DescricaoCondominio editar(int id);
 	
-	public int get(DescricaoCondominio condominio);
+	public DescricaoCondominio get(int id);
 	
 	public void update(DescricaoCondominio descricaoCondominio);
 	

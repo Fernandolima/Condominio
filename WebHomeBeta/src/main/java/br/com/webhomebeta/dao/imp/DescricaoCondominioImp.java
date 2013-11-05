@@ -33,14 +33,10 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<DescricaoCondominio> getDescricaoCondominios() {
-		String sql = "exec [dbo].[SELECT_DESCRICAO_CONDOMINIO]";
-		Query q = factory.getCurrentSession().createSQLQuery(sql)
-				.addEntity(DescricaoCondominio.class);
-		@SuppressWarnings("unchecked")
-		List<DescricaoCondominio> descricaoCondominios = q.list();
-		return descricaoCondominios;
+		return factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[DESCRICAO_CONDOMINIO]").addEntity(DescricaoCondominio.class).list();
 	}
 
 	@Transactional
@@ -87,11 +83,10 @@ public class DescricaoCondominioImp implements DescricaoCondominioDAO {
 
 	@Override
 	@Transactional
-	public int get(DescricaoCondominio condominio) {
-		Query q = factory.getCurrentSession().createSQLQuery("SELECT ID_BLOCO FROM [dbo].[DESCRICAO_CONDOMINIO] WHERE BLOCO = ?");
-		q.setParameter(0,condominio.getBloco());
-		int id = (int) q.uniqueResult();
-		return id;
+	public DescricaoCondominio get(int id) {
+	
+		return (DescricaoCondominio) factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[DESCRICAO_CONDOMINIO] WHERE ID_BLOCO = ?").addEntity(DescricaoCondominio.class).setInteger(0, id).uniqueResult();
+	
 	}
 
 }

@@ -36,7 +36,6 @@ public class CadastroCondominioController {
 
 	private ValidatorDescricaoCondominio validatorDescricaoCondominio = new ValidatorDescricaoCondominio();
 
-	private DescricaoCondominio getDescricaoById;
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -132,9 +131,7 @@ public class CadastroCondominioController {
 	Json delete(
 	// recebe o id do bloco a ser excluido
 			@RequestParam int idbloco) {
-		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
-				// ----------------------------------------s
-		descricaoCondominio.setIdcondomnio(idbloco);
+		DescricaoCondominio descricaoCondominio = cadastroCondominioService.get(idbloco);
 		cadastroCondominioService.delete(descricaoCondominio);
 		return new Json("true");
 	}
@@ -154,8 +151,8 @@ public class CadastroCondominioController {
 		
 		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
 		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
-				.getBloco(), cadastroCondominioService.get(descricaoCondominio),
-				bloco.getDescricaoCondominioTO().getQuatApAndares(), bloco
+				.getBloco(), descricaoCondominio.getIdbloco(),
+				Integer.parseInt(bloco.getDescricaoCondominioTO().getQuatApAndares()), bloco
 						.getDescricaoCondominioTO().getNumeroInicia(), bloco
 						.getDescricaoCondominioTO().getQuantAp());
 
