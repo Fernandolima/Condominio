@@ -19,28 +19,37 @@ var CADASTRO = {
 	notificar: function(e) {
 		e.preventDefault();
 		
-		if($('#frm-register').hasClass('error')) {
-			$('#warnningMessage').css('display', 'block');
-		}else{
-		
 		$.ajax({
 			url: 'add',
 			type: 'POST',
 			data : $('#frm-register').serialize(),
 			success: function(data) {
-				$.ajax({
-					url: 'notificacaoNovoUsuario',
+				if(data.allCorrect){
+				
+					$.ajax({
+					url: '/WebHomeBeta/notificacaoNovoUsuario',
 					type: 'POST',
 					dataType: 'json',
 					success: function(data2){
-							console.log('aaaaa')
+							window.location.replace("/WebHomeBeta/cadastroRealizado");
 						}
 					});
-				
+					
+				}else{
+					$('#nome').addClass(data.validName ? '' : 'error');
+					$('#email').addClass(data.validEmail ? '' : 'error');
+					$('#senha').addClass(data.validSenha ? '' : 'error');
+					$('#confSenha').addClass(data.confSenha ? '' : 'error');
+					$('#dt_nascimento').addClass(data.validDataNascimento ? '' : 'error');
+					$('#cpf').addClass(data.validCpf ? '' : 'error');
+					$('#bloco').addClass(data.validBloco ? '' : 'error');
+					$('#apartamento').addClass(data.validApartamento ? '' : 'error');
+					
+					$('#senha').val('');
+					$('#confSenha').val('');
+				}
 			}
 		});
-		
-		}
 	}
 }
 

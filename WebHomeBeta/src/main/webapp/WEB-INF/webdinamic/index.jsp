@@ -54,7 +54,7 @@
 	</head>
 	<body id="login">
 	    <div class="container">
-	        <form class="form-signin" action="j_spring_security_check" id="frmLogin" method="post" autocomplete="off">
+	        <form class="form-signin" action="j-pring-security-check" id="frmLogin" method="post" autocomplete="off">
 	            <h2 class="form-signin-heading" id="titleLogin">Web Home</h2>
 	            <input type="text" class="input-block-level" name="j_username" placeholder="E-mail">
 	            <input type="password" class="input-block-level" name="j_password" placeholder="Senha">

@@ -113,9 +113,11 @@
 
 	<!-- Spring Security -->
 	<sec:http auto-config="true">
-		<sec:form-login login-page="/index.jsp"
+		<sec:form-login login-page="/"
+		    login-processing-url="/j-spring-security-check"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
+			<sec:logout invalidate-session="true" logout-url="/logout" logout-success-url="/"/>
 		<sec:intercept-url pattern="/index.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/index"

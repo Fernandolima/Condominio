@@ -1,85 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-						http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0" metadata-complete="true">
-
-	<display-name>WebHome</display-name>
-
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
-	</context-param>
-
-
-	<!-- Atmosphere + SPRING MVC ??? -->
-	<servlet>
-		<servlet-name>Spring-Servlet</servlet-name>
-		<servlet-class>org.atmosphere.cpr.MeteorServlet</servlet-class>
-		
-		<init-param>
-			<!-- When MeteorServlet is used, this is the parameter that will be looked 
-				and all requests will be delegated to this servlet, Of course, since we are 
-				using, Spring MVC, we delegate to DispatcherServlet -->
-			<param-name>org.atmosphere.servlet</param-name>
-			<param-value>org.springframework.web.servlet.DispatcherServlet</param-value>
-		</init-param>
-		<!-- Bunch of Atmosphere specific properties -->
-		
-		<init-param>
-			<param-name>org.atmosphere.cpr.broadcasterClass</param-name>
-			<param-value>org.atmosphere.cpr.DefaultBroadcaster</param-value>
-		</init-param>
-		
-		<init-param>
-			<param-name>org.atmosphere.useNative</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		
-		<init-param>
-			<param-name>org.atmosphere.useWebSocket</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		
-		<init-param>
-			<param-name>org.atmosphere.useStream</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
-		</init-param>
-		
-		<init-param>
-			<param-name>org.atmosphere.useBlocking</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<async-supported>true</async-supported>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Spring-Servlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-
-
-	<!-- Spring Security -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<welcome-file-list>
-		<welcome-file>/META-INF/webdinamic/index.jsp</welcome-file>
-	</welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" metadata-complete="true" version="3.0">
+  <display-name>WebHomeBeta</display-name>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Spring-Servlet</servlet-name>
+    <servlet-class>org.atmosphere.cpr.MeteorServlet</servlet-class>
+    <init-param>
+      <param-name>org.atmosphere.servlet</param-name>
+      <param-value>org.springframework.web.servlet.DispatcherServlet</param-value>
+    </init-param>
+    <init-param>
+      <param-name>org.atmosphere.useWebSocket</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>org.atmosphere.useStream</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/applicationContext-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Spring-Servlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <!-- configuracao melhorada -->
+  
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <async-supported>true</async-supported>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

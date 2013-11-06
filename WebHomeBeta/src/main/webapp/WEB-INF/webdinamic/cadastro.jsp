@@ -51,7 +51,7 @@
 
 					<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
 					<form:input type="text" id="nome" path="usuarioTO.nome"
-						cssClass="${(bean.validName) ? '' : 'error'}" />
+						cssClass="${(bean.validName) ? '' : 'error'}"/>
 
 					<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
 					<form:input path="usuarioTO.email" id="email"

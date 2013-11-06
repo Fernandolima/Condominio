@@ -18,7 +18,7 @@ public class CadastroJSON {
 	public CadastroJSON(boolean validName, boolean validEmail,
 			boolean validEmailExistente, boolean validSenha,
 			boolean validConfSenha, boolean validDataNascimento,
-			boolean validCpf, boolean validBloco, boolean validApartamento) {
+			boolean validCpf, boolean validBloco, boolean validApartamento, boolean allCorret) {
 		this.validName = validName;
 		this.validEmail = validEmail;
 		this.validEmailExistente = validEmailExistente;
@@ -28,6 +28,7 @@ public class CadastroJSON {
 		this.validCpf = validCpf;
 		this.validBloco = validBloco;
 		this.validApartamento = validApartamento;
+		this.allCorrect = allCorret;
 	}
 	
 	

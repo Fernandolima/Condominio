@@ -62,7 +62,7 @@
 					<div id="user-connected">
 						<div id="photo-user">
 							<img id="thumb-photo" src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>"/>
-							<form:form modelAttribute="uploadControllerBean" id="trocarFoto" action="perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
+							<form:form modelAttribute="uploadControllerBean" id="trocarFoto" action="/WebHomeBeta/perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
 								<label for="image" class="inputFile">Alterar foto</label>
 								<form:input path="fileData" id="image" type="file" style="display:none;" onchange="EDITAR_PERFIL.alterarFoto(this)" />
 									

@@ -107,7 +107,7 @@ public class NotificacaoController {
 	@RequestMapping(value = "notificacaoNovoUsuario", method = RequestMethod.POST)
 	public @ResponseBody
 	String receberNotificacaoNovoUsuario() {
-		// adiociona a notificacaoJSON no queue
+		// adiociona a notificao ao queue
 		String user = "novoUsuario";
 		queueNovoMorador.add(user);
 		

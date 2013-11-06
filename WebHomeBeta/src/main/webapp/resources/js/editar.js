@@ -76,7 +76,7 @@ var EDITAR_PERFIL  = {
 		 $.ajax({
 		    	type: 'post',
 		    	data: data,
-		      	url:'cropAndUpload',
+		      	url:'/WebHomeBeta/cropAndUpload',
 		      	success: function(e) {
 		      		$('#thumb-photo').attr('src', e);
 		      		$('.close-modal').trigger('click');	    

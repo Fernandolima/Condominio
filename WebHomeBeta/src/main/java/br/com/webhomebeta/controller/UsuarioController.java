@@ -1,15 +1,10 @@
 package br.com.webhomebeta.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,22 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.faces.facelets.PrivateApiFaceletCacheAdapter;
-
-import br.com.webhomebeta.bean.CadastroCondominioControllerBean;
 import br.com.webhomebeta.bean.UsuarioControllerBean;
-import br.com.webhomebeta.entity.DescricaoCondominio;
 import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.json.CadastroJSON;
 import br.com.webhomebeta.service.CadastroCondominioService;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.UsuarioService;
-import br.com.webhomebeta.service.security.UserDetailsImp;
-import br.com.webhomebeta.to.DescricaoCondominioTO;
 import br.com.webhomebeta.validacao.Validator;
 
 @Controller
@@ -77,8 +67,10 @@ public class UsuarioController {
 	// Pega o Objeto usuario e salva na tabela USER no banco.
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ModelAndView cadastro(
-			@ModelAttribute("bean") final UsuarioControllerBean bean, BindingResult result, HttpServletRequest request) {
+	public @ResponseBody
+	CadastroJSON cadastro(
+			@ModelAttribute("bean") final UsuarioControllerBean bean,
+			BindingResult result) {
 
 		validarCadastro(bean);
 
@@ -109,16 +101,21 @@ public class UsuarioController {
 			bean.getUsuarioTO().setAp(null);
 			bean.getUsuarioTO().setCargo(null);
 
-			Perfil perfil = new Perfil("", "", "", 0, "", usuario.getNome(),
-					"/WebHomeBeta/img/anonimos.jpg");
-			perfilService.salvar(perfil);
-			Usuario usuario2 = usuarioService.save(usuario);
-			emailServico.validaEmailMorador(usuario2);
-			return new ModelAndView("cadastroRealizado");
+			perfilService.salvar(new Perfil("", "", "", 0, "", usuario
+					.getNome(), "/WebHomeBeta/img/anonimos.jpg"));
+
+			emailServico.validaEmailMorador(usuarioService.save(usuario));
+			
+			return new CadastroJSON(true);
 
 		}
 
-		return new ModelAndView("cadastro", "bean", bean);
+		CadastroJSON cadastroJSON = new CadastroJSON(bean.isValidName(),
+				bean.isValidEmail(), bean.isValidEmailExistente(),
+				bean.isValidSenha(), bean.isValidConfSenha(),
+				bean.isValidDataNascimento(), bean.isValidCpf(),
+				bean.isValidBloco(), bean.isValidApartamento(), false);
+		return cadastroJSON;
 
 	}
 
@@ -166,7 +163,8 @@ public class UsuarioController {
 			bean.setValidApartamento(true);
 
 		for (Usuario user : usuarioService.getUsuario()) {
-			if (bean.getUsuarioTO().getBloco().equals(user.getBloco()) && bean.getUsuarioTO().getAp().equals(user.getAp())) {
+			if (bean.getUsuarioTO().getBloco().equals(user.getBloco())
+					&& bean.getUsuarioTO().getAp().equals(user.getAp())) {
 				bean.setValidBloco(false);
 			} else {
 				bean.setValidBloco(true);

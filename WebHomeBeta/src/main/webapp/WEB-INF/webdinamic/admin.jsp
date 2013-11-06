@@ -86,8 +86,8 @@
                         <li>
                             <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
                         </li>
-                         <li>
-                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
+                         <li>		
+                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right "></i>Web Home</a>
                         </li>
                     </ul>
                 </div>
@@ -109,6 +109,7 @@
 
                                 </div>
                             </div>
+                            <div class="block-content collapse in">
                             <c:forEach items="${enquetes}" var="enquete">
                             <div class="list-enquete">
                             	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.enquete}</p>
@@ -123,6 +124,31 @@
 	                            </div>
 	                    	</div>
 	                    	</c:forEach>
+	                    	</div>
+                        </div>
+                         <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Atividade dos usuarios</div>
+                                <div class="pull-right"><a href="/WebHomeBeta/admin/listaEnquetes" title="Ver mais"><span class="badge badge-warning">Ver mais</span></a>
+
+                                </div>
+                            </div>
+                            <div class="block-content collapse in">
+                            <c:forEach items="${enquetes}" var="enquete">
+                            <div class="list-enquete">
+                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.enquete}</p>
+	                            <div class="block-content collapse in enquetes">
+	                            <c:forEach items="${enquete.opcoes}" var="opcao">
+	                            	<div class="span3">
+	                                    <div class="chart" data-percent="<c:out value="${opcao.porcentagemVotos}"></c:out>">${opcao.porcentagemVotos}%</div>
+	                                    <div class="chart-bottom-heading"><span class="label label-info">${opcao.opcao}</span>
+	                                    </div>
+	                                </div>
+								</c:forEach>                            
+	                            </div>
+	                    	</div>
+	                    	</c:forEach>
+	                    	</div>
                         </div>
                         <!-- /block -->
                     </div>              
