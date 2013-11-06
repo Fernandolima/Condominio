@@ -79,6 +79,16 @@ public class EspacoCondominioController {
 			return condominioJSON;	
 		}
 
+	@RequestMapping(value = "home/listarEspaco", method = RequestMethod.GET)
+	public ModelAndView listarEspacosHome(ModelMap model){
+		
+		List<EspacoCondominio> espacos = condominioServe.getLisEspacoCondominios();
+		model.put("listaEspacos", espacos);
+		model.put("usuario", getUsuario());
+		return new ModelAndView("espacoUsuario", model);
+	}
+	
+	
 	@RequestMapping(value = "admin/listarEspaco", method = RequestMethod.GET)
 	public ModelAndView listarEspacos(ModelMap model){
 		
