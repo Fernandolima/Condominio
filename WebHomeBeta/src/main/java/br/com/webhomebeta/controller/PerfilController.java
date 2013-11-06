@@ -44,7 +44,7 @@ import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 import br.com.webhomebeta.to.PerfilTO;
-
+//Controle do perfi;
 @Controller
 public class PerfilController {
 
