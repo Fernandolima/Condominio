@@ -1,14 +1,17 @@
-package br.com.webhomebeta.entity;
+package br.com.webhomebeta.json;
 
 import java.util.Date;
 
-public class CalendarEvent {
-	
+import org.joda.time.DateTime;
+
+public class CalendarEventJSON {
+
 	private int id;
 	private String title;
-	private Date start;
-	private Date end;
+	private String start;
+	private String end;
 	private boolean editable;
+	
 	public int getId() {
 		return id;
 	}
@@ -21,16 +24,16 @@ public class CalendarEvent {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
-	public Date getEnd() {
+	public String getEnd() {
 		return end;
 	}
-	public void setEnd(Date end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 	public boolean isEditable() {
@@ -39,8 +42,5 @@ public class CalendarEvent {
 	public void setEditable(boolean editable) {
 		this.editable = editable;
 	}
-	
-	
-	
 	
 }
