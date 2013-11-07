@@ -23,13 +23,38 @@ public class CalendarEvent {
 	
 	@Column(name = "INICIO")
 	private Date start;
-	
-	@Column(name = "FIM")
-	private Date end;
-	
+
 	@Column(name = "EDITAVEL", columnDefinition = "BOOLEAN")
 	private boolean editable;
 	
+	@Column(name = "APROVADA")
+	private boolean aprovada;
+	
+	@Column(name = "ID_ESPACO")
+	private int idEspaco;
+	
+	@Column(name = "ID_USER")
+	private int idUser;
+
+	
+	public boolean isAprovada() {
+		return aprovada;
+	}
+	public void setAprovada(boolean aprovada) {
+		this.aprovada = aprovada;
+	}
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+	public int getIdEspaco() {
+		return idEspaco;
+	}
+	public void setIdEspaco(int idEspaco) {
+		this.idEspaco = idEspaco;
+	}
 	public int getId() {
 		return id;
 	}
@@ -47,12 +72,6 @@ public class CalendarEvent {
 	}
 	public void setStart(Date start) {
 		this.start = start;
-	}
-	public Date getEnd() {
-		return end;
-	}
-	public void setEnd(Date end) {
-		this.end = end;
 	}
 	public boolean isEditable() {
 		return editable;

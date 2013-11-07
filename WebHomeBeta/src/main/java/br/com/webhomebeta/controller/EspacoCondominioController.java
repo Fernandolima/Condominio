@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.EspacoCondominioJSON;
+import br.com.webhomebeta.service.CalendarEventService;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -34,6 +35,8 @@ public class EspacoCondominioController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EspacoCondominioServe condominioServe;
+	@Autowired
+	private CalendarEventService calendarEventService;
 
 	private HashMap<String, String> espacos = new HashMap<>();
 
@@ -78,6 +81,18 @@ public class EspacoCondominioController {
 			condominioJSON.setIdEspaco(espacoCondominio.getIdEspaco());
 			return condominioJSON;	
 		}
+	
+	@RequestMapping(value = "admin/deletarEvento", method = RequestMethod.POST)
+	public @ResponseBody String deletarEvento(@RequestParam("id") int id){
+		calendarEventService.delete(calendarEventService.get(id));
+		return "true";
+	}
+	
+	@RequestMapping(value = "admin/ativarEvento", method = RequestMethod.POST)
+	public @ResponseBody String ativarEvento(@RequestParam("id") int id){
+		calendarEventService.update(id);
+		return "true";
+	}
 
 	@RequestMapping(value = "home/listarEspaco", method = RequestMethod.GET)
 	public ModelAndView listarEspacosHome(ModelMap model){

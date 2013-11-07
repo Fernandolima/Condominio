@@ -9,7 +9,6 @@ public class CalendarEventJSON {
 	private int id;
 	private String title;
 	private String start;
-	private String end;
 	private boolean editable;
 	
 	public int getId() {
@@ -29,12 +28,6 @@ public class CalendarEventJSON {
 	}
 	public void setStart(String start) {
 		this.start = start;
-	}
-	public String getEnd() {
-		return end;
-	}
-	public void setEnd(String end) {
-		this.end = end;
 	}
 	public boolean isEditable() {
 		return editable;

@@ -29,6 +29,13 @@ public class CalendarEventService {
 		calendarEventDAO.delete(event);
 		
 	}
+	
+	public List<CalendarEvent> getEventos(int id){
+		return calendarEventDAO.getEventos(id);
+	}
 
+	public void update(int idEspaco) {
+		calendarEventDAO.update(idEspaco);
+	}
 	
 }

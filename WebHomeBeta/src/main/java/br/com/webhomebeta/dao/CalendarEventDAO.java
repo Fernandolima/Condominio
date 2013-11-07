@@ -8,7 +8,9 @@ public interface CalendarEventDAO {
 
 	public CalendarEvent save(CalendarEvent calendarEvent);
 	public CalendarEvent get(int id);
+	public List<CalendarEvent> getEventos(int id);
 	public List<CalendarEvent> get();
 	public void delete(CalendarEvent event);
+	public void update(int idEspaco);
 		
 }
