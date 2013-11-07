@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery.modal.css"/>"/>
 		<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
@@ -100,6 +101,11 @@
 										
 										<label>Confirmar Nova Senha:</label>
 										<input type="password" id="txtNovaSenhaConf" />
+										
+										 <div class="form-actions">
+                                        	<input type="submit" id="btSubmitPerfil" class="btn btn-primary" value="Salvar" />
+                                        </div>
+                                        
 									</form>
 								</div>
 							</div>
