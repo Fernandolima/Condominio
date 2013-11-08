@@ -73,10 +73,10 @@
 						<div id="nav-user">
 							<h3>Categoria</h3>
 							<ul class="list-nav">
-								<li><a href="#">Assembleias</a></li>
-								<li><a href="#">Enquetes</a></li>
+								<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
+								<li><a href="/WebHomeBeta/home/atas">Atas de Assembléias</a></li>
 								<li><a href="#">Gastos</a></li>
-								<li><a href="#">Reserva de espa&ccedil;os</a></li>
+								<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
 								<li class="last-link"><a href="#">Usu&aacute;rios</a></li>
 							</ul>
 						</div>

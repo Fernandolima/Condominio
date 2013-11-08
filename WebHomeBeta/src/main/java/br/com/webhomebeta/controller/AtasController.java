@@ -69,6 +69,7 @@ public class AtasController {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		List<AtasEntity> atas = atasService.getListAtas();
 		List<AtasTo> atasTo = new ArrayList<>();
+		model.put("usuario", getUsuario());
 
 		for (AtasEntity ata : atas) {
 			AtasTo ataTo = new AtasTo();

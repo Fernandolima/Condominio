@@ -1,5 +1,9 @@
 /* bootstrap 3 helpers */
 
+body {
+	background: #fff !important;
+}
+
 .navbar-form input, .form-inline input {
 	width:auto;
 }
@@ -17,11 +21,21 @@ header {
   
   #sidebar.affix {
     position: fixed;
-    top:50px;
+    top:60px;
     width:228px;
+    height: 100%;
+    background-color: #ECEFF5 !important;
   }
+}
+
+.nav-usuario {
+	margin-top: 20px !important;
 }
 
 .affix,.affix-top {
    position:static;
+}
+
+#fotoUsuario {
+	margin-top: 20px;
 }

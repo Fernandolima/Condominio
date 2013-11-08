@@ -8,7 +8,13 @@
 <html lang="pt_BR">
 	<head>
 	<meta charset="UTF-8" />
-		<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+		<title>Web Home</title>
+		
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
+		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
@@ -29,7 +35,7 @@
 				<div id="data-user">
 					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
-					<a href="/WebHomeBeta/home/perfil">Configurações</a>
+					<a href="perfil">Configurações</a>
 					<span>|</span>
 					<p class="name-user-connected"><c:out value="${moradorControllerBean.usuario.nome}"></c:out><p>					
 				</div>
@@ -57,41 +63,34 @@
 					</div>
 				</div>
 				<div id="rightCol">
-					<div id="rigth-content">
-						<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean">
-							<form:textarea type="text" path = "publicacaoTO.publicacao" name="postUser" id="txtComment" placeholder="Está pensando em que?"></form:textarea>
-							<input type="button" id="submitComment" value="Publicar" />
-						</form:form>
-						<div id="main-comments"></div>
-					</div>
-					<div id="enquete-content">
-						<h2 class="titleEnquete">Enquetes</h2>
-						<div id="mainEnqueteSite">
-							<c:forEach items="${listaEnquetes}" var="item">
-								<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
-									<p class="perguntaEnquete"><b>Pergunta:</b> <c:out value="${item.titulo}"/></p>
-									<div class="opcoesEnquete">
-									<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
-									<c:forEach items="${item.opcoes}" var="opc">
-										<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/><br>
-									</c:forEach>
-									</div>
-									<a href="#" class="participarEnquete">Votar</a>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
+					<div class="navbar navbar-inner block-header">
+                         <div class="muted pull-left">Reserva de Espaço</div>
+                     </div>
+					<div class="block-content collapse in">
+						<table class="table">
+			            	<thead>
+			                	<tr>
+					                <th>Espaços</th>
+					                <th>Agenda</th>
+			              		</tr>
+			              	</thead>
+			              	<tbody>
+			              	    <c:forEach items="${listaEspacos}" var="item">
+			                		<tr>
+				                		<td><c:out value="${item.espaco}"/></td>
+				                		<td><a href="/WebHomeBeta/home/espaco/id=<c:out value="${item.idEspaco}"/>" target="_blank" class="btn btn-info">Ver agenda</a></td>
+			                		</tr>
+			                	</c:forEach>
+			              	</tbody>
+			        	</table>
+			        </div>
 				</div>
 			</div>
 		</section>
 		<!-- <footer id="footer-site">
-		</footer> -->
-		<script src="<c:url value = "/js/jquery.autosize.min.js"/>" type="text/javascript"></script>
-		<script>
-			$(document).ready(function(){
-			    $('textarea').autosize();   
-			});
-		</script>
-		<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
+		</footer> -->		
+		<script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 	</body>
 </html>
