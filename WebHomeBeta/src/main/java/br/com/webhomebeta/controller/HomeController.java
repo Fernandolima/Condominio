@@ -178,6 +178,7 @@ public class HomeController {
 			ArrayList<JsonPublicacao> jp = new ArrayList<>();
 			JsonPublicacao p = new JsonPublicacao();
 			p.setFimPublicacoes(true);
+			jp.add(p);
 			return jp;
 		}
 
@@ -194,6 +195,9 @@ public class HomeController {
 
 			ArrayList<GostouJSON> gostouJSONs = new ArrayList<>();
 			ArrayList<NaoGostouJSON> naoGostouJSONs = new ArrayList<>();
+			
+			jsonPublicacao.setQuantidadeGostou(p.getGostous().size());
+			jsonPublicacao.setQuantidadeNaoGostou(p.getNaoGostous().size());
 
 			for (Gostou gostou : p.getGostous()) {
 				GostouJSON gostouJSON = new GostouJSON(gostou.getId(),

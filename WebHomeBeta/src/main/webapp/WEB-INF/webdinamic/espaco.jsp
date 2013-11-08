@@ -163,7 +163,7 @@
 									                  	<div id="div${item.idEspaco}" class="modal hide">
 																<div class="modal-header">
 																	<button data-dismiss="modal" class="close" type="button">×</button>
-																	<h3>Exclusão da enquete</h3>
+																	<h3>Exclusão de espaço</h3>
 																</div>
 																	<div class="modal-body">
 																		<p>Deseja excluir?</p>

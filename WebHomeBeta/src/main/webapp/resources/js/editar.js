@@ -9,7 +9,7 @@ var EDITAR_PERFIL  = {
 	alterarFoto: function(e) {
 		var foto = $('#image').val();
 		
-		$('#container-foto').html('<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/>');
+		$('#container-foto').html('<img src="/WebHomeBeta/img/load-login.gif" id="loadFoto" alt="carregando foto"/> ');
   		$('#cortarImagem').hide();
   		$('#editarFoto').css({
   			'width': 'auto',

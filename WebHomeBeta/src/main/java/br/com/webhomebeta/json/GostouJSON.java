@@ -13,6 +13,7 @@ public class GostouJSON {
 		this.idUsuario = idUsuario;
 		this.idPublicacao = idPublicacao;
 	}
+	
 	public int getId() {
 		return id;
 	}

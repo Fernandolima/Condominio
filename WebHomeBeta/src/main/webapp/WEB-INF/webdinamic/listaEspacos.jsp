@@ -109,7 +109,22 @@
 						                	<tr>
 						                		<td><c:out value="${item.espaco}"/></td>
 						                		<td><c:out value="${item.descricao}"/></td>
-						                		<td><a href="#" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a></td>
+						                		<td>
+						                		<a href="#div${item.idEspaco}" data-toggle="modal" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a>
+						                			<div id="div${item.idEspaco}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Exclusão de espaço</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Deseja excluir?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a  id="btnDeleteListaEspaco" data-dismiss="modal" class="btn btn-primary" href="#" data-id="<c:out value="${item.idEspaco}"/>">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+						                		</td>
 						                	</tr>
 						                </c:forEach>
 						              </tbody>

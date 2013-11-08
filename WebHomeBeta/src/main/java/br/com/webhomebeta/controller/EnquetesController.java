@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,9 +70,17 @@ public class EnquetesController {
 		return new ModelAndView("listaEnquetes", model);
 
 	}
-	
+
+	@RequestMapping(value = "admin/visualizar/id={id}", method = RequestMethod.GET)
+	public ModelAndView visualizarEnquete(@PathVariable("id") int idEnquete) {
+		return new ModelAndView("visualizarEnquete", "enquete",
+				enquetesService.get(idEnquete));
+	}
+
 	@RequestMapping(value = "admin/enquetes/ativar")
-	public @ResponseBody String ativarEnquete(@RequestParam("idEnquete") int idEnquete, @RequestParam("ativa") boolean ativa){
+	public @ResponseBody
+	String ativarEnquete(@RequestParam("idEnquete") int idEnquete,
+			@RequestParam("ativa") boolean ativa) {
 		enquetesService.update(idEnquete, ativa);
 		return "true";
 	}
@@ -114,7 +123,7 @@ public class EnquetesController {
 			@RequestParam("idOpcao") int idOpcao,
 			@RequestParam("idEnquete") int idEnquete) {
 		Opcao opcao = opcaoService.get(idOpcao);
-		OpcaoVotada opcaoVotada = new OpcaoVotada(opcao,idUser);
+		OpcaoVotada opcaoVotada = new OpcaoVotada(opcao, idUser);
 		if (idUser == getUsuario().getIdUser()) {
 			opcaoVotadaService.save(opcaoVotada);
 			opcaoService.update(1, idOpcao);
@@ -145,7 +154,8 @@ public class EnquetesController {
 	}
 
 	@RequestMapping(value = "admin/enquetes/delete", method = RequestMethod.POST)
-	public @ResponseBody String delete(@RequestParam("idEnquete") int idEnquete) {
+	public @ResponseBody
+	String delete(@RequestParam("idEnquete") int idEnquete) {
 
 		Enquetes enquete = enquetesService.get(idEnquete);
 		enquetesService.delete(enquete);

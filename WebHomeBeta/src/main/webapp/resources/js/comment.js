@@ -6,7 +6,7 @@ var POST_COMMENT  = {
 		init: function() {
 			$.ajax({
 		    	type: 'get',
-		      	url:'notificacaoInicial',
+		      	url:'/WebHomeBeta/notificacaoInicial',
 		      	dataType: 'json',	
 		      	success: POST_COMMENT.loadNotificacao
 
@@ -14,7 +14,7 @@ var POST_COMMENT  = {
 			console.log('aaaaaa');
 			$.ajax({
 		    	type: 'post',
-		      	url:'getPublicacao',
+		      	url:'/WebHomeBeta/getPublicacao',
 		      	dataType: 'json',	
 		      	success: POST_COMMENT.loadHome,
 		      	error: function(e) {
@@ -43,6 +43,10 @@ var POST_COMMENT  = {
 			console.log('loadHome', data);
 			var htmlHome = '';
 			$.each(data, function(e, val){
+				console.log("Fim das publicacoes:" + val.fimPublicacoes);
+				if(val.fimPublicacoes){
+					$('#carrengandoComentario').hide();
+				}
 				htmlHome = '';
 				
 				htmlHome += '<div class="post" data-id-user="'+val.usuarioPublicacao.idUsuarioPublicacao+'" data-id-post="'+val.idPublicacao+'">';
@@ -56,20 +60,30 @@ var POST_COMMENT  = {
 						htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
 						console.log('val.gostous = ', val.gostous);
 						if(val.gostous){
+							var aux = false;
+							var idGostou = 0;
 							$.each(val.gostous, function(i, gostou){
-								console.log('each = ', gostou);
-								if(gostou.idUsuario === val.usuarioPublicacao.idUsuarioPublicacao){
-								htmlHome += '<div class="gosteiPublicacao">';
-								htmlHome += '<span class="iconSmile iconGostei active"></span><p class="labelGostei">'+val.quantidadeGostou+'</p>';
-								htmlHome += '</div>';
+								console.log('idusergostou    :' + gostou.idUsuario);
+								if(gostou.idUsuario == POST_COMMENT.idUser){
+									aux = true;
+									idGostou = gostou.id;
 								}
 							});
 							
-						}else{
-							htmlHome += '<div class="gosteiPublicacao">';
-							htmlHome += '<span class="iconSmile iconGostar"></span><p class="labelGostei"></p>';
-							htmlHome += '</div>';
-						}
+							if(aux){
+								htmlHome += '<div class="gosteiPublicacao">';
+								htmlHome += '<span class="iconSmile iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span><p class="labelGostei">'+val.quantidadeGostou+'</p>';
+								htmlHome += '</div>';
+							}
+							else{
+								htmlHome += '<div class="gosteiPublicacao">';
+								htmlHome += '<span class="iconSmile iconGostar" data-gostou="'+val.quantidadeGostou+'"></span><p class="labelGostei">'+val.quantidadeGostou+'</p>';
+								htmlHome += '</div>';
+								console.log('nao entra');
+							}
+							console.log(POST_COMMENT.idUser);
+							console.log(aux);	
+					}
 							
 						
 					
@@ -136,7 +150,7 @@ var POST_COMMENT  = {
 			$.ajax({
 				data: $('#frmComment').serialize(),
 		    	type: 'post',
-		      	url:'home/publicar',
+		      	url:'/WebHomeBeta/home/publicar',
 		      	dataType: 'json',	
 		      	success: POST_COMMENT.successPost
 		    });
@@ -204,7 +218,7 @@ var POST_COMMENT  = {
 			
 			$.ajax({
 	            type: "post",
-	            url: "notificacao/",
+	            url: "/WebHomeBeta/notificacao",
 	            data: dataNotificacao,
 	            success: function () {
 	            	console.log('sucesso');
@@ -227,7 +241,7 @@ var POST_COMMENT  = {
 			$.ajax({
 				data: dataPost,
 		    	type: 'get',
-		      	url:'home/delete',
+		      	url:'/WebHomeBeta/home/delete',
 		      	dataType: 'json',	
 		      	success: function(e) {
 		      		if(e) {
@@ -239,7 +253,7 @@ var POST_COMMENT  = {
 		verificaNotificacoes: function() {
 			$.ajax({
 				type: 'post',
-		      	url:'verificaNotificacoes',
+		      	url:'/WebHomeBeta/verificaNotificacoes',
 		      	dataType: 'json',	
 		      	success: function(data) {
 		      		if(data.length > 0) {
@@ -288,17 +302,20 @@ var POST_COMMENT  = {
 		onClickGostei: function(e) {
 			e.preventDefault();
 			var el = $(this),
-				dataCurtir = 'id=' + $(this).closest('.post').attr('data-id-post');
+				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post');
+			var quantidadeGostou = parseInt(el.closest('.iconSmile').attr('data-gostou'),10);
 			
 			$.ajax({
 	            type: "post",
-	            url: "gostou",
+	            url: "/WebHomeBeta/gostou",
 	            data: dataCurtir,
-	            success: function () {
+	            success: function (data) {
 	            	el.addClass('active');
 	            	el.addClass('iconGostei');
 	            	el.removeClass('iconGostar');
-	    			el.next('.labelGostei').text('Gostei');
+	            	el.attr('data-id-gostou', data);
+	            	el.attr('data-gostou', (quantidadeGostou + 1));
+	    			el.next('.labelGostei').html((quantidadeGostou + 1));
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -311,17 +328,19 @@ var POST_COMMENT  = {
 		onClickRemoveGostei: function(e) {
 			e.preventDefault();
 			var el = $(this),
-				dataCurtir = 'idPost=' + $(this).closest('.post').attr('data-id-post') + '&idUser = ' + $('#userSessao').val();
+				dataCurtir = 'idPost=' + $(this).closest('.iconGostei').attr('data-id-gostou');
+			var quantidadeGostou = parseInt($(this).closest('.iconSmile').attr('data-gostou'),10);
 			
 			$.ajax({
 	            type: "post",
-	            url: "removeGostou",
+	            url: "/WebHomeBeta/removeGostou",
 	            data: dataCurtir,
 	            success: function () {
 	            	el.removeClass('active');
 	            	el.removeClass('iconGostei');
 	            	el.addClass('iconGostar');
-	    			el.next('.labelGostei').text('');
+	            	el.attr('data-gostou', (quantidadeGostou -1));
+	    			el.next('.labelGostei').html((quantidadeGostou-1));
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -350,7 +369,7 @@ var POST_COMMENT  = {
 				
 				$.ajax({
 		            type: "post",
-		            url: "computarVoto",
+		            url: "/WebHomeBeta/computarVoto",
 		            data: 'idUser=' + idUser + '&idOpcao=' + idOpc + '&idEnquete=' + idEnquete,
 		            success: function (data) {
 		            	$('#' + container).hide('slow');
@@ -388,6 +407,10 @@ $(function() {
 		POST_COMMENT.verificaNotificacoes();
 	},10000);	
 	
+	setInterval(function(){
+		location.reload();
+	},300000);
+	
 	$('#submitComment').on('click', POST_COMMENT.onSubmitPost);
 	var alturaPagina, scroolTop;
 	
@@ -395,10 +418,10 @@ $(function() {
 		if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
 			if(POST_COMMENT.isScroll) {
 				POST_COMMENT.isScroll = false;
-				$('#main-comments').append('<img src="img/loadComentario.gif" id="carrengandoComentario" alt="Aguarde, carregando" />');
+				$('#main-comments').append('<img src="/WebHomeBeta/img/loadComentario.gif" id="carrengandoComentario" alt="Aguarde, carregando" />');
 				$.ajax({
 			    	type: 'post',
-			      	url:'getPublicacao',
+			      	url:'/WebHomeBeta/getPublicacao',
 			      	dataType: 'json',	
 			      	success: POST_COMMENT.loadHome
 				});

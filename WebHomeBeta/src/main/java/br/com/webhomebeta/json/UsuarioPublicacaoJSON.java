@@ -1,8 +1,8 @@
 package br.com.webhomebeta.json;
 
 public class UsuarioPublicacaoJSON {
-	int idUsuarioPublicacao;
-	String nome;
+	private int idUsuarioPublicacao;
+	private String nome;
 	
 	public UsuarioPublicacaoJSON(int idUsuarioPublicacao, String nome) {
 		super();

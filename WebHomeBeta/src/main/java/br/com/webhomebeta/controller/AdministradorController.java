@@ -46,9 +46,8 @@ public class AdministradorController {
 	@Autowired
 	private EmailServico emailServico;
 
-	@RequestMapping(value = "admin/enquete?id={id}", method = RequestMethod.GET)
-	public @ResponseBody
-	EnqueteJSON showEnquete(@PathVariable("id") int id) {
+	@RequestMapping(value = "admin/enquete/id={id}", method = RequestMethod.GET)
+	public ModelAndView showEnquete(@PathVariable("id") int id) {
 		Enquetes e = enquetesService.get(id);
 		ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 		int totalVotos = e.getTotalVotos();
@@ -63,7 +62,7 @@ public class AdministradorController {
 		}
 		enqueteJSON.setOpcoes(opcaoJSONs);
 
-		return enqueteJSON;
+		return new ModelAndView("visualizarEnquete", "enquete", enqueteJSON);
 	}
 
 	public List<EnqueteJSON> loadEnquetes() {

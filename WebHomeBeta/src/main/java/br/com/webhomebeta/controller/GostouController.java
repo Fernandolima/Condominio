@@ -59,15 +59,16 @@ public class GostouController {
 	String gostou(@RequestParam("id") int id) {
 
 		Gostou gostou = new Gostou(new Publicacao(id), getUsuario().getIdUser());
-		if (gostouService.salvar(gostou).getId() == 0)
+		Gostou g = gostouService.salvar(gostou);
+		if (g.getId() == 0)
 			return "false";
 		else
-			return "true";
+			return String.valueOf(g.getId());
 
 	}
 
 	@RequestMapping(value = "removeGostou", method = RequestMethod.POST)
-	public String removeGostou(@RequestParam("id") int id) {
+	public @ResponseBody String removeGostou(@RequestParam("idPost") int id) {
 		Gostou gostou = gostouService.get(id);
 		if (getUsuario().getIdUser() == gostou.getIdUsuario()) {
 			gostouService.delete(gostou);

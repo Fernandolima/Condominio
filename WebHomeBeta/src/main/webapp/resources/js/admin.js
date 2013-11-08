@@ -3,15 +3,6 @@ var ADMIN = {
 	numeroEspaco : 1,
 	
 	init: function(){
-		
-		if($('#adminView')[0]) {
-			$.ajax({
-		    	type: 'post',
-		      	url:'loadEnquetes',
-		      	dataType: 'json',	
-		      	success: ADMIN.loadEnquete
-			});
-		}
 	},	
 		
 	esqueciMinhaSenha: function() {
@@ -335,7 +326,7 @@ var ADMIN = {
 		
 		$.ajax({
 	    	type: 'post',
-	      	url:'verificaNotificacoesNovoUser',
+	      	url:'/WebHomeBeta/verificaNotificacoesNovoUser',
 	      	dataType: 'json',
 	      	success: function(data) {
 	      		if(data.length > 0){
@@ -383,6 +374,8 @@ $(function() {
 		
 		$("#frmEditarCadastro").submit();
 	});
+	
+	$('#btnDeleteListaEspaco').on('click', ADMIN.excluirEspaco);
 	
 	$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
 	
