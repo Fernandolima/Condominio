@@ -85,7 +85,7 @@
 			<div class="col-md-3">
 				
 			
-				
+				<!-- SideBar azul -->
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					
 						<div class="col-md-12">
@@ -106,7 +106,9 @@
                   	  	 </a>
                       </div>
 				</div>
-
+				
+				<!-- SideBar azul -->
+	
 			</div>
 			<div class="col-md-6">
 				<h2>Content</h2>
@@ -227,6 +229,8 @@
 	<script
 		src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>"
 		type="text/javascript"></script>
+		
+	<!-- Static -->
 	<script type="text/javascript">
 		$('#sidebar').affix({
 			offset : {
@@ -234,6 +238,8 @@
 			}
 		});
 	</script>
+	
+	<!-- Static -->
 	<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
 </body>
 </html>
