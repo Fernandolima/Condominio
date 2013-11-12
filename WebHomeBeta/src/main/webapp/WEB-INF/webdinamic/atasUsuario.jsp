@@ -2,7 +2,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -29,17 +30,30 @@
           </button>
           <a class="navbar-brand" href="#">Web Home</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${usuario.nome}" /> <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Editar</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Sair</a></li>
-              </ul>
-            </li>
-          </ul>
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    		<ul class="nav navbar-nav">
+    			<li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
+	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
+	              <ul class="dropdown-menu" id="main-notificacao">
+	                <li>Inserir aqui as notificacoes</li>
+	                <li class="divider"></li>
+	                <li><a href="#">Sair</a></li>
+	              </ul>
+	            </li>
+    		</ul>
+          
+          	<ul class="nav navbar-nav navbar-right">
+            	<li class="dropdown">
+	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${usuario.nome}" /> <b class="caret"></b></a>
+	              	<ul class="dropdown-menu">
+	                	<li><a href="/WebHomeBeta/home/perfil">Editar Perfil</a></li>
+	                	<li class="divider"></li>
+	                	<li><a href="WebHomeBeta/logout">Sair</a></li>
+	              	</ul>
+            	</li>
+          	</ul>
         </div><!--/.nav-collapse -->
 	</nav>
 	
@@ -50,119 +64,45 @@
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
-						<img src="/WebHomeBeta/img/anonimos.jpg" alt="..." class="img-rounded img-responsive">
+						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
 					</div>
 					
 					<ul class="nav nav-pills nav-stacked nav-usuario">
-						<li class="active"><a href="#">Home</a></li>
-						  <li><a href="#">Profile</a></li>
-						  <li><a href="#">Messages</a></li>
+						<li><a href="/WebHomeBeta/home">Home</a></li>
+						<li class="active"><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
+						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
+						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
+						<li><a href="#">Usu&aacute;rios</a></li>
 					</ul>
 				</div>
 			</div>
 			
-			<div class="col-md-6">
-				<h2>Content</h2>
-				Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-				quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-				cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-				porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-				consectetur, adipisci velit, sed quia non numquam eius modi tempora
-				incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-				enim ad minima veniam, quis nostrum exercitationem ullam corporis
-				suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-
-				<hr>
-
-				<h2>Content</h2>
-				Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-				architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-				cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-				porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-				consectetur, adipisci velit, sed quia non numquam eius modi tempora
-				incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-				enim ad minima veniam, quis nostrum exercitationem ullam corporis
-				suscipit laboriosam, nisi ut
-
-				<hr>
-
-				<h2>Content</h2>
-				Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-				architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-				cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-				porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-				consectetur, adipisci velit, sed quia non numquam eius modi tempora
-				incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-				enim ad minima veniam, quis nostrum exercitationem ullam corporis
-				suscipit laboriosam, nisi ut
-
-				<hr>
-
-				<h2>Content</h2>
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-				aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui
-				ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-				dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-				quia non numquam eius modi tempora incidunt ut labore et dolore
-				magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-				nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-
-				<h2>Content</h2>
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-				aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui
-				ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-				dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-				quia non numquam eius modi tempora incidunt ut labore et dolore
-				magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-				nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-
-
-				<hr>
-					<h4>
-						<a href="http://bootply.com/73864">Edit on Bootply</a>
-					</h4>
-				<hr>
-
-
+			<div class="col-md-9">
+				<h3>Atas de Assembléia</h3><br/>
+				<table class="table table-striped">
+					<thead>
+						
+						<tr>
+			                <th>Título da Ata</th>
+			                <th>Data da ata</th>
+			                <th>Visualizar</th>
+			                <th>Download</th>
+	              		</tr>
+						
+					</thead>
+					<tbody>
+						<c:forEach items="${atas}" var="item">
+		               		<tr>
+		                		<td><c:out value="${item.titulo}"/></td>
+		                		<td><c:out value="${item.dataFormat}"/></td>
+		                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
+		                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
+		               		</tr>
+		               	</c:forEach>
+					</tbody>
+				</table>
 			</div>
-			
-			<div class="col-md-3" style="background: #ECEFF5;">
-			
-			<h2>Content</h2>
-				Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-				architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-				cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-				porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-				consectetur, adipisci velit, sed quia non numquam eius modi tempora
-				incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-				enim ad minima veniam, quis nostrum exercitationem ullam corporis
-				suscipit laboriosam, nisi ut
-
-				<hr>
-
-				<h2>Content</h2>
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-				aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui
-				ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-				dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-				quia non numquam eius modi tempora incidunt ut labore et dolore
-				magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-				nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-			</div>
-			
 		</div>
 	</div>
 	<!-- <footer id="footer-site">
@@ -180,6 +120,6 @@
 			}
 		});
 	</script>
-	<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
 </body>
 </html>
