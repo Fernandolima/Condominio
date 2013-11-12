@@ -174,13 +174,7 @@ public class HomeController {
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
 				colunaInicial, tamanhoColuna);
 
-		if (colunaInicial >= publicacaoes.size()) {
-			ArrayList<JsonPublicacao> jp = new ArrayList<>();
-			JsonPublicacao p = new JsonPublicacao();
-			p.setFimPublicacoes(true);
-			jp.add(p);
-			return jp;
-		}
+		
 
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
@@ -247,7 +241,7 @@ public class HomeController {
 		}
 
 		colunaInicial += publicacaoes.size();
-
+		System.out.println("Coluna inicial: "+ colunaInicial);
 		return jsonPublicacaos;
 	}
 

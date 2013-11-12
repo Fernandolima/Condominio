@@ -88,20 +88,15 @@ public class NotificacaoController {
 			@RequestParam("idPost") int idPost) {
 
 		// adiociona a notificacaoJSON no queue
-		NotificacoesJSON json = new NotificacoesJSON();
-		json.setIdPublicacao(idPost);
-		json.SetTipo(tipo, dadosUsuarioBean.getUsuario().getNome());
-		json.setImagem(dadosUsuarioBean.getUsuario().getImagemView());
-		json.setIdUser(idNotificado);
-		json.setIdUserComentou(dadosUsuarioBean.getUsuario().getIdUser());
-		json.setURL("/WebHomeBeta/home/publicacao/id=" + idPost);
-		this.queueNotificacaoJSON.add(json);
+		NotificacoesJSON notificacoesJSON = new NotificacoesJSON();
+		this.queueNotificacaoJSON.add(notificacoesJSON);
 		
 		Notificacao notificacao = new Notificacao(tipo, idNotificado,
 				dadosUsuarioBean.getUsuario().getIdUser(), idPost, false,
 				"show/id=" + idPost);
 		// Adiociona a notificao salva na queue.
 		this.queueNotificacao.add(notificacaoService.salvar(notificacao));
+		
 
 		return "true";
 	}
@@ -112,24 +107,22 @@ public class NotificacaoController {
 		// adiociona a notificao ao queue
 		String user = "novoUsuario";
 		queueNovoMorador.add(user);
-
+		
 		return "true";
 	}
-
+	
 	@RequestMapping(value = "verificaNotificacoesNovoUser", method = RequestMethod.POST)
-	public @ResponseBody
-	DeferredResult<ArrayList<String>> externalThreadNovoUser() {
+	public @ResponseBody DeferredResult<ArrayList<String>> externalThreadNovoUser(){
 		DeferredResult<ArrayList<String>> deffered = new DeferredResult<ArrayList<String>>();
 		ArrayList<String> users = new ArrayList<>();
-
-		for (String user : this.queueNovoMorador) {
+		
+		for(String user : this.queueNovoMorador){
 			users.add(user);
 			queueNovoMorador.remove(user);
 		}
 		deffered.setResult(users);
 		return deffered;
 	}
-
 	@RequestMapping(value = "verificaNotificacoes", method = RequestMethod.POST)
 	public @ResponseBody
 	DeferredResult<ArrayList<NotificacoesJSON>> externalThread() {
@@ -138,7 +131,16 @@ public class NotificacaoController {
 
 		for (NotificacoesJSON result : this.queueNotificacaoJSON) {
 
-			array.add(result);
+			Notificacao n = queueNotificacao.poll();
+			Usuario usuario = usuarioService.getById(n.getIdNotificacador());
+
+			NotificacoesJSON json = new NotificacoesJSON();
+			json.setIdPublicacao(n.getIdPost());
+			json.SetTipo(n.getTipoNotificacao(), usuario.getNome());
+			json.setImagem(usuario.getImagemView());
+			json.setIdUser(n.getIdNotificacado());
+			json.setIdUserComentou(n.getIdNotificacador());
+			array.add(json);
 
 			this.queueNotificacaoJSON.remove(result);
 
