@@ -16,7 +16,7 @@ public class CalendarEventService {
 		return calendarEventDAO.save(calendarEvent);
 	}
 
-	public CalendarEvent get(int id) {
+	public List<CalendarEvent> get(int id) {
 		return calendarEventDAO.get(id);
 	}
 
