@@ -19,10 +19,10 @@ public class CalendarEventDAOImp implements CalendarEventDAO {
 		return calendarEvent;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public CalendarEvent get(int id) {
-		return (CalendarEvent) factory.getCurrentSession().get(
-				CalendarEvent.class, id);
+	public List<CalendarEvent> get(int id) {
+		return factory.getCurrentSession().createQuery("from CalendarEvent event where event.idEspaco = ?").setInteger(0, id).list();
 	}
 
 	@SuppressWarnings("unchecked")
