@@ -77,23 +77,20 @@ public class HomeController {
 	@Autowired
 	private OpcaoService opcaoService;
 
-	private int colunaInicial;
-
 	// Inicializa a pagina com todos os parametros necessarios
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView init(ModelMap model) {
-		
+
 		Usuario usuario = getUsuario();
 
 		moradorControllerBean.setUsuario(getUsuario());
+		moradorControllerBean.setColunaInicial(0);
 
 		model.put("moradorControllerBean", moradorControllerBean);
 
 		model.put("listaEnquetes", getEnquetes(usuario));
 		model.put("listaEnquetesVotadas", getEnquetesVotadas(usuario));
 		model.put("usuario", usuario);
-
-		colunaInicial = 0;
 
 		return new ModelAndView("home", model);
 	}
@@ -172,9 +169,7 @@ public class HomeController {
 		final int tamanhoColuna = 10;
 
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
-				colunaInicial, tamanhoColuna);
-
-		
+				moradorControllerBean.getColunaInicial(), tamanhoColuna);
 
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
@@ -189,7 +184,7 @@ public class HomeController {
 
 			ArrayList<GostouJSON> gostouJSONs = new ArrayList<>();
 			ArrayList<NaoGostouJSON> naoGostouJSONs = new ArrayList<>();
-			
+
 			jsonPublicacao.setQuantidadeGostou(p.getGostous().size());
 			jsonPublicacao.setQuantidadeNaoGostou(p.getNaoGostous().size());
 
@@ -240,8 +235,9 @@ public class HomeController {
 			jsonPublicacaos.add(jsonPublicacao);
 		}
 
-		colunaInicial += publicacaoes.size();
-		System.out.println("Coluna inicial: "+ colunaInicial);
+		moradorControllerBean.setColunaInicial(moradorControllerBean
+				.getColunaInicial() + publicacaoes.size());
+
 		return jsonPublicacaos;
 	}
 
@@ -351,7 +347,9 @@ public class HomeController {
 
 		return usuario;
 	}
-	public ArrayList<EnqueteJSON> getEnquetesVotadas(Usuario usuario){
+
+	// Envia para o home as enquetes votadas pelo usuario LOGADO
+	public ArrayList<EnqueteJSON> getEnquetesVotadas(Usuario usuario) {
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		ArrayList<EnqueteJSON> enqueteJSONsVOTADA = new ArrayList<>();
@@ -359,30 +357,34 @@ public class HomeController {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos(), e.getEnquete());
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
+					e.getTotalVotos(), e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
 				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
-						o.getOpcao(), f.format(((o.getQuatVots() * 100d) / totalVotos)));
-				for(OpcaoVotada ov : o.getOpcaoVotadas()){
+						o.getOpcao(),
+						f.format(((o.getQuatVots() * 100d) / totalVotos)));
+				for (OpcaoVotada ov : o.getOpcaoVotadas()) {
 					enqueteJSON.getIdVoto().add(ov.getIdUser());
 				}
 				opcaoJSONs.add(opcaoJSON);
 			}
 			enqueteJSON.setOpcoes(opcaoJSONs);
-			
+
 			enqueteJSONs.add(enqueteJSON);
 		}
-		
-		for(EnqueteJSON enqueteJson : enqueteJSONs){
-			if(enqueteJson.getIdVoto().contains(usuario.getIdUser())){
+
+		for (EnqueteJSON enqueteJson : enqueteJSONs) {
+			if (enqueteJson.getIdVoto().contains(usuario.getIdUser())) {
 				enqueteJSONsVOTADA.add(enqueteJson);
 			}
 		}
-		
+
 		return enqueteJSONsVOTADA;
 	}
-	public ArrayList<EnqueteJSON> getEnquetes(Usuario usuario){
+
+	// Envia para a home as enquetes que ainda nao foram VOTADAS
+	public ArrayList<EnqueteJSON> getEnquetes(Usuario usuario) {
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		ArrayList<EnqueteJSON> enqueteJSONsVIEW = new ArrayList<>();
@@ -390,27 +392,29 @@ public class HomeController {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
 			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),e.getTotalVotos(), e.getEnquete());
+					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
+					e.getTotalVotos(), e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
 				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
-						o.getOpcao(), f.format(((o.getQuatVots() * 100d) / totalVotos)));
-				for(OpcaoVotada ov : o.getOpcaoVotadas()){
+						o.getOpcao(),
+						f.format(((o.getQuatVots() * 100d) / totalVotos)));
+				for (OpcaoVotada ov : o.getOpcaoVotadas()) {
 					enqueteJSON.getIdVoto().add(ov.getIdUser());
 				}
 				opcaoJSONs.add(opcaoJSON);
 			}
 			enqueteJSON.setOpcoes(opcaoJSONs);
-			
+
 			enqueteJSONs.add(enqueteJSON);
 		}
-		
-		for(EnqueteJSON enqueteJson : enqueteJSONs){
-			if(!enqueteJson.getIdVoto().contains(usuario.getIdUser())){
+
+		for (EnqueteJSON enqueteJson : enqueteJSONs) {
+			if (!enqueteJson.getIdVoto().contains(usuario.getIdUser())) {
 				enqueteJSONsVIEW.add(enqueteJson);
 			}
 		}
-		
+
 		return enqueteJSONsVIEW;
 	}
 

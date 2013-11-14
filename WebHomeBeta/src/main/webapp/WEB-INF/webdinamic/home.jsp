@@ -61,7 +61,7 @@
 	<!-- Begin Body -->
 	<div class="container">
 		
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
 						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-6 col-sm-6">
 			
 				<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean" class="form-horizontal" role="form">
 					<form:textarea type="text" path ="publicacaoTO.publicacao" name="postUser" id="txtComment" class="form-control" placeholder="Está pensando em que?"></form:textarea>
@@ -89,7 +89,8 @@
 				
 			</div>
 			
-			<div class="col-md-2 col-md-offset-1" style="background: #ECEFF5; ">
+			<div class="col-md-2 col-sm-2 col-md-offset-1" style="background: #ECEFF5;">
+			 
 				<c:forEach items="${listaEnquetes}" var="item">
 					<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
 						<h4><c:out value="${item.enquete}"/></h4>
@@ -107,7 +108,8 @@
 						<a href="#" class="participarEnquete btn btn-info">Votar</a>
 					</div>
 				</c:forEach>
-			</div>			
+			 
+		    </div>			
 			
 		
 	</div>

@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -38,7 +39,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
+                                        <a tabindex="-1" href="/WebHomeBeta/logout">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -53,6 +54,7 @@
                 
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                       <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="active">
                             <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
@@ -86,9 +88,21 @@
                         <li>
                             <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
                         </li>
-                         <li>		
-                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right "></i>Web Home</a>
+                        <li>
+                        	 <a href="/WebHomeBeta/admin/gasto"><i class="icon-chevron-right"></i>Gasto</a>
                         </li>
+                         <li>
+                            <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
+                        </li>
+                        </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_FUNC')">
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes"><i class="icon-chevron-right "></i>Visitantes</a>
+                        </li>
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes/cadastro"><i class="icon-chevron-right "></i>Cadastrar Visitantes</a>
+                        </li>
+                        </sec:authorize>
                     </ul>
                 </div>
                 
@@ -102,55 +116,31 @@
 					
                     <div class="row-fluid">
                         <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Enquetes ativas</div>
-                                <div class="pull-right"><a href="/WebHomeBeta/admin/listaEnquetes" title="Ver mais"><span class="badge badge-warning">Ver mais</span></a>
-
-                                </div>
-                            </div>
-                            <div class="block-content collapse in">
-                            <c:forEach items="${enquetes}" var="enquete">
-                            <div class="list-enquete">
-                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.enquete}</p>
-	                            <div class="block-content collapse in enquetes">
-	                            <c:forEach items="${enquete.opcoes}" var="opcao">
-	                            	<div class="span3">
-	                                    <div class="chart" data-percent="<c:out value="${opcao.porcentagemVotos}"></c:out>">${opcao.porcentagemVotos}%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">${opcao.opcao}</span>
-	                                    </div>
-	                                </div>
-								</c:forEach>                            
+                        <c:forEach items="${enquetes}" var="enquete">
+	                    	<div class="block">
+	                        	<div class="navbar navbar-inner block-header">
+	                            	<div class="muted pull-left">Enquetes ativas</div>
+	                                <div class="pull-right">
+	                                	<a href="/WebHomeBeta/admin/listaEnquetes" title="Ver mais"><span class="badge badge-warning">Ver mais</span></a>
+									</div>
 	                            </div>
-	                    	</div>
-	                    	</c:forEach>
-	                    	</div>
-                        </div>
-                         <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Atividade dos usuarios</div>
-                                <div class="pull-right"><a href="/WebHomeBeta/admin/listaEnquetes" title="Ver mais"><span class="badge badge-warning">Ver mais</span></a>
-
-                                </div>
-                            </div>
-                            <div class="block-content collapse in">
-                            <c:forEach items="${enquetes}" var="enquete">
-                            <div class="list-enquete">
-                            	<p class="perguntaEnquete"><b>Enquete Ativa:</b>${enquete.enquete}</p>
-	                            <div class="block-content collapse in enquetes">
-	                            <c:forEach items="${enquete.opcoes}" var="opcao">
-	                            	<div class="span3">
-	                                    <div class="chart" data-percent="<c:out value="${opcao.porcentagemVotos}"></c:out>">${opcao.porcentagemVotos}%</div>
-	                                    <div class="chart-bottom-heading"><span class="label label-info">${opcao.opcao}</span>
-	                                    </div>
-	                                </div>
-								</c:forEach>                            
-	                            </div>
-	                    	</div>
-	                    	</c:forEach>
-	                    	</div>
-                        </div>
-                        <!-- /block -->
+	                            
+	                            <div class="block-content collapse in">
+	                            	<div class="list-enquete">
+	                            		<p class="perguntaEnquete"><b>Enquete Ativa:</b> ${enquete.enquete}</p>
+		                            	<div class="block-content collapse in enquetes">
+		                            		<c:forEach items="${enquete.opcoes}" var="opcao">
+		                            			<div class="span3">
+		                                    		<div class="chart" data-percent="<c:out value="${opcao.porcentagemVotos}"></c:out>">${opcao.porcentagemVotos}%</div>
+				                                    <div class="chart-bottom-heading"><span class="label label-info">${opcao.opcao}</span>
+				                                    </div>
+		                                		</div>
+											</c:forEach>                            
+		                            	</div>
+		                    		</div>
+		                    	</div>
+	                        </div>
+	                	</c:forEach> 	                        
                     </div>              
                 </div>
             </div>

@@ -49,8 +49,7 @@ public class EnqueteDaoImp implements EnqueteDao {
 	@Override
 	@Transactional
 	public Enquetes get(int idEnquete) {
-		return (Enquetes) factory.getCurrentSession().get(Enquetes.class,
-				idEnquete);
+		return (Enquetes) factory.getCurrentSession().createQuery("from Enquetes e where e.idEquete = ?").setInteger(0, idEnquete).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

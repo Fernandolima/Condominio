@@ -4,17 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="false"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa</title>
-		
+		<script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>"/>
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		<script src="<c:url value = "/bootstrap/vendors/modernizr-2.6.2-respond-1.1.0.min.js"/>" type="text/javascript"></script>
@@ -38,7 +40,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
+                                        <a tabindex="-1" href="/WebHomeBeta/logout">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -53,7 +55,8 @@
                 
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                       <li>
+                       <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <li>
                             <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
                         <li>
@@ -71,7 +74,7 @@
                         <li>
                             <a href="/WebHomeBeta/admin/espaco"><i class="icon-chevron-right"></i> Cadastrar Espaços</a>
                         </li>
-                        <li class="active">
+                        <li class = "active">
                             <a href="/WebHomeBeta/admin/listaEnquetes"><i class="icon-chevron-right"></i> Listar Enquetes</a>
                         </li>
                         <li>
@@ -83,9 +86,24 @@
                         <li>
                             <a href="/WebHomeBeta/admin/reservas"><i class="icon-chevron-right"></i>Validar Reservas</a>
                         </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
+                        </li>
+                        <li>
+                        	 <a href="/WebHomeBeta/admin/gasto"><i class="icon-chevron-right"></i>Gasto</a>
+                        </li>
                          <li>
                             <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
                         </li>
+                        </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_FUNC')">
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes"><i class="icon-chevron-right "></i>Visitantes</a>
+                        </li>
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes/cadastro"><i class="icon-chevron-right "></i>Cadastrar Visitantes</a>
+                        </li>
+                        </sec:authorize>
                     </ul>
                 </div>
                 
@@ -107,6 +125,7 @@
 						                  <th>Status</th>
 						                  <th>Excluir</th>
 						                  <th>Visualizar</th>
+						                  <th>Editar</th>
 						                </tr>
 						              </thead>
 						              <tbody>
@@ -169,6 +188,7 @@
 																</div>
 						                		</td>
 						                		<td><a href="/WebHomeBeta/admin/enquete/id=${item.idEquete}" class="visualizarEnquete btn btn-info" id="btnVisualizar" >Visualizar</a></td>
+						                		<td><a href="/WebHomeBeta/admin/enquetes/editar/id=${item.idEquete}" class="editarEnquete btn btn-primary" id="btnEditar">Editar</a></td>
 						                	</tr>
 						                </c:forEach>
 						                
@@ -182,6 +202,21 @@
                     </div>	
                 					
                 </div>
+                <div id="modalErro" class="modal hide">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button">×</button>
+						<h3>Exclusão da enquete</h3>
+					</div>
+						<div class="modal-body">
+							<p>Deseja excluir?</p>
+						</div>
+						<div class="modal-footer">
+							<a data-dismiss="modal" class="btn excluirEnquete btn-primary" href="#" data-id="${theCount.index}" data-enquete="<c:out value="${item.idEquete}"/>">Sim</a>
+							<a data-dismiss="modal" class="btn" href="#">Não</a>
+						</div>
+					</div>
+                
+                
             </div>
             <hr>
             <footer>
@@ -190,11 +225,20 @@
         </div>
         <!--/.fluid-container-->
         
-        <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
+       
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-                
+         
+        <div id="jGrowl" class="top-right jGrowl">
+			<div class="jGrowl-notification"></div>
+		</div>  
+		
+		<c:if test="${erro == 1}">
+                	<script>
+                	 $.jGrowl("Esta enquete já possuí votos. Não é possível modifica-la");
+                	</script>
+                </c:if>      
 	</body>	
 </html>

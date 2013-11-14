@@ -2,6 +2,7 @@ package br.com.webhomebeta.to;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import br.com.webhomebeta.entity.Opcao;
@@ -14,7 +15,7 @@ public class EnquetesTo {
 	private Usuario usuarioEnquete;
 	private String titulo;
 	private boolean isAtiva;
-	private Set<Opcao> opcoes = new HashSet<>(0);
+	private List<Opcao> opcoes;
 	
 	
 	
@@ -27,13 +28,13 @@ public class EnquetesTo {
 	/**
 	 * @return the opcoes
 	 */
-	public Set<Opcao> getOpcoes() {
+	public List<Opcao> getOpcoes() {
 		return opcoes;
 	}
 	/**
 	 * @param opcoes the opcoes to set
 	 */
-	public void setOpcoes(Set<Opcao> opcoes) {
+	public void setOpcoes(List<Opcao> opcoes) {
 		this.opcoes = opcoes;
 	}
 	/**

@@ -8,7 +8,7 @@ import br.com.webhomebeta.to.EnquetesTo;
 public class EnquetesControllerBean {
 
 	private List<String> listOpcoes;
-	private EnquetesTo enquetesTo;
+	private EnquetesTo enquetesTo = new EnquetesTo();;
 	/**
 	 * @return the listOpcoes
 	 */

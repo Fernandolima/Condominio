@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div id="data-user">
-					<a href="WebHomeBeta/j_spring_security_logout" title="Sair" class="logout-site">Sair</a>
+					<a href="WebHomeBeta/logout" title="Sair" class="logout-site">Sair</a>
 					<span>|</span>
 					<a href="perfil">Configurações</a>
 					<span>|</span>

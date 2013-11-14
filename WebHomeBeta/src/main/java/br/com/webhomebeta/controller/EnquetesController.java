@@ -93,7 +93,59 @@ public class EnquetesController {
 
 	}
 
-	// tati vai passa a string com as opcoes
+	@RequestMapping(value = "admin/enquetes/editar/id={id}")
+	public ModelAndView editarEnquete(@PathVariable("id") int id, ModelMap model){
+		EnquetesControllerBean bean = new EnquetesControllerBean();
+		Enquetes enquetes = enquetesService.get(id);
+		BeanUtils.copyProperties(enquetes, bean.getEnquetesTo());
+		
+		if(enquetes.getTotalVotos() > 0){
+			model.put("listaEnquetes", enquetesService.getList());
+			model.put("usuario", getUsuario());
+			int erro = 1;
+			model.put("erro", erro);
+			return new ModelAndView("listaEnquetes", model);
+		}
+		List<String> opcaos = new ArrayList<>();
+		for(Opcao opcao : enquetes.getOpcao()){
+			opcaos.add(opcao.getOpcao());
+			System.out.println(opcao.getOpcao());
+		}
+		bean.setListOpcoes(opcaos);
+		model.put("bean", bean);
+		return new ModelAndView("editarEnquete", model);
+	}
+	
+	
+	@RequestMapping(value = "admin/enquetes/editar", method = RequestMethod.POST)
+	public String editarEnquete(
+			@ModelAttribute("bean") EnquetesControllerBean bean,
+			BindingResult result) {
+		
+		Enquetes enquetes = enquetesService.get(bean.getEnquetesTo().getIdEquete());
+		List<Opcao> opcoes = enquetes.getOpcao();
+
+		//Variavel aux
+		int aux = 0;
+		for(int i = 0; i < opcoes.size(); i++){
+			String o = bean.getListOpcoes().get(i);
+			Opcao op = opcoes.get(i);
+			op.setOpcao(o);
+			System.out.println("Nova opcao " + op.getOpcao());
+			aux++;
+		}
+		if(aux != bean.getListOpcoes().size()){
+			for(int i = aux; i < bean.getListOpcoes().size(); i ++){
+				Opcao op = new Opcao(bean.getListOpcoes().get(i), enquetes);
+				opcoes.add(op);
+			}
+		}
+		enquetes.setOpcao(opcoes);
+		enquetesService.update(enquetes);
+
+		return "redirect:/admin/enquetes";
+	}
+	
 	@RequestMapping(value = "admin/enquetes/salvar", method = RequestMethod.POST)
 	public String salvarEnquete(
 			@ModelAttribute("bean") EnquetesControllerBean bean,

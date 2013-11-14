@@ -1,8 +1,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page session="false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>"/>
+		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
 		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
@@ -54,7 +56,7 @@
                 
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                       <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li>
                             <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
@@ -64,7 +66,7 @@
                         <li>
                             <a href="/WebHomeBeta/admin/atas"><i class="icon-chevron-right"></i> Cadastrar Atas</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/WebHomeBeta/admin/cadastrarBlocos"><i class="icon-chevron-right"></i> Cadastrar Blocos</a>
                         </li>
                         <li>
@@ -113,102 +115,48 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Cadastro de blocos</div>
+                                <div class="muted pull-left">Cadastro de Enquetes</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                     <form:form modelAttribute="bloco" class="form-horizontal" action="#" method="post" id="frmBlocos">
+                                	<form:form modelAttribute="bean" action="/WebHomeBeta/admin/enquetes/salvar" class="form-horizontal" method="post" id="frmEnquetes">
                                       <fieldset>
-                                        <legend>Blocos do condimínio</legend>
+                                        <legend>Enquete</legend>
+                                        <form:hidden path="enquetesTo.idEquete"/>
                                         <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.bloco">Bloco:</form:label>
+                                        	<form:label for="tituloEnquete" path="enquetesTo.titulo" class="control-label">Título:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.bloco" autocomplete="off" />
+	                                        	<form:input type="text" id="tituloEnquete" path="enquetesTo.titulo" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
                                         </div>
+                                        
                                         <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quantAp">Número de apartamentos:</form:label>
+                                        	<form:label for="tituloEnquete" path="enquetesTo.equete" class="control-label">Pergunta:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quantAp" autocomplete="off" />
+	                                        	<form:input type="text" id="tituloEnquete" path="enquetesTo.equete" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
                                         </div>
-                                        <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quatApAndares">Apartamentos por andar:</form:label>
-	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
+                                        
+                                        <div id="contentOpcao">
+                                        
+	                                        <c:forEach items="${bean.listOpcoes}" var="opcao" varStatus="cont">
+	                                        <div class="control-group">
+	                                        	<label for="listOpcoes" class="control-label">Opção ${cont.index}:</label>
+		                                        <div class="controls">
+		                                        	<input type="text" name="listOpcoes[${cont.index}]" autocomplete="off" value="${opcao}" class="input-xlarge focused opcaoEnquete">
+		                                        </div>
+		                                       
 	                                        </div>
-                                        </div>
-                                        <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.numeroInicial">Início da numeração:</form:label>
-	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
-	                                        </div>
-                                        </div>
+	                                        </c:forEach>
+	                                    </div>
+                                        
                                         <div class="form-actions">
-                                        	<input type="button" id="btSubmitBlocos" class="btn btn-primary" value="Salvar" />
+                                        	<a href="#" id="btn-adiciona-opcao" class="btn btn-info">Adicionar opção</a>
+                                        	<input type="submit" id="btEditEnquete" class="btn btn-primary" value="Concluir edição" />
                                         </div>
                                       </fieldset>
                                     </form:form>
 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /block -->
-                        
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Blocos Cadastrados</div>
-                            </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-  									<table class="table" id="listaBlocos">
-						              <thead>
-						                <tr>
-						                  <th>Bloco</th>
-						                  <th>Nº de Apartamentos</th>
-						                  <th>Ap. por Andar</th>
-						                  <th>Inicio da numeração</th>
-						                  <th>Excluir</th>
-						                </tr>
-						              </thead>
-						              <tbody>
-						              	<c:choose>
-											<c:when test="${fn:length(listaBlocos) gt 0}">
-								              	<c:forEach items="${listaBlocos}" var="item" varStatus="num">
-									                <tr>
-									                  <td><c:out value="${item.bloco}"/></td>
-									                  <td><c:out value="${item.quantAp}"/></td>
-									                  <td><c:out value="${item.quatApAndares}"/></td>
-									                  <td><c:out value="${item.numeroInicial}" /></td>
-									                  <td>
-									                  <a href="#div${item.idbloco}" data-toggle="modal" class="btn btn-danger">Delete</a>
-									                  <div id="div${item.idbloco}" class="modal hide">
-																<div class="modal-header">
-																	<button data-dismiss="modal" class="close" type="button">×</button>
-																	<h3>Exclusão do bloco</h3>
-																</div>
-																	<div class="modal-body">
-																		<p>Confirma exclusão do bloco?</p>
-																	</div>
-																	<div class="modal-footer">
-																		<a data-dismiss="modal" class="btn btn-delete-bloco  btn-primary" href="#" data-id="${item.idbloco}">Sim</a>
-																		<a data-dismiss="modal" class="btn" href="#">Não</a>
-																	</div>
-																</div>
-									                  
-									                  </td>
-									                </tr>
-									            </c:forEach>	
-									        </c:when>
-											<c:otherwise>
-												<tr>
-									                  <td colspan="5"><p class="nenhumResultado">Nenhum bloco cadastrado</p></td>
-									            </tr>
-											</c:otherwise>	
-										</c:choose>				                
-						              </tbody>
-						            </table>
                                 </div>
                             </div>
                         </div>
@@ -227,13 +175,12 @@
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
-        <script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
-        <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-               
-        <div id="jGrowl" class="top-right jGrowl">
+		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+		
+		<div id="jGrowl" class="top-right jGrowl">
 			<div class="jGrowl-notification"></div>
-		</div> 
-	</body>	
-</html>
+		</div>
+    </body>	
 </html>

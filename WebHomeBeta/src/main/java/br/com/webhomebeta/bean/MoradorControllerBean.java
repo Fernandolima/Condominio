@@ -7,11 +7,30 @@ import br.com.webhomebeta.to.ComentarioTO;
 import br.com.webhomebeta.to.PublicacaoTO;
 
 public class MoradorControllerBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private PublicacaoTO publicacaoTO;
 	private ComentarioTO comentarioTO;
 	private Usuario usuario;
 	private int idComentario;
 	private int idPublicacao;
+	private int colunaInicial;
+	
+	
+
+	public int getColunaInicial() {
+		return colunaInicial;
+	}
+
+	public void setColunaInicial(int colunaInicial) {
+		this.colunaInicial = colunaInicial;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public int getIdComentario() {
 		return idComentario;

@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd  
         http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security-3.0.xsd
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
  	    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
  	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
@@ -112,40 +112,58 @@
 	</bean>
 
 	<!-- Spring Security -->
-	<sec:http auto-config="true">
+	<sec:http auto-config="true" use-expressions="true">
 		<sec:form-login login-page="/"
 		    login-processing-url="/j-spring-security-check"
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
 			<sec:logout invalidate-session="true" logout-url="/logout" logout-success-url="/"/>
 		<sec:intercept-url pattern="/index.jsp"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			access="isAnonymous()" />
 		<sec:intercept-url pattern="/index"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			access="isAnonymous()" />
 		<sec:intercept-url pattern="/cadastro.jsp"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			access="isAnonymous()" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<sec:intercept-url pattern="/admin" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/home" access="ROLE_MORADOR,ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/home.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/atas.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/atas" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/listaAtas" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/listaAtas.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/cadastrarBlocos" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/cadastrarBlocos.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/enquetes" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/enquetes.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/listaEnquetes.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/validarMoradores" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/validarMoradores.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/admin/listaEnquetes" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/espaco" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/espaco.jsp" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/perfil" access="ROLE_MORADOR,ROLE_ADMIN" />
-		<sec:intercept-url pattern="/perfil.jsp" access="ROLE_MORADOR,ROLE_ADMIN" />
+			access="isAnonymous()" />
+		<sec:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/atas.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/atas" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listaAtas" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listaAtas.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/cadastrarBlocos" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/cadastrarBlocos.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/enquetes" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/enquetes.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listaEnquetes.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/validarMoradores" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/validarMoradores.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listaEnquetes" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listaEnquetes.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listarEspaco" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/listarEspaco.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/espaco" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/mural" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/mural.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/espaco.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/reservas" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/reservas.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/gasto" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/gasto.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/perfil" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/perfil.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/visitantes" access="hasRole('ROLE_FUNC')" />
+		<sec:intercept-url pattern="/admin/visitantes.jsp" access="hasRole('ROLE_FUNC')" />
+		<sec:intercept-url pattern="/admin/visitantes/cadastro" access="hasRole('ROLE_FUNC')" />
+		<sec:intercept-url pattern="/home/atas" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home/atas.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home/informativo" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home/informativo.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home/listarEspaco" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/home/listarEspaco.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
 		<sec:remember-me key="myAppKey"/>
 	</sec:http>
 
@@ -266,9 +284,12 @@
 	<bean id="informativoBean" class="br.com.webhomebeta.bean.InformativoBean"></bean>
 	<bean id="calendarEventDAO" class="br.com.webhomebeta.dao.imp.CalendarEventDAOImp"></bean>
 	<bean id="calendarEventService" class="br.com.webhomebeta.service.CalendarEventService"></bean>
+	<bean id="gastoDAO" class="br.com.webhomebeta.dao.imp.GastoDAOImp"></bean>
+	<bean id="gastoService" class="br.com.webhomebeta.service.GastoService"></bean>
 	<bean id="visitanteService" class="br.com.webhomebeta.service.VisitanteService"></bean>
 	<bean id="VisitanteDao" class="br.com.webhomebeta.dao.imp.VisitanteImp"></bean>
 	<bean id="visitanteBean" class="br.com.webhomebeta.bean.VisitanteBean"></bean>
+	<bean id="usuarioService" class="br.com.webhomebeta.service.UsuarioService"></bean>
 	
 
 

@@ -251,6 +251,34 @@ var ADMIN = {
 		});
 	},
 	
+	editarEnquete: function(e) {
+		e.preventDefault();
+		var htmlOpcao = '';
+		var el = $('#contentOpcao');
+		$.ajax({
+			url: '/WebHomeBeta/admin/enquetes/editar',
+			type: 'POST',
+			data : $('#frmEnquetes').serialize(),
+			success: function(data) {
+				$('input[type="text"]').val('');
+				el.empty();
+				
+				$.jGrowl("Enquete salva!");
+				
+				htmlOpcao += '<div class="control-group">';
+				htmlOpcao += '<label for="listOpcoes" name="enquetesTo.opcoes" class="control-label">Opção 1:</label>';
+					htmlOpcao += '<div class="controls">';
+						htmlOpcao += '<input type="text" name="listOpcoes[0]" autocomplete="off" class="input-xlarge focused opcaoEnquete" />';
+					htmlOpcao += '</div>';
+				htmlOpcao += '</div>';
+				
+				el.append(htmlOpcao);
+				
+			}
+		
+		});
+	},
+	
 	notificarEnqueteSalva: function(e) {
 		e.preventDefault();
 		var htmlOpcao = '';
@@ -339,6 +367,70 @@ var ADMIN = {
 		});
 	},
 	
+	inserirGasto: function(e) {
+		e.preventDefault();
+		
+		console.log('data-form: ', $('#frmGasto').serialize());
+		
+		htmlBloco = "";			
+		$.ajax({
+			url: '/WebHomeBeta/admin/gastos/add',
+			type: 'POST',
+			data : $('#frmGasto').serialize(),
+			success: function(data) {
+				
+				htmlBloco += '<tr>';
+					htmlBloco += '<td>'+data.gasto+'</p>';
+					htmlBloco += '<td>'+data.mes+'</p>';
+					htmlBloco += '<td>'+data.ano+'</p>';
+					htmlBloco += '<td><a href="#div'+data.idGasto+'" data-toggle="modal" class="btn btn-danger">Delete</a>';
+					//Modal
+					htmlBloco += '<div id="div'+data.idGasto+'" class="modal hide">';
+					htmlBloco += '<div class="modal-header">';
+					htmlBloco += '<button data-dismiss="modal" class="close" type="button">×</button>';
+					htmlBloco += '<h3>Exclusão de gasto</h3>';
+					htmlBloco += '</div>';
+					htmlBloco += 	'<div class="modal-body">';
+					htmlBloco += '<p>Confirma exclusão?</p>';
+					htmlBloco += '</div>';
+					htmlBloco += '<div class="modal-footer">';
+					htmlBloco += 	'<a data-dismiss="modal" class="btn btn-delete-gasto btn-primary" href="#" data-id="'+data.idGasto+'">Sim</a>';
+					htmlBloco += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+					htmlBloco += '</div>';
+					htmlBloco += '</div>';
+					htmlBloco += '</td>';
+				htmlBloco += '</tr>';
+				
+				if($('.nenhumResultado').css('display') == 'block') {
+					$('.nenhumResultado').hide();
+				}
+				
+				$('#listaGastos tbody').prepend(htmlBloco);
+				$('input[type="text"]').val('');
+				$('#mes option').first().attr('selected', 'selected');
+				$('body').on('click', '.btn-delete-gasto', ADMIN.excluirGasto);
+				$.jGrowl("Gasto contabilizado");
+			}
+		});		
+	},
+	
+	excluirGasto: function(e) {
+		e.preventDefault();
+		
+		var idGasto = $(this).attr('data-id'),
+			el = $(this);
+		$.ajax({
+			url: '/WebHomeBeta/admin/gastos/delete',
+			type: 'POST',
+			data: { idGasto: idGasto },
+			success: function(data) {
+				if(data) {
+					el.closest('tr').remove();
+				}
+			}
+		});
+	},
+	
 	deleteEnquete: function(e) {
 		e.preventDefault();
 		
@@ -375,9 +467,16 @@ $(function() {
 		$("#frmEditarCadastro").submit();
 	});
 	
+	
+	$('#btSubmitGasto').on('click', ADMIN.inserirGasto);
+	
+	$('body').on('click', '.btn-delete-gasto', ADMIN.excluirGasto);
+	
 	$('#btnDeleteListaEspaco').on('click', ADMIN.excluirEspaco);
 	
 	$('#btSubmitEspacos').on('click', ADMIN.inserirEspaco);
+	
+	$('#btEditEnquete').on('click', ADMIN.editarEnquete);
 	
 	$('#btSubmitEnquete').on('click', ADMIN.notificarEnqueteSalva);
 	

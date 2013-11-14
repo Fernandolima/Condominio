@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="false"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -39,7 +40,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
+                                        <a tabindex="-1" href="/WebHomeBeta/logout">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -54,7 +55,8 @@
                 
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                       <li>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <li>
                             <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
                         <li>
@@ -84,9 +86,24 @@
                         <li class="active">
                             <a href="/WebHomeBeta/admin/reservas"><i class="icon-chevron-right"></i>Validar Reservas</a>
                         </li>
+                        <li>
+                            <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
+                        </li>
+                        <li>
+                        	 <a href="/WebHomeBeta/admin/gasto"><i class="icon-chevron-right"></i>Gasto</a>
+                        </li>
                          <li>
                             <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
                         </li>
+                        </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_FUNC')">
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes"><i class="icon-chevron-right "></i>Visitantes</a>
+                        </li>
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes/cadastro"><i class="icon-chevron-right "></i>Cadastrar Visitantes</a>
+                        </li>
+                        </sec:authorize>
                     </ul>
                 </div>
                 

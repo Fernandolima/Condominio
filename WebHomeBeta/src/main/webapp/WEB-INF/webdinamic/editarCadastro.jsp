@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -38,7 +39,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="WebHomeBeta/j_spring_security_logout">Logout</a>
+                                        <a tabindex="-1" href="/WebHomeBeta/logout">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -53,6 +54,7 @@
                 
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li>
                             <a href="/WebHomeBeta/admin"><i class="icon-chevron-right"></i>Página Principal</a>
                         </li>
@@ -86,46 +88,43 @@
                         <li>
                             <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
                         </li>
+                        <li>
+                        	 <a href="/WebHomeBeta/admin/gasto"><i class="icon-chevron-right"></i>Gasto</a>
+                        </li>
                          <li>
                             <a href="/WebHomeBeta/home"><i class="icon-chevron-right"></i>Web Home</a>
                         </li>
+                        </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_FUNC')">
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes"><i class="icon-chevron-right "></i>Visitantes</a>
+                        </li>
+                        <li>		
+                            <a href="/WebHomeBeta/admin/visitantes/cadastro"><i class="icon-chevron-right "></i>Cadastrar Visitantes</a>
+                        </li>
+                        </sec:authorize>
                     </ul>
                 </div>
                 
                 <!--/span-->
                 <div class="span9" id="content">	
-                    <div class="row-fluid">
+                	<div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">Dados do morador</div>
                             </div>
                             <div class="block-content collapse in">
-                            <ul class="nav">
-                            	<li>
-                               		<strong>Nome:</strong><c:out value=" ${usuarioValidar.nome}"></c:out>
-                                </li>
-                                <li>
-									<strong>CPF:</strong><c:out value=" ${usuarioValidar.CPF}"></c:out>
-								</li>
-								<li>
-									<strong>E-mail:</strong><c:out value=" ${usuarioValidar.email}"></c:out>
-								</li>
-								<li>
-									<strong>Data de nascimento:</strong><c:out value=" ${usuarioValidar.dataNascimento}"></c:out>
-								</li>
-								<li>
-									<strong>Apartamento:</strong><c:out value=" ${usuarioValidar.ap}"></c:out>
-								</li>
-								<li>
-									<strong>Bloco:</strong><c:out value=" ${usuarioValidar.bloco}"></c:out>
-								</li>
-								<li>
-									<strong>Id:</strong><c:out value=" ${usuarioValidar.id}"></c:out>
-								</li>
-							</ul>
-								<a href="/WebHomeBeta/admin/morador/val=true/login=<c:out value="${usuarioValidar.email}"/>/proc" class="btn btn-default">Aceitar</a>
-								<a href="/WebHomeBeta/admin/morador/val=false/login=<c:out value="${usuarioValidar.email}"/>/proc" class="btn btn-default">Recusar</a>
+                            	<p><strong>Nome:</strong><c:out value=" ${usuarioValidar.nome}"></c:out></p>
+                            	<p><strong>CPF:</strong><c:out value=" ${usuarioValidar.CPF}"></c:out></p>
+                            	<p><strong>E-mail:</strong><c:out value=" ${usuarioValidar.email}"></c:out></p>
+                            	<p><strong>Data de nascimento:</strong><c:out value=" ${usuarioValidar.dataNascimento}"></c:out></p>
+                            	<p><strong>Apartamento:</strong><c:out value=" ${usuarioValidar.ap}"></c:out></p>
+                            	<p><strong>Bloco:</strong><c:out value=" ${usuarioValidar.bloco}"></c:out></p>
+                            	<p><strong>Id:</strong><c:out value=" ${usuarioValidar.id}"></c:out></p>
+                            
+								<a href="/WebHomeBeta/admin/morador/val=true/login=<c:out value="${usuarioValidar.email}"/>/proc" class="btn btn-success">Aceitar</a>
+								<a href="/WebHomeBeta/admin/morador/val=false/login=<c:out value="${usuarioValidar.email}"/>/proc" class="btn btn-danger">Recusar</a>
 								</div>
                             </div>
                           </div>

@@ -64,7 +64,7 @@
                         <li>
                             <a href="/WebHomeBeta/admin/atas"><i class="icon-chevron-right"></i> Cadastrar Atas</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/WebHomeBeta/admin/cadastrarBlocos"><i class="icon-chevron-right"></i> Cadastrar Blocos</a>
                         </li>
                         <li>
@@ -88,7 +88,7 @@
                         <li>
                             <a href="/WebHomeBeta/admin/mural"><i class="icon-chevron-right"></i>Mural</a>
                         </li>
-                        <li>
+                        <li class="active">
                         	 <a href="/WebHomeBeta/admin/gasto"><i class="icon-chevron-right"></i>Gasto</a>
                         </li>
                          <li>
@@ -113,39 +113,33 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Cadastro de blocos</div>
+                                <div class="muted pull-left">Cadastro dos gastos do condominio</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                     <form:form modelAttribute="bloco" class="form-horizontal" action="#" method="post" id="frmBlocos">
+                                     <form:form modelAttribute="gasto" class="form-horizontal" action="#" method="post" id="frmGasto">
                                       <fieldset>
-                                        <legend>Blocos do condimínio</legend>
+                                        <legend>Gastos do condimínio</legend>
                                         <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.bloco">Bloco:</form:label>
+                                        	<form:label class="control-label" for="gasto"  path="gastoTO.gasto">Valor gasto:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.bloco" autocomplete="off" />
+	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="gastoTO.gasto" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quantAp">Número de apartamentos:</form:label>
+                                        	<form:label class="control-label" for="gasto"  path="ano">Ano:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quantAp" autocomplete="off" />
+	                                        	<form:input type="text" id="anoGasto" class="input-xlarge focused" path="ano" autocomplete="on" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quatApAndares">Apartamentos por andar:</form:label>
+                                        	<form:label class="control-label" for="gasto"  path="mes">Mês:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
-	                                        </div>
-                                        </div>
-                                        <div class="control-group">
-                                        	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.numeroInicial">Início da numeração:</form:label>
-	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
+	                                        	<form:select path="mes" items="${listaMeses}"></form:select>
 	                                        </div>
                                         </div>
                                         <div class="form-actions">
-                                        	<input type="button" id="btSubmitBlocos" class="btn btn-primary" value="Salvar" />
+                                        	<input type="button" id="btSubmitGasto" class="btn btn-primary" value="Salvar" />
                                         </div>
                                       </fieldset>
                                     </form:form>
@@ -158,41 +152,39 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Blocos Cadastrados</div>
+                                <div class="muted pull-left">Gastos contabilizados</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-  									<table class="table" id="listaBlocos">
+  									<table class="table" id="listaGastos">
 						              <thead>
 						                <tr>
-						                  <th>Bloco</th>
-						                  <th>Nº de Apartamentos</th>
-						                  <th>Ap. por Andar</th>
-						                  <th>Inicio da numeração</th>
+						                  <th>Valor</th>
+						                  <th>Mes</th>
+						                  <th>Ano</th>
 						                  <th>Excluir</th>
 						                </tr>
 						              </thead>
 						              <tbody>
 						              	<c:choose>
-											<c:when test="${fn:length(listaBlocos) gt 0}">
-								              	<c:forEach items="${listaBlocos}" var="item" varStatus="num">
+											<c:when test="${fn:length(listaGastos) gt 0}">
+								              	<c:forEach items="${listaGastos}" var="item" varStatus="num">
 									                <tr>
-									                  <td><c:out value="${item.bloco}"/></td>
-									                  <td><c:out value="${item.quantAp}"/></td>
-									                  <td><c:out value="${item.quatApAndares}"/></td>
-									                  <td><c:out value="${item.numeroInicial}" /></td>
+									                  <td><c:out value="${item.gasto}"/></td>
+									                  <td><c:out value="${item.mes}"/></td>
+									                  <td><c:out value="${item.ano}" /></td>
 									                  <td>
-									                  <a href="#div${item.idbloco}" data-toggle="modal" class="btn btn-danger">Delete</a>
-									                  <div id="div${item.idbloco}" class="modal hide">
+									                  <a href="#div${item.idGasto}" data-toggle="modal" class="btn btn-danger">Excluir</a>
+									                  <div id="div${item.idGasto}" class="modal hide">
 																<div class="modal-header">
 																	<button data-dismiss="modal" class="close" type="button">×</button>
-																	<h3>Exclusão do bloco</h3>
+																	<h3>Exclusão de gasto</h3>
 																</div>
 																	<div class="modal-body">
-																		<p>Confirma exclusão do bloco?</p>
+																		<p>Confirma exclusão?</p>
 																	</div>
 																	<div class="modal-footer">
-																		<a data-dismiss="modal" class="btn btn-delete-bloco  btn-primary" href="#" data-id="${item.idbloco}">Sim</a>
+																		<a data-dismiss="modal" class="btn btn-delete-gasto  btn-primary" href="#" data-id="${item.idGasto}">Sim</a>
 																		<a data-dismiss="modal" class="btn" href="#">Não</a>
 																	</div>
 																</div>
@@ -203,7 +195,7 @@
 									        </c:when>
 											<c:otherwise>
 												<tr>
-									                  <td colspan="5"><p class="nenhumResultado">Nenhum bloco cadastrado</p></td>
+									                  <td colspan="5"><p class="nenhumResultado">Sem gastos contabilizados</p></td>
 									            </tr>
 											</c:otherwise>	
 										</c:choose>				                
@@ -227,10 +219,13 @@
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-               
+        
+        <script>
+        	$('#anoGasto').val('');
+        </script>
+        
         <div id="jGrowl" class="top-right jGrowl">
 			<div class="jGrowl-notification"></div>
 		</div> 
