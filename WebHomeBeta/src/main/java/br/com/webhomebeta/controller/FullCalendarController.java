@@ -8,7 +8,11 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,18 +21,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.CalendarEvent;
+import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.CalendarEventJSON;
 import br.com.webhomebeta.service.CalendarEventService;
+import br.com.webhomebeta.service.UsuarioService;
+import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
 public class FullCalendarController {
 
 	@Autowired
 	private CalendarEventService calendarEventService;
+	@Autowired
+	private UsuarioService usuarioService;
+
+	@RequestMapping(value = "home/espaco/id={id}")
+	public ModelAndView show(@PathVariable("id") int id, ModelMap model) {
+		model.put("usuario", getUsuario());
+		model.put("idEspaco", id);
+		return new ModelAndView("calendar", model);
+	}
 
 	@RequestMapping(value = "home/calendar", method = RequestMethod.GET)
-	public ModelAndView showCalendar() {
-		return new ModelAndView("calendar");
+	public @ResponseBody
+	List<CalendarEventJSON> showCalendar(@RequestParam("idEspaco") int id) {
+		List<CalendarEvent> calendarEvents = calendarEventService.get(id);
+		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
+		for (CalendarEvent calendarEvent : calendarEvents) {
+
+		}
+
+		return null;
 	}
 
 	@RequestMapping(value = "event/save", method = RequestMethod.POST)
@@ -57,18 +80,35 @@ public class FullCalendarController {
 	List<CalendarEventJSON> feedCalender(@PathVariable("id") int idEspaco) {
 
 		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
-		
-		for(CalendarEvent event : calendarEventService.getEventos(idEspaco)){
-			CalendarEventJSON calendarEventJSON = new CalendarEventJSON();
-			calendarEventJSON.setEditable(event.isEditable());
-			calendarEventJSON.setId(event.getId());
-			calendarEventJSON.setStart(dateToString(event.getStart()));
-			calendarEventJSON.setTitle(event.getTitle());
-			
+
+		for (CalendarEvent event : calendarEventService.getEventos(idEspaco)) {
+			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
+					event.getId(), event.getTitle(),
+					dateToString(event.getStart()), event.isEditable());
+
 			calendarEventJSONs.add(calendarEventJSON);
 		}
-			
+
 		return calendarEventJSONs;
+	}
+
+	public Usuario getUsuario() {
+
+		Usuario usuario = null;
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context instanceof SecurityContext) {
+			// Pega as informacoes da autenticacao
+			Authentication authentication = context.getAuthentication();
+			if (authentication instanceof Authentication) {
+				// Pega o usuario que logou
+				usuario = usuarioService
+						.getUsuarioByLogin(((UserDetailsImp) authentication
+								.getPrincipal()).getUsername());
+
+			}
+		}
+
+		return usuario;
 	}
 
 	public String dateToString(Date date) {

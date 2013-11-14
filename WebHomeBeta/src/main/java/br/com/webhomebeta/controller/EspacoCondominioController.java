@@ -84,7 +84,7 @@ public class EspacoCondominioController {
 	
 	@RequestMapping(value = "admin/deletarEvento", method = RequestMethod.POST)
 	public @ResponseBody String deletarEvento(@RequestParam("id") int id){
-		calendarEventService.delete(calendarEventService.get(id));
+		//calendarEventService.delete(calendarEventService.get(id));
 		return "true";
 	}
 	

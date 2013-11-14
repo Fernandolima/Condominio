@@ -45,24 +45,10 @@ public class ReservaController {
 	private ReservaControllerBean reservaControllerBean;
 
 	// mapeia a URL principal (Reserva) e retorna um novo objeto Reserva
-	@RequestMapping(value = "home/reserva", method = RequestMethod.GET)
-	public ModelAndView reserva(ModelMap model) {
-
-		model.put("usuario", getUsuario());
-		model.put("bean", reservaControllerBean);
-		model.put("listaReserva",
-				espacoCondominioServe.getLisEspacoCondominios());
-		return new ModelAndView("reserva", model);
-	}
-
-	@RequestMapping(value = "home/reserva/delete", method = RequestMethod.POST)
-	public String delete(@ModelAttribute("reserva") Reserva reserva,
-			BindingResult result) {
-		reservaService.delete(reserva);
-
-		return "redirect:/home/reserva";
-	}
-
+	/*@RequestMapping(value = "home/reserva/id={id}", method = RequestMethod.GET)
+	public  reserva(@PathVariable("id") int id) {
+		
+	}*/
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
 	@RequestMapping(value = "home/salvaReserva", method = RequestMethod.GET)
 	public boolean listaReserva(@RequestParam("data") String dataPreReserva,
@@ -99,10 +85,11 @@ public class ReservaController {
 	// mapeia a URL principal (Reserva) e retorna um novo objeto
 	@RequestMapping(value = "home/listarEspacos", method = RequestMethod.GET)
 	public ModelAndView listaEspaco(ModelMap model) {
+		model.put("usuario", getUsuario());
 		model.put("listaespacos",
 				espacoCondominioServe.getLisEspacoCondominios());
 
-		return new ModelAndView("listaespacos", model);
+		return new ModelAndView("espacoUsuario", model);
 
 	}
 
