@@ -142,3 +142,20 @@ header {
 	top: 0;
 	right: 0;
 }
+
+#topPage {
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+#informativoView .panel {
+	width: 30%;
+	margin-right: 27px;
+	float: left;
+}
+
+#downloadAta {
+	width: 100%;
+	float: left;
+	margin-bottom: 30px;
+}
