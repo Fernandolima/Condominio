@@ -118,10 +118,6 @@
 			authentication-failure-url="/index.jsp?error"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
 			<sec:logout invalidate-session="true" logout-url="/logout" logout-success-url="/"/>
-		<sec:intercept-url pattern="/index.jsp"
-			access="isAnonymous()" />
-		<sec:intercept-url pattern="/index"
-			access="isAnonymous()" />
 		<sec:intercept-url pattern="/cadastro.jsp"
 			access="isAnonymous()" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"

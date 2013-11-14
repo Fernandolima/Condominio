@@ -1,10 +1,10 @@
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.springframework.security.core.GrantedAuthority"%>
 <%@page import="java.util.List"%>
 <%@page import="org.springframework.security.core.context.SecurityContext"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="org.springframework.security.core.Authentication"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -13,7 +13,7 @@
 
 
 
-<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MORADOR','ROLE_FUNC')">
   <% 
   	//verifica se o usuario ja esta logado, evitando que o mesmo veja a pagina de login se estiver logado
   	String path = null;
@@ -21,7 +21,7 @@
  	if (context instanceof SecurityContext){
 		Authentication authentication = context.getAuthentication();
 		if (authentication instanceof Authentication){
-			Collection<GrantedAuthority> granted = authentication.getAuthorities();
+			Collection<GrantedAuthority> granted = (Collection<GrantedAuthority>) authentication.getAuthorities();
 			for(GrantedAuthority authority : granted){
 				if (authority.getAuthority().equals("ROLE_ADMIN")) {
 					path = request.getContextPath()+"/admin";
