@@ -18,7 +18,7 @@
 
 	<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 <head>
-<body id="home" class="rede-social">
+<body id="informativoView" class="rede-social">
 	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
@@ -37,9 +37,7 @@
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
 	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
 	              <ul class="dropdown-menu" id="main-notificacao">
-	                <li>Inserir aqui as notificacoes</li>
-	                <li class="divider"></li>
-	                <li><a href="#">Sair</a></li>
+	                <li>Nenhuma notificação</li>
 	              </ul>
 	            </li>
     		</ul>
@@ -79,21 +77,20 @@
 			</div>
 			
 			<div class="col-md-9">
-				<h3>Anúncios</h3><br/>
-				<a href="/WebHomeBeta/home/novoInformativo">+ Adicionar Anuncio</a>
-				
+				<div id="topPage">
+					<h3>Anúncios</h3>
+					<a href="/WebHomeBeta/home/novoInformativo" class="btn btn-xs btn-primary">+ Adicionar Anúncio</a>
+				</div>
 				<c:forEach items="${listainformativo}" var="item">					
-					<div class="col-md-9">
-						<div class="panel panel-default">
-	  						<div class="panel-heading">
-	    						<h3 class="panel-title"><c:out value="${item.nomeUser}"/></h3>
-	  						</div>
-	  						<div class="panel-body">
-	    						<p><b>E-mail: </b><c:out value="${item.email}"/></p>
-				                <p><b>Anúncio: </b><c:out value="${item.informativo}"/></p>
-	  						</div>
-						</div>
-					</div>						
+					<div class="panel panel-success">
+  						<div class="panel-heading">
+    						<h3 class="panel-title"><c:out value="${item.nomeUser}"/></h3>
+  						</div>
+  						<div class="panel-body">
+    						<p><b>E-mail: </b><c:out value="${item.email}"/></p>
+			                <p><b>Anúncio: </b><c:out value="${item.informativo}"/></p>
+  						</div>
+					</div>					
                 </c:forEach>
                 
 			</div>

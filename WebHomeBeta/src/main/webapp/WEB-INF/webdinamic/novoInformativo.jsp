@@ -37,9 +37,7 @@
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
 	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
 	              <ul class="dropdown-menu" id="main-notificacao">
-	                <li>Inserir aqui as notificacoes</li>
-	                <li class="divider"></li>
-	                <li><a href="#">Sair</a></li>
+	                <li>Nenhuma notificação</li>
 	              </ul>
 	            </li>
     		</ul>

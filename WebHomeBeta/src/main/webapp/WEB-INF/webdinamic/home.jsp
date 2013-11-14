@@ -4,12 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
 	<meta charset="UTF-8" />
-	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<title>Web Home</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrap.min.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/magic-bootstrap.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
@@ -37,9 +38,7 @@
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
 	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
 	              <ul class="dropdown-menu" id="main-notificacao">
-	                <li>Inserir aqui as notificacoes</li>
-	                <li class="divider"></li>
-	                <li><a href="#">Sair</a></li>
+	                <li>Nenhuma notificação</li>
 	              </ul>
 	            </li>
     		</ul>
@@ -61,7 +60,7 @@
 	<!-- Begin Body -->
 	<div class="container">
 		
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
 						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
@@ -78,7 +77,7 @@
 				</div>
 			</div>
 			
-			<div class="col-md-6 col-sm-6">
+			<div class="col-md-5">
 			
 				<form:form id="frmComment" method="POST" action="#" modelAttribute="moradorControllerBean" class="form-horizontal" role="form">
 					<form:textarea type="text" path ="publicacaoTO.publicacao" name="postUser" id="txtComment" class="form-control" placeholder="Está pensando em que?"></form:textarea>
@@ -89,30 +88,65 @@
 				
 			</div>
 			
-			<div class="col-md-2 col-sm-2 col-md-offset-1" style="background: #ECEFF5;">
-			 
-				<c:forEach items="${listaEnquetes}" var="item">
-					<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
-						<h4><c:out value="${item.enquete}"/></h4>
-						<div class="opcoesEnquete">
-							<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
-							<c:forEach items="${item.opcoes}" var="opc">
-								<div class="radio">
-									<label>
-										<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/>
-									</label>
-								</div>
-							</c:forEach>
+			<c:if test="${fn:length(listaEnquetes) gt 0}">
+				<div class="col-md-3 col-md-offset-1" style="margin-bottom: 30px; background: #ECEFF5; ">
+					<c:forEach items="${listaEnquetes}" var="item">
+						<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
+							<h4>Enquete: <c:out value="${item.enquete}"/></h4>
+							<div class="opcoesEnquete">
+								<input type="hidden" class="idEnquete" value="<c:out value="${item.idEnquete}"/>"/>
+								<c:forEach items="${item.opcoes}" var="opc">
+									<div class="radio">
+										<label>
+											<input type="radio" name="opc" value="<c:out value="${opc.idOpcao}"/>"><c:out value="${opc.opcao}"/>
+										</label>
+									</div>
+								</c:forEach>
+							</div>
+							
+							<a href="#" class="participarEnquete btn btn-info">Votar</a>
 						</div>
-						
-						<a href="#" class="participarEnquete btn btn-info">Votar</a>
-					</div>
-				</c:forEach>
-			 
-		    </div>			
+					</c:forEach>
+				</div>
+			</c:if>
 			
+			<div class="col-md-3 col-md-offset-1" style="background: #ECEFF5; padding-bottom:15px;">
+				<h4>Anúncios</h4>
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+      						<h4 class="panel-title">
+					        	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					          		vende-se apartamento
+					        	</a>
+      						</h4>
+    					</div>
+    					<div id="collapseOne" class="panel-collapse collapse in">
+					    	<div class="panel-body">
+					        	3dorm, sala, cozinha planejada
+					        	Contato: 19 33221111
+					      	</div>
+					    </div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+      						<h4 class="panel-title">
+					        	<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					          		vende-se apartamento
+					        	</a>
+      						</h4>
+    					</div>
+    					<div id="collapseTwo" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	3dorm, sala, cozinha planejada
+					        	Contato: 19 33221111
+					      	</div>
+					    </div>
+					</div>
+				</div>
+			</div>
+			</div>
 		
-	</div>
 	<!-- <footer id="footer-site">
 		</footer> -->
 

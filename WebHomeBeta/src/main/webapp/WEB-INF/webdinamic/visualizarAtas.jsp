@@ -37,9 +37,7 @@
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
 	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
 	              <ul class="dropdown-menu" id="main-notificacao">
-	                <li>Inserir aqui as notificacoes</li>
-	                <li class="divider"></li>
-	                <li><a href="#">Sair</a></li>
+	                <li>Nenhuma notificação</li>
 	              </ul>
 	            </li>
     		</ul>
@@ -50,7 +48,7 @@
 	              	<ul class="dropdown-menu">
 	                	<li><a href="/WebHomeBeta/home/perfil">Editar Perfil</a></li>
 	                	<li class="divider"></li>
-	                	<li><a href="WebHomeBeta/logout">Sair</a></li>
+	                	<li><a href="/WebHomeBeta/logout">Sair</a></li>
 	              	</ul>
             	</li>
           	</ul>
@@ -79,8 +77,10 @@
 			</div>
 			
 			<div class="col-md-9">
-				<h3>Ata: <c:out value="${visualizar.atasTo.titulo	}"/><small> <c:out value="${visualizar.atasTo.dataFormat}"/></small></h3>
-				
+				<h3>Ata: <c:out value="${visualizar.atasTo.titulo}"/><small> (<c:out value="${visualizar.atasTo.dataFormat}"/>)</small></h3>
+				<div id="downloadAta">
+					<a href="<c:out value="${visualizar.atasTo.arquivo}" />" target="_blank" class="btn btn-primary btn-xs">Download</a>
+				</div>				
 				${visualizar.atasTo.atas}								
 			
 			</div>

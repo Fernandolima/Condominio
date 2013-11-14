@@ -37,9 +37,7 @@
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="alerta-notificacao"><span class="glyphicon glyphicon-star-empty"></span></a>
 	              <span id="numeroNotificacao" class="badge dropdown-toggle" data-toggle="dropdown"></span>
 	              <ul class="dropdown-menu" id="main-notificacao">
-	                <li>Inserir aqui as notificacoes</li>
-	                <li class="divider"></li>
-	                <li><a href="#">Sair</a></li>
+	                <li>Nenhuma notificação</li>
 	              </ul>
 	            </li>
     		</ul>
@@ -87,7 +85,6 @@
 			                <th>Título da Ata</th>
 			                <th>Data da ata</th>
 			                <th>Visualizar</th>
-			                <th>Download</th>
 	              		</tr>
 						
 					</thead>
@@ -97,8 +94,7 @@
 		                		<td><c:out value="${item.titulo}"/></td>
 		                		<td><c:out value="${item.dataFormat}"/></td>
 		                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
-		                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
-		               		</tr>
+		                	</tr>
 		               	</c:forEach>
 					</tbody>
 				</table>
