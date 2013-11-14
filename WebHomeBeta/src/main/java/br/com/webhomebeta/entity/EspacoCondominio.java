@@ -46,6 +46,20 @@ public class EspacoCondominio {
 	public EspacoCondominio(){
 		
 	}
+	
+	
+	
+	public Set<Reserva> getReservas() {
+		return reservas;
+	}
+
+
+
+	public void setReservas(Set<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+
 
 	public EspacoCondominio(int idEspaco){
 		this.idEspaco = idEspaco;
