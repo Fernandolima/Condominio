@@ -7,8 +7,26 @@ public class InformativoTO {
 	private String informativo;
 	private int idUser;
 	private String nomeUser;
-	private Date dataPublicaco;
+	private String dataPublicaco;
 	private String email;
+	private Date dataExpiracao;
+	
+
+	public Date getDataExpiracao() {
+		return dataExpiracao;
+	}
+
+	public void setDataExpiracao(Date dataExpiracao) {
+		this.dataExpiracao = dataExpiracao;
+	}
+
+	public String getDataPublicaco() {
+		return dataPublicaco;
+	}
+
+	public void setDataPublicaco(String dataPublicaco) {
+		this.dataPublicaco = dataPublicaco;
+	}
 
 	public int getIdInformativo() {
 		return idInformativo;
@@ -26,9 +44,7 @@ public class InformativoTO {
 		return nomeUser;
 	}
 
-	public Date getDataPublicaco() {
-		return dataPublicaco;
-	}
+	
 
 	public String getEmail() {
 		return email;
@@ -50,9 +66,6 @@ public class InformativoTO {
 		this.nomeUser = nomeUser;
 	}
 
-	public void setDataPublicaco(Date dataPublicaco) {
-		this.dataPublicaco = dataPublicaco;
-	}
 
 	public void setEmail(String email) {
 		this.email = email;

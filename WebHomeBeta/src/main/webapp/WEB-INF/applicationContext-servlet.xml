@@ -266,6 +266,9 @@
 	<bean id="informativoBean" class="br.com.webhomebeta.bean.InformativoBean"></bean>
 	<bean id="calendarEventDAO" class="br.com.webhomebeta.dao.imp.CalendarEventDAOImp"></bean>
 	<bean id="calendarEventService" class="br.com.webhomebeta.service.CalendarEventService"></bean>
+	<bean id="visitanteService" class="br.com.webhomebeta.service.VisitanteService"></bean>
+	<bean id="VisitanteDao" class="br.com.webhomebeta.dao.imp.VisitanteImp"></bean>
+	<bean id="visitanteBean" class="br.com.webhomebeta.bean.VisitanteBean"></bean>
 	
 
 

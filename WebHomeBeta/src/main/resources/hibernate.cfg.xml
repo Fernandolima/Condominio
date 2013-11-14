@@ -31,6 +31,7 @@
 		<mapping class="br.com.webhomebeta.entity.Informativo"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Reserva"></mapping>
 		<mapping class="br.com.webhomebeta.entity.CalendarEvent"></mapping>
+		<mapping class="br.com.webhomebeta.entity.Visitante"></mapping>
 
 
 	</session-factory>

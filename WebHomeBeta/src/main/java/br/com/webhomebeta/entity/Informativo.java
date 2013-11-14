@@ -20,6 +20,9 @@ public class Informativo {
 	@Column(name = "INFORMATIVO")
 	private String informativo;
 
+	@Column (name = "DATA_EXPIRACAO")
+	private Date dataExpiracao;
+	
 	@Column(name = "ID_USER")
 	private int idUser;
 
@@ -31,6 +34,16 @@ public class Informativo {
 
 	@Column(name = "EMAIL")
 	private String email;
+
+	
+	
+	public Date getDataExpiracao() {
+		return dataExpiracao;
+	}
+
+	public void setDataExpiracao(Date dataExpiracao) {
+		this.dataExpiracao = dataExpiracao;
+	}
 
 	public int getIdInformativo() {
 		return idInformativo;

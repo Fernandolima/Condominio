@@ -10,7 +10,7 @@ import br.com.webhomebeta.dao.UsuarioDAO;
 
 import br.com.webhomebeta.entity.Usuario;
 
-@Service("usuarioService")
+@Service("visitanteService")
 public class UsuarioService {
 	// @Autowired injeta na propriedade anotada um Bean do Spring que seja od
 	// mesmo tipo da propriedade
