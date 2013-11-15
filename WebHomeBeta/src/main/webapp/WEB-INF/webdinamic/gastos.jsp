@@ -123,7 +123,7 @@
                                         <div class="control-group">
                                         	<form:label class="control-label" for="gasto"  path="gastoTO.gasto">Valor gasto:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="gastoTO.gasto" autocomplete="off" />
+	                                        	<form:input type="text" id="gastoReal" class="input-xlarge focused" path="gastoTO.gasto" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">
@@ -217,13 +217,18 @@
         <!--/.fluid-container-->
         
         <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value = "/js/jquery.maskMoney.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
+        <script src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>" type="text/javascript"></script>
         
         <script>
         	$('#anoGasto').val('');
+        	$('#anoGasto').mask('9999');
+        	$('#gastoReal').maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+        	
         </script>
         
         <div id="jGrowl" class="top-right jGrowl">

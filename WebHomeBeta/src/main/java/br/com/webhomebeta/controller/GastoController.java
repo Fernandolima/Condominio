@@ -104,7 +104,7 @@ public class GastoController {
 		GastoJSON gastoJSON = new GastoJSON();
 		gastoJSON.setAno(calendar.get(Calendar.YEAR));
 		gastoJSON.setMes(meses[calendar.get(Calendar.MONTH)]);
-		gastoJSON.setGasto(g.getGasto());
+		gastoJSON.setGasto("R$ " + g.getGasto());
 		gastoJSON.setIdGasto(g.getIdGasto());
 		
 		return gastoJSON;
