@@ -10,14 +10,24 @@ public class CalendarEventJSON {
 	private String title;
 	private String start;
 	private boolean editable;
+	private String nomeEspaco;
+	
+	
 	
 	public CalendarEventJSON(int id, String title, String start,
-			boolean editable) {
+			boolean editable, String nomeEspaco) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.start = start;
 		this.editable = editable;
+		this.nomeEspaco = nomeEspaco;
+	}
+	public String getNomeEspaco() {
+		return nomeEspaco;
+	}
+	public void setNomeEspaco(String nomeEspaco) {
+		this.nomeEspaco = nomeEspaco;
 	}
 	public int getId() {
 		return id;

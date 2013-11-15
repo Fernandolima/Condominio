@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.CalendarEvent;
+import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.CalendarEventJSON;
 import br.com.webhomebeta.service.CalendarEventService;
+import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
@@ -34,24 +36,34 @@ public class FullCalendarController {
 	private CalendarEventService calendarEventService;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private EspacoCondominioServe condominioServe;
 
 	@RequestMapping(value = "home/espaco/id={id}")
 	public ModelAndView show(@PathVariable("id") int id, ModelMap model) {
+		EspacoCondominio espaco = condominioServe.get(id);
 		model.put("usuario", getUsuario());
 		model.put("idEspaco", id);
+		model.put("espaco", espaco);
 		return new ModelAndView("calendar", model);
 	}
 
-	@RequestMapping(value = "home/calendar", method = RequestMethod.GET)
+	@RequestMapping(value = "home/calendar", method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody
 	List<CalendarEventJSON> showCalendar(@RequestParam("idEspaco") int id) {
 		List<CalendarEvent> calendarEvents = calendarEventService.get(id);
+		EspacoCondominio espaco = condominioServe.get(id);
 		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
 		for (CalendarEvent calendarEvent : calendarEvents) {
-
+			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
+					calendarEvent.getId(), calendarEvent.getTitle(),
+					dateToString(calendarEvent.getStart()),
+					calendarEvent.isEditable(), espaco.getEspaco());
+			
+			calendarEventJSONs.add(calendarEventJSON);
 		}
 
-		return null;
+		return calendarEventJSONs;
 	}
 
 	@RequestMapping(value = "event/save", method = RequestMethod.POST)
@@ -72,25 +84,25 @@ public class FullCalendarController {
 
 		calendarEventService.save(calendarEvent);
 
-		return "redirect:/WebHomeBeta/home/calendar";
+		return "redirect:/home/listarEspaco";
 	}
 
-	@RequestMapping(value = "event/id={id}", method = RequestMethod.GET)
-	public @ResponseBody
-	List<CalendarEventJSON> feedCalender(@PathVariable("id") int idEspaco) {
-
-		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
-
-		for (CalendarEvent event : calendarEventService.getEventos(idEspaco)) {
-			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
-					event.getId(), event.getTitle(),
-					dateToString(event.getStart()), event.isEditable());
-
-			calendarEventJSONs.add(calendarEventJSON);
-		}
-
-		return calendarEventJSONs;
-	}
+//	@RequestMapping(value = "event/id={id}", method = RequestMethod.GET)
+//	public @ResponseBody
+//	List<CalendarEventJSON> feedCalender(@PathVariable("id") int idEspaco) {
+//
+//		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
+//
+//		for (CalendarEvent event : calendarEventService.getEventos(idEspaco)) {
+//			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
+//					event.getId(), event.getTitle(),
+//					dateToString(event.getStart()), event.isEditable());
+//
+//			calendarEventJSONs.add(calendarEventJSON);
+//		}
+//
+//		return calendarEventJSONs;
+//	}
 
 	public Usuario getUsuario() {
 
