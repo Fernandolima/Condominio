@@ -24,8 +24,10 @@ public class VisitanteImp implements VisitanteDao {
 	}
 
 	@Transactional
-	public void delete(Visitante visitante) {
-		factory.getCurrentSession().delete(visitante);
+	public void delete(int id) {
+
+		factory.getCurrentSession()
+				.createSQLQuery("DELETE FROM DBO.VISITANTE WHERE ID_VISITANTE = ?").addEntity(Visitante.class).setInteger(0, id).executeUpdate();
 
 	}
 

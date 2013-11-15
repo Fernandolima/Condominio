@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.VisitanteBean;
-import br.com.webhomebeta.entity.AtasEntity;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.entity.Visitante;
 import br.com.webhomebeta.json.UsuarioJSON;
@@ -40,16 +40,29 @@ public class VisitanteConller {
 	@Autowired
 	private VisitanteBean visitanteBean;
 
-	// mapeia a URL principal (Atas) e retorna um novo objeto atas
+	// mapeia a URL principal (visitantes) e retorna um novo objeto visitante para listar os visitantes
 	@RequestMapping(value = "admin/visitante", method = RequestMethod.GET)
-	public ModelAndView Atas(ModelMap model) {
+	public ModelAndView listaVisitantes(ModelMap model) {
 		List<Visitante> visitantes = visitanteService.getVisitantes();
 		model.put("usuario", getUsuario());
+		model.put("listaVisitantes", visitantes);
+		// Lista os visitantes.
+		return new ModelAndView("listaDeVisitantes", model);
+
+	}
+
+
+	// mapeia a URL principal (visitantes) e retorna um novo objeto visitantes para cadastrar os visitantes
+	@RequestMapping(value = "admin/cadastrar/visitantes", method = RequestMethod.GET)
+	public ModelAndView visitantes(ModelMap model) {
+		model.put("bean", visitanteBean);
+		model.put("usuario", getUsuario());
+		// cadastra os visitantes.
 		return new ModelAndView("visitantes", model);
 
 	}
 
-	@RequestMapping(value = "admin/virificarAp", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/verificarAp", method = RequestMethod.GET)
 	public @ResponseBody
 	List<UsuarioJSON> Atas(@RequestParam("bloco") String bloco,
 			@RequestParam("ap") String ap) {
@@ -85,12 +98,12 @@ public class VisitanteConller {
 		return "redirect:/admin/visitante";
 	}
 
-	@RequestMapping(value = "visitante/delete", method = RequestMethod.POST)
-	public String delete(@ModelAttribute("visitante") Visitante visitante,
-			BindingResult result) {
-		visitanteService.delete(visitante);
+	@RequestMapping(value = "admin/visitante/delete/id={id}", method = RequestMethod.GET)
+	public String delete(@PathVariable int id) {
+		
+		visitanteService.delete(id);
 
-		return "redirect:/inserirVisitante/delete";
+		return "redirect:/admin/visitante";
 	}
 
 	public Usuario getUsuario() {

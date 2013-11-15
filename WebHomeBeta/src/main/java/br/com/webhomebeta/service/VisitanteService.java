@@ -19,8 +19,8 @@ public class VisitanteService {
 		return dao.save(visitante);
 	}
 
-	public void delete(Visitante visitante) {
-		dao.delete(visitante);
+	public void delete(int id) {
+		dao.delete(id);
 
 	}
 

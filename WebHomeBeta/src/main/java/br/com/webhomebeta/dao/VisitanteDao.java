@@ -9,7 +9,7 @@ public interface VisitanteDao {
 
 	public Visitante save(Visitante visitante);
 
-	public void delete(Visitante visitante);
+	public void delete(int id);
 
 	public List<Usuario> getLit(String bloco, String ap);
 

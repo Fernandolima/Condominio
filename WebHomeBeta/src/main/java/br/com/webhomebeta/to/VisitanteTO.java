@@ -8,6 +8,16 @@ public class VisitanteTO {
 	private String ap;
 	private String bloco;
 	private String data;
+	private int idVisitante;
+	
+	
+	
+	public int getIdVisitante() {
+		return idVisitante;
+	}
+	public void setIdVisitante(int idVisitante) {
+		this.idVisitante = idVisitante;
+	}
 	public String getNomeVisitante() {
 		return nomeVisitante;
 	}
