@@ -8,7 +8,7 @@
 <html lang="pt_BR">	
 <head>
 	<meta charset="UTF-8" />
-	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<title>Web Home</title>
 	 <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>	
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrap.min.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/magic-bootstrap.css"/>" />
@@ -17,8 +17,11 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery.modal.css"/>"/>
 	<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
-
-		
+	
+	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
+	
 		<script type="text/javascript">
 			function Validate() {
 				var image = document.getElementById("image").value;
@@ -35,6 +38,15 @@
 		</script>
 <head>
 <body id="home" class="rede-social">
+
+	<!-- Modal HTML embedded directly into document -->
+  	<div id="editarFoto" style="display:none; z-index:10000; ">
+  		<div id="container-foto">
+  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
+  		</div>
+  		<a href="#" id="cortarImagem" style="display: none">OK</a>
+  	</div>
+			  	
 	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
@@ -92,19 +104,10 @@
 			</div>
 			
 			<div class="col-md-9">
-			
-				<!-- Modal HTML embedded directly into document -->
-			  	<div id="editarFoto" style="display:none;">
-			  		<div id="container-foto">
-			  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
-			  		</div>
-			  		<a href="#" id="cortarImagem" style="display: none">OK</a>
-			  	</div>
-  	
-				<h3 class="text-primary"><b>Perfil</b></h3><br/>
+				<h3 class="text-primary"><b>Perfil</b></h3>
 				
 				<form:form role="form" modelAttribute="uploadControllerBean" id="trocarFoto" class="form-group" action="/WebHomeBeta/perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
-					<label for="image" class="inputFile">Alterar foto</label>
+					<label for="image" class="inputFile btn btn-warning btn-sm">Alterar foto</label>
 					<form:input path="fileData" id="image" type="file" style="display:none;" onchange="EDITAR_PERFIL.alterarFoto(this)" />
 				</form:form>
 				
@@ -220,9 +223,6 @@
 	<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>" type="text/javascript"></script>
-	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
-	<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
-	<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
 	
 	<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/js/editar.js"/>" type="text/javascript"></script>
