@@ -71,8 +71,10 @@ var EDITAR_PERFIL  = {
 		EDITAR_PERFIL.CH = c.h;
 	 },
 	 
-	 cortarFoto: function() {
+	 cortarFoto: function(e) {
 		 console.log('aaaa');
+		 
+		 e.preventDefault();
 		 var data = 'x1='+EDITAR_PERFIL.CX+'&y1='+EDITAR_PERFIL.CY+'&w='+EDITAR_PERFIL.CW+'&h='+EDITAR_PERFIL.CH;
 		 $.ajax({
 		    	type: 'post',
@@ -95,9 +97,9 @@ var EDITAR_PERFIL  = {
 }
 
 $(function() {
-	
-	$('#dataNascimento').numeric();
-	$('#dataNascimento').mask("99/99/9999",{placeholder:" "});
+	console.log('editar js');
+	//$('#dataNascimento').numeric();
+	//$('#dataNascimento').mask("99/99/9999",{placeholder:" "});
 	
 	//alterar foto do usuário
 	$('#alterarFoto').on('click', EDITAR_PERFIL.alterarFoto);
