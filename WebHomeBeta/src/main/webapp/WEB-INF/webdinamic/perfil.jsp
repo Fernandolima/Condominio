@@ -214,8 +214,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- <footer id="footer-site">
-		</footer> -->
+	<footer id="footer-site">
+		<p>Web Home</p>
+	</footer>
 
 	<script src="<c:url value = "/bootstrap/dist/js/bootstrap.min.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>

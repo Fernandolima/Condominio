@@ -72,6 +72,7 @@ var EDITAR_PERFIL  = {
 	 },
 	 
 	 cortarFoto: function() {
+		 console.log('aaaa');
 		 var data = 'x1='+EDITAR_PERFIL.CX+'&y1='+EDITAR_PERFIL.CY+'&w='+EDITAR_PERFIL.CW+'&h='+EDITAR_PERFIL.CH;
 		 $.ajax({
 		    	type: 'post',
@@ -102,7 +103,7 @@ $(function() {
 	$('#alterarFoto').on('click', EDITAR_PERFIL.alterarFoto);
 	
 	//Quando clica em cortar foto
-	$('#cortarImagem').on('click', EDITAR_PERFIL.cortarFoto);
+	$('body #cortarImagem').on('click', EDITAR_PERFIL.cortarFoto);
 	
 	$('#btn-alterar-senha').on('click', EDITAR_PERFIL.abrirAlterarSenha);
 });

@@ -241,5 +241,7 @@ header {
   overflow: hidden;
 }
 
-
+.jcrop img {
+   max-width: none;
+}
 
