@@ -5,18 +5,17 @@ import java.util.List;
 
 public class EnqueteJSON {
 
-	private String titulo;
 	private String enquete;
 	private int idEnquete;
 	private int idUser;
 	private List<OpcaoJSON> opcoes;
 	private int totalVotos;
 	private List<Integer> idVoto = new ArrayList<>();
+	private boolean erro;
 
 	
-	public EnqueteJSON(String titulo, int idEnquete, int idUser, int totalVotos, String enquete) {
+	public EnqueteJSON(int idEnquete, int idUser, int totalVotos, String enquete) {
 		super();
-		this.titulo = titulo;
 		this.idEnquete = idEnquete;
 		this.idUser = idUser;
 		this.totalVotos = totalVotos;
@@ -25,6 +24,29 @@ public class EnqueteJSON {
 	
 	
 	
+	
+	public EnqueteJSON(boolean erro) {
+		super();
+		this.erro = erro;
+	}
+
+
+
+
+	public boolean isErro() {
+		return erro;
+	}
+
+
+
+
+	public void setErro(boolean erro) {
+		this.erro = erro;
+	}
+
+
+
+
 	public String getEnquete() {
 		return enquete;
 	}
@@ -52,14 +74,6 @@ public class EnqueteJSON {
 
 	public void setTotalVotos(int totalVotos) {
 		this.totalVotos = totalVotos;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
 	}
 
 	public int getIdEnquete() {

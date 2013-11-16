@@ -118,6 +118,10 @@ var ADMIN = {
 		console.log('a');
 		var obj = new Object();
 		    obj.novoEspaco = $('#comboEspacoList option:selected').val();
+		    if(obj.novoEspaco == "Outro")
+	        {
+	            obj.novoEspaco = $("#novoEspaco").val()
+	        }
 		    obj.idUser = $('#idUser').val();
 		    obj.descricao = $('#descricao').val();
 		    console.log(obj);
@@ -131,10 +135,17 @@ var ADMIN = {
 		      	contentType: 'application/json',
 		      	mimeType: 'application/json',
 		      	success: function(data) {
+		      		if(data.erro === 1){
+		      			$.jGrowl("Este espaço já esta cadastrado no sistema!", { header: 'ERRO!', sticky:true,});
+		      			}
+		      			else if(data.erro === 2){
+		      				$.jGrowl("Você não escolheu um espaço!", { header: 'ERRO!', sticky:true,});
+		      			}
+		      			else{
 		      		htmlBloco += '<tr>';
 		      			htmlBloco += '<td>'+data.novoEspaco+'</p>';
 		      			htmlBloco += '<td>'+data.descricao+'</p>';
-		      			htmlBloco += '<td><a href="#div'+data.idEspaco+'" data-toggle="modal" data-id="'+data.idEspaco+'" class="btn btn-danger btn-delete-bloco">Delete</a>';
+		      			htmlBloco += '<td><a href="#div'+data.idEspaco+'" data-toggle="modal" data-id="'+data.idEspaco+'" class="btn btn-danger btn-delete-bloco">Excluir</a>';
 		      				htmlBloco += '<div id="div'+data.idEspaco+'" class="modal hide">';
 		      				htmlBloco += '<div class="modal-header">';
 		      					htmlBloco += '<button data-dismiss="modal" class="close" type="button">×</button>';
@@ -150,14 +161,23 @@ var ADMIN = {
 		      			htmlBloco += '</div>';
 		      			htmlBloco += '</td>';
 					htmlBloco += '</tr>';
+					 
+					        
+					var value = $('#comboEspacoList').find('option:selected');
+						if(value == "Outro"){
+							value.html("Outro");
+						}
+
+					$('#listaEspacos tbody').append(htmlBloco);
+					$('.excluirEspaco').on('click', ADMIN.excluirEspaco);
+					$.jGrowl("Espaço adicionado!");
+		      		}
 				
 				if($('.nenhumResultado').css('display') == 'block') {
 					$('.nenhumResultado').hide();
 				}
-				$('#listaEspacos tbody').append(htmlBloco);
+				
 				$('input[type="text"]').val('');
-				$.jGrowl("Espaço adicionado!");
-				$('.excluirEspaco').on('click', ADMIN.excluirEspaco);
 		      	}
 			});
 		}
@@ -450,6 +470,29 @@ var ADMIN = {
 	}
 }
 
+var fadeEffect = function(){
+	return{
+		init:function(id, flag, target){
+			this.elem = document.getElementById(id);
+			clearInterval(this.elem.si);
+			this.target = target ? target : flag ? 100 : 0;
+			this.flag = flag || -1;
+			this.alpha = this.elem.style.opacity ? parseFloat(this.elem.style.opacity) * 100 : 0;
+			this.elem.si = setInterval(function(){fadeEffect.tween()}, 20);
+		},
+		tween:function(){
+			if(this.alpha == this.target){
+				clearInterval(this.elem.si);
+			}else{
+				var value = Math.round(this.alpha + ((this.target - this.alpha) * .05)) + (1 * this.flag);
+				this.elem.style.opacity = value / 100;
+				this.elem.style.filter = 'alpha(opacity=' + value + ')';
+				this.alpha = value
+			}
+		}
+	}
+}();
+
 $(function() {
 
 	ADMIN.init();
@@ -517,4 +560,37 @@ $(function() {
 		}).show();
 	}
 	
+	
+
+	
+	
+	
+	
+	$("#novoEspaco").hide();
+	$("#novoEspacoLabel").hide();
+	$("#divNovoEspaco").hide();
+	$("#divNovoEspaco2").hide();
+	
+    $('#comboEspacoList').change(function() {
+      if($(this).find('option:selected').val() == "Outro"){
+    	$("#novoEspaco").fadeIn("slow");
+    	$("#novoEspacoLabel").fadeIn("slow");
+    	$("#divNovoEspaco").fadeIn("slow");
+    	$("#divNovoEspaco2").fadeIn("slow");
+      }else{
+    	$("#novoEspaco").fadeOut("slow");
+    	$("#novoEspacoLabel").fadeOut("slow");
+    	$("#divNovoEspaco").fadeOut("slow");
+    	$("#divNovoEspaco2").fadeOut("slow");
+      }
+    });
+    $("#novoEspaco").keyup(function(ev){
+        var othersOption = $('#comboEspacoList').find('option:selected');
+        if(othersOption.val() == "Outro")
+        {
+            ev.preventDefault();
+            //change the selected drop down text
+            $(othersOption).html($("#novoEspaco").val()); 
+        } 
+    });
 });

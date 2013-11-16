@@ -6,8 +6,18 @@ public class JsonBlocos {
 	private int quatApAndares; //Quat de apartamento no andar
 	private String numeroInicial;
 	private String quantAp;
+	private int erro;
 	
 	
+	
+	public JsonBlocos(int erro) {
+		super();
+		this.erro = erro;
+	}
+
+
+
+
 	public JsonBlocos(String bloco, int idBloco, int quatApAndares,
 			String numeroInicial, String quantAp) {
 		super();
@@ -17,6 +27,22 @@ public class JsonBlocos {
 		this.numeroInicial = numeroInicial;
 		this.quantAp = quantAp;
 	}
+
+
+	
+	
+	public int getErro() {
+		return erro;
+	}
+
+
+
+
+	public void setErro(int erro) {
+		this.erro = erro;
+	}
+
+
 
 
 	/**

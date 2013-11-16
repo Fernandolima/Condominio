@@ -1,21 +1,12 @@
-package br.com.webhomebeta.to;
+package br.com.webhomebeta.json;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class GastoTO {
-
-	private int idGasto;
+public class GastoGrafico {
 	private BigDecimal gasto;
 	private Date data;
 
-	
-	public int getIdGasto() {
-		return idGasto;
-	}
-	public void setIdGasto(int idGasto) {
-		this.idGasto = idGasto;
-	}
 	
 	public BigDecimal getGasto() {
 		return gasto;
@@ -29,7 +20,7 @@ public class GastoTO {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	
 	
 }

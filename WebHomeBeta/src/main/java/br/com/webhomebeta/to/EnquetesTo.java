@@ -13,7 +13,6 @@ public class EnquetesTo {
 	private String equete;
 	private Date dataequete;
 	private Usuario usuarioEnquete;
-	private String titulo;
 	private boolean isAtiva;
 	private List<Opcao> opcoes;
 	
@@ -40,18 +39,6 @@ public class EnquetesTo {
 	/**
 	 * @return the aprovacao
 
-	/**
-	 * @return the titulo
-	 */
-	public String getTitulo() {
-		return titulo;
-	}
-	/**
-	 * @param titulo the titulo to set
-	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 	/**
 	
 	/**

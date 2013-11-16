@@ -13,8 +13,30 @@ public class EspacoCondominioJSON implements Serializable {
 	private String novoEspaco;
 	private int idUser;
 	private int idEspaco;
+	private int erro;
 	
 	
+
+	public EspacoCondominioJSON() {
+		super();
+	}
+
+	public EspacoCondominioJSON(int erro) {
+		super();
+		this.erro = erro;
+	}
+
+	public int getErro() {
+		return erro;
+	}
+
+	public void setErro(int erro) {
+		this.erro = erro;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public int getIdEspaco() {
 		return idEspaco;

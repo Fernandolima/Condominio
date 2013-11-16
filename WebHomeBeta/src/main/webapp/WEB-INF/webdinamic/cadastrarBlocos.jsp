@@ -129,19 +129,19 @@
                                         <div class="control-group">
                                         	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quantAp">Número de apartamentos:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quantAp" autocomplete="off" />
+	                                        	<form:input type="text" id="nrmApartementos" class="input-xlarge focused" path="descricaoCondominioTO.quantAp" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">
                                         	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.quatApAndares">Apartamentos por andar:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
+	                                        	<form:input type="text" id="apartamentosPorAndar" class="input-xlarge focused" path="descricaoCondominioTO.quatApAndares" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">
                                         	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.numeroInicial">Início da numeração:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="bloco" class="input-xlarge focused" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
+	                                        	<form:input type="text" id="inicioDaNumeracao" class="input-xlarge focused" path="descricaoCondominioTO.numeroInicial" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="form-actions">
@@ -185,7 +185,7 @@
 									                  <a href="#div${item.idbloco}" data-toggle="modal" class="btn btn-danger">Delete</a>
 									                  <div id="div${item.idbloco}" class="modal hide">
 																<div class="modal-header">
-																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<button data-dismiss="modal" class="close" type="button">Excluir</button>
 																	<h3>Exclusão do bloco</h3>
 																</div>
 																	<div class="modal-body">
@@ -224,13 +224,14 @@
         </div>
         <!--/.fluid-container-->
         
-        <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
+     	<script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
         <script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
-               
+       	<script src="<c:url value = "/js/jquery.maskMoney.js"/>" type="text/javascript"></script>
+        <script src="<c:url value = "/js/adicionarBlocos.js"/>" type="text/javascript"></script>
+        <script src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>" type="text/javascript"></script>
         <div id="jGrowl" class="top-right jGrowl">
 			<div class="jGrowl-notification"></div>
 		</div> 

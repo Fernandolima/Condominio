@@ -1,5 +1,6 @@
 package br.com.webhomebeta.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +33,8 @@ import br.com.webhomebeta.entity.Enquetes;
 import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.OpcaoVotada;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.json.EnqueteJSON;
+import br.com.webhomebeta.json.OpcaoJSON;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.OpcaoService;
 import br.com.webhomebeta.service.OpcaoVotadaService;
@@ -169,9 +172,11 @@ public class EnquetesController {
 		return "redirect:/admin/enquetes";
 	}
 
+
+	
 	@RequestMapping(value = "computarVoto", method = RequestMethod.POST)
 	public @ResponseBody
-	String computarVoto(@RequestParam("idUser") int idUser,
+	EnqueteJSON computarVoto(@RequestParam("idUser") int idUser,
 			@RequestParam("idOpcao") int idOpcao,
 			@RequestParam("idEnquete") int idEnquete) {
 		Opcao opcao = opcaoService.get(idOpcao);
@@ -180,10 +185,29 @@ public class EnquetesController {
 			opcaoVotadaService.save(opcaoVotada);
 			opcaoService.update(1, idOpcao);
 			enquetesService.update(1, idEnquete);
-			return "true";
+			
+			DecimalFormat f = new DecimalFormat("##.##");
+			Enquetes enquetes = enquetesService.get(idEnquete);
+			int totalVotos = enquetes.getTotalVotos();
+			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
+			EnqueteJSON enqueteJSON = new EnqueteJSON(enquetes.getIdEquete(), enquetes
+					.getUsuarioEnquete().getIdUser(), enquetes.getTotalVotos(),
+					enquetes.getEnquete());
+			for (Opcao o : enquetes.getOpcao()) {
+				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
+						o.getOpcao(),
+						f.format(((o.getQuatVots() * 100d) / totalVotos)));
+				for (OpcaoVotada ov : o.getOpcaoVotadas()) {
+					enqueteJSON.getIdVoto().add(ov.getIdUser());
+				}
+				opcaoJSONs.add(opcaoJSON);
+			}
+			enqueteJSON.setOpcoes(opcaoJSONs);
+			
+			return enqueteJSON;
 		}
 
-		return "true";
+		return new EnqueteJSON(true);
 	}
 
 	public Usuario getUsuario() {

@@ -40,9 +40,6 @@ public class Enquetes implements Serializable {
 
 	@Column(name = "DATA_ENQUETE")
 	private Date dataequete;
-
-	@Column(name = "TITULO")
-	private String titulo;
 	
 	@Column(name = "ATIVA", columnDefinition = "BOOLEAN")
 	private boolean isAtiva;
@@ -105,20 +102,7 @@ public class Enquetes implements Serializable {
 		this.opcao = opcao;
 	}
 
-	/**
-	 * @return the titulo
-	 */
-	public String getTitulo() {
-		return titulo;
-	}
 
-	/**
-	 * @param titulo
-	 *            the titulo to set
-	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 
 	/**
 	 * @return the idEquete

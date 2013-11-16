@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.GastoControllerBean;
 import br.com.webhomebeta.entity.Gasto;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.json.GastoGrafico;
 import br.com.webhomebeta.json.GastoJSON;
 import br.com.webhomebeta.service.GastoService;
 import br.com.webhomebeta.service.UsuarioService;
@@ -36,16 +38,16 @@ public class GastoController {
 	private GastoService gastoService;
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	private String meses[] = {"Janeiro", "Fevereiro", 
+            "Março", "Abril", "Maio", "Junho", 
+            "Julho", "Agosto", "Setembro", "Outubro",
+	      "Novembro", "Dezembro"};
 
 	@RequestMapping(value = "admin/gasto", method = RequestMethod.GET)
 	public ModelAndView CadastraBlocos(ModelMap model) {
 		
 		Calendar calendar = Calendar.getInstance();
-		
-		 String meses[] = {"Janeiro", "Fevereiro", 
-	              "Março", "Abril", "Maio", "Junho", 
-	              "Julho", "Agosto", "Setembro", "Outubro",
-		      "Novembro", "Dezembro"};
 		 
 		ArrayList<GastoJSON> gastoJSONs = new ArrayList<>();
 		
@@ -54,7 +56,7 @@ public class GastoController {
 			GastoJSON gastoJSON = new GastoJSON();
 			gastoJSON.setAno(calendar.get(Calendar.YEAR));
 			gastoJSON.setMes(meses[g.getData().getMonth()]);
-			gastoJSON.setGasto(g.getGasto());
+			gastoJSON.setGasto("R$ " + g.getGasto());
 			gastoJSON.setIdGasto(g.getIdGasto());
 			
 			gastoJSONs.add(gastoJSON);
@@ -98,7 +100,7 @@ public class GastoController {
 		Gasto g = new Gasto();
 		
 		BeanUtils.copyProperties(gasto.getGastoTO(), g);
-		
+		System.out.println(g.getGasto());
 		g = gastoService.save(g);
 		
 		GastoJSON gastoJSON = new GastoJSON();
@@ -116,6 +118,26 @@ public class GastoController {
 		return "true";
 	}
 
+	@RequestMapping(value = "home/gastos", method = RequestMethod.GET)
+	public ModelAndView showGastos(ModelMap model){
+		model.put("usuario", getUsuario());
+		model.put("gastos", gastoService.getYears());
+		return new ModelAndView("gastosUsuario", model);
+	}
+	
+	@RequestMapping(value = "home/gastos/ano={ano}", method = RequestMethod.GET)
+	public ModelAndView showGrafico(@PathVariable("ano") int ano, ModelMap model){
+		model.put("usuario",getUsuario());
+		model.put("ano", ano);
+		return new ModelAndView("gastoGraficoUsuario", model);
+	}
+	
+	@RequestMapping(value = "home/gastos/grafico")
+	public @ResponseBody List<GastoGrafico> montarGrafico(@RequestParam("ano") int ano){
+		List<GastoGrafico> gastoGraficos = gastoJSON(ano);
+		return gastoGraficos;
+	}
+	
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;
@@ -133,6 +155,23 @@ public class GastoController {
 		}
 
 		return usuario;
+	}
+	
+	public List<GastoGrafico> gastoJSON(int ano){
+		
+		
+		List<GastoGrafico> gastoJSONs = new ArrayList<>();
+		for(Gasto gasto :  gastoService.getGastos(ano)){
+			
+			GastoGrafico gastoJSON = new GastoGrafico();
+			gastoJSON.setData(gasto.getData());
+			gastoJSON.setGasto(gasto.getGasto());
+			System.out.println(gasto.getGasto());
+		
+			gastoJSONs.add(gastoJSON);
+		}
+		
+		return gastoJSONs;
 	}
 	
 }

@@ -52,8 +52,7 @@ public class CadastroCondominioController {
 		// Retorna a pagina cadastrarBlocos.jsp com um bloco criado
 		return new ModelAndView("cadastrarBlocos", model);
 	}
-	
-	
+
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;
@@ -73,37 +72,7 @@ public class CadastroCondominioController {
 		return usuario;
 	}
 
-	// Pega o Objeto bloco e sava na procedure DESCRICAO_CONDOMINIO_I no banco.
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "addBloco", method = RequestMethod.POST)
-	// valor da action
-	public ModelAndView CadastroBlocos(
-			@ModelAttribute("bloco") final CadastroCondominioControllerBean bloco, // se
-																					// passo
-																					// o
-																					// bean
-			BindingResult result, HttpServletRequest request) {
-		ValidaCadastroBlocos(bloco);
-		if (bloco.hasErrors()) {
-
-			DescricaoCondominio descricao = new DescricaoCondominio();
-			BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
-					descricao);
-			// Salva no banco
-
-			bloco.getDescricaoCondominioTO().setBloco(null);
-			bloco.getDescricaoCondominioTO().setNumeroInicia(null);
-			bloco.getDescricaoCondominioTO().setQuantAp(null);
-			bloco.getDescricaoCondominioTO().setQuatApAndares(null);
-			
-			cadastroCondominioService.save(descricao);
-
-			return new ModelAndView("cadastrarBlocos");
-		}
-
-		return new ModelAndView("cadastrarBlocos", "bloco", bloco);
-	}
-
+	
 	@RequestMapping(value = "cadastro/editar", method = RequestMethod.POST)
 	public ModelAndView editar(@RequestParam("idcondomnio") int id,
 			BindingResult result, HttpServletRequest request) {
@@ -131,7 +100,8 @@ public class CadastroCondominioController {
 	Json delete(
 	// recebe o id do bloco a ser excluido
 			@RequestParam int idbloco) {
-		DescricaoCondominio descricaoCondominio = cadastroCondominioService.get(idbloco);
+		DescricaoCondominio descricaoCondominio = cadastroCondominioService
+				.get(idbloco);
 		cadastroCondominioService.delete(descricaoCondominio);
 		return new Json("true");
 	}
@@ -139,22 +109,40 @@ public class CadastroCondominioController {
 	// ResponseBody retorna um JSON.
 	@RequestMapping(value = "admin/cadastro/salvarBloco", method = RequestMethod.POST)
 	public @ResponseBody
-	//Nome da Class do Json Criado JsonBlocos e depois o metodo.
+	// Nome da Class do Json Criado JsonBlocos e depois o metodo.
 	JsonBlocos save(
 			// recebe o id do bloco a ser excluido
 			@ModelAttribute("addbloco") CadastroCondominioControllerBean bloco,
 			BindingResult bindingResult) {
+
+		if (bloco.getDescricaoCondominioTO().getBloco().equals("")
+				|| bloco.getDescricaoCondominioTO().getQuantAp().equals("")
+				|| bloco.getDescricaoCondominioTO().getQuatApAndares()
+						.equals("")
+				|| bloco.getDescricaoCondominioTO().getNumeroInicia()
+						.equals("")) {
+			return new JsonBlocos(1);
+		}
+		
+		for(DescricaoCondominio condominio : cadastroCondominioService.getDescricao()){
+			if(condominio.getBloco().equals(bloco.getDescricaoCondominioTO().getBloco())){
+				return new JsonBlocos(2);
+			}
+		}
+
 		DescricaoCondominio descricaoCondominio = new DescricaoCondominio();
 		BeanUtils.copyProperties(bloco.getDescricaoCondominioTO(),
 				descricaoCondominio);
 		cadastroCondominioService.save(descricaoCondominio);
-		
-		//Cria um objeto do JsonBlocos e depois acessa o mesmo pelo bloco.alguma coisa
+
+		// Cria um objeto do JsonBlocos e depois acessa o mesmo pelo
+		// bloco.alguma coisa
 		JsonBlocos jsonbloco = new JsonBlocos(bloco.getDescricaoCondominioTO()
 				.getBloco(), descricaoCondominio.getIdbloco(),
-				Integer.parseInt(bloco.getDescricaoCondominioTO().getQuatApAndares()), bloco
-						.getDescricaoCondominioTO().getNumeroInicia(), bloco
-						.getDescricaoCondominioTO().getQuantAp());
+				Integer.parseInt(bloco.getDescricaoCondominioTO()
+						.getQuatApAndares()), bloco.getDescricaoCondominioTO()
+						.getNumeroInicia(), bloco.getDescricaoCondominioTO()
+						.getQuantAp());
 
 		// ----------------------------------------s
 

@@ -1,5 +1,6 @@
 package br.com.webhomebeta.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ public class Gasto {
 	@Column(name = "ID_GASTO")
 	private int idGasto;
 	@Column(name = "GASTO")
-	private String gasto;
+	private BigDecimal gasto;
 	@Column(name = "DATA")
 	private Date data;
 	
@@ -30,10 +31,11 @@ public class Gasto {
 	public void setIdGasto(int idGasto) {
 		this.idGasto = idGasto;
 	}	
-	public String getGasto() {
+	
+	public BigDecimal getGasto() {
 		return gasto;
 	}
-	public void setGasto(String gasto) {
+	public void setGasto(BigDecimal gasto) {
 		this.gasto = gasto;
 	}
 	public Date getData() {

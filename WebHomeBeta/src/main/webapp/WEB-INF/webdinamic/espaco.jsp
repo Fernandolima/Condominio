@@ -125,7 +125,7 @@
                                         	<label class="control-label">Espaço:</label>
 	                                        <div class="controls">
 	                                        	<select id="comboEspacoList" class="chzn-select selectArea 0" name="espaco">
-	                                        	  <option value="">Selecione</option>
+	                                        	  <option value="selecione">Selecione</option>
 	                                        	  <c:forEach items="${listaEspaco}" var="item" varStatus="num">
 												  	<option value="${item.key}"><c:out value="${item.key}"/></option>
 												  </c:forEach>
@@ -133,6 +133,12 @@
 	                                        </div>
                                         </div>
                                         
+                                        <div class="control-group" id="divNovoEspaco">
+                                        	<label class="control-label" id="novoEspacoLabel">Nome do espaço:</label>
+	                                        <div class="controls" id="divNovoEspaco2">
+	                                        	<input type="text" id="novoEspaco" class="input-xlarge focused descricaoArea" name="espaco" autocomplete="off" />
+	                                        </div>
+                                        </div>
                                         
                                         <div class="control-group">
                                         	<label class="control-label">Descrição:</label>

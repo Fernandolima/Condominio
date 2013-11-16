@@ -1,12 +1,14 @@
 package br.com.webhomebeta.json;
 
+import java.math.BigDecimal;
+
 
 public class GastoJSON {
 
 	private int idGasto;
 	private String gasto;
-	private String mes;
-	private int ano;
+	private String Mes;
+	private int Ano;
 	
 	public int getIdGasto() {
 		return idGasto;
@@ -14,6 +16,8 @@ public class GastoJSON {
 	public void setIdGasto(int idGasto) {
 		this.idGasto = idGasto;
 	}
+	
+	
 	public String getGasto() {
 		return gasto;
 	}
@@ -21,16 +25,16 @@ public class GastoJSON {
 		this.gasto = gasto;
 	}
 	public String getMes() {
-		return mes;
+		return Mes;
 	}
 	public void setMes(String mes) {
-		this.mes = mes;
+		this.Mes = mes;
 	}
 	public int getAno() {
-		return ano;
+		return Ano;
 	}
 	public void setAno(int ano) {
-		this.ano = ano;
+		this.Ano = ano;
 	}
 	
 	

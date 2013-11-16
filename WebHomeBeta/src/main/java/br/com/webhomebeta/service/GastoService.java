@@ -21,4 +21,11 @@ public class GastoService {
 	public void delete(int id){
 		gastoDAO.delete(id);
 	}
+	
+	public List<Gasto> getYears(){
+		return gastoDAO.getYears();
+	}
+	public List<Gasto> getGastos(int year){
+		return gastoDAO.getGastos(year);
+	}
 }

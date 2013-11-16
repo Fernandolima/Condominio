@@ -36,4 +36,19 @@ public class GastoDAOImp implements GastoDAO {
 		factory.getCurrentSession().createQuery("delete from Gasto gasto where gasto.idGasto = ?").setInteger(0, id).executeUpdate();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Gasto> getYears() {
+		return factory.getCurrentSession().createQuery("select distinct year(g.data) from Gasto g").list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Gasto> getGastos(int year) {
+		
+		return factory.getCurrentSession().createQuery("from Gasto g where year(g.data) = ?").setInteger(0, year).list();
+	}
+
 }

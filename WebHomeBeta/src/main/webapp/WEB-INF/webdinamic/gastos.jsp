@@ -226,7 +226,7 @@
         
         <script>
         	$('#anoGasto').val('');
-        	$('#anoGasto').mask('9999');
+        	$('#anoGasto').mask('9999',{placeholder:""});
         	$('#gastoReal').maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
         	
         </script>

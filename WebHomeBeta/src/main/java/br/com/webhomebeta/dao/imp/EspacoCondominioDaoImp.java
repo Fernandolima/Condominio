@@ -37,7 +37,7 @@ public class EspacoCondominioDaoImp implements EspacoCondominioDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<EspacoCondominio> getLisEspacoCondominios() {
-		return factory.getCurrentSession().createSQLQuery("SELECT * FROM [dbo].[ESPACO]").addEntity(EspacoCondominio.class).list();
+		return factory.getCurrentSession().createQuery("from EspacoCondominio e order by e.espaco").list();
 	}
 
 	@Transactional

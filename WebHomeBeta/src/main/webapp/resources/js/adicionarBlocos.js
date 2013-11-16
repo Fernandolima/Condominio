@@ -14,12 +14,18 @@ var BLOCOS = {
 			data : $('#frmBlocos').serialize(),
 			success: function(data) {
 				console.log(data);
+				if(data.erro === 1){
+					$.jGrowl("Você deve preencher todos os campos!", { header: 'ERRO!', sticky:true,});
+				}
+					else if(data.erro === 2) {
+						$.jGrowl("Este bloco já esta adicionado!", { header: 'ERRO!', sticky:true,});
+				}else{
 				htmlBloco += '<tr>';
 					htmlBloco += '<td>'+data.bloco+'</p>';
 					htmlBloco += '<td>'+data.quantAp+'</p>';
 					htmlBloco += '<td>'+data.quatApAndares+'</p>';
 					htmlBloco += '<td>'+data.numeroInicial+'</p>';
-					htmlBloco += '<td><a href="#div'+data.idBloco+'" data-toggle="modal" class="btn btn-danger">Delete</a>';
+					htmlBloco += '<td><a href="#div'+data.idBloco+'" data-toggle="modal" class="btn btn-danger">Excluir</a>';
 					//Modal
 					htmlBloco += '<div id="div'+data.idBloco+'" class="modal hide">';
 					htmlBloco += '<div class="modal-header">';
@@ -36,15 +42,16 @@ var BLOCOS = {
 					htmlBloco += '</div>';
 					htmlBloco += '</td>';
 				htmlBloco += '</tr>';
+				$('#listaBlocos tbody').prepend(htmlBloco);
+				$('body').on('click', '.btn-delete-bloco', BLOCOS.excluirBlocos);
+				$.jGrowl("O Bloco foi adicionado com sucesso!");
+				$('input[type="text"]').val('');
+				}
 				
 				if($('.nenhumResultado').css('display') == 'block') {
 					$('.nenhumResultado').hide();
 				}
 				
-				$('#listaBlocos tbody').prepend(htmlBloco);
-				$('input[type="text"]').val('');
-				$('body').on('click', '.btn-delete-bloco', BLOCOS.excluirBlocos);
-				$.jGrowl("Um novo morador acabou de realizar o cadastro!");
 			}
 		});		
 	},
@@ -78,5 +85,8 @@ $(function() {
 		BLOCOS.init();
 		$('#btSubmitBlocos').on('click', BLOCOS.inserirBlocos);
 		$('body').on('click', '.btn-delete-bloco', BLOCOS.excluirBlocos);
+		$('#nrmApartementos').mask('?9999',{placeholder:""});
+		$('#apartamentosPorAndar').mask('?9999',{placeholder:""});
+		$('#inicioDaNumeracao').mask('?9999',{placeholder:""});
 	}	
 });

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.webhomebeta.bean.ReservaControllerBean;
 import br.com.webhomebeta.entity.EspacoCondominio;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.CalendarEventService;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.ReservaService;
@@ -33,6 +34,8 @@ public class ReservaController {
 
 	@Autowired
 	private ReservaService reservaService;
+	@Autowired
+	private CalendarEventService calendarEventService;
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
@@ -102,16 +105,16 @@ public class ReservaController {
 
 	}
 	
-	@RequestMapping(value = "admin/reservas/aceitar={bol}/id={id}")
-	public boolean aceitarReserva(@PathVariable("bol") boolean ativa, @PathVariable("id") int id){
-		if(ativa){
-			reservaService.update(id, ativa);
+	@RequestMapping(value = "admin/reservas/aceitar")
+	public boolean aceitarReserva(@RequestParam("id") int id){
+			
 			return true;
-		}else{
-			Reserva reserva = reservaService.get(id);
-			reservaService.delete(reserva);
+	}
+	
+	@RequestMapping(value = "admin/reservas/recusar")
+	public boolean recusarReserva(@RequestParam("id") int id){
+		
 			return true;
-		}
 	}
 	
 //	@RequestMapping(value = "admin/reservas/id={id}", method = RequestMethod.GET)

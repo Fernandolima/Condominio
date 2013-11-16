@@ -5,21 +5,19 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="pt_BR">	
 <head>
 	<meta charset="UTF-8" />
 	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	 <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>	
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrap.min.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/magic-bootstrap.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery.modal.css"/>"/>
+	<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
 
-	<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
-	
-	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
 		
 		<script type="text/javascript">
 			function Validate() {
@@ -218,9 +216,16 @@
 
 	<script src="<c:url value = "/bootstrap/dist/js/bootstrap.min.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery.maskMoney.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
+	
+	<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/editar.js"/>" type="text/javascript"></script>
 	<script type="text/javascript">
 		$('#sidebar').affix({
 			offset : {
@@ -235,7 +240,5 @@
         	
         	
         </script>
-	<script src="<c:url value = "/js/comment.js"/>" type="text/javascript"></script>
-	<script src="<c:url value = "/js/editar.js"/>" type="text/javascript"></script>
 </body>
 </html>

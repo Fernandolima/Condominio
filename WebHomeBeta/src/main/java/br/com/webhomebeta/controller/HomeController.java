@@ -350,17 +350,17 @@ public class HomeController {
 
 	// Envia para o home as enquetes votadas pelo usuario LOGADO
 	public ArrayList<EnqueteJSON> getEnquetesVotadas(Usuario usuario) {
+		DecimalFormat f = new DecimalFormat("##.##");
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		ArrayList<EnqueteJSON> enqueteJSONsVOTADA = new ArrayList<>();
 		for (Enquetes e : enquetes) {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
-			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
-					e.getTotalVotos(), e.getEnquete());
+			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getIdEquete(), e
+					.getUsuarioEnquete().getIdUser(), e.getTotalVotos(),
+					e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
-				DecimalFormat f = new DecimalFormat("##.##");
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
 						o.getOpcao(),
 						f.format(((o.getQuatVots() * 100d) / totalVotos)));
@@ -385,17 +385,18 @@ public class HomeController {
 
 	// Envia para a home as enquetes que ainda nao foram VOTADAS
 	public ArrayList<EnqueteJSON> getEnquetes(Usuario usuario) {
+		DecimalFormat f = new DecimalFormat("##.##");
 		List<Enquetes> enquetes = enquetesService.getListAtiva(true);
 		ArrayList<EnqueteJSON> enqueteJSONs = new ArrayList<>();
 		ArrayList<EnqueteJSON> enqueteJSONsVIEW = new ArrayList<>();
 		for (Enquetes e : enquetes) {
 			int totalVotos = e.getTotalVotos();
 			ArrayList<OpcaoJSON> opcaoJSONs = new ArrayList<>();
-			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getTitulo(),
-					e.getIdEquete(), e.getUsuarioEnquete().getIdUser(),
-					e.getTotalVotos(), e.getEnquete());
+			EnqueteJSON enqueteJSON = new EnqueteJSON(e.getIdEquete(), e
+					.getUsuarioEnquete().getIdUser(), e.getTotalVotos(),
+					e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
-				DecimalFormat f = new DecimalFormat("##.##");
+				
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
 						o.getOpcao(),
 						f.format(((o.getQuatVots() * 100d) / totalVotos)));
