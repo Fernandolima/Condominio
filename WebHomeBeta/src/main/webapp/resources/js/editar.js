@@ -83,6 +83,9 @@ var EDITAR_PERFIL  = {
 		      	success: function(e) {
 		      		$('#thumb-photo').attr('src', e);
 		      		$('.close-modal').trigger('click');	    
+		      	},
+		      	error: function(erro) {
+		      		console.log('---erro = ',erro);
 		      	}
 
 		    });
