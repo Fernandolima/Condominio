@@ -73,6 +73,7 @@ public class PerfilController {
 		if (getPerfilTO() == null) {
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
+			
 		} else {
 			perfilControllerBean.setPerfilTO(getPerfilTO());
 			List<Publicacao> publicacoes = publicacaoService.getPublicacao(getUsuario().getIdUser());

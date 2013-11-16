@@ -95,6 +95,9 @@ var EDITAR_PERFIL  = {
 
 $(function() {
 	
+	$('#dataNascimento').numeric();
+	$('#dataNascimento').mask("99/99/9999",{placeholder:" "});
+	
 	//alterar foto do usuário
 	$('#alterarFoto').on('click', EDITAR_PERFIL.alterarFoto);
 	
