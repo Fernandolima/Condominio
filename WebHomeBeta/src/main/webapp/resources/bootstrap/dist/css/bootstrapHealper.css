@@ -291,3 +291,7 @@ header {
 .labelNaoGostei.disable {
 	color: #000;
 }
+
+textarea#txtComment.form-control {
+	resize: none;
+}
