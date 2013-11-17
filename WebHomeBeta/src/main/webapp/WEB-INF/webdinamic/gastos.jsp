@@ -123,7 +123,7 @@
                                         <div class="control-group">
                                         	<form:label class="control-label" for="gasto"  path="gastoTO.gasto">Valor gasto:</form:label>
 	                                        <div class="controls">
-	                                        	<form:input type="text" id="gastoReal" class="input-xlarge focused" path="gastoTO.gasto" autocomplete="off" />
+	                                        	<form:input type="text" id="gastoReal" class="input-xlarge focused" path="gasto" autocomplete="off" />
 	                                        </div>
                                         </div>
                                         <div class="control-group">

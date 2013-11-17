@@ -9,15 +9,14 @@
 	<head>
 	<meta charset="UTF-8" />
 		<title>Web Home - &Aacute;rea Administrativa</title>
-		
+		<script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/css/bootstrap-responsive.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>"/>
-		
+		<script src="<c:url value = "/bootstrap/vendors/modernizr-2.6.2-respond-1.1.0.min.js"/>" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
-		
-		<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
+	
 	</head>
 		
 	<body id="adminView">
@@ -124,18 +123,18 @@
 						                  <th>Adicionada em</th>
 						                  <th>Alterado em</th>
 						                  <th>Editar</th>
-						                  <th>Download</th>
+						                  <th>Visualizar</th>
 						                </tr>
 						              </thead>
 						              <tbody>
 						                <c:forEach items="${listaAtas}" var="item">
 						                	<tr>
-						                		<td><c:out value="${item.titulo}"/></td>
+						                		<td style="width:35%;"><c:out value="${item.titulo}"/></td>
 						                		<td><c:out value="${item.dataFormat}"/></td>
 						                		<td><c:out value="${item.criacaoAta}"/></td>
 						                		<td><c:out value="${item.alterada}"/></td>
 						                		<td><a href="atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Editar</a></td>
-						                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Baixar</a></td>
+						                		<td><a href="<c:out value="${item.arquivo}" />" target="_blank" class="btn btn-info">Visualizar</a></td>
 						                	</tr>
 						                </c:forEach>
 						              </tbody>
@@ -155,7 +154,6 @@
         </div>
         <!--/.fluid-container-->
         
-        <script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
         

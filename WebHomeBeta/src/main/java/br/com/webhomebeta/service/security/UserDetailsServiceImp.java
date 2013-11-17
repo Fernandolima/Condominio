@@ -25,8 +25,11 @@ public class UserDetailsServiceImp implements UserDetailsService {
 			"ROLE_ADMIN");
 	private GrantedAuthority authorityMorador = new GrantedAuthorityImp(
 			"ROLE_MORADOR");
+	private GrantedAuthority authorityFunc = new GrantedAuthorityImp(
+			"ROLE_FUNC");
 	private Set<GrantedAuthority> authoritiesAdmin = new HashSet<GrantedAuthority>();
 	private Set<GrantedAuthority> authoritiesMorador = new HashSet<GrantedAuthority>();
+	private Set<GrantedAuthority> authoritiesFunc = new HashSet<GrantedAuthority>();
 	private Usuario usuario;
     private UserDetails user;
 
@@ -35,6 +38,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 			throws UsernameNotFoundException, DataAccessException {
 		authoritiesAdmin.add(authorityAdmin);
 		authoritiesMorador.add(authorityMorador);
+		authoritiesFunc.add(authorityFunc);
+		
 		usuario = usuarioService.getUsuarioByLogin(username);
 		if (usuario == null || usuario.isStatus() == false) {
 			throw new UsernameNotFoundException("Usuario nao encontrado");
@@ -44,6 +49,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 					authoritiesAdmin);
 		} else if (usuario.getPermissao().equals("ROLE_MORADOR")){
 			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),authoritiesMorador);
+		} else if (usuario.getPermissao().equals("ROLE_FUNC")){
+			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),authoritiesFunc);
 		}
 		return user;
 	}

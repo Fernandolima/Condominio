@@ -123,12 +123,7 @@
                                       <fieldset>
                                         <legend>Enquete</legend>
                                         <form:hidden path="enquetesTo.idEquete"/>
-                                        <div class="control-group">
-                                        	<form:label for="tituloEnquete" path="enquetesTo.titulo" class="control-label">Título:</form:label>
-	                                        <div class="controls">
-	                                        	<form:input type="text" id="tituloEnquete" path="enquetesTo.titulo" autocomplete="off" class="input-xlarge focused" />
-	                                        </div>
-                                        </div>
+                                      
                                         
                                         <div class="control-group">
                                         	<form:label for="tituloEnquete" path="enquetesTo.equete" class="control-label">Pergunta:</form:label>

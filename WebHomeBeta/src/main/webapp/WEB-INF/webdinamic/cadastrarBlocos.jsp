@@ -182,10 +182,10 @@
 									                  <td><c:out value="${item.quatApAndares}"/></td>
 									                  <td><c:out value="${item.numeroInicial}" /></td>
 									                  <td>
-									                  <a href="#div${item.idbloco}" data-toggle="modal" class="btn btn-danger">Delete</a>
+									                  <a href="#div${item.idbloco}" data-toggle="modal" class="btn btn-danger">Excluir</a>
 									                  <div id="div${item.idbloco}" class="modal hide">
 																<div class="modal-header">
-																	<button data-dismiss="modal" class="close" type="button">Excluir</button>
+																	<button data-dismiss="modal" class="close" type="button">x</button>
 																	<h3>Exclusão do bloco</h3>
 																</div>
 																	<div class="modal-body">

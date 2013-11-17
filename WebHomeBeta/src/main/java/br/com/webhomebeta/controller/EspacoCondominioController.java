@@ -92,18 +92,6 @@ public class EspacoCondominioController {
 			return condominioJSON;	
 		}
 	
-	@RequestMapping(value = "admin/deletarEvento", method = RequestMethod.POST)
-	public @ResponseBody String deletarEvento(@RequestParam("id") int id){
-		//calendarEventService.delete(calendarEventService.get(id));
-		return "true";
-	}
-	
-	@RequestMapping(value = "admin/ativarEvento", method = RequestMethod.POST)
-	public @ResponseBody String ativarEvento(@RequestParam("id") int id){
-		calendarEventService.update(id);
-		return "true";
-	}
-
 	@RequestMapping(value = "home/listarEspaco", method = RequestMethod.GET)
 	public ModelAndView listarEspacosHome(ModelMap model){
 		

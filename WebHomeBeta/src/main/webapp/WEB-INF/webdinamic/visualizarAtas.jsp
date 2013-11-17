@@ -84,6 +84,7 @@
 				${visualizar.atasTo.atas}								
 			
 			</div>
+		</div>
 	</div>
 	<!-- <footer id="footer-site">
 		</footer> -->

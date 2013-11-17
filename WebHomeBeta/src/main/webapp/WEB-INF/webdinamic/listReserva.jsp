@@ -114,7 +114,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Enquetes Cadastradas</div>
+                                <div class="muted pull-left">Reservas Cadastradas</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -122,27 +122,74 @@
 						              <thead>
 						                <tr>
 						                  <th>Reserva</th>
+						                  <th>Espaço</th>
 						                  <th>Ativar/Desativar</th>
 						                  <th>Data da reserva</th>
 						                  <th>Morador</th>
-						                  <th>Histórico do morador</th>
+						                  <th>Histórico</th>
+						                  <th>Excluir</th>
 						                </tr>
 						              </thead>
 						              <tbody>
 						                <c:forEach items="${reservas}" var="item">
 						                	<tr>
-						                		<td><c:out value="${item.reserva}"/></td>
+						                		<td><c:out value="${item.title}"/></td>
+						                		<td><c:out value="${item.nomeEspaco}"/></td>
 						                		<c:choose>
-													<c:when test="${item.ativa}">
-														<td><a href="#" class="desativarEnquete btn btn-inverse" data-enquete="<c:out value="${item.idReserva}"/>">Desativar</a></td>
+													<c:when test="${item.aprovada}">
+														<td><a id="${item.id}" href="#div${item.id}" data-toggle = "modal" class="btn btn-inverse">Desativar</a>
+														<div id="div${item.id}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Desativação de reserva</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Confirma desativação da reserva?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn desativarReserva btn-primary" href="#" data-id="${item.id}">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+														</td>
 												    </c:when>
 												  	<c:otherwise>
-												  		<td><a href="#" class="ativarEnquete btn btn-success" data-enquete="<c:out value="${item.idReserva}"/>">Ativar</a></td>												    	
+												  		<td><a id="${item.id}" href="#div${item.id}" data-toggle = "modal" class="btn btn-success">Ativar</a>
+												  		<div id="div${item.id}" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Ativação de reserva</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Confirma ativação da reserva?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn ativarReserva btn-primary" href="#" data-id="${item.id}">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+												  		</td>												    	
 												  	</c:otherwise>
 												</c:choose>
-						                		<td><c:out value="${item.preReserva}"></c:out></td>
+						                		<td><c:out value="${item.start}"></c:out></td>
 						                		<td><c:out value="${item.nome}"></c:out></td>
-						                		<td><a href="#" class="visualizarEnquete btn btn-info" data-enquete="<c:out value="${item.idUser}"/>">Histórico do morador</a></td>
+						                		<td><a href="/WebHomeBeta/admin/reservas/historico/id=${item.idUser}" class="historicoMorador btn btn-info" data-id="<c:out value="${item.idUser}"/>">Histórico</a></td>
+						                		<td>
+						                			<a id="${item.id}" href="#div${item.id}Excluir" data-toggle="modal" class="btn btn-danger" id="btnExcluirReserva">Excluir</a>
+						                			<div id="div${item.id}Excluir" class="modal hide">
+																<div class="modal-header">
+																	<button data-dismiss="modal" class="close" type="button">×</button>
+																	<h3>Exclusão da reserva</h3>
+																</div>
+																	<div class="modal-body">
+																		<p>Deseja excluir?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<a data-dismiss="modal" class="btn excluirReserva btn-primary" href="#" data-id="${item.id}">Sim</a>
+																		<a data-dismiss="modal" class="btn" href="#">Não</a>
+																	</div>
+																</div>
+						                		</td>
 						                	</tr>
 						                </c:forEach>
 						              </tbody>

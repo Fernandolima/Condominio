@@ -36,7 +36,26 @@ public class CalendarEvent {
 	@Column(name = "ID_USER")
 	private int idUser;
 
+	@Column(name = "NOME")
+	private String nome;
 	
+	@Column(name = "NOME_ESPACO")
+	private String nomeEspaco;
+	
+	
+	
+	public String getNomeEspaco() {
+		return nomeEspaco;
+	}
+	public void setNomeEspaco(String nomeEspaco) {
+		this.nomeEspaco = nomeEspaco;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public boolean isAprovada() {
 		return aprovada;
 	}

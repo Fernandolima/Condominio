@@ -10,7 +10,9 @@ public interface CalendarEventDAO {
 	public List<CalendarEvent> get(int id);
 	public List<CalendarEvent> getEventos(int id);
 	public List<CalendarEvent> get();
-	public void delete(CalendarEvent event);
-	public void update(int idEspaco);
+	public List<CalendarEvent> getAll();
+	public List<CalendarEvent> getHistorico(int idUser);
+	public void delete(int id);
+	public void update(int idEspaco, boolean ativa);
 		
 }

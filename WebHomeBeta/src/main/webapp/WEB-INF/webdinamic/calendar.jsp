@@ -79,6 +79,7 @@
 			
 			<div class="col-md-9">
 				<input type="hidden" id="idEspaco" value="${idEspaco}" />
+				<input type="hidden" id="nomeEspaco" value="${espaco.espaco}" />
 				<h2 class="text-center text-primary" id="nomeEspaco">${espaco.espaco}</h2>
 				<div id="contentCalendar">
 					<div id='calendar'></div>

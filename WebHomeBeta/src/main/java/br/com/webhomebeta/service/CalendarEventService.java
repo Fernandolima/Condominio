@@ -25,8 +25,8 @@ public class CalendarEventService {
 		return calendarEventDAO.get();
 	}
 
-	public void delete(CalendarEvent event) {
-		calendarEventDAO.delete(event);
+	public void delete(int id) {
+		calendarEventDAO.delete(id);
 		
 	}
 	
@@ -34,8 +34,14 @@ public class CalendarEventService {
 		return calendarEventDAO.getEventos(id);
 	}
 
-	public void update(int idEspaco) {
-		calendarEventDAO.update(idEspaco);
+	public void update(int idEspaco, boolean ativa) {
+		calendarEventDAO.update(idEspaco, ativa);
 	}
 	
+	public List<CalendarEvent> getAll(){
+		return calendarEventDAO.getAll();
+	}
+	public List<CalendarEvent> getHistorico(int idUser){
+		return calendarEventDAO.getHistorico(idUser);
+	}
 }

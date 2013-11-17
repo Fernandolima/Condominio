@@ -122,9 +122,9 @@
 			access="isAnonymous()" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
 			access="isAnonymous()" />
-		<sec:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN','ROLE_FUNC')" />
 		<sec:intercept-url pattern="/home" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
-		<sec:intercept-url pattern="/admin.jsp" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin.jsp" access="hasAnyRole('ROLE_ADMIN','ROLE_FUNC')"/>
 		<sec:intercept-url pattern="/home.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/admin/atas.jsp" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/admin/atas" access="hasRole('ROLE_ADMIN')" />

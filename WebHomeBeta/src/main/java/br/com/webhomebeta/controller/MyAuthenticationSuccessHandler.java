@@ -47,6 +47,7 @@ public class MyAuthenticationSuccessHandler implements
 	protected String determineTargetUrl(Authentication authentication) {
 		boolean isMorador = false;
 		boolean isAdmin = false;
+		boolean isFunc = false;
 		//authenticaction possui o login a senha e as permissoes
 		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
@@ -57,13 +58,19 @@ public class MyAuthenticationSuccessHandler implements
 			} else if (grantedAuthority.getAuthority().equals("ROLE_MORADOR")) {
 				isMorador = true;
 				break;
-			}
+			} else if (grantedAuthority.getAuthority().equals("ROLE_FUNC")) {
+				isFunc = true;
+				break;
+			} 
 		}
 
 		if (isAdmin) {
 			return "/admin";
 		} else if (isMorador) {
 			return "/home";
+		}
+		else if (isFunc) {
+			return "/admin";
 		} else {
 			throw new IllegalStateException();
 		}

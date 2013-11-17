@@ -34,6 +34,7 @@ import br.com.webhomebeta.entity.Opcao;
 import br.com.webhomebeta.entity.OpcaoVotada;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.EnqueteJSON;
+import br.com.webhomebeta.json.Json;
 import br.com.webhomebeta.json.OpcaoJSON;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.OpcaoService;
@@ -150,9 +151,12 @@ public class EnquetesController {
 	}
 	
 	@RequestMapping(value = "admin/enquetes/salvar", method = RequestMethod.POST)
-	public String salvarEnquete(
+	public @ResponseBody Json salvarEnquete(
 			@ModelAttribute("bean") EnquetesControllerBean bean,
 			BindingResult result) {
+		if(bean.getListOpcoes().contains("") || bean.getEnquetesTo().getEquete().equals("")){
+			return new Json("false");
+		}
 		// criar a data da enquete
 		bean.getEnquetesTo().setDataequete(new Date());
 		bean.getEnquetesTo().setUsuarioEnquete(getUsuario());
@@ -169,7 +173,7 @@ public class EnquetesController {
 		enquetes.setOpcao(opcao);
 		enquetesService.save(enquetes);
 
-		return "redirect:/admin/enquetes";
+		return new Json("true");
 	}
 
 

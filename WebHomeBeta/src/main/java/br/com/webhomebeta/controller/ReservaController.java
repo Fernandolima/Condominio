@@ -96,27 +96,6 @@ public class ReservaController {
 
 	}
 
-	@RequestMapping(value = "admin/reservas", method = RequestMethod.GET)
-	public ModelAndView showReservas(ModelMap model) {
-		List<Reserva> reservas = reservaService.getLisReservas();
-		model.put("reservas", reservas);
-		model.put("usuario", getUsuario());
-		return new ModelAndView("listReserva", model);
-
-	}
-	
-	@RequestMapping(value = "admin/reservas/aceitar")
-	public boolean aceitarReserva(@RequestParam("id") int id){
-			
-			return true;
-	}
-	
-	@RequestMapping(value = "admin/reservas/recusar")
-	public boolean recusarReserva(@RequestParam("id") int id){
-		
-			return true;
-	}
-	
 //	@RequestMapping(value = "admin/reservas/id={id}", method = RequestMethod.GET)
 //	public ModelAndView decidirReserva(@PathVariable("id") int idReserva, ModelMap model){
 //		Reserva reserva = reservaService.get(idReserva);

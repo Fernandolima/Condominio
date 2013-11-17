@@ -9,7 +9,17 @@ public class GastoJSON {
 	private String gasto;
 	private String Mes;
 	private int Ano;
+	private int erro;
 	
+	
+	
+	public GastoJSON() {
+		super();
+	}
+	public GastoJSON(int erro) {
+		super();
+		this.erro = erro;
+	}
 	public int getIdGasto() {
 		return idGasto;
 	}
@@ -18,6 +28,12 @@ public class GastoJSON {
 	}
 	
 	
+	public int getErro() {
+		return erro;
+	}
+	public void setErro(int erro) {
+		this.erro = erro;
+	}
 	public String getGasto() {
 		return gasto;
 	}

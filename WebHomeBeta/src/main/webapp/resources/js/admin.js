@@ -308,6 +308,9 @@ var ADMIN = {
 			type: 'POST',
 			data : $('#frmEnquetes').serialize(),
 			success: function(data) {
+				if(data.json ==	 "false"){
+					$.jGrowl("Você deve preencher todos os campos!", { header: 'ERRO!', sticky:true,});
+				}else{
 				$('input[type="text"]').val('');
 				el.empty();
 				
@@ -321,6 +324,7 @@ var ADMIN = {
 				htmlOpcao += '</div>';
 				
 				el.append(htmlOpcao);
+			}
 				
 			}
 		
@@ -370,6 +374,103 @@ var ADMIN = {
 		});
 	},
 	
+	desativarReserva: function(e){
+		e.preventDefault();
+		
+		var data = 'idReserva='+$(this).attr('data-id')+'&ativa=false',
+		id = $(this).attr('data-id'),
+		el = $('#'+id+'');
+		console.log(id);
+		var html = '';
+		$.ajax({
+			data: data,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/reservas/ativar',
+	      	success: function(data) {
+	      		
+	      		
+	      		
+	      		html += '<div id="div'+id+'" class="modal hide">';
+				html += '<div class="modal-header">';
+					 html += '<button data-dismiss="modal" class="close" type="button">×</button>';
+					 html += '<h3>Ativação da reserva</h3>';
+					html += '</div>';
+				html += 	'<div class="modal-body">';
+					 html += '<p>Confirma ativação da reserva?</p>';
+					html += '</div>';
+							html += '<div class="modal-footer">';
+								html += 	'<a data-dismiss="modal" class="btn ativarReserva btn-primary" href="#" data-id="'+id+'">Sim</a>';
+								html += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+								html += '</div>';
+			     html += '</div>';
+			     
+			     el.removeClass('btn-inverse');
+			     el.addClass('btn-success');
+			     el.text('Ativar');
+			     el.attr('href','#div'+id+'');
+			     el.closest('div.modal').remove();
+				 el.after(html);
+				
+	      	}
+		});
+	},
+	
+	ativarReserva: function(e){
+		e.preventDefault();
+		
+		var data = 'idReserva='+$(this).attr('data-id')+'&ativa=true',
+		id = $(this).attr('data-id'),
+		el = $('#'+id+'');
+		console.log(id);	
+		var html = '';
+		$.ajax({
+			data: data,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/reservas/ativar',
+	      	success: function(data) {
+
+	      		html += '<div id="div'+id+'" class="modal hide">';
+				html += '<div class="modal-header">';
+					 html += '<button data-dismiss="modal" class="close" type="button">×</button>';
+					 html += '<h3>Desativação da reserva</h3>';
+					html += '</div>';
+				html += 	'<div class="modal-body">';
+					 html += '<p>Confirma desativação da reserva?</p>';
+					html += '</div>';
+							html += '<div class="modal-footer">';
+								html += 	'<a data-dismiss="modal" class="btn desativarReserva btn-primary" href="#" data-id="'+id+'">Sim</a>';
+								html += 	'<a data-dismiss="modal" class="btn" href="#">Não</a>';
+								html += '</div>';
+			     html += '</div>';
+			     
+			     el.removeClass('btn-success');
+			     el.addClass('btn-inverse');
+			     el.text('Desativar');
+			     el.attr('href','#div'+id+'');
+			     el.closest('div.modal').remove();
+				 el.after(html);
+	      	}
+		});
+	},
+	
+	deleteReserva: function(e) {
+		e.preventDefault();
+		
+		var idReserva = 'idReserva='+$(this).attr('data-id'),
+			el = $(this);
+			console.log('aaaaa');
+		$.ajax({
+			data: idReserva,
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/reservas/deletar',
+	      	success: function(data) {
+	      			console.log('aaa');
+	      			el.closest('tr').remove();
+	      		
+	      	}
+		});
+	},
+	
 	verificaNotificacao: function() {
 		
 		$.ajax({
@@ -399,6 +500,12 @@ var ADMIN = {
 			data : $('#frmGasto').serialize(),
 			success: function(data) {
 				
+				if(data.erro === 1){
+					$.jGrowl("O ano informado não é valido!", { header: 'ERRO!', sticky:true,});
+				}else if(data.erro === 2){
+					$.jGrowl("O mês inserido para esta ano já existe!", { header: 'ERRO!', sticky:true,});
+				}else{
+				
 				htmlBloco += '<tr>';
 					htmlBloco += '<td>'+data.gasto+'</p>';
 					htmlBloco += '<td>'+data.mes+'</p>';
@@ -420,16 +527,17 @@ var ADMIN = {
 					htmlBloco += '</div>';
 					htmlBloco += '</td>';
 				htmlBloco += '</tr>';
-				
+				$('#listaGastos tbody').prepend(htmlBloco);
+				$('#mes option').first().attr('selected', 'selected');
+				$('body').on('click', '.btn-delete-gasto', ADMIN.excluirGasto);
+				$.jGrowl("Gasto contabilizado");
+				}
 				if($('.nenhumResultado').css('display') == 'block') {
 					$('.nenhumResultado').hide();
 				}
 				
-				$('#listaGastos tbody').prepend(htmlBloco);
 				$('input[type="text"]').val('');
-				$('#mes option').first().attr('selected', 'selected');
-				$('body').on('click', '.btn-delete-gasto', ADMIN.excluirGasto);
-				$.jGrowl("Gasto contabilizado");
+				
 			}
 		});		
 	},
@@ -510,6 +618,11 @@ $(function() {
 		$("#frmEditarCadastro").submit();
 	});
 	
+	$('tbody').on('click', '.excluirReserva', ADMIN.deleteReserva);
+	
+	$('tbody').on('click', '.ativarReserva', ADMIN.ativarReserva);
+	
+	$('tbody').on('click', '.desativarReserva', ADMIN.desativarReserva);
 	
 	$('#btSubmitGasto').on('click', ADMIN.inserirGasto);
 	
@@ -539,7 +652,7 @@ $(function() {
 	
 	setInterval(function(){
 		ADMIN.verificaNotificacao();
-	},10000);	
+	},20000);	
 	
 	if($('#adminView')[0]) {
 	}

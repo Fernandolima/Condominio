@@ -6,12 +6,25 @@ import java.util.Map;
 import br.com.webhomebeta.to.GastoTO;
 
 public class GastoControllerBean {
-	private GastoTO gastoTO;
+	private GastoTO gastoTO = new GastoTO();
 	private String mes;
 	private int ano;
+	private String gasto;
 	private Map<String,String> meses = new HashMap<String, String>();
-	
-	
+
+
+	public String getGasto() {
+		return gasto;
+	}
+	public void setGasto(String gasto) {
+		this.gasto = gasto;
+	}
+	public Map<String, String> getMeses() {
+		return meses;
+	}
+	public void setMeses(Map<String, String> meses) {
+		this.meses = meses;
+	}
 	public GastoTO getGastoTO() {
 		return gastoTO;
 	}

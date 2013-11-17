@@ -1,5 +1,7 @@
 package br.com.webhomebeta.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.entity.CalendarEvent;
 import br.com.webhomebeta.entity.EspacoCondominio;
+import br.com.webhomebeta.entity.Reserva;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.CalendarEventJSON;
 import br.com.webhomebeta.service.CalendarEventService;
@@ -48,7 +51,8 @@ public class FullCalendarController {
 		return new ModelAndView("calendar", model);
 	}
 
-	@RequestMapping(value = "home/calendar", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "home/calendar", method = { RequestMethod.POST,
+			RequestMethod.GET })
 	public @ResponseBody
 	List<CalendarEventJSON> showCalendar(@RequestParam("idEspaco") int id) {
 		List<CalendarEvent> calendarEvents = calendarEventService.get(id);
@@ -59,7 +63,7 @@ public class FullCalendarController {
 					calendarEvent.getId(), calendarEvent.getTitle(),
 					dateToString(calendarEvent.getStart()),
 					calendarEvent.isEditable(), espaco.getEspaco());
-			
+
 			calendarEventJSONs.add(calendarEventJSON);
 		}
 
@@ -70,7 +74,9 @@ public class FullCalendarController {
 	public String salvar(@RequestParam("idEspaco") int idEspaco,
 			@RequestParam("titulo") String titulo,
 			@RequestParam("idUser") int idUser, @RequestParam("dia") int dia,
-			@RequestParam("mes") int mes, @RequestParam("ano") int ano) {
+			@RequestParam("mes") int mes, @RequestParam("ano") int ano, @RequestParam("nomeEspaco") String nomeEspaco) {
+
+		Usuario u = usuarioService.getById(idUser);
 
 		DateTime dateTime = new DateTime(ano, mes, dia, 0, 0);
 
@@ -81,29 +87,61 @@ public class FullCalendarController {
 		calendarEvent.setIdUser(idUser);
 		calendarEvent.setTitle(titulo);
 		calendarEvent.setStart(dateTime.toDate());
+		calendarEvent.setNome(u.getNome());
+		calendarEvent.setNomeEspaco(nomeEspaco);
+		
 
 		calendarEventService.save(calendarEvent);
 
 		return "redirect:/home/listarEspaco";
 	}
 
-//	@RequestMapping(value = "event/id={id}", method = RequestMethod.GET)
-//	public @ResponseBody
-//	List<CalendarEventJSON> feedCalender(@PathVariable("id") int idEspaco) {
-//
-//		List<CalendarEventJSON> calendarEventJSONs = new ArrayList<>();
-//
-//		for (CalendarEvent event : calendarEventService.getEventos(idEspaco)) {
-//			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
-//					event.getId(), event.getTitle(),
-//					dateToString(event.getStart()), event.isEditable());
-//
-//			calendarEventJSONs.add(calendarEventJSON);
-//		}
-//
-//		return calendarEventJSONs;
-//	}
+	@RequestMapping(value = "admin/reservas", method = RequestMethod.GET)
+	public ModelAndView showReservas(ModelMap model) {
+		List<CalendarEventJSON> eventJSONs = new ArrayList<>();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		for (CalendarEvent reservas : calendarEventService.getAll()) {
+			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
+					reservas.getId(), reservas.getTitle(), df.format(reservas
+							.getStart()), reservas.isEditable(),
+					reservas.getNomeEspaco(), reservas.getNome(), reservas.getIdUser(), reservas.isAprovada());
+			eventJSONs.add(calendarEventJSON);
+		}
 
+		model.put("reservas", eventJSONs);
+		model.put("usuario", getUsuario());
+		return new ModelAndView("listReserva", model);
+	}
+	
+	@RequestMapping(value = "admin/reservas/ativar")
+	public @ResponseBody String aceitarReserva(@RequestParam("idReserva") int id,@RequestParam("ativa") boolean ativa){
+			calendarEventService.update(id, ativa);
+			return "true";
+	}
+	@RequestMapping(value = "admin/reservas/deletar")
+	public @ResponseBody String excluir(@RequestParam("idReserva") int id){
+		
+		calendarEventService.delete(id);
+		return "true";
+	}
+	@RequestMapping(value = "admin/reservas/historico/id={id}", method = RequestMethod.GET)
+	public ModelAndView historico(@PathVariable("id") int id, ModelMap model){
+		List<CalendarEventJSON> eventJSONs = new ArrayList<>();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		for (CalendarEvent reservas : calendarEventService.getAll()) {
+			CalendarEventJSON calendarEventJSON = new CalendarEventJSON(
+					reservas.getId(), reservas.getTitle(), df.format(reservas
+							.getStart()), reservas.isEditable(),
+					reservas.getNomeEspaco(), reservas.getNome(), reservas.getIdUser(), reservas.isAprovada());
+			eventJSONs.add(calendarEventJSON);
+		}
+		
+		model.put("reservas", eventJSONs);
+		model.put("usuario", getUsuario());
+		
+		return new ModelAndView("historicoMorador",model);
+	}
+	
 	public Usuario getUsuario() {
 
 		Usuario usuario = null;

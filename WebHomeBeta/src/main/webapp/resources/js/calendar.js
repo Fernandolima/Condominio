@@ -51,7 +51,7 @@ var CALENDAR  = {
 					$.ajax({
 				    	type: 'POST',
 				      	url:'/WebHomeBeta/event/save',
-				      	data: {idEspaco : $('#idEspaco').val(), titulo: title, idUser: $('#userSessao').val(), dia: dia, mes: mes, ano:ano},
+				      	data: {idEspaco : $('#idEspaco').val(), titulo: title, idUser: $('#userSessao').val(), dia: dia, mes: mes, ano:ano, nomeEspaco:  $('#nomeEspaco').val()},
 				      	success: CALENDAR.enviadoSucesso,
 				      	error: function(e) {
 				      		console.log('erro = ', e);

@@ -82,7 +82,7 @@
 					<h3>Gastos totais do condomínio</h3>
 				</div>
 				<fieldset>
-				<legend>Ano: </legend>
+				<legend>Ano: <c:out value="${ano}"></c:out></legend>
 					<div id="myfirstchart" style="height: 250px;"></div>
 				</fieldset>
                 
@@ -138,8 +138,13 @@
 		  			  labels: ['Gasto'],
 		  			  preUnits: ['R$'],
 		  			  	
+		  			yLabelFormat: function(gasto) {
+		  			    return 'R$ ' + gasto; 
+		  			  },
+		  			  
 		  			xLabelFormat: function(d) {
-		  			    return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear(); 
+		  				var data = new Date(d);
+	  			    	return  mes[data.getMonth() + 1] 
 		  			  },
 		  			dateFormat: function (x) { 
 	  					var d = new Date(x);

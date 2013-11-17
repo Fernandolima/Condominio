@@ -66,7 +66,7 @@ public class ValidadorAtas {
 	}
 	public boolean isValiTitulo( String titulo) {
 		if ( titulo == null ||titulo.length() < 3
-				|| titulo.length() > 30)
+				|| titulo.length() > 300)
 			return false;
 		else
 			return true;

@@ -131,7 +131,7 @@
 						              <tbody>
 						                <c:forEach items="${listaEnquetes}" var="item" varStatus="theCount">
 						                	<tr id="listEnquete">
-						                		<td><c:out value="${item.enquete}"/></td>
+						                		<td style="width:35%;"><c:out value="${item.enquete}"/></td>
 						                		<c:choose>
 													<c:when test="${item.ativa}">
 														<td>

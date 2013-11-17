@@ -122,14 +122,7 @@
                                 	<form:form modelAttribute="bean" action="/WebHomeBeta/admin/enquetes/salvar" class="form-horizontal" method="post" id="frmEnquetes">
                                       <fieldset>
                                         <legend>Enquete</legend>
-                                        
-                                        <div class="control-group">
-                                        	<form:label for="tituloEnquete" path="enquetesTo.titulo" class="control-label">Título:</form:label>
-	                                        <div class="controls">
-	                                        	<form:input type="text" id="tituloEnquete" path="enquetesTo.titulo" autocomplete="off" class="input-xlarge focused" />
-	                                        </div>
-                                        </div>
-                                        
+                                 
                                         <div class="control-group">
                                         	<form:label for="tituloEnquete" path="enquetesTo.equete" class="control-label">Pergunta:</form:label>
 	                                        <div class="controls">
