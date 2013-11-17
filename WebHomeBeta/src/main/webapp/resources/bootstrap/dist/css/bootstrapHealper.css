@@ -72,7 +72,7 @@ header {
 .comments-post {
 	margin-top: 4px;
 	float: left;
-	width: 90%;
+	width: 100%;
 }
 
 .add-comments {
@@ -294,4 +294,8 @@ header {
 
 textarea#txtComment.form-control {
 	resize: none;
+}
+
+.comment-user {
+	word-break: break-word;
 }
