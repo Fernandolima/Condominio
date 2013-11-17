@@ -27,7 +27,8 @@ var POST_COMMENT  = {
 		loadNotificacao: function(data) {
 			var htmlNotificacao = '';
 			if(data.length > 0) {
-				$('#alerta-notificacao').addClass('glyphicon glyphicon-star');
+				$('#alerta-notificacao span').removeClass('glyphicon glyphicon-star-empty');
+				$('#alerta-notificacao span').addClass('glyphicon glyphicon-star');
 				$('#numeroNotificacao').text(data.length);
 				$.each(data, function(i, val){
 					htmlNotificacao += '<li class="notificacao">';
@@ -75,11 +76,11 @@ var POST_COMMENT  = {
 								if(auxGostou){
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei active">'+val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei disable">'+val.quantidadeGostou+'</p><span class="iconNaoGostei disable" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeGostou+'</p><span class="iconNaoGostei" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								} else if(auxGostou){ 
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei disable">'+val.quantidadeGostou+'</p><span class="iconGostei disable" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
 									htmlHome += '<p class="labelNaoGostei active">'+val.quantidadeGostou+'</p><span class="iconNaoGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';									
 								} else{
@@ -179,8 +180,9 @@ var POST_COMMENT  = {
 				htmlInserPost += '<p class="time-comments">'+e.dataPublicacao+'</p>';
 				htmlInserPost += '<p class="comment-user">'+e.publicacao+'</p>';
 				htmlInserPost += '<div class="gosteiPublicacao">';
-					htmlInserPost += '<p class="labelGostei">0</p><span class="iconGostar" data-gostou="0"></span>';
-				htmlInserPost += '</div>'
+					htmlInserPost += '<p class="labelGostei">0</p><span class="iconGostei" data-gostou="0"></span>';
+					htmlInserPost += '<p class="labelNaoGostei">0</p><span class="iconNaoGostei" data-id-gostou="" data-gostou="0"></span>';
+				htmlInserPost += '</div>';
 			htmlInserPost += '</div>';
 			htmlInserPost += '<a href="#" class="add-comments btn btn-info">Comentar</a>';
 			htmlInserPost += '</div>';
@@ -281,7 +283,8 @@ var POST_COMMENT  = {
 		      			$.each(data, function(i, val) {
 		      				if(POST_COMMENT.idUser == val.idUser) {
 		      					$('#numeroNotificacao').html(num + data.length);
-				      			$('#alerta-notificacao').addClass('glyphicon glyphicon-star');
+		      					$('#alerta-notificacao span').removeClass('glyphicon-star-empty');
+				      			$('#alerta-notificacao span').addClass('glyphicon-star');
 				      			
 		      					htmlNotificacao += '<li class="notificacao">';
 									htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
@@ -289,7 +292,12 @@ var POST_COMMENT  = {
 		      				}
 		      			});
 						
-						$('#main-notificacao').append(htmlNotificacao);
+		      			if($('#main-notificacao li').length > 0) {
+		      				$('#main-notificacao').append(htmlNotificacao);
+		      			} else {
+		      				$('#main-notificacao').html(htmlNotificacao);
+		      			}
+						
 		      		}
 		      	},
 		      	error: function(data) {
@@ -301,7 +309,8 @@ var POST_COMMENT  = {
 			e.preventDefault();
 			$('#main-notificacao').toggle('show', function(){
 				if($('#main-notificacao').css('display') == 'block') {
-					$('#alerta-notificacao').removeClass('glyphicon glyphicon-star');
+					$('#alerta-notificacao span').removeClass('glyphicon-star');
+					$('#alerta-notificacao span').addClass('glyphicon-star-empty');
 					$('#numeroNotificacao').text('');
 				 	$.post('notificacaoVista');
 				} else {
@@ -315,14 +324,15 @@ var POST_COMMENT  = {
 			e.preventDefault();
 			
 			var el = $(this),
-				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post');
-			var quantidadeGostou = el.attr('data-gostou');
+				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
+				quantidadeGostou = el.attr('data-gostou'),
+				quantidadeNaoGostou = el.closest('.labelNaoGostei').text();
+						
+			quantidadeGostou = parseInt(quantidadeGostou,10)+1;
 			
-			if (el.hasClass('active') || el.hasClass('disable')) {
+			if(el.hasClass('active')) {
 				return;
 			}
-			
-			quantidadeGostou = parseInt(quantidadeGostou,10)+1;
 			
 			$.ajax({
 	            type: "post",
@@ -333,8 +343,10 @@ var POST_COMMENT  = {
 	            	el.attr('data-id-gostou', data);
 	            	el.attr('data-gostou', quantidadeGostou);
 	    			el.closest('.gosteiPublicacao').find('.labelGostei').html(quantidadeGostou);
-	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').addClass('disable');
-	    			el.closest('.gosteiPublicacao').find('.iconNaoGostei').addClass('disable');
+	    				    			
+	    			if( el.hasClass('disable')) {
+	    				el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(parseInt(quantidadeNaoGostou, 10) - 1);
+	    			}
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -349,13 +361,14 @@ var POST_COMMENT  = {
 			
 			var el = $(this),
 			dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
-				quantidadeGostou = el.attr('data-gostou');
+				quantidadeNaoGostou = el.attr('data-gostou'),
+				quantidadeGostou = el.closest('.labelGostei').text();
 			
-			if(el.hasClass('active') || el.hasClass('disable')) {
+			if(el.hasClass('active')) {
 				return;
 			}
 			
-			quantidadeGostou = parseInt(quantidadeGostou,10)-1;
+			quantidadeNaoGostou = parseInt(quantidadeNaoGostou,10)-1;
 			
 			$.ajax({
 	            type: "post",
@@ -365,9 +378,12 @@ var POST_COMMENT  = {
 	            	el.addClass('active');
 	            	el.attr('data-id-gostou', data);
 	            	el.attr('data-gostou', quantidadeGostou);
-	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(quantidadeGostou);
-	    			el.closest('.gosteiPublicacao').find('.labelGostei').addClass('disable');
-	    			el.closest('.gosteiPublicacao').find('.iconGostei').addClass('disable');
+	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(quantidadeNaoGostou);
+	    			
+	    			if( el.hasClass('disable')) {
+	    				el.closest('.gosteiPublicacao').find('.labelGostei').html(parseInt(quantidadeGostou, 10) - 1);
+	    			}
+	    			
 	            },
 	            error: function () {
 	            	console.log('errormessage');
