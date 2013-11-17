@@ -372,7 +372,7 @@ var POST_COMMENT  = {
 			
 			$.ajax({
 	            type: "post",
-	            url: "/WebHomeBeta/removeGostou",
+	            url: "/WebHomeBeta/naoGostou",
 	            data: dataCurtir,
 	            success: function () {
 	            	el.addClass('active');
