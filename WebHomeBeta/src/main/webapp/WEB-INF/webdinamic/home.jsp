@@ -145,10 +145,13 @@
 					</div>
 				</div>
 			</div>
-			</div>
+					    	
+		</div>
+			
+			
+    
 		
-	<!-- <footer id="footer-site">
-		</footer> -->
+	
 
 	<script src="<c:url value = "/bootstrap/vendors/jquery-1.9.1.min.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/dist/js/bootstrap.min.js"/>" type="text/javascript"></script>

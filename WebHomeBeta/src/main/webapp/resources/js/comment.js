@@ -43,6 +43,7 @@ var POST_COMMENT  = {
 			
 			if(data.length > 0) {
 				$.each(data, function(e, val){
+					console.log('val = ', val);
 					htmlHome = '';
 					
 					htmlHome += '<div class="post" data-id-user="'+val.usuarioPublicacao.idUsuarioPublicacao+'" data-id-post="'+val.idPublicacao+'">';
@@ -55,23 +56,36 @@ var POST_COMMENT  = {
 							htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';
 							htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
 							if(val.gostous){
-								var aux = false;
-								var idGostou = 0;
+								var auxGostou = false,
+									auxNaoGostou = false,
+									idGostou = 0;
 								$.each(val.gostous, function(i, gostou){
 									if(gostou.idUsuario == POST_COMMENT.idUser){
-										aux = true;
+										auxGostou = true;
+										idGostou = gostou.id;
+									}
+								});
+								$.each(val.naoGostous, function(i, naoGostou){
+									if(naoGostou.idUsuario == POST_COMMENT.idUser){
+										auxNaoGostou = true;
 										idGostou = gostou.id;
 									}
 								});
 								
-								if(aux){
+								if(auxGostou){
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconSmile iconGostei active glyphicon glyphicon-thumbs-down" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelGostei active">'+val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei disable">'+val.quantidadeGostou+'</p><span class="iconNaoGostei disable" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
-								}
-								else{
+								} else if(auxGostou){ 
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="glyphicon glyphicon-thumbs-up iconGostar" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelGostei disable">'+val.quantidadeGostou+'</p><span class="iconGostei disable" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei active">'+val.quantidadeGostou+'</p><span class="iconNaoGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '</div>';									
+								} else{
+									htmlHome += '<div class="gosteiPublicacao">';
+									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeGostou+'</p><span class="iconNaoGostei" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 						}
@@ -165,7 +179,7 @@ var POST_COMMENT  = {
 				htmlInserPost += '<p class="time-comments">'+e.dataPublicacao+'</p>';
 				htmlInserPost += '<p class="comment-user">'+e.publicacao+'</p>';
 				htmlInserPost += '<div class="gosteiPublicacao">';
-					htmlInserPost += '<p class="labelGostei">0</p><span class="glyphicon glyphicon-thumbs-up iconGostar" data-gostou="0"></span>';
+					htmlInserPost += '<p class="labelGostei">0</p><span class="iconGostar" data-gostou="0"></span>';
 				htmlInserPost += '</div>'
 			htmlInserPost += '</div>';
 			htmlInserPost += '<a href="#" class="add-comments btn btn-info">Comentar</a>';
@@ -299,9 +313,14 @@ var POST_COMMENT  = {
 		
 		onClickGostei: function(e) {
 			e.preventDefault();
+			
 			var el = $(this),
 				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post');
 			var quantidadeGostou = el.attr('data-gostou');
+			
+			if (el.hasClass('active') || el.hasClass('disable')) {
+				return;
+			}
 			
 			quantidadeGostou = parseInt(quantidadeGostou,10)+1;
 			
@@ -311,13 +330,11 @@ var POST_COMMENT  = {
 	            data: dataCurtir,
 	            success: function (data) {
 	            	el.addClass('active');
-	            	el.addClass('iconGostei');
-	            	el.addClass('glyphicon-thumbs-down');
-	            	el.removeClass('glyphicon-thumbs-up');
-	            	el.removeClass('iconGostar');
 	            	el.attr('data-id-gostou', data);
 	            	el.attr('data-gostou', quantidadeGostou);
 	    			el.closest('.gosteiPublicacao').find('.labelGostei').html(quantidadeGostou);
+	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').addClass('disable');
+	    			el.closest('.gosteiPublicacao').find('.iconNaoGostei').addClass('disable');
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -327,11 +344,16 @@ var POST_COMMENT  = {
 	        });
 		},
 		
-		onClickRemoveGostei: function(e) {
+		onClickNaoGostei: function(e) {
 			e.preventDefault();
+			
 			var el = $(this),
-				dataCurtir = 'idPost=' + $(this).closest('.iconGostei').attr('data-id-gostou');
-			var quantidadeGostou = el.attr('data-gostou');
+			dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
+				quantidadeGostou = el.attr('data-gostou');
+			
+			if(el.hasClass('active') || el.hasClass('disable')) {
+				return;
+			}
 			
 			quantidadeGostou = parseInt(quantidadeGostou,10)-1;
 			
@@ -340,13 +362,12 @@ var POST_COMMENT  = {
 	            url: "/WebHomeBeta/removeGostou",
 	            data: dataCurtir,
 	            success: function () {
-	            	el.removeClass('active');
-	            	el.removeClass('iconGostei');
-	            	el.removeClass('glyphicon-thumbs-down');
-	            	el.addClass('iconGostar');
-	            	el.addClass('glyphicon-thumbs-up');
+	            	el.addClass('active');
+	            	el.attr('data-id-gostou', data);
 	            	el.attr('data-gostou', quantidadeGostou);
-	            	el.closest('.gosteiPublicacao').find('.labelGostei').html(quantidadeGostou);
+	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(quantidadeGostou);
+	    			el.closest('.gosteiPublicacao').find('.labelGostei').addClass('disable');
+	    			el.closest('.gosteiPublicacao').find('.iconGostei').addClass('disable');
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -404,8 +425,8 @@ $(function() {
 	$('body').on('click', '.add-comments', POST_COMMENT.addComment);
 	$('body').on('submit', '.frmCommentPost', POST_COMMENT.submitComment);
 	$('body').on('click', '.deletePost', POST_COMMENT.onDeletePost);
-	$('body').on('click', '.iconGostar', POST_COMMENT.onClickGostei);
-	$('body').on('click', '.iconGostei', POST_COMMENT.onClickRemoveGostei);
+	$('body').on('click', '.iconGostei', POST_COMMENT.onClickGostei);
+	$('body').on('click', '.iconNaoGostei', POST_COMMENT.onClickNaoGostei);
 	
 	$('#alerta-notificacao').on('click', POST_COMMENT.visualizaNotificacao);
 	

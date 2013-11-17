@@ -39,14 +39,6 @@
 <head>
 <body id="home" class="rede-social">
 
-	<!-- Modal HTML embedded directly into document -->
-  	<div id="editarFoto" style="display:none; z-index:10000; ">
-  		<div id="container-foto">
-  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
-  		</div>
-  		<a href="#" id="cortarImagem" style="display: none">OK</a>
-  	</div>
-			  	
 	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
@@ -104,12 +96,20 @@
 			</div>
 			
 			<div class="col-md-9">
-				<h3 class="text-primary"><b>Perfil</b></h3>
-				
+				<!-- Modal HTML embedded directly into document -->
+			  	<div id="editarFoto" style="display:none;">
+			  		<div id="container-foto">
+			  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
+			  		</div>
+			  		<a href="#" id="cortarImagem" style="display: none">OK</a>
+			  	</div>
+			  	
 				<form:form role="form" modelAttribute="uploadControllerBean" id="trocarFoto" class="form-group" action="/WebHomeBeta/perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
 					<label for="image" class="inputFile btn btn-warning btn-sm">Alterar foto</label>
 					<form:input path="fileData" id="image" type="file" style="display:none;" onchange="EDITAR_PERFIL.alterarFoto(this)" />
 				</form:form>
+				
+				<h3 class="text-primary"><b>Perfil</b></h3>
 				
 				<div class="panel-group" id="accordion">
   
@@ -210,13 +210,16 @@
      						 </div>
     					</div>
   					</div>
+  					<footer id="footer-site">
+						<p class="text-right">© Web Home</p>
+					</footer>
+					
 				</div>
 			</div>
+			
 		</div>
 	</div>
-	<footer id="footer-site">
-		<p>Web Home</p>
-	</footer>
+	
 
 	<script src="<c:url value = "/bootstrap/dist/js/bootstrap.min.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>

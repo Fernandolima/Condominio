@@ -35,8 +35,8 @@ var EDITAR_PERFIL  = {
 				altura = parseInt(data[2], 10);
 				
 				 $('#editarFoto').css({
-					 'width': largura,
-					 'height': altura
+					 'width': largura + 20,
+					 'height': altura + 20
 				 });
 				 
 				 $('#cortarImagem').show();
