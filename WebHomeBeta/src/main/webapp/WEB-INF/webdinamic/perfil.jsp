@@ -15,12 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/jquery.modal.css"/>"/>
 	<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
 	
 	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/jquery.modal.js"/>" type="text/javascript"></script>
-		<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
+		
+	<script src="<c:url value = "/js/jquery.Jcrop.min.js"/>" type="text/javascript"></script>
 	
 		<script type="text/javascript">
 			function Validate() {
@@ -37,7 +36,7 @@
 			}
 		</script>
 <head>
-<body id="home" class="rede-social">
+<body id="perfilView" class="rede-social">
 
 	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,6 +76,23 @@
 	
 	<!-- Begin Body -->
 	<div class="container">
+		
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				 <div class="modal-content">
+				 	<button type="button" class="close" data-dismiss="modal">x</button>
+				 	<div class="modal-body">
+	  					<div id="container-foto">
+				  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
+				  		</div>
+					</div>
+					<div class="modal-footer">
+						<a href="#" id="cortarImagem" style="display: none">OK</a>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+				
 		<div class="row">
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
@@ -96,14 +112,13 @@
 			</div>
 			
 			<div class="col-md-9">
-				<!-- Modal HTML embedded directly into document -->
+				<!-- Modal HTML embedded directly into document 
 			  	<div id="editarFoto" style="display:none;">
 			  		<div id="container-foto">
 			  			<img src="img/load-login.gif" id="loadFoto" alt="carregando foto"/> 
 			  		</div>
 			  		<a href="#" id="cortarImagem" style="display: none">OK</a>
-			  	</div>
-			  	
+			  	</div>-->
 				<form:form role="form" modelAttribute="uploadControllerBean" id="trocarFoto" class="form-group" action="/WebHomeBeta/perfil/upload" name="frm" method="post" enctype="multipart/form-data" onSubmit="return Validate();">
 					<label for="image" class="inputFile btn btn-warning btn-sm">Alterar foto</label>
 					<form:input path="fileData" id="image" type="file" style="display:none;" onchange="EDITAR_PERFIL.alterarFoto(this)" />
@@ -117,37 +132,28 @@
     					<div class="panel-heading">
       						<h4 class="panel-title">
       							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-      								<span class="glyphicon glyphicon-user"></span> <b>Atualizar dados pessoais</b>
+      								<span class="glyphicon glyphicon-user"></span> <b>Dados Pessoais</b>
       							</a>
       						</h4>
     					</div>
     					<div id="collapseOne" class="panel-collapse collapse in">
       						<div class="panel-body">
         						<form role="form">
-  									<div class="form-group">
-    									<label for="exampleInputEmail1">Nome</label>
-    									<input type="email" class="form-control" id="exampleInputEmail1" value="Tatiane Jayme Dias">
-  									</div>
-  									<fieldset disabled>
+        							<fieldset disabled>
+	  									<div class="form-group">
+	    									<label for="exampleInputEmail1">Nome</label>
+	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="Tatiane Jayme Dias">
+	  									</div>
+	  								
 								    	<div class="form-group">
 								      		<label for="disabledTextInput">E-mail</label>
 								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="tatianejayme@gmail.com">
 								    	</div>
-								    </fieldset>
-								    <div class="form-group">
-    									<label for="dataNascimento">Data de Nascimento</label>
-    									<input type="text" class="form-control" id="dataNascimento" value="16/10/1985">
-  									</div>
-  									<div class="form-group">
-    									<label for="dataNascimento">Estado Civil</label>
-	  									<select class="form-control">
-	  										<option value=""></option>
-										  	<option value="solteiro">Solteiro</option>
-										  	<option value="casado">Casado</option>
-										  	<option value="viuvo">Viuvo</option>
-										</select>
-									</div>
-  									<button type="submit" class="btn btn-primary">Enviar</button>
+									    <div class="form-group">
+	    									<label for="dataNascimento">Data de Nascimento</label>
+	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="16/10/1985">
+	  									</div>
+	  								</fieldset>
 								</form>
       						</div>
     					</div>
@@ -209,11 +215,7 @@
   								</form>   
      						 </div>
     					</div>
-  					</div>
-  					<footer id="footer-site">
-						<p class="text-right">© Web Home</p>
-					</footer>
-					
+  					</div>  					
 				</div>
 			</div>
 			

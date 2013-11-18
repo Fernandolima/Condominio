@@ -299,3 +299,7 @@ textarea#txtComment.form-control {
 .comment-user {
 	word-break: break-word;
 }
+
+#perfilView .modal-content {
+	top: 60px;
+}

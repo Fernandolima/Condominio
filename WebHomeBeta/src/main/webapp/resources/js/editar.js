@@ -15,8 +15,8 @@ var EDITAR_PERFIL  = {
   			'width': 'auto',
   			'height': 'auto'
   		});
-		
-		$('#editarFoto').modal();
+  		$('#myModal').modal('show');
+		//$('#editarFoto').modal();
 		
 		var larguraModal = 700,
 			alturaModal = 500,
@@ -34,19 +34,15 @@ var EDITAR_PERFIL  = {
 				largura = parseInt(data[1], 10);
 				altura = parseInt(data[2], 10);
 				
-				 $('#editarFoto').css({
-					 'width': largura + 20,
+				 $('.modal-dialog').css({
+					 'max-width': largura + 80,
 					 'height': altura + 20
 				 });
 				 
 				 $('#cortarImagem').show();
 				 $('#cortarImagem').css('left', largura/2);
 				 $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" />');
-		         $('#editarFoto').modal({
-		             escapeClose: false,
-		             clickClose: false,
-		             showClose: true
-		         });
+		         
 		         
 		         EDITAR_PERFIL.JcropInit();         
 		         
@@ -82,7 +78,7 @@ var EDITAR_PERFIL  = {
 		      	url:'/WebHomeBeta/cropAndUpload',
 		      	success: function(e) {
 		      		$('#thumb-photo').attr('src', e);
-		      		$('.close-modal').trigger('click');	    
+		      		$('.close').trigger('click');	    
 		      	},
 		      	error: function(erro) {
 		      		console.log('---erro = ',erro);
