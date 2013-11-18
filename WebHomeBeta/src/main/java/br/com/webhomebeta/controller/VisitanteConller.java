@@ -82,7 +82,7 @@ public class VisitanteConller {
 		return json;
 	}
 
-	@RequestMapping(value = "admin/visitante/salvar", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/visitante/salvar", method = RequestMethod.GET)
 	public String salvarVisitante(@ModelAttribute("bean") BindingResult result,
 			VisitanteBean bean) {
 		Visitante visitante = new Visitante();
@@ -95,7 +95,7 @@ public class VisitanteConller {
 		bean.getVisitanteTO().setPlacaDoCarro(null);
 		bean.getVisitanteTO().setRg(null);
 
-		return "redirect:/admin/visitante";
+		return "redirect:/admin/visitantes";
 	}
 
 	@RequestMapping(value = "admin/visitante/delete/id={id}", method = RequestMethod.GET)
