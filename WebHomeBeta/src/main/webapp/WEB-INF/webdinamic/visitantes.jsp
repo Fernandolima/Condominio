@@ -116,7 +116,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Cadastro de Enquetes</div>
+                                <div class="muted pull-left">Cadastro de Visitantes</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -139,7 +139,7 @@
                                         </div>
                                         
                                          <div class="control-group">
-                                        	<form:label for="rgVisitante" path="VisitanteTO.rg" class="control-label">Numero da Carteira de Identidade:</form:label>
+                                        	<form:label for="rgVisitante" path="VisitanteTO.rg" class="control-label">Registro Geral (RG):</form:label>
 	                                        <div class="controls">
 	                                        	<form:input type="text" id="rgVisitante" path="visitanteTO.rg" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
@@ -170,7 +170,7 @@
                                         
                                                                            
                                         <div class="form-actions">
-                                        	<a href="/WebHomeBeta/admin/cadastrar/visitantes" id="btn-adiciona-visitante" class="btn btn-info">Adicionar visitante</a>
+                                        	<a href="/WebHomeBeta/admin/visitante/salvar" id="btn-adiciona-visitante" class="btn btn-info">Adicionar visitante</a>
                                         </div>
                                       </fieldset>
                                     </form:form>
