@@ -1,6 +1,5 @@
 var LOGIN = {
 	hash: null,
-	
 	init: function() {
 		//pega parâmetro da URL
 		hash = location.href.split('?');
@@ -19,7 +18,16 @@ var LOGIN = {
 				break;
 			}
 		}
-	}	
+	},
+	
+	sendLogin: function(e)	{
+		e.preventDefault();
+		$.ajax({
+	    	type: 'post',
+	      	url:'j-spring-security-check',
+	      	data: $("#frmLogin").serialize()
+	    });
+	}
 }
 
 $(function() {
@@ -27,7 +35,7 @@ $(function() {
 	if($('#login-view')[0]){
 		LOGIN.init();
 	}
-	
+	$("#btnLogin").on('click', LOGIN.sendLogin);
 	//quando o form for submetido exibe o load e esconde o botão
 	$('#frmLogin').on('submit', function(){
 		$('#btSubmitLogin').css('display', 'none');

@@ -33,6 +33,7 @@
 		<mapping class="br.com.webhomebeta.entity.CalendarEvent"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Gasto"></mapping>
 		<mapping class="br.com.webhomebeta.entity.Visitante"></mapping>
+		<mapping class="br.com.webhomebeta.entity.TentativaLogin"></mapping>
 
 
 	</session-factory>

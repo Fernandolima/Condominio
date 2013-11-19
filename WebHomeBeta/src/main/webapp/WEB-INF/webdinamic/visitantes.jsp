@@ -102,7 +102,7 @@
                         <li>		
                             <a href="/WebHomeBeta/admin/visitantes"><i class="icon-chevron-right "></i>Visitantes</a>
                         </li>
-                        <li>		
+                        <li class="active">		
                             <a href="/WebHomeBeta/admin/visitantes/cadastro"><i class="icon-chevron-right "></i>Cadastrar Visitantes</a>
                         </li>
                         </sec:authorize>
@@ -125,14 +125,14 @@
                                         <legend>Visitantes</legend>
                                         
                                         <div class="control-group">
-                                        	<form:label for="tituloVisitante" path="VisitanteTO.nomeVisitante" class="control-label">Nome do Visitante:</form:label>
+                                        	<form:label for="tituloVisitante" path="visitanteTO.nomeVisitante" class="control-label">Nome do Visitante:</form:label>
 	                                        <div class="controls">
 	                                        	<form:input type="text" id="tituloVisitante" path="visitanteTO.nomeVisitante" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
                                         </div>
                                         
                                         <div class="control-group">
-                                        	<form:label for="visitantePlacadoCarro" path="VisitanteTO.placaDoCarro" class="control-label">Digite a Placa do Carro:</form:label>
+                                        	<form:label for="visitantePlacadoCarro" path="visitanteTO.placaDoCarro" class="control-label">Digite a Placa do Carro:</form:label>
 	                                        <div class="controls">
 	                                        	<form:input type="text" id="placaVisitante" path="visitanteTO.placaDoCarro" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
@@ -146,14 +146,14 @@
                                         </div>
                                         
                                           <div class="control-group">
-                                        	<form:label for="apVisitante" path="VisitanteTO.ap" class="control-label">Apartamento:</form:label>
+                                        	<form:label for="apVisitante" path="visitanteTO.ap" class="control-label">Apartamento:</form:label>
 	                                        <div class="controls">
 	                                        	<form:input type="text" id="apVisitante" path="visitanteTO.ap" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
                                         </div>
                                         
                                         <div class="control-group">
-                                        	<form:label for="blocoVisitante" path="VisitanteTO.bloco" class="control-label">Bloco:</form:label>
+                                        	<form:label for="blocoVisitante" path="visitanteTO.bloco" class="control-label">Bloco:</form:label>
 	                                        <div class="controls">
 	                                        	<form:input type="text" id="blocoVisitante" path="visitanteTO.bloco" autocomplete="off" class="input-xlarge focused" />
 	                                        </div>
@@ -169,9 +169,9 @@
                                       
                                         
                                                                            
-                                        <div class="form-actions">
-                                        	<a href="/WebHomeBeta/admin/visitante/salvar" id="btn-adiciona-visitante" class="btn btn-info">Adicionar visitante</a>
-                                        </div>
+                                       <div class="form-actions">
+                                          		<input type="submit" class="btn btn-primary" value="Adicionar Visitante" />
+                                          	</div>
                                       </fieldset>
                                     </form:form>
 

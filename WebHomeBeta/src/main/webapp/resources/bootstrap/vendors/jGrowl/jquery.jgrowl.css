@@ -68,15 +68,14 @@ div.jGrowl.bottom-right {
 }
 
 div.jGrowl.center {
-	top: 				0px;
-	width: 				50%;
-	left: 				25%;
+	top:				44%;
+	left: 				44%;
 }
 
 /** Cross Browser Styling **/
 div.center div.jGrowl-notification, div.center div.jGrowl-closer {
-	margin-left: 		auto;
-	margin-right: 		auto;
+	margin-left: 		none;
+	margin-right: 		none;
 }
 
 div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {

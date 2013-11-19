@@ -133,7 +133,7 @@
 						              <tbody>
 						                <c:forEach items="${reservas}" var="item">
 						                	<tr>
-						                		<td><c:out value="${item.title}"/></td>
+						                		<td style="word-break: break-word;"><c:out value="${item.title}"/></td>
 						                		<td><c:out value="${item.nomeEspaco}"/></td>
 						                		<c:choose>
 													<c:when test="${item.aprovada}">

@@ -70,9 +70,9 @@
 						<li class="active"><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Usu&aacute;rios</a></li>
+						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>
@@ -84,12 +84,12 @@
 					<input type="button" id="submitComment" class="btn btn-warning" value="Publicar" />
 				</form:form>
 				
-				<div id="main-comments"></div>
+				<div class = "row" id="main-comments"></div>
 				
 			</div>
-			
+			<div class="col-md-3 col-md-offset-1" style="margin-bottom: 30px; ">
 			<c:if test="${fn:length(listaEnquetes) gt 0}">
-				<div class="col-md-3 col-md-offset-1" style="margin-bottom: 30px; background: #ECEFF5; ">
+				<div class = "row" style="background: #ECEFF5; padding-left: 15px; padding-right: 15px;">
 					<c:forEach items="${listaEnquetes}" var="item">
 						<div class="enquete" id="idEnquete-<c:out value="${item.idEnquete}"/>">
 							<h4>Enquete: <c:out value="${item.enquete}"/></h4>
@@ -108,43 +108,62 @@
 						</div>
 					</c:forEach>
 				</div>
-			</c:if>
-			
-			<div class="col-md-3 col-md-offset-1" style="background: #ECEFF5; padding-bottom:15px;">
-				<h4>Anúncios</h4>
-				<div class="panel-group" id="accordion">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-      						<h4 class="panel-title">
-					        	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-					          		vende-se apartamento
-					        	</a>
-      						</h4>
-    					</div>
-    					<div id="collapseOne" class="panel-collapse collapse in">
-					    	<div class="panel-body">
-					        	3dorm, sala, cozinha planejada
-					        	Contato: 19 33221111
-					      	</div>
-					    </div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-      						<h4 class="panel-title">
-					        	<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-					          		vende-se apartamento
-					        	</a>
-      						</h4>
-    					</div>
-    					<div id="collapseTwo" class="panel-collapse collapse">
-					    	<div class="panel-body">
-					        	3dorm, sala, cozinha planejada
-					        	Contato: 19 33221111
-					      	</div>
-					    </div>
-					</div>
+				
+				</c:if>
+				
+				<div class = "row" id="enquetesPariticipadas" style="background: #F1F1F1; padding-left: 15px; padding-right: 15px; margin-top: 20px;">
+					<c:forEach items="${listaEnquetesVotadas}" var="item">
+						<div class="enquete">
+							<h5 class="text-info"><b>Enquete: <c:out value="${item.enquete}"/></b></h5>
+							<div class="opcoesEnquete">
+								<c:forEach items="${item.opcoes}" var="opc">
+									<!-- label><c:out value="${opc.opcao}"/>: <c:out value="${opc.porcentagemVotos}"/>%</label-->
+									
+									<p class="text-danger"><c:out value="${opc.opcao}"/></p>
+									<div class="progress">
+  										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<c:out value="${opc.porcentagemVotos}"/>" aria-valuemin="0" aria-valuemax="100" style="width: <c:out value="${opc.porcentagemVotos}"/>%">
+    										<span class="sr-only">80% Complete</span>
+  										</div>
+									</div>
+									
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
+			
+			
+			<div class = "row" style="padding-bottom: 25px; padding-left: 15px; padding-right: 15px; margin-top: 30px; background: #ECEFF5">
+			
+			<h4>Anúncios</h4>
+				<div class="panel-group" id="accordion">
+					
+					<c:forEach items="${listaAnuncios}" var="item">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+	      						<h4 class="panel-title">
+						        	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${item.idInformativo}" />">
+						          		vende-se apartamento
+						          		<%--<c:out value="${item.titulo}" /> --%>
+						        	</a>
+	      						</h4>
+	    					</div>
+	    					
+	    					<div id="<c:out value="${item.idInformativo}" />" class="panel-collapse collapse">
+						    	<div class="panel-body">
+						        	<c:out value="${item.informativo}" />
+						      	</div>
+						    </div>
+						</div>
+					</c:forEach>
+					
+										
+				</div>
+			  </div>
 			</div>
+			
+				
+			
 					    	
 		</div>
 			

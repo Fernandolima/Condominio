@@ -28,6 +28,7 @@ import br.com.webhomebeta.entity.Reserva;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.CalendarEventJSON;
 import br.com.webhomebeta.service.CalendarEventService;
+import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EspacoCondominioServe;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -41,6 +42,8 @@ public class FullCalendarController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private EspacoCondominioServe condominioServe;
+	@Autowired
+	private EmailServico emailServico;
 
 	@RequestMapping(value = "home/espaco/id={id}")
 	public ModelAndView show(@PathVariable("id") int id, ModelMap model) {
@@ -76,7 +79,7 @@ public class FullCalendarController {
 			@RequestParam("idUser") int idUser, @RequestParam("dia") int dia,
 			@RequestParam("mes") int mes, @RequestParam("ano") int ano, @RequestParam("nomeEspaco") String nomeEspaco) {
 
-		Usuario u = usuarioService.getById(idUser);
+		Usuario u = usuarioService.getImg(idUser);
 
 		DateTime dateTime = new DateTime(ano, mes, dia, 0, 0);
 
@@ -89,9 +92,9 @@ public class FullCalendarController {
 		calendarEvent.setStart(dateTime.toDate());
 		calendarEvent.setNome(u.getNome());
 		calendarEvent.setNomeEspaco(nomeEspaco);
-		
 
 		calendarEventService.save(calendarEvent);
+		emailServico.emailNovaReserva(u, calendarEvent);
 
 		return "redirect:/home/listarEspaco";
 	}
@@ -116,6 +119,7 @@ public class FullCalendarController {
 	@RequestMapping(value = "admin/reservas/ativar")
 	public @ResponseBody String aceitarReserva(@RequestParam("idReserva") int id,@RequestParam("ativa") boolean ativa){
 			calendarEventService.update(id, ativa);
+			emailServico.emailReservaAceita(getUsuario(), calendarEventService.getEvent(id));
 			return "true";
 	}
 	@RequestMapping(value = "admin/reservas/deletar")

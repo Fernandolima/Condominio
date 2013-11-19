@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import com.googlecode.ehcache.annotations.Cacheable;
 
 import br.com.webhomebeta.dao.PublicacaoDAO;
 import br.com.webhomebeta.entity.Publicacao;
+import br.com.webhomebeta.entity.Usuario;
 
 public class PublicacaoDAOImp implements PublicacaoDAO {
 	
@@ -78,6 +80,12 @@ public class PublicacaoDAOImp implements PublicacaoDAO {
 	public Publicacao getUnicaPublicacao(int idPublicacao) {
 		Publicacao p = (Publicacao) factory.getCurrentSession().get(Publicacao.class,idPublicacao);
 		return p;
+	}
+	
+	@Transactional
+	public long getRowCount() {
+		return (long) factory.getCurrentSession().createCriteria(Publicacao.class)
+				.setProjection(Projections.rowCount()).uniqueResult();
 	}
 	
 }

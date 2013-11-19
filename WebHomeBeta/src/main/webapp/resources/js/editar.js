@@ -78,13 +78,35 @@ var EDITAR_PERFIL  = {
 		      	url:'/WebHomeBeta/cropAndUpload',
 		      	success: function(e) {
 		      		$('#thumb-photo').attr('src', e);
-		      		$('.close').trigger('click');	    
+		      		$('.close').trigger('click');
 		      	},
 		      	error: function(erro) {
 		      		console.log('---erro = ',erro);
 		      	}
 
 		    });
+	 },
+	 
+	 alterarSenha: function(e) {
+	 
+		 e.preventDefault();
+		 
+		 $.ajax({
+				url: '/WebHomeBeta/perfil/alterarSenha',
+				type: 'POST',
+				data : $('#frmAlterarSenha').serialize(),
+				success: function(data) {
+					if(data == 'true'){
+						$.jGrowl("Sua senha foi alterada!", { header: 'SUCESSO'});
+					}
+					else if(data == 'senhaNaoConfere'){
+						$.jGrowl("As senhas não conferem!", { header: 'ERRO'});
+					}else{
+						$.jGrowl("A senha atual está inválida!", { header: 'ERRO'});
+					}
+				}
+		 });
+		 
 	 },
 	 
 	 abrirAlterarSenha: function(e) {
@@ -102,6 +124,8 @@ $(function() {
 	
 	//alterar foto do usuário
 	$('#alterarFoto').on('click', EDITAR_PERFIL.alterarFoto);
+	
+	$('.alterarSenha').on('click', EDITAR_PERFIL.alterarSenha);
 	
 	//Quando clica em cortar foto
 	$('body #cortarImagem').on('click', EDITAR_PERFIL.cortarFoto);

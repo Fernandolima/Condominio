@@ -22,6 +22,7 @@ public interface UsuarioDAO {
 		  public Usuario getByCargo(String cargo);
 		  public void update(int idUser, String senha);
 		  public List<Usuario> getLisAtivo(boolean ativo);
+		  public Usuario getImg(int id);
 		  
 	}
 

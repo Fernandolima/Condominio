@@ -21,6 +21,7 @@ public class JsonPublicacao {
 	private int quantidadeGostou;
 	private int quantidadeNaoGostou;
 	private boolean fimPublicacoes;
+	private int colunaInicial;
 
 	
 
@@ -40,6 +41,15 @@ public class JsonPublicacao {
 	}
 	
 	
+	
+	public int getColunaInicial() {
+		return colunaInicial;
+	}
+
+	public void setColunaInicial(int colunaInicial) {
+		this.colunaInicial = colunaInicial;
+	}
+
 	public boolean isFimPublicacoes() {
 		return fimPublicacoes;
 	}

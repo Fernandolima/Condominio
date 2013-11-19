@@ -53,6 +53,7 @@ import br.com.webhomebeta.json.OpcaoVotadaJSON;
 import br.com.webhomebeta.json.UsuarioPublicacaoJSON;
 import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.EnquetesService;
+import br.com.webhomebeta.service.InformativoService;
 import br.com.webhomebeta.service.NotificacaoService;
 import br.com.webhomebeta.service.OpcaoService;
 import br.com.webhomebeta.service.PublicacaoService;
@@ -69,6 +70,8 @@ public class HomeController {
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
+	private InformativoService informativoService;
+	@Autowired
 	private MoradorControllerBean moradorControllerBean;
 	@Autowired
 	private NotificacaoService notificacaoService;
@@ -84,10 +87,9 @@ public class HomeController {
 		Usuario usuario = getUsuario();
 
 		moradorControllerBean.setUsuario(getUsuario());
-		moradorControllerBean.setColunaInicial(0);
 
 		model.put("moradorControllerBean", moradorControllerBean);
-
+		model.put("listaAnuncios", informativoService.getList());
 		model.put("listaEnquetes", getEnquetes(usuario));
 		model.put("listaEnquetesVotadas", getEnquetesVotadas(usuario));
 		model.put("usuario", usuario);
@@ -163,13 +165,25 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "getPublicacao", method = RequestMethod.POST)
 	public @ResponseBody
-	ArrayList<JsonPublicacao> sendJsonPublicacao() {
+	ArrayList<JsonPublicacao> sendJsonPublicacao(
+			@RequestParam("colunaInicial") int colunaInicial) {
+		Usuario usuario = getUsuario();
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ArrayList<JsonPublicacao> jsonPublicacaos = new ArrayList<>();
 		final int tamanhoColuna = 10;
 
+		System.out.println("ROWCOUNT PUBLICACOES: "
+				+ publicacaoService.getRowCount());
+
+		if (colunaInicial >= publicacaoService.getRowCount()) {
+			JsonPublicacao p = new JsonPublicacao();
+			p.setFimPublicacoes(true);
+			jsonPublicacaos.add(p);
+			return jsonPublicacaos;
+		}
+
 		List<Publicacao> publicacaoes = publicacaoService.getPublicacoes(
-				moradorControllerBean.getColunaInicial(), tamanhoColuna);
+				colunaInicial, tamanhoColuna);
 
 		// Varre cada publicacao
 		for (Publicacao p : publicacaoes) {
@@ -196,10 +210,10 @@ public class HomeController {
 			}
 
 			for (NaoGostou naoGostou : p.getNaoGostous()) {
-				NaoGostouJSON gostouJSON = new NaoGostouJSON(naoGostou.getId(),
-						naoGostou.getIdUsuario(), naoGostou.getPublicacao()
-								.getIdPublicacao());
-				naoGostouJSONs.add(gostouJSON);
+				NaoGostouJSON naoGostouJSON = new NaoGostouJSON(
+						naoGostou.getId(), naoGostou.getIdUsuario(), naoGostou
+								.getPublicacao().getIdPublicacao());
+				naoGostouJSONs.add(naoGostouJSON);
 			}
 
 			// Varre os comentarios dentro da publicacao
@@ -225,18 +239,16 @@ public class HomeController {
 			jsonPublicacao.setQuantidadeComentarios(comentariosJSON.size());
 
 			// Verifica se a publicacao eh do usuario que esta logado
-			if (moradorControllerBean.getUsuario().getIdUser() == p
-					.getUsuarioPublicacao().getIdUser())
+			if (usuario.getIdUser() == p.getUsuarioPublicacao().getIdUser())
 				jsonPublicacao.setProprietario(true);
 			else
 				jsonPublicacao.setProprietario(false);
 
 			// Seta as publicacoes filtradas e as retorna para a VIEW
+			colunaInicial = publicacaoes.size();
+			jsonPublicacao.setColunaInicial(colunaInicial);
 			jsonPublicacaos.add(jsonPublicacao);
 		}
-
-		moradorControllerBean.setColunaInicial(moradorControllerBean
-				.getColunaInicial() + publicacaoes.size());
 
 		return jsonPublicacaos;
 	}
@@ -251,10 +263,10 @@ public class HomeController {
 				.getUnicaPublicacao(moradorControllerBean.getIdPublicacao());
 		moradorControllerBean.getComentarioTO().setPublicacao(p);
 		moradorControllerBean.getComentarioTO().setUsuarioComentario(
-				this.moradorControllerBean.getUsuario());
+				getUsuario());
 		moradorControllerBean.getComentarioTO().setData(new Date());
 		moradorControllerBean.getComentarioTO().setImagem(
-				this.moradorControllerBean.getUsuario().getImagemView());
+				getUsuario().getImagemView());
 
 		Comentario comentario = new Comentario();
 		BeanUtils.copyProperties(moradorControllerBean.getComentarioTO(),
@@ -267,11 +279,9 @@ public class HomeController {
 
 		NovoComentarioJSON comentarioJSON = new NovoComentarioJSON(
 				moradorControllerBean.getComentarioTO().getComentario(),
-				c.getIdComentario(), this.moradorControllerBean.getUsuario()
-						.getIdUser(), this.moradorControllerBean.getUsuario()
+				c.getIdComentario(), getUsuario().getIdUser(), getUsuario()
 						.getImagemView(), df.format(moradorControllerBean
-						.getComentarioTO().getData()),
-				this.moradorControllerBean.getUsuario().getNome());
+						.getComentarioTO().getData()), getUsuario().getNome());
 		return comentarioJSON;
 	}
 
@@ -294,8 +304,7 @@ public class HomeController {
 		// Seta a data de postagem
 		bean.getPublicacaoTO().setData(new Date());
 		// Seta a imagem de quem publicou
-		bean.getPublicacaoTO().setImagem(
-				moradorControllerBean.getUsuario().getImagemView());
+		bean.getPublicacaoTO().setImagem(getUsuario().getImagemView());
 		Publicacao publicacao = new Publicacao();
 		// salva no banco
 		BeanUtils.copyProperties(bean.getPublicacaoTO(), publicacao);
@@ -306,10 +315,9 @@ public class HomeController {
 		// monta o JSON de Publicacao.
 		NovaPublicacaoJSON novaPublicacaoJSON = new NovaPublicacaoJSON(
 				p.getIdPublicacao(), publicacaoEscape, df.format(bean
-						.getPublicacaoTO().getData()), moradorControllerBean
-						.getUsuario().getIdUser(), moradorControllerBean
-						.getUsuario().getNome(), moradorControllerBean
-						.getUsuario().getImagemView());
+						.getPublicacaoTO().getData()),
+				getUsuario().getIdUser(), getUsuario().getNome(), getUsuario()
+						.getImagemView());
 		return novaPublicacaoJSON;
 
 	}
@@ -396,7 +404,7 @@ public class HomeController {
 					.getUsuarioEnquete().getIdUser(), e.getTotalVotos(),
 					e.getEnquete());
 			for (Opcao o : e.getOpcao()) {
-				
+
 				OpcaoJSON opcaoJSON = new OpcaoJSON(o.getIdOpcao(),
 						o.getOpcao(),
 						f.format(((o.getQuatVots() * 100d) / totalVotos)));

@@ -16,18 +16,7 @@ public class MoradorControllerBean implements Serializable {
 	private Usuario usuario;
 	private int idComentario;
 	private int idPublicacao;
-	private int colunaInicial;
 	
-	
-
-	public int getColunaInicial() {
-		return colunaInicial;
-	}
-
-	public void setColunaInicial(int colunaInicial) {
-		this.colunaInicial = colunaInicial;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

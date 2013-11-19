@@ -29,6 +29,9 @@
 				} else if (authority.getAuthority().equals("ROLE_MORADOR")) {
 					path = request.getContextPath()+"/home";
 					break;
+				} else{
+					path = request.getContextPath()+"/admin";
+					break;
 				}
 			}
 		}
@@ -56,14 +59,14 @@
 	</head>
 	<body id="login">
 	    <div class="container">
-	        <form class="form-signin" action="j-spring-security-check" id="frmLogin" method="post" autocomplete="off">
+	        <form class="form-signin" action="#" id="frmLogin" method="post" autocomplete="off">
 	            <h2 class="form-signin-heading" id="titleLogin">Web Home</h2>
 	            <input type="text" class="input-block-level" name="j_username" placeholder="E-mail">
 	            <input type="password" class="input-block-level" name="j_password" placeholder="Senha">
 	            <label for="j_remember" class="checkbox">
 	            <input type="checkbox" id="j_remember" name="_spring_security_remember_me"> Continuar conectado
 	            </label>
-	            <input class="btn btn-large btn-primary" type="submit" value="Login"/>
+	            <input id ="btnLogin" class="btn btn-large btn-primary" type="button" value="Login"/>
 	            
 	            <p id="noRegister">Ainda n&atilde;o tem cadastro? <a href="cadastro" id="btRegister">Clique aqui</a></p>
 	        </form>	

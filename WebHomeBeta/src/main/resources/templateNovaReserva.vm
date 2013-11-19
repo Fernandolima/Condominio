@@ -171,14 +171,9 @@ body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; 
                                 <td class="w580" width="580">
                                     <p align="left" class="article-title"><singleline label="Title">Nova Reserva</singleline></p>
                                     <div align="left" class="article-content">
-                                        <multiline label="Description">Olá $nome! Sua nova senha foi gerada!</multiline>
-
-										<p>Senha:  $senha</p>
-
-										<p>Página principal: <a href ="http://localhost:8080/WebHomeBeta/home">Web Home</a></p>
-
-										<p>Ao entrar na WebHome altere sua senha!</p>
-										                         
+                                        <multiline label="Description">O morador $nome realizou uma nova reserva!</multiline>
+                                        <p>Data da reserva: $data</p>
+                                        <p>Acesse o link para validar a reserva: <a href ="http://localhost:8080/WebHomeBeta/admin/reservas">Web Home</a></p>
                                     </div>
                                 </td>
                             </tr>

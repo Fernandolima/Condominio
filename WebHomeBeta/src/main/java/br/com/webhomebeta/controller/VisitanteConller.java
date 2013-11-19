@@ -41,7 +41,7 @@ public class VisitanteConller {
 	private VisitanteBean visitanteBean;
 
 	// mapeia a URL principal (visitantes) e retorna um novo objeto visitante para listar os visitantes
-	@RequestMapping(value = "admin/visitante", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/visitantes", method = RequestMethod.GET)
 	public ModelAndView listaVisitantes(ModelMap model) {
 		List<Visitante> visitantes = visitanteService.getVisitantes();
 		model.put("usuario", getUsuario());
@@ -53,7 +53,7 @@ public class VisitanteConller {
 
 
 	// mapeia a URL principal (visitantes) e retorna um novo objeto visitantes para cadastrar os visitantes
-	@RequestMapping(value = "admin/cadastrar/visitantes", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/visitantes/cadastro", method = RequestMethod.GET)
 	public ModelAndView visitantes(ModelMap model) {
 		model.put("bean", visitanteBean);
 		model.put("usuario", getUsuario());
@@ -82,9 +82,8 @@ public class VisitanteConller {
 		return json;
 	}
 
-	@RequestMapping(value = "admin/visitante/salvar", method = RequestMethod.GET)
-	public String salvarVisitante(@ModelAttribute("bean") BindingResult result,
-			VisitanteBean bean) {
+	@RequestMapping(value = "admin/visitante/salvar", method = RequestMethod.POST)
+	public String salvarVisitante(@ModelAttribute("bean") VisitanteBean bean, BindingResult result) {
 		Visitante visitante = new Visitante();
 		BeanUtils.copyProperties(bean.getVisitanteTO(), visitante);
 		visitanteService.save(visitante);
@@ -95,7 +94,7 @@ public class VisitanteConller {
 		bean.getVisitanteTO().setPlacaDoCarro(null);
 		bean.getVisitanteTO().setRg(null);
 
-		return "redirect:/admin/visitantes";
+		return "redirect:/admin/visitante";
 	}
 
 	@RequestMapping(value = "admin/visitante/delete/id={id}", method = RequestMethod.GET)

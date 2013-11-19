@@ -10,66 +10,70 @@ import br.com.webhomebeta.dao.UsuarioDAO;
 
 import br.com.webhomebeta.entity.Usuario;
 
-@Service("visitanteService")
+
 public class UsuarioService {
 	// @Autowired injeta na propriedade anotada um Bean do Spring que seja od
 	// mesmo tipo da propriedade
 	@Autowired
-	private UsuarioDAO dao;
+	private UsuarioDAO usuarioDao;
 
 	public Usuario save(Usuario usuario) {
 
-		return dao.save(usuario);
+		return usuarioDao.save(usuario);
 	}
 
 	public List<Usuario> getUsuario() {
 
-		return dao.getUsuario();
+		return usuarioDao.getUsuario();
 	}
 
 	public List<Usuario> getUsuarioNaoAtivo() {
 
-		return dao.getUsuarioNaoAtivo();
+		return usuarioDao.getUsuarioNaoAtivo();
 	}
 
 	public Usuario getUsuarioByLogin(String login) {
 
-		return dao.getUsuarioByLogin(login);
+		return usuarioDao.getUsuarioByLogin(login);
 	}
 
 	public void update(Usuario usuario) {
 
-		dao.update(usuario);
+		usuarioDao.update(usuario);
 	}
 
 	public long getRowCount(boolean b) {
-		return dao.getRowCount(b);
+		return usuarioDao.getRowCount(b);
 	}
 
 	public Usuario getById(int id) {
-		return dao.getById(id);
+		return usuarioDao.getById(id);
 	}
 
 	public void evitcCache() {
-		dao.evictCache();
+		usuarioDao.evictCache();
 	}
 
 	public void update(int id, boolean b) {
-		dao.update(id, b);
+		usuarioDao.update(id, b);
 	}
 
 	public Usuario getByCargo(String cargo) {
-		return dao.getByCargo(cargo);
+		return usuarioDao.getByCargo(cargo);
 	}
 
 	public void update(int idUser, String senha) {
-		dao.update(idUser, senha);
+		usuarioDao.update(idUser, senha);
 	}
 
 	public List<Usuario> getListAtiva(boolean usuario) {
-		return dao.getLisAtivo(usuario);
+		return usuarioDao.getLisAtivo(usuario);
 	}
 	public Usuario getId(int id) {
-		return dao.getId(id);
+		return usuarioDao.getId(id);
+	}
+	
+	public Usuario getImg(int id){
+		return usuarioDao.getImg(id);
 	}
 }

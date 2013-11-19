@@ -68,10 +68,10 @@
 					<ul class="nav nav-pills nav-stacked nav-usuario">
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
-						<li class="active"><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
+						<li class="active"><a href="#">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Usu&aacute;rios</a></li>
+						<li><a href="#">Mural</a></li>
 					</ul>
 				</div>
 			</div>
@@ -85,7 +85,7 @@
 				<legend>Ano: <c:out value="${ano}"></c:out></legend>
 					<div id="myfirstchart" style="height: 250px;"></div>
 				</fieldset>
-                
+                <a href="/WebHomeBeta/home/gastos" class="btn btn-primary">Voltar</a>
 			</div>
 		</div>
 	</div>

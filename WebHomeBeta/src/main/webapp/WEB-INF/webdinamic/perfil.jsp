@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>" />
 	<link rel="stylesheet" href="<c:url value = "/css/jquery.Jcrop.min.css"/>"/>
 	
 	<script src="<c:url value = "/js/jquery.form.js"/>" type="text/javascript"></script>
@@ -97,16 +98,16 @@
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
-						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
+						<img src="<c:out value="${usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
 					</div>
 					
 					<ul class="nav nav-pills nav-stacked nav-usuario">
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Usu&aacute;rios</a></li>
+						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>
@@ -142,16 +143,16 @@
         							<fieldset disabled>
 	  									<div class="form-group">
 	    									<label for="exampleInputEmail1">Nome</label>
-	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="Tatiane Jayme Dias">
+	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.nome}">
 	  									</div>
 	  								
 								    	<div class="form-group">
 								      		<label for="disabledTextInput">E-mail</label>
-								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="tatianejayme@gmail.com">
+								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.email}">
 								    	</div>
 									    <div class="form-group">
 	    									<label for="dataNascimento">Data de Nascimento</label>
-	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="16/10/1985">
+	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.dt_nascimento}">
 	  									</div>
 	  								</fieldset>
 								</form>
@@ -169,20 +170,20 @@
    						</div>
     					<div id="collapseTwo" class="panel-collapse collapse">
       						<div class="panel-body">
-	      						<form role="form" action="" method="POST">
+	      						<form role="form" action="#" method="POST" id="frmAlterarSenha">
   									<div class="form-group">
     									<label for="senhaAtual">Senha atual:</label>
-    									<input type="password" class="form-control" id="senhaAtual">
+    									<input type="password" class="form-control" id="senhaAtual" name="senha">
   									</div>
   									<div class="form-group">
     									<label for="novaSenha">Nova senha:</label>
-    									<input type="password" class="form-control" id="novaSenha">
+    									<input type="password" class="form-control" id="novaSenha" name="novaSenha">
   									</div>
   									<div class="form-group">
     									<label for="confNovaSenha">Confirmar nova senha:</label>
-    									<input type="password" class="form-control" id="confNovaSenha">
+    									<input type="password" class="form-control" id="confNovaSenha" name="confNovaSenha">
   									</div>
-  									<button type="submit" class="btn btn-primary">Alterar Senha</button>
+  									<button type="submit" class="btn btn-primary alterarSenha">Alterar Senha</button>
   								</form>        						
       						</div>
     					</div>
@@ -198,21 +199,33 @@
     					</div>
     					<div id="collapseThree" class="panel-collapse collapse">
       						<div class="panel-body">
-        						<form role="form" action="" method="POST">
+        						<form:form role="form" modelAttribute="perfilControllerBean" action="/WebHomeBeta/perfil/salvar" method="POST">
   									<div class="form-group">
-    									<label for="filmesFavoritos">Filmes favoritos:</label>
-    									<input type="text" class="form-control" id="filmesFavoritos">
+    									<form:label for="filmeFavorito" path="perfilTO.filme">Filme favorito:</form:label>
+    									<form:input type="text" class="form-control" id="filmeFavorito" path="perfilTO.filme"></form:input>
   									</div>
   									<div class="form-group">
-    									<label for="musicasFavoritas">Músicas favoritas:</label>
-    									<input type="text" class="form-control" id="musicasFavoritas">
+    									<form:label for="filmeFavorito" path="perfilTO.livros">Livro favorito:</form:label>
+    									<form:input type="text" class="form-control" id="livroFavorito" path="perfilTO.livros"></form:input>
   									</div>
   									<div class="form-group">
-    									<label for="pensamento">Pensamento:</label>
-    									<input type="text" class="form-control" id="pensamento">
+    									<form:label for="musicaFavorita" path="perfilTO.estilosMusicais">Música favorita:</form:label>
+    									<form:input type="text" class="form-control" id="musicaFavorita" path="perfilTO.estilosMusicais"></form:input>
+  									</div>
+  									<div class="form-group">
+    									<form:label for="sobreMim" path="perfilTO.sobreMim">Sobre mim:</form:label>
+    									<form:input type="text" class="form-control" id="sobreMim" path="perfilTO.sobreMim"></form:input>
+  									</div>
+  									<div class="form-group">
+    									<form:label for="idade" path="perfilTO.idade">Idade:</form:label>
+    									<form:input type="text" class="form-control" id="idade" path="perfilTO.idade"></form:input>
+  									</div>
+  									<div class="form-group">
+    									<form:label for="profissao" path="perfilTO.profissao">Profissão:</form:label>
+    									<form:input type="text" class="form-control" id="profissao" path="perfilTO.profissao"></form:input>
   									</div>
   									<button type="submit" class="btn btn-primary">Salvar</button>
-  								</form>   
+  								</form:form>   
      						 </div>
     					</div>
   					</div>  					
@@ -246,5 +259,9 @@
         	
         	
         </script>
+        
+        <div id="jGrowl" class="center jGrowl">
+		<div class="jGrowl-notification"></div>
+	</div>
 </body>
 </html>

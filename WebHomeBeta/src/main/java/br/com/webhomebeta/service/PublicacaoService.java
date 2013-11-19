@@ -41,4 +41,8 @@ public class PublicacaoService {
 	public void delete(Publicacao p){
 		publicacaoDAO.delete(p);
 	}
+	
+	public long getRowCount(){
+		return publicacaoDAO.getRowCount();
+	}
 }

@@ -16,7 +16,15 @@ public class PerfilControllerBean {
 	private String novaSenha;
 	private String confNovaSenha;
 	
+	
 
+	public PerfilTO getPerfilTO() {
+		return perfilTO;
+	}
+
+	public void setPerfilTO(PerfilTO perfilTO) {
+		this.perfilTO = perfilTO;
+	}
 
 	public String getSenha() {
 		return senha;
@@ -57,14 +65,6 @@ public class PerfilControllerBean {
 
 	public void setFileData(FileData fileData) {
 		this.fileData = fileData;
-	}
-
-	public PerfilTO getPerfilTO() {
-		return perfilTO;
-	}
-
-	public void setPerfilTO(PerfilTO perfilTO) {
-		this.perfilTO = perfilTO;
 	}
 
 	public Usuario getUsuario() {

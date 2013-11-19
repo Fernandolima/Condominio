@@ -169,17 +169,12 @@ body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; 
                         <table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
                             <tbody><tr>
                                 <td class="w580" width="580">
-                                    <p align="left" class="article-title"><singleline label="Title">Nova Reserva</singleline></p>
+                                    <p align="left" class="article-title"><singleline label="Title">Reserva Aceita</singleline></p>
                                     <div align="left" class="article-content">
-                                        <multiline label="Description">Olá $nome! Sua nova senha foi gerada!</multiline>
-
-										<p>Senha:  $senha</p>
-
-										<p>Página principal: <a href ="http://localhost:8080/WebHomeBeta/home">Web Home</a></p>
-
-										<p>Ao entrar na WebHome altere sua senha!</p>
-										                         
+                                        <multiline label="Description">A sua reserva foi aceita para a data $data</multiline>
+										<p>Acesse o link: <a href ="http://localhost:8080/WebHomeBeta/home">Web Home</a></p>
                                     </div>
+									 
                                 </td>
                             </tr>
                             <tr><td class="w580" width="580" height="10"></td></tr>
@@ -217,3 +212,4 @@ body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; 
         </td>
 	</tr>
 </tbody></table></body></html>
+ww

@@ -130,7 +130,7 @@
 						                		<td><c:out value="${item.espaco}"/></td>
 						                		<td><c:out value="${item.descricao}"/></td>
 						                		<td>
-						                		<a href="#div${item.idEspaco}" data-toggle="modal" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Delete</a>
+						                		<a href="#div${item.idEspaco}" data-toggle="modal" data-id="<c:out value="${item.idEspaco}"/>" class="btn btn-danger btn-delete-bloco">Excluir</a>
 						                			<div id="div${item.idEspaco}" class="modal hide">
 																<div class="modal-header">
 																	<button data-dismiss="modal" class="close" type="button">×</button>

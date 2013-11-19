@@ -15,13 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/morris.css"/>" />
-	
 
 	<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 <head>
 <body id="informativoView" class="rede-social">
-	<input type="hidden" id="userSessao" value="<c:out value="${usuario.idUser}"></c:out>" />
+	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -70,25 +68,45 @@
 					<ul class="nav nav-pills nav-stacked nav-usuario">
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
-						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li class="active"><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
+						<li class="active"><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
+						<li><a href="#">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<li><a href="#">Usu&aacute;rios</a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="col-md-9">
-				<div id="topPage">
-					<h3>Gastos totais do condomínio</h3>
+			
+				<div class="row">
+					<div id="topPage">
+						<img alt="${perfil.nomeUsuario}" class="fotoPerfilUsuario" src="${perfil.imagemUsuario}">
+						<p class="nomePerfilUsuario text-primary">${perfil.nomeUsuario}</p>
+					</div>
 				</div>
-				<fieldset>
-				<legend>Escolha o ano a ser visualizado</legend>
-					<c:forEach items="${gastos}" var="item">
-						<a href="/WebHomeBeta/home/gastos/ano=${item}" class="btn btn-primary">${item}</a>
-					</c:forEach>
-				</fieldset>
-                
+				
+				<div class="row">
+					<div class="jumbotron">
+					  
+					  <h3 class="text-primary">Idade</h3>
+					  <p>${perfil.idade}</p>
+					  <hr/>
+					  <h3 class="text-primary">Profissão</h3>
+					  <p>${perfil.profissao}</p>
+					  <hr/>	
+					  <h3 class="text-primary">Sobre mim</h3>
+					  <p>${perfil.sobreMim}</p>
+					  <hr/>
+					  <h3 class="text-primary">Livro favorito</h3>
+					  <p>${perfil.livros}</p>
+					  <hr/>
+					  <h3 class="text-primary">Filme favorito</h3>
+					  <p>${perfil.filme}</p>
+					  <hr/>
+					  <h3 class="text-primary">Música favorita</h3>
+					  <p>${perfil.estilosMusicais}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -100,7 +118,6 @@
 	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
-	
 	<script type="text/javascript">
 		$('#sidebar').affix({
 			offset : {

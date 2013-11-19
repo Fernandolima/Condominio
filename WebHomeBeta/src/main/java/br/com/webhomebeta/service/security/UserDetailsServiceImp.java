@@ -49,7 +49,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 					authoritiesAdmin);
 		} else if (usuario.getPermissao().equals("ROLE_MORADOR")){
 			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),authoritiesMorador);
-		} else if (usuario.getPermissao().equals("ROLE_FUNC")){
+		} else {
 			user = new UserDetailsImp(usuario.getSenha(), usuario.getLogin(),authoritiesFunc);
 		}
 		return user;

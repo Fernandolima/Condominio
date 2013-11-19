@@ -48,7 +48,8 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 		return usuario;
 	}
-/////
+
+	// ///
 	@Transactional
 	public List<Usuario> getUsuario() {
 		String sql = "exec [dbo].[USUARIOS_DESCRIPTOGRAFADO_ALL]";
@@ -155,7 +156,15 @@ public class UsuarioDAOImp implements UsuarioDAO {
 	@Override
 	@Transactional
 	public Usuario getId(int id) {
-		return (Usuario) factory.getCurrentSession().get(Usuario.class,id);
+		return (Usuario) factory.getCurrentSession().get(Usuario.class, id);
+	}
+
+	@Override
+	@Transactional
+	public Usuario getImg(int id) {
+		return (Usuario) factory.getCurrentSession()
+				.createSQLQuery("exec [dbo].[USUARIOS_DESCRIPTOGRAFADO] ?")
+				.addEntity(Usuario.class).setInteger(0, id).uniqueResult();
 	}
 
 }

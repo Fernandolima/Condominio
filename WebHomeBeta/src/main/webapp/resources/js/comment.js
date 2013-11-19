@@ -1,7 +1,9 @@
+
 var POST_COMMENT  = {	
 		
 		idUser: $('#userSessao').val(),
 		isScroll: true,
+		colunaInicial: 0,
 		
 		init: function() {
 			$.ajax({
@@ -14,7 +16,7 @@ var POST_COMMENT  = {
 			$.ajax({
 		    	type: 'post',
 		      	url:'/WebHomeBeta/getPublicacao',
-		      	dataType: 'json',	
+		      	data: {colunaInicial: POST_COMMENT.colunaInicial},
 		      	success: POST_COMMENT.loadHome,
 		      	error: function(e) {
 		      		console.log('erro = ', e);
@@ -25,14 +27,16 @@ var POST_COMMENT  = {
 		},
 		
 		loadNotificacao: function(data) {
+
 			var htmlNotificacao = '';
 			if(data.length > 0) {
 				$('#alerta-notificacao span').removeClass('glyphicon glyphicon-star-empty');
 				$('#alerta-notificacao span').addClass('glyphicon glyphicon-star');
 				$('#numeroNotificacao').text(data.length);
 				$.each(data, function(i, val){
-					htmlNotificacao += '<li class="notificacao">';
-						htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
+					htmlNotificacao += '<li class="notificacao notif">';
+						htmlNotificacao += '<img src = "'+val.imagem+'">';
+						htmlNotificacao += '<p class="mensagemNotificacao"><a href="'+val.url+'">'+val.texto+'</a></p>';
 					htmlNotificacao += '</li>';
 				});
 				$('#main-notificacao').html(htmlNotificacao);
@@ -44,7 +48,6 @@ var POST_COMMENT  = {
 			
 			if(data.length > 0) {
 				$.each(data, function(e, val){
-					console.log('val = ', val);
 					htmlHome = '';
 					
 					htmlHome += '<div class="post" data-id-user="'+val.usuarioPublicacao.idUsuarioPublicacao+'" data-id-post="'+val.idPublicacao+'">';
@@ -53,13 +56,14 @@ var POST_COMMENT  = {
 						}
 						htmlHome += '<img src="'+val.imagemPublicacao+'" class="thumb-post" />';
 						htmlHome += '<div class="comments-post">';
-							htmlHome += '<a href="#" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
+							htmlHome += '<a href="/WebHomeBeta/perfil/id='+val.usuarioPublicacao.idUsuarioPublicacao+'" class="name-user-comment">'+val.usuarioPublicacao.nome+'</a>';
 							htmlHome += '<p class="time-comments">'+val.dataPublicacao+'</p>';
 							htmlHome += '<p class="comment-user">'+val.publicacao+'</p>';
 							if(val.gostous){
 								var auxGostou = false,
 									auxNaoGostou = false,
 									idGostou = 0;
+									idNaoGostou = 0;
 								$.each(val.gostous, function(i, gostou){
 									if(gostou.idUsuario == POST_COMMENT.idUser){
 										auxGostou = true;
@@ -69,24 +73,28 @@ var POST_COMMENT  = {
 								$.each(val.naoGostous, function(i, naoGostou){
 									if(naoGostou.idUsuario == POST_COMMENT.idUser){
 										auxNaoGostou = true;
-										idGostou = gostou.id;
+										idNaoGostou = naoGostou.id;
 									}
 								});
+								
+								
 								
 								if(auxGostou){
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei active">'+val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeGostou+'</p><span class="iconNaoGostei" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="'+idNaoGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
-								} else if(auxGostou){ 
+								}
+								
+								else if(auxNaoGostou){ 
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei active">'+val.quantidadeGostou+'</p><span class="iconNaoGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei active">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei active" data-id-nao-gostou="'+idGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';									
 								} else{
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeGostou+'</p><span class="iconNaoGostei" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="'+idGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 						}
@@ -101,7 +109,7 @@ var POST_COMMENT  = {
 							$.each(val.comentarios, function(l, comment){							
 									htmlHome += '<div class="comments">';
 										htmlHome += '<img src="'+comment.imagemUsuario+'" class="thumb-post" />';
-										htmlHome += '<a href="#" class="name-user-comment">'+comment.nome+'</a>';
+										htmlHome += '<a href="/WebHomeBeta/perfil/id='+comment.idUsuarioComentario+'" class="name-user-comment">'+comment.nome+'</a>';
 										htmlHome += '<p class="time-comments">'+comment.dataComentario+'</p>';
 										htmlHome += '<p>'+comment.comentario+'</p>';
 									htmlHome += '</div>';
@@ -122,6 +130,8 @@ var POST_COMMENT  = {
 					$('#carrengandoComentario').remove();
 					$('#main-comments').append(htmlHome);
 					POST_COMMENT.isScroll = true;
+					POST_COMMENT.colunaInicial = val.colunaInicial;
+					
 				}); 
 			} else {
 				$('#carrengandoComentario').hide();
@@ -176,12 +186,12 @@ var POST_COMMENT  = {
 			htmlInserPost += '<a href="#" class="deletePost"><span class="glyphicon glyphicon-remove"></span></a>';
 			htmlInserPost += '<img src="'+e.caminhoImg+'" class="thumb-post" />';
 			htmlInserPost += '<div class="comments-post">';
-				htmlInserPost += '<a href="#" class="name-user-comment">'+e.nome+'</a>';
+				htmlInserPost += '<a href="/WebHomeBeta/perfil/id='+e.idUsuario+'" class="name-user-comment">'+e.nome+'</a>';
 				htmlInserPost += '<p class="time-comments">'+e.dataPublicacao+'</p>';
 				htmlInserPost += '<p class="comment-user">'+e.publicacao+'</p>';
 				htmlInserPost += '<div class="gosteiPublicacao">';
 					htmlInserPost += '<p class="labelGostei">0</p><span class="iconGostei" data-gostou="0"></span>';
-					htmlInserPost += '<p class="labelNaoGostei">0</p><span class="iconNaoGostei" data-id-gostou="" data-gostou="0"></span>';
+					htmlInserPost += '<p class="labelNaoGostei">0</p><span class="iconNaoGostei" data-id-nao-gostou="" data-nao-gostou="0"></span>';
 				htmlInserPost += '</div>';
 			htmlInserPost += '</div>';
 			htmlInserPost += '<a href="#" class="add-comments btn btn-info">Comentar</a>';
@@ -286,13 +296,14 @@ var POST_COMMENT  = {
 		      					$('#alerta-notificacao span').removeClass('glyphicon-star-empty');
 				      			$('#alerta-notificacao span').addClass('glyphicon-star');
 				      			
-		      					htmlNotificacao += '<li class="notificacao">';
-									htmlNotificacao += '<p class="mensagemNotificacao">'+val.texto+'</p>';
+				      			htmlNotificacao += '<li class="notificacao notif">';
+									htmlNotificacao += '<img src = "'+val.imagem+'">';
+									htmlNotificacao += '<p class="mensagemNotificacao"><a href="'+val.url+'">'+val.texto+'</a></p>';
 								htmlNotificacao += '</li>';
 		      				}
 		      			});
 						
-		      			if($('#main-notificacao li').length > 0) {
+		      			if($('#main-notificacao li.notif').length > 0) {
 		      				$('#main-notificacao').append(htmlNotificacao);
 		      			} else {
 		      				$('#main-notificacao').html(htmlNotificacao);
@@ -325,8 +336,7 @@ var POST_COMMENT  = {
 			
 			var el = $(this),
 				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
-				quantidadeGostou = el.attr('data-gostou'),
-				quantidadeNaoGostou = el.closest('.labelNaoGostei').text();
+				quantidadeGostou = el.attr('data-gostou');
 						
 			quantidadeGostou = parseInt(quantidadeGostou,10)+1;
 			
@@ -339,14 +349,12 @@ var POST_COMMENT  = {
 	            url: "/WebHomeBeta/gostou",
 	            data: dataCurtir,
 	            success: function (data) {
+	            	if(data != 'false'){            
 	            	el.addClass('active');
 	            	el.attr('data-id-gostou', data);
 	            	el.attr('data-gostou', quantidadeGostou);
 	    			el.closest('.gosteiPublicacao').find('.labelGostei').html(quantidadeGostou);
-	    				    			
-	    			if( el.hasClass('disable')) {
-	    				el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(parseInt(quantidadeNaoGostou, 10) - 1);
-	    			}
+	            	}    			
 	            },
 	            error: function () {
 	            	console.log('errormessage');
@@ -361,28 +369,23 @@ var POST_COMMENT  = {
 			
 			var el = $(this),
 			dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
-				quantidadeNaoGostou = el.attr('data-gostou'),
-				quantidadeGostou = el.closest('.labelGostei').text();
+				quantidadeNaoGostou = el.attr('data-nao-gostou');		
 			
-			if(el.hasClass('active')) {
-				return;
-			}
-			
-			quantidadeNaoGostou = parseInt(quantidadeNaoGostou,10)-1;
+				quantidadeNaoGostou = parseInt(quantidadeNaoGostou,10)+1;
 			
 			$.ajax({
 	            type: "post",
 	            url: "/WebHomeBeta/naoGostou",
 	            data: dataCurtir,
-	            success: function () {
+	            success: function (data) {
+	            	if(data != 'false'){
 	            	el.addClass('active');
-	            	el.attr('data-id-gostou', data);
-	            	el.attr('data-gostou', quantidadeGostou);
+	            	el.attr('data-id-nao-gostou', data);
+	            	el.attr('data-nao-gostou', quantidadeNaoGostou);
 	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(quantidadeNaoGostou);
 	    			
-	    			if( el.hasClass('disable')) {
-	    				el.closest('.gosteiPublicacao').find('.labelGostei').html(parseInt(quantidadeGostou, 10) - 1);
-	    			}
+	            	}
+	    			
 	    			
 	            },
 	            error: function () {
@@ -401,7 +404,8 @@ var POST_COMMENT  = {
 				idOpc='',
 				idUser = '',
 				idEnquete = '',
-				container = '';
+				container = '',
+				html = '';
 			
 			idOpc = el.closest('.enquete').find('.opcoesEnquete').find('input:checked').val();
 			
@@ -415,7 +419,25 @@ var POST_COMMENT  = {
 		            url: "/WebHomeBeta/computarVoto",
 		            data: 'idUser=' + idUser + '&idOpcao=' + idOpc + '&idEnquete=' + idEnquete,
 		            success: function (data) {
-		            	$('#' + container).hide('slow');
+		            	html += '<div class="enquete">';
+		            	html += '<h5 class="text-info"><b>Enquete: '+data.enquete+'</b></h5>';
+		            		html += '<div class="opcoesEnquete">';
+		            			$.each(data.opcoes, function(i, val){
+			            			//html += '<label>'+val.opcao+': '+val.porcentagemVotos+'%</label>';
+		            				html += '<p class="text-danger">'+val.opcao+'</p>';
+		            				html += '<div class="progress">';
+		            					html += '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'+val.porcentagemVotos+'" aria-valuemin="0" aria-valuemax="100" style="width:"'+val.porcentagemVotos+'%">';
+		            						html += '<span class="sr-only">80% Complete</span>';
+		            							html += ' </div>';
+		            								html += '</div>';
+												
+		            			});		            								
+		            		html += '</div>';
+						html+= '</div>';
+		            
+						$('#' + container).hide('slow');
+						
+						$('#enquetesPariticipadas').prepend(html);
 		            },
 		            error: function () {
 		            	console.log('errormessage');
@@ -465,7 +487,7 @@ $(function() {
 				$.ajax({
 			    	type: 'post',
 			      	url:'/WebHomeBeta/getPublicacao',
-			      	dataType: 'json',	
+			      	data: {colunaInicial: POST_COMMENT.colunaInicial},
 			      	success: POST_COMMENT.loadHome
 				});
 			}			

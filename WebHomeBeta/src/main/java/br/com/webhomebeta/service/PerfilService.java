@@ -21,4 +21,12 @@ public class PerfilService {
 	public Perfil get(int idPerfil){
 		return perfilDAO.get(idPerfil);
 	}
+	
+	public Perfil getByUser(int idUser){
+		return perfilDAO.getByUser(idUser);
+	}
+	
+	public void update(String img){
+		perfilDAO.update(img);
+	}
 }

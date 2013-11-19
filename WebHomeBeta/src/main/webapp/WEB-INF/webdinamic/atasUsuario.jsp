@@ -62,16 +62,16 @@
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
-						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
+						<img src="<c:out value="${usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
 					</div>
 					
 					<ul class="nav nav-pills nav-stacked nav-usuario">
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li class="active"><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Usu&aacute;rios</a></li>
+						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>

@@ -44,4 +44,8 @@ public class CalendarEventService {
 	public List<CalendarEvent> getHistorico(int idUser){
 		return calendarEventDAO.getHistorico(idUser);
 	}
+	
+	public CalendarEvent getEvent(int id){
+		return calendarEventDAO.getEvent(id);
+	}
 }

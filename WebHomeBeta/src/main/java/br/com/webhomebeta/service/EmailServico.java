@@ -1,5 +1,7 @@
 package br.com.webhomebeta.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import br.com.webhomebeta.entity.Reserva;
+import br.com.webhomebeta.entity.CalendarEvent;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.to.UsuarioTO;
 
@@ -37,16 +39,20 @@ public class EmailServico {
 	private static final String TEMPLATE_ESQUECI_SENHA = "templateSenha.vm";
 	private static final String TEMPLATE_USUARIO_NAO_ACEITO = "templateUsuarioNaoAceito.vm";
 	private static final String TEMPLATE_USUARIO_ACEITO = "templateUsuarioAceito.vm";
-	private static final String TEMPLATE_ESPACO_ACEITO = "templateEspaco.vm";
 	private static final String TEMPLATE_NOVO_USUARIO = "templateNovoUsuario.vm";
 	private static final String TEMPLATE_NOVO_APROVADO = "templateMoradorAprovado.vm";
+	private static final String TEMPLATE_NOVA_RESERVA = "templateNovaReserva.vm";
+	private static final String TEMPLATE_RESERVA_ACEITA = "templateReservaAceita.vm";
 	private static final String FROM = "webhomecondominios@gmail.com";
 	private static final String SUBJECT_NOVO_MORADOR = "Novo morador cadastrado!";
-	private static final String SUBJECT_MORADOR_ACEITO = "Seu cadastro na WebHome foi aceito!";
+	private static final String SUBJECT_MORADOR_ACEITO = "Seu cadastro na Web Home foi aceito!";
 	private static final String SUBJECT_MORADOR_APROVADO = "Validação de email Web Home!";
-	private static final String SUBJECT_ESPACO_ACEITO = "A reserva realizada na WebHome foi aceita!";
-	private static final String SUBJECT_MORADOR_NAO_ACEITO = "Seu cadastro na WebHome foi rejeitado!";
-	private static final String SUBJECT_SENHA = "Recuperacao de senha - WebHome";
+	private static final String SUBJECT_ESPACO_ACEITO = "A reserva realizada na Web Home foi aceita!";
+	private static final String SUBJECT_MORADOR_NAO_ACEITO = "Seu cadastro na Web Home foi rejeitado!";
+	private static final String SUBJECT_SENHA = "Recuperacao de senha - Web Home";
+	private static final String SUBJECT_NOVA_RESERVA = "Pedido de nova reserva";
+	private static final String SUBJECT_RESERVA_ACEITA= "Sua reserva foi aceita! - Web Home";
+	
 
 	public void emailNovoMorador(final Usuario usuario) {
 
@@ -63,7 +69,6 @@ public class EmailServico {
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", u.getNome());
 				model.put("nomeMorador", usuario.getNome());
-				model.put("link", "http://localhost:8080/WebHomeBeta/admin/validarMoradores");
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
 						velocityEngine, TEMPLATE_NOVO_USUARIO, model);
@@ -82,14 +87,14 @@ public class EmailServico {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo(usuario.getEmail());
 				message.setFrom(FROM);
-				message.setSubject(SUBJECT_NOVO_MORADOR);
+				message.setSubject(SUBJECT_MORADOR_NAO_ACEITO);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
-						velocityEngine, TEMPLATE, model);
+						velocityEngine, TEMPLATE_USUARIO_NAO_ACEITO, model);
 				message.setText(text, true);
 			}
 		};
@@ -168,32 +173,58 @@ public class EmailServico {
 		this.mailSender.send(preparator);
 	}
 	
-	// manda email para reserva um espaço.
-	public void emailNovoEspacoReservado(final Usuario usuario , final Reserva reserva) {
+	
+	public void emailNovaReserva(final Usuario usuario , final CalendarEvent event) {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo("fernandolima66@gmail.com");
 				message.setFrom(FROM);
-				message.setSubject(SUBJECT_ESPACO_ACEITO);
+				message.setSubject(SUBJECT_NOVA_RESERVA);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
-				model.put("DataEspaco", reserva.getPreReserva());
+				model.put("DataEspaco", df.format(event.getStart()));
 				model.put("link", "http://localhost:8080/WebHomeBeta");
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
-						velocityEngine, TEMPLATE_ESPACO_ACEITO, model);
+						velocityEngine, TEMPLATE_NOVA_RESERVA, model);
 				message.setText(text, true);
 			}
 		};
 		this.mailSender.send(preparator);
 	}
 	
-	
+	public void emailReservaAceita(final Usuario usuario , final CalendarEvent event) {
+
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo("fernandolima66@gmail.com");
+				message.setFrom(FROM);
+				message.setSubject(SUBJECT_RESERVA_ACEITA);
+				// passando os parâmetros para o template
+				Map<String, Object> model = new HashMap<String, Object>();
+				model.put("nome", usuario.getNome());
+				model.put("DataEspaco", df.format(event.getStart()));
+				model.put("link", "http://localhost:8080/WebHomeBeta");
+
+				@SuppressWarnings("deprecation")
+				String text = VelocityEngineUtils.mergeTemplateIntoString(
+						velocityEngine, TEMPLATE_RESERVA_ACEITA, model);
+				message.setText(text, true);
+			}
+		};
+		this.mailSender.send(preparator);
+	}
 	
 	
 	
@@ -257,6 +288,61 @@ public class EmailServico {
 	}
 	public static String getTemplateMoradorAprovado(){
 		return SUBJECT_MORADOR_APROVADO;
+	}
+
+
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
+
+	public static String getTemplateEsqueciSenha() {
+		return TEMPLATE_ESQUECI_SENHA;
+	}
+
+
+	public static String getTemplateNovoAprovado() {
+		return TEMPLATE_NOVO_APROVADO;
+	}
+
+
+	public static String getTemplateNovaReserva() {
+		return TEMPLATE_NOVA_RESERVA;
+	}
+
+
+	public static String getTemplateReservaAceita() {
+		return TEMPLATE_RESERVA_ACEITA;
+	}
+
+
+	public static String getSubjectMoradorAprovado() {
+		return SUBJECT_MORADOR_APROVADO;
+	}
+
+
+	public static String getSubjectEspacoAceito() {
+		return SUBJECT_ESPACO_ACEITO;
+	}
+
+
+	public static String getSubjectSenha() {
+		return SUBJECT_SENHA;
+	}
+
+
+	public static String getSubjectNovaReserva() {
+		return SUBJECT_NOVA_RESERVA;
+	}
+
+
+	public static String getSubjectReservaAceita() {
+		return SUBJECT_RESERVA_ACEITA;
 	}
 	
 	

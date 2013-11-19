@@ -33,7 +33,21 @@ public class PerfilDAOImp implements PerfilDAO {
 	}
 	@Transactional
 	public Perfil get(int idPerfil){
-		return (Perfil) factory.getCurrentSession().get(Perfil.class, idPerfil);
+		return (Perfil) factory.getCurrentSession().createQuery("from Perfil p where p.idPerfil = ?").setInteger(0, idPerfil).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public Perfil getByUser(int idUser) {
+		
+		return (Perfil) factory.getCurrentSession().createQuery("from Perfil p where p.idUser = ?").setInteger(0, idUser).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public void update(String img) {
+		factory.getCurrentSession().createQuery("update Perfil p set p.imagemUsuario = ?").setString(0, img).executeUpdate();
+		
 	}
 
 }

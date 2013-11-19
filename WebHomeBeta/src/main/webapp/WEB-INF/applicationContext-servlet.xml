@@ -112,12 +112,12 @@
 	</bean>
 
 	<!-- Spring Security -->
-	<sec:http auto-config="true" use-expressions="true">
+	<sec:http auto-config="true" use-expressions="true" create-session="always">
 		<sec:form-login login-page="/"
 		    login-processing-url="/j-spring-security-check"
-			authentication-failure-url="/index.jsp?error"
-			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-			<sec:logout invalidate-session="true" logout-url="/logout" logout-success-url="/"/>
+		    authentication-success-handler-ref="myAuthenticationSuccessHandler"
+			authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
+			<sec:logout logout-url="/logout" logout-success-url="/"/>
 		<sec:intercept-url pattern="/cadastro.jsp"
 			access="isAnonymous()" />
 		<sec:intercept-url pattern="/esqueciMinhaSenha.jsp"
@@ -160,9 +160,18 @@
 		<sec:intercept-url pattern="/home/informativo.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/home/listarEspaco" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/home/listarEspaco.jsp" access="hasAnyRole('ROLE_MORADOR','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/admin/visitantes" access="hasRole('ROLE_FUNC')" />
+		<sec:intercept-url pattern="/admin/visitantes.jsp" access="hasRole('ROLE_FUNC')" />
+		<sec:intercept-url pattern="/admin/visitantes/cadastro" access="hasRole('ROLE_FUNC')" />
+		
+		
+		
 		<sec:remember-me key="myAppKey"/>
 	</sec:http>
 
+	<bean id="customAuthenticationFailureHandler"
+     	 class="br.com.webhomebeta.service.security.CustomAuthenticationFailureHandler">
+	</bean>
 
 	<bean id="myAuthenticationSuccessHandler"
 		class="br.com.webhomebeta.controller.MyAuthenticationSuccessHandler">
@@ -286,6 +295,7 @@
 	<bean id="VisitanteDao" class="br.com.webhomebeta.dao.imp.VisitanteImp"></bean>
 	<bean id="visitanteBean" class="br.com.webhomebeta.bean.VisitanteBean"></bean>
 	<bean id="usuarioService" class="br.com.webhomebeta.service.UsuarioService"></bean>
+	<bean id="usuarioDao" class="br.com.webhomebeta.dao.imp.UsuarioDAOImp"></bean>
 	
 
 

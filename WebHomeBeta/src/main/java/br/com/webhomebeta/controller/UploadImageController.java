@@ -40,6 +40,7 @@ import com.sun.mail.handlers.image_jpeg;
 import br.com.webhomebeta.bean.UploadControllerBean;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.ComentarioService;
+import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
@@ -53,6 +54,8 @@ public class UploadImageController {
 	private PublicacaoService publicacaoService;
 	@Autowired
 	private ComentarioService comentarioService;
+	@Autowired
+	private PerfilService perfilService;
 	@Autowired
 	private ServletContext context;
 	@Autowired
@@ -104,6 +107,8 @@ public class UploadImageController {
 			
 			usuario.setImagem(imagem);
 			usuarioService.update(usuario);
+			perfilService.update(usuario.getImagem());
+			
 			
 			// redimensiona imagem para o tamanho para 43x43
 			InputStream stream2 = new ByteArrayInputStream(file.getBytes());

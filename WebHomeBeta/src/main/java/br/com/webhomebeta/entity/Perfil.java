@@ -30,7 +30,8 @@ public class Perfil {
 	private int idade;
 	@Column(name = "PROFISSAO")
 	private String profissao;
-	
+	@Column(name = "FILME")
+	private String filme;
 	public Perfil(){
 		
 	}
@@ -48,6 +49,14 @@ public class Perfil {
 	
 	
 	
+	public String getFilme() {
+		return filme;
+	}
+
+	public void setFilme(String filme) {
+		this.filme = filme;
+	}
+
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}

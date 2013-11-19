@@ -26,6 +26,12 @@ public class NaoGostou {
 	@Column(name = "ID_USER")
 	private int idUsuario;
 
+	
+	
+	public NaoGostou() {
+		super();
+	}
+
 	public NaoGostou(Publicacao publicacao, int idUsuario) {
 		super();
 		this.publicacao = publicacao;

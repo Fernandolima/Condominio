@@ -73,4 +73,10 @@ public class CalendarEventDAOImp implements CalendarEventDAO {
 		return factory.getCurrentSession().createQuery("from CalendarEvent event where event.idUser = ? ").setInteger(0, idUser).list();
 	}
 
+	@Override
+	@Transactional
+	public CalendarEvent getEvent(int id) {
+		return (CalendarEvent) factory.getCurrentSession().createQuery("from CalendarEvent event where event.id = ?").setInteger(0, id).uniqueResult();
+	}
+
 }

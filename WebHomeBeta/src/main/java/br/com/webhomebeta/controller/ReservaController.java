@@ -46,33 +46,6 @@ public class ReservaController {
 	private EspacoCondominioController espacoCondominioController;
 	@Autowired
 	private ReservaControllerBean reservaControllerBean;
-
-	// mapeia a URL principal (Reserva) e retorna um novo objeto Reserva
-	/*@RequestMapping(value = "home/reserva/id={id}", method = RequestMethod.GET)
-	public  reserva(@PathVariable("id") int id) {
-		
-	}*/
-	// mapeia a URL principal (Reserva) e retorna um novo objeto
-	@RequestMapping(value = "home/salvaReserva", method = RequestMethod.GET)
-	public boolean listaReserva(@RequestParam("data") String dataPreReserva,
-			@RequestParam("reserva") String nomeReserva,
-			@RequestParam("nome") String nome,
-			@RequestParam("idUser") int idUser,
-			@RequestParam("idEspaco") int idEspaco) {
-
-		EspacoCondominio espaco = espacoCondominioServe.get(idEspaco);
-
-		for (Reserva r : reservaService.getLisReservas())
-			if (r.getPreReserva() == dataPreReserva && r.getEspacoCondominio().getEspaco().equals(nomeReserva))
-				return false;
-
-		Reserva reserva = new Reserva(nomeReserva, dataPreReserva, idUser,
-				nome, espaco, false);
-		emailServico.emailNovoEspacoReservado(getUsuario(), reserva);
-		reservaService.save(reserva);
-		return true;
-
-	}
 	
 	@RequestMapping(value = "home/reserva/cancelar={id}", method = RequestMethod.GET)
 	public boolean cancelarReserva(@PathVariable("id") int idReserva){
@@ -96,38 +69,12 @@ public class ReservaController {
 
 	}
 
-//	@RequestMapping(value = "admin/reservas/id={id}", method = RequestMethod.GET)
-//	public ModelAndView decidirReserva(@PathVariable("id") int idReserva, ModelMap model){
-//		Reserva reserva = reservaService.get(idReserva);
-//		model.put("reserva", reserva);
-//		return new ModelAndView("visualizaReserva", model);
-//	}
-	
 	@RequestMapping(value = "admin/reservas/historico={id}", method = RequestMethod.GET)
 	public ModelAndView historico(@PathVariable("id") int idUser, ModelMap model){
 		List<Reserva> historicoReserva = reservaService.getHistorico(idUser);
 		model.put("historicoReservas", historicoReserva);
 		return new ModelAndView("historicoReserva", model);
 	}
-
-	// @RequestMapping(value = "home/reserva/salvar", method =
-	// RequestMethod.POST)
-	// public String salvarReserva(
-	// @ModelAttribute("bean") ReservaControllerBean bean,
-	// BindingResult result) {
-	// // criar a data da enquete
-	// for (String reserva : bean.getListReserva()) {
-	// // split divide a string em pedaços
-	// String pedaco[] = reserva.split(",");
-	//
-	// Reserva reservaa = new Reserva(pedaco[0], new Date(pedaco[1]),
-	// getUsuario().getNome());
-	//
-	// reservaService.save(reservaa);
-	// }
-	//
-	// return "redirect:/home/reserva";
-	// }
 
 	public Usuario getUsuario() {
 

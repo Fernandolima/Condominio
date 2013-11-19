@@ -73,6 +73,7 @@ public class PerfilController {
 		if (getPerfilTO() == null) {
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
+			model.put("usuario", getUsuario());
 			
 		} else {
 			perfilControllerBean.setPerfilTO(getPerfilTO());
@@ -80,6 +81,7 @@ public class PerfilController {
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
 			model.put("publicacoes", publicacoes);
+			model.put("usuario", getUsuario());
 		}
 
 		return new ModelAndView("perfil", model);
@@ -87,7 +89,7 @@ public class PerfilController {
 
 	
 	@RequestMapping(value = "perfil/alterarSenha", method = RequestMethod.POST)
-	public String alterarSenha(
+	public @ResponseBody String alterarSenha(
 			@ModelAttribute("perfilControllerBean") PerfilControllerBean bean,
 			BindingResult result) {
 
@@ -123,10 +125,12 @@ public class PerfilController {
 	}
 
 	@RequestMapping(value = "/perfil/id={id}")
-	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id) {
+	public ModelAndView visualizarPerfilUsuario(@PathVariable("id") int id, ModelMap model) {
 		if (id > 0) {
-			Perfil p = perfilService.get(id);
-			return new ModelAndView("perfilUsuario", "perfil", p);
+			model.put("usuario", getUsuario());
+			Perfil p = perfilService.getByUser(id);
+			model.put("perfil", p);
+			return new ModelAndView("perfilUsuario", model);
 		} else {
 			return new ModelAndView("perfilNaoExiste");
 		}
@@ -208,9 +212,13 @@ public class PerfilController {
 			@ModelAttribute("perfilControllerBean") PerfilControllerBean bean,
 			BindingResult bindingResult) {
 		PerfilTO perfilTO = bean.getPerfilTO();
-		Perfil perfil = null;
+		Perfil perfil = new Perfil();
 		BeanUtils.copyProperties(perfilTO, perfil);
-		perfilService.salvar(perfil);
+		Perfil p = perfilService.getByUser(getUsuario().getIdUser());
+		
+		perfil.setIdPerfil(p.getIdPerfil());
+		perfil.setIdUser(p.getIdUser());
+		perfilService.update(perfil);
 
 	}
 
