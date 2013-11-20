@@ -188,8 +188,7 @@ public class EmailServico {
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("nome", usuario.getNome());
-				model.put("DataEspaco", df.format(event.getStart()));
-				model.put("link", "http://localhost:8080/WebHomeBeta");
+				model.put("data", df.format(event.getStart()));
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
@@ -213,9 +212,9 @@ public class EmailServico {
 				message.setSubject(SUBJECT_RESERVA_ACEITA);
 				// passando os parâmetros para o template
 				Map<String, Object> model = new HashMap<String, Object>();
-				model.put("nome", usuario.getNome());
-				model.put("DataEspaco", df.format(event.getStart()));
-				model.put("link", "http://localhost:8080/WebHomeBeta");
+
+				model.put("data", df.format(event.getStart()));
+
 
 				@SuppressWarnings("deprecation")
 				String text = VelocityEngineUtils.mergeTemplateIntoString(

@@ -31,8 +31,9 @@ public class MyAuthenticationSuccessHandler implements
 	public void onAuthenticationSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
+		System.out.println("OIOIOOOIOIOIOIOIOIOIASOIDOISDASOOISOSDAOISDOISDAOISDOIASASDOIOISDOISDAOSDIOIDSOIDSOISDAOIAOI");
 		handle(request, response, auth);
-		clearAuthenticationAttributes(request);
+		//clearAuthenticationAttributes(request);
 	}
 	//Redireciona para a pagina que o ROLE_ determinar
 	protected void handle(HttpServletRequest request,
