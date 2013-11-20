@@ -78,6 +78,25 @@ public class MuralController {
 		muralService.update(mural);
 
 	}
+	
+	@RequestMapping(value = "home/mural/id={idMural}", method = RequestMethod.GET)
+	public ModelAndView muralID(@PathVariable("idMural") int idMural, ModelMap model) {
+		Mural mural = muralService.get(idMural);
+		model.put("usuario", getUsuario());
+		model.put("mural", mural);
+		return new ModelAndView("visualizarMural", model);
+	}
+
+	
+	
+	@RequestMapping(value = "home/mural", method = RequestMethod.GET)
+	public ModelAndView muralUsuario(ModelMap model) {
+		model.put("usuario", getUsuario());
+		model.put("listaMural", muralService.getList());
+		return new ModelAndView("muralUsuario", model);
+
+	}
+
 
 	public Usuario getUsuario() {
 
