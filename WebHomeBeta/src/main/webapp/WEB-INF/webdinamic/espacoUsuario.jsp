@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -78,24 +79,30 @@
 			
 			<div class="col-md-9">
 				<h3>Reserva de espaços</h3><br/>
-				<table class="table table-striped">
-					<thead>
-						
-						<tr>
-			                <th>Espaços</th>
-			                <th>Agenda</th>
-	              		</tr>
-						
-					</thead>
-					<tbody>
-						<c:forEach items="${listaEspacos}" var="item">
-		               		<tr>
-		                		<td><c:out value="${item.espaco}"/></td>
-		                		<td><a href="/WebHomeBeta/home/espaco/id=<c:out value="${item.idEspaco}"/>"><span class="glyphicon glyphicon-calendar"></span></a></td>
-		                	</tr>
-		               	</c:forEach>
-					</tbody>
-				</table>
+				
+				<c:choose>
+					<c:when test="${fn:length(listaEspacos) > 0}">
+				    	<table class="table table-striped">
+							<thead>								
+								<tr>
+					                <th>Espaços</th>
+					                <th>Agenda</th>
+			              		</tr>								
+							</thead>
+							<tbody>
+								<c:forEach items="${listaEspacos}" var="item">
+				               		<tr>
+				                		<td><c:out value="${item.espaco}"/></td>
+				                		<td><a href="/WebHomeBeta/home/espaco/id=<c:out value="${item.idEspaco}"/>"><span class="glyphicon glyphicon-calendar"></span></a></td>
+				                	</tr>
+				               	</c:forEach>
+							</tbody>
+						</table>
+				  	</c:when>
+				  	<c:otherwise>
+				    	<p>Nenhum espaço cadastrado</p>
+				  	</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

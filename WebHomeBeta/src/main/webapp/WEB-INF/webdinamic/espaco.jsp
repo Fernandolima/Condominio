@@ -118,7 +118,7 @@
                                 <div class="span12">
                                      <form class="form-horizontal" action="#" method="post" id="formCadEspaco" accept-charset="UTF-8">
                                       <fieldset>
-                                        <legend>Espaços do condimínio</legend>
+                                        <legend>Espaços do condomínio</legend>
                                         <input type="hidden" name="idUser" id="idUser" value="<c:out value="${usuario.idUser}"/>" />
                                         
                                         <div class="control-group" data-posicao="0">
@@ -189,7 +189,7 @@
 																	<h3>Exclusão de espaço</h3>
 																</div>
 																	<div class="modal-body">
-																		<p>Deseja excluir?</p>
+																		<p>Essa exclusão apagará todas as reservas deste espaço. Deseja prosseguir?</p>
 																	</div>
 																	<div class="modal-footer">
 																		<a  id="aExc" data-dismiss="modal" class="btn excluirEspaco btn-primary" href="#" data-id="<c:out value="${item.idEspaco}"/>">Sim</a>

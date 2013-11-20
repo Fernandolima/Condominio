@@ -132,34 +132,33 @@
 					</c:forEach>
 				</div>
 			
-			
-			<div class = "row" style="padding-bottom: 25px; padding-left: 15px; padding-right: 15px; margin-top: 30px; background: #ECEFF5">
-			
-			<h4>Anúncios</h4>
-				<div class="panel-group" id="accordion">
+			<c:if test="${fn:length(listaAnuncios) > 0}">
+				<div class = "row" style="padding-bottom: 25px; padding-left: 15px; padding-right: 15px; margin-top: 30px; background: #ECEFF5">
 					
-					<c:forEach items="${listaAnuncios}" var="item">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-	      						<h4 class="panel-title">
-						        	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${item.idInformativo}" />">
-						          		vende-se apartamento
-						          		<%--<c:out value="${item.titulo}" /> --%>
-						        	</a>
-	      						</h4>
-	    					</div>
-	    					
-	    					<div id="<c:out value="${item.idInformativo}" />" class="panel-collapse collapse">
-						    	<div class="panel-body">
-						        	<c:out value="${item.informativo}" />
-						      	</div>
-						    </div>
-						</div>
-					</c:forEach>
-					
-										
-				</div>
-			  </div>
+					<h4>Anúncios</h4>
+					<div class="panel-group" id="accordion">
+						
+						<c:forEach items="${listaAnuncios}" var="item">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+		      						<h4 class="panel-title">
+							        	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${item.idInformativo}" />">
+							          		vende-se apartamento
+							          		<%--<c:out value="${item.titulo}" /> --%>
+							        	</a>
+		      						</h4>
+		    					</div>
+		    					
+		    					<div id="<c:out value="${item.idInformativo}" />" class="panel-collapse collapse">
+							    	<div class="panel-body">
+							        	<c:out value="${item.informativo}" />
+							      	</div>
+							    </div>
+							</div>
+						</c:forEach>		
+					</div>				
+				  </div>
+			  </c:if>
 			</div>
 			
 				

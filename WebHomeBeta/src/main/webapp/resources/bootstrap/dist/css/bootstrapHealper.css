@@ -342,3 +342,7 @@ textarea#txtComment.form-control {
 #perfilView .modal-content {
 	top: 60px;
 }
+
+#frm-register {
+	margin-top: 20px;
+}

@@ -132,7 +132,7 @@
 	                                        
 	                                    	<div class="control-group">
                                           		<div class="controls">
-                                            		<textarea class="input-xlarge textarea" name="atasTo.atas" placeholder="Texto da Ata" style="width: 700px; height: 200px"></textarea>
+                                            		<textarea class="input-xlarge textarea" name="atasTo.atas" placeholder="Descrição da Ata" style="width: 700px; height: 200px"></textarea>
                                           		</div>
                                         	</div>
                                         	
@@ -186,6 +186,8 @@
             $(".datepicker").datepicker();
             $(".uniform_on").uniform();
             $('.textarea').wysihtml5();
+            
+            $("#tituloAta").val("");
 		});
         </script>
                         

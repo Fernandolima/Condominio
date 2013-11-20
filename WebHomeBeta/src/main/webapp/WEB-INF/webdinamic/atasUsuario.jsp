@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -78,26 +79,35 @@
 			
 			<div class="col-md-9">
 				<h3>Atas de Assembléia</h3><br/>
-				<table class="table table-striped">
-					<thead>
-						
-						<tr>
-			                <th>Título da Ata</th>
-			                <th>Data da ata</th>
-			                <th>Visualizar</th>
-	              		</tr>
-						
-					</thead>
-					<tbody>
-						<c:forEach items="${atas}" var="item">
-		               		<tr>
-		                		<td><c:out value="${item.titulo}"/></td>
-		                		<td><c:out value="${item.dataFormat}"/></td>
-		                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
-		                	</tr>
-		               	</c:forEach>
-					</tbody>
-				</table>
+				
+				<c:choose>
+					<c:when test="${fn:length(atas) > 0}">
+				    	<table class="table table-striped">
+							<thead>
+								
+								<tr>
+					                <th>Título da Ata</th>
+					                <th>Data da ata</th>
+					                <th>Visualizar</th>
+			              		</tr>
+								
+							</thead>
+							<tbody>
+								<c:forEach items="${atas}" var="item">
+				               		<tr>
+				                		<td><c:out value="${item.titulo}"/></td>
+				                		<td><c:out value="${item.dataFormat}"/></td>
+				                		<td><a href="/WebHomeBeta/home/atas/id=<c:out value="${item.idAtas}"/>" class="btn btn-default">Visualizar</a></td>
+				                	</tr>
+				               	</c:forEach>
+							</tbody>
+						</table>
+				  	</c:when>
+				  	<c:otherwise>
+				    	<p>Nenhuma ata cadastrada</p>
+				  	</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 	</div>

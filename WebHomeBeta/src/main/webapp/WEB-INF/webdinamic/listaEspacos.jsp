@@ -121,7 +121,7 @@
 						                <tr>
 						                  <th>Espaço</th>
 						                  <th>Descrição</th>
-						                  <th>Desativar</th>
+						                  <th>Excluir</th>
 						                </tr>
 						              </thead>
 						              <tbody>
@@ -137,7 +137,7 @@
 																	<h3>Exclusão de espaço</h3>
 																</div>
 																	<div class="modal-body">
-																		<p>Deseja excluir?</p>
+																		<p>Essa exclusão apagará todas as reservas deste espaço. Deseja prosseguir?</p>
 																	</div>
 																	<div class="modal-footer">
 																		<a  id="btnDeleteListaEspaco" data-dismiss="modal" class="btn btn-primary" href="#" data-id="<c:out value="${item.idEspaco}"/>">Sim</a>

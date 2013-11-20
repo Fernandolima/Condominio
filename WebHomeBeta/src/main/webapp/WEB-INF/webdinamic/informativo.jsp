@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -81,18 +82,25 @@
 					<h3>Anúncios</h3>
 					<a href="/WebHomeBeta/home/novoInformativo" class="btn btn-xs btn-primary">+ Adicionar Anúncio</a>
 				</div>
-				<c:forEach items="${listainformativo}" var="item">					
-					<div class="panel panel-success">
-  						<div class="panel-heading">
-    						<h3 class="panel-title"><c:out value="${item.nomeUser}"/></h3>
-  						</div>
-  						<div class="panel-body">
-    						<p><b>E-mail: </b><c:out value="${item.email}"/></p>
-			                <p><b>Anúncio: </b><c:out value="${item.informativo}"/></p>
-  						</div>
-					</div>					
-                </c:forEach>
-                
+				
+				<c:choose>
+					<c:when test="${fn:length(listainformativo) > 0}">
+				    	<c:forEach items="${listainformativo}" var="item">					
+							<div class="panel panel-success">
+		  						<div class="panel-heading">
+		    						<h3 class="panel-title"><c:out value="${item.nomeUser}"/></h3>
+		  						</div>
+		  						<div class="panel-body">
+		    						<p><b>E-mail: </b><c:out value="${item.email}"/></p>
+					                <p><b>Anúncio: </b><c:out value="${item.informativo}"/></p>
+		  						</div>
+							</div>					
+		                </c:forEach>
+				  	</c:when>
+				  	<c:otherwise>
+				    	<p>Nenhum anúncio cadastrado. Seja o primeiro a fazer um anúncio</p>
+				  	</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

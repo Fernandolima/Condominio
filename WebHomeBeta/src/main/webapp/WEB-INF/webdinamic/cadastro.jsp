@@ -2,99 +2,100 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
-
-<c:set var="nomeOK" value="false" />
-<!-- se o campo estiver preenchido errado uma variável deve vir setada como true -->
-<c:set var="nomeCadastro" value="Tatiane Jayme Dias" />
-<!-- quando retorna com erro, todos os valores inseridos nos inputs devem ser retornados em uma variável -->
-<c:set var="formNok" value="true" />
-<!-- se algum campo do formulário estiver com erro, uma variável deve vir setada como true -->
-
 <head>
-<meta charset="UTF-8" />
-<title>Web Home - Cadastro</title>
-<link rel="stylesheet" type="text/css" href="<c:url value = "/css/style.css"/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value = "/css/cadastro.css"/>" />
+	<meta charset="UTF-8" />
+	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrap.min.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/magic-bootstrap.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
 
-<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
 <head>
-<body id="register-view">
-	<header id="header-site">
-			<div class="content">
-				<h1><a href="admin" class="hidden" id="logo-site" title="Web Home">Web Home</a></h1>
-				<div id="data-user">
-					<p>Ol&aacute;, <c:out value="${dadosUsuarioBean.usuario.nome}"/><p>
-				</div>
-			</div>
-		</header>
-	<section id="main-register">
-		<div class="content">
-			<div class="info-register">
-				<h2>Pr&eacute;-Cadastro</h2>
+<body id="home" class="rede-social">
+	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+          <a class="navbar-brand" href="#">Web Home</a>
+        </div>
+	</nav>
+	
+
+	<!-- Begin Body -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h2 class="text-info">Pr&eacute;-Cadastro</h2>
 
 				<p>Para ter acesso &agrave; &Aacute;rea do Morador, preencha o
 					formul&aacute;rio ao lado.</p>
 				<p>Seu cadastro ser&aacute; encaminhado e validado pelo
 					s&iacute;ndico e em breve seu acesso ser&aacute; liberado.</p>
 			</div>
-			<div class="form-register">
-				<h2>Formulário de Pré-Cadastro</h2>
-				<p>* Campos obrigatórios</p>
-
-				<form:form modelAttribute="bean" action="add" method="post" id="frm-register">
-					<div id="warnningMessage"
-						class="${(bean.hasErrorForm) ? 'error' : ''}">
+			
+			<div class="col-md-8">
+				<h2 class="text-info">Formulário de Cadastro</h2>
+				<p class="text-right">* Campos obrigatórios</p>
+				<form:form role="form" modelAttribute="bean" action="add" method="post" id="frm-register">
+				
+					<div id="warnningMessage" class="panel panel-danger ${(bean.hasErrorForm) ? 'error' : ''}">
 						<p>Verifique os campos destacados</p>
 					</div>
-
-					<form:label for="nome" path="usuarioTO.nome">Nome: *</form:label>
-					<form:input type="text" id="nome" path="usuarioTO.nome"
-						cssClass="${(bean.validName) ? '' : 'error'}"/>
-
-					<form:label for="email" path="usuarioTO.email">E-mail: *</form:label>
-					<form:input path="usuarioTO.email" id="email"
-						cssClass="${(bean.validEmail) || (bean.validEmailExistente) ? '' : 'error'}" />
-
-					<form:label for="senha" path="usuarioTO.senha">Senha: *</form:label>
-					<form:password id="senha" path="usuarioTO.senha"
-						cssClass="${(bean.validSenha) ? '' : 'error'}" />
-
-					<form:label for="confSenha" class="lblRight" path="confSenha">Confirmar Senha: *</form:label>
-					<form:password id="confSenha" path="confSenha"
-						cssClass="${(bean.validConfSenha) ? '' : 'error'}" />
-
-					<form:label for="dt_nascimento" path="data">Data de nascimento:</form:label>
-					<form:input path="data" id="dt_nascimento"
-						cssClass="${(bean.validDataNascimento) ? '' : 'error'}" />
-
-					<form:label class="lblRight" for="cpf" path="usuarioTO.cpf">CPF: *</form:label>
-					<form:input path="usuarioTO.cpf" id="cpf"
-						cssClass="${(bean.validCpf) ? '' : 'error'}" />
-
-					<form:label for="bloco" path="usuarioTO.bloco">Bloco: *</form:label>
-					<form:input path="usuarioTO.bloco" id="bloco"
-						cssClass="${(bean.validBloco) ? '' : 'error'}" />
-
-					<form:label for="apartamento" class="lblRight" path="usuarioTO.ap">Apartamento: *</form:label>
-					<form:input path="usuarioTO.ap" id="apartamento"
-						cssClass="${(bean.validApartamento) ? '' : 'error'}" />
-
-					<input type="submit" id="btSubmitRegister" class="btSubmit"
-						value="Enviar" />
+				
+					<div class="form-group">
+    					<form:input placeholder="Nome: *" type="text" id="nome" path="usuarioTO.nome" cssClass="form-control  ${(bean.validName) ? '' : 'has-error'}"/>
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:input placeholder="E-mail: *" path="usuarioTO.email" id="email" cssClass="form-control  ${(bean.validEmail) || (bean.validEmailExistente) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:password placeholder="Senha: *" id="senha" path="usuarioTO.senha" cssClass="form-control  ${(bean.validSenha) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:password placeholder="Confirmar Senha: *" id="confSenha" path="confSenha" cssClass="form-control  ${(bean.validConfSenha) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:input placeholder="Data de nascimento: *" path="data" id="dt_nascimento" cssClass="form-control  ${(bean.validDataNascimento) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:input placeholder="CPF: *" path="usuarioTO.cpf" id="cpf" cssClass="form-control ${(bean.validCpf) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:input placeholder="Bloco: *" path="usuarioTO.bloco" id="bloco" cssClass="form-control ${(bean.validBloco) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<form:input placeholder="Apartamento: *" path="usuarioTO.ap" id="apartamento" cssClass="form-control  ${(bean.validApartamento) ? '' : 'error'}" />
+ 					</div>
+ 					
+ 					<input type="submit" id="btSubmitRegister" class="btn btn-primary" value="Enviar" />
 				</form:form>
 			</div>
+			
 		</div>
-	</section>
-	<footer id="footer-site"> </footer>
+	</div>
+	<!-- <footer id="footer-site">
+		</footer> -->
 
-	<script src="<c:url value = "/js/jquery.alphanumeric.js"/>"
-		type="text/javascript"></script>
-	<script
-		src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>"
-		type="text/javascript"></script>
-	<script src="<c:url value = "/js/cadastro.js"/>"
-		type="text/javascript"></script>
+	<script src="<c:url value = "/bootstrap/dist/js/bootstrap.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
+	
+	<script src="<c:url value = "/js/jquery.alphanumeric.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/jquery.maskedinput-1.3.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value = "/js/cadastro.js"/>" type="text/javascript"></script>
 </body>
 </html>

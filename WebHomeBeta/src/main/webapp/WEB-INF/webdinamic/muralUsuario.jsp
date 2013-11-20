@@ -16,13 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/assets/styles.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value = "/css/morris.css"/>" />
-	
 
 	<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 <head>
-<body id="informativoView" class="rede-social">
-	<input type="hidden" id="userSessao" value="<c:out value="${usuario.idUser}"></c:out>" />
+<body id="home" class="rede-social">
+	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -72,31 +70,42 @@
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li class="active"><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<li class="active"><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="col-md-9">
-				<div id="topPage">
-					<h3>Gastos totais do condomínio</h3>
-				</div>
+				<h3>Mural</h3><br/>
 				
 				<c:choose>
-					<c:when test="${fn:length(gastos) > 0}">
-				    	<fieldset>
-							<legend>Escolha o ano a ser visualizado</legend>
-							<c:forEach items="${gastos}" var="item">
-								<a href="/WebHomeBeta/home/gastos/ano=${item}" class="btn btn-primary">${item}</a>
-							</c:forEach>
-						</fieldset>
+					<c:when test="${fn:length(listaMural) > 0}">
+				    	<table class="table table-striped">
+							<thead>								
+								<tr>
+					                <th>Título</th>
+					                <th>Data de publicação</th>
+					                <th>Visualizar</th>
+			              		</tr>								
+							</thead>
+							<tbody>
+								<c:forEach items="${listaMural}" var="item">
+				               		<tr>
+				                		<td><c:out value="${item.idMural}"/></td>
+				                		<td><c:out value="${item.data}"/></td>
+				                		<td><a href="/WebHomeBeta/home/mural/id=<c:out value="${item.idMural}"/>" class="btn btn-default">Visualizar</a></td>
+				                	</tr>
+				               	</c:forEach>
+							</tbody>
+						</table>
 				  	</c:when>
 				  	<c:otherwise>
-				    	<p>Nenhum gasto cadastrado</p>
+				    	<p>Nenhum mural cadastrado</p>
 				  	</c:otherwise>
 				</c:choose>
+				
 			</div>
 		</div>
 	</div>
@@ -108,7 +117,6 @@
 	<script src="<c:url value = "/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 	<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
-	
 	<script type="text/javascript">
 		$('#sidebar').affix({
 			offset : {

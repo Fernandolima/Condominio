@@ -119,7 +119,7 @@
                                 <div class="span12">
                                      <form:form modelAttribute="bloco" class="form-horizontal" action="#" method="post" id="frmBlocos">
                                       <fieldset>
-                                        <legend>Blocos do condimínio</legend>
+                                        <legend>Blocos do condomínio</legend>
                                         <div class="control-group">
                                         	<form:label class="control-label" for="bloco"  path="descricaoCondominioTO.bloco">Bloco:</form:label>
 	                                        <div class="controls">
@@ -168,7 +168,7 @@
 						                  <th>Bloco</th>
 						                  <th>Nº de Apartamentos</th>
 						                  <th>Ap. por Andar</th>
-						                  <th>Inicio da numeração</th>
+						                  <th>Início da numeração</th>
 						                  <th>Excluir</th>
 						                </tr>
 						              </thead>

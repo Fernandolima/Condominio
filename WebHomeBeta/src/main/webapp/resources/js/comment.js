@@ -46,6 +46,8 @@ var POST_COMMENT  = {
 		loadHome: function(data) {
 			var htmlHome = '';
 			
+			$('#carrengandoComentario').remove();
+			
 			if(data.length > 0) {
 				$.each(data, function(e, val){
 					htmlHome = '';
@@ -127,7 +129,6 @@ var POST_COMMENT  = {
 							htmlHome += '<a href="#" class="add-comments btn btn-info">Comentar</a>';
 						}
 					htmlHome += '</div>';
-					$('#carrengandoComentario').remove();
 					$('#main-comments').append(htmlHome);
 					POST_COMMENT.isScroll = true;
 					POST_COMMENT.colunaInicial = val.colunaInicial;
@@ -419,17 +420,18 @@ var POST_COMMENT  = {
 		            url: "/WebHomeBeta/computarVoto",
 		            data: 'idUser=' + idUser + '&idOpcao=' + idOpc + '&idEnquete=' + idEnquete,
 		            success: function (data) {
+		            	console.log('**********', data);
 		            	html += '<div class="enquete">';
 		            	html += '<h5 class="text-info"><b>Enquete: '+data.enquete+'</b></h5>';
 		            		html += '<div class="opcoesEnquete">';
 		            			$.each(data.opcoes, function(i, val){
-			            			//html += '<label>'+val.opcao+': '+val.porcentagemVotos+'%</label>';
-		            				html += '<p class="text-danger">'+val.opcao+'</p>';
+		            				console.log('----------------', val);
+			            			html += '<p class="text-danger">'+val.opcao+'</p>';
 		            				html += '<div class="progress">';
-		            					html += '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'+val.porcentagemVotos+'" aria-valuemin="0" aria-valuemax="100" style="width:"'+val.porcentagemVotos+'%">';
-		            						html += '<span class="sr-only">80% Complete</span>';
-		            							html += ' </div>';
-		            								html += '</div>';
+		            					html += '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'+val.porcentagemVotos+'" aria-valuemin="0" aria-valuemax="100" style="width:'+val.porcentagemVotos+'%">';
+		            						html += '<span class="sr-only">'+val.porcentagemVotos+' Votos</span>';
+		            					html += ' </div>';
+		            				html += '</div>';
 												
 		            			});		            								
 		            		html += '</div>';
