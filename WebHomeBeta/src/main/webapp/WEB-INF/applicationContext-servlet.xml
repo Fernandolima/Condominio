@@ -101,6 +101,18 @@
 		<property name="target" ref="publicacaoDAO" />
 	</bean>
 
+	<bean id="transactionAttributeSource"
+		class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+		<property name="properties">
+			<value>
+				get*=PROPAGATION_REQUIRED,readOnly
+				find*=PROPAGATION_REQUIRED,readOnly
+				create*=PROPAGATION_REQUIRED,readOnly
+				delete*=PROPAGATION_REQUIRED
+			</value>
+		</property>
+	</bean>
+
 	<!-- Spring Security -->
 	<sec:http auto-config="true" use-expressions="true" create-session="always">
 		<sec:form-login login-page="/"
