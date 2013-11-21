@@ -2,6 +2,9 @@ package br.com.webhomebeta.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +41,7 @@ import br.com.webhomebeta.entity.Perfil;
 import br.com.webhomebeta.entity.Publicacao;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.handler.ImageHandler;
+import br.com.webhomebeta.json.PerfilJSON;
 import br.com.webhomebeta.service.ComentarioService;
 import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.PublicacaoService;
@@ -71,17 +75,54 @@ public class PerfilController {
 	public ModelAndView visualizarPerfil(ModelMap model) {
 
 		if (getPerfilTO() == null) {
-			model.put("perfilControllerBean", perfilControllerBean);
-			model.put("uploadControllerBean", uploadControllerBean);
-			model.put("usuario", getUsuario());
-			
-		} else {
+			Usuario u = getUsuario();
 			perfilControllerBean.setPerfilTO(getPerfilTO());
-			List<Publicacao> publicacoes = publicacaoService.getPublicacao(getUsuario().getIdUser());
+			List<Publicacao> publicacoes = publicacaoService.getPublicacao(u.getIdUser());
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
 			model.put("publicacoes", publicacoes);
-			model.put("usuario", getUsuario());
+			model.put("usuario", u);
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			PerfilJSON perfil = new PerfilJSON();
+			perfil.setEmail(u.getEmail());
+			perfil.setData(df.format(u.getDt_nascimento()));
+			
+			Perfil p = perfilService.getByUser(u.getIdUser());
+			
+			perfil.setEstilosMusicais(p.getEstilosMusicais());
+			perfil.setIdade(p.getIdade());
+			perfil.setIdPerfil(p.getIdPerfil());
+			perfil.setIdUser(p.getIdUser());
+			perfil.setImagemUsuario(p.getImagemUsuario());
+			perfil.setLivros(p.getLivros());
+			perfil.setNomeUsuario(p.getNomeUsuario());
+			perfil.setSobreMim(p.getSobreMim());
+			model.put("perfil", perfil);
+			
+		} else {
+			Usuario u = getUsuario();
+			perfilControllerBean.setPerfilTO(getPerfilTO());
+			List<Publicacao> publicacoes = publicacaoService.getPublicacao(u.getIdUser());
+			model.put("perfilControllerBean", perfilControllerBean);
+			model.put("uploadControllerBean", uploadControllerBean);
+			model.put("publicacoes", publicacoes);
+			model.put("usuario", u);
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			PerfilJSON perfil = new PerfilJSON();
+			perfil.setEmail(u.getEmail());
+			perfil.setData(df.format(u.getDt_nascimento()));
+			
+			Perfil p = perfilService.getByUser(u.getIdUser());
+			
+			perfil.setEstilosMusicais(p.getEstilosMusicais());
+			perfil.setIdade(p.getIdade());
+			perfil.setIdPerfil(p.getIdPerfil());
+			perfil.setIdUser(p.getIdUser());
+			perfil.setImagemUsuario(p.getImagemUsuario());
+			perfil.setLivros(p.getLivros());
+			perfil.setNomeUsuario(p.getNomeUsuario());
+			perfil.setSobreMim(p.getSobreMim());
+			model.put("perfil", perfil);
 		}
 
 		return new ModelAndView("perfil", model);
@@ -203,9 +244,13 @@ public class PerfilController {
 	}
 
 	@RequestMapping(value = "perfil/editar", method = RequestMethod.POST)
-	public void editarSobre() {
-
+	public String editarSobre(@ModelAttribute("perfil") PerfilJSON perfilJSON, BindingResult result) {
+		
+		usuarioService.update(perfilJSON.getIdUser(), perfilJSON.getNomeUsuario(), new Date(perfilJSON.getData()));
+		
+		return "redirect:/home/perfil";
 	}
+		
 
 	@RequestMapping(value = "perfil/salvar", method = RequestMethod.POST)
 	public void salvarPerfil(

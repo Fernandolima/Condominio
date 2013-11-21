@@ -4,7 +4,7 @@
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring" xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
@@ -17,7 +17,9 @@
         http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
  	    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
- 	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+ 	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+ 	    http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<!-- Configura o EHCache -->
 	<ehcache:annotation-driven cache-manager="cacheManager" />
@@ -46,7 +48,7 @@
 			<bean class="br.com.webhomebeta.resolver.AtmoSpringControllerResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
-
+	<task:annotation-driven/>
 	<!-- Diz ao Spring onde as paginas JSP estao -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -171,6 +173,7 @@
 
 	<bean id="customAuthenticationFailureHandler"
      	 class="br.com.webhomebeta.service.security.CustomAuthenticationFailureHandler">
+     	 <property name="defaultFailureUrl" value="/"/>
 	</bean>
 
 	<bean id="myAuthenticationSuccessHandler"
@@ -296,6 +299,8 @@
 	<bean id="visitanteBean" class="br.com.webhomebeta.bean.VisitanteBean"></bean>
 	<bean id="usuarioService" class="br.com.webhomebeta.service.UsuarioService"></bean>
 	<bean id="usuarioDao" class="br.com.webhomebeta.dao.imp.UsuarioDAOImp"></bean>
+	<bean id="loginService" class="br.com.webhomebeta.service.TentativaLoginService"></bean>
+	<bean id="loginDAO" class="br.com.webhomebeta.dao.imp.TentativaLoginDAOImp"></bean>
 	
 
 

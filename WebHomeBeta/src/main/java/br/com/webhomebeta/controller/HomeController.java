@@ -96,6 +96,16 @@ public class HomeController {
 
 		return new ModelAndView("home", model);
 	}
+	
+	@RequestMapping(value = "erro", method = RequestMethod.GET)
+	public ModelAndView erro(){
+		return new ModelAndView("bloqueado");
+	}
+	
+	@RequestMapping(value = "cadastroRealizado", method = RequestMethod.GET)
+	public ModelAndView sucesso(){
+		return new ModelAndView("sucessoCadastro");
+	}
 
 	public ComentarioJSON atualizarComentario() {
 		return null;

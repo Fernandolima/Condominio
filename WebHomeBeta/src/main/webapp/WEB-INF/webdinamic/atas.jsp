@@ -132,6 +132,7 @@
 	                                        
 	                                    	<div class="control-group">
                                           		<div class="controls">
+                                            		<textarea class="input-xlarge textarea" name="atasTo.atas" placeholder="Descrição da ata" style="width: 700px; height: 200px"></textarea>
                                             		<textarea class="input-xlarge textarea" name="atasTo.atas" placeholder="Descrição da Ata" style="width: 700px; height: 200px"></textarea>
                                           		</div>
                                         	</div>

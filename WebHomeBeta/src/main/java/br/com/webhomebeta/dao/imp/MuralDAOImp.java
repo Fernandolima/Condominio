@@ -41,7 +41,7 @@ public class MuralDAOImp implements MuralDAO{
 	@Override
 	public List<Mural> getList() {
 		Query q = factory.getCurrentSession().createSQLQuery("SELECT * FROM MURAL ORDER BY DATA DESC").addEntity(Mural.class);
-		@SuppressWarnings("unchecked")
+
 		List<Mural> mural = q.list();
 		return mural;
 		

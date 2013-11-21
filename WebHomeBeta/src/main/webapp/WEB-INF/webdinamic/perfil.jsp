@@ -139,23 +139,24 @@
     					</div>
     					<div id="collapseOne" class="panel-collapse collapse in">
       						<div class="panel-body">
-        						<form role="form">
+        						<form:form role="form" action="/WebHomeBeta/perfil/editar" modelAttribute="perfil">
         							<fieldset disabled>
 	  									<div class="form-group">
-	    									<label for="exampleInputEmail1">Nome</label>
-	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.nome}">
+	    									<form:label for="exampleInputEmail1" path="nomeUsuario">Nome</form:label>
+	    									<form:input type="text" class="form-control" path="nomeUsuario" placeholder="nomeUsuario"></form:input>
 	  									</div>
 	  								
 								    	<div class="form-group">
 								      		<label for="disabledTextInput">E-mail</label>
-								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.email}">
+								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="${perfil.email}">
 								    	</div>
 									    <div class="form-group">
-	    									<label for="dataNascimento">Data de Nascimento</label>
-	    									<input type="text" id="disabledTextInput" class="form-control" placeholder="${usuario.dt_nascimento}">
+	    									<form:label for="dataNascimento" path="data">Data de Nascimento</form:label>
+	    									<form:input type="text" class="form-control" path="data" placeholder="data"></form:input>
 	  									</div>
 	  								</fieldset>
-								</form>
+	  								<button type="submit" class="btn btn-primary alterarDados">Alterar dados</button>
+								</form:form>
       						</div>
     					</div>
   					</div>

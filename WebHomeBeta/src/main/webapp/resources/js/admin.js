@@ -510,7 +510,7 @@ var ADMIN = {
 					htmlBloco += '<td>'+data.gasto+'</p>';
 					htmlBloco += '<td>'+data.mes+'</p>';
 					htmlBloco += '<td>'+data.ano+'</p>';
-					htmlBloco += '<td><a href="#div'+data.idGasto+'" data-toggle="modal" class="btn btn-danger">Delete</a>';
+					htmlBloco += '<td><a href="#div'+data.idGasto+'" data-toggle="modal" class="btn btn-danger">Excluir</a>';
 					//Modal
 					htmlBloco += '<div id="div'+data.idGasto+'" class="modal hide">';
 					htmlBloco += '<div class="modal-header">';

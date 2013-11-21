@@ -124,8 +124,14 @@
                                         <legend>Mural</legend>                                        
                                         	<input type="hidden" name="muralTO.idUser" value="<c:out value="${usuario.idUser}" />"/>
 	                                    	<div class="control-group">
+	                                    		<form:label class="control-label" for="tituloMural" path="muralTO.titulo">Título </form:label>
                                           		<div class="controls">
-                                            		<textarea class="input-xlarge textarea" name="muralTO.noticia" placeholder="Texto da Ata" style="width: 700px; height: 200px"></textarea>
+                                            		<form:input class="input-xlarge" path="muralTO.titulo" placeholder="Titulo do mural"></form:input>
+                                          		</div>
+                                        	</div>    
+	                                    	<div class="control-group">
+                                          		<div class="controls">
+                                            		<textarea class="input-xlarge textarea" name="muralTO.noticia" placeholder="Texto do mural" style="width: 700px; height: 200px"></textarea>
                                           		</div>
                                         	</div>                                       	
                                         	

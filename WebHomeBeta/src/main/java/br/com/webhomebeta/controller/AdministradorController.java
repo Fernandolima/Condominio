@@ -29,6 +29,7 @@ import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.json.EnqueteJSON;
 import br.com.webhomebeta.json.OpcaoJSON;
 import br.com.webhomebeta.json.UsuarioJSON;
+import br.com.webhomebeta.service.CalendarEventService;
 import br.com.webhomebeta.service.EmailServico;
 import br.com.webhomebeta.service.EnquetesService;
 import br.com.webhomebeta.service.UsuarioService;
@@ -45,6 +46,8 @@ public class AdministradorController {
 	private EnquetesService enquetesService;
 	@Autowired
 	private EmailServico emailServico;
+	@Autowired
+	private CalendarEventService calendarEventService;
 
 	@RequestMapping(value = "admin/enquete/id={id}", method = RequestMethod.GET)
 	public ModelAndView showEnquete(@PathVariable("id") int id) {
@@ -99,9 +102,10 @@ public class AdministradorController {
 		bean.setUsuario(usuario);
 
 		long validarModadores = usuarioService.getRowCount(false);
-
+		long validarReservas = calendarEventService.getRowCount(false);
+		
 		model.put("enquetes", enquetes);
-
+		model.put("reservas", validarReservas);
 		model.put("dadosUsuarioBean", bean);
 		model.put("usuario", usuario);
 		model.put("validarMoradores", validarModadores);

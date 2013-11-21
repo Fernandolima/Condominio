@@ -1,5 +1,6 @@
 package br.com.webhomebeta.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +77,8 @@ public class UsuarioService {
 	public Usuario getImg(int id){
 		return usuarioDao.getImg(id);
 	}
+	
+	 public void update(int id, String nome, Date data){
+		 usuarioDao.update(id, nome, data);
+	 }
 }

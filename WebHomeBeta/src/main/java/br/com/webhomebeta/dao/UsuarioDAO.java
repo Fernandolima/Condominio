@@ -1,5 +1,6 @@
 package br.com.webhomebeta.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.webhomebeta.entity.Usuario;
@@ -19,6 +20,7 @@ public interface UsuarioDAO {
 		  public void evictCache();
 		  public long getRowCount(boolean b);
 		  public void update(int id, boolean b);
+		  public void update(int id, String nome, Date data);
 		  public Usuario getByCargo(String cargo);
 		  public void update(int idUser, String senha);
 		  public List<Usuario> getLisAtivo(boolean ativo);

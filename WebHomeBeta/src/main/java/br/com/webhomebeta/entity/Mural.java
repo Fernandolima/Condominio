@@ -1,6 +1,5 @@
 package br.com.webhomebeta.entity;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "[dbo].[MURAL]")
@@ -26,10 +23,18 @@ public class Mural {
 	@Column(name = "DATA")
 	private String data;
 	@Column(name= "DATA_ALTERADA")
-	
 	private String dataAlterada;
+	@Column(name = "TITULO")
+	private String titulo;
 	
 	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public String getDataAlterada() {
 		return dataAlterada;

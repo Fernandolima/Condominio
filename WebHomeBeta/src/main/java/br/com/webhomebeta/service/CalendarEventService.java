@@ -48,4 +48,8 @@ public class CalendarEventService {
 	public CalendarEvent getEvent(int id){
 		return calendarEventDAO.getEvent(id);
 	}
+	
+	public long getRowCount(boolean b){
+		return calendarEventDAO.getRowCount(b);
+	}
 }

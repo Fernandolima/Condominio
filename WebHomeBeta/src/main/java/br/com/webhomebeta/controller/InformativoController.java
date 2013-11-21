@@ -90,18 +90,18 @@ public class InformativoController {
 	}
 
 	//deleta uma data quando vencer por 60 dias
-	@Scheduled(fixedRate = 86400000)
-	public void expirar() {
-		Date date = new Date();
-		List<Informativo> expirar = informativoService.getList();
-		for (Informativo informativo : expirar) {
-			if (informativo.getDataExpiracao().after(date)) {
-				informativoService.delete(informativo);
-
-			}
-		}
-
-	}
+//	@Scheduled(fixedRate = 86400000)
+//	public void expirar() {
+//		Date date = new Date();
+//		List<Informativo> expirar = informativoService.getList();
+//		for (Informativo informativo : expirar) {
+//			if (informativo.getDataExpiracao().after(date)) {
+//				informativoService.delete(informativo);
+//
+//			}
+//		}
+//
+//	}
 
 	public Usuario getUsuario() {
 

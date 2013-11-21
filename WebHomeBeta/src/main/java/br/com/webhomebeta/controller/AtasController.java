@@ -105,6 +105,7 @@ public class AtasController {
 		ataTo.setAlterada(atasEntity.getAlterada());
 		uploadArquivobeanUsuarios.setAtasTo(ataTo);
 		model.addAttribute("visualizar", uploadArquivobeanUsuarios);
+		model.put("usuario", getUsuario());
 		return new ModelAndView("visualizarAtas", model);
 
 	}

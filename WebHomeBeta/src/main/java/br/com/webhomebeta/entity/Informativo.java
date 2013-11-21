@@ -35,8 +35,18 @@ public class Informativo {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "TITULO")
+	private String titulo;
 	
 	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public Date getDataExpiracao() {
 		return dataExpiracao;
 	}

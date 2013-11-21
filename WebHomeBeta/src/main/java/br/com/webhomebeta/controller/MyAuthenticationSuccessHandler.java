@@ -19,7 +19,9 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import br.com.webhomebeta.entity.TentativaLogin;
 import br.com.webhomebeta.entity.Usuario;
+import br.com.webhomebeta.service.TentativaLoginService;
 //Esta classe determina qual pagina o usuario ira ser Redirecionado dependendo da sua ROLE_
 public class MyAuthenticationSuccessHandler implements
 		AuthenticationSuccessHandler {
@@ -31,8 +33,7 @@ public class MyAuthenticationSuccessHandler implements
 	public void onAuthenticationSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
-		System.out.println("OIOIOOOIOIOIOIOIOIOIASOIDOISDASOOISOSDAOISDOISDAOISDOIASASDOIOISDOISDAOSDIOIDSOIDSOISDAOIAOI");
-		handle(request, response, auth);
+			handle(request, response, auth);
 		//clearAuthenticationAttributes(request);
 	}
 	//Redireciona para a pagina que o ROLE_ determinar

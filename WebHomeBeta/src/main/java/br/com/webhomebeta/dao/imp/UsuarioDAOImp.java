@@ -1,5 +1,6 @@
 package br.com.webhomebeta.dao.imp;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -165,6 +166,17 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		return (Usuario) factory.getCurrentSession()
 				.createSQLQuery("exec [dbo].[USUARIOS_DESCRIPTOGRAFADO] ?")
 				.addEntity(Usuario.class).setInteger(0, id).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public void update(int id, String nome, Date data) {
+
+		factory.getCurrentSession()
+				.createQuery(
+						"update Usuario e set e.nome = ?, e.dt_nascimento = ? where e.idUser = ?")
+				.setString(0, nome).setDate(1, data).setInteger(2, id).executeUpdate();
+
 	}
 
 }

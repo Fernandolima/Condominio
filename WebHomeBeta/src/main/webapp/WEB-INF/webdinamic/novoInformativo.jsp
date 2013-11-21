@@ -19,7 +19,7 @@
 	<script src="<c:url value = "/js/jquery-1.10.2.min.js"/>" type="text/javascript"></script>
 <head>
 <body id="home" class="rede-social">
-	<input type="hidden" id="userSessao" value="<c:out value="${moradorControllerBean.usuario.idUser}"></c:out>" />
+	<input type="hidden" id="userSessao" value="<c:out value="${usuario.idUser}"></c:out>" />
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -62,7 +62,7 @@
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
-						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
+						<img src="<c:out value="${usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
 					</div>
 					
 					<ul class="nav nav-pills nav-stacked nav-usuario">
@@ -84,6 +84,8 @@
 					<input type="hidden" name="informativoTO.nomeUser" value="<c:out value="${usuario.nome}"/>" />
 					
 					<div class="form-group">
+						<label>Título</label>
+				    	<input type = "text" class="form-control" id="exampleInputTitulo1" placeholder="Digite o título do anúncio" name="informativoTO.titulo">
 				    	<label>E-mail</label>
 				    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Digite seu e-mail" name="informativoTO.email">
 				    	<br />

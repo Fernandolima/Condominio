@@ -69,9 +69,9 @@
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li class="active"><a href="#">Gastos</a></li>
+						<li class="active"><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Mural</a></li>
+						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>

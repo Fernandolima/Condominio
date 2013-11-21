@@ -109,6 +109,13 @@
 						aprovados. <a href="admin/validarMoradores">Clique aqui para
 							moderar</a>
 					</div>
+					<div class="alert alert-info">
+						<button class="close" data-dismiss="alert">&times;</button>
+						<strong>Info!</strong> Você possui <b><c:out
+								value="${reservas}"></c:out></b> reservas para serem
+						aprovadas. <a href="admin/reservas">Clique aqui para
+							moderar</a>
+					</div>
 
 					<div class="row-fluid">
 						<!-- block -->

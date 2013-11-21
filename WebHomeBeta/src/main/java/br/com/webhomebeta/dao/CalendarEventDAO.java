@@ -15,5 +15,6 @@ public interface CalendarEventDAO {
 	public List<CalendarEvent> getHistorico(int idUser);
 	public void delete(int id);
 	public void update(int idEspaco, boolean ativa);
+	public long getRowCount(boolean b);
 		
 }

@@ -9,8 +9,15 @@ public class MuralTO {
 	private int idUser;
 	private String data;
 	private String dataAlterada;
+	private String titulo;
 	
 	
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	public String getDataAlterada() {
 		return dataAlterada;
 	}

@@ -3,11 +3,14 @@ package br.com.webhomebeta.dao.imp;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webhomebeta.dao.CalendarEventDAO;
 import br.com.webhomebeta.entity.CalendarEvent;
+import br.com.webhomebeta.entity.Usuario;
 
 public class CalendarEventDAOImp implements CalendarEventDAO {
 
@@ -77,6 +80,14 @@ public class CalendarEventDAOImp implements CalendarEventDAO {
 	@Transactional
 	public CalendarEvent getEvent(int id) {
 		return (CalendarEvent) factory.getCurrentSession().createQuery("from CalendarEvent event where event.id = ?").setInteger(0, id).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public long getRowCount(boolean b) {
+		return (long) factory.getCurrentSession().createCriteria(CalendarEvent.class)
+				.add(Restrictions.eq("aprovada", b))
+				.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
 }
