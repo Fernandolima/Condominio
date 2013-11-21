@@ -37,22 +37,8 @@
 						Esqueci minha senha
 					</div>
 					<div class="panel-body">
-						<p class="text-right">* Campos obrigatórios</p>
-						<p class="text-primary">Para solicitar uma nova senha, informe o e-mail cadastrado no sistema para solicitar uma nova senha.</p>
-						
-						<form:form modelAttribute="usuario" action="enviarEmail" method="POST" id="frmForgotPassword" role="form" autocomplete="off">
-													
-							<div class="form-group">
-		    					<form:input placeholder="Digite seu e-mail: *" type="text" path="email" cssClass="form-control"/>
-		 					</div>
-		 					
-		 					<div class="form-group">
-		    					<form:input placeholder="Digite seu CPF: *" path="cpf" cssClass="form-control" />
-		 					</div>
-		 					
-		 						
-		 					<input type="submit" class="btn btn-primary" value="Enviar" />
-						</form:form>
+						<p class="text-primary">Um e-mail foi enviado com sua nova senha.</p>
+						<a href="/WebHomeBeta/home" class="btn btn-primary">Voltar para o site</a>
 					</div>					
 				</div>
 			</div>
