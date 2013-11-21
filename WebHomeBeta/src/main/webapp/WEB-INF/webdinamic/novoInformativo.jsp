@@ -9,7 +9,7 @@
 <html lang="pt_BR">
 <head>
 	<meta charset="UTF-8" />
-	<title>Web Home - &Aacute;rea Administrativa - Validar Cadastro</title>
+	<title>Web Home</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrap.min.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/magic-bootstrap.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/dist/css/bootstrapHealper.css"/>" />
@@ -69,9 +69,9 @@
 						<li><a href="/WebHomeBeta/home">Home</a></li>
 						<li><a href="/WebHomeBeta/home/atas">Atas de Assembléia</a></li>
 						<li class="active"><a href="/WebHomeBeta/home/informativo">Anúncios</a></li>
-						<li><a href="#">Gastos</a></li>
+						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
-						<li><a href="#">Usu&aacute;rios</a></li>
+						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
 					</ul>
 				</div>
 			</div>
