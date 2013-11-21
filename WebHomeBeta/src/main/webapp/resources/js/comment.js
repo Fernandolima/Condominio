@@ -83,20 +83,20 @@ var POST_COMMENT  = {
 								
 								if(auxGostou){
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei active">'+val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="'+idNaoGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelGostei active"> '((val.quantidadeGostou == 1) ? 'Você'  : 'Você e mais' ) +val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 								
 								else if(auxNaoGostou){ 
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei active">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei active" data-id-nao-gostou="'+idGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei active">Você e mais'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei active" data-id-nao-gostou="'+idNaoGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';									
 								} else{
 									htmlHome += '<div class="gosteiPublicacao">';
 									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="'+idGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 						}
