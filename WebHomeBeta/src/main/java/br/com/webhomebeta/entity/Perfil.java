@@ -37,7 +37,7 @@ public class Perfil {
 	}
 	
 	public Perfil(String estilosMusicais, String livros, String sobreMim,
-			int idade, String profissao, String nome, String imagem) {
+			int idade, String profissao, String nome, String imagem, int idUser) {
 		this.estilosMusicais = estilosMusicais;
 		this.livros = livros;
 		this.sobreMim = sobreMim;
@@ -45,6 +45,7 @@ public class Perfil {
 		this.profissao = profissao;
 		this.nomeUsuario = nome;
 		this.imagemUsuario = imagem;
+		this.idUser = idUser;
 	}
 	
 	

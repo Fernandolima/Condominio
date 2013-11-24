@@ -170,6 +170,7 @@ var ADMIN = {
 
 					$('#listaEspacos tbody').append(htmlBloco);
 					$('.excluirEspaco').on('click', ADMIN.excluirEspaco);
+					value.html("Outro");
 					$.jGrowl("Espaço adicionado!");
 		      		}
 				
@@ -228,6 +229,7 @@ var ADMIN = {
 	      	success: function(e) {
 	      		//to do: redirect para listar areas
 	      		console.log('resposta -', e);
+	      		$(this).find('option:selected').html("Outro");
 	      	}
 		});
 	},
@@ -283,7 +285,7 @@ var ADMIN = {
 				$('input[type="text"]').val('');
 				el.empty();
 				
-				$.jGrowl("Enquete salva!");
+				$.jGrowl("Enquete editada!");
 				
 				htmlOpcao += '<div class="control-group">';
 				htmlOpcao += '<label for="listOpcoes" name="enquetesTo.opcoes" class="control-label">Opção 1:</label>';
@@ -559,6 +561,27 @@ var ADMIN = {
 		});
 	},
 	
+	salvaMural: function(e) {
+		e.preventDefault();
+		$.ajax({
+			data: $("#frmMural").serialize(),
+	    	type: 'post',
+	      	url:'/WebHomeBeta/admin/mural/save',
+	      	success: function(data) {
+	      		if(data == 'erro'){
+	      			$.jGrowl("Você deve preencher todos os campos!", { header: 'ERRO!', sticky:true,});
+	      		}else{
+	      			location.reload();
+	      			$.jGrowl("Mural adicionado!");
+	      			$('input[type="text"]').val('');
+	      			$("#textMural").text("");
+	      		}
+	      			
+	      		
+	      	}
+		});
+	},
+	
 	deleteEnquete: function(e) {
 		e.preventDefault();
 		
@@ -617,6 +640,8 @@ $(function() {
 		
 		$("#frmEditarCadastro").submit();
 	});
+	
+	$('#btnMural').on('click', ADMIN.salvaMural);
 	
 	$('tbody').on('click', '.excluirReserva', ADMIN.deleteReserva);
 	

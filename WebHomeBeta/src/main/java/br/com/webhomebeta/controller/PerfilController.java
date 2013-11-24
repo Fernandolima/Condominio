@@ -76,7 +76,6 @@ public class PerfilController {
 
 		if (getPerfilTO() == null) {
 			Usuario u = getUsuario();
-			perfilControllerBean.setPerfilTO(getPerfilTO());
 			List<Publicacao> publicacoes = publicacaoService.getPublicacao(u.getIdUser());
 			model.put("perfilControllerBean", perfilControllerBean);
 			model.put("uploadControllerBean", uploadControllerBean);
@@ -89,13 +88,16 @@ public class PerfilController {
 			
 			Perfil p = perfilService.getByUser(u.getIdUser());
 			
+			
+			perfilControllerBean.setPerfilTO(getPerfilTO());
+			
 			perfil.setEstilosMusicais(p.getEstilosMusicais());
 			perfil.setIdade(p.getIdade());
 			perfil.setIdPerfil(p.getIdPerfil());
 			perfil.setIdUser(p.getIdUser());
 			perfil.setImagemUsuario(p.getImagemUsuario());
 			perfil.setLivros(p.getLivros());
-			perfil.setNomeUsuario(p.getNomeUsuario());
+			perfil.setNomeUsuario(u.getNome());
 			perfil.setSobreMim(p.getSobreMim());
 			model.put("perfil", perfil);
 			
@@ -120,7 +122,7 @@ public class PerfilController {
 			perfil.setIdUser(p.getIdUser());
 			perfil.setImagemUsuario(p.getImagemUsuario());
 			perfil.setLivros(p.getLivros());
-			perfil.setNomeUsuario(p.getNomeUsuario());
+			perfil.setNomeUsuario(u.getNome());
 			perfil.setSobreMim(p.getSobreMim());
 			model.put("perfil", perfil);
 		}
@@ -148,10 +150,9 @@ public class PerfilController {
 	}
 
 	// Upload do PERFIL
-	@Async
 	@RequestMapping(value = "perfil/upload", method = RequestMethod.POST)
 	public @ResponseBody
-	String upload(
+	ImagePathAndSize upload(
 			@ModelAttribute("uploadControllerBean") UploadControllerBean uploadControllerBean,
 			BindingResult result) {
 		String caminho = null;
@@ -161,8 +162,10 @@ public class PerfilController {
 		MultipartFile file = uploadControllerBean.getFileData();
 		ImagePathAndSize ipz = imageHandler.getOriginalImagemResized(file,
 				getUsuario());
-
-		return ipz.getUrl() + "," + ipz.getWidth() + "," + ipz.getHeight();
+		
+		System.out.println("aadssdsdaUHADUIDHUDAUHIUA" + ipz.getUrl() + ipz.getHeight());
+		
+		return ipz;
 	}
 
 	@RequestMapping(value = "/perfil/id={id}")
@@ -246,14 +249,14 @@ public class PerfilController {
 	@RequestMapping(value = "perfil/editar", method = RequestMethod.POST)
 	public String editarSobre(@ModelAttribute("perfil") PerfilJSON perfilJSON, BindingResult result) {
 		
-		usuarioService.update(perfilJSON.getIdUser(), perfilJSON.getNomeUsuario(), new Date(perfilJSON.getData()));
+		usuarioService.update(getUsuario().getIdUser(), perfilJSON.getNomeUsuario(), new Date(perfilJSON.getData()));
 		
 		return "redirect:/home/perfil";
 	}
 		
 
 	@RequestMapping(value = "perfil/salvar", method = RequestMethod.POST)
-	public void salvarPerfil(
+	public String salvarPerfil(
 			@ModelAttribute("perfilControllerBean") PerfilControllerBean bean,
 			BindingResult bindingResult) {
 		PerfilTO perfilTO = bean.getPerfilTO();
@@ -264,12 +267,14 @@ public class PerfilController {
 		perfil.setIdPerfil(p.getIdPerfil());
 		perfil.setIdUser(p.getIdUser());
 		perfilService.update(perfil);
+		
+		return "redirect:/home/perfil";
 
 	}
 
 	public PerfilTO getPerfilTO() {
 
-		Perfil p = perfilService.get(getUsuario().getIdUser());
+		Perfil p = perfilService.getByUser(getUsuario().getIdUser());
 		if (p == null)
 			return null;
 		else {

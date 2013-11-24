@@ -26,7 +26,7 @@ public class PerfilService {
 		return perfilDAO.getByUser(idUser);
 	}
 	
-	public void update(String img){
-		perfilDAO.update(img);
+	public void update(String img, int idUser){
+		perfilDAO.update(img, idUser);
 	}
 }

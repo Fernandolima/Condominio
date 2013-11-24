@@ -83,20 +83,20 @@ var POST_COMMENT  = {
 								
 								if(auxGostou){
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei active"> '((val.quantidadeGostou == 1) ? 'Você'  : 'Você e mais' ) +val.quantidadeGostou+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelGostei active"> '+((val.quantidadeGostou == 1) ? 'Você'  : 'Você e mais '+(val.quantidadeGostou-1)+'')+'</p><span class="iconGostei active" data-id-gostou="'+idGostou+'" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="0" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 								
 								else if(auxNaoGostou){ 
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei active">Você e mais'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei active" data-id-nao-gostou="'+idNaoGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei"  data-id-gostou="0" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei active">'+((val.quantidadeNaoGostou == 1) ? 'Você'  : 'Você e mais '+(val.quantidadeNaoGostou-1)+'')+'</p><span class="iconNaoGostei active" data-id-nao-gostou="'+idNaoGostou+'" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';									
 								} else{
 									htmlHome += '<div class="gosteiPublicacao">';
-									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-gostou="'+val.quantidadeGostou+'"></span>';
-									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
+									htmlHome += '<p class="labelGostei">'+val.quantidadeGostou+'</p><span class="iconGostei" data-id-gostou="0" data-gostou="'+val.quantidadeGostou+'"></span>';
+									htmlHome += '<p class="labelNaoGostei">'+val.quantidadeNaoGostou+'</p><span class="iconNaoGostei" data-id-nao-gostou="0" data-nao-gostou="'+val.quantidadeNaoGostou+'"></span>';
 									htmlHome += '</div>';
 								}
 						}
@@ -211,6 +211,10 @@ var POST_COMMENT  = {
 				dataForm = '',
 				htmlComment = '',
 				dataNotificacao = "tipo=comentou&idPost=" + idPub + '&id=' + idUserPost;
+			
+			if($.trim(el.closest('.post').find('.inputComment').val()).length === 0) {
+				return false;
+			}
 			
 			$(this).closest('.post').find('.idPub').val(idPub);
 			
@@ -336,25 +340,45 @@ var POST_COMMENT  = {
 			e.preventDefault();
 			
 			var el = $(this),
-				dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
-				quantidadeGostou = el.attr('data-gostou');
+				dataCurtir = el.closest('.post').attr('data-id-post'),
+				quantidadeGostou = el.attr('data-gostou'),
+				idGostou = el.attr('data-id-gostou');
 						
-			quantidadeGostou = parseInt(quantidadeGostou,10)+1;
+			quantidadeGostou = parseInt(quantidadeGostou,10);
 			
-			if(el.hasClass('active')) {
-				return;
-			}
+			if(idGostou != 0){
+				$.ajax({
+		            type: "post",
+		            url: "/WebHomeBeta/removeGostou",
+		            data: {id: idGostou, idPost: dataCurtir},
+		            success: function (data) {
+		            	if(data != 'false'){
+		            	el.removeClass('active');
+		            	el.attr('data-id-gostou', 0);
+		            	el.attr('data-gostou', (quantidadeGostou-1));
+		    			el.closest('.gosteiPublicacao').find('.labelGostei').html((quantidadeGostou-1));
+		    			
+		            	}
+		    			
+		            },
+		            error: function () {
+		            	console.log('errormessage');
+		                //do something else
+
+		            }
+		        });
+			}else{
 			
 			$.ajax({
 	            type: "post",
 	            url: "/WebHomeBeta/gostou",
-	            data: dataCurtir,
+	            data: {id: dataCurtir},
 	            success: function (data) {
 	            	if(data != 'false'){            
 	            	el.addClass('active');
 	            	el.attr('data-id-gostou', data);
-	            	el.attr('data-gostou', quantidadeGostou);
-	    			el.closest('.gosteiPublicacao').find('.labelGostei').html(quantidadeGostou);
+	            	el.attr('data-gostou', (quantidadeGostou+1));
+	    			el.closest('.gosteiPublicacao').find('.labelGostei').html(((quantidadeGostou == 0) ? 'Você'  : 'Você e mais '+(quantidadeGostou)));
 	            	}    			
 	            },
 	            error: function () {
@@ -363,27 +387,55 @@ var POST_COMMENT  = {
 
 	            }
 	        });
+			
+			}
 		},
 		
 		onClickNaoGostei: function(e) {
 			e.preventDefault();
 			
 			var el = $(this),
-			dataCurtir = 'id=' + el.closest('.post').attr('data-id-post'),
-				quantidadeNaoGostou = el.attr('data-nao-gostou');		
+			dataCurtir = el.closest('.post').attr('data-id-post'),
+				quantidadeNaoGostou = el.attr('data-nao-gostou'),
+				idNaoGostou = el.attr('data-id-nao-gostou');
 			
-				quantidadeNaoGostou = parseInt(quantidadeNaoGostou,10)+1;
+				quantidadeNaoGostou = parseInt(quantidadeNaoGostou,10);
+				
+			if(idNaoGostou != 0){
+				$.ajax({
+		            type: "post",
+		            url: "/WebHomeBeta/removeNaoGostou",
+		            data: {id: idNaoGostou, idPost: dataCurtir},
+		            success: function (data) {
+		            	if(data != 'false'){
+		            	el.removeClass('active');
+		            	el.attr('data-id-nao-gostou', 0);
+		            	el.attr('data-nao-gostou', (quantidadeNaoGostou-1));
+		    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html((quantidadeNaoGostou-1));
+		    			
+		            	}
+		    			
+		            },
+		            error: function () {
+		            	console.log('errormessage');
+		                //do something else
+
+		            }
+		        });
+			}else{	
 			
+				
+				
 			$.ajax({
 	            type: "post",
 	            url: "/WebHomeBeta/naoGostou",
-	            data: dataCurtir,
+	            data: {id: dataCurtir},
 	            success: function (data) {
 	            	if(data != 'false'){
 	            	el.addClass('active');
 	            	el.attr('data-id-nao-gostou', data);
-	            	el.attr('data-nao-gostou', quantidadeNaoGostou);
-	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(quantidadeNaoGostou);
+	            	el.attr('data-nao-gostou', (quantidadeNaoGostou+1));
+	    			el.closest('.gosteiPublicacao').find('.labelNaoGostei').html(((quantidadeNaoGostou == 0) ? 'Você'  : 'Você e mais '+(quantidadeNaoGostou)));
 	    			
 	            	}
 	    			
@@ -395,6 +447,7 @@ var POST_COMMENT  = {
 
 	            }
 	        });
+		  }
 		},
 		
 		onParticipaEnquete: function(e) {

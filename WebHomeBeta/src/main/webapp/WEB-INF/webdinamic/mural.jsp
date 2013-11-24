@@ -17,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/datepicker.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/uniform.default.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/wysiwyg/bootstrap-wysihtml5.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.css"/>" />
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value = "/css/admin-home.css"/>"/>
 		
@@ -119,7 +120,7 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                	<form:form modelAttribute="mural" class="form-horizontal" action="/WebHomeBeta/admin/mural/save" method="post">
+                                	<form:form modelAttribute="mural" class="form-horizontal" id="frmMural" action="#" method="post">
                                       <fieldset>
                                         <legend>Mural</legend>                                        
                                         	<input type="hidden" name="muralTO.idUser" value="<c:out value="${usuario.idUser}" />"/>
@@ -131,12 +132,12 @@
                                         	</div>    
 	                                    	<div class="control-group">
                                           		<div class="controls">
-                                            		<textarea class="input-xlarge textarea" name="muralTO.noticia" placeholder="Texto do mural" style="width: 700px; height: 200px"></textarea>
+                                            		<textarea id="textMural" class="input-xlarge textarea" name="muralTO.noticia" placeholder="Texto do mural" style="width: 700px; height: 200px"></textarea>
                                           		</div>
                                         	</div>                                       	
                                         	
                                         	<div class="form-actions">
-                                          		<input type="submit" class="btn btn-primary" value="Enviar" />
+                                          		<input type="button" id="btnMural" class="btn btn-primary" value="Salvar" />
                                           	</div>
                                       </fieldset>
                                     </form:form>
@@ -163,14 +164,17 @@
 		<script src="<c:url value = "/bootstrap/vendors/wysiwyg/wysihtml5-0.3.0.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/vendors/wysiwyg/bootstrap-wysihtml5.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/vendors/wizard/jquery.bootstrap.wizard.min.js"/>" type="text/javascript"></script>
-		
-		
+		<script src="<c:url value = "/bootstrap/vendors/jGrowl/jquery.jgrowl.js"/>" type="text/javascript"></script>
+		<script src="<c:url value = "/js/admin.js"/>" type="text/javascript"></script>
 		<script src="<c:url value = "/bootstrap/assets/scripts.js"/>" type="text/javascript"></script>
 		<script>
         $(function() {
             $('.textarea').wysihtml5();
 		});
         </script>
-                        
+                   
+        <div id="jGrowl" class="top-right jGrowl">
+		<div class="jGrowl-notification"></div>
+	</div>                
 	</body>	
 </html>

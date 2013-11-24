@@ -68,7 +68,8 @@ public class InformativoController {
 		int diasAvancar = 60;
 		Date novaData = new Date(hoje.getTime()
 				+ ((1000 * 24 * 60 * 60) * diasAvancar));
-		bean.getInformativoTO().setDataExpiracao(novaData);
+		informativo.setDataExpiracao(novaData);
+		informativo.setDataPublicaco(hoje);
 		informativoService.save(informativo);
 
 		bean.getInformativoTO().setDataPublicaco(null);
@@ -90,18 +91,20 @@ public class InformativoController {
 	}
 
 	//deleta uma data quando vencer por 60 dias
-//	@Scheduled(fixedRate = 86400000)
-//	public void expirar() {
-//		Date date = new Date();
-//		List<Informativo> expirar = informativoService.getList();
-//		for (Informativo informativo : expirar) {
-//			if (informativo.getDataExpiracao().after(date)) {
-//				informativoService.delete(informativo);
-//
-//			}
-//		}
-//
-//	}
+	@Scheduled(fixedRate = 8280000)
+	public void expirar() {
+		Date date = new Date();
+		List<Informativo> expirar = informativoService.getList();
+		if(expirar != null){
+		for (Informativo informativo : expirar) {
+			if (informativo.getDataExpiracao().after(date)) {
+				informativoService.delete(informativo);
+
+			}
+		  }
+		}
+
+	}
 
 	public Usuario getUsuario() {
 

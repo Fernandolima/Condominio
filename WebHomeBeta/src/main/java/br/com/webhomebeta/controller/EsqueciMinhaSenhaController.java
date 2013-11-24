@@ -45,7 +45,7 @@ public class EsqueciMinhaSenhaController {
 			if (user.getEmail().equals(usuarioTO.getEmail())) {
 				if (user.getCpf().equals(usuarioTO.getCpf())) {
 					ModelAndView mv = new ModelAndView(
-							"pagina de confirmacao de email enviado");
+							"esqueciMinhaSenhaSend");
 					// adiciona ao model a variavel validEmail
 					UUID uuid = UUID.randomUUID();
 					String myRandom = uuid.toString();

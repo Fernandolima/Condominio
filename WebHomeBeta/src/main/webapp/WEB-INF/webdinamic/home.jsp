@@ -5,7 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
@@ -73,6 +74,7 @@
 						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
 						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="/WebHomeBeta/admin">Área Administrativa</a></li></sec:authorize>
 					</ul>
 				</div>
 			</div>
@@ -143,8 +145,8 @@
 								<div class="panel-heading">
 		      						<h4 class="panel-title">
 							        	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${item.idInformativo}" />">
-							          		vende-se apartamento
-							          		<%--<c:out value="${item.titulo}" /> --%>
+					
+							          		<c:out value="${item.titulo}" />
 							        	</a>
 		      						</h4>
 		    					</div>

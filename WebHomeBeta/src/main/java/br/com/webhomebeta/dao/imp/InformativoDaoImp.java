@@ -23,14 +23,7 @@ public class InformativoDaoImp implements InformativoDao {
 
 	@Transactional
 	public List<Informativo> getListInformativos() {
-		Query q = factory
-				.getCurrentSession()
-				.createSQLQuery(
-						"SELECT * FROM INFORMATIVO ORDER BY DATA_PUBLICACAO DESC")
-				.addEntity(Informativo.class);
-		@SuppressWarnings("unchecked")
-		List<Informativo> informativos = q.list();
-		return informativos;
+		return factory.getCurrentSession().createQuery("from Informativo").list();
 	}
 
 	@Transactional

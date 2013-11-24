@@ -22,7 +22,7 @@ import br.com.webhomebeta.service.UsuarioService;
 import br.com.webhomebeta.service.security.UserDetailsImp;
 
 @Controller
-public class GostouController { 
+public class GostouController {
 
 	@Autowired
 	private GostouService gostouService;
@@ -32,36 +32,48 @@ public class GostouController {
 	private NaoGostouService naoGostouService;
 	@Autowired
 	private PublicacaoService publicacaoService;
-	
+
 	@RequestMapping(value = "removeNaoGostou", method = RequestMethod.POST)
-	public String removeNaoGostou(@RequestParam("id") int id) {
-		NaoGostou naoGostou = naoGostouService.get(id);
-		if (getUsuario().getIdUser() == naoGostou.getIdUsuario()) {
+	public @ResponseBody
+	String removeNaoGostou(@RequestParam("id") int id,
+			@RequestParam("idPost") int idPost) {
+		boolean aux = false;
+		Usuario user = getUsuario();
+		Publicacao p = publicacaoService.getUnicaPublicacao(idPost);
+
+		for (NaoGostou naoGostou : p.getNaoGostous()) {
+			if (naoGostou.getIdUsuario() == user.getIdUser()) {
+				aux = true;
+			}
+		}
+		if (aux) {
+			NaoGostou naoGostou = naoGostouService.get(id);
 			naoGostouService.delete(naoGostou);
 			return "true";
-		} else
+		} else {
 			return "false";
+		}
 	}
-	
+
 	@RequestMapping(value = "naoGostou", method = RequestMethod.POST)
 	public @ResponseBody
 	String naoGostou(@RequestParam("id") int id) {
 
 		Usuario user = getUsuario();
 		Publicacao p = publicacaoService.getUnicaPublicacao(id);
-		for(Gostou gostou : p.getGostous()){
-			if(gostou.getIdUsuario() == user.getIdUser()){
+		for (Gostou gostou : p.getGostous()) {
+			if (gostou.getIdUsuario() == user.getIdUser()) {
 				return "false";
-				
+
 			}
 		}
-		for(NaoGostou naoGostou : p.getNaoGostous()){
-			if(naoGostou.getIdUsuario() == user.getIdUser()){
+		for (NaoGostou naoGostou : p.getNaoGostous()) {
+			if (naoGostou.getIdUsuario() == user.getIdUser()) {
 				return "false";
-				
+
 			}
 		}
-		
+
 		NaoGostou ngostou = new NaoGostou(p, getUsuario().getIdUser());
 		ngostou = naoGostouService.salvar(ngostou);
 		if (ngostou.getId() == 0)
@@ -71,26 +83,25 @@ public class GostouController {
 
 	}
 
-	
 	@RequestMapping(value = "gostou", method = RequestMethod.POST)
 	public @ResponseBody
 	String gostou(@RequestParam("id") int id) {
-	
+
 		Usuario user = getUsuario();
 		Publicacao p = publicacaoService.getUnicaPublicacao(id);
-		for(Gostou gostou : p.getGostous()){
-			if(gostou.getIdUsuario() == user.getIdUser()){
+		for (Gostou gostou : p.getGostous()) {
+			if (gostou.getIdUsuario() == user.getIdUser()) {
 				return "false";
-				
+
 			}
 		}
-		for(NaoGostou naoGostou : p.getNaoGostous()){
-			if(naoGostou.getIdUsuario() == user.getIdUser()){
+		for (NaoGostou naoGostou : p.getNaoGostous()) {
+			if (naoGostou.getIdUsuario() == user.getIdUser()) {
 				return "false";
-				
+
 			}
 		}
-		
+
 		Gostou gostou = new Gostou(p, getUsuario().getIdUser());
 		Gostou g = gostouService.salvar(gostou);
 		if (g.getId() == 0)
@@ -101,13 +112,24 @@ public class GostouController {
 	}
 
 	@RequestMapping(value = "removeGostou", method = RequestMethod.POST)
-	public @ResponseBody String removeGostou(@RequestParam("id") int id) {
-		Gostou gostou = gostouService.get(id);
-		if (getUsuario().getIdUser() == gostou.getIdUsuario()) {
+	public @ResponseBody
+	String removeGostou(@RequestParam("id") int id, @RequestParam("idPost") int idPost) {
+		boolean aux = false;
+		Usuario user = getUsuario();
+		Publicacao p = publicacaoService.getUnicaPublicacao(idPost);
+
+		for (Gostou gostou : p.getGostous()) {
+			if (gostou.getIdUsuario() == user.getIdUser()) {
+				aux = true;
+			}
+		}
+		if (aux) {
+			Gostou gostou = gostouService.get(id);
 			gostouService.delete(gostou);
 			return "true";
-		} else
+		} else {
 			return "false";
+		}
 	}
 
 	public Usuario getUsuario() {

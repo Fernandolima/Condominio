@@ -29,10 +29,9 @@ var EDITAR_PERFIL  = {
 			
 			//rancar fora e ALTERAR O TAMANHO DA MODAL DE ACORDO COM A FOTO
 			success:function(data) {
-				
-				data = data.split(',');
-				largura = parseInt(data[1], 10);
-				altura = parseInt(data[2], 10);
+				console.log('data' + data);
+				largura = parseInt(data.width, 10);
+				altura = parseInt(data.height, 10);
 				
 				 $('.modal-dialog').css({
 					 'max-width': largura + 80,
@@ -41,13 +40,13 @@ var EDITAR_PERFIL  = {
 				 
 				 $('#cortarImagem').show();
 				 $('#cortarImagem').css('left', largura/2);
-				 $('#container-foto').html('<img src="'+data[0]+'" id="imageUser" />');
+				 $('#container-foto').html('<img src="'+data.url+'" id="imageUser" />');
 		         
 		         
 		         EDITAR_PERFIL.JcropInit();         
 		         
 		     },
-		     dataType:"text"
+		     dataType:"json"
 		   }).submit();
 	},
 	
@@ -100,9 +99,9 @@ var EDITAR_PERFIL  = {
 						$.jGrowl("Sua senha foi alterada!", { header: 'SUCESSO'});
 					}
 					else if(data == 'senhaNaoConfere'){
-						$.jGrowl("As senhas não conferem!", { header: 'ERRO'});
+						$.jGrowl("As senhas n&atilde;o conferem!", { header: 'ERRO'});
 					}else{
-						$.jGrowl("A senha atual está inválida!", { header: 'ERRO'});
+						$.jGrowl("A senha atual est&aacute; inv&aacute;lida!", { header: 'ERRO'});
 					}
 				}
 		 });

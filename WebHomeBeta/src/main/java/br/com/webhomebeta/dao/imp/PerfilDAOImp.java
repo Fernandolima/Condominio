@@ -45,8 +45,8 @@ public class PerfilDAOImp implements PerfilDAO {
 
 	@Override
 	@Transactional
-	public void update(String img) {
-		factory.getCurrentSession().createQuery("update Perfil p set p.imagemUsuario = ?").setString(0, img).executeUpdate();
+	public void update(String img, int idUser) {
+		factory.getCurrentSession().createQuery("update Perfil p set p.imagemUsuario = ? where p.idUser = ?").setString(0, img).setInteger(1, idUser).executeUpdate();
 		
 	}
 

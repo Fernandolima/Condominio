@@ -3,6 +3,8 @@
 <%@ page session="false"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 
 <!DOCTYPE html>
 <html lang="pt_BR">	
@@ -108,6 +110,7 @@
 						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
 						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="/WebHomeBeta/admin">Área Administrativa</a></li></sec:authorize>
 					</ul>
 				</div>
 			</div>
@@ -140,7 +143,7 @@
     					<div id="collapseOne" class="panel-collapse collapse in">
       						<div class="panel-body">
         						<form:form role="form" action="/WebHomeBeta/perfil/editar" modelAttribute="perfil">
-        							<fieldset disabled>
+        							<fieldset>
 	  									<div class="form-group">
 	    									<form:label for="exampleInputEmail1" path="nomeUsuario">Nome</form:label>
 	    									<form:input type="text" class="form-control" path="nomeUsuario" placeholder="nomeUsuario"></form:input>
@@ -148,7 +151,7 @@
 	  								
 								    	<div class="form-group">
 								      		<label for="disabledTextInput">E-mail</label>
-								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="${perfil.email}">
+								      		<input type="text" id="disabledTextInput" class="form-control" placeholder="${perfil.email}" disabled>
 								    	</div>
 									    <div class="form-group">
 	    									<form:label for="dataNascimento" path="data">Data de Nascimento</form:label>

@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -62,7 +64,7 @@
 			<div class="col-md-3">
 				<div class="row" id="sidebar" style="background-color: #57acdd;">
 					<div class="col-md-12" id="fotoUsuario">
-						<img src="<c:out value="${moradorControllerBean.usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
+						<img src="<c:out value="${usuario.imagem}"></c:out>" alt="..." class="img-rounded img-responsive">
 					</div>
 					
 					<ul class="nav nav-pills nav-stacked nav-usuario">
@@ -72,12 +74,13 @@
 						<li><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
 						<li class="active"><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="/WebHomeBeta/admin">Área Administrativa</a></li></sec:authorize>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="col-md-9">
-				<h3>Mural: <c:out value="${mural.idMural}"/><small> (<c:out value="${mural.data}"/>)</small></h3>
+				<h3>Mural: <c:out value="${mural.titulo}"/><small> (<c:out value="${mural.data}"/>)</small></h3>
 								
 				${mural.noticia}								
 			

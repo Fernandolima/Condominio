@@ -107,7 +107,6 @@ public class UploadImageController {
 			
 			usuario.setImagem(imagem);
 			usuarioService.update(usuario);
-			perfilService.update(usuario.getImagem());
 			
 			
 			// redimensiona imagem para o tamanho para 43x43

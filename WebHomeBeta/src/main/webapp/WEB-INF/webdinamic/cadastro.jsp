@@ -44,9 +44,7 @@
 				<p class="text-right">* Campos obrigatórios</p>
 				<form:form role="form" modelAttribute="bean" action="add" method="post" id="frm-register">
 				
-					<div id="warnningMessage" class="panel panel-danger ${(bean.hasErrorForm) ? 'error' : ''}">
-						<p>Verifique os campos destacados</p>
-					</div>
+			
 				
 					<div class="form-group">
     					<form:input placeholder="Nome: *" type="text" id="nome" path="usuarioTO.nome" cssClass="form-control  ${(bean.validName) ? '' : 'has-error'}"/>

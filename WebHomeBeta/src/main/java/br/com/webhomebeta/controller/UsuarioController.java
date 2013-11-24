@@ -102,7 +102,7 @@ public class UsuarioController {
 			bean.getUsuarioTO().setCargo(null);
 
 			perfilService.salvar(new Perfil("", "", "", 0, "", usuario
-					.getNome(), "/WebHomeBeta/img/anonimos.jpg"));
+					.getNome(), "/WebHomeBeta/img/anonimos.jpg", usuario.getIdUser()));
 
 			emailServico.validaEmailMorador(usuarioService.save(usuario));
 			
@@ -120,10 +120,10 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "aprovarEmail/email={email}/proc", method = RequestMethod.GET)
-	public void validaEmailNovoMorador(@PathVariable("email") String email) {
+	public ModelAndView validaEmailNovoMorador(@PathVariable("email") String email) {
 		Usuario usuario = usuarioService.getUsuarioByLogin(email);
 		emailServico.emailNovoMorador(usuario);
-
+		return new ModelAndView("emailValidado");
 	}
 
 	private void validarCadastro(UsuarioControllerBean bean) {

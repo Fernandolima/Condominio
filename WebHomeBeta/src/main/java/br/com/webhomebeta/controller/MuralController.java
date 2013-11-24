@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.webhomebeta.bean.DadosUsuarioBean;
@@ -47,15 +48,22 @@ public class MuralController {
 	}
 
 	@RequestMapping(value = "admin/mural/save", method = RequestMethod.POST)
-	public String save(@ModelAttribute("bean") MuralBean bean,
+	public @ResponseBody String save(@ModelAttribute("bean") MuralBean bean,
 			BindingResult result) {
+		
+		if(bean.getMuralTO().getTitulo().equals("")){
+			return "erro";
+		}
+		if(bean.getMuralTO().getNoticia().equals("")){
+			return "erro";
+		}
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Mural mural = new Mural();
 		bean.getMuralTO().setData((df.format(new Date())));
 		BeanUtils.copyProperties(bean.getMuralTO(), mural);
 		muralService.save(mural);
 		
-		return "redirect:/admin/mural";
+		return "true";
 
 	}
 

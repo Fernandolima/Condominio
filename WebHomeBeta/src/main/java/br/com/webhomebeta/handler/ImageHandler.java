@@ -15,9 +15,13 @@ import org.imgscalr.Scalr.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mortennobel.imagescaling.AdvancedResizeOp.UnsharpenMask;
+import com.mortennobel.imagescaling.ResampleOp;
+
 import br.com.webhomebeta.entity.ImagePathAndSize;
 import br.com.webhomebeta.entity.Usuario;
 import br.com.webhomebeta.service.ComentarioService;
+import br.com.webhomebeta.service.PerfilService;
 import br.com.webhomebeta.service.PublicacaoService;
 import br.com.webhomebeta.service.UsuarioService;
 
@@ -32,6 +36,8 @@ public class ImageHandler {
 	private ComentarioService comentarioService;
 	@Autowired
 	private PublicacaoService publicacaoService;
+	@Autowired
+	private PerfilService perfilService;
 
 	public ImagePathAndSize getOriginalImagemResized(MultipartFile file,
 			Usuario usuario) {
@@ -85,9 +91,11 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
+					
+					
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -101,10 +109,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
-
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 					fileToBrowser = new File(resultOriginal);
 
 					if (file.getOriginalFilename().endsWith("jpg"))
@@ -150,9 +157,9 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -166,9 +173,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -215,9 +222,9 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -231,9 +238,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -279,9 +286,9 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -295,9 +302,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -344,10 +351,10 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
-
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
+					
 					fileToBrowser = new File(resultOriginal);
 
 					if (file.getOriginalFilename().endsWith("jpg"))
@@ -360,9 +367,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -405,9 +412,9 @@ public class ImageHandler {
 					height = ((originalImage.getHeight() * (int) percent) - originalImage
 							.getHeight()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -421,9 +428,9 @@ public class ImageHandler {
 					width = ((originalImage.getWidth() * (int) percent) - originalImage
 							.getWidth()) / 100;
 
-					rescaledImage = Scalr.resize(originalImage,
-							Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width,
-							height, Scalr.OP_ANTIALIAS);
+					ResampleOp  resampleOp = new ResampleOp (width,height);
+					resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+					rescaledImage = resampleOp.filter(originalImage, null);
 
 					fileToBrowser = new File(resultOriginal);
 
@@ -491,12 +498,20 @@ public class ImageHandler {
 			usuario.setImagem(imagemPerfil);
 			usuario.setImagemView(imagem43x43);
 			usuarioService.update(usuario);
+			perfilService.update(imagemPerfil, usuario.getIdUser());
 
-			// redimensiona imagem para o tamanho para 43x43
+			// redimensiona imagem para o tamanho para 50x50
 
-			BufferedImage imagemRedimensionada43x43 = Scalr.resize(cropedImage,
-					Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 43, 43,
-					Scalr.OP_ANTIALIAS);
+			
+//			ResampleOp  resampleOp = new ResampleOp (120,120);
+//			resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+//			BufferedImage imagemRedimensionada120x120 = resampleOp.filter(cropedImage, null);
+			
+			ResampleOp resampleOp = new ResampleOp (50,50);
+			resampleOp.setUnsharpenMask(UnsharpenMask.Normal);
+			BufferedImage imagemRedimensionada43x43 = resampleOp.filter(cropedImage, null);
+			
+			
 			if (file.getOriginalFilename().endsWith("jpg")) {
 				fileToDiskRedimensionada = new File(resultRedimensionada);
 				ImageIO.write(imagemRedimensionada43x43, "JPEG",
@@ -508,7 +523,6 @@ public class ImageHandler {
 						fileToDiskRedimensionada);
 			}
 
-			usuario.setImagem(imagemPerfil);
 			usuario.setImagemView(imagem43x43);
 			usuarioService.update(usuario);
 			publicacaoService.update(usuario.getIdUser(), imagem43x43);

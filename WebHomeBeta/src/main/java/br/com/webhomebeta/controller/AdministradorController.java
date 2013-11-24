@@ -124,7 +124,7 @@ public class AdministradorController {
 	}
 
 	@RequestMapping(value = "admin/morador/val={valid}/login={log}/proc")
-	public void validar(@PathVariable("valid") boolean valid,
+	public String validar(@PathVariable("valid") boolean valid,
 			@PathVariable("log") String log) {
 		Usuario usuario = usuarioService.getUsuarioByLogin(log);
 		if (valid) {
@@ -133,7 +133,8 @@ public class AdministradorController {
 		} else {
 			emailServico.emailMoradorNaoAceito(usuario);
 		}
-
+		
+		return "redirect:/admin/validarMoradores";
 	}
 
 	// Recebe como parametro o id do usuario e devolve o usuario com todas as

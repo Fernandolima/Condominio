@@ -5,7 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
@@ -75,6 +76,7 @@
 						<li class="active"><a href="/WebHomeBeta/home/gastos">Gastos</a></li>
 						<li><a href="/WebHomeBeta/home/listarEspaco">Reserva de espa&ccedil;os</a></li>
 						<li><a href="/WebHomeBeta/home/mural">Mural</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="/WebHomeBeta/admin">Área Administrativa</a></li></sec:authorize>
 					</ul>
 				</div>
 			</div>
